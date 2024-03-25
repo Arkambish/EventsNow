@@ -4,6 +4,7 @@ import EventCardDisabled from "@/components/EventCardDisabled";
 import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
+import Redirect from "./organization/newuser/Redirect";
 // import EventCardDisabled from "@/components/EventCardDisabled";
 
 // import EventViewMode from "../components/EventViewMode";
@@ -65,7 +66,7 @@ export default async function Home() {
   const event = await getEvent();
   return (
     <div>
-      <HeroSection />
+      {/* <HeroSection />
 
       <EventViewMode event={event} />
       {data.length !== 0 && (
@@ -84,7 +85,8 @@ export default async function Home() {
             date={formatDate(e.eventStartDate)}
           />
         ))}
-      </div>
+      </div> */}
+      <Redirect />
 
       <Footer />
     </div>
