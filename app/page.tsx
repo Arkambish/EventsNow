@@ -1,76 +1,71 @@
 import React from "react";
 import Footer from "@/components/Footer";
-import EventCardDisabled from "@/components/EventCardDisabled";
 import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
 import Test from "@/components/Test";
 import IndexPage from "@/components/Test1";
-// import EventCardDisabled from "@/components/EventCardDisabled";
+import EventCardDisabled from "@/components/EventCardDisabled";
 
-// import EventViewMode from "../components/EventViewMode";
-// import { Event } from "./admin/Type";
+import { Event } from "./admin/Type";
 
-// export interface EventType {
-//   _id: string;
-//   eventName: string;
-//   selectedTab: string;
-//   eventLocation: string;
-//   eventStartDate: string;
-//   startTime: string;
-//   duration: string;
-//   eventTimeZone: string;
-//   description: string;
-//   postImageLink: string;
-//   organizationId: [string];
-//   isPublished: boolean;
-//   registerUser: [string];
-//   dashboardImage: string;
-//   __v: number;
-// }
+export interface EventType {
+  _id: string;
+  eventName: string;
+  selectedTab: string;
+  eventLocation: string;
+  eventStartDate: string;
+  startTime: string;
+  duration: string;
+  eventTimeZone: string;
+  description: string;
+  postImageLink: string;
+  organizationId: [string];
+  isPublished: boolean;
+  registerUser: [string];
+  dashboardImage: string;
+  __v: number;
+}
 
-// async function getOutDateEvent() {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/outdatedEvents`,
-//       { next: { revalidate: 10 } }
-//     );
-//     const data = await response.json();
-//     console.log(data);
-//     return data;
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     return [];
-//   }
-// }
+async function getOutDateEvent() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/event/outdatedEvents`,
+      { next: { revalidate: 10 } }
+    );
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
 
-// async function getEvent() {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getPublishedEvents`,
-//       { next: { revalidate: 10 } }
-//     );
-//     const event = await response.json();
+async function getEvent() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getPublishedEvents`,
+      { next: { revalidate: 10 } }
+    );
+    const event = await response.json();
 
-//     return event;
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     return [];
-//   }
-// }
-
-// import HeroSection from "@/components/HeroSection";
-// import { formatDate } from "@/util/helper";
+    return event;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
 
 export default async function Home() {
-  // const data = await getOutDateEvent();
-  // const event = await getEvent();
+  const data = await getOutDateEvent();
+  const event = await getEvent();
 
   return (
     <div>
-      <Test />
+      {/* <Test /> */}
 
-      {/* <HeroSection />
+      <HeroSection />
 
       <EventViewMode event={event} />
       {data.length !== 0 && (
@@ -91,7 +86,7 @@ export default async function Home() {
         ))}
       </div>
 
-      <Footer /> */}
+      <Footer />
     </div>
   );
 }
