@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectMongoDB from "../../../../../lib/mongo/mongodb";
-import Ticket from "@/models/ticket";
+import TicketType from "@/models/ticketType";
+// import Ticket from "@/models/ticketType";
 
 export async function POST(req: NextRequest) {
   const { price, image, eventId, classType } = await req.json();
   try {
     connectMongoDB();
-    const ticket = await Ticket.create({
+    const ticket = await TicketType.create({
       price,
       image,
       eventId,
