@@ -10,7 +10,7 @@ import { Session } from "inspector";
 import { useLocalizedStringDictionary } from "@react-aria/i18n";
 import { get, set } from "lodash";
 import { is } from "date-fns/locale";
-import QRcodeGenerator from "@/app/organization/dashboard/[id]/components/QRcodegenerator";
+
 
 interface HostSideBar {
   EventName: String;
@@ -45,9 +45,8 @@ export default function HostSideBar({
     null
   );
   function buyTckets() {
-    setqrVisible(true );
   }
-  const [qrVisible,setqrVisible]=useState(false)
+
 
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
@@ -366,10 +365,7 @@ export default function HostSideBar({
             Buy tickets
           </div>
         </button>
-        {qrVisible && <QRcodeGenerator 
-        eventId={id}
-        userId={userId||""}
-        />}
+        
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import Description from "../components/Description";
 import { Event, Post } from "../SelectTemplate";
 
 import { formatDate } from "@/util/helper";
-import QRcodeGenerator from "@/app/organization/dashboard/[id]/components/QRcodegenerator";
+
 
 export default function Template({ event }: { event: Event }) {
   const date = `${formatDate(event.eventStartDate)} to ${formatDate(
