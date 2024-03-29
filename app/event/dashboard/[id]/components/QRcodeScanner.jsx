@@ -1,35 +1,54 @@
-'use client'
-import React from "react";
-import Html5QrcodeScanner from "html5-qrcode";
-import { useRef, useEffect } from 'react';
+"use client";
+import react from "react";
+import QrScanner from "qr-scanner";
+import { useEffect, useRef, useState } from "react";
 
-export default function QRcodeScanner() {
-    const scannerRef = useRef();
-    useEffect(() => {
-      const html5QrCodeScanner = new Html5QrcodeScanner(
-        'qr-code-reader',
-        {
-          fps: 10,
-          qrbox: 250,
-        },
-        result => {
-          console.log('QR Code detected:', result);
-          // Handle the QR code result as needed
-        }
-      );
-      scannerRef.current = html5QrCodeScanner;
-  
-      return () => {
-        if (scannerRef.current) {
-          scannerRef.current.stop();
-        }
-      };
-    }, []);
+const QRScanner = () => {
+  const videoElementRef = useRef(null);
+  const [scanned, setScannedText] = useState("");
+  const [scannedEvent, setScannedEvent] = useState("");
+  const [scannedUser, setScannedUser] = useState("");
+
+  useEffect(() => {
+    const video = videoElementRef.current;
+    const qrScanner = new QrScanner(
+      video,
+      (result) => {
+        console.log("decoded qr code:", result);
+        setScannedText(result.data);
+        setScannedEvent(result.data.split(",")[0]);
+        setScannedUser(result.data.split(",")[1]);
+      },
+      {
+        returnDetailedScanResult: true,
+        highlightScanRegion: true,
+        highlightCodeOutline: true,
+      }
+    );
+    qrScanner.start();
+    console.log("start");
+
+    return () => {
+      console.log(qrScanner);
+      qrScanner.stop();
+      qrScanner.destroy();
+    };
+  }, []);
 
 
-      
 
-  return <div>
-        <div id="qr-code-reader"></div>
-  </div>;
-}
+  return (
+    <div>
+      <div className="flex align items-center justify-center mb-3 ">
+        <video
+          className="object-cover border-2 border-solid w-64 h-64"
+          ref={videoElementRef}
+        />
+      </div>
+      <p className="scannedText">event: {scannedEvent}</p>
+      <p className="scannedText">user: {scannedUser}</p>
+    </div>
+  );
+};
+
+export default QRScanner;
