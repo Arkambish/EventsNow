@@ -11,6 +11,7 @@ import { useLocalizedStringDictionary } from "@react-aria/i18n";
 import { get, set } from "lodash";
 import { is } from "date-fns/locale";
 
+
 interface HostSideBar {
   EventName: String;
   Location: String;
@@ -28,7 +29,7 @@ interface customUser {
   _id: string;
 }
 
-function buyTckets() {}
+
 
 export default function HostSideBar({
   EventName,
@@ -45,6 +46,9 @@ export default function HostSideBar({
   const [registeredUserList, setRegisteredUserList] = useState<string[] | null>(
     null
   );
+  function buyTckets() {
+  }
+
 
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
@@ -376,6 +380,7 @@ export default function HostSideBar({
             Buy tickets
           </div>
         </button>
+        
       </div>
     </div>
   );
