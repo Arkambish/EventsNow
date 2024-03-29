@@ -1,14 +1,15 @@
 import React from "react";
 import Footer from "@/components/Footer";
-import EventCardDisabled from "@/components/EventCardDisabled";
 import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
 import QRcodeScanner from "@/app/event/dashboard/[id]/components/QRcodeScanner";
 // import EventCardDisabled from "@/components/EventCardDisabled";
+import Test from "@/components/Test";
+import IndexPage from "@/components/Test1";
+import EventCardDisabled from "@/components/EventCardDisabled";
 
-// import EventViewMode from "../components/EventViewMode";
-// import { Event } from "./admin/Type";
+import { Event } from "./admin/Type";
 
 export interface EventType {
   _id: string;
@@ -58,37 +59,39 @@ async function getEvent() {
   }
 }
 
-// import HeroSection from "@/components/HeroSection";
-// import { formatDate } from "@/util/helper";
-
 export default async function Home() {
   const data = await getOutDateEvent();
   const event = await getEvent();
+
   return (
-    // <div>
-    //   <HeroSection />
+    <div>
+      {/* <Test /> */}
 
-    //   <EventViewMode event={event} />
-    //   {data.length !== 0 && (
-    //     <div className="font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
-    //       Outdated Events
-    //     </div>
-    //   )}
+      <HeroSection />
 
-    //   <div className="flex flex-wrap ms-12">
-    //     {data.map((e: any) => (
-    //       <EventCardDisabled
-    //         key={e._id}
-    //         name={e.eventName}
-    //         img={e.dashboardImage}
-    //         location={e.selectedTab}
-    //         date={formatDate(e.eventStartDate)}
-    //       />
-    //     ))}
-    //   </div>
+     <EventViewMode event={event} />
+      {data.length !== 0 && (
+        <div className="font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
+          Outdated Events
+        </div>
+      )}
 
-    //   <Footer />
+      <div className="flex flex-wrap ms-12">
+        {data.map((e: any) => (
+          <EventCardDisabled
+            key={e._id}
+            name={e.eventName}
+            img={e.dashboardImage}
+            location={e.selectedTab}
+            date={formatDate(e.eventStartDate)}
+          />
+        ))}
+      </div>
+
+      <Footer />
+    </div>
+    // <QRcodeScanner />
     // </div>
-    <QRcodeScanner />
   );
 }
+

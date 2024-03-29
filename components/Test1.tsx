@@ -1,42 +1,65 @@
-// pages/index.js
-"use client";
+import React from "react";
+import { ReactNode } from "react";
 
-import { SetStateAction, useState } from "react";
+// export interface ScannerProps {
+//   isActive?: boolean;
+//   children?: ReactNode;
+//   interval?: number;
+//   license?: string;
+//   onInitialized?: (enhancer: CameraEnhancer, reader: BarcodeReader) => void;
+//   onScanned?: (results: TextResult[]) => void;
+//   onPlayed?: (playCallbackInfo: PlayCallbackInfo) => void;
+//   onClosed?: () => void;
+// }
 
-const IndexPage = () => {
-  const [content, setContent] = useState("Initial Content");
+const BarcodeScanner = (): React.ReactElement => {
+  // const container = React.useRef(null);
 
-  const handleButtonClick = (n: SetStateAction<string>) => {
-    setContent(n);
-  };
+  // React.useEffect(() => {
+  //   const init = async () => {
+  //     if (BarcodeReader.isWasmLoaded() === false) {
+  //       if (props.license) {
+  //         BarcodeReader.license = props.license;
+  //       } else {
+  //         BarcodeReader.license =
+  //           "DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ=="; //one-day trial license
+  //       }
+  //       BarcodeReader.engineResourcePath =
+  //         "https://cdn.jsdelivr.net/npm/dynamsoft-javascript-barcode@9.6.11/dist/";
+  //     }
+  //     reader.current = await BarcodeReader.createInstance();
+  //     enhancer.current = await CameraEnhancer.createInstance();
+  //     await enhancer.current.setUIElement(container.current!);
+  //     enhancer.current.on("played", (playCallbackInfo: PlayCallbackInfo) => {
+  //       if (props.onPlayed) {
+  //         props.onPlayed(playCallbackInfo);
+  //       }
+  //     });
+  //     enhancer.current.on("cameraClose", () => {
+  //       if (props.onClosed) {
+  //         props.onClosed();
+  //       }
+  //     });
+  //     enhancer.current.setVideoFit("cover");
+  //     if (props.onInitialized) {
+  //       props.onInitialized(enhancer.current, reader.current);
+  //     }
+  //   };
+  //   if (mounted.current === false) {
+  //     init();
+  //   }
+  //   mounted.current = true;
+  // }, []);
 
   return (
-    <div className="flex h-screen">
-      <div className="w-1/4 bg-gray-200 p-4">
-        {/* Buttons in the first div */}
-        <button
-          className="block w-full mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={() => handleButtonClick("Changed Content 1")}
-        >
-          Change Content 1
-        </button>
-        <button
-          className="block w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-          onClick={() => handleButtonClick("Changed Content 2")}
-        >
-          Change Content 2
-        </button>
-      </div>
-      <div className="w-2/4 bg-gray-300 p-4">
-        {/* Content in the second div */}
-        <p>{content}</p>
-      </div>
-      <div className="w-1/4 bg-gray-400 p-4">
-        {/* Content in the third div */}
-        <p>Third Div - Stable Content</p>
-      </div>
-    </div>
+    <></>
+    // <div
+    //   ref={container}
+    //   style={{ position: "relative", width: "100%", height: "100%" }}
+    // >
+    //   <div className="dce-video-container"></div>
+    // </div>
   );
 };
 
-export default IndexPage;
+export default BarcodeScanner;

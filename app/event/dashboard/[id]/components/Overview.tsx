@@ -17,17 +17,17 @@ export default function Overview() {
           <OverviewSubComponent
             image="tickets.svg"
             text="Total ticket Sale"
-            linkToDetails="/event/dashboard/1/tickets"
+            linkToDetails="totalTicket"
           />
           <OverviewSubComponent
             image="attendence.svg"
             text="Total attendence"
-            linkToDetails="/event/dashboard/1/tickets"
+            linkToDetails="totalAttendence"
           />
           <OverviewSubComponent
             image="revenue.svg"
             text="Total revenue"
-            linkToDetails="/event/dashboard/1/tickets"
+            linkToDetails="totalRevenue"
           />
         </div>
       </div>
