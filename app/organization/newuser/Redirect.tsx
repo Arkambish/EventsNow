@@ -1,12 +1,30 @@
+import Link from "next/link";
 import React from "react";
 
 function Redirect() {
   return (
-    <div
-      className="flex items-center justify-center w-screen h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/organization/black.jpg')" }}
-    >
-      <div className="text-white text-4xl font-bold">Redirect</div>
+    <div className="h-screen">
+      <div
+        className="relative flex flex-col items-center justify-center w-full h-1/2  bg-cover font-khand"
+        //style={{ backgroundImage: "url('/images/organization/black.jpg')" }}
+      >
+        {" "}
+        {/* Linear gradient overlay */}
+        <div className="absolute inset-0 bg-[#AC736D] opacity-70"></div>
+        {/* Content */}
+        <div className="relative text-white text-4xl mt-12  font-bold">
+          You have been added to the organization team
+        </div>
+        {/* Button */}
+        <div className="relative z-10">
+          <Link href={"/"}>
+            <button className="bg-custom-orange text-white rounded-xl font-bold border-white text-xl  px-4 py-2 mt-12 ">
+              Home page
+            </button>
+          </Link>
+        </div>
+      </div>
+      <div className="bg-white w-full h-1/2 "></div>
     </div>
   );
 }
