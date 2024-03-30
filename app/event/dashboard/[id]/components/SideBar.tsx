@@ -16,6 +16,7 @@ export default function SideBar() {
     handleReports,
     handleCampaign,
     handleSetting,
+    handleTicket,
     isSideBar,
     setIsSideBar,
   } = UseEventContext() as EventContextType;
@@ -86,6 +87,12 @@ export default function SideBar() {
                 text="Settings"
                 onClick={() => handleSetting()}
               />
+              <EventDashButton
+                isSlideBar={isSideBar}
+                img="ticket.svg"
+                text="Tickets"
+                onClick={() => handleTicket()}
+                />
             </div>
           </div>
         </div>

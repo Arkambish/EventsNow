@@ -25,6 +25,7 @@ export interface EventContextType {
   handleReports: voidFunc;
   handleCampaign: voidFunc;
   handleSetting: voidFunc;
+  handleTicket: voidFunc;
   isSideBar: boolean;
   setIsSideBar: (value: boolean) => void;
 
@@ -84,7 +85,7 @@ const EventContext = createContext<EventContextType | string>("");
 
 function EventContextProvider({ children }: { children: React.ReactNode }) {
   const { setEventPublish } = useAuth() as AuthContext;
-  const [status, setStatus] = useState("overview");
+  const [status, setStatus] = useState("tickets");
   const params = useParams<{ id: string }>();
   const [isSideBar, setIsSideBar] = useState(true);
 
@@ -112,6 +113,10 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const handleSetting: voidFunc = () => {
     setStatus("settings");
   };
+  const handleTicket: voidFunc = () => {
+    setStatus("tickets");
+  };
+
   const id = useParams<{ id: string }>().id;
   const [event, setEvent] = useState<EventType>({
     selectedTab: "",
@@ -244,6 +249,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         handleReports,
         handleCampaign,
         handleSetting,
+        handleTicket,
         isSideBar,
         setIsSideBar,
 

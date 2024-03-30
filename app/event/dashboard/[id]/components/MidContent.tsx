@@ -11,6 +11,7 @@ import EditPost from "./EditPost";
 import SendEmail from "./SendEmail";
 import Attendance from "./overviewModal/Attendance";
 import Revenue from "./overviewModal/Revenue";
+import Tickets from "./Tickets";
 
 export default function MidContent() {
   const { status } = UseEventContext() as EventContextType;
@@ -26,6 +27,7 @@ export default function MidContent() {
       {status === "sendemail" && <SendEmail />}
       {status === "attendance" && <Attendance />}
       {status === "revenue" && <Revenue />}
+      {status === "tickets" && <Tickets />}
     </div>
   );
 }
