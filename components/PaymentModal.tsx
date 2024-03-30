@@ -92,8 +92,18 @@ const PaymentModal = (props: any) => {
         const value = {
           useId: "65f2b6a08dcf796e631062dc",
           eventId: "65f2b6f98dcf796e631062fc",
-          quantity: 4,
+          ticket: [
+            {
+              class: "A",
+              quantity: 4,
+            },
+            {
+              class: "B",
+              quantity: 4,
+            },
+          ],
         };
+
         const qrImg = await generateQRCodeImage(JSON.stringify(value));
         // const image = await uploadToCloudinary(qrImg);
         console.log("QR Code Image Data:", qrImg);
@@ -132,8 +142,8 @@ const PaymentModal = (props: any) => {
         error("Payment dismissed");
       };
 
-      window.payhere.onError = function onError(error: string) {
-        console.log("asdf");
+      window.payhere.onError = function onError(e: string) {
+        error(e);
       };
     };
     scriptRef.current = script;
