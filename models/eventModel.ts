@@ -31,7 +31,6 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please select the event end time"],
   },
-
   description: {
     type: String,
   },
@@ -44,7 +43,7 @@ const eventSchema = new mongoose.Schema({
     required: [true, "Please upload the event dashboard photo"],
   },
   organizationId: {
-    type: [mongoose.Schema.Types.ObjectId],
+    type: mongoose.Schema.Types.ObjectId,
     ref: Organization,
     required: [true, "Please enter organization Id"],
   },
