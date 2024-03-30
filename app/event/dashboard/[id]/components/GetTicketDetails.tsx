@@ -1,22 +1,27 @@
 "use client";
-import React from 'react'
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 import Modal from "./ModalContext";
-import TicketDetailmodalContent from './modals/TicketDetailModal';
+import TicketDetailmodalContent from "./modals/TicketDetailModal";
 import { EventContextProvider } from "../EventDashContext";
-
+import Image from "next/image";
 
 export default function GetTicketDatils() {
   const [showTicketDetail, setTicketDetail] = useState(false);
   return (
-    <>
-    <button
-    onClick={() => setTicketDetail(true)}
-        className="flex button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4  "
+    <div className=" justify-items-start flex ">
+      <button
+        onClick={() => setTicketDetail(true)}
+        className="flex button mt-8 bg-custom-orange text-white rounded-md items-center  px-4 py-2 gap-2   "
       >
-        <div className=" w-10 h-8 mt-2 ml-2 xl:ml-0">
-        </div>
-        <div className="font-medium xl:text-lg text-md text-white text-left leading-tight ml-4">
+        <Image
+          src="/images/eventDash/icons8-new-ticket.png"
+          width={28}
+          height={28}
+          alt="Picture of the author"
+        />
+
+        <div className="font-medium xl:text-lg text-md text-white text-center leading-tight mx-auto">
           Create tickets
         </div>
       </button>
@@ -28,6 +33,6 @@ export default function GetTicketDatils() {
           {/* </EventContextProvider> */}
         </Modal>
       )}
-    </>
-  )
+    </div>
+  );
 }
