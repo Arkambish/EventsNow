@@ -1,4 +1,5 @@
 "use client";
+import { da } from "date-fns/locale";
 import { useParams, useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
@@ -29,8 +30,11 @@ export interface ProfContext {
   handlemyTickets: VoidFunc;
   setUserDeatails: React.Dispatch<React.SetStateAction<UserDetails>>;
   userDeatails: UserDetails;
+  eventDetails: any;
+  register: any;
   userImage: string;
   setUserImage: React.Dispatch<React.SetStateAction<string>>;
+  registerEvent: RegisterEventType[];
 }
 interface ProfContextProviderProps {
   children: React.ReactNode;
@@ -42,6 +46,12 @@ export type UserDetails = {
   lastName: string;
   image: string;
   __v: Number;
+};
+
+export type RegisterEventType = {
+  _id: string;
+  eventName: string;
+  postImageLink: string;
 };
 
 function ProfContextProvider({ children }: ProfContextProviderProps) {
@@ -59,12 +69,16 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
     image: "",
     __v: 0,
   });
+  const [eventDetails, setEventDetails] = useState<any>();
+  const [register, setRegister] = useState<any>([]);
   const [userImage, setUserImage] = useState<string>("");
   const [fname, setFname] = useState<string>("");
   const [lname, setLname] = useState<string>("");
   const params = useParams();
   const router = useRouter();
   const userId = params.id;
+
+  const [registerEvent, setRegisterEvent] = useState<RegisterEventType[]>([]);
 
   const handleProfile: VoidFunc = () => {
     setStatus("myProfile");
@@ -106,7 +120,7 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
           return;
         }
         const finalResponse = await res.json();
-        console.log(finalResponse);
+
         setUserDeatails(finalResponse);
         setUserImage(finalResponse.image);
         setFname(finalResponse.firstName);
@@ -117,7 +131,51 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
 
         setIsLoading(false);
       }
+      async function getWishList() {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getWishList/${params.id}`
+        );
+
+        if (!res.ok) {
+          // router.push("/404");
+          setIsLoading(false);
+
+          return;
+        }
+        const finalrespone = await res.json();
+        setEventDetails(finalrespone);
+      }
+      async function getRegisterdUser() {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getRegisteredUser/${params.id}`
+        );
+
+        if (!res.ok) {
+          setIsLoading(false);
+
+          return;
+        }
+        const finalrespone = await res.json();
+        if (finalrespone.length > 0) {
+          setRegister(finalrespone);
+        }
+      }
+      async function getManageEvents() {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/userManageEvent/${params.id}`
+        );
+        if (!res.ok) {
+          setIsLoading(false);
+          return;
+        }
+        const data = await res.json();
+
+        setRegisterEvent(data);
+      }
       getData();
+      getWishList();
+      getRegisterdUser();
+      getManageEvents();
     },
 
     [params.id]
@@ -126,6 +184,7 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
   return (
     <ProfContext.Provider
       value={{
+        registerEvent,
         handleSetting,
         isSlideBar,
         setIsSlideBar,
@@ -146,6 +205,8 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
         handlemyTickets,
         setUserDeatails,
         userDeatails,
+        eventDetails,
+        register,
         setLname,
         setFname,
         passwordExists,
