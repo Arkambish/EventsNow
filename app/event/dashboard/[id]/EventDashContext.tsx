@@ -14,6 +14,7 @@ import { AuthContext, useAuth } from "@/app/AuthContext";
 // import { Post } from "../../host/[id]/components/PostTab";
 
 import { Post } from "../../host/[id]/SelectTemplate";
+import { EventType } from "@/app/Type";
 
 export interface EventContextType {
   id: String;
@@ -27,6 +28,9 @@ export interface EventContextType {
   isSideBar: boolean;
   setIsSideBar: (value: boolean) => void;
 
+  event: EventType;
+  setEvent: React.Dispatch<React.SetStateAction<EventType>>;
+
   user: EventUserDeatils[];
   setStatus: Dispatch<SetStateAction<string>>;
   eventPosts: Post[];
@@ -39,7 +43,8 @@ export interface EventContextType {
   eventType: String;
   eventDate: String;
   eventStartTime: String;
-
+  isPreview: boolean;
+  setIsPreview: Dispatch<SetStateAction<boolean>>;
   endTime: String;
   eventVisibility: boolean;
 
@@ -108,7 +113,26 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     setStatus("settings");
   };
   const id = useParams<{ id: string }>().id;
+  const [event, setEvent] = useState<EventType>({
+    selectedTab: "",
+    eventStartDate: "",
+    startTime: "",
+    _id: "",
+    eventName: "",
+    organizationId: "",
+    description: "",
+    coverImage: "",
+    dashboardImage: "",
+    isPublished: false,
+    template: "",
+    registerUser: [],
+    location: "",
+    eventEndDate: "",
+    endTime: "",
+    __v: 0,
+  });
   const [eventname, setEventname] = useState<string>("");
+  const [isPreview, setIsPreview] = useState<boolean>(false);
   const [eventLocation, setEventLocation] = useState<string>("");
   const [eventType, setEventType] = useState<string>("");
   const [eventDate, setEventDate] = useState<string>("");
@@ -174,6 +198,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         router.push("/404");
         return;
       }
+      setEvent(event);
       setEventname(event.eventName);
       setEventLocation(event.eventLocation);
       setEventType(event.selectedTab);
@@ -204,9 +229,12 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   return (
     <EventContext.Provider
       value={{
+        isPreview,
+        setIsPreview,
         setEventEndDate,
         eventEndDate,
-
+        event,
+        setEvent,
         id,
         status,
         user,

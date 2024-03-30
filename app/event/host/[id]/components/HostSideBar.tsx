@@ -11,11 +11,13 @@ import { useLocalizedStringDictionary } from "@react-aria/i18n";
 import { get, set } from "lodash";
 import { is } from "date-fns/locale";
 
+
 interface HostSideBar {
   EventName: String;
   Location: String;
   Time: String;
   Date: String;
+  preview?: boolean;
   activeComponent: string; // Add prop for active component
   handleComponentChange: (component: string) => void; // Add prop for handling component change
 }
@@ -27,7 +29,7 @@ interface customUser {
   _id: string;
 }
 
-function buyTckets() {}
+
 
 export default function HostSideBar({
   EventName,
@@ -35,6 +37,7 @@ export default function HostSideBar({
   Time,
   Date,
   activeComponent,
+  preview = true,
   handleComponentChange,
 }: HostSideBar) {
   const [activeButton, setActiveButton] = useState<number | null>(1);
@@ -43,6 +46,9 @@ export default function HostSideBar({
   const [registeredUserList, setRegisteredUserList] = useState<string[] | null>(
     null
   );
+  function buyTckets() {
+  }
+
 
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
@@ -277,6 +283,7 @@ export default function HostSideBar({
         <div className="flex xl:pt-12 md:pt-14 items-center ">
           {isRegistered ? (
             <button
+              disabled={preview ? true : false}
               onClick={removeUserFromRegisteredEvent}
               className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-custom-orange rounded-l-2xl items-center xl:px-4"
             >
@@ -294,8 +301,11 @@ export default function HostSideBar({
             </button>
           ) : (
             <button
+              disabled={preview ? true : false}
               onClick={userRegistrationForEventHandler}
-              className="flex button xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4"
+              className={`flex button xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4 ${
+                preview ? "cursor-not-allowed" : ""
+              } `}
             >
               <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
                 <Image
@@ -313,6 +323,7 @@ export default function HostSideBar({
 
           {isAddWishList ? (
             <button
+              disabled={preview ? true : false}
               onClick={removeFromWishlistHandler}
               className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
             >
@@ -330,8 +341,11 @@ export default function HostSideBar({
             </button>
           ) : (
             <button
+              disabled={preview ? true : false}
               onClick={addTowishlistHandler}
-              className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
+              className={`${
+                preview ? "cursor-not-allowed" : ""
+              }  flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4`}
             >
               <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
                 <Image
@@ -348,7 +362,12 @@ export default function HostSideBar({
           )}
         </div>
 
-        <button className="flex button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4  ">
+        <button
+          disabled={preview ? true : false}
+          className={`flex  button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4 ${
+            preview ? "cursor-not-allowed" : ""
+          } `}
+        >
           <div className=" w-10 h-8 mt-2 ml-2 xl:ml-0">
             <Image
               src="https://res.cloudinary.com/dpk9utvby/image/upload/v1710478589/ew/tecmf69jzdyv2sn22saa.svg"
@@ -361,6 +380,7 @@ export default function HostSideBar({
             Buy tickets
           </div>
         </button>
+        
       </div>
     </div>
   );
