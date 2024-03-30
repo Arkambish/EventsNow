@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: [true, "Please enter user ID"],
+  },
   userImage: {
     type: String,
     required: [true, "Please enter userImage"],

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { use, useEffect, useRef } from "react";
 import styles from "./Post.module.css";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
@@ -22,6 +22,7 @@ import {
   FacebookShareCount,
   TwitterShareButton,
 } from "react-share";
+import { set } from "mongoose";
 interface Post {
   profilePic: string;
   name: string;
@@ -47,6 +48,7 @@ type Comment = {
   userImage: string;
   postId: string;
   description: string;
+  userId: string;
 };
 
 export default function Post({
@@ -66,6 +68,8 @@ Post) {
   const [isLike, setIsLike] = useState(liked);
   const [hasComment, setHasComment] = useState(false);
   const [isShare, setIsShare] = useState(false);
+
+  const [userId, setUserId] = useState("");
 
   const [user, setUser] = useState<User | Session>({
     user: { image: "", email: "", name: "" },
@@ -100,6 +104,27 @@ Post) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isComment, setIsComment]);
+
+  
+  useEffect(() => {
+    const getUser = async () => {
+      const userData = await fetch("/api/v1/user/getUserId", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user?.user?.email,
+        }),
+      });
+      const userID  = await userData.json();
+   setUserId(userID.id);
+    }
+    
+    
+   getUser();
+   
+  }, [user]);
 
   // handle all comment
   useEffect(() => {
@@ -205,7 +230,11 @@ Post) {
     isShare ? setIsShare(false) : setIsShare(true);
   }
 
+  //send comment 
   async function sentComment() {
+   
+    
+
     if (comment.length > 0) {
       const res = await fetch("/api/v1/post/createComment", {
         method: "POST",
@@ -213,6 +242,7 @@ Post) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          userId:userId,
           userImage: user?.user?.image,
           postId: id,
           description: comment,
@@ -229,6 +259,7 @@ Post) {
             userImage: data.comment.userImage,
             postId: data.comment.postId,
             description: data.comment.description,
+            userId: data.comment.userId,
           },
         ]);
       }
@@ -388,6 +419,7 @@ Post) {
               <div className=" mt-2 border-[1px] p-2 border-black rounded-lg h-20 overflow-auto mb-2 flex flex-col gap-2 ">
                 {allComment.map((comment) => (
                   <CommentBtn
+                    canDelete={userId===comment.userId ? true : false}
                     key={comment._id}
                     userImage={comment.userImage}
                     description={comment.description}
