@@ -1,7 +1,10 @@
+'use client '
 import React from 'react'
 import { useState } from 'react'
 
-export default function page() {
+
+
+export default function TicketDetail() {
   const [showTicketDetail, setTicketDetail] = useState(false);
   return (
     <button
