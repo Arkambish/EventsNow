@@ -17,50 +17,21 @@ interface TicketDetailProps {
 }
 
 const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
-  const [ticketPrice, setTicketPrice] = useState<number>(0);
-  const [ticketClass, setTicketClass] = useState<string>("");
-  const [ticketImage, setTicketImage] = useState<string>("");
-  const createTicketHandlerLocal = () => {
-    console.log("ticketPrice", ticketPrice);
-    console.log("ticketClass", ticketClass);
-    console.log("ticketImage", ticketImage);
-    setTicketDetail(false);
-  }
-
   const {
     newTicketPrice,
 newTicketClass,
 newTicketImage,
 setNewTicketPrice,
 setNewTicketClass ,
-setNewTicketImage } = UseEventContext() as EventContextType;
+setNewTicketImage,
+createTicketHandler } = UseEventContext() as EventContextType;
+  
+  const createTicketHandlerLocal = async  () => {
+   await  createTicketHandler();
+    setTicketDetail(false);
+  }
 
-  // const handleCreateTicket = async () => {
-  //   try {
-
-  //     const response = await fetch('/api/v1/', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         price: ticketPrice,
-  //         classType: classType,
-  //         // Add other fields like image, eventId if needed
-  //       }),
-  //     });
-
-  //     if (response.ok) {
-  //       // Ticket created successfull
-  //       console.log('Ticket created successfully');
-  //     } else {
-  //       // Failed to create ticket
-  //       console.error('Failed to create ticket');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error creating ticket:', error);
-  //   }
-  // };
+  
 
   return (
     <div className="sm:flex sm:items-start mb-2">
@@ -73,10 +44,10 @@ setNewTicketImage } = UseEventContext() as EventContextType;
             <input
               type="text"
               id="price"
-              value={ticketPrice}
+              value={newTicketPrice}
               className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
               onChange={(e) => {
-                setTicketPrice(Number(e.target.value));
+                setNewTicketPrice(Number(e.target.value));
               }}
             />
 
@@ -84,10 +55,10 @@ setNewTicketImage } = UseEventContext() as EventContextType;
             <input
               type="text"
               id="ticketclass"
-              value={ticketClass}
+              value={newTicketClass}
               className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
               onChange={(e) => {
-                setTicketClass(e.target.value);
+                setNewTicketClass(e.target.value);
               }}
             />
 
@@ -128,7 +99,7 @@ setNewTicketImage } = UseEventContext() as EventContextType;
                 const profileImageURL = {
                   image: uploadedResult.secure_url,
                 };
-                setTicketImage(profileImageURL.image);
+                setNewTicketImage(profileImageURL.image);
               }}
               options={{
                 tags: ["ticket image"],
@@ -188,11 +159,11 @@ setNewTicketImage } = UseEventContext() as EventContextType;
               }}
             </CldUploadWidget>
             <div className="flex">
-              {ticketImage.length > 0 && (
+              {newTicketImage.length > 0 && (
                 <div className=" mt-5 border-2 w-auto border-solId rounded-xl   ">
                   <Image
                     className=" p-4"
-                    src={ticketImage}
+                    src={newTicketImage}
                     width={500}
                     height={500}
                     alt="event cover image"

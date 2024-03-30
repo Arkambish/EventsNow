@@ -15,6 +15,9 @@ import { AuthContext, useAuth } from "@/app/AuthContext";
 
 import { Post } from "../../host/[id]/SelectTemplate";
 import { EventType } from "@/app/Type";
+import { set } from "mongoose";
+import { ca } from "date-fns/locale";
+import { error, success } from "@/util/Toastify";
 
 export interface EventContextType {
   id: String;
@@ -76,6 +79,7 @@ export interface EventContextType {
   setNewTicketPrice:React.Dispatch<React.SetStateAction<number>>;
   setNewTicketClass : React.Dispatch<React.SetStateAction<string>>;
   setNewTicketImage : React.Dispatch<React.SetStateAction<string>>;
+  createTicketHandler: voidFunc;
 
 }
 
@@ -173,7 +177,30 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [newTicketPrice, setNewTicketPrice] = useState<number>(0);
   const [newTicketClass, setNewTicketClass] = useState<string>("");
   const [newTicketImage, setNewTicketImage] = useState<string>("");
-  const createTicketHandler = () =>{
+  const createTicketHandler = async () =>{
+    try{
+      const res = await fetch(`/api/v1/ticket/addTicket`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          price: newTicketPrice,
+          image: newTicketImage,
+          eventId: params.id,
+          classType:newTicketClass
+        }),
+      });
+      if (!res.ok) {
+        error("Failed to create ticket");
+        
+        return;
+      }
+      setAllTickets([...allTickets, await res.json()]);
+      success("Ticket created successfully");
+    }catch(e){
+      
+    }
 
   } 
   useEffect(() => {
@@ -327,7 +354,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   newTicketImage,
   setNewTicketPrice,
   setNewTicketClass ,
-  setNewTicketImage 
+  setNewTicketImage,
+  createTicketHandler,
       }}
     >
       {children}
