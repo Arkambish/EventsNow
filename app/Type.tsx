@@ -7,6 +7,17 @@ export type UserType = {
   role: string;
   wishListId: string[];
   registeredEvents: string[];
+  mobileNumber: Number;
+};
+
+export type AttendanceType = {
+  quantity: number;
+  _id: string;
+  userId: UserType;
+  eventId: string;
+  attendance: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type PostType = {
@@ -138,7 +149,7 @@ export interface EventContextType {
 
   setEventEndDate: React.Dispatch<React.SetStateAction<string>>;
   eventEndDate: string;
-
+  attendances: AttendanceType[];
   setEventDashboardImage: React.Dispatch<React.SetStateAction<string>>;
   setEventCoverImage: React.Dispatch<React.SetStateAction<string>>;
 }

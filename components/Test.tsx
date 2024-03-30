@@ -17,8 +17,15 @@ export default function Test() {
     setQRValue(event.target.value);
   };
 
+  const value = {
+    useId: "1234",
+    eventId: "123445",
+    quantity: 4,
+  };
+
   const handleGenerateQRCode = async () => {
-    const qrImageData = await generateQRCodeImage(qrValue);
+    const qrImageData = await generateQRCodeImage(JSON.stringify(value));
+    console.log("QR Code Image Data:", qrImageData);
     setQRImage(qrImageData);
   };
 
@@ -32,9 +39,7 @@ export default function Test() {
       <div>
         <input type="text" value={qrValue} onChange={handleChange} />
         <button onClick={handleGenerateQRCode}>Generate QR Code</button>
-        {qrImage && (
-          <Image src={qrImage} width={500} height={500} alt="QR Code" />
-        )}
+        {qrImage && <img src={qrImage} alt="QR Code" />}
       </div>
       {/* <h1>Scan QR Code</h1>
       <QRCodeScanner /> */}

@@ -6,7 +6,8 @@ import Head from "next/head";
 import axios from "axios";
 import Script from "next/script";
 import Image from "next/image";
-import { error } from "@/util/Toastify";
+import { generateQRCodeImage } from "@/util/helper";
+import { error, success } from "@/util/Toastify";
 
 declare global {
   interface Window {
@@ -72,6 +73,12 @@ const PaymentModal = (props: any) => {
     hash: hash,
   };
 
+  const value = {
+    useId: "1234",
+    eventId: "123445",
+    quantity: 4,
+  };
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://www.payhere.lk/lib/payhere.js";
@@ -79,7 +86,45 @@ const PaymentModal = (props: any) => {
 
     script.onload = () => {
       // PayHere script is loaded, initialize event listeners
-      window.payhere.onCompleted = function onCompleted(paymentId: string) {
+      window.payhere.onCompleted = async function onCompleted(
+        paymentId: string
+      ) {
+        const value = {
+          useId: "65f2b6a08dcf796e631062dc",
+          eventId: "65f2b6f98dcf796e631062fc",
+          quantity: 4,
+        };
+        const qrImg = await generateQRCodeImage(JSON.stringify(value));
+        // const image = await uploadToCloudinary(qrImg);
+        console.log("QR Code Image Data:", qrImg);
+        // console.log("QR Code Image :", image);
+
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              qr: qrImg,
+              userid: "65f2b6a08dcf796e631062dc",
+            }),
+          }
+        );
+
+        if (!res.ok) {
+          console.error("Error sending qr code");
+          error("Error sending qr code");
+        }
+
+        const message = await res.json();
+        if (message === "No User  exists") {
+          error("No User exists");
+        }
+
+        success("Payment completed");
+
         console.log("success payment completed");
       };
 
@@ -87,8 +132,8 @@ const PaymentModal = (props: any) => {
         error("Payment dismissed");
       };
 
-      window.payhere.onError = function onError(e: string) {
-        error(e);
+      window.payhere.onError = function onError(error: string) {
+        console.log("asdf");
       };
     };
     scriptRef.current = script;
