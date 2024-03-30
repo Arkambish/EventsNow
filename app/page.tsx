@@ -91,14 +91,14 @@
 //   );
 // }
 
-import React from 'react';
+import React from "react";
 import GetTicketDatils from "./event/dashboard/[id]/components/GetTicketDetails";
-export default function 
-hi() {
-  return (
-    <div>
-      <GetTicketDatils />
-    </div>
-  )
-}
+import TicketMockup from "./event/dashboard/[id]/components/TicketMockup";
 
+export default function hi() {
+  return (
+    <div className="m-4">
+      <TicketMockup image="/images/about/vision.png" price="1000" type="VIP" />
+    </div>
+  );
+}
