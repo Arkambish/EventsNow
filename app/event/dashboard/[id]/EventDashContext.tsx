@@ -133,6 +133,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     eventEndDate: "",
     endTime: "",
     __v: 0,
+    income: 0,
   });
   const [eventname, setEventname] = useState<string>("");
   const [isPreview, setIsPreview] = useState<boolean>(false);
