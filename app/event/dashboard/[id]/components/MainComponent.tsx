@@ -29,6 +29,7 @@ export default function MainComponent() {
     eventEndDate,
     isPreview,
     setIsPreview,
+    handleQRreader,
   } = UseEventContext() as EventContextType;
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
 
@@ -154,6 +155,12 @@ export default function MainComponent() {
                 img="setting.svg"
                 text="Settings"
                 onClick={() => handleSetting()}
+              />
+              <EventDashButton
+                isSlideBar={isSideBar}
+                img="setting.svg"
+                text="QR Reader"
+                onClick={() => handleQRreader()}
               />
             </div>
           </div>

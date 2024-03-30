@@ -18,6 +18,7 @@ export default function SideBar() {
     handleSetting,
     isSideBar,
     setIsSideBar,
+    handleQRreader,
   } = UseEventContext() as EventContextType;
 
   return (
@@ -85,6 +86,12 @@ export default function SideBar() {
                 img="Setting.svg"
                 text="Settings"
                 onClick={() => handleSetting()}
+              />
+              <EventDashButton
+                isSlideBar={isSideBar}
+                img="setting.svg"
+                text="QR Reader"
+                onClick={() => handleQRreader()}
               />
             </div>
           </div>

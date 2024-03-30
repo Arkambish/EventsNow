@@ -4,7 +4,7 @@ import { EventContextType } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
 
 export default memo(function AttendanceDetails() {
-  const { setStatus } = UseEventContext() as EventContextType;
+  const { setStatus, attendances } = UseEventContext() as EventContextType;
 
   return (
     <>
@@ -71,65 +71,44 @@ export default memo(function AttendanceDetails() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="border-b dark:border-neutral-500">
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            1
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">Mark</td>
-                          <td className="whitespace-nowrap px-6 py-4">Otto</td>
-                          <td className="whitespace-nowrap px-6 py-4">@mdo</td>
-                          <td className="whitespace-nowrap px-6 py-4">@mdo</td>
-                        </tr>
-                        <tr className="border-b dark:border-neutral-500">
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            2
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">Jacob</td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            Thornton
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">@fat</td>
-                          <td className="whitespace-nowrap px-6 py-4">@fat</td>
-                        </tr>
-                        <tr className="border-b dark:border-neutral-500">
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            3
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">Larry</td>
-                          <td className="whitespace-nowrap px-6 py-4">Wild</td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            @twitter
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            @twitter
-                          </td>
-                        </tr>
-                        <tr className="border-b dark:border-neutral-500">
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            3
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">Larry</td>
-                          <td className="whitespace-nowrap px-6 py-4">Wild</td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            @twitter
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            @twitter
-                          </td>
-                        </tr>
-                        <tr className="border-b dark:border-neutral-500">
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            3
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">Larry</td>
-                          <td className="whitespace-nowrap px-6 py-4">Wild</td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            @twitter
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            @twitter
-                          </td>
-                        </tr>
+                        {attendances.length === 0 ? (
+                          <tr className="border-b dark:border-neutral-500">
+                            <td className="whitespace-nowrap px-6 py-4 font-medium">
+                              _
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">_</td>
+                            <td className="whitespace-nowrap px-6 py-4">_</td>
+                            <td className="whitespace-nowrap px-6 py-4">_</td>
+                            <td className="whitespace-nowrap px-6 py-4">_</td>
+                          </tr>
+                        ) : (
+                          attendances.map((attendance, index) => (
+                            <tr
+                              key={index}
+                              className="border-b dark:border-neutral-500"
+                            >
+                              <td className="whitespace-nowrap px-6 py-4 font-medium">
+                                {index + 1}
+                              </td>
+                              <td className="whitespace-nowrap px-6 py-4">
+                                {attendance.createdAt}
+                              </td>
+                              <td className="whitespace-nowrap px-6 py-4">
+                                {attendance.userId._id}
+                              </td>
+                              <td className="whitespace-nowrap px-6 py-4">
+                                {attendance.userId?.firstName}
+                              </td>
+                              <td className="whitespace-nowrap px-6 py-4">
+                                _
+                                {/* {attendance.userId?.mobileNumber
+                                ? attendance.userId?.mobileNumber
+                                : ""} */}
+                              </td>
+                            </tr>
+                          ))
+                        )}
+                        {}
                       </tbody>
                     </table>
                   </div>
@@ -139,7 +118,7 @@ export default memo(function AttendanceDetails() {
           </div>
           <div className="bg-slate-500 rounded-md flex justify-between p-2">
             <div className="text-lg font-bold	 text-white">
-              Toral Attendence: 100
+              Toral Attendence: {attendances.length}
             </div>
             <button className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
               <FaPrint />

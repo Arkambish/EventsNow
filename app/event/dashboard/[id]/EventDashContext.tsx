@@ -14,7 +14,7 @@ import { AuthContext, useAuth } from "@/app/AuthContext";
 // import { Post } from "../../host/[id]/components/PostTab";
 
 import { Post } from "../../host/[id]/SelectTemplate";
-import { EventType } from "@/app/Type";
+import { AttendanceType, EventType } from "@/app/Type";
 
 export interface EventContextType {
   id: String;
@@ -61,10 +61,10 @@ export interface EventContextType {
   eventCoverImage: string;
   eventEndTime: string;
   startTime: string;
-
+  handleQRreader: voidFunc;
   setEventEndDate: React.Dispatch<React.SetStateAction<string>>;
   eventEndDate: string;
-
+  attendances: AttendanceType[];
   setEventDashboardImage: React.Dispatch<React.SetStateAction<string>>;
   setEventCoverImage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -106,6 +106,9 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const handleReports: voidFunc = () => {
     setStatus("reports");
   };
+  const handleQRreader: voidFunc = () => {
+    setStatus("qrreader");
+  };
   const handleCampaign: voidFunc = () => {
     setStatus("campaign");
   };
@@ -145,6 +148,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [eventVisibility, setEventVisibility] = useState<boolean>(false);
   const [eventCoverImage, setEventCoverImage] = useState<string>("");
   const [eventDashboardImage, setEventDashboardImage] = useState<string>("");
+
+  const [attendances, setAttendances] = useState<AttendanceType[]>([]);
   const router = useRouter();
   useEffect(() => {
     const getEvent = async () => {
@@ -192,6 +197,16 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       return data;
     };
 
+    const getAttendence = async () => {
+      const res = await fetch(`/api/v1/attendant/getAttendants/${id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+
+      return data;
+    };
+
     async function handleContext() {
       const event = await getEvent();
       if (event.message === "No event") {
@@ -222,13 +237,17 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
       const posts = await eventPost();
       setEventPosts(posts);
+
+      const attendance = await getAttendence();
+      setAttendances(attendance);
     }
     handleContext();
-  }, [params.id, router, setEventPublish, status]);
+  }, [params.id, router, setEventPublish, status, id]);
 
   return (
     <EventContext.Provider
       value={{
+        attendances,
         isPreview,
         setIsPreview,
         setEventEndDate,
@@ -246,7 +265,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         handleSetting,
         isSideBar,
         setIsSideBar,
-
+        handleQRreader,
         setStatus,
         eventPosts,
         setEventPosts,
