@@ -5,23 +5,25 @@ import Image from "next/image";
 interface TicketMockupProps {
   image: string;
   type: string;
-  price: string;
+  price: number;
+  key: string;
 }
 
 export default function TicketMockup({
   image,
   type,
   price,
+  key,
 }: TicketMockupProps) {
   return (
-    <div className=" bg-gray-200 hover:border border-gray-400 w-[18rem] rounded-lg  shadow-inner button">
-      <div className="p-4 text-center w-[17.7rem] h-[13rem] overflow-hidden object-cover">
+    <div className=" bg-gray-200 hover:border border-gray-400  w-[14rem]  rounded-xl  shadow-inner button">
+      <div className="p-4 text-center w-[14rem] h-[9rem] overflow-hidden object-cover">
         <Image
           src={image}
           width={250}
           height={250}
           alt="Picture of ticket"
-          className="rounded-lg shadow-md"
+          className="rounded-xl shadow-md"
         />
       </div>
 

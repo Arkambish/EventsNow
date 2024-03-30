@@ -4,6 +4,7 @@ import Container from "./Container";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
 import GetTicketDatils from "./GetTicketDetails";
 import { UseEventContext, EventContextType } from "../EventDashContext";
+import TicketMockup from "./TicketMockup";
 export default function Tickets() {
   const { allTickets } = UseEventContext() as EventContextType;
 
@@ -20,11 +21,18 @@ export default function Tickets() {
               
             </div>
 
-            <div className="mt-20">
+            <div className="mt-20 xl:flex">
               {!allTickets || allTickets.length==0 ? (
                 <EmptyStateComponent message="You have not created any tickets yet" />
               ):allTickets.map((ticket) => 
-                "ticket details here")}
+              <div className="m-4 ">
+              <TicketMockup 
+              image={ticket.image}
+              price={ticket.price}
+              type={ticket.classType}
+              key={ticket._id}
+               />
+            </div>)}
             </div>
             <div className="w-full">
               <GetTicketDatils />
