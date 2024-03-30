@@ -40,6 +40,7 @@ export type EventType = {
   eventEndDate: string;
   endTime: string;
   __v: number;
+  income: number;
 };
 
 export type OrganizationType = {

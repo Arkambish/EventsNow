@@ -61,6 +61,10 @@ const eventSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: "User",
   },
+  income: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
