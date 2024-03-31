@@ -1,10 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { Organization } from "@/app/admin/Type";
-import Modal from "./ModalContext";
-import DetailsModalContent from "@/app/admin/dashboard/components/modals/DetailsModal";
-import DenyModalContent from "./modals/DenyModal";
+
 import { OrganizationType } from "@/app/Type";
 import PaymentModal from "./modals/PaymentModal";
 
@@ -15,6 +12,7 @@ interface OrganizationPayment {
 export default function OrganizationPayment({
   organization,
 }: OrganizationPayment) {
+  console.log(organization);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [showDenyModal, setShowDenyModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);

@@ -21,25 +21,39 @@ export default function Payments() {
   >([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  async function paymentsOrganizationData() {
+    setIsLoading(true);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationHasPayment`
+    );
+    const data = await response.json();
+    return data;
+  }
+
+  async function reloadPage() {
+    const data = await paymentsOrganizationData();
+    setOrganizationData(data);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     async function paymentsOrganization() {
       setIsLoading(true);
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationHasPayment`
-      );
-      const data = await response.json();
+      const data = await paymentsOrganizationData();
       setOrganizationData(data);
       console.log(data);
       setIsLoading(false);
     }
     paymentsOrganization();
   }, []);
+
   return (
     <div>
       <SuperadminPages
         title="Payments Page"
         description="You can get all the details about payments from here"
         text="Search Payments"
+        reloadPage={reloadPage}
         customComponent={
           <>
             {isLoading ? (
