@@ -5,7 +5,8 @@ export const QrEmailTemplate = `
 <head>
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!--><!--<![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900" rel="stylesheet" type="text/css"><!--<![endif]-->
 	<style>
 		* {
 			box-sizing: border-box;
@@ -42,23 +43,11 @@ export const QrEmailTemplate = `
 			display: none;
 		}
 
-		@media (max-width:665px) {
+		@media (max-width:700px) {
 
-			.desktop_hide table.icons-inner,
+			.row-9 .column-2 .block-1.social_block .alignment table,
 			.social_block.desktop_hide .social-table {
 				display: inline-block !important;
-			}
-
-			.icons-inner {
-				text-align: center;
-			}
-
-			.icons-inner td {
-				margin: 0 auto;
-			}
-
-			.image_block div.fullWidth {
-				max-width: 100% !important;
 			}
 
 			.mobile_hide {
@@ -88,108 +77,127 @@ export const QrEmailTemplate = `
 				max-height: none !important;
 			}
 
-			.row-1 .column-1 .block-3.heading_block h1 {
-				font-size: 46px !important;
+			.reverse {
+				display: table;
+				width: 100%;
 			}
 
-			.row-1 .column-1 .block-2.heading_block h2 {
-				font-size: 13px !important;
+			.reverse .column.first {
+				display: table-footer-group !important;
 			}
 
-			.row-2 .column-1 .block-1.image_block td.pad {
-				padding: 10px 20px 45px !important;
+			.reverse .column.last {
+				display: table-header-group !important;
 			}
 
-			.row-3 .column-2 .block-3.paragraph_block td.pad {
-				padding: 10px 25px 30px !important;
+			.row-7 td.column.first .border {
+				padding: 5px 0 5px 40px;
+				border-top: 0;
+				border-right: 0px;
+				border-bottom: 0;
+				border-left: 0;
 			}
 
-			.row-4 .column-1 .block-2.heading_block td.pad {
-				padding: 0 25px !important;
+			.row-7 td.column.last .border {
+				padding: 20px 0 40px;
+				border-top: 0;
+				border-right: 0px;
+				border-bottom: 0;
+				border-left: 0;
 			}
 
-			.row-4 .column-2 .block-1.image_block td.pad {
-				padding: 0 20px 15px !important;
+			.row-3 .column-1 .block-1.heading_block td.pad,
+			.row-5 .column-1 .block-1.heading_block td.pad {
+				padding: 20px 0 10px !important;
 			}
 
-			.row-4 .column-2 .block-1.image_block .alignment div {
-				margin: 0 auto 0 0 !important;
+			.row-4 .column-1 .block-1.paragraph_block td.pad {
+				padding: 15px 0 25px !important;
 			}
 
-			.row-6 .column-1 .block-1.spacer_block,
-			.row-8 .column-1 .block-1.spacer_block {
-				height: 20px !important;
+			.row-5 .column-1 .block-2.heading_block td.pad {
+				padding: 10px 0 !important;
 			}
 
-			.row-5 .column-1 .block-1.divider_block td.pad {
-				padding: 30px 25px 10px !important;
+			.row-6 .column-1 .block-1.heading_block h3,
+			.row-9 .column-2 .block-1.social_block .alignment {
+				text-align: center !important;
 			}
 
-			.row-5 .column-1 .block-1.divider_block .alignment table {
-				display: inline-table;
+			.row-7 .column-1 .block-1.paragraph_block td.pad {
+				padding: 5px 0 25px 5px !important;
 			}
 
-			.row-5 .column-1 .block-4.image_block td.pad {
-				padding: 25px 20px 30px !important;
+			.row-9 .column-1 .block-1.image_block .alignment div {
+				margin: 0 auto !important;
+			}
+
+			.row-4 .column-1 .block-2.button_block td.pad,
+			.row-9 .column-2 .block-1.social_block td.pad {
+				padding: 10px !important;
+			}
+
+			.row-4 .column-1 .block-2.button_block a,
+			.row-4 .column-1 .block-2.button_block div,
+			.row-4 .column-1 .block-2.button_block span {
+				line-height: 32px !important;
 			}
 
 			.row-3 .column-1 {
-				padding: 45px 0 !important;
+				padding: 40px 30px 0 !important;
 			}
 
-			.row-3 .column-2,
-			.row-4 .column-2 {
-				padding: 0 !important;
+			.row-4 .column-1 {
+				padding: 30px 30px 35px !important;
+			}
+
+			.row-5 .column-1 {
+				padding: 30px 30px 15px !important;
+			}
+
+			.row-6 .column-1 {
+				padding: 40px 30px 25px !important;
+			}
+
+			.row-7 .column-1 .border {
+				padding: 5px 30px !important;
+			}
+
+			.row-7 .column-2 .border {
+				padding: 20px 0 30px !important;
+			}
+
+			.row-9 .column-1 {
+				padding: 40px 40px 20px !important;
+			}
+
+			.row-9 .column-2 {
+				padding: 5px 0 30px !important;
 			}
 		}
 	</style>
 </head>
 
-<body style="margin: 0; background-color: #f2e9dc; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-	<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f2e9dc;">
+<body style="background-color: #f5f5f2; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+	<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f5f5f2;">
 		<tbody>
 			<tr>
 				<td>
-					<table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+					<table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-size: auto;">
 						<tbody>
 							<tr>
 								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f2e9dc; border-radius: 0; color: #000000; width: 645px; margin: 0 auto;" width="645">
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-repeat: no-repeat; color: #000000; background-size: auto; background-color: #ffbe98; background-image: url('https://d15k2d11r6t6rl.cloudfront.net/pub/bfra/rt28zbov/31u/cmf/gre/golden-glitter-confetti-falling-on-black-vector-background-shining-gold-shimmer-luxury.jpg'); background-position: top center; width: 680px; margin: 0 auto;" width="680">
 										<tbody>
 											<tr>
-												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-top: 30px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<div class="spacer_block block-1" style="height:325px;line-height:325px;font-size:1px;">&#8202;</div>
+													<table class="image_block block-2" width="100%" border="0" cellpadding="30" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
-															<td class="pad" style="padding-bottom:25px;width:100%;padding-right:0px;padding-left:0px;">
+															<td class="pad">
 																<div class="alignment" align="center" style="line-height:10px">
-																	<div style="max-width: 129px;"><a href="http://www.example.com" target="_blank" style="outline:none" tabindex="-1"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8446/logo_yourbrand4.png" style="display: block; height: auto; border: 0; width: 100%;" width="129" alt="Your Brand" title="Your Brand" height="auto"></a></div>
+																	<div style="max-width: 136px;"><img src="https://d15k2d11r6t6rl.cloudfront.net/pub/bfra/rt28zbov/rsm/30t/09n/nav-logo.png" style="display: block; height: auto; border: 0; width: 100%;" width="136" alt="Logo Placeholder" title="Logo Placeholder" height="auto"></div>
 																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:50px;padding-right:50px;padding-top:10px;text-align:center;width:100%;">
-																<h2 style="margin: 0; color: #562d2b; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 5px; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 18px;"><span class="tinyMce-placeholder">ENHACE YOUR LIFE</span></h2>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:50px;padding-right:50px;text-align:center;width:100%;">
-																<h1 style="margin: 0; color: #562d2b; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 58px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 69.6px;"><span class="tinyMce-placeholder">Immerse yourself in warmth</span></h1>
-															</td>
-														</tr>
-													</table>
-													<table class="button_block block-4" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:30px;padding-left:10px;padding-right:10px;padding-top:10px;text-align:center;">
-																<div class="alignment" align="center"><!--[if mso]>
-<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.example.com" style="height:50px;width:201px;v-text-anchor:middle;" arcsize="0%" stroke="false" fillcolor="#562d2b">
-<w:anchorlock/>
-<v:textbox inset="0px,0px,0px,0px">
-<center style="color:#ffffff; font-family:Arial, sans-serif; font-size:15px">
-<![endif]--><a href="http://www.example.com" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#562d2b;border-radius:0px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:10px;padding-bottom:10px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:15px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:35px;padding-right:35px;font-size:15px;display:inline-block;letter-spacing:1px;"><span style="word-break: break-word; line-height: 30px;">VIEW PALETTES</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
 															</td>
 														</tr>
 													</table>
@@ -201,14 +209,16 @@ export const QrEmailTemplate = `
 							</tr>
 						</tbody>
 					</table>
-					<table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-size: auto;">
+					<table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 						<tbody>
 							<tr>
 								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f2e9dc; border-radius: 0; color: #000000; background-image: url('https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8446/bg-abstract2.png'); background-repeat: no-repeat; background-size: cover; width: 645px; margin: 0 auto;" width="645">
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffbe98; border-radius: 0; color: #000000; width: 680px; margin: 0 auto;" width="680">
 										<tbody>
 											<tr>
-												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"></td>
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<div class="spacer_block block-1" style="height:10px;line-height:10px;font-size:1px;">&#8202;</div>
+												</td>
 											</tr>
 										</tbody>
 									</table>
@@ -216,346 +226,254 @@ export const QrEmailTemplate = `
 							</tr>
 						</tbody>
 					</table>
-					<table class="row row-3" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fce5d8;">
+					<table class="row row-3" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 						<tbody>
 							<tr>
 								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; background-color: #fce5d8; background-image: url(''); background-repeat: no-repeat; width: 645px; margin: 0 auto;" width="645">
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fffef8; border-radius: 0; color: #000000; width: 680px; margin: 0 auto;" width="680">
 										<tbody>
 											<tr>
-												<td class="column column-1" width="50%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 45px; padding-top: 45px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-left: 50px; padding-right: 50px; padding-top: 40px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<table class="heading_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:20px;text-align:center;width:100%;">
+																<h1 style="margin: 0; color: #04363d; direction: ltr; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 32px; font-weight: 500; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 38.4px;"><span class="tinyMce-placeholder">Your payment on EventsNow is successful</span></h1>
+															</td>
+														</tr>
+													</table>
+													<table class="heading_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad">
+																<h2 style="margin: 0; color: #04363d; direction: ltr; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 24px; font-weight: 300; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 28.799999999999997px;"><span class="tinyMce-placeholder">Your Tickets for {{eventName}} Are Here!</span></h2>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="row row-4" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-size: auto;">
+						<tbody>
+							<tr>
+								<td>
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-repeat: no-repeat; color: #000000; background-size: auto; background-color: #fffef8; background-image: url('https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8551/watermark-bg-large_1.png'); width: 680px; margin: 0 auto;" width="680">
+										<tbody>
+											<tr>
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 35px; padding-left: 50px; padding-right: 50px; padding-top: 30px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<table class="paragraph_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+														<tr>
+															<td class="pad" style="padding-bottom:40px;padding-top:15px;">
+																<div style="color:#393d47;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;line-height:180%;text-align:left;mso-line-height-alt:28.8px;">
+																	<p style="margin: 0;">Hi {{fullName}},</p>
+																	<p style="margin: 0;">We're thrilled to confirm that your purchase of tickets for {{eventName}} was successful!</p>
+																	<p style="margin: 0;">Get ready for an amazing experience at {{date}} at {{startTime}} held at {{location}}.</p>
+																	<p style="margin: 0;">&nbsp;</p>
+																	<p style="margin: 0;">&nbsp;</p>
+																</div>
+															</td>
+														</tr>
+													</table>
+													<table class="button_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad">
+																<div class="alignment" align="center"><!--[if mso]>
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:52px;width:238px;v-text-anchor:middle;" arcsize="58%" stroke="false" fillcolor="#d47151">
+<w:anchorlock/>
+<v:textbox inset="0px,0px,0px,0px">
+<center style="color:#04363d; font-family:Tahoma, sans-serif; font-size:16px">
+<![endif]-->
+																	<div style="text-decoration:none;display:inline-block;color:#04363d;background-color:#d47151;border-radius:30px;width:auto;border-top:0px solid #FFBE98;font-weight:undefined;border-right:0px solid #FFBE98;border-bottom:0px solid #FFBE98;border-left:0px solid #FFBE98;padding-top:10px;padding-bottom:10px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">Visit {{eventName}} page</span></span></div><!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
+																</div>
+															</td>
+														</tr>
+													</table>
+													<div class="spacer_block block-3" style="height:40px;line-height:40px;font-size:1px;">&#8202;</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="row row-5" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+						<tbody>
+							<tr>
+								<td>
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fffef8; border-radius: 0; color: #000000; width: 680px; margin: 0 auto;" width="680">
+										<tbody>
+											<tr>
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-top: 40px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<table class="heading_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:20px;text-align:center;width:100%;">
+																<h3 style="margin: 0; color: #04363d; direction: ltr; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 24px; font-weight: 500; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 28.799999999999997px;"><span class="tinyMce-placeholder">How to access your ticket ?</span></h3>
+															</td>
+														</tr>
+													</table>
+													<table class="heading_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad" style="padding-bottom:25px;padding-left:10px;padding-right:10px;padding-top:10px;text-align:center;width:100%;">
+																<h3 style="margin: 0; color: #04363d; direction: ltr; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 20px; font-weight: 300; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 24px;"><span class="tinyMce-placeholder">You can access your tickets directly through your EventsNow account. Simply log in to your account and navigate to the "My Tickets" section.</span></h3>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="row row-6" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+						<tbody>
+							<tr>
+								<td>
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff8ee; border-radius: 0; color: #000000; width: 680px; margin: 0 auto;" width="680">
+										<tbody>
+											<tr>
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 25px; padding-left: 40px; padding-right: 40px; padding-top: 40px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<table class="heading_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:20px;text-align:center;width:100%;">
+																<h3 style="margin: 0; color: #04363d; direction: ltr; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 32px; font-weight: 500; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 38.4px;">Access your ticket on mobile wallet</h3>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="row row-7" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+						<tbody>
+							<tr>
+								<td>
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff8ee; border-radius: 0; color: #000000; width: 680px; margin: 0 auto;" width="680">
+										<tbody>
+											<tr class="reverse">
+												<td class="column column-1 first" width="50%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-left: 40px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<div class="border">
+														<table class="paragraph_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+															<tr>
+																<td class="pad" style="padding-bottom:25px;padding-left:5px;padding-top:15px;">
+																	<div style="color:#393d47;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;line-height:180%;text-align:left;mso-line-height-alt:28.8px;">
+																		<p style="margin: 0; word-break: break-word;">For the easier digital experience,&nbsp;<strong> </strong>a QR code image containing your ticket information is attached to this email.<br><br><strong> </strong>You can scan this code using your smartphone's camera app to save your ticket directly to your mobile wallet for easy access at the event<strong>.</strong></p>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</div>
+												</td>
+												<td class="column column-2 last" width="50%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 40px; padding-top: 20px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<div class="border">
+														<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+															<tr>
+																<td class="pad" style="width:100%;">
+																	<div class="alignment" align="center" style="line-height:10px">
+																		<div style="max-width: 300px;"><img src="https://d15k2d11r6t6rl.cloudfront.net/pub/bfra/rt28zbov/wr3/fb3/9l5/Symbology-QR-code.svg" style="display: block; height: auto; border: 0; width: 100%;" width="300" alt="Business. Photo by August de Richelieu from Pexel" title="Business. Photo by August de Richelieu from Pexel" height="auto"></div>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="row row-8" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+						<tbody>
+							<tr>
+								<td>
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff8ee; color: #000000; width: 680px; margin: 0 auto;" width="680">
+										<tbody>
+											<tr>
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 10px; padding-top: 10px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<div class="spacer_block block-1" style="height:20px;line-height:20px;font-size:1px;">&#8202;</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="row row-9" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+						<tbody>
+							<tr>
+								<td>
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #d47151; color: #000000; width: 680px; margin: 0 auto;" width="680">
+										<tbody>
+											<tr>
+												<td class="column column-1" width="50%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 40px; padding-left: 40px; padding-right: 40px; padding-top: 40px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
 													<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-																<div class="alignment" align="center" style="line-height:10px">
-																	<div style="max-width: 274.125px;"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8446/Color_Pantone2.png" style="display: block; height: auto; border: 0; width: 100%;" width="274.125" alt="Color Of The Year" title="Color Of The Year" height="auto"></div>
-																</div>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td class="column column-2" width="50%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-top: 5px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="divider_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div class="alignment" align="left">
-																	<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="10%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-																		<tr>
-																			<td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 6px solid #FDBD98;"><span>&#8202;</span></td>
-																		</tr>
-																	</table>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;text-align:center;width:100%;">
-																<h2 style="margin: 0; color: #562d2b; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 29px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 34.8px;"><span class="tinyMce-placeholder">What is color of the year Peach Fuzz?</span></h2>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div style="color:#562d2b;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:left;mso-line-height-alt:24px;">
-																	<p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur semper turpis vulputate, dapibus neque eget, porta felis. Curabitur a sapien a tellus posuere bibendum ut sed arcu.</p>
-																</div>
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="row row-4" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fce5d8; background-size: auto;">
-						<tbody>
-							<tr>
-								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; background-color: #fce5d8; background-size: auto; width: 645px; margin: 0 auto;" width="645">
-										<tbody>
-											<tr>
-												<td class="column column-1" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 30px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="divider_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:5px;">
-																<div class="alignment" align="left">
-																	<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="15%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-																		<tr>
-																			<td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 6px solid #FDBD98;"><span>&#8202;</span></td>
-																		</tr>
-																	</table>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;text-align:center;width:100%;">
-																<h2 style="margin: 0; color: #562d2b; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 29px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 34.8px;">Behind the scenes of Peach Fuzz</h2>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td class="column column-2" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:15px;padding-left:25px;padding-right:25px;width:100%;">
-																<div class="alignment" align="center" style="line-height:10px">
-																	<div class="fullWidth" style="max-width: 165.55px;"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8446/13e24eb7-9062-40b0-8e57-6be83d2ff7b5.png" style="display: block; height: auto; border: 0; width: 100%;" width="165.55" alt="Landscape Color Of The Year 1" title="Landscape Color Of The Year 1" height="auto"></div>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;text-align:center;width:100%;">
-																<h3 style="margin: 0; color: #562d2b; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 20.4px;">Envelop Yourself in&nbsp; Peach Fuzz</h3>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div style="color:#562d2b;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:left;mso-line-height-alt:24px;">
-																	<p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="button_block block-4" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-left:25px;padding-right:25px;text-align:left;">
-																<div class="alignment" align="left"><!--[if mso]>
-<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.example.com" style="height:50px;width:99px;v-text-anchor:middle;" arcsize="0%" stroke="false" fill="false">
-<w:anchorlock/>
-<v:textbox inset="0px,0px,0px,0px">
-<center style="color:#562d2b; font-family:Arial, sans-serif; font-size:15px">
-<![endif]--><a href="http://www.example.com" target="_blank" style="text-decoration:none;display:inline-block;color:#562d2b;background-color:transparent;border-radius:0px;width:auto;border-top:0px solid #562D2B;font-weight:400;border-right:0px solid #562D2B;border-bottom:0px solid #562D2B;border-left:0px solid #562D2B;padding-top:10px;padding-bottom:10px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:15px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:0px;padding-right:0px;font-size:15px;display:inline-block;letter-spacing:1px;"><span style="word-break: break-word; line-height: 30px;"><u>READ MORE</u></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td class="column column-3" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 45px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:15px;padding-left:25px;padding-right:25px;width:100%;">
-																<div class="alignment" align="center" style="line-height:10px">
-																	<div class="fullWidth" style="max-width: 165.55px;"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8446/25396909-0d00-4833-b702-b63860de22a8.png" style="display: block; height: auto; border: 0; width: 100%;" width="165.55" alt="Landscape Color Of The Year 2" title="Landscape Color Of The Year 2" height="auto"></div>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;text-align:center;width:100%;">
-																<h3 style="margin: 0; color: #562d2b; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 20.4px;">How is the colour of the year chosen?</h3>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div style="color:#562d2b;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:left;mso-line-height-alt:24px;">
-																	<p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="button_block block-4" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-left:25px;padding-right:25px;text-align:left;">
-																<div class="alignment" align="left"><!--[if mso]>
-<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.example.com" style="height:50px;width:99px;v-text-anchor:middle;" arcsize="0%" stroke="false" fill="false">
-<w:anchorlock/>
-<v:textbox inset="0px,0px,0px,0px">
-<center style="color:#562d2b; font-family:Arial, sans-serif; font-size:15px">
-<![endif]--><a href="http://www.example.com" target="_blank" style="text-decoration:none;display:inline-block;color:#562d2b;background-color:transparent;border-radius:0px;width:auto;border-top:0px solid #562D2B;font-weight:400;border-right:0px solid #562D2B;border-bottom:0px solid #562D2B;border-left:0px solid #562D2B;padding-top:10px;padding-bottom:10px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:15px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:0px;padding-right:0px;font-size:15px;display:inline-block;letter-spacing:1px;"><span style="word-break: break-word; line-height: 30px;"><u>READ MORE</u></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="row row-5" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fdbd98; background-size: auto;">
-						<tbody>
-							<tr>
-								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; background-color: #fdbd98; background-image: url('https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8446/bg-abstract7.png'); background-repeat: no-repeat; background-size: cover; width: 645px; margin: 0 auto;" width="645">
-										<tbody>
-											<tr>
-												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="divider_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:45px;">
-																<div class="alignment" align="center">
-																	<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="5%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-																		<tr>
-																			<td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 6px solid #562D2B;"><span>&#8202;</span></td>
-																		</tr>
-																	</table>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;text-align:center;width:100%;">
-																<h2 style="margin: 0; color: #562d2b; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 29px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 34.8px;"><span class="tinyMce-placeholder">How use it?</span></h2>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div style="color:#562d2b;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
-																	<p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur semper turpis vulputate, dapibus neque eget, porta felis.</p>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="image_block block-4" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:45px;padding-left:20px;padding-right:20px;padding-top:25px;width:100%;">
-																<div class="alignment" align="center" style="line-height:10px">
-																	<div class="fullWidth" style="max-width: 483.75px;"><a href="http://www.example.com" target="_blank" style="outline:none" tabindex="-1"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8446/93438d06-edc7-413a-892f-c6f2057c5ea8.png" style="display: block; height: auto; border: 0; width: 100%;" width="483.75" alt="Video Color Of The Year" title="Video Color Of The Year" height="auto"></a></div>
-																</div>
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="row row-6" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #562d2b;">
-						<tbody>
-							<tr>
-								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #562d2b; border-radius: 0; color: #000000; width: 645px; margin: 0 auto;" width="645">
-										<tbody>
-											<tr>
-												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<div class="spacer_block block-1" style="height:25px;line-height:25px;font-size:1px;">&#8202;</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="row row-7" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #562d2b;">
-						<tbody>
-							<tr>
-								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #562d2b; border-radius: 0; color: #000000; width: 645px; margin: 0 auto;" width="645">
-										<tbody>
-											<tr>
-												<td class="column column-1" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-left:10px;padding-right:10px;width:100%;">
 																<div class="alignment" align="left" style="line-height:10px">
-																	<div style="max-width: 129px;"><a href="http://www.example.com" target="_blank" style="outline:none" tabindex="-1"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/8446/logo_yourbrand_footer.png" style="display: block; height: auto; border: 0; width: 100%;" width="129" alt="Your Brand" title="Your Brand" height="auto"></a></div>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;text-align:center;width:100%;">
-																<h3 style="margin: 0; color: #fdbd98; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 24px;"><span class="tinyMce-placeholder">ABOUT US</span></h3>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div style="color:#ffffff;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:left;mso-line-height-alt:24px;">
-																	<p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+																	<div style="max-width: 130px;"><img src="https://d15k2d11r6t6rl.cloudfront.net/pub/bfra/rt28zbov/rsm/30t/09n/nav-logo.png" style="display: block; height: auto; border: 0; width: 100%;" width="130" height="auto"></div>
 																</div>
 															</td>
 														</tr>
 													</table>
 												</td>
-												<td class="column column-2" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="heading_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+												<td class="column column-2" width="50%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-right: 40px; padding-top: 40px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<table class="social_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;text-align:center;width:100%;">
-																<h3 style="margin: 0; color: #fdbd98; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 24px;"><span class="tinyMce-placeholder">LINKS</span></h3>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div style="color:#ffffff;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-																	<p style="margin: 0;"><a href="http://www.example.com" target="_blank" style="text-decoration: none; color: #ffffff;" rel="noopener">Community</a></p>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div style="color:#ffffff;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-																	<p style="margin: 0;"><a href="http://www.example.com" target="_blank" style="text-decoration: none; color: #ffffff;" rel="noopener">Blog</a></p>
-																</div>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td class="column column-3" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="heading_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;text-align:center;width:100%;">
-																<h3 style="margin: 0; color: #fdbd98; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 24px;"><span class="tinyMce-placeholder">CONTACT</span></h3>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:25px;padding-top:10px;">
-																<div style="color:#ffffff;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-																	<p style="margin: 0;"><a href="http://www.example.com" target="_blank" style="text-decoration: none; color: #ffffff;" rel="noopener">Help Center</a></p>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="social_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="padding-bottom:5px;padding-left:20px;padding-right:20px;padding-top:10px;text-align:left;">
-																<div class="alignment" align="left">
+															<td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:15px;text-align:right;">
+																<div class="alignment" align="right">
 																	<table class="social-table" width="144px" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block;">
 																		<tr>
-																			<td style="padding:0 4px 0 0;"><a href="https://www.facebook.com/" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/facebook@2x.png" width="32" height="auto" alt="Facebook" title="facebook" style="display: block; height: auto; border: 0;"></a></td>
-																			<td style="padding:0 4px 0 0;"><a href="https://www.twitter.com/" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/twitter@2x.png" width="32" height="auto" alt="Twitter" title="twitter" style="display: block; height: auto; border: 0;"></a></td>
-																			<td style="padding:0 4px 0 0;"><a href="https://www.linkedin.com/" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/linkedin@2x.png" width="32" height="auto" alt="Linkedin" title="linkedin" style="display: block; height: auto; border: 0;"></a></td>
-																			<td style="padding:0 4px 0 0;"><a href="https://www.instagram.com/" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/instagram@2x.png" width="32" height="auto" alt="Instagram" title="instagram" style="display: block; height: auto; border: 0;"></a></td>
+																			<td style="padding:0 0 0 4px;"><a href="https://www.facebook.com" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/facebook@2x.png" width="32" height="auto" alt="Facebook" title="Facebook" style="display: block; height: auto; border: 0;"></a></td>
+																			<td style="padding:0 0 0 4px;"><a href="https://www.twitter.com" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/twitter@2x.png" width="32" height="auto" alt="Twitter" title="Twitter" style="display: block; height: auto; border: 0;"></a></td>
+																			<td style="padding:0 0 0 4px;"><a href="https://www.instagram.com" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/instagram@2x.png" width="32" height="auto" alt="Instagram" title="Instagram" style="display: block; height: auto; border: 0;"></a></td>
+																			<td style="padding:0 0 0 4px;"><a href="https://www.linkedin.com" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/linkedin@2x.png" width="32" height="auto" alt="LinkedIn" title="LinkedIn" style="display: block; height: auto; border: 0;"></a></td>
 																		</tr>
 																	</table>
 																</div>
 															</td>
 														</tr>
 													</table>
-													<table class="paragraph_block block-4" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="row row-10" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+						<tbody>
+							<tr>
+								<td>
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 680px; margin: 0 auto;" width="680">
+										<tbody>
+											<tr>
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<table class="paragraph_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
-															<td class="pad" style="padding-bottom:10px;padding-left:30px;padding-right:30px;">
-																<div style="color:#7a5452;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:15.6px;">
-																	<p style="margin: 0;"><a href="http://example.com/unsubcribe" target="_blank" style="text-decoration: none; color: #7a5452;" rel="noopener">Unsuscribe</a></p>
+															<td class="pad" style="padding-left:30px;padding-right:30px;padding-top:5px;">
+																<div style="color:#999999;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:14px;line-height:150%;text-align:center;mso-line-height-alt:21px;">&nbsp;</div>
+															</td>
+														</tr>
+													</table>
+													<table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+														<tr>
+															<td class="pad" style="padding-bottom:30px;padding-left:30px;padding-right:30px;">
+																<div style="color:#999999;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:12px;line-height:150%;text-align:center;mso-line-height-alt:18px;">
+																	<p style="margin: 0; word-break: break-word;"><span><span>© EventsNow. All Rights Reserved.&nbsp;<a href="#" target="_blank" style="text-decoration: underline; color: #ffbe98;" rel="noopener"></a></span></span></p>
+																	<p style="margin: 0; word-break: break-word;">&nbsp;</p>
 																</div>
 															</td>
 														</tr>
@@ -568,47 +486,18 @@ export const QrEmailTemplate = `
 							</tr>
 						</tbody>
 					</table>
-					<table class="row row-8" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #562d2b;">
+					<table class="row row-11" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
 						<tbody>
 							<tr>
 								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #562d2b; border-radius: 0; color: #000000; width: 645px; margin: 0 auto;" width="645">
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 680px; margin: 0 auto;" width="680">
 										<tbody>
 											<tr>
 												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<div class="spacer_block block-1" style="height:25px;line-height:25px;font-size:1px;">&#8202;</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="row row-9" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
-						<tbody>
-							<tr>
-								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 645px; margin: 0 auto;" width="645">
-										<tbody>
-											<tr>
-												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-													<table class="icons_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: center;">
+													<table class="empty_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
-															<td class="pad" style="vertical-align: middle; color: #1e0e4b; font-family: 'Inter', sans-serif; font-size: 15px; padding-bottom: 5px; padding-top: 5px; text-align: center;">
-																<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-																	<tr>
-																		<td class="alignment" style="vertical-align: middle; text-align: center;"><!--[if vml]><table align="center" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
-																			<!--[if !vml]><!-->
-																			<table class="icons-inner" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;" cellpadding="0" cellspacing="0" role="presentation"><!--<![endif]-->
-																				<tr>
-																					<td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 6px;"><a href="http://designedwithbeefree.com/" target="_blank" style="text-decoration: none;"><img class="icon" alt="Beefree Logo" src="https://d1oco4z2z1fhwp.cloudfront.net/assets/Beefree-logo.png" height="auto" width="34" align="center" style="display: block; height: auto; margin: 0 auto; border: 0;"></a></td>
-																					<td style="font-family: 'Inter', sans-serif; font-size: 15px; font-weight: undefined; color: #1e0e4b; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="http://designedwithbeefree.com/" target="_blank" style="color: #1e0e4b; text-decoration: none;">Designed with Beefree</a></td>
-																				</tr>
-																			</table>
-																		</td>
-																	</tr>
-																</table>
+															<td class="pad">
+																<div></div>
 															</td>
 														</tr>
 													</table>
@@ -626,5 +515,4 @@ export const QrEmailTemplate = `
 	</table><!-- End -->
 </body>
 
-</html>
-`;
+</html>`;
