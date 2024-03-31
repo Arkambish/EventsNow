@@ -5,30 +5,37 @@ import { promises as fs } from "fs";
 import { transporter, mailOptions } from "@/config/nodemailer";
 import User from "@/models/userModel";
 import { emailTemplate } from "@/lib/email/email";
+import { QrEmailTemplate } from "@/lib/email/QrcodeEmailTemplate";
+import { uploadToCloudinary } from "@/util/helper";
+
+import { v2 as cloudinary } from "cloudinary";
 
 export async function POST(req: Request) {
-  const { qr, userid } = await req.json();
+  const data = await req.json();
+  console.log(data);
 
-  const user = await User.findOne({ _id: userid });
+  const image = await uploadToCloudinary(data.qr);
+  console.log(image);
+
+  const user = await User.findOne({ _id: data.userid });
 
   if (user === null) {
     return NextResponse.json("No User  exists");
   }
 
-  // const template = Handlebars.compile(emailTemplate);
-  // const htmlBody = template({
-  //   name: "99x",
-  //   URL: `${process.env.NEXT_PUBLIC_URL}/organization/newuser?organizationId=${organizationId}&userId=${user._id}`,
-  // });
+  const template = Handlebars.compile(QrEmailTemplate);
+  const htmlBody = template({
+    qr: data.qr,
+  });
 
   try {
     const res = await transporter.sendMail({
       from: "ruchithsamarawickrama.sg@gmail.com",
       to: user.email,
-      subject: "Invitation to join the organization",
-      text: `You have been invited to join the organization`,
+      subject: "Payment Successfull",
+      text: `Payment Successfull. Here is your qr code`,
       // html: htmlBody,
-      html: `<img src=${qr}> this is your qr code`,
+      html: `<img src=${image}  alt="this is qr code"/> this is your qr code`,
     });
 
     if (res.accepted.length > 0) {

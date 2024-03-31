@@ -50,7 +50,7 @@ export default function SelectTemplate({
   return (
     <div>
       {event.template === "template1" && (
-        <Template event={event} preview={true} />
+        <Template event={event} preview={false} />
       )}
     </div>
   );

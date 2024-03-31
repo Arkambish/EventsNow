@@ -6,6 +6,8 @@ import Head from "next/head";
 import axios from "axios";
 import Script from "next/script";
 import Image from "next/image";
+import { generateQRCodeImage } from "@/util/helper";
+import { error, success } from "@/util/Toastify";
 
 declare global {
   interface Window {
@@ -21,7 +23,8 @@ const PaymentModal = (props: any) => {
   const name = props.item;
   const amount = props.amount;
   const merchantId = "1226307";
-  const merchantSecret = "MjY0MDQ5OTc3NTIyNDg2NDk2OTUyMzU2MDY1OTcxMzYyMTEyODYxMA==";
+  const merchantSecret =
+    "MjY0MDQ5OTc3NTIyNDg2NDk2OTUyMzU2MDY1OTcxMzYyMTEyODYxMA==";
   const currency = props.currency || "LKR";
 
   const hashedSecret = crypto
@@ -70,6 +73,12 @@ const PaymentModal = (props: any) => {
     hash: hash,
   };
 
+  const value = {
+    useId: "1234",
+    eventId: "123445",
+    quantity: 4,
+  };
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://www.payhere.lk/lib/payhere.js";
@@ -77,16 +86,78 @@ const PaymentModal = (props: any) => {
 
     script.onload = () => {
       // PayHere script is loaded, initialize event listeners
-      window.payhere.onCompleted = function onCompleted(paymentId: string) {
+      window.payhere.onCompleted = async function onCompleted(
+        paymentId: string
+      ) {
+        const value = {
+          useId: "65f2b6a08dcf796e631062dc",
+          eventId: "65f2b6f98dcf796e631062fc",
+          ticket: [
+            {
+              class: "A",
+              quantity: 4,
+            },
+            {
+              class: "B",
+              quantity: 4,
+            },
+          ],
+        };
+
+        const qrImg = await generateQRCodeImage(JSON.stringify(value));
+        // const image = await uploadToCloudinary(qrImg);
+        console.log("QR Code Image Data:", qrImg);
+        // console.log("QR Code Image :", image);
+
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              qr: qrImg,
+              userid: "65f2b6a08dcf796e631062dc",
+            }),
+          }
+        );
+
+        if (!res.ok) {
+          console.error("Error sending qr code");
+          error("Error sending qr code");
+        }
+
+        const message = await res.json();
+        if (message === "No User  exists") {
+          error("No User exists");
+        }
+
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: "65f2b6f98dcf796e631062fc",
+              amount: 1000,
+            }),
+          }
+        );
+
+        success("Payment completed");
+
         console.log("success payment completed");
       };
 
       window.payhere.onDismissed = function onDismissed() {
-        console.log("asdf");
+        error("Payment dismissed");
       };
 
-      window.payhere.onError = function onError(error: string) {
-        console.log("asdf");
+      window.payhere.onError = function onError(e: string) {
+        error(e);
       };
     };
     scriptRef.current = script;
@@ -248,18 +319,10 @@ const PaymentModal = (props: any) => {
 
       <button
         onClick={pay}
-        className="flex button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4  "
+        className="flex button w-20 p-[1px] bg-[#D47151] rounded-2xl items-center  "
       >
-        <div className=" w-10 h-8 mt-2 ml-2 xl:ml-0">
-          <Image
-            src="https://res.cloudinary.com/dpk9utvby/image/upload/v1710478589/ew/tecmf69jzdyv2sn22saa.svg"
-            alt="print"
-            width={32}
-            height={32}
-          />
-        </div>
         <div className="font-medium xl:text-lg text-md text-white text-left leading-tight ml-4">
-          Buy tickets
+          Pay Now
         </div>
       </button>
     </>

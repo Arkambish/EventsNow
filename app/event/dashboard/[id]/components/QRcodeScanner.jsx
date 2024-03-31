@@ -8,34 +8,41 @@ const QRScanner = () => {
   const [scanned, setScannedText] = useState("");
   const [scannedEvent, setScannedEvent] = useState("");
   const [scannedUser, setScannedUser] = useState("");
+  const [quantity, setQuantity] = useState();
+  const [isVideoOn, setIsVideoOn] = useState(false);
+
+  const handleToggleVideo = () => {
+    setIsVideoOn(!isVideoOn);
+  };
 
   useEffect(() => {
-    const video = videoElementRef.current;
-    const qrScanner = new QrScanner(
-      video,
-      (result) => {
-        console.log("decoded qr code:", result);
-        setScannedText(result.data);
-        setScannedEvent(result.data.split(",")[0]);
-        setScannedUser(result.data.split(",")[1]);
-      },
-      {
-        returnDetailedScanResult: true,
-        highlightScanRegion: true,
-        highlightCodeOutline: true,
-      }
-    );
-    qrScanner.start();
-    console.log("start");
+    if (isVideoOn) {
+      const video = videoElementRef.current;
+      const qrScanner = new QrScanner(
+        video,
+        (result) => {
+          console.log("decoded qr code:", result);
+          setScannedText(result.data);
+          setScannedEvent(result.data.split(",")[0]);
+          setScannedUser(result.data.split(",")[1]);
+          setQuantity(result.data.split(",")[2]);
+        },
+        {
+          returnDetailedScanResult: true,
+          highlightScanRegion: true,
+          highlightCodeOutline: true,
+        }
+      );
+      qrScanner.start();
+      console.log("start");
 
-    return () => {
-      console.log(qrScanner);
-      qrScanner.stop();
-      qrScanner.destroy();
-    };
-  }, []);
-
-
+      return () => {
+        console.log(qrScanner);
+        qrScanner.stop();
+        qrScanner.destroy();
+      };
+    }
+  }, [isVideoOn]);
 
   return (
     <div>
@@ -45,8 +52,9 @@ const QRScanner = () => {
           ref={videoElementRef}
         />
       </div>
-      <p className="scannedText">event: {scannedEvent}</p>
+      <p className="scannedText ">event: {scannedEvent}</p>
       <p className="scannedText">user: {scannedUser}</p>
+      <p className="quantity">quantity: {quantity}</p>
     </div>
   );
 };

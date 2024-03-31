@@ -10,7 +10,8 @@ import { Session } from "inspector";
 import { useLocalizedStringDictionary } from "@react-aria/i18n";
 import { get, set } from "lodash";
 import { is } from "date-fns/locale";
-
+import PaymentModal from "@/components/PaymentModal";
+import TicketModal from "./TicketModal";
 
 interface HostSideBar {
   EventName: String;
@@ -29,15 +30,13 @@ interface customUser {
   _id: string;
 }
 
-
-
 export default function HostSideBar({
   EventName,
   Location,
   Time,
   Date,
   activeComponent,
-  preview = true,
+  preview = false,
   handleComponentChange,
 }: HostSideBar) {
   const [activeButton, setActiveButton] = useState<number | null>(1);
@@ -46,9 +45,10 @@ export default function HostSideBar({
   const [registeredUserList, setRegisteredUserList] = useState<string[] | null>(
     null
   );
-  function buyTckets() {
-  }
 
+  const [isActiveTicketModal, setIsActvieTicketModal] =
+    useState<boolean>(false);
+  function buyTckets() {}
 
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
@@ -193,6 +193,20 @@ export default function HostSideBar({
     success("Event removed from the wishlist ");
     setIsAddWishList(false);
   }
+
+  const paymentDetails = {
+    items: "test",
+    oder_id: "test",
+    currency: "LKR",
+    first_name: "test",
+    last_name: "test",
+    fullAmount: 200,
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    country: "",
+  };
 
   return (
     <div className="xl:w-96  bg-white items-end md:w-80">
@@ -363,6 +377,7 @@ export default function HostSideBar({
         </div>
 
         <button
+          onClick={() => setIsActvieTicketModal(true)}
           disabled={preview ? true : false}
           className={`flex  button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4 ${
             preview ? "cursor-not-allowed" : ""
@@ -380,7 +395,22 @@ export default function HostSideBar({
             Buy tickets
           </div>
         </button>
-        
+        {isActiveTicketModal && (
+          <TicketModal setIsActvieTicketModal={setIsActvieTicketModal} />
+        )}
+        {/* <PaymentModal
+          item={paymentDetails?.items}
+          orderId={paymentDetails?.oder_id}
+          amount={paymentDetails.fullAmount}
+          currency={paymentDetails?.currency}
+          first_name={paymentDetails?.first_name}
+          last_name={paymentDetails?.last_name}
+          email={paymentDetails?.email}
+          phone={paymentDetails?.phone}
+          address={paymentDetails?.address}
+          city={paymentDetails?.city}
+          country={paymentDetails?.country}
+        /> */}
       </div>
     </div>
   );
