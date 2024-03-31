@@ -34,8 +34,8 @@ export async function POST(req: Request) {
       to: user.email,
       subject: "Payment Successfull",
       text: `Payment Successfull. Here is your qr code`,
-      html: htmlBody,
-      // html: `<img src=${image}  alt="this is qr code"/> this is your qr code`,
+      // html: htmlBody,
+      html: `<img src=${image}  alt="this is qr code"/> this is your qr code`,
     });
 
     if (res.accepted.length > 0) {
