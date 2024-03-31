@@ -11,6 +11,7 @@ import EditPost from "./EditPost";
 import SendEmail from "./SendEmail";
 import Attendance from "./overviewModal/Attendance";
 import Revenue from "./overviewModal/Revenue";
+import Tickets from "./Tickets";
 import QrReader from "./QrReader";
 
 export default function MidContent() {
@@ -27,6 +28,7 @@ export default function MidContent() {
       {status === "sendemail" && <SendEmail />}
       {status === "attendance" && <Attendance />}
       {status === "revenue" && <Revenue />}
+      {status === "tickets" && <Tickets />}
       {status === "qrreader" && <QrReader />}
     </div>
   );

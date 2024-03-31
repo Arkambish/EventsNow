@@ -105,7 +105,7 @@ export default function AdminPersonDetailsBar({
         </div>
       </div>
 
-      {showBlacklistModal && (
+      {showBlacklistModal && ( 
         <Modal title="Details" onClose={() => setShowBlacklistModal(false)}>
           <BlacklistModalContent userId={""} />
         </Modal>

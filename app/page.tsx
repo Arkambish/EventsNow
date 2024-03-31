@@ -1,15 +1,13 @@
 import React from "react";
 import Footer from "@/components/Footer";
+import EventCardDisabled from "@/components/EventCardDisabled";
 import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
-import QRcodeScanner from "@/app/event/dashboard/[id]/components/QRcodeScanner";
 // import EventCardDisabled from "@/components/EventCardDisabled";
-import Test from "@/components/Test";
-import IndexPage from "@/components/Test1";
-import EventCardDisabled from "@/components/EventCardDisabled";
 
-import { Event } from "./admin/Type";
+// import EventViewMode from "../components/EventViewMode";
+// import { Event } from "./admin/Type";
 
 export interface EventType {
   _id: string;
@@ -59,14 +57,14 @@ async function getEvent() {
   }
 }
 
+// import HeroSection from "@/components/HeroSection";
+// import { formatDate } from "@/util/helper";
+
 export default async function Home() {
   const data = await getOutDateEvent();
   const event = await getEvent();
-
   return (
     <div>
-      {/* <Test /> */}
-
       <HeroSection />
 
       <EventViewMode event={event} />
@@ -90,7 +88,6 @@ export default async function Home() {
 
       <Footer />
     </div>
-    // <QRcodeScanner />
-    // </div>
   );
 }
+

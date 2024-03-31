@@ -17,6 +17,7 @@ export default function MainComponent() {
     handleReports,
     handleCampaign,
     handleSetting,
+    handleTicket,
     isSideBar,
     setIsSideBar,
     eventname,
@@ -156,12 +157,23 @@ export default function MainComponent() {
                 text="Settings"
                 onClick={() => handleSetting()}
               />
+
+              <EventDashButton
+                isSlideBar={isSideBar}
+                img="ticket.svg"
+                text="Tickets"
+                onClick={() => handleTicket()}
+              />
+
               <EventDashButton
                 isSlideBar={isSideBar}
                 img="setting.svg"
                 text="QR Reader"
                 onClick={() => handleQRreader()}
               />
+
+
+              
             </div>
           </div>
           <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2">

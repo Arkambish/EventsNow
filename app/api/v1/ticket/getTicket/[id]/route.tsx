@@ -19,7 +19,7 @@ export async function GET(request: Request, { params }: { params: Params }) {
 
     const ticket = await TicketType.find({ eventId: id });
     if (!ticket || ticket.length === 0) {
-      return NextResponse.json("no ticket found");
+      return NextResponse.json(null);
     }
     return NextResponse.json(ticket);
   } catch (error) {

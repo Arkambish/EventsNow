@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+    
     return NextResponse.json({ ticket }, { status: 201 });
   } catch (e) {
     return NextResponse.json(

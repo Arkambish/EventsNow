@@ -16,6 +16,7 @@ export default function SideBar() {
     handleReports,
     handleCampaign,
     handleSetting,
+    handleTicket,
     isSideBar,
     setIsSideBar,
     handleQRreader,
@@ -89,10 +90,18 @@ export default function SideBar() {
               />
               <EventDashButton
                 isSlideBar={isSideBar}
+                img="ticket.svg"
+                text="Tickets"
+                onClick={() => handleTicket()}
+                />
+
+            <EventDashButton
+                isSlideBar={isSideBar}
                 img="setting.svg"
                 text="QR Reader"
                 onClick={() => handleQRreader()}
               />
+
             </div>
           </div>
         </div>
