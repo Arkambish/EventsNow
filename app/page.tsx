@@ -98,7 +98,7 @@ import TicketMockup from "./event/dashboard/[id]/components/TicketMockup";
 export default function hi() {
   return (
     <div className="m-4">
-      <TicketMockup image="/images/about/vision.png" price="1000" type="VIP" />
+      {/* <TicketMockup image="/images/about/vision.png" price="1000" type="VIP" /> */}
     </div>
   );
 }

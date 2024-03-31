@@ -25,7 +25,7 @@ export default function Tickets() {
               {!allTickets || allTickets.length==0 ? (
                 <EmptyStateComponent message="You have not created any tickets yet" />
               ):allTickets.map((ticket) => 
-              <div className="m-4 ">
+              <div className="m-4" key={ticket._id}>
               <TicketMockup 
               image={ticket.image}
               price={ticket.price}
