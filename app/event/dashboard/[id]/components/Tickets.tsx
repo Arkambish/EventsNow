@@ -10,32 +10,37 @@ export default function Tickets() {
 
   return (
     <Container>
-      <div className=" lg:ml-16 mb-5 grid gap-2 lg:px-6 mt-8 lg:mr-16 pb-20">
+      <div className="  mb-5 grid gap-2 lg:px-6 mt-8 lg:mr-16 pb-20">
         <div className="">
           <div className="   content-start  font-mono pb-4 ">
             <div className=" text-custom-orange font-medium text-3xl">
               TICKETS
             </div>
-            
-            <div className="">
-              
+
+            <div className="text-[#455273] font-mono md:mr-8">
+              You can create tickets for your event here. You can create
+              multiple tickets with different prices and class types.
+            </div>
+            <div className="w-full flex justify-end">
+              <GetTicketDatils />
             </div>
 
-            <div className="mt-20 xl:flex">
-              {!allTickets || allTickets.length==0 ? (
+            <div className="mt-20 flex flex-wrap">
+              {!allTickets || allTickets.length == 0 ? (
                 <EmptyStateComponent message="You have not created any tickets yet" />
-              ):allTickets.map((ticket) => 
-              <div className="m-4" key={ticket._id}>
-              <TicketMockup 
-              image={ticket.image}
-              price={ticket.price}
-              type={ticket.classType}
-              key={ticket._id}
-               />
-            </div>)}
-            </div>
-            <div className="w-full">
-              <GetTicketDatils />
+              ) : (
+                allTickets.map((ticket) => (
+                  <div className="m-4" key={ticket._id}>
+                    <TicketMockup
+                      id={ticket._id}
+                      image={ticket.image}
+                      price={ticket.price}
+                      type={ticket.classType}
+                      key={ticket._id}
+                    />
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>

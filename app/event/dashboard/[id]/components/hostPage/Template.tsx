@@ -24,7 +24,7 @@ export default function Template({ setShowTemplate, handleTemplate1 }: Props) {
         id="static-modal"
         data-modal-backdrop="static"
         aria-hidden="true"
-        className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0 max-h-full"
       >
         <div className="border-[1px] divide-x-2 mb-10  rounded-xl bg-white w-4/5 2xl:w-1/5 lg:w-2/5 md:w-3/5  relative md:top-[25%] md:left-[25%]  top-[5%] left-[5%] 2xl:left-[35%]">
           <div className="text-black p-3 text-xl ">
