@@ -297,3 +297,11 @@ export type OrganizationProps = {
 export interface ChildrenType {
   children: React.ReactNode;
 }
+//ticket type
+export type Ticket = {
+  _id: string;
+  eventId: string;
+  price: number;
+  classType: string;
+  image: string;
+};
