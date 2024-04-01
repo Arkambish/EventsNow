@@ -83,26 +83,35 @@ const PaymentModal = (props: any) => {
   useEffect(() => {
     const getUserId = async () => {
       const session = await getSession();
-      try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/user/getUserId`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: session?.user?.email,
-          }),
-        });
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getUserId`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: session?.user?.email,
+            }),
+          }
+        );
+
         if (!res.ok) {
           error("Error fetching user id");
         }
-      }catch(e){
+
+        const data = await res.json();
+
+        setUserId(data.id);
+      } catch (e) {
         error("Error fetching user id");
       }
-
-      
     };
     getUserId();
+  }, []);
+
+  useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://www.payhere.lk/lib/payhere.js";
     script.async = true;
@@ -114,6 +123,7 @@ const PaymentModal = (props: any) => {
       ) {
         {
           props.ticketArrTemp.map(async (ticket: string) => {
+            console.log("Ticket Type:", userId);
             const value = {
               useId: userId,
               eventId: params.id,
@@ -142,14 +152,14 @@ const PaymentModal = (props: any) => {
             if (!res.ok) {
               console.error("Error sending qr code");
               error("Error sending qr code");
+              return;
             }
 
             const message = await res.json();
             if (message === "No User  exists") {
               error("No User exists");
+              return;
             }
-
-            
           });
         }
         const response = await fetch(
@@ -169,9 +179,6 @@ const PaymentModal = (props: any) => {
         success("Payment completed");
         props.setIsActiveProceedTicketModal(false);
         props.setTicketArrTemp("");
-
-
-        
       };
 
       window.payhere.onDismissed = function onDismissed() {
@@ -197,7 +204,7 @@ const PaymentModal = (props: any) => {
     return () => {
       document.body.removeChild(script);
     };
-  }, [params.id, props.ticketArrTemp, props.totalPrice, userId]);
+  }, [params.id, props.ticketArrTemp, props.totalPrice, userId, props]);
 
   // // initial setup
 
