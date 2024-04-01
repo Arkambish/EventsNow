@@ -1,16 +1,17 @@
 import React from "react";
 import axios from "axios";
-import { Organization } from "@/app/admin/Type";
+// import { Organization } from "@/app/admin/Type";
 import { success } from "@/util/Toastify";
 import { useAdmin } from "../../AdminContextFile";
+import { OrganizationType } from "@/app/Type";
 
 interface DenyModalProps {
-  organization: Organization;
+  organization: OrganizationType;
 }
 type ContextData = {
-  setNotification: React.Dispatch<React.SetStateAction<Organization[]>>;
-  setOrganization: React.Dispatch<React.SetStateAction<Organization[]>>;
-  notification: Organization[];
+  setNotification: React.Dispatch<React.SetStateAction<OrganizationType[]>>;
+  setOrganization: React.Dispatch<React.SetStateAction<OrganizationType[]>>;
+  notification: OrganizationType[];
 };
 const DenyModalContent = ({ organization }: DenyModalProps) => {
   const { setOrganization, setNotification, notification } =
@@ -26,10 +27,10 @@ const DenyModalContent = ({ organization }: DenyModalProps) => {
 
       const updatedNotifications = [...notification, organization];
       success("Organization Denied successfully");
-      setNotification(updatedNotifications);
-      setOrganization((prev: Organization[]) =>
+      setNotification(updatedNotifications); // Add denied organization to the notification list
+      setOrganization((prev: OrganizationType[]) =>
         prev.filter((org) => org._id !== organization._id)
-      );
+      ); // Remove denied organization from the organization list
     } catch (error) {
       console.error("Error updating organization:", error);
     }

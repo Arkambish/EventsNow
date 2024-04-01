@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Event } from "../Type";
+
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { success } from "@/util/Toastify";
 import { error } from "@/util/Toastify";
 import { useOrg } from "../OrgContext";
 
 import axios from "axios";
+import { EventType } from "@/app/Type";
 
 interface EventCardOrgDash {
   img: string;
@@ -20,11 +21,12 @@ interface EventCardOrgDash {
 }
 
 type ContextData = {
-  setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
-  events: Event[];
+  setEvents: React.Dispatch<React.SetStateAction<EventType[]>>;
+  events: EventType[];
 };
 
 function eventDashboardHandler() {}
+
 function EventCardOrgDash({
   img,
   name,
@@ -53,7 +55,9 @@ function EventCardOrgDash({
 
       setEvents(newEvents);
       success("Event deleted successfully");
-      setEvents((prev: Event[]) => prev.filter((event) => event._id !== id));
+      setEvents((prev: EventType[]) =>
+        prev.filter((event) => event._id !== id)
+      );
     } catch (error) {
       console.error("Error deleting......", error);
     }
@@ -210,21 +214,8 @@ function EventCardOrgDash({
               {date.substring(0, 10)}
             </div>
           </div>
-          {/* <div className="flex">
-            <Image
-              src="/images/admin/Line_up_blue.svg"
-              alt="calendar"
-              width={35}
-              height={40}
-            />
-            <div className="my-auto font-mono text-[#353C4E] text-sm font-medium">
-              {}
-            </div>
-          </div> */}
         </div>
         <div className="flex sm:hidden content-center ">
-          {/* <Link href={`/event/dashboard/${id}`}> */}
-
           <button className="button text-center mb-8 flex gap-2 bg-[#D47151] text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM ">
             <svg
               width="21"

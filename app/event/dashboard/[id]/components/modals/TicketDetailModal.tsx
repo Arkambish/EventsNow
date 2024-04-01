@@ -1,9 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { Event } from "@/app/admin/Type";
 import { UseEventContext, EventContextType } from "../../EventDashContext";
 import Image from "next/image";
-import Modal from "../ModalContext";
 import {
   CldUploadWidget,
   CloudinaryUploadWidgetInfo,

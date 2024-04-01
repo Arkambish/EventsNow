@@ -1,13 +1,13 @@
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "./ModalContext";
 import DetailsModalContent from "./modals/DetailsModal";
 import AllowModalContent from "./modals/AllowModal";
 import DenyModalContent from "./modals/DenyModal";
-import { Organization } from "@/app/admin/Type";
+import { OrganizationType } from "@/app/Type";
 
 interface OrgRequestHandleProps {
-  organization: Organization;
+  organization: OrganizationType;
 }
 
 export default function Org_RequestHandle({

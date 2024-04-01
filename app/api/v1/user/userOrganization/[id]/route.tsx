@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import connectMongoDB from "@/lib/mongo/mongodb";
-import Permission from "../../../../../models/permissionModel";
-import Organization from "../../../../../models/organizationModel";
+import Permission from "../../../../../../models/permissionModel";
+import Organization from "../../../../../../models/organizationModel";
 // import Permission from "@/models/permissionModel";
 // import Organization from "@/models/organizationModel";
 
-export const POST = async (req: Request) => {
+export const GET = async (
+  req: Request,
+  { params }: { params: { id: string } }
+) => {
   try {
-    const { id } = await req.json();
-
-    // const objectId = new mongoose.Types.ObjectId(id);
-
+    const id = params.id;
 
     await connectMongoDB();
     const user = await Permission.find({
@@ -43,7 +43,6 @@ export const POST = async (req: Request) => {
         const name = data[0].organizationName;
         const image = data[0].postImageLink;
         const id = data[0]._id;
-
 
         return { name, image, id };
       })

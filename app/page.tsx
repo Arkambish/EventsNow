@@ -4,28 +4,8 @@ import EventCardDisabled from "@/components/EventCardDisabled";
 import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
-// import EventCardDisabled from "@/components/EventCardDisabled";
-
-// import EventViewMode from "../components/EventViewMode";
-// import { Event } from "./admin/Type";
-
-export interface EventType {
-  _id: string;
-  eventName: string;
-  selectedTab: string;
-  eventLocation: string;
-  eventStartDate: string;
-  startTime: string;
-  duration: string;
-  eventTimeZone: string;
-  description: string;
-  postImageLink: string;
-  organizationId: [string];
-  isPublished: boolean;
-  registerUser: [string];
-  dashboardImage: string;
-  __v: number;
-}
+import { EventType } from "./Type";
+import EventsPage from "@/components/EventViewMode";
 
 async function getOutDateEvent() {
   try {
@@ -57,14 +37,11 @@ async function getEvent() {
   }
 }
 
-// import HeroSection from "@/components/HeroSection";
-// import { formatDate } from "@/util/helper";
-
 export default async function Home() {
   const data = await getOutDateEvent();
-  console.log(data);
+
   const event = await getEvent();
-  console.log(event);
+
   return (
     <div>
       <HeroSection />

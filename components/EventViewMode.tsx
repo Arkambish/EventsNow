@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { HiOutlineViewGrid, HiOutlineViewList } from "react-icons/hi";
-
 import EventCard from "@/components/EventCard";
 import Pagination from "@mui/material/Pagination";
-import { Event } from "@/app/admin/Type";
 import { formatDate } from "@/util/helper";
 import EventListView from "./EventListView";
 import { EventType } from "@/app/Type";
@@ -28,22 +26,19 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1440) {
-        setEventsPerPage(5); // Large screens
-      } else if (window.innerWidth >= 1280) {
+      if (document.documentElement.clientWidth >= 1024) {
         setEventsPerPage(4); // Large screens
-      } else if (window.innerWidth >= 1024) {
-        console.log("medium screen", window.innerWidth);
+      } else if (document.documentElement.clientWidth >= 768) {
         setEventsPerPage(3); // Medium screens
       } else {
-        setEventsPerPage(2); // Small screens or default
+        setEventsPerPage(1); // Small screens
       }
     };
     handleResize();
-    // window.addEventListener("resize", handleResize);
-    // return () => {
-    //   window.removeEventListener("resize", handleResize);
-    // };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

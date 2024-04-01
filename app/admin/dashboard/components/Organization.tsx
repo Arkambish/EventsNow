@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SuperadminPages from "@/app/admin/dashboard/components/SuperadminPages";
 import Available_Orgs from "@/app/admin/dashboard/components/Available_Orgs";
-
 import { useAdmin } from "../AdminContextFile";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
-import { AdminContext } from "../../Type";
+
 import { getAllOrganization } from "../FetchData";
 import Spinner from "@/components/Spinner";
-import { MdRefresh } from "react-icons/md";
-import { OrganizationType } from "@/app/Type";
+import { AdminContext, OrganizationType } from "@/app/Type";
 
 export default function Organization() {
   const { organization, setOrganization, setNotification } =
     useAdmin() as AdminContext;
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function reloadPage() {
