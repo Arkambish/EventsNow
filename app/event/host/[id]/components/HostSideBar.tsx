@@ -10,12 +10,15 @@ import { Session } from "inspector";
 import { useLocalizedStringDictionary } from "@react-aria/i18n";
 import { get, set } from "lodash";
 import { is } from "date-fns/locale";
+import PaymentModal from "@/components/PaymentModal";
+import TicketModal from "./TicketModal";
 
 interface HostSideBar {
   EventName: String;
   Location: String;
   Time: String;
   Date: String;
+  preview?: boolean;
   activeComponent: string; // Add prop for active component
   handleComponentChange: (component: string) => void; // Add prop for handling component change
 }
@@ -27,14 +30,13 @@ interface customUser {
   _id: string;
 }
 
-function buyTckets() {}
-
 export default function HostSideBar({
   EventName,
   Location,
   Time,
   Date,
   activeComponent,
+  preview = false,
   handleComponentChange,
 }: HostSideBar) {
   const [activeButton, setActiveButton] = useState<number | null>(1);
@@ -43,6 +45,10 @@ export default function HostSideBar({
   const [registeredUserList, setRegisteredUserList] = useState<string[] | null>(
     null
   );
+
+  const [isActiveTicketModal, setIsActvieTicketModal] =
+    useState<boolean>(false);
+  function buyTckets() {}
 
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
@@ -188,6 +194,20 @@ export default function HostSideBar({
     setIsAddWishList(false);
   }
 
+  const paymentDetails = {
+    items: "test",
+    oder_id: "test",
+    currency: "LKR",
+    first_name: "test",
+    last_name: "test",
+    fullAmount: 200,
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    country: "",
+  };
+
   return (
     <div className="xl:w-96  bg-white items-end md:w-80">
       <div className=' text-center text-[#454545cc] md:text-4xl xl:text-5xl sm:text-xl font-normal xl:pt-16 md:pt-10 font-["Roboto"]'>
@@ -277,6 +297,7 @@ export default function HostSideBar({
         <div className="flex xl:pt-12 md:pt-14 items-center ">
           {isRegistered ? (
             <button
+              disabled={preview ? true : false}
               onClick={removeUserFromRegisteredEvent}
               className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-custom-orange rounded-l-2xl items-center xl:px-4"
             >
@@ -294,8 +315,11 @@ export default function HostSideBar({
             </button>
           ) : (
             <button
+              disabled={preview ? true : false}
               onClick={userRegistrationForEventHandler}
-              className="flex button xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4"
+              className={`flex button xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4 ${
+                preview ? "cursor-not-allowed" : ""
+              } `}
             >
               <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
                 <Image
@@ -313,6 +337,7 @@ export default function HostSideBar({
 
           {isAddWishList ? (
             <button
+              disabled={preview ? true : false}
               onClick={removeFromWishlistHandler}
               className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
             >
@@ -330,8 +355,11 @@ export default function HostSideBar({
             </button>
           ) : (
             <button
+              disabled={preview ? true : false}
               onClick={addTowishlistHandler}
-              className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
+              className={`${
+                preview ? "cursor-not-allowed" : ""
+              }  flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4`}
             >
               <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
                 <Image
@@ -348,7 +376,13 @@ export default function HostSideBar({
           )}
         </div>
 
-        <button className="flex button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4  ">
+        <button
+          onClick={() => setIsActvieTicketModal(true)}
+          disabled={preview ? true : false}
+          className={`flex  button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4 ${
+            preview ? "cursor-not-allowed" : ""
+          } `}
+        >
           <div className=" w-10 h-8 mt-2 ml-2 xl:ml-0">
             <Image
               src="https://res.cloudinary.com/dpk9utvby/image/upload/v1710478589/ew/tecmf69jzdyv2sn22saa.svg"
@@ -361,6 +395,22 @@ export default function HostSideBar({
             Buy tickets
           </div>
         </button>
+        {isActiveTicketModal && (
+          <TicketModal setIsActvieTicketModal={setIsActvieTicketModal} />
+        )}
+        {/* <PaymentModal
+          item={paymentDetails?.items}
+          orderId={paymentDetails?.oder_id}
+          amount={paymentDetails.fullAmount}
+          currency={paymentDetails?.currency}
+          first_name={paymentDetails?.first_name}
+          last_name={paymentDetails?.last_name}
+          email={paymentDetails?.email}
+          phone={paymentDetails?.phone}
+          address={paymentDetails?.address}
+          city={paymentDetails?.city}
+          country={paymentDetails?.country}
+        /> */}
       </div>
     </div>
   );

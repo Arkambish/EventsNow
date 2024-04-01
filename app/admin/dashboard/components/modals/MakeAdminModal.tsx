@@ -1,6 +1,7 @@
 import { User } from "@/app/admin/Type";
 import { error, success } from "@/util/Toastify";
 import React from "react";
+
 interface MAkeAdminprops {
   setUser: React.Dispatch<React.SetStateAction<User[]>>;
   userId: String;

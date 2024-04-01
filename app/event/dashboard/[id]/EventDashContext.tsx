@@ -14,6 +14,10 @@ import { AuthContext, useAuth } from "@/app/AuthContext";
 // import { Post } from "../../host/[id]/components/PostTab";
 
 import { Post } from "../../host/[id]/SelectTemplate";
+import { set } from "mongoose";
+import { ca } from "date-fns/locale";
+import { error, success } from "@/util/Toastify";
+import { AttendanceType, EventType } from "@/app/Type";
 
 export interface EventContextType {
   id: String;
@@ -27,6 +31,9 @@ export interface EventContextType {
   handleTicket: voidFunc;
   isSideBar: boolean;
   setIsSideBar: (value: boolean) => void;
+  setAllTickets: React.Dispatch<React.SetStateAction<Ticket[]>>;
+  event: EventType;
+  setEvent: React.Dispatch<React.SetStateAction<EventType>>;
 
   user: EventUserDeatils[];
   setStatus: Dispatch<SetStateAction<string>>;
@@ -40,7 +47,8 @@ export interface EventContextType {
   eventType: String;
   eventDate: String;
   eventStartTime: String;
-
+  isPreview: boolean;
+  setIsPreview: Dispatch<SetStateAction<boolean>>;
   endTime: String;
   eventVisibility: boolean;
 
@@ -57,12 +65,20 @@ export interface EventContextType {
   eventCoverImage: string;
   eventEndTime: string;
   startTime: string;
-
+  handleQRreader: voidFunc;
   setEventEndDate: React.Dispatch<React.SetStateAction<string>>;
   eventEndDate: string;
-
+  attendances: AttendanceType[];
   setEventDashboardImage: React.Dispatch<React.SetStateAction<string>>;
   setEventCoverImage: React.Dispatch<React.SetStateAction<string>>;
+
+  allTickets: Ticket[];
+  newTicketPrice: number;
+  newTicketClass: string;
+  newTicketImage: string;
+  setNewTicketPrice: React.Dispatch<React.SetStateAction<number>>;
+  setNewTicketClass: React.Dispatch<React.SetStateAction<string>>;
+  setNewTicketImage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 type EventUserDeatils = {
@@ -75,17 +91,25 @@ type Comment = {
   postId: string;
   description: string;
 };
+type Ticket = {
+  _id: string;
+  eventId: string;
+  price: number;
+  classType: string;
+  image: string;
+};
 
 const EventContext = createContext<EventContextType | string>("");
 
 function EventContextProvider({ children }: { children: React.ReactNode }) {
   const { setEventPublish } = useAuth() as AuthContext;
-  const [status, setStatus] = useState("overview");
+  const [status, setStatus] = useState("tickets");
   const params = useParams<{ id: string }>();
   const [isSideBar, setIsSideBar] = useState(true);
 
   const [eventPosts, setEventPosts] = useState<Post[]>([]);
   const [allComment, setAllComment] = useState<Comment[]>([]);
+  const [allTickets, setAllTickets] = useState<Ticket[]>([]);
 
   const [isloading, setIsloading] = useState(false);
 
@@ -102,6 +126,9 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const handleReports: voidFunc = () => {
     setStatus("reports");
   };
+  const handleQRreader: voidFunc = () => {
+    setStatus("qrreader");
+  };
   const handleCampaign: voidFunc = () => {
     setStatus("campaign");
   };
@@ -109,10 +136,31 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     setStatus("settings");
   };
   const handleTicket: voidFunc = () => {
-    setStatus("ticket");
+    setStatus("tickets");
   };
+
   const id = useParams<{ id: string }>().id;
+  const [event, setEvent] = useState<EventType>({
+    selectedTab: "",
+    eventStartDate: "",
+    startTime: "",
+    _id: "",
+    eventName: "",
+    organizationId: "",
+    description: "",
+    coverImage: "",
+    dashboardImage: "",
+    isPublished: false,
+    template: "",
+    registerUser: [],
+    location: "",
+    eventEndDate: "",
+    endTime: "",
+    __v: 0,
+    income: 0,
+  });
   const [eventname, setEventname] = useState<string>("");
+  const [isPreview, setIsPreview] = useState<boolean>(false);
   const [eventLocation, setEventLocation] = useState<string>("");
   const [eventType, setEventType] = useState<string>("");
   const [eventDate, setEventDate] = useState<string>("");
@@ -125,7 +173,15 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [eventVisibility, setEventVisibility] = useState<boolean>(false);
   const [eventCoverImage, setEventCoverImage] = useState<string>("");
   const [eventDashboardImage, setEventDashboardImage] = useState<string>("");
+
+  const [attendances, setAttendances] = useState<AttendanceType[]>([]);
   const router = useRouter();
+
+  //new ticket details
+  const [newTicketPrice, setNewTicketPrice] = useState<number>(0);
+  const [newTicketClass, setNewTicketClass] = useState<string>("");
+  const [newTicketImage, setNewTicketImage] = useState<string>("");
+
   useEffect(() => {
     const getEvent = async () => {
       const res = await fetch(`/api/v1/event/getOneEvent`, {
@@ -172,12 +228,23 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       return data;
     };
 
+    const getAttendence = async () => {
+      const res = await fetch(`/api/v1/attendant/getAttendants/${id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+
+      return data;
+    };
+
     async function handleContext() {
       const event = await getEvent();
       if (event.message === "No event") {
         router.push("/404");
         return;
       }
+      setEvent(event);
       setEventname(event.eventName);
       setEventLocation(event.eventLocation);
       setEventType(event.selectedTab);
@@ -201,16 +268,33 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
       const posts = await eventPost();
       setEventPosts(posts);
+
+      const attendance = await getAttendence();
+      setAttendances(attendance);
     }
     handleContext();
-  }, [params.id, router, setEventPublish, status]);
+
+    async function getTickets() {
+      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+      setAllTickets(data);
+    }
+    getTickets();
+  }, [params.id, router, setEventPublish, status, id]);
 
   return (
     <EventContext.Provider
       value={{
+        attendances,
+        isPreview,
+        setIsPreview,
         setEventEndDate,
         eventEndDate,
-
+        event,
+        setEvent,
         id,
         status,
         user,
@@ -223,7 +307,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         handleTicket,
         isSideBar,
         setIsSideBar,
-
+        handleQRreader,
         setStatus,
         eventPosts,
         setEventPosts,
@@ -255,6 +339,14 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
         setEventDashboardImage,
         setEventCoverImage,
+        setAllTickets,
+        allTickets,
+        newTicketPrice,
+        newTicketClass,
+        newTicketImage,
+        setNewTicketPrice,
+        setNewTicketClass,
+        setNewTicketImage,
       }}
     >
       {children}

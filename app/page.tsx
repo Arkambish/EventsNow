@@ -34,7 +34,7 @@ async function getOutDateEvent() {
       { next: { revalidate: 10 } }
     );
     const data = await response.json();
-    console.log(data);
+
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -62,7 +62,9 @@ async function getEvent() {
 
 export default async function Home() {
   const data = await getOutDateEvent();
+  console.log(data);
   const event = await getEvent();
+  console.log(event);
   return (
     <div>
       <HeroSection />
@@ -75,7 +77,7 @@ export default async function Home() {
       )}
 
       <div className="flex flex-wrap ms-12">
-        {data.map((e: any) => (
+        {data.map((e: EventType) => (
           <EventCardDisabled
             key={e._id}
             name={e.eventName}
