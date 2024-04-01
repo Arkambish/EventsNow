@@ -22,7 +22,7 @@ export default function EventListView({
 }: EventListViewProps) {
   console.log(id);
   return (
-    <div className="flex gap-3 rounded-sm xl:w-3/5 lg:w-4/5 bg-[#D9D9D9]">
+    <div className=" flex gap-3 rounded-sm xl:w-3/5 lg:w-4/5 bg-[#D9D9D9]">
       <div className="">
         <Image src={img} alt="event" height={180} width={230} />
       </div>

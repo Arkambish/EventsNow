@@ -29,20 +29,15 @@ export default function Test() {
     setQRImage(qrImageData);
   };
 
-  const handleScan = (data: any) => {
-    console.log("Scanned QR Code:", data);
-    // You can handle the scanned data here, such as sending it to a server or updating state
-  };
-
   return (
     <div className="">
       <div>
         <input type="text" value={qrValue} onChange={handleChange} />
         <button onClick={handleGenerateQRCode}>Generate QR Code</button>
-        {qrImage && <img src={qrImage} alt="QR Code" />}
+        {qrImage && (
+          <Image src={qrImage} alt="QR Code" width={50} height={50} />
+        )}
       </div>
-      {/* <h1>Scan QR Code</h1>
-      <QRCodeScanner /> */}
     </div>
   );
 }

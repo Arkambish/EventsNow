@@ -12,7 +12,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 export async function POST(req: Request) {
   const data = await req.json();
-  console.log(data);
+  console.log(data.userid);
 
   const image = await uploadToCloudinary(data.qr);
   console.log(image);

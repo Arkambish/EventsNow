@@ -8,10 +8,6 @@ export default function AdvanceDetails({ name }: Details) {
   const [editedName, setEditedName] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedName(e.target.value);
-  };
-
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -26,7 +22,7 @@ export default function AdvanceDetails({ name }: Details) {
         <label className="" htmlFor="fname">
           {name}
         </label>
-        <div className="flex     mr-2">
+        <div className="flex mr-2">
           {isEditing ? (
             <button
               onClick={handleSave}
@@ -64,8 +60,6 @@ export default function AdvanceDetails({ name }: Details) {
             type="text"
             name="firstName"
             id="firstName"
-            // value={firstName}
-            // onChange={(e) => setFristName(e.target.value)}
             className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
             placeholder=" Bank  "
           />
@@ -73,9 +67,7 @@ export default function AdvanceDetails({ name }: Details) {
           <label
             className="border-gray border-2 w-full p-2 rounded-lg bg-white my-2"
             htmlFor="fname"
-          >
-            {/* {editedName} */}
-          </label>
+          ></label>
         )}
         {isEditing ? (
           <input
@@ -83,8 +75,6 @@ export default function AdvanceDetails({ name }: Details) {
             type="text"
             name="firstName"
             id="firstName"
-            // value={firstName}
-            // onChange={(e) => setFristName(e.target.value)}
             className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
             placeholder=" Bank  "
           />
@@ -92,9 +82,7 @@ export default function AdvanceDetails({ name }: Details) {
           <label
             className="border-gray border-2 w-full p-2 rounded-lg bg-white my-2"
             htmlFor="fname"
-          >
-            {/* {editedName} */}
-          </label>
+          ></label>
         )}
       </div>
     </div>

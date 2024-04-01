@@ -1,13 +1,11 @@
 import Organization from "@/models/organizationModel";
 import connectMongoDB from "@/lib/mongo/mongodb";
 import { NextResponse } from "next/server";
-import Permission from "@/models/permissionModel";
 
-type Params = {
-  id: string;
-};
-
-export async function PUT(request: Request, { params }: { params: Params }) {
+export async function PUT(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
     const id = params.id;
 
@@ -15,20 +13,13 @@ export async function PUT(request: Request, { params }: { params: Params }) {
 
     await connectMongoDB();
 
-    const res = await Permission.findByIdAndUpdate(
+    await Organization.findByIdAndUpdate(
       id,
       {
-        $set: { globalPermission: body },
+        $set: { ...body },
       },
       { new: true }
     );
-
-    if (!res) {
-      return NextResponse.json(
-        { message: "Failed to update global permission" },
-        { status: 500 }
-      );
-    }
 
     return NextResponse.json({ message: "success" });
   } catch (error) {

@@ -306,6 +306,7 @@ export interface ChildrenType {
   children: React.ReactNode;
 }
 
+
 export type VoidFunc = () => void;
 
 export interface ProfContext {
@@ -337,3 +338,12 @@ export interface ProfContext {
   setUserImage: React.Dispatch<React.SetStateAction<string>>;
   registerEvent: RegisterEventType[];
 }
+
+export type Ticket = {
+  _id: string;
+  eventId: string;
+  price: number;
+  classType: string;
+  image: string;
+};
+

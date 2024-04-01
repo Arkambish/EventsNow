@@ -90,10 +90,11 @@ export default function SideBar() {
               />
               <EventDashButton
                 isSlideBar={isSideBar}
-                img="ticket.svg"
+                img="Setting.svg"
                 text="Tickets"
                 onClick={() => handleTicket()}
               />
+              
 
               <EventDashButton
                 isSlideBar={isSideBar}

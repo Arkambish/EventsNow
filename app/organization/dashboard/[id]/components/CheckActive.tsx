@@ -6,13 +6,11 @@ import { useOrg } from "../OrgContext";
 import Image from "next/image";
 
 import OrganizationRequestPending from "@/components/OrganizationRequestPending";
-import DashboardDetails from "@/app/organization/dashboard/[id]/components/DashboardDetails";
 import Dashboard_Btn from "@/app/organization/dashboard/[id]/components/Dashboard_Btn";
 import Spinner from "@/components/Spinner";
-import { OrgContext, voidFunc } from "../Type";
-import Profile from "./Profile";
 
-// import Profile from "./Profile";
+import Profile from "./Profile";
+import { OrgContext } from "@/app/Type";
 
 export default function CheckActive() {
   const {
@@ -58,13 +56,9 @@ export default function CheckActive() {
                   className={`lg:col-span-3 md:block hidden
              ${isSlideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
                 >
-                  {/* <DashboardDetails /> */}
                   <Profile />
                 </div>
               </div>
-              {/* ${
-              isDashboardOpen ? "left-[65%]" : "left-0"
-            }   */}
 
               <div
                 className={`fixed 
@@ -73,11 +67,6 @@ export default function CheckActive() {
               >
                 <button onClick={() => setIsDashboardOpen(!isDashboardOpen)}>
                   <div className="  mr-5 h-10  md:hidden  flex justify-center items-center rounded-full   ">
-                    {/* {isDashboardOpen ? (
-                  <BiArrowFromRight size={25} />
-                ) : (
-                  <BiArrowFromLeft size={25} />
-                )} */}
                     <div className="bg-myBrown w-[100px] h-[55px] flex items-center   rounded-full">
                       <div className="bg-custom-orange w-[95px] h-[46px] flex justify-end pr-3 rounded-full">
                         <Image
@@ -101,7 +90,6 @@ export default function CheckActive() {
                 >
                   <button onClick={() => setIsDashboardOpen(false)}>
                     <div className="mx-2 my-2 w-fit p-1 mb-3 ">
-                      {/* <MdClose size={20} /> */}
                       <Image
                         src="/images/reusableComponents/close.svg"
                         alt="close"
