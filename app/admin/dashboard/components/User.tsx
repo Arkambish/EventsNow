@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SuperadminPages from "@/app/admin/dashboard/components/SuperadminPages";
 import AdminPersonDetailsBar from "./AdminPersonalDetailBar";
-import { AdminContext, User } from "@/app/admin/Type";
+import { AdminContext } from "@/app/admin/Type";
 import { useAdmin } from "../AdminContextFile";
 import { getAllUser } from "../FetchData";
 import Spinner from "@/components/Spinner";

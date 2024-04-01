@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Event } from "@/app/admin/Type";
-function info() {}
+function send() {}
 
 interface Upcoming_Events {
   event: Event;
@@ -29,7 +29,7 @@ export default function Upcoming_Events({ event }: Upcoming_Events) {
 
           <div className="flex justify-end ">
             <button
-              onClick={() => info()}
+              onClick={() => send()}
               className="w-20 h-7 rounded-3xl bg-custom-admin shrink-0 flex"
             >
               <div className="py-0.5 pl-1.5 pt-1">

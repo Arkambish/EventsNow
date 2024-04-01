@@ -26,6 +26,7 @@ export default function AdminDashboard() {
     status,
     isLoading,
   } = useAdmin() as AdminContext;
+
   const [show, setShow] = useState(false);
   const handleClick = () => {
     setShow(!show);

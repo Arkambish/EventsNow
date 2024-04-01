@@ -12,9 +12,6 @@ interface OrganizationPayment {
 export default function OrganizationPayment({
   organization,
 }: OrganizationPayment) {
-  console.log(organization);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [showDenyModal, setShowDenyModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const value =
     organization.fullName.length > 10

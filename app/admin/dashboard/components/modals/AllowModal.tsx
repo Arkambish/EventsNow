@@ -19,18 +19,16 @@ const AllowModalContent = ({ organization }: Data) => {
   const { setOrganization, setNotification, notification } =
     useAdmin() as ContextData;
 
-  console.log(organization);
-
   const handleAllow = async () => {
     try {
-      const res = await axios.put(
+      const allowOrgRes = await axios.put(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/updateOrganization/${organization._id}`,
         {
           isActive: true,
         }
       );
 
-      if (res.status !== 200) {
+      if (allowOrgRes.status !== 200) {
         error("Failed to Allow the organization");
         return;
       }
@@ -38,6 +36,10 @@ const AllowModalContent = ({ organization }: Data) => {
       const newNotification = notification.filter(
         (org) => org._id !== organization._id
       );
+
+      success("Organization Allowed successfully");
+      setNotification(newNotification); // Remove approved organization from the notification list
+      setOrganization((prev: Organization[]) => [...prev, organization]); // Add approved organization to the organization list
 
       const sendEmailRes = await axios.post(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/organizationAproveEmail`,
@@ -51,11 +53,6 @@ const AllowModalContent = ({ organization }: Data) => {
         error("Failed to send email to the organization");
         return;
       }
-
-      success("Organization Allowed successfully");
-      setNotification(newNotification);
-
-      setOrganization((prev: Organization[]) => [...prev, organization]);
     } catch (error) {
       console.error("Error updating......", error);
     }
