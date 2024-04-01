@@ -2,57 +2,18 @@
 import { da } from "date-fns/locale";
 import { useParams, useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import {
+  ProfContext,
+  UserDetails,
+  RegisterEventType,
+  VoidFunc,
+} from "@/app/Type";
 
 const ProfContext = createContext<ProfContext | string>("");
 
-type VoidFunc = () => void;
-
-export interface ProfContext {
-  lname: string;
-  fname: string;
-  isLoading: boolean;
-  isSlideBar: boolean;
-  isDashboardOpen: boolean;
-  setIsSlideBar: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsDashboardOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  isActive: boolean;
-  setLname: React.Dispatch<React.SetStateAction<string>>;
-  setFname: React.Dispatch<React.SetStateAction<string>>;
-  passwordExists: boolean;
-  userId: any;
-
-  status: string;
-  handleSetting: VoidFunc;
-  handleProfile: VoidFunc;
-  handleWishList: VoidFunc;
-  handleMyEvents: VoidFunc;
-  handlemyTickets: VoidFunc;
-  setUserDeatails: React.Dispatch<React.SetStateAction<UserDetails>>;
-  userDeatails: UserDetails;
-  eventDetails: any;
-  register: any;
-  userImage: string;
-  setUserImage: React.Dispatch<React.SetStateAction<string>>;
-  registerEvent: RegisterEventType[];
-}
 interface ProfContextProviderProps {
   children: React.ReactNode;
 }
-export type UserDetails = {
-  _id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  image: string;
-  __v: Number;
-};
-
-export type RegisterEventType = {
-  _id: string;
-  eventName: string;
-  postImageLink: string;
-};
 
 function ProfContextProvider({ children }: ProfContextProviderProps) {
   const [status, setStatus] = useState("myProfile");
@@ -105,12 +66,7 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
       async function getData() {
         setIsLoading(true);
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getOneUserById`,
-          {
-            method: "POST",
-            mode: "cors",
-            body: JSON.stringify(params.id),
-          }
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getOneUserById/${params.id}`
         );
 
         if (!res.ok) {
