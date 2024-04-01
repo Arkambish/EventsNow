@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Event } from "../Type";
+
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { success } from "@/util/Toastify";
 import { error } from "@/util/Toastify";
 import { useOrg } from "../OrgContext";
 
 import axios from "axios";
+import { EventType } from "@/app/Type";
 
 interface EventCardOrgDash {
   img: string;
@@ -19,10 +20,9 @@ interface EventCardOrgDash {
   id: string;
 }
 
-
 type ContextData = {
-  setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
-  events: Event[];
+  setEvents: React.Dispatch<React.SetStateAction<EventType[]>>;
+  events: EventType[];
 };
 
 function eventDashboardHandler() {}
@@ -55,7 +55,9 @@ function EventCardOrgDash({
 
       setEvents(newEvents);
       success("Event deleted successfully");
-      setEvents((prev: Event[]) => prev.filter((event) => event._id !== id));
+      setEvents((prev: EventType[]) =>
+        prev.filter((event) => event._id !== id)
+      );
     } catch (error) {
       console.error("Error deleting......", error);
     }
