@@ -6,8 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 // import Ticket from "@/models/ticketType";
 
 export async function POST(req: NextRequest) {
-  const { quantity, eventId, userId } = await req.json();
-  console.log(quantity, eventId, userId);
+  const { ticketType, eventId, userId } = await req.json();
+  console.log(ticketType, eventId, userId);
   try {
     connectMongoDB();
 
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     }
 
     const attendant = await Attendant.create({
-      quantity,
+      ticketType,
       eventId,
       userId,
     });

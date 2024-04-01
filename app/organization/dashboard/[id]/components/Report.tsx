@@ -1,12 +1,12 @@
 import View_Report from "@/app/organization/dashboard/[id]/components/View_Report";
 import React, { useState } from "react";
 import { useOrg } from "../OrgContext";
-import { Event } from "../Type";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
+import { EventType } from "@/app/Type";
 
 interface contextProps {
   isSlideBar: boolean;
-  events: Event[];
+  events: EventType[];
 }
 
 export default function Report() {
@@ -85,22 +85,12 @@ export default function Report() {
                 ))}
               </>
             )}
-            {/* <option selected>Choose an event</option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option> */}
           </select>
         </div>
       </div>
       <div className="flex h-56 w-full overflow-auto flex-col gap-5 mb-5">
-        {/* {selectedEvent === "Choose an event" ? (
-          <EmptyStateComponent message="Choose an event" />
-        ) : } */}
         {report()}
       </div>
-      {/* </>
-      )} */}
     </div>
   );
 }

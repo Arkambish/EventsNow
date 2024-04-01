@@ -14,6 +14,16 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
   const [sortBy, setSortBy] = useState("");
   const [eventsPerPage, setEventsPerPage] = useState(2);
 
+  function getEventsPerPage() {
+    if (window.innerWidth >= 1024) {
+      return 4;
+    } else if (window.innerWidth >= 768) {
+      return 3;
+    } else {
+      return 1;
+    }
+  }
+
   useEffect(() => {
     const handleResize = () => {
       if (document.documentElement.clientWidth >= 1024) {
@@ -60,6 +70,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
   const currentEvents = eventarr.slice(indexOfFirstEvent, indexOfLastEvent);
+
   return (
     <div>
       <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between">

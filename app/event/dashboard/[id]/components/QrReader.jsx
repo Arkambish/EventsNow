@@ -39,7 +39,7 @@ const QrReader = () => {
           setScannedText(result.data);
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
-          setQuantity(dataObject.quantity);
+          setQuantity(dataObject.class.ticket);
           setIsActiveMark(true);
           console.log(
             dataObject.eventId,
@@ -81,13 +81,14 @@ const QrReader = () => {
         body: JSON.stringify({
           eventId: scannedEvent,
           userId: scannedUser,
-          quantity,
+          ticketType: quantity,
         }),
       }
     );
 
     if (!res.ok) {
       error("Failed to mark attendance");
+      return;
     }
 
     const data = await res.json();
@@ -143,7 +144,7 @@ const QrReader = () => {
                 User id:<span className="text-slate-400"> {scannedUser}</span>
               </p>
               <p className="quantity font-bold text-lg">
-                Quantity: <span className="text-slate-400"> {quantity}</span>
+                Ticket Type: <span className="text-slate-400"> {quantity}</span>
               </p>
             </div>
             <button
