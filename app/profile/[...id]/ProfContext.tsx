@@ -66,12 +66,7 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
       async function getData() {
         setIsLoading(true);
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getOneUserById`,
-          {
-            method: "POST",
-            mode: "cors",
-            body: JSON.stringify(params.id),
-          }
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getOneUserById/${params.id}`
         );
 
         if (!res.ok) {
