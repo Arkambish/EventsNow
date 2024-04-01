@@ -9,6 +9,7 @@ import Myteam from "./Myteam";
 import Reports from "./Reports";
 import EditPost from "./EditPost";
 import SendEmail from "./SendEmail";
+import Tickets from "./Tickets";
 
 export default function MidContent() {
   const { status } = UseEventContext() as EventContextType;
@@ -20,6 +21,7 @@ export default function MidContent() {
       {status === "reports" && <Reports />}
       {status === "campaign" && <Campaign />}
       {status === "settings" && <Settings />}
+      {status === "ticket" && <Tickets />}
       {status === "editpost" && <EditPost />}
       {status === "sendemail" && <SendEmail />}
     </div>

@@ -24,6 +24,7 @@ export interface EventContextType {
   handleReports: voidFunc;
   handleCampaign: voidFunc;
   handleSetting: voidFunc;
+  handleTicket: voidFunc;
   isSideBar: boolean;
   setIsSideBar: (value: boolean) => void;
 
@@ -106,6 +107,9 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   };
   const handleSetting: voidFunc = () => {
     setStatus("settings");
+  };
+  const handleTicket: voidFunc = () => {
+    setStatus("ticket");
   };
   const id = useParams<{ id: string }>().id;
   const [eventname, setEventname] = useState<string>("");
@@ -216,6 +220,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         handleReports,
         handleCampaign,
         handleSetting,
+        handleTicket,
         isSideBar,
         setIsSideBar,
 
