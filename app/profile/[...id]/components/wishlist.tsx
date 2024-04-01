@@ -1,15 +1,13 @@
 import React from "react";
-import ProfileDetails from "./ProfileDetails";
 import WishListCard from "./WishListCard";
 import { useProf } from "../ProfContext";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
-
-type EvenDetails = {
+export type EventDetails = {
   eventDetails: any[];
 };
 
 export default function MyProfile() {
-  const { eventDetails } = useProf() as any as EvenDetails;
+  const { eventDetails } = useProf() as any as EventDetails;
   return (
     <div className="flex flex-col h-screen md:flex-row rounded-lg shadow-3xl bg-[#fff] pt-8 justify-start items-start gap-12 overflow-y-scroll">
       <div className="w-full ml-0 overflow-y-auto">

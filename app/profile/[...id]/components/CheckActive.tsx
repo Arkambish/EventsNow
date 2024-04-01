@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "./SideBar";
 import Content from "./Content";
-import { ProfContext, useProf } from "../ProfContext";
+import { useProf } from "../ProfContext";
+import { ProfContext } from "@/app/Type";
 import Image from "next/image";
 
 import OrganizationRequestPending from "@/components/OrganizationRequestPending";

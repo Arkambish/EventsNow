@@ -9,6 +9,8 @@ const inter = Inter({ subsets: ["latin"] });
 import NavBar from "@/components/Navbar/NavBar";
 import AuthProvider from "./AuthProvider";
 import TostifyProvider from "@/provider/TostifyProvider";
+import "grapesjs/dist/css/grapes.min.css";
+import "grapick/dist/grapick.min.css";
 
 export const metadata: Metadata = {
   title: "EventsNow",

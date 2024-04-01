@@ -7,7 +7,8 @@ import Profsettings from "./Profsettings";
 import ChangePassword from "./ChangePassword";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { UserDetails, useProf } from "../ProfContext";
+import { useProf } from "../ProfContext";
+import { UserDetails } from "@/app/Type";
 import { useParams } from "next/navigation";
 import { error, success } from "@/util/Toastify";
 

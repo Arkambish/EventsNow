@@ -4,11 +4,13 @@ import connectMongoDB from "@/lib/mongo/mongodb";
 
 export async function POST(req: Request) {
   try {
+    console.log("Connected to momgooose");
     connectMongoDB();
 
     const id = await req.json();
 
     const data = await User.findOne({ _id: id }).select("+password");
+    console.log("Connected to momgooose");
 
     if (!data) {
       return NextResponse.json("No User");
