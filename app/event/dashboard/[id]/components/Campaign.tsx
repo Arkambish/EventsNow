@@ -11,7 +11,9 @@ export default function Campaign() {
   const [user, setUser] = useState<unknown>(null);
   const { setStatus } = UseEventContext() as EventContextType;
 
+  
   useEffect(() => {
+    
     const getUser = async () => {
       const user = await getSession();
    

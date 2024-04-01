@@ -301,17 +301,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     }
     handleContext();
 
-    async function getTickets() {
-      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
-      if (!res.ok) {
-        return;
-      }
-      const data = await res.json();
-      setAllTickets(data);
-      
-    }
-    getTickets();
-  },  [params.id, router, setEventPublish, status, id]);
 
   return (
     <EventContext.Provider

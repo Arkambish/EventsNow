@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import { useState } from "react";
 
 import crypto from "crypto";
 import Head from "next/head";
@@ -8,6 +9,10 @@ import Script from "next/script";
 import Image from "next/image";
 import { generateQRCodeImage } from "@/util/helper";
 import { error, success } from "@/util/Toastify";
+import { useParams, useRouter } from "next/navigation";
+import { getSession } from "next-auth/react";
+import { set } from "mongoose";
+import { ca } from "date-fns/locale";
 
 declare global {
   interface Window {
@@ -72,14 +77,32 @@ const PaymentModal = (props: any) => {
     country: props.country,
     hash: hash,
   };
-
-  const value = {
-    useId: "1234",
-    eventId: "123445",
-    quantity: 4,
-  };
+  const params = useParams<{ id: string }>();
+  const [userId, setUserId] = useState<string>("");
 
   useEffect(() => {
+    const getUserId = async () => {
+      const session = await getSession();
+      try{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/user/getUserId`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: session?.user?.email,
+          }),
+        });
+        if (!res.ok) {
+          error("Error fetching user id");
+        }
+      }catch(e){
+        error("Error fetching user id");
+      }
+
+      
+    };
+    getUserId();
     const script = document.createElement("script");
     script.src = "https://www.payhere.lk/lib/payhere.js";
     script.async = true;
@@ -89,50 +112,46 @@ const PaymentModal = (props: any) => {
       window.payhere.onCompleted = async function onCompleted(
         paymentId: string
       ) {
-        const value = {
-          useId: "65f2b6a08dcf796e631062dc",
-          eventId: "65f2b6f98dcf796e631062fc",
-          ticket: [
-            {
-              class: "A",
-              quantity: 4,
-            },
-            {
-              class: "B",
-              quantity: 4,
-            },
-          ],
-        };
+        {
+          props.ticketArrTemp.map(async (ticket: string) => {
+            const value = {
+              useId: userId,
+              eventId: params.id,
+              class: { ticket },
+            };
 
-        const qrImg = await generateQRCodeImage(JSON.stringify(value));
-        // const image = await uploadToCloudinary(qrImg);
-        console.log("QR Code Image Data:", qrImg);
-        // console.log("QR Code Image :", image);
+            const qrImg = await generateQRCodeImage(JSON.stringify(value));
+            // const image = await uploadToCloudinary(qrImg);
+            console.log("QR Code Image Data:", qrImg);
+            // console.log("QR Code Image :", image);
 
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              qr: qrImg,
-              userid: "65f2b6a08dcf796e631062dc",
-            }),
-          }
-        );
+            const res = await fetch(
+              `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  qr: qrImg,
+                  userid: userId,
+                }),
+              }
+            );
 
-        if (!res.ok) {
-          console.error("Error sending qr code");
-          error("Error sending qr code");
+            if (!res.ok) {
+              console.error("Error sending qr code");
+              error("Error sending qr code");
+            }
+
+            const message = await res.json();
+            if (message === "No User  exists") {
+              error("No User exists");
+            }
+
+            
+          });
         }
-
-        const message = await res.json();
-        if (message === "No User  exists") {
-          error("No User exists");
-        }
-
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
           {
@@ -141,15 +160,18 @@ const PaymentModal = (props: any) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              id: "65f2b6f98dcf796e631062fc",
-              amount: 1000,
+              id: params.id,
+              amount: props.totalPrice,
             }),
           }
         );
 
         success("Payment completed");
+        props.setIsActiveProceedTicketModal(false);
+        props.setTicketArrTemp("");
 
-        console.log("success payment completed");
+
+        
       };
 
       window.payhere.onDismissed = function onDismissed() {
@@ -175,7 +197,7 @@ const PaymentModal = (props: any) => {
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  }, [params.id, props.ticketArrTemp, props.totalPrice, userId]);
 
   // // initial setup
 
@@ -319,9 +341,9 @@ const PaymentModal = (props: any) => {
 
       <button
         onClick={pay}
-        className="flex button w-20 p-[1px] bg-[#D47151] rounded-2xl items-center  "
+        className="flex button  px-4 py-1 bg-[#D47151] rounded-2xl items-center  "
       >
-        <div className="font-medium xl:text-lg text-md text-white text-left leading-tight ml-4">
+        <div className="font-medium xl:text-lg text-md text-white text-left leading-tight ">
           Pay Now
         </div>
       </button>
