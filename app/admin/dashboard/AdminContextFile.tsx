@@ -18,6 +18,7 @@ import { getAllEvents, getAllOrganization, getAllUser } from "./FetchData";
 import { getSession, useSession } from "next-auth/react";
 import { getUser } from "@/components/Navbar/NavBar";
 import { useRouter } from "next/navigation";
+import { EventType } from "@/app/Type";
 
 interface AdminContextProps {
   children: React.ReactNode;
@@ -28,7 +29,7 @@ const adminContext = createContext<AdminContext | string>("");
 function AdminContextProvider({ children }: AdminContextProps) {
   const [status, setStatus] = useState("");
   const [user, setUser] = useState<User[]>([]);
-  const [event, setEvent] = useState<Event[]>([]);
+  const [event, setEvent] = useState<EventType[]>([]);
   const [notification, setNotification] = useState<Organization[]>([]);
   const [organization, setOrganization] = useState<Organization[]>([]);
   const [payment, setPayment] = useState<any[]>([]);

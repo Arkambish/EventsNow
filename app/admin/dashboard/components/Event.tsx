@@ -49,7 +49,9 @@ export default function Event() {
                   date={e.eventStartDate}
                   time={e.startTime}
                   location={"KCC,Kandy Road,kandy."}
-                  eventCover={e.postImageLink}
+
+                  eventCover={e.dashboardImage}
+
                 />
               ))
             )}

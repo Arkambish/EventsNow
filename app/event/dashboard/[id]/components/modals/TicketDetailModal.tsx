@@ -10,6 +10,7 @@ import {
   CloudinaryUploadWidgetResults,
 } from "next-cloudinary";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { error, success } from "@/util/Toastify";
 
 interface TicketDetailProps {
   // event: Event;
@@ -19,19 +20,46 @@ interface TicketDetailProps {
 const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
   const {
     newTicketPrice,
-newTicketClass,
-newTicketImage,
-setNewTicketPrice,
-setNewTicketClass ,
-setNewTicketImage,
-createTicketHandler } = UseEventContext() as EventContextType;
-  
-  const createTicketHandlerLocal = async  () => {
-   await  createTicketHandler();
-    setTicketDetail(false);
-  }
+    newTicketClass,
+    newTicketImage,
+    setNewTicketPrice,
+    setNewTicketClass,
+    setNewTicketImage,
+    setAllTickets,
+    id,
+  } = UseEventContext() as EventContextType;
 
-  
+  const createTicketHandlerLocal = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/addTicket`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            price: newTicketPrice,
+            image: newTicketImage,
+            eventId: id,
+            classType: newTicketClass,
+          }),
+        }
+      );
+      if (!res.ok) {
+        error("Failed to create ticket");
+        return;
+      }
+      const newData = await res.json();
+      console.log(newData);
+      setAllTickets((prev) => [...prev, newData.ticket]);
+      success("Ticket created successfully");
+      setTicketDetail(false);
+    } catch (err) {
+      console.log(err);
+      error("Failed to create ticket 2");
+    }
+  };
 
   return (
     <div className="sm:flex sm:items-start mb-2">
@@ -61,33 +89,6 @@ createTicketHandler } = UseEventContext() as EventContextType;
                 setNewTicketClass(e.target.value);
               }}
             />
-
-            {/* <label htmlFor="image" className="flex items-center">
-              Upload Image:
-            </label>
-            <input
-              type="file"
-              id="image"
-              onChange={handleImageChange}
-              className="hidden"
-            />
-            <label
-              htmlFor="image"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer"
-            >
-              Choose file
-            </label>
-
-            {image && (
-              // <img src={image} alt="Uploaded" className="mt-2 w-40" />
-              <Image
-                src={image}
-                alt="Uploaded"
-                width={100}
-                height={100}
-                className="mt-2 w-40"
-              />
-            )} */}
             <CldUploadWidget
               uploadPreset="events"
               onOpen={() => {
@@ -103,16 +104,14 @@ createTicketHandler } = UseEventContext() as EventContextType;
               }}
               options={{
                 tags: ["ticket image"],
-                // publicId: `${organizationName}/${Date.now()}`,
-                // publicId: "b2c",
 
                 sources: ["local"],
                 googleApiKey: "<image_search_google_api_key>",
                 showAdvancedOptions: false,
-                // cropping: true,
+                cropping: true,
                 multiple: false,
                 showSkipCropButton: false,
-                croppingAspectRatio: 0.75,
+                croppingAspectRatio: 1.1,
                 croppingDefaultSelectionRatio: 0.75,
                 croppingShowDimensions: true,
                 croppingCoordinatesMode: "custom",
@@ -173,7 +172,6 @@ createTicketHandler } = UseEventContext() as EventContextType;
 
               <div className="flex justify-end w-full ">
                 <button
-                 
                   onClick={createTicketHandlerLocal}
                   type="button"
                   className=" rounded-md border border-transparent shadow-sm py-1 px-2 my-auto  bg-custom-orange  text-base font-medium text-white hover:opacity-70  button  sm:ml-3 sm:w-auto sm:text-sm"

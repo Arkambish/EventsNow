@@ -1,22 +1,45 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { EventContextType, UseEventContext } from "../EventDashContext";
+import { error, success } from "@/util/Toastify";
 
 interface TicketMockupProps {
   image: string;
   type: string;
   price: number;
-  key: string;
+  id: string;
 }
 
 export default function TicketMockup({
   image,
   type,
   price,
-  key,
+  id,
 }: TicketMockupProps) {
+  const { allTickets, setAllTickets } = UseEventContext() as EventContextType;
+  async function deleteTicket() {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/deleteTicket/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!res.ok) {
+      error("Failed to delete ticket");
+      return;
+    }
+    success("Ticket deleted successfully");
+    setAllTickets(allTickets.filter((ticket) => ticket._id !== id));
+  }
+
   return (
-    <div className=" bg-gray-200 hover:border border-gray-400  w-[14rem]  rounded-xl  shadow-inner button">
+    <div className=" bg-gray-200 hover:border border-gray-400  w-[14rem]  rounded-xl  shadow-inner ">
+      <button onClick={deleteTicket}>
+        <div className=" button text-end text-lg font-semibold text-white bg-red-600 rounded-lg px-1 ">
+          Delete
+        </div>
+      </button>
       <div className="p-4 text-center w-[14rem] h-[9rem] overflow-hidden object-cover">
         <Image
           src={image}

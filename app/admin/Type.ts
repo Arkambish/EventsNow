@@ -1,3 +1,5 @@
+import { EventType } from "../Type";
+
 export type voidFunc = () => void;
 
 export type DashBoardStatus = "Notification";
@@ -16,12 +18,12 @@ export interface AdminContext {
   handlePayments: voidFunc;
   notification: Organization[];
   organization: Organization[];
-  event: Event[];
+  event: EventType[];
   user: User[];
   payment: any;
   setNotification: React.Dispatch<React.SetStateAction<Organization[]>>;
   setOrganization: React.Dispatch<React.SetStateAction<Organization[]>>;
-  setEvent: React.Dispatch<React.SetStateAction<Event[]>>;
+  setEvent: React.Dispatch<React.SetStateAction<EventType[]>>;
   setUser: React.Dispatch<React.SetStateAction<User[]>>;
   setPayment: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -49,6 +51,8 @@ export type User = {
   role: string;
 };
 export type Event = {
+  dashboardImage: string;
+
   selectedTab: string;
   duration: string;
   eventTimeZone: string;

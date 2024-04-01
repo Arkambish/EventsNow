@@ -9,6 +9,25 @@ export async function PUT(request: NextRequest) {
 
     await connectMongoDB();
 
+    const event = await Event.findOne({ _id: id });
+    const orgnaizationId = event.organizationId;
+    const organization = await Organization.findOne({ _id: orgnaizationId });
+    if (!organization) {
+      return NextResponse.json({ message: "No organization found" });
+    }
+
+    if (
+      !organization.accountName ||
+      !organization.accountNumber ||
+      !organization.bank ||
+      !organization.branch ||
+      !organization.payout
+    ) {
+      return NextResponse.json({
+        message: "Please complete your organization details",
+      });
+    }
+
     const data = await Event.findByIdAndUpdate(
       id,
       {

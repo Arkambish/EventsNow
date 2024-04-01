@@ -31,7 +31,7 @@ export interface EventContextType {
   handleTicket: voidFunc;
   isSideBar: boolean;
   setIsSideBar: (value: boolean) => void;
-
+  setAllTickets: React.Dispatch<React.SetStateAction<Ticket[]>>;
   event: EventType;
   setEvent: React.Dispatch<React.SetStateAction<EventType>>;
 
@@ -79,7 +79,9 @@ export interface EventContextType {
   setNewTicketPrice: React.Dispatch<React.SetStateAction<number>>;
   setNewTicketClass: React.Dispatch<React.SetStateAction<string>>;
   setNewTicketImage: React.Dispatch<React.SetStateAction<string>>;
+
   createTicketHandler: voidFunc;
+
 }
 
 type EventUserDeatils = {
@@ -182,6 +184,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [newTicketPrice, setNewTicketPrice] = useState<number>(0);
   const [newTicketClass, setNewTicketClass] = useState<string>("");
   const [newTicketImage, setNewTicketImage] = useState<string>("");
+
   const createTicketHandler = async () => {
     try {
       const res = await fetch(`/api/v1/ticket/addTicket`, {
@@ -205,6 +208,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       success("Ticket created successfully");
     } catch (e) {}
   };
+
   useEffect(() => {
     const getEvent = async () => {
       const res = await fetch(`/api/v1/event/getOneEvent`, {
@@ -296,7 +300,19 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setAttendances(attendance);
     }
     handleContext();
-  }, [params.id, setEventPublish, router, id]);
+
+
+    async function getTickets() {
+      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+      setAllTickets(data);
+    }
+    getTickets();
+  }, [params.id, router, setEventPublish, status, id]);
+
 
   return (
     <EventContext.Provider
@@ -352,7 +368,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
         setEventDashboardImage,
         setEventCoverImage,
-
+        setAllTickets,
         allTickets,
         newTicketPrice,
         newTicketClass,
@@ -360,7 +376,9 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         setNewTicketPrice,
         setNewTicketClass,
         setNewTicketImage,
+
         createTicketHandler,
+
       }}
     >
       {children}
