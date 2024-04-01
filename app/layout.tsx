@@ -6,11 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContextProvider } from "./AuthContext";
 const inter = Inter({ subsets: ["latin"] });
 
-import NavBar from "@/components/Navbar/NavBar";
+// import NavBar from "@/components/Navbar/NavBar";
 import AuthProvider from "./AuthProvider";
 import TostifyProvider from "@/provider/TostifyProvider";
 import "grapesjs/dist/css/grapes.min.css";
 import "grapick/dist/grapick.min.css";
+import NavBar from "@/components/Navbar/NavBar";
 
 export const metadata: Metadata = {
   title: "EventsNow",
@@ -28,7 +29,7 @@ export default function RootLayout({
         <link rel="icon" href="/reusableComponents/nav-logo.png" sizes="any" />
         <AuthProvider>
           <AuthContextProvider>
-            {/* <NavBar /> */}
+            <NavBar />
             {children}
           </AuthContextProvider>
           <TostifyProvider />

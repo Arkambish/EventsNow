@@ -44,7 +44,7 @@ export default async function Home() {
 
   return (
     <div>
-      <HeroSection />
+      {/* <HeroSection /> */}
 
       <EventViewMode event={event} />
       {data.length !== 0 && (
