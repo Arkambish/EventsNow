@@ -4,11 +4,11 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { z } from "zod";
-// import { error, success } from "../../../util/Toastify";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-// import { firebaseConfig } from "../../../services/FirebaseConfig";
+
 
 import { error, success } from "@/util/Toastify";
 import {
@@ -17,27 +17,26 @@ import {
   CloudinaryUploadWidgetResults,
 } from "next-cloudinary";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export default function EventRegisterFormBasic() {
-  const [eventName, setEventName] = useState("");
-  const [selectedTab, setSelectedTab] = useState("Onsite");
-  const [eventLocation, setEventLocation] = useState("");
-  const [eventStartDate, setEventStartDate] = useState(new Date());
-  const [eventEndDate, setEventEndDate] = useState(new Date());
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [duration, setDuration] = useState("");
-  const [eventTimeZone, setEventTimeZone] = useState("");
-  const [description, setDescription] = useState("");
-  const [postImage, setPostImage] = useState([File] as any);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const params = useParams();
-  const router = useRouter();
+  const [eventName, setEventName] = useState<string>("");
+  const [selectedTab, setSelectedTab] = useState<string>("Onsite");
+  const [eventLocation, setEventLocation] = useState<string>("");
+  const [eventStartDate, setEventStartDate] = useState<Date>(new Date());
+  const [eventEndDate, setEventEndDate] = useState<Date>(new Date());
+  const [startTime, setStartTime] = useState<string>("");
+  const [endTime, setEndTime] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
+  const [eventTimeZone, setEventTimeZone] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [previewImage, setPreviewImage] = useState<string>("");
+  const params  =  useParams();
+  const router : AppRouterInstance = useRouter();
 
-  const [coverImage, setcoverImage] = useState("");
-  const [dashboardImage, setdashboardImage] = useState("");
+  const [coverImage, setcoverImage] = useState<string>("");
+  const [dashboardImage, setdashboardImage] = useState<string>("");
 
   const validateEvent = z.object({
     eventName: z.string().min(1, "Enter event name "),
@@ -102,6 +101,8 @@ export default function EventRegisterFormBasic() {
       setDescription("");
       setPreviewImage("");
       setEventName("");
+      setcoverImage("");
+      setdashboardImage("");
     } else {
       error(result.error.errors[0].message);
     }
@@ -378,8 +379,7 @@ export default function EventRegisterFormBasic() {
             }}
             options={{
               tags: ["events image"],
-              // publicId: `${organizationName}/${Date.now()}`,
-              // publicId: "b2c",
+             
 
               sources: ["local"],
               googleApiKey: "<image_search_google_api_key>",
@@ -391,8 +391,6 @@ export default function EventRegisterFormBasic() {
               croppingDefaultSelectionRatio: 0.75,
               croppingShowDimensions: true,
               croppingCoordinatesMode: "custom",
-              // maxImageHeight: 100,
-              // croppingValidateDimensions: true,
               defaultSource: "local",
               resourceType: "image",
               folder: "events",

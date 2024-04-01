@@ -32,7 +32,7 @@ export default function MainComponent() {
     setIsPreview,
     handleQRreader,
   } = UseEventContext() as EventContextType;
-  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
+  const [isDashboardOpen, setIsDashboardOpen] = useState<boolean>(false);
 
   const menuBarRef = useRef<HTMLDivElement>(null);
 

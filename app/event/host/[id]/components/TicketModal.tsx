@@ -6,10 +6,11 @@ import { UseEventContext } from "@/app/event/dashboard/[id]/EventDashContext";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PaymentModal from "@/components/PaymentModal";
 
+
 export default memo(function TicketModal({
   setIsActvieTicketModal,
 }: {
-  setIsActvieTicketModal: any;
+  setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   // const [isActive, setIsActvie] = useState(false);
 

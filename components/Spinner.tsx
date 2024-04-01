@@ -13,8 +13,6 @@ export default function Spinner() {
         height={60}
       />
     </div>
-    // <Box sx={{ width: "100%" }}>
-    //   <LinearProgress />
-    // </Box>
+    
   );
 }

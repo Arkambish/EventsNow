@@ -38,7 +38,7 @@
     "app/admin/dashboard/[id]/AdminContext.jsx",
     "app/admin/dashboard/[id]/components/Notification.jsx",
     "app/organization/dashboard/[id]/components/DashboardSide.tsx",
-    "app/api/v1/organization/createOrganization/route.js",
+    "app/api/v1/organization/createOrganization/route.ts",
     "app/organization/dashboard/[id]/OrgContext.tsx",
     "app/api/v1/organization/updateOrganization/[...id]/route.jsx",
     "components/List.jsx",

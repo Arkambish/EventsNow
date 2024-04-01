@@ -5,8 +5,8 @@ import Image from "next/image";
 import Template from "./hostPage/Template";
 import Template1 from "./hostPage/Template1";
 export default function Hostpage() {
-  const [showTemplate, setShowTemplate] = useState(false);
-  const [isTemplate1, setIsTemplate1] = useState(false);
+  const [showTemplate, setShowTemplate] = useState<boolean>(false);
+  const [isTemplate1, setIsTemplate1] = useState<boolean>(false);
   function handleTemplate1() {
     setIsTemplate1(true);
     setShowTemplate(false);

@@ -11,12 +11,8 @@ import React, {
 } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { AuthContext, useAuth } from "@/app/AuthContext";
-// import { Post } from "../../host/[id]/components/PostTab";
 
 import { Post } from "../../host/[id]/SelectTemplate";
-import { set } from "mongoose";
-import { ca } from "date-fns/locale";
-import { error, success } from "@/util/Toastify";
 import { AttendanceType, EventType } from "@/app/Type";
 
 export interface EventContextType {
@@ -103,15 +99,15 @@ const EventContext = createContext<EventContextType | string>("");
 
 function EventContextProvider({ children }: { children: React.ReactNode }) {
   const { setEventPublish } = useAuth() as AuthContext;
-  const [status, setStatus] = useState("tickets");
+  const [status, setStatus] = useState<string>("overview");
   const params = useParams<{ id: string }>();
-  const [isSideBar, setIsSideBar] = useState(true);
+  const [isSideBar, setIsSideBar] = useState<boolean>(true);
 
   const [eventPosts, setEventPosts] = useState<Post[]>([]);
   const [allComment, setAllComment] = useState<Comment[]>([]);
   const [allTickets, setAllTickets] = useState<Ticket[]>([]);
 
-  const [isloading, setIsloading] = useState(false);
+  const [isloading, setIsloading] = useState<boolean>(false);
 
   const handleOverview: voidFunc = () => {
     setStatus("overview");
