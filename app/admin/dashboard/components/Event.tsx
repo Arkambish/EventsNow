@@ -42,7 +42,16 @@ export default function Event() {
             ) : event.length === 0 ? (
               <EmptyStateComponent message="No Events" />
             ) : (
-              event.map((e) => <EventCardNewOrg key={e._id} event={e.eventName} date={e.eventStartDate} time={e.startTime} location={"KCC,Kandy Road,kandy."} eventCover={e.postImageLink} />)
+              event.map((e) => (
+                <EventCardNewOrg
+                  key={e._id}
+                  event={e.eventName}
+                  date={e.eventStartDate}
+                  time={e.startTime}
+                  location={"KCC,Kandy Road,kandy."}
+                  eventCover={e.dashboardImage}
+                />
+              ))
             )}
             {}
           </>

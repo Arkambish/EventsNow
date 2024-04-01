@@ -16,6 +16,7 @@ export default function SideBar() {
     handleReports,
     handleCampaign,
     handleSetting,
+    handleTicket,
     isSideBar,
     setIsSideBar,
     handleQRreader,
@@ -24,7 +25,7 @@ export default function SideBar() {
   return (
     <div>
       <div className=" flex flex-col  items-center shadow-3xl bg-[#FCFCFD] rounded-lg py- text-center  ">
-        <div className=" grid-rows-8 mt-5 gap-3 flex flex-col items-center">
+        <div className=" grid-rows-8  gap-3 flex flex-col items-center">
           <div
             className={`mt-8 ${
               isSideBar
@@ -87,6 +88,13 @@ export default function SideBar() {
                 text="Settings"
                 onClick={() => handleSetting()}
               />
+              <EventDashButton
+                isSlideBar={isSideBar}
+                img="ticket.svg"
+                text="Tickets"
+                onClick={() => handleTicket()}
+              />
+
               <EventDashButton
                 isSlideBar={isSideBar}
                 img="setting.svg"

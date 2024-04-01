@@ -1,15 +1,13 @@
 import React from "react";
 import Footer from "@/components/Footer";
+import EventCardDisabled from "@/components/EventCardDisabled";
 import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
-import QRcodeScanner from "@/app/event/dashboard/[id]/components/QRcodeScanner";
 // import EventCardDisabled from "@/components/EventCardDisabled";
-import Test from "@/components/Test";
-import IndexPage from "@/components/Test1";
-import EventCardDisabled from "@/components/EventCardDisabled";
 
-import { Event } from "./admin/Type";
+// import EventViewMode from "../components/EventViewMode";
+// import { Event } from "./admin/Type";
 
 export interface EventType {
   _id: string;
@@ -36,7 +34,7 @@ async function getOutDateEvent() {
       { next: { revalidate: 10 } }
     );
     const data = await response.json();
-    console.log(data);
+
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -59,14 +57,16 @@ async function getEvent() {
   }
 }
 
+// import HeroSection from "@/components/HeroSection";
+// import { formatDate } from "@/util/helper";
+
 export default async function Home() {
   const data = await getOutDateEvent();
+  console.log(data);
   const event = await getEvent();
-
+  console.log(event);
   return (
     <div>
-      {/* <Test /> */}
-
       <HeroSection />
 
       <EventViewMode event={event} />
@@ -77,7 +77,7 @@ export default async function Home() {
       )}
 
       <div className="flex flex-wrap ms-12">
-        {data.map((e: any) => (
+        {data.map((e: EventType) => (
           <EventCardDisabled
             key={e._id}
             name={e.eventName}
@@ -90,7 +90,5 @@ export default async function Home() {
 
       <Footer />
     </div>
-    // <QRcodeScanner />
-    // </div>
   );
 }

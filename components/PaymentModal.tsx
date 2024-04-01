@@ -133,6 +133,20 @@ const PaymentModal = (props: any) => {
           error("No User exists");
         }
 
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: "65f2b6f98dcf796e631062fc",
+              amount: 1000,
+            }),
+          }
+        );
+
         success("Payment completed");
 
         console.log("success payment completed");

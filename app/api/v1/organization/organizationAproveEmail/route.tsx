@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 import { transporter, mailOptions } from "@/config/nodemailer";
+import { OraganizationApprovalEmail } from "@/lib/email/OraganizationApprovalEmail";
 
 export async function POST(req: Request) {
   const { email, name } = await req.json();
 
-  // const template = Handlebars.compile(emailTemplate);
-  // const htmlBody = template({
-  //   name: "99x",
-  //   URL: `${process.env.NEXT_PUBLIC_URL}/organization/newuser?organizationId=${organizationId}&userId=${user._id}`,
-  // });
+  const template = Handlebars.compile(OraganizationApprovalEmail);
+  const htmlBody = template({
+    organizationName: name,
+  });
 
   try {
     const res = await transporter.sendMail({
@@ -16,8 +16,8 @@ export async function POST(req: Request) {
       to: email,
       subject: "Invitation to join the organization",
       text: `You have been invited to join the organization`,
-      // html: htmlBody,
-      html: `<h1>Your ${name} organization has been approved</h1>`,
+      html: htmlBody,
+      // html: `<h1>Your ${name} organization has been approved</h1>`,
     });
 
     if (res.accepted.length > 0) {

@@ -17,6 +17,7 @@ export default function MainComponent() {
     handleReports,
     handleCampaign,
     handleSetting,
+    handleTicket,
     isSideBar,
     setIsSideBar,
     eventname,
@@ -156,6 +157,14 @@ export default function MainComponent() {
                 text="Settings"
                 onClick={() => handleSetting()}
               />
+
+              <EventDashButton
+                isSlideBar={isSideBar}
+                img="setting.svg"
+                text="Tickets"
+                onClick={() => handleTicket()}
+              />
+
               <EventDashButton
                 isSlideBar={isSideBar}
                 img="setting.svg"
