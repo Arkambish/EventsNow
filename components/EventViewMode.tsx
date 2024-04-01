@@ -14,31 +14,19 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
   const [sortBy, setSortBy] = useState("");
   const [eventsPerPage, setEventsPerPage] = useState(2);
 
-  function getEventsPerPage() {
-    if (window.innerWidth >= 1024) {
-      return 4;
-    } else if (window.innerWidth >= 768) {
-      return 3;
-    } else {
-      return 1;
-    }
-  }
-
   useEffect(() => {
     const handleResize = () => {
-      if (document.documentElement.clientWidth >= 1024) {
-        setEventsPerPage(4); // Large screens
+      if (document.documentElement.clientWidth >= 1448) {
+        setEventsPerPage(4);
+      } else if (document.documentElement.clientWidth >= 1024) {
+        setEventsPerPage(3); // Large screens
       } else if (document.documentElement.clientWidth >= 768) {
-        setEventsPerPage(3); // Medium screens
+        setEventsPerPage(2); // Medium screens
       } else {
         setEventsPerPage(1); // Small screens
       }
     };
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
 
   const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

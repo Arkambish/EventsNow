@@ -63,6 +63,7 @@ function OrgContextProvider({ children }: ChildrenType) {
       async function getData() {
         setIsLoading(true);
         try {
+          console.log(params.id);
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganization/${params.id}`
           );
