@@ -127,7 +127,7 @@ const Pay = (props: any) => {
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  }, [props.eventDetails]);
 
   function pay() {
     window.payhere.startPayment(payment);

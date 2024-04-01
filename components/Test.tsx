@@ -39,7 +39,9 @@ export default function Test() {
       <div>
         <input type="text" value={qrValue} onChange={handleChange} />
         <button onClick={handleGenerateQRCode}>Generate QR Code</button>
-        {qrImage && <img src={qrImage} alt="QR Code" />}
+        {qrImage && (
+          <Image src={qrImage} alt="QR Code" width={50} height={50} />
+        )}
       </div>
       {/* <h1>Scan QR Code</h1>
       <QRCodeScanner /> */}
