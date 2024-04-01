@@ -1,21 +1,9 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  use,
-} from "react";
-import {
-  AdminContext,
-  voidFunc,
-  Event,
-  User,
-  Organization,
-} from "@/app/admin/Type";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { AdminContext, voidFunc, User, Organization } from "@/app/admin/Type";
 import { getAllEvents, getAllOrganization, getAllUser } from "./FetchData";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { getUser } from "@/components/Navbar/NavBar";
 import { useRouter } from "next/navigation";
 import { EventType } from "@/app/Type";
@@ -53,6 +41,7 @@ function AdminContextProvider({ children }: AdminContextProps) {
     setStatus("Payments");
   };
 
+  //fetch all data from the api and set the state
   useEffect(() => {
     async function getData() {
       setIsLoading(true);
@@ -68,24 +57,14 @@ function AdminContextProvider({ children }: AdminContextProps) {
         router.push("/404");
       }
 
-      // const res3 = await fetch(
-      //   // `api/v1/organization/getAllOrganization`,
-      //   `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getAllOrganization`,
-      //   {
-      //     next: {
-      //       revalidate: 30,
-      //     },
-      //   }
-      // );
+      const allOrg = await getAllOrganization();
 
-      const res3 = await getAllOrganization();
-
-      if (!res3.ok) {
+      if (!allOrg.ok) {
         setIsLoading(false);
         return;
       }
 
-      const { organization } = await res3.json();
+      const { organization } = await allOrg.json();
 
       const resActive = organization.filter(
         (org: Organization) => org.isActive
@@ -101,32 +80,27 @@ function AdminContextProvider({ children }: AdminContextProps) {
         setNotification(notActive);
       }
 
-      // const res = await fetch(
-      //   // `api/v1/user/getAllUser`
-      //   `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getAllUser`
-      // );
+      const allUser = await getAllUser();
 
-      const res = await getAllUser();
-
-      if (!res.ok) {
+      if (!allUser.ok) {
         setIsLoading(false);
         return;
       }
 
-      const finalRes = await res.json();
+      const users = await allUser.json();
 
-      setUser(finalRes);
+      setUser(users);
 
-      const res2 = await getAllEvents();
+      const allEvent = await getAllEvents();
 
-      if (!res2.ok) {
+      if (!allEvent.ok) {
         setIsLoading(false);
         return;
       }
 
-      const finalRes1 = await res2.json();
+      const events = await allEvent.json();
 
-      setEvent(finalRes1);
+      setEvent(events);
 
       setIsLoading(false);
     }
@@ -134,6 +108,8 @@ function AdminContextProvider({ children }: AdminContextProps) {
   }, [router]);
 
   return (
+    //provide adminContext values to child components
+
     <adminContext.Provider
       value={{
         status,

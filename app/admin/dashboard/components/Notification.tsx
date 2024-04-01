@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SuperadminPages from "./SuperadminPages";
 import Org_RequestHandle from "./Org_RequestHandle";
 import { AdminContext, Organization } from "@/app/admin/Type";
 import { useAdmin } from "../AdminContextFile";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
-import { MdRefresh } from "react-icons/md";
 import Spinner from "@/components/Spinner";
 import { getAllOrganization } from "../FetchData";
 

@@ -26,10 +26,10 @@ const DenyModalContent = ({ organization }: DenyModalProps) => {
 
       const updatedNotifications = [...notification, organization];
       success("Organization Denied successfully");
-      setNotification(updatedNotifications);
+      setNotification(updatedNotifications); // Add denied organization to the notification list
       setOrganization((prev: Organization[]) =>
         prev.filter((org) => org._id !== organization._id)
-      );
+      ); // Remove denied organization from the organization list
     } catch (error) {
       console.error("Error updating organization:", error);
     }
