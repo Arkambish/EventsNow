@@ -1,9 +1,10 @@
-import { User } from "@/app/admin/Type";
+// import { User } from "@/app/admin/Type";
+import { UserType } from "@/app/Type";
 import { error, success } from "@/util/Toastify";
 import React from "react";
 
 interface makeAdminprops {
-  setUser: React.Dispatch<React.SetStateAction<User[]>>;
+  setUser: React.Dispatch<React.SetStateAction<UserType[]>>;
   userId: String;
   setMakeAdminModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -29,8 +30,8 @@ const MakeAdminModalContent = ({
 
       success("User is now an admin");
       setMakeAdminModal(false);
-      setUser((user: User[]) => {
-        const userChangers = user.map((user: User) => {
+      setUser((user: UserType[]) => {
+        const userChangers = user.map((user: UserType) => {
           if (user._id === userId) {
             user.role = "admin";
           }

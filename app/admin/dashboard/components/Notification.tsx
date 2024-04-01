@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import SuperadminPages from "./SuperadminPages";
 import Org_RequestHandle from "./Org_RequestHandle";
-import { AdminContext, Organization } from "@/app/admin/Type";
 import { useAdmin } from "../AdminContextFile";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
 import Spinner from "@/components/Spinner";
 import { getAllOrganization } from "../FetchData";
+import { AdminContext, OrganizationType } from "@/app/Type";
 
 export default function Notification() {
   const { notification, setOrganization, setNotification } =
@@ -24,8 +24,12 @@ export default function Notification() {
 
     const { organization } = await res3.json();
 
-    const resActive = organization.filter((org: Organization) => org.isActive);
-    const notActive = organization.filter((org: Organization) => !org.isActive);
+    const resActive = organization.filter(
+      (org: OrganizationType) => org.isActive
+    );
+    const notActive = organization.filter(
+      (org: OrganizationType) => !org.isActive
+    );
 
     if (resActive.length !== 0) {
       setOrganization(resActive);

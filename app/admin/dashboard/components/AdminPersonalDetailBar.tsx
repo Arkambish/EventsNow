@@ -3,14 +3,14 @@ import Modal from "./ModalContext";
 import BlacklistModalContent from "./modals/BlacklistModal";
 import MakeAdminModalContent from "./modals/MakeAdminModal";
 import Image from "next/image";
-import { User } from "../../Type";
+import { UserType } from "@/app/Type";
 
 interface PresonDetailsBar {
   name: string;
   email: string;
   userId: String;
   role: String;
-  setUser: React.Dispatch<React.SetStateAction<User[]>>;
+  setUser: React.Dispatch<React.SetStateAction<UserType[]>>;
 }
 
 export default function AdminPersonDetailsBar({
