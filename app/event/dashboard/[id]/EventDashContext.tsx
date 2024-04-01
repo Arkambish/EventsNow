@@ -1,5 +1,4 @@
 "use client";
-import { voidFunc } from "@/app/organization/dashboard/[id]/Type";
 
 import React, {
   createContext,
@@ -17,7 +16,7 @@ import { Post } from "../../host/[id]/SelectTemplate";
 import { set } from "mongoose";
 import { ca } from "date-fns/locale";
 import { error, success } from "@/util/Toastify";
-import { AttendanceType, EventType } from "@/app/Type";
+import { AttendanceType, EventType, voidFunc } from "@/app/Type";
 
 export interface EventContextType {
   id: String;
