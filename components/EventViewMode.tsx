@@ -198,19 +198,28 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
   const [viewMode, setViewMode] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("");
-  const [eventsPerPage, setEventsPerPage] = useState(4);
+  const [eventsPerPage, setEventsPerPage] = useState(2);
 
   // setEventarr(event);
 
   useEffect(() => {
     const handleResize = () => {
-      setEventsPerPage(4);
+      if (window.innerWidth >= 1440) {
+        setEventsPerPage(5); // Large screens
+      } else if (window.innerWidth >= 1280) {
+        setEventsPerPage(4); // Large screens
+      } else if (window.innerWidth >= 1024) {
+        console.log("medium screen", window.innerWidth);
+        setEventsPerPage(3); // Medium screens
+      } else {
+        setEventsPerPage(2); // Small screens or default
+      }
     };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    handleResize();
+    // window.addEventListener("resize", handleResize);
+    // return () => {
+    //   window.removeEventListener("resize", handleResize);
+    // };
   }, []);
 
   // const getEventsPerPage = () => {
@@ -301,7 +310,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
       <div
         className={`flex ${
           viewMode === "grid"
-            ? "flex-wrap ml-1"
+            ? "flex-wrap ml-1 justify-center items-center"
             : " flex-col gap-3 justify-center items-center"
         }  `}
       >
