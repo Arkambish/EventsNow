@@ -1,9 +1,7 @@
 import React from "react";
-import { useState } from "react";
-import { Event } from "@/app/admin/Type";
 import { UseEventContext, EventContextType } from "../../EventDashContext";
 import Image from "next/image";
-import Modal from "../ModalContext";
+
 import {
   CldUploadWidget,
   CloudinaryUploadWidgetInfo,
@@ -13,7 +11,6 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { error, success } from "@/util/Toastify";
 
 interface TicketDetailProps {
-  // event: Event;
   setTicketDetail: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -157,6 +154,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
                 );
               }}
             </CldUploadWidget>
+            
             <div className="flex">
               {newTicketImage.length > 0 && (
                 <div className=" mt-5 border-2 w-auto border-solId rounded-xl   ">
