@@ -1,17 +1,18 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter, useParams, notFound } from "next/navigation";
-import {
-  Event,
-  OrgContext,
-  OrgStatus,
-  Organization,
-  Team,
-  User,
-  voidFunc,
-} from "./Type";
 import { useAuth } from "@/app/AuthContext";
 import { AuthContext } from "@/components/Navbar/NavBar";
+import {
+  ChildrenType,
+  EventType,
+  OrgContext,
+  OrgDashboardType,
+  OrganizationTeamType,
+  OrganizationType,
+  UserType,
+  voidFunc,
+} from "@/app/Type";
 
 export type Modal =
   | ""
@@ -20,28 +21,29 @@ export type Modal =
   | "permissionOneEvent"
   | "selectOneEvent";
 
-interface OrgContextProviderProps {
-  children: React.ReactNode;
-}
-
 export type EventPermission = {
   eventId: string;
   eventPermission: string[];
 };
 
+type GettingOrganizationData = {
+  organization: OrganizationType;
+  message: string;
+};
 const orgContext = createContext<OrgContext | string>("");
-
-function OrgContextProvider({ children }: OrgContextProviderProps) {
-  const [status, setStatus] = useState<OrgStatus>("dashboard");
+function OrgContextProvider({ children }: ChildrenType) {
+  const [status, setStatus] = useState<OrgDashboardType>("dashboard");
   const [revenue, setRevenue] = useState<number>(0);
   const [ticketSold, setTicketSold] = useState<number>(0);
-  const [events, setEvents] = useState<Event[]>([]);
-  const [team, setTeam] = useState<Team[]>([]);
+  const [events, setEvents] = useState<EventType[]>([]);
+  const [team, setTeam] = useState<OrganizationTeamType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isDashboardOpen, setIsDashboardOpen] = useState<boolean>(false);
   const [isSlideBar, setIsSlideBar] = useState<boolean>(true);
-  const [organization, setOrganization] = useState<Organization | null>(null);
+  const [organization, setOrganization] = useState<OrganizationType | null>(
+    null
+  );
   const params = useParams();
   const router = useRouter();
   const [editedName, setEditedName] = useState<string>("");
@@ -53,36 +55,16 @@ function OrgContextProvider({ children }: OrgContextProviderProps) {
   const [selectEventForPermission, setSelectEventForPermission] =
     useState<Event | null>(null);
   const [organizationImage, setOrganizationImage] = useState<string>("");
-
   const id: string | any = params.id;
-
-  // async function handleOrganizationTeam() {
-  //   const res2 = await fetch(
-  //     "${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers",
-  //     {
-  //       method: "POST",
-  //       mode: "cors",
-  //       body: JSON.stringify({ id: params.id }),
-  //     }
-  //   );
-
-  //   const finalResponse2 = await res2.json();
-  //   return finalResponse2;
-  // }
-
   const [eventPermission, setEventPermission] = useState<EventPermission[]>([]);
+
   useEffect(
     function () {
       async function getData() {
         setIsLoading(true);
         try {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganization`,
-            {
-              method: "POST",
-              mode: "cors",
-              body: JSON.stringify(params.id),
-            }
+            `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganization/${params.id}`
           );
 
           if (!res.ok) {
@@ -90,49 +72,43 @@ function OrgContextProvider({ children }: OrgContextProviderProps) {
             return;
           }
 
-          const finalResponse = await res.json();
+          const organizationDetails: GettingOrganizationData = await res.json();
 
-          if (finalResponse.message === "No organization") {
+          if (organizationDetails.message === "No organization") {
             router.push("/404");
           }
 
-          setEditedName(finalResponse.organization.organizationName || "");
-          setOrganization(finalResponse.organization);
-          setOrganizationImage(finalResponse.organization.postImageLink || "");
+          setEditedName(
+            organizationDetails.organization.organizationName || ""
+          );
+          setOrganization(organizationDetails.organization);
+          setOrganizationImage(
+            organizationDetails.organization.postImageLink || ""
+          );
 
-          setIsActive(finalResponse.organization.isActive);
+          setIsActive(organizationDetails.organization.isActive);
 
           // get users in organization
           const res2 = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers`,
-            {
-              method: "POST",
-              mode: "cors",
-              body: JSON.stringify({ id: params.id }),
-            }
+            `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers/${params.id}`
           );
 
-          const finalResponse2 = await res2.json();
+          const organizationUser: OrganizationTeamType[] = await res2.json();
 
-          const team = finalResponse2.filter(
-            (user: Team) =>
-              user.userData.email !== finalResponse.organization.email
+          const team: OrganizationTeamType[] = organizationUser.filter(
+            (user: OrganizationTeamType) =>
+              user.userData.email !== organizationDetails.organization.email
           );
 
           setTeam(team);
           setOrganizationId(params.id);
           // get events in organization
           const res3 = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationEvent`,
-            {
-              method: "POST",
-              mode: "cors",
-              body: JSON.stringify(params.id),
-            }
+            `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationEvent/${params.id}`
           );
 
-          const finalResponse3 = await res3.json();
-          setEvents(finalResponse3);
+          const organizationEvent: EventType[] = await res3.json();
+          setEvents(organizationEvent);
 
           setIsLoading(false);
         } catch (error) {
