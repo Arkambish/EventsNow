@@ -11,7 +11,7 @@ async function getOutDateEvent() {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/outdatedEvents`,
-      { next: { revalidate: 10 } }
+      { cache: "no-cache" }
     );
     const data = await response.json();
 
@@ -47,23 +47,24 @@ export default async function Home() {
       <HeroSection />
 
       <EventViewMode event={event} />
+
+      <div className="font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
+        Outdated Events
+      </div>
+
       {data.length !== 0 && (
-        <div className="font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
-          Outdated Events
+        <div className="flex flex-wrap ms-12">
+          {data.map((e: EventType) => (
+            <EventCardDisabled
+              key={e._id}
+              name={e.eventName}
+              img={e.dashboardImage}
+              location={e.selectedTab}
+              date={formatDate(e.eventStartDate)}
+            />
+          ))}
         </div>
       )}
-
-      <div className="flex flex-wrap ms-12">
-        {data.map((e: EventType) => (
-          <EventCardDisabled
-            key={e._id}
-            name={e.eventName}
-            img={e.dashboardImage}
-            location={e.selectedTab}
-            date={formatDate(e.eventStartDate)}
-          />
-        ))}
-      </div>
 
       <Footer />
     </div>

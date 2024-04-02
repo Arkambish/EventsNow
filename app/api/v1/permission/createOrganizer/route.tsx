@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const { organizationId, userId, globalPermission } = await req.json();
+  console.log({ organizationId, userId, globalPermission });
 
   await connectMongoDB();
 
@@ -11,6 +12,8 @@ export async function POST(req: Request) {
     userId: userId,
     organizationId: organizationId,
   });
+
+  console.log(user);
 
   if (user) {
     return NextResponse.json(
@@ -32,6 +35,7 @@ export async function POST(req: Request) {
     );
   }
 
+  console.log("success");
   return NextResponse.json(
     { message: "success to create organizer" },
     { status: 201 }

@@ -53,7 +53,7 @@ function OrgContextProvider({ children }: ChildrenType) {
   const [globalPermission, setGlobalPermission] = useState<string[]>([]);
   const { setOrganizationId } = useAuth() as AuthContext;
   const [selectEventForPermission, setSelectEventForPermission] =
-    useState<Event | null>(null);
+    useState<EventType | null>(null);
   const [organizationImage, setOrganizationImage] = useState<string>("");
   const id: string | any = params.id;
   const [eventPermission, setEventPermission] = useState<EventPermission[]>([]);
@@ -67,6 +67,7 @@ function OrgContextProvider({ children }: ChildrenType) {
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganization/${params.id}`
           );
+          console.log(res.ok, "res.ok");
 
           if (!res.ok) {
             router.push("/404");
@@ -74,7 +75,7 @@ function OrgContextProvider({ children }: ChildrenType) {
           }
 
           const organizationDetails: GettingOrganizationData = await res.json();
-
+          console.log(organizationDetails, "organizationDetails");
           if (organizationDetails.message === "No organization") {
             router.push("/404");
           }
@@ -93,9 +94,15 @@ function OrgContextProvider({ children }: ChildrenType) {
           const res2 = await fetch(
             `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers/${params.id}`
           );
+          console.log(res2.ok, "res2.ok");
 
           const organizationUser: OrganizationTeamType[] = await res2.json();
+          console.log(organizationUser, "organizationUser");
 
+          console.log(
+            organizationDetails.organization.email,
+            "organizationDetails.organization.email"
+          );
           const team: OrganizationTeamType[] = organizationUser.filter(
             (user: OrganizationTeamType) =>
               user.userData.email !== organizationDetails.organization.email
@@ -108,6 +115,7 @@ function OrgContextProvider({ children }: ChildrenType) {
             `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationEvent/${params.id}`
           );
 
+          console.log(res3.ok, "res3.ok");
           const organizationEvent: EventType[] = await res3.json();
           setEvents(organizationEvent);
 

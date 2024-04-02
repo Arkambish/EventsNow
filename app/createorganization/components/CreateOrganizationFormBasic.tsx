@@ -37,11 +37,10 @@ type OrganizationValidationTypes = ZodObject<{
   phoneNumber: z.ZodString;
   email: z.ZodString;
   postImageLink: z.ZodString;
-
 }>;
- type OrganizationDataType = {
+type OrganizationDataType = {
   fullName: string;
-  numberType: string ;
+  numberType: string;
   number: string;
   companyName: string;
   organizationName: string;
@@ -49,7 +48,6 @@ type OrganizationValidationTypes = ZodObject<{
   phoneNumber: string;
   email: string;
   postImageLink: string;
-
 };
 
 export default function CreateOrganizationFormBasic() {
@@ -75,8 +73,8 @@ export default function CreateOrganizationFormBasic() {
     }
     const email: string | null | undefined = session.user?.email;
 
-    try{
-      const res = await  fetch(
+    try {
+      const res = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getUserId`,
         {
           method: "POST",
@@ -88,16 +86,16 @@ export default function CreateOrganizationFormBasic() {
         error("There is an error for registration");
         return null;
       }
-  
+
       const id = await res.json();
       return id;
-    }catch(e){
+    } catch (e) {
       error(e + "There is an error for registration");
       return null;
     }
   };
 
-  const validateOrganization : OrganizationValidationTypes = z.object({
+  const validateOrganization: OrganizationValidationTypes = z.object({
     fullName: z
       .string()
       .min(1, "Enter your full name ")
@@ -119,118 +117,127 @@ export default function CreateOrganizationFormBasic() {
   });
 
   async function sendOrganizationData(e: any) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const userId : string   = await getUserId();
+      const userId = await getUserId();
 
-    setIsSubmitting(true);
+      console.log(userId);
 
-    const data : OrganizationDataType = {
-      fullName,
-      numberType,
-      number,
-      companyName,
-      organizationName,
-      address,
-      phoneNumber,
-      email,
-      postImageLink: profileImage,
-    };
+      setIsSubmitting(true);
 
-    const result = validateOrganization.safeParse(data);
+      const data: OrganizationDataType = {
+        fullName,
+        numberType,
+        number,
+        companyName,
+        organizationName,
+        address,
+        phoneNumber,
+        email,
+        postImageLink: profileImage,
+      };
+      console.log(data);
 
-    if (result.success) {
-      const res  = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/createOrganization`,
-        {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify(data),
+      const result = validateOrganization.safeParse(data);
+      console.log(result.success);
+      if (result.success) {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/createOrganization`,
+          {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(data),
+          }
+        );
+
+        console.log(res.ok);
+
+        if (!res.ok) {
+          error("There is an error for registration");
+          setIsSubmitting(false);
+          return null;
         }
-      );
 
-      if (!res.ok) {
-        error("There is an error for registration");
-        setIsSubmitting(false);
-        return null;
-      }
+        const id = await res.json();
 
-      const id = await res.json();
+        const oraganizationDataForNavBarProfile = {
+          id: id.id,
+          name: organizationName,
+          image: profileImage,
+        } as OrganizationProps;
 
-      const oraganizationDataForNavBarProfile = {
-        id: id.id,
-        name: organizationName,
-        image: profileImage,
-      } as OrganizationProps;
+        setOrganization((data: OrganizationProps[]) => [
+          ...data,
+          oraganizationDataForNavBarProfile,
+        ]);
 
-      setOrganization((data: OrganizationProps[]) => [
-        ...data,
-        oraganizationDataForNavBarProfile,
-      ]);
+        console.log(id.id, userId);
 
-    
+        const organizerRes = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/createOrganizer`,
+          {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify({
+              organizationId: id.id,
+              userId: userId.id,
+              globalPermission: ["allPermission"],
+            }),
+          }
+        );
+        console.log(organizerRes.ok);
 
-      const organizerRes  = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/createOrganizer`,
-        {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify({
-            organizationId: id.id,
-            userId,
-            globalPermission: ["allPermission"],
-          }),
+        if (!organizerRes.ok) {
+          error("There is an error for registration");
+          setIsSubmitting(false);
+          return null;
         }
-      );
 
-      if (!organizerRes.ok) {
-        error("There is an error for registration");
+        success("registration data sent succesfully");
+
+        setFullName("");
+        setNumberType("");
+        setNumber("");
+        setCompanyName("");
+        setAddress("");
+        setPhoneNumber("");
+        setEmail("");
+        setOrganizationName("");
+        setProfileImage("");
+
         setIsSubmitting(false);
-        return null;
+
+        router.push(`/organization/dashboard/${id.id}`);
+        return;
+      } else {
+        const formattedError = result.error.format();
+
+        if (formattedError.fullName?._errors) {
+          error(String(formattedError.fullName?._errors));
+        } else if (formattedError.numberType) {
+          error(String(formattedError.numberType?._errors));
+        } else if (formattedError.number) {
+          error(String(formattedError.number?._errors));
+        } else if (formattedError.companyName) {
+          error(String(formattedError.companyName?._errors));
+        } else if (formattedError.organizationName) {
+          error(String(formattedError.organizationName?._errors));
+        } else if (formattedError.address) {
+          error(String(formattedError.address?._errors));
+        } else if (formattedError.phoneNumber) {
+          error(String(formattedError.phoneNumber?._errors));
+        } else if (formattedError.email) {
+          error(String(formattedError.email._errors));
+        } else if (formattedError.postImageLink) {
+          error(String(formattedError.postImageLink._errors));
+        } else error("an unknown error occur in validation process");
       }
-
-      success("registration data sent succesfully");
-
-      setFullName("");
-      setNumberType("");
-      setNumber("");
-      setCompanyName("");
-      setAddress("");
-      setPhoneNumber("");
-      setEmail("");
-      setOrganizationName("");
-      setProfileImage("");
 
       setIsSubmitting(false);
-
-      router.push(`/organization/dashboard/${id.id}`);
-      return;
-    } 
-    else {
-      const formattedError = result.error.format();
-
-      if (formattedError.fullName?._errors) {
-        error(String(formattedError.fullName?._errors));
-      } else if (formattedError.numberType) {
-        error(String(formattedError.numberType?._errors));
-      } else if (formattedError.number) {
-        error(String(formattedError.number?._errors));
-      } else if (formattedError.companyName) {
-        error(String(formattedError.companyName?._errors));
-      } else if (formattedError.organizationName) {
-        error(String(formattedError.organizationName?._errors));
-      } else if (formattedError.address) {
-        error(String(formattedError.address?._errors));
-      } else if (formattedError.phoneNumber) {
-        error(String(formattedError.phoneNumber?._errors));
-      } else if (formattedError.email) {
-        error(String(formattedError.email._errors));
-      } else if (formattedError.postImageLink) {
-        error(String(formattedError.postImageLink._errors));
-      } else error("an unknown error occur in validation process");
+    } catch (e) {
+      error(e + "There is an error for registration");
     }
-
-    setIsSubmitting(false);
   }
 
   return (
@@ -402,7 +409,6 @@ export default function CreateOrganizationFormBasic() {
       >
         {({ open }) => {
           return (
-           
             <button
               onClick={() => {
                 open();
