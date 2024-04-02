@@ -9,10 +9,12 @@ export const GET = async (req: Request, { params }: any) => {
 
   try {
     connectMongoDB();
-    const rigisterdEvents = await User.findOne({ _id: id }).populate(
-      "registeredUser"
+    const registerdEventsUser = await User.findOne({ _id: id }).populate(
+      "registeredEvents"
     );
-    const data = rigisterdEvents.registeredUser.map((user: any) => user);
+    const data = registerdEventsUser.registeredEvents.map((user: any) => user);
+    console.log("Testttttttt");
+    console.log(data);
 
     return new NextResponse(JSON.stringify(data), { status: 200 });
   } catch (error) {

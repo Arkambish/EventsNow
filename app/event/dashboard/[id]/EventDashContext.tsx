@@ -18,7 +18,6 @@ import { ca, ro } from "date-fns/locale";
 import { error, success } from "@/util/Toastify";
 import { AttendanceType, EventType, voidFunc } from "@/app/Type";
 
-
 export interface EventContextType {
   id: String;
   status: String;
@@ -42,6 +41,8 @@ export interface EventContextType {
   allComment: Comment[];
   setAllComment: Dispatch<SetStateAction<Comment[]>>;
 
+  isPageBuilder: boolean;
+  setIsPageBuilder: Dispatch<SetStateAction<boolean>>;
   eventname: String;
   eventLocation: String;
   eventType: String;
@@ -81,7 +82,6 @@ export interface EventContextType {
   setNewTicketImage: React.Dispatch<React.SetStateAction<string>>;
 
   createTicketHandler: voidFunc;
-
 }
 
 type EventUserDeatils = {
@@ -114,7 +114,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [allComment, setAllComment] = useState<Comment[]>([]);
   const [allTickets, setAllTickets] = useState<Ticket[]>([]);
 
-  const [isloading, setIsloading] = useState<boolean>(false);
+  const [isPageBuilder, setIsPageBuilder] = useState<boolean>(false);
 
   const handleOverview: voidFunc = () => {
     setStatus("overview");
@@ -301,7 +301,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     }
     handleContext();
 
-
     async function getTickets() {
       const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
       if (!res.ok) {
@@ -313,10 +312,11 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     getTickets();
   }, [params.id, router, setEventPublish, status, id]);
 
-
   return (
     <EventContext.Provider
       value={{
+        isPageBuilder,
+        setIsPageBuilder,
         attendances,
         isPreview,
         setIsPreview,
@@ -378,7 +378,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         setNewTicketImage,
 
         createTicketHandler,
-
       }}
     >
       {children}

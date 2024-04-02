@@ -23,6 +23,8 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
   const [isDissableBtn, setIsDissableBtn] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  console.log("user", user);
+
   function handleEdit(value: string) {
     setTitle(value);
     if (value.length > 0) {
@@ -34,6 +36,7 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
 
   const handlePostButton = async () => {
     setIsSubmitting(true);
+
     const data = {
       userName: user.user.name,
       userImage: user.user.image,
@@ -41,23 +44,31 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
       description: title,
       image: profileImage,
     };
-    const res = await fetch("/api/v1/post/createPost", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/post/createPost`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
-    if (!res.ok) {
+      if (!res.ok) {
+        setIsSubmitting(false);
+        error("There was an error creating the post");
+        return;
+      }
+
+      success("Post created successfully");
       setIsSubmitting(false);
-      error("There was an error creating the post");
-      return;
+      setCreatePost(false);
+    } catch (e) {
+      console.log(e);
+      error(e);
     }
-
-    success("Post created successfully");
-    setIsSubmitting(false);
-    setCreatePost(false);
   };
   return (
     <>
@@ -108,17 +119,6 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
               />
             </div>
           </div>
-          {/* <button className="w-full">
-            <div className="border-[2px] items-center full m-2 rounded-2xl font-medium p-3 flex justify-between ">
-              Add to your post
-              <Image
-                src={`/images/event/post/add-post-btn.png`}
-                alt="profile picture"
-                width={20}
-                height={20}
-              />
-            </div>
-          </button> */}
 
           {profileImage.length > 0 && (
             <div>
@@ -154,13 +154,10 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
             }}
             options={{
               tags: ["event post"],
-              // publicId: `${organizationName}/${Date.now()}`,
-              // publicId: "b2c",
 
               sources: ["local"],
               googleApiKey: "<image_search_google_api_key>",
               showAdvancedOptions: false,
-              // cropping: true,
               multiple: false,
               showSkipCropButton: false,
               // croppingAspectRatio: 0.75,

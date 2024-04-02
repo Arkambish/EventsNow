@@ -8,7 +8,7 @@ export function formatDate(dateString: any) {
 
 export const generateQRCodeImage = async (value: any, options = {}) => {
   try {
-    const qrImageData = await qrCode.toDataURL(value, options);
+    const qrImageData : string = await qrCode.toDataURL(value, options);
     return qrImageData;
   } catch (error) {
     console.error("Error generating QR code:", error);
@@ -39,7 +39,7 @@ export async function uploadToCloudinary(imageData: any) {
     const data = await res.json();
 
     // Get the public URL of the uploaded image
-    const imageUrl = data.secure_url;
+    const imageUrl : string = data.secure_url;
 
     return imageUrl;
   } catch (error) {

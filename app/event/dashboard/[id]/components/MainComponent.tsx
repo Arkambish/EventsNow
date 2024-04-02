@@ -8,6 +8,7 @@ import EventDashButton from "./EventDashButton";
 import Event from "../components/Event";
 import SelectTemplate from "@/app/event/host/[id]/SelectTemplate";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import Build from "./pageBuilder/Build";
 
 export default function MainComponent() {
   const {
@@ -30,7 +31,9 @@ export default function MainComponent() {
     eventEndDate,
     isPreview,
     setIsPreview,
+    setIsPageBuilder,
     handleQRreader,
+    isPageBuilder,
   } = UseEventContext() as EventContextType;
   const [isDashboardOpen, setIsDashboardOpen] = useState<boolean>(false);
 
@@ -74,20 +77,31 @@ export default function MainComponent() {
           </button>
           <SelectTemplate event={event} preview={true} />
         </div>
+      ) : isPageBuilder ? (
+        <div className=" ">
+          <button
+            onClick={() => setIsPageBuilder(false)}
+            className=" bg-custom-orange w-full flex justify-center items-center gap-3 text-white text-lg font-bold"
+          >
+            <IoArrowBackCircleOutline size={22} />
+            Back
+          </button>
+          <Build />
+        </div>
       ) : (
         <div>
           <div
             className={`fixed 
-            -left-14
-            top-40`}
+        -left-14
+        top-40`}
           >
             <button onClick={() => setIsDashboardOpen(!isDashboardOpen)}>
               <div className="  mr-5 h-10  md:hidden  flex justify-center items-center rounded-full   ">
                 {/* {isDashboardOpen ? (
-                  <BiArrowFromRight size={25} />
-                ) : (
-                  <BiArrowFromLeft size={25} />
-                )} */}
+              <BiArrowFromRight size={25} />
+            ) : (
+              <BiArrowFromLeft size={25} />
+            )} */}
                 <div className="bg-myBrown w-[100px] h-[55px] flex items-center   rounded-full">
                   <div className="bg-custom-orange w-[95px] h-[46px] flex justify-end pr-3 rounded-full">
                     <Image
@@ -192,7 +206,7 @@ export default function MainComponent() {
             </div>
             <div
               className={`lg:col-span-3 md:block hidden
-             ${isSideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
+         ${isSideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
             >
               <Event
                 EventName={eventname}

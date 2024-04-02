@@ -186,7 +186,7 @@ export default function NavBar() {
               <Spinner />
             </nav>
           ) : (
-            <nav className="dark:bg-navWhite">
+            <nav className="bg-navWhite">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
                 {/* Events now logo and name */}
                 {pathname.startsWith("/event/dashboard") ? (

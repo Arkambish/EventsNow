@@ -5,9 +5,11 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   ProfContext,
   UserDetails,
-  RegisterEventType,
   VoidFunc,
+  EventType,
+  Ticket,
 } from "@/app/Type";
+import { error } from "@/util/Toastify";
 
 const ProfContext = createContext<ProfContext | string>("");
 
@@ -35,11 +37,17 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
   const [userImage, setUserImage] = useState<string>("");
   const [fname, setFname] = useState<string>("");
   const [lname, setLname] = useState<string>("");
+  const [registerEvent, setRegisterEvent] = useState<EventType[]>([]);
+  const [ticket, setTicket] = useState<Ticket>({
+    _id: "",
+    eventId: "",
+    price: 0,
+    classType: "",
+    image: "",
+  });
   const params = useParams();
   const router = useRouter();
   const userId = params.id;
-
-  const [registerEvent, setRegisterEvent] = useState<RegisterEventType[]>([]);
 
   const handleProfile: VoidFunc = () => {
     setStatus("myProfile");
@@ -128,10 +136,26 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
 
         setRegisterEvent(data);
       }
+      async function getTicket() {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/buyTicket/getUserTicket/${params.id}`
+        );
+
+        if (!res.ok) {
+          // router.push("/404");
+          setIsLoading(false);
+
+          return;
+        }
+        const finalrespone = await res.json();
+        setTicket(finalrespone);
+      }
+
       getData();
       getWishList();
       getRegisterdUser();
       getManageEvents();
+      getTicket();
     },
 
     [params.id]
@@ -152,6 +176,8 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
         fname,
         lname,
         userId,
+        ticket,
+        setTicket,
         userImage,
         setUserImage,
         status,

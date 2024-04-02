@@ -125,7 +125,8 @@ export interface EventContextType {
   handleSetting: voidFunc;
   isSideBar: boolean;
   setIsSideBar: (value: boolean) => void;
-
+  isPageBuilder: boolean;
+  setIsPageBuilder: React.Dispatch<React.SetStateAction<boolean>>;
   user: EventUserDeatils[];
   setStatus: React.Dispatch<React.SetStateAction<string>>;
   eventPosts: PostType[];
@@ -272,7 +273,7 @@ export interface ProfContext {
   register: any;
   userImage: string;
   setUserImage: React.Dispatch<React.SetStateAction<string>>;
-  registerEvent: RegisterEventType[];
+  registerEvent: EventType[];
 }
 
 export type RegisterEventType = {
@@ -335,7 +336,9 @@ export interface ProfContext {
   register: any;
   userImage: string;
   setUserImage: React.Dispatch<React.SetStateAction<string>>;
-  registerEvent: RegisterEventType[];
+  registerEvent: EventType[];
+  ticket: Ticket;
+  setTicket: React.Dispatch<React.SetStateAction<Ticket>>;
 }
 
 export type Ticket = {
