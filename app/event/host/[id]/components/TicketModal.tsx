@@ -1,14 +1,9 @@
-import React, { memo, useEffect, useState } from "react";
-// import { UseEventContext } from "../../EventDashContext";
-import { EventContextType } from "@/app/Type";
-import { FaPrint } from "react-icons/fa6";
-
-import { useParams, useRouter } from "next/navigation";
+import React, { memo } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PaymentModal from "@/components/PaymentModal";
 
 import { Ticket } from "@/app/Type";
-import { set } from "mongoose";
+
 
 export default memo(function TicketModal({
   setIsActiveProceedTicketModal,
@@ -107,24 +102,7 @@ export default memo(function TicketModal({
                   </tr>
                 </thead>
                 <tbody>
-                  {/* <tr>
-                    <td className="px-6 py-4">General</td>
-                    <td className="px-6 py-4">1000</td>
-                    <td className="px-6 py-4">10</td>
-                    <td className="px-6 py-4">10000</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4">VIP</td>
-                    <td className="px-6 py-4">5000</td>
-                    <td className="px-6 py-4">5</td>
-                    <td className="px-6 py-4">25000</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4">VVIP</td>
-                    <td className="px-6 py-4">10000</td>
-                    <td className="px-6 py-4">2</td>
-                    <td className="px-6 py-4">20000</td>
-                  </tr> */}
+                  
                   {ticketTypes.map((ticket, index) => (
                     <tr key={index}>
                       <td className="px-6 py-4">{ticket.classType}</td>

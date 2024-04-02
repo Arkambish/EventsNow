@@ -5,7 +5,7 @@ import { useState } from "react";
 import crypto from "crypto";
 import { generateQRCodeImage } from "@/util/helper";
 import { error, success } from "@/util/Toastify";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
 
 
@@ -15,7 +15,26 @@ declare global {
   }
 }
 
-const PaymentModal = (props: any) => {
+type PaymentModalProps = {
+  orderId: string;
+  item: string;
+  amount: number;
+  currency: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  country: string;
+  ticketArrTemp: string[];
+  totalPrice: number;
+  setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setTicketArrTemp: React.Dispatch<React.SetStateAction<string[]>>;
+};
+
+
+const PaymentModal = (props: PaymentModalProps) => {
   const scriptRef = useRef<any>();
 
   const key = "updatable";
@@ -32,7 +51,7 @@ const PaymentModal = (props: any) => {
     .update(merchantSecret)
     .digest("hex")
     .toUpperCase();
-  let amountFormatted = parseFloat(amount)
+  let amountFormatted = (amount)
     .toLocaleString("en-us", { minimumFractionDigits: 2 })
     .replaceAll(",", "");
 
@@ -163,7 +182,7 @@ const PaymentModal = (props: any) => {
 
         success("Payment completed");
         props.setIsActiveProceedTicketModal(false);
-        props.setTicketArrTemp("");
+        props.setTicketArrTemp([]);
       };
 
       window.payhere.onDismissed = function onDismissed() {
