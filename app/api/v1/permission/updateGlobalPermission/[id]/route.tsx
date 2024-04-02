@@ -8,26 +8,30 @@ type Params = {
 };
 
 export async function PUT(request: Request, { params }: { params: Params }) {
-  const id = params.id;
+  try {
+    const id = params.id;
 
-  const body = await request.json();
+    const body = await request.json();
 
-  await connectMongoDB();
+    await connectMongoDB();
 
-  const res = await Permission.findByIdAndUpdate(
-    id,
-    {
-      $set: { globalPermission: body },
-    },
-    { new: true }
-  );
-
-  if (!res) {
-    return NextResponse.json(
-      { message: "Failed to update global permission" },
-      { status: 500 }
+    const res = await Permission.findByIdAndUpdate(
+      id,
+      {
+        $set: { globalPermission: body },
+      },
+      { new: true }
     );
-  }
 
-  return NextResponse.json({ message: "success" });
+    if (!res) {
+      return NextResponse.json(
+        { message: "Failed to update global permission" },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ message: "success" });
+  } catch (error) {
+    return NextResponse.json({ message: "error" }, { status: 500 });
+  }
 }

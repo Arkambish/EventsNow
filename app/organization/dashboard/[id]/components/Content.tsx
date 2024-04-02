@@ -6,10 +6,10 @@ import MyTeam from "./MyTeam";
 import MyEvents from "./MyEvents";
 import { useOrg } from "../OrgContext";
 import Setting from "./Setting";
-import { OrgStatus } from "../Type";
+import { OrgDashboardType } from "@/app/Type";
 
 interface ContentProps {
-  status: OrgStatus;
+  status: OrgDashboardType;
 }
 
 export default function Content() {

@@ -3,7 +3,7 @@ import { useOrg } from "../OrgContext";
 import { error } from "@/util/Toastify";
 import { success } from "@/util/Toastify";
 import dynamic from "next/dynamic";
-import { Organization } from "../Type";
+// import { Organization } from "../Type";
 import { IoSaveOutline } from "react-icons/io5";
 import { FaCloudUploadAlt, FaRegWindowClose } from "react-icons/fa";
 import {
@@ -12,12 +12,13 @@ import {
   CloudinaryUploadWidgetResults,
 } from "next-cloudinary";
 import Image from "next/image";
+import { OrganizationType } from "@/app/Type";
 const ProfileSettings = dynamic(
   () => import("@/app/organization/dashboard/[id]/components/ProfileSettings")
 );
 
 interface contextProps {
-  organization: Organization;
+  organization: OrganizationType;
   id: string;
   setOrganizationImage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -126,18 +127,6 @@ export default function Setting() {
           )}
         </div>
         <div className="md:w-full mt-2 lg:w-3/4 text-[#525252]">
-          {/* <div className="border-[1px] border-[#848484] flex items-center gap-3 px-2 py-1 rounded-lg">
-            Organization Name -:
-            <input
-              required
-              type="text"
-              name="firstName"
-              id="firstName"
-              // value={accountName}
-              // onChange={(e) => setAccountName(e.target.value)}
-              className=" focus:outline-none   block flex-1  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400  sm:text-sm sm:leading-6 rounded-[12px]"
-            />
-          </div> */}
           <ProfileSettings
             setIsEditing={setIsEditing}
             isEditing={isEditing}
@@ -172,8 +161,7 @@ export default function Setting() {
               croppingDefaultSelectionRatio: 0.75,
               croppingShowDimensions: true,
               croppingCoordinatesMode: "custom",
-              // maxImageHeight: 100,
-              // croppingValidateDimensions: true,
+
               defaultSource: "local",
               resourceType: "image",
               folder: "organization",

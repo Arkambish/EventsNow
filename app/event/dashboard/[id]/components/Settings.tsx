@@ -435,7 +435,7 @@ export default function Settings() {
 
         <div className="flex justify-start">
           <button
-            className="mt-8 bg-custom-orange text-white rounded-md items-center flex px-4 py-2 gap-2 "
+            className=" button mt-8 bg-custom-orange text-white rounded-md items-center flex px-4 py-2 gap-2 "
             onClick={handleUpdate}
           >
             <svg

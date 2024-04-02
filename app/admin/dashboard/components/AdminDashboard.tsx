@@ -13,8 +13,9 @@ import { BiWorld } from "react-icons/bi";
 import { LiaBookSolid } from "react-icons/lia";
 import { GoPeople } from "react-icons/go";
 import { FiFileText } from "react-icons/fi";
-import { AdminContext } from "@/app/admin/Type";
+
 import Spinner from "@/components/Spinner";
+import { AdminContext } from "@/app/Type";
 
 export default function AdminDashboard() {
   const {
@@ -26,6 +27,7 @@ export default function AdminDashboard() {
     status,
     isLoading,
   } = useAdmin() as AdminContext;
+
   const [show, setShow] = useState(false);
   const handleClick = () => {
     setShow(!show);

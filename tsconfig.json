@@ -38,14 +38,16 @@
     "app/admin/dashboard/[id]/AdminContext.jsx",
     "app/admin/dashboard/[id]/components/Notification.jsx",
     "app/organization/dashboard/[id]/components/DashboardSide.tsx",
-    "app/api/v1/organization/createOrganization/route.js",
+    "app/api/v1/organization/createOrganization/route.ts",
     "app/organization/dashboard/[id]/OrgContext.tsx",
-    "app/api/v1/organization/updateOrganization/[...id]/route.jsx",
+    "app/api/v1/organization/updateOrganization/[...id]/route.tsx",
     "components/List.jsx",
     "models/userModel.js",
 
     "app/api/v1/organization/denyOrganization/[...id]/route.jsx",
-    "app/api/v1/post/getOnePost/[...id]/route.jsx"
+    "app/api/v1/post/getOnePost/[...id]/route.jsx",
+    "app/event/dashboard/[id]/components/QRcodeScanner.jsx",
+    "app/event/dashboard/[id]/components/QrReader.jsx"
   ],
   "exclude": ["node_modules"]
 }

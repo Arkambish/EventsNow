@@ -41,6 +41,12 @@ export default function Template1({ setIsTemplate1 }: Props) {
       }),
     });
     const data = await res.json();
+
+    if (data.message === "Please complete your organization details") {
+      error("Please complete your organization bank details");
+      return;
+    }
+
     if (data.message === "No event found") {
       error("There was an error publishing the event");
       return;
@@ -58,7 +64,7 @@ export default function Template1({ setIsTemplate1 }: Props) {
         id="static-modal"
         data-modal-backdrop="static"
         aria-hidden="true"
-        className=" overflow-y-auto overflow-x-hidden  fixed  z-50 justify-center items-center w-full inset-0 md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className=" overflow-y-auto overflow-x-hidden  fixed  z-50 justify-center items-center w-full inset-0 md:inset-0  max-h-full"
       >
         <div className="border-[1px] divide-x-2 md:mb-10 mb-0  rounded-xl bg-white w-4/5 2xl:w-1/5 lg:w-11/12 md:w-11/12  relative top-10 left-10 md:top-[5%] md:left-[5%]   ">
           <div className="text-black p-3 text-xl ">

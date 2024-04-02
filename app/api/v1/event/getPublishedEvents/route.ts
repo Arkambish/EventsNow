@@ -4,16 +4,24 @@ import { NextResponse } from "next/server";
 
 import Event from "@/models/eventModel";
 import connectMongoDB from "@/lib/mongo/mongodb";
+import { formatDate } from "@/util/helper";
+import { EventType } from "@/app/Type";
 
 export const GET = async (req: Request) => {
   try {
     await connectMongoDB();
 
-    const futureEvents = await Event.find({
+    const isPublishedEvent = await Event.find({
       isPublished: true,
     });
 
-    if (futureEvents.length === 0) {
+    const currentDate = formatDate(new Date());
+
+    const futureEvents = isPublishedEvent.filter((event: EventType) => {
+      return new Date(event.eventEndDate) > new Date(currentDate);
+    });
+
+    if (futureEvents === undefined) {
       return new NextResponse(JSON.stringify([]), {
         status: 404,
       });

@@ -2,28 +2,14 @@ import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import Image from "next/image";
 import CreatePost from "./post/CreatePost";
-import { User } from "@/app/organization/dashboard/[id]/Type";
 import { getSession } from "next-auth/react";
 import { EventContextType, UseEventContext } from "../EventDashContext";
 import { MdArrowBack } from "react-icons/md";
 import GeneralUpdate from "./GeneralUpdate";
 
 export default function SendEmail() {
-  const [createPost, setCreatePost] = useState(false);
-  const [user, setUser] = useState<unknown>(null);
   const [generalUpdate, setGenaralUpdate] = useState(false);
   const { setStatus } = UseEventContext() as EventContextType;
-
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const user = await getSession();
-  //     console.log(user);
-  //     if (user) {
-  //       setUser(user);
-  //     }
-  //   };
-  //   getUser();
-  // }, []);
 
   return (
     <Container>

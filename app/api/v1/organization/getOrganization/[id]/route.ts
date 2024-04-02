@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 import Organization from "@/models/organizationModel";
 import connectMongoDB from "@/lib/mongo/mongodb";
 
-export async function POST(req: Request) {
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
   try {
-    const id = await req.json();
+    const id = params.id;
 
     connectMongoDB();
     const organization = await Organization.findOne({ _id: id });

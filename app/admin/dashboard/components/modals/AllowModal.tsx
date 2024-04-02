@@ -1,18 +1,19 @@
 import React from "react";
 import axios from "axios";
-import { Organization } from "@/app/admin/Type";
+// import { Organization } from "@/app/admin/Type";
 import { useAdmin } from "../../AdminContextFile";
 import { success } from "@/util/Toastify";
 import { error } from "@/util/Toastify";
+import { OrganizationType } from "@/app/Type";
 
 interface Data {
-  organization: Organization;
+  organization: OrganizationType;
 }
 
 type ContextData = {
-  setOrganization: React.Dispatch<React.SetStateAction<Organization[]>>;
-  setNotification: React.Dispatch<React.SetStateAction<Organization[]>>;
-  notification: Organization[];
+  setOrganization: React.Dispatch<React.SetStateAction<OrganizationType[]>>;
+  setNotification: React.Dispatch<React.SetStateAction<OrganizationType[]>>;
+  notification: OrganizationType[];
 };
 
 const AllowModalContent = ({ organization }: Data) => {
@@ -21,14 +22,14 @@ const AllowModalContent = ({ organization }: Data) => {
 
   const handleAllow = async () => {
     try {
-      const res = await axios.put(
+      const allowOrgRes = await axios.put(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/updateOrganization/${organization._id}`,
         {
           isActive: true,
         }
       );
 
-      if (res.status !== 200) {
+      if (allowOrgRes.status !== 200) {
         error("Failed to Allow the organization");
         return;
       }
@@ -36,10 +37,23 @@ const AllowModalContent = ({ organization }: Data) => {
       const newNotification = notification.filter(
         (org) => org._id !== organization._id
       );
-      success("Organization Allowed successfully");
-      setNotification(newNotification);
 
-      setOrganization((prev: Organization[]) => [...prev, organization]);
+      success("Organization Allowed successfully");
+      setNotification(newNotification); // Remove approved organization from the notification list
+      setOrganization((prev: OrganizationType[]) => [...prev, organization]); // Add approved organization to the organization list
+
+      const sendEmailRes = await axios.post(
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/organizationAproveEmail`,
+        {
+          email: organization.email,
+          name: organization.organizationName,
+        }
+      );
+
+      if (sendEmailRes.status !== 200) {
+        error("Failed to send email to the organization");
+        return;
+      }
     } catch (error) {
       console.error("Error updating......", error);
     }

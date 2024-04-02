@@ -7,6 +7,25 @@ export type UserType = {
   role: string;
   wishListId: string[];
   registeredEvents: string[];
+  mobileNumber: Number;
+};
+export type UserDetails = {
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  image: string;
+  __v: Number;
+};
+
+export type AttendanceType = {
+  quantity: number;
+  _id: string;
+  userId: UserType;
+  eventId: string;
+  attendance: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type PostType = {
@@ -40,6 +59,7 @@ export type EventType = {
   eventEndDate: string;
   endTime: string;
   __v: number;
+  income: number;
 };
 
 export type OrganizationType = {
@@ -138,7 +158,7 @@ export interface EventContextType {
 
   setEventEndDate: React.Dispatch<React.SetStateAction<string>>;
   eventEndDate: string;
-
+  attendances: AttendanceType[];
   setEventDashboardImage: React.Dispatch<React.SetStateAction<string>>;
   setEventCoverImage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -246,8 +266,8 @@ export interface ProfContext {
   handleWishList: voidFunc;
   handleMyEvents: voidFunc;
   handlemyTickets: voidFunc;
-  setUserDeatails: React.Dispatch<React.SetStateAction<UserType>>;
-  userDeatails: UserType;
+  setUserDeatails: React.Dispatch<React.SetStateAction<UserDetails>>;
+  userDeatails: UserDetails;
   eventDetails: any;
   register: any;
   userImage: string;
@@ -285,3 +305,45 @@ export type OrganizationProps = {
 export interface ChildrenType {
   children: React.ReactNode;
 }
+
+
+export type VoidFunc = () => void;
+
+export interface ProfContext {
+  lname: string;
+  fname: string;
+  isLoading: boolean;
+  isSlideBar: boolean;
+  isDashboardOpen: boolean;
+  setIsSlideBar: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDashboardOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isActive: boolean;
+  setLname: React.Dispatch<React.SetStateAction<string>>;
+  setFname: React.Dispatch<React.SetStateAction<string>>;
+  passwordExists: boolean;
+  userId: any;
+
+  status: string;
+  handleSetting: VoidFunc;
+  handleProfile: VoidFunc;
+  handleWishList: VoidFunc;
+  handleMyEvents: VoidFunc;
+  handlemyTickets: VoidFunc;
+  setUserDeatails: React.Dispatch<React.SetStateAction<UserDetails>>;
+  userDeatails: UserDetails;
+  eventDetails: any;
+  register: any;
+  userImage: string;
+  setUserImage: React.Dispatch<React.SetStateAction<string>>;
+  registerEvent: RegisterEventType[];
+}
+
+export type Ticket = {
+  _id: string;
+  eventId: string;
+  price: number;
+  classType: string;
+  image: string;
+};
+

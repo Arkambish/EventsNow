@@ -1,8 +1,10 @@
-import { User } from "@/app/admin/Type";
+// import { User } from "@/app/admin/Type";
+import { UserType } from "@/app/Type";
 import { error, success } from "@/util/Toastify";
 import React from "react";
-interface MAkeAdminprops {
-  setUser: React.Dispatch<React.SetStateAction<User[]>>;
+
+interface makeAdminprops {
+  setUser: React.Dispatch<React.SetStateAction<UserType[]>>;
   userId: String;
   setMakeAdminModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -10,10 +12,10 @@ const MakeAdminModalContent = ({
   userId,
   setMakeAdminModal,
   setUser,
-}: MAkeAdminprops) => {
+}: makeAdminprops) => {
   const adminUser = async () => {
     try {
-      const response = await fetch(
+      const makeAdminRes = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/makeAdmin`,
         {
           method: "PUT",
@@ -21,15 +23,15 @@ const MakeAdminModalContent = ({
         }
       );
 
-      if (!response.ok) {
+      if (!makeAdminRes.ok) {
         error("Failed to make user an admin");
         return;
       }
 
       success("User is now an admin");
       setMakeAdminModal(false);
-      setUser((user: User[]) => {
-        const userChangers = user.map((user: User) => {
+      setUser((user: UserType[]) => {
+        const userChangers = user.map((user: UserType) => {
           if (user._id === userId) {
             user.role = "admin";
           }
@@ -37,8 +39,6 @@ const MakeAdminModalContent = ({
         });
         return userChangers;
       });
-
-      // (user.find((user) => user._id === userId)?.role = "admin")
     } catch (error) {
       console.error("Error make admin user:", error);
     }

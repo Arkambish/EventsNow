@@ -12,10 +12,13 @@ type OrganizationPermission = {
   globalPermission: string[];
   eventPermission: string[];
 };
+type Params = {
+  id: string;
+};
 
-export const POST = async (req: Request) => {
+export const GET = async (req: Request, { params }: { params: Params }) => {
   try {
-    const { id } = await req.json();
+    const id = params.id;
 
     connectMongoDB();
     const org = await Permission.find({ organizationId: id }).populate(

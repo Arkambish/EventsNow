@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useOrg } from "../OrgContext";
-import { Event } from "../Type";
+import { EventType } from "@/app/Type";
 
 interface ContentProps {
   revenue: number;
   ticketSold: number;
   isSlideBar: boolean;
-  events: Event[];
+  events: EventType[];
 }
 
 export default function Dashboard() {
@@ -60,11 +60,6 @@ export default function Dashboard() {
                     ))}
                   </>
                 )}
-                {/* <option selected>Choose an event</option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option> */}
               </select>
             </div>
           </div>

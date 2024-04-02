@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
-import { Organization } from "@/app/admin/Type";
 import { FaRegBuilding } from "react-icons/fa6";
 
 interface eventCard {
@@ -12,7 +11,6 @@ interface eventCard {
 export default function EventCardNew({ event, organization }: eventCard) {
   return (
     <div>
-      {/*  fgffjfjsbhfh khdkhddkb kds.h.fhhhhhhhhhhhh */}
       <div className="m-4 bg-[#D9D9D9] rounded-2xl shadow-xl max-w-sm  w-[250px] md:w-[500px] lg:w-[600px] lg:max-w-full lg:flex text-wrap">
         <div
           className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
