@@ -20,12 +20,7 @@ export default function MyTeam() {
   async function handleTeam() {
     setLoading(true);
     const res2 = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers`,
-      {
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ id }),
-      }
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers/${id}`
     );
 
     const organizationTeam: OrganizationTeamType[] = await res2.json();
