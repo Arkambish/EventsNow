@@ -14,8 +14,6 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
     setBtnState(selectedBtn);
   };
   const { register, registerEvent } = useProf() as ProfContext;
-  console.log("Eventtttttttttt");
-  console.log(registerEvent);
 
   return (
     <div className="flex h-screen flex-col items-center font-IBM pr-4 ml-5 ">
