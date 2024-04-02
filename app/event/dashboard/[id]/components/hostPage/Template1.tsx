@@ -1,13 +1,6 @@
-import Image from "next/image";
-import React, { memo, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MdPublish } from "react-icons/md";
-
 import { IoClose } from "react-icons/io5";
-import {
-  CldUploadWidget,
-  CloudinaryUploadWidgetInfo,
-  CloudinaryUploadWidgetResults,
-} from "next-cloudinary";
 import { error, success } from "@/util/Toastify";
 import Description from "@/app/event/host/[id]/components/Description";
 import CoverPhoto from "@/app/event/host/[id]/components/CoverPhoto";

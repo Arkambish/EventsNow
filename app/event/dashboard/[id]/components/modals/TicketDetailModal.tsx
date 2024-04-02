@@ -10,7 +10,6 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { error, success } from "@/util/Toastify";
 
 interface TicketDetailProps {
-  // event: Event;
   setTicketDetail: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -25,6 +24,8 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
     setAllTickets,
     id,
   } = UseEventContext() as EventContextType;
+
+  console.log (typeof newTicketPrice, newTicketPrice, newTicketClass, newTicketImage, setNewTicketPrice, setNewTicketClass, setNewTicketImage, setAllTickets, id);
 
   const createTicketHandlerLocal = async () => {
     try {
@@ -159,6 +160,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
                 );
               }}
             </CldUploadWidget>
+            
             <div className="flex">
               {newTicketImage.length > 0 && (
                 <div className=" mt-5 border-2 w-auto border-solId rounded-xl   ">

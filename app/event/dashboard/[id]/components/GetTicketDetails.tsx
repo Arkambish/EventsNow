@@ -3,11 +3,11 @@ import React from "react";
 import { useState } from "react";
 import Modal from "./ModalContext";
 import TicketDetailmodalContent from "./modals/TicketDetailModal";
-import { EventContextProvider } from "../EventDashContext";
 import Image from "next/image";
 
 export default function GetTicketDatils() {
-  const [showTicketDetail, setTicketDetail] = useState(false);
+  const [showTicketDetail, setTicketDetail] = useState<boolean>(false);
+  
   return (
     <div className=" justify-items-start flex ">
       <button
@@ -27,10 +27,8 @@ export default function GetTicketDatils() {
       </button>
 
       {showTicketDetail && (
-        <Modal title="Ticket Details" onClose={() => setTicketDetail(false)}>
-          {/* <EventContextProvider> */}
+        <Modal title="Ticket Details" onClose={() => setTicketDetail(false)}>      
           <TicketDetailmodalContent setTicketDetail={setTicketDetail} />
-          {/* </EventContextProvider> */}
         </Modal>
       )}
     </div>
