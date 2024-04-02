@@ -9,7 +9,7 @@ export async function PUT(req: Request) {
 
     const user = await User.findByIdAndUpdate(
       id,
-      { $addToSet: { registeredUser: registeredUser } },
+      { $addToSet: { registeredEvents: registeredUser } },
       { new: true }
     );
 
