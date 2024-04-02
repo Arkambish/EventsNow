@@ -2,7 +2,7 @@
 import { generateQRCodeImage } from "@/util/helper";
 import Image from "next/image";
 import React, { useState } from "react";
-import QRCodeScanner from "./Test1";
+
 
 interface Test {
   word: string;
@@ -29,11 +29,6 @@ export default function Test() {
     setQRImage(qrImageData);
   };
 
-  const handleScan = (data: any) => {
-    console.log("Scanned QR Code:", data);
-    // You can handle the scanned data here, such as sending it to a server or updating state
-  };
-
   return (
     <div className="">
       <div>
@@ -43,8 +38,6 @@ export default function Test() {
           <Image src={qrImage} alt="QR Code" width={50} height={50} />
         )}
       </div>
-      {/* <h1>Scan QR Code</h1>
-      <QRCodeScanner /> */}
     </div>
   );
 }

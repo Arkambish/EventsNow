@@ -1,7 +1,6 @@
 import React from "react";
 import { UseEventContext, EventContextType } from "../../EventDashContext";
 import Image from "next/image";
-
 import {
   CldUploadWidget,
   CloudinaryUploadWidgetInfo,
@@ -25,6 +24,8 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
     setAllTickets,
     id,
   } = UseEventContext() as EventContextType;
+
+  console.log (typeof newTicketPrice, newTicketPrice, newTicketClass, newTicketImage, setNewTicketPrice, setNewTicketClass, setNewTicketImage, setAllTickets, id);
 
   const createTicketHandlerLocal = async () => {
     try {

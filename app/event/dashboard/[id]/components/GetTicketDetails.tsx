@@ -7,6 +7,7 @@ import Image from "next/image";
 
 export default function GetTicketDatils() {
   const [showTicketDetail, setTicketDetail] = useState<boolean>(false);
+  
   return (
     <div className=" justify-items-start flex ">
       <button

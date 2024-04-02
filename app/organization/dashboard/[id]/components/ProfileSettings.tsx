@@ -23,7 +23,6 @@ const ProfileSettings = memo(function ProfileSettings({
   isEditing,
   setIsEditing,
 }: Details) {
-  // const [editedName, setEditedName] = useState<string>(organizationName || "");
   const { editedName, setEditedName } = useOrg() as Context;
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditedName(e.target.value);

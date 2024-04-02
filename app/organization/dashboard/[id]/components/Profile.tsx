@@ -3,14 +3,13 @@ import React from "react";
 
 import ProfCard from "./ProfCard";
 import { useOrg } from "../OrgContext";
-import { Event, Organization, Team } from "../Type";
-// import ProfileCard from "@/app/profile/[...id]/components/ProfileCard";
+import { EventType, OrganizationTeamType, OrganizationType } from "@/app/Type";
 
 interface contextProps {
   editedName: string;
-  team: Team[];
-  events: Event[];
-  organization: Organization;
+  team: OrganizationTeamType[];
+  events: EventType[];
+  organization: OrganizationType;
   organizationImage: string;
 }
 

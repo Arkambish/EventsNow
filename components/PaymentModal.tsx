@@ -1,8 +1,13 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import { useState } from "react";
+
 import crypto from "crypto";
 import { generateQRCodeImage } from "@/util/helper";
 import { error, success } from "@/util/Toastify";
+import { useParams, useRouter } from "next/navigation";
+import { getSession } from "next-auth/react";
+
 
 declare global {
   interface Window {
@@ -57,12 +62,39 @@ const PaymentModal = (props: any) => {
     country: props.country,
     hash: hash,
   };
+  const params = useParams<{ id: string }>();
+  const [userId, setUserId] = useState<string>("");
 
-  const value = {
-    useId: "1234",
-    eventId: "123445",
-    quantity: 4,
-  };
+  useEffect(() => {
+    const getUserId = async () => {
+      const session = await getSession();
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getUserId`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: session?.user?.email,
+            }),
+          }
+        );
+
+        if (!res.ok) {
+          error("Error fetching user id");
+        }
+
+        const data = await res.json();
+
+        setUserId(data.id);
+      } catch (e) {
+        error("Error fetching user id");
+      }
+    };
+    getUserId();
+  }, []);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -74,63 +106,47 @@ const PaymentModal = (props: any) => {
       window.payhere.onCompleted = async function onCompleted(
         paymentId: string
       ) {
-        const value = {
-          useId: "65f2b6a08dcf796e631062dc",
-          eventId: "65f2b6f98dcf796e631062fc",
-          ticket: [
-            {
-              class: "A",
-              quantity: 4,
-            },
-            {
-              class: "B",
-              quantity: 4,
-            },
-          ],
-        };
+        {
+          props.ticketArrTemp.map(async (ticket: string) => {
+            console.log("Ticket Type:", userId);
+            const value = {
+              useId: userId,
+              eventId: params.id,
+              class: { ticket },
+            };
 
-        const qrImg = await generateQRCodeImage(JSON.stringify(value));
-        // const image = await uploadToCloudinary(qrImg);
-        console.log("QR Code Image Data:", qrImg);
-        // console.log("QR Code Image :", image);
+            const qrImg = await generateQRCodeImage(JSON.stringify(value));
+            // const image = await uploadToCloudinary(qrImg);
+            console.log("QR Code Image Data:", qrImg);
+            // console.log("QR Code Image :", image);
 
-        // console.log(typeof orderId);
-        // console.log(typeof paymentId);
-        // console.log(typeof amount);
-        // console.log(typeof currency);
-        // console.log(typeof payment.first_name);
-        // console.log(typeof payment.last_name);
-        // console.log(typeof payment.email);
-        // console.log(typeof payment.phone);
-        // console.log(typeof payment.address);
-        // console.log(typeof payment.city);
-        // console.log(typeof payment.country);
+            const res = await fetch(
+              `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  qr: qrImg,
+                  userid: userId,
+                }),
+              }
+            );
 
-          
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              qr: qrImg,
-              userid: "65f2b6a08dcf796e631062dc",
-            }),
-          }
-        );
+            if (!res.ok) {
+              console.error("Error sending qr code");
+              error("Error sending qr code");
+              return;
+            }
 
-        if (!res.ok) {
-          console.error("Error sending qr code");
-          error("Error sending qr code");
+            const message = await res.json();
+            if (message === "No User  exists") {
+              error("No User exists");
+              return;
+            }
+          });
         }
-
-        const message = await res.json();
-        if (message === "No User  exists") {
-          error("No User exists");
-        }
-
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
           {
@@ -139,15 +155,15 @@ const PaymentModal = (props: any) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              id: "65f2b6f98dcf796e631062fc",
-              amount: 1000,
+              id: params.id,
+              amount: props.totalPrice,
             }),
           }
         );
 
         success("Payment completed");
-
-        console.log("success payment completed");
+        props.setIsActiveProceedTicketModal(false);
+        props.setTicketArrTemp("");
       };
 
       window.payhere.onDismissed = function onDismissed() {
@@ -165,7 +181,7 @@ const PaymentModal = (props: any) => {
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  }, [params.id, props.ticketArrTemp, props.totalPrice, userId, props]);
 
 
   function pay() {
@@ -179,9 +195,9 @@ const PaymentModal = (props: any) => {
     <>
       <button
         onClick={pay}
-        className="flex button w-20 p-[1px] bg-[#D47151] rounded-2xl items-center  "
+        className="flex button  px-4 py-1 bg-[#D47151] rounded-2xl items-center  "
       >
-        <div className="font-medium xl:text-lg text-md text-white text-left leading-tight ml-4">
+        <div className="font-medium xl:text-lg text-md text-white text-left leading-tight ">
           Pay Now
         </div>
       </button>

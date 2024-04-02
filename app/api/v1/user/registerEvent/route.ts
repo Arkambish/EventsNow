@@ -13,6 +13,8 @@ export async function PUT(req: Request) {
       { new: true }
     );
 
+    console.log(user);
+
     if (!user) {
       return new NextResponse("User not found", { status: 404 });
     }

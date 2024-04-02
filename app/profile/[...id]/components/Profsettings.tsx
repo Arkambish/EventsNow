@@ -1,5 +1,4 @@
 import React from "react";
-import { UserDetails, useProf } from "../ProfContext";
 
 interface Details {
   name: string;
@@ -7,11 +6,6 @@ interface Details {
   value?: string | number;
   setFname?: any;
 }
-type Detailss = {
-  fname: string;
-  userDeatails: UserDetails;
-  lname: string;
-};
 
 function Profsetti({ name, type, value, setFname }: Details) {
   return (
