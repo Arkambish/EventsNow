@@ -5,7 +5,6 @@ import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
 import { EventType } from "./Type";
-import EventsPage from "@/components/EventViewMode";
 
 async function getOutDateEvent() {
   try {

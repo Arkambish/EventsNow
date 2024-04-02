@@ -1,17 +1,50 @@
 import { Session } from "next-auth";
 import Image from "next/image";
 import { User } from "./Post";
+import { error } from "@/util/Toastify";
+import { success } from "@/util/Toastify";
+import { all } from "axios";
+import { Dispatch } from "react";
+type Comment = {
+  _id: string;
+  userImage: string;
+  postId: string;
+  description: string;
+  userId: string;
+};
 
 export default function CommentBtn({
   canDelete,
   userImage,
   description,
+  id,
+  setAllComment,
+  allComments
 }: {
   canDelete: boolean;
   userImage: string;
   description: string;
+  id: string;
+  setAllComment: any;
+  allComments: Comment[];
 }) {
-  const deleteCommentHandler = async () => {};
+
+  const deleteCommentHandler = async () => {
+    const res = await fetch(`/api/v1/post/deleteComment/${id}`,{
+      method: "DELETE",
+
+    });
+    if (!res.ok) {
+      error("Failed to delete comment");
+      return
+    
+  };
+  success("Comment deleted successfully");
+  setAllComment(allComments.filter((comment:Comment) => comment._id !== id));
+
+  return;
+}
+
   return (
     <div className="flex items-center gap-4 justify-between">
       <div className="flex items-center gap-4 ">

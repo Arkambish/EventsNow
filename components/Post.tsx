@@ -419,7 +419,10 @@ Post) {
               <div className=" mt-2 border-[1px] p-2 border-black rounded-lg h-20 overflow-auto mb-2 flex flex-col gap-2 ">
                 {allComment.map((comment) => (
                   <CommentBtn
+                    allComments={allComment}
+                    setAllComment={setAllComment}
                     canDelete={userId===comment.userId ? true : false}
+                    id={comment._id}
                     key={comment._id}
                     userImage={comment.userImage}
                     description={comment.description}

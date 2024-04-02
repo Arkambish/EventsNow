@@ -20,7 +20,8 @@ export default memo(function TicketModal({
   totalPrice,
   setIsActiveTicketModal
 }: {
-  setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+  
+  
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   ticketArrayTemp: string[];
   ticketTypes: Ticket[];
