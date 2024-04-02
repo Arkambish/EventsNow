@@ -1,8 +1,17 @@
-import React, { memo } from "react";
+
+import React, { memo, useEffect, useState } from "react";
+// import { UseEventContext } from "../../EventDashContext";
+import { EventContextType } from "@/app/Type";
+import { FaPrint } from "react-icons/fa6";
+
+import { useParams, useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PaymentModal from "@/components/PaymentModal";
 
+
 import { Ticket } from "@/app/Type";
+import { set } from "mongoose";
+
 
 
 export default memo(function TicketModal({
@@ -13,12 +22,16 @@ export default memo(function TicketModal({
   totalPrice,
   setIsActiveTicketModal
 }: {
+
+  setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   ticketArrayTemp: string[];
   ticketTypes: Ticket[];
   totalPrice: number;
   setIsActiveTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   setTicketArrayTemp: React.Dispatch<React.SetStateAction<string[]>>;
+
 }) {
   const paymentDetails = {
     items: "test",
@@ -102,7 +115,26 @@ export default memo(function TicketModal({
                   </tr>
                 </thead>
                 <tbody>
-                  
+
+                  {/* <tr>
+                    <td className="px-6 py-4">General</td>
+                    <td className="px-6 py-4">1000</td>
+                    <td className="px-6 py-4">10</td>
+                    <td className="px-6 py-4">10000</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4">VIP</td>
+                    <td className="px-6 py-4">5000</td>
+                    <td className="px-6 py-4">5</td>
+                    <td className="px-6 py-4">25000</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4">VVIP</td>
+                    <td className="px-6 py-4">10000</td>
+                    <td className="px-6 py-4">2</td>
+                    <td className="px-6 py-4">20000</td>
+                  </tr> */}
+
                   {ticketTypes.map((ticket, index) => (
                     <tr key={index}>
                       <td className="px-6 py-4">{ticket.classType}</td>

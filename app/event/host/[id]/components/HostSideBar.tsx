@@ -71,6 +71,7 @@ export default function HostSideBar({
 
   const id = useParams<{ id: string }>().id;
   const [allBuyTicketsArrayTemp, setAllBuyTicketsArrayTemp] = useState<
+
   string[]
 >([]);
 const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
@@ -426,10 +427,11 @@ useEffect(() => {
           </div>
         </button>
         {isActiveTicketModal && (
-          // <TicketModal setIsActvieTicketModal={setIsActvieTicketModal} />
+
           <ShowTicketsForUserModal
-          totalPrice={totalTicketPrice}
-          setTotalPrice={setTotalTicketPrice}
+            totalPrice={totalTicketPrice}
+            setTotalPrice={setTotalTicketPrice}
+
             setIsActiveTicketModal={setIsActiveTicketModal}
             setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}
             ticketArrayTemp={allBuyTicketsArrayTemp}
@@ -440,11 +442,13 @@ useEffect(() => {
         )}
         {isActiveProceedTicketModal && (
           <TicketModal
+
           setTicketArrayTemp={setAllBuyTicketsArrayTemp}
           setIsActiveTicketModal={setIsActiveTicketModal}
           totalPrice={totalTicketPrice}
           ticketTypes={allTicketTypes}
           ticketArrayTemp={allBuyTicketsArrayTemp}
+
             setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}
           />
         )}

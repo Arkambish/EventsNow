@@ -53,7 +53,7 @@ function OrgContextProvider({ children }: ChildrenType) {
   const [globalPermission, setGlobalPermission] = useState<string[]>([]);
   const { setOrganizationId } = useAuth() as AuthContext;
   const [selectEventForPermission, setSelectEventForPermission] =
-    useState<Event | null>(null);
+    useState<EventType | null>(null);
   const [organizationImage, setOrganizationImage] = useState<string>("");
   const id: string | any = params.id;
   const [eventPermission, setEventPermission] = useState<EventPermission[]>([]);
@@ -67,6 +67,7 @@ function OrgContextProvider({ children }: ChildrenType) {
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganization/${params.id}`
           );
+          console.log(res.ok, "res.ok");
 
           if (!res.ok) {
             router.push("/404");
@@ -93,6 +94,7 @@ function OrgContextProvider({ children }: ChildrenType) {
           const res2 = await fetch(
             `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers/${params.id}`
           );
+          console.log(res2.ok, "res2.ok");
 
           const organizationUser: OrganizationTeamType[] = await res2.json();
 
@@ -107,6 +109,7 @@ function OrgContextProvider({ children }: ChildrenType) {
           const res3 = await fetch(
             `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationEvent/${params.id}`
           );
+
 
           const organizationEvent: EventType[] = await res3.json();
           setEvents(organizationEvent);

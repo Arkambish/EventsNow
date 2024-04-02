@@ -50,7 +50,12 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
       }
       const newData = await res.json();
       console.log(newData);
-      setAllTickets((prev) => [...prev, newData.ticket]);
+
+      setAllTickets((prev) => {
+        if (!prev) return [newData.ticket];
+        else return [...prev, newData.ticket];
+      });
+
       success("Ticket created successfully");
       setTicketDetail(false);
     } catch (err) {

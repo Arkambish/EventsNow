@@ -5,8 +5,10 @@ import { useState } from "react";
 import crypto from "crypto";
 import { generateQRCodeImage } from "@/util/helper";
 import { error, success } from "@/util/Toastify";
+
 import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
+
 
 
 declare global {
@@ -182,7 +184,9 @@ const PaymentModal = (props: PaymentModalProps) => {
 
         success("Payment completed");
         props.setIsActiveProceedTicketModal(false);
-        props.setTicketArrTemp([]);
+
+        props.setTicketArrTemp("");
+
       };
 
       window.payhere.onDismissed = function onDismissed() {
@@ -201,6 +205,7 @@ const PaymentModal = (props: PaymentModalProps) => {
       document.body.removeChild(script);
     };
   }, [params.id, props.ticketArrTemp, props.totalPrice, userId, props]);
+
 
 
   function pay() {

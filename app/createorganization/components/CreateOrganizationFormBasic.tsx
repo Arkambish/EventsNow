@@ -1,15 +1,9 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "react-phone-number-input/style.css";
-import { z } from "zod";
+import { SafeParseReturnType, ZodObject, number, z } from "zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-// import firebase from "firebase/compat/app";
-// import { firebaseConfig } from "../../../services/FirebaseConfig";
-// import "firebase/compat/storage";
-
-// firebase.initializeApp(firebaseConfig);
-
 import { error, success } from "../../../util/Toastify";
 import {
   Dropdown,
@@ -20,51 +14,88 @@ import {
 import { getSession } from "next-auth/react";
 import { OrganizationProps } from "@/components/Navbar/NavBar";
 import { useAuth } from "@/app/AuthContext";
+import { AuthContext } from "@/app/Type";
 import {
   CldUploadWidget,
   CloudinaryUploadWidgetInfo,
   CloudinaryUploadWidgetResults,
 } from "next-cloudinary";
-import { tr } from "date-fns/locale";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { Session } from "next-auth";
+import { Router } from "next/router";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { NextResponse } from "next/server";
+import { ca } from "date-fns/locale";
+
+type OrganizationValidationTypes = ZodObject<{
+  fullName: z.ZodString;
+  numberType: z.ZodString;
+  number: z.ZodString;
+  companyName: z.ZodString;
+  organizationName: z.ZodString;
+  address: z.ZodString;
+  phoneNumber: z.ZodString;
+  email: z.ZodString;
+  postImageLink: z.ZodString;
+}>;
+type OrganizationDataType = {
+  fullName: string;
+  numberType: string;
+  number: string;
+  companyName: string;
+  organizationName: string;
+  address: string;
+  phoneNumber: string;
+  email: string;
+  postImageLink: string;
+};
 
 export default function CreateOrganizationFormBasic() {
-  const [fullName, setFullName] = useState("");
-  const [number, setNumber] = useState("");
-  const [numberType, setNumberType] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [address, setAddress] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [organizationName, setOrganizationName] = useState("");
-  const [previewImage, setPreviewImage] = useState("");
+  const [fullName, setFullName] = useState<string>("");
+  const [number, setNumber] = useState<string>("");
+  const [numberType, setNumberType] = useState<string>("");
+  const [companyName, setCompanyName] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [organizationName, setOrganizationName] = useState<string>("");
 
-  const [postImage, setPostImage] = useState([] as any);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { organization, setOrganization }: any = useAuth();
+  const router: AppRouterInstance = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const { setOrganization } = useAuth() as AuthContext;
 
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState<string>("");
 
   const getUserId = async () => {
-    const session = await getSession();
+    const session: null | Session = await getSession();
     if (!session) {
       return null;
     }
     const email: string | null | undefined = session.user?.email;
 
-    const res = fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/user/getUserId`, {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify({ email }),
-    });
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getUserId`,
+        {
+          method: "POST",
+          mode: "cors",
+          body: JSON.stringify({ email }),
+        }
+      );
+      if (!res.ok) {
+        error("There is an error for registration");
+        return null;
+      }
 
-    const { id } = await res.then((res) => res.json());
-    return id;
+      const id = await res.json();
+      return id;
+    } catch (e) {
+      error(e + "There is an error for registration");
+      return null;
+    }
   };
 
-  const validateOrganization = z.object({
+  const validateOrganization: OrganizationValidationTypes = z.object({
     fullName: z
       .string()
       .min(1, "Enter your full name ")
@@ -86,128 +117,127 @@ export default function CreateOrganizationFormBasic() {
   });
 
   async function sendOrganizationData(e: any) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const userId = await getUserId();
+      const userId = await getUserId();
 
-    setIsSubmitting(true);
+      console.log(userId);
 
-    // const storageRef = firebase.storage().ref();
-    // const fileRef = storageRef.child(`eventCover-${organizationName}`);
-    // const postImageLink = await fileRef
-    //   .put(postImage)
-    //   .then((snapshot) =>
-    //     snapshot.ref.getDownloadURL().then((downloadURL) => downloadURL)
-    //   );
+      setIsSubmitting(true);
 
-    const data = {
-      fullName,
-      numberType,
-      number,
-      companyName,
-      organizationName,
-      address,
-      phoneNumber,
-      email,
-      postImageLink: profileImage,
-    };
+      const data: OrganizationDataType = {
+        fullName,
+        numberType,
+        number,
+        companyName,
+        organizationName,
+        address,
+        phoneNumber,
+        email,
+        postImageLink: profileImage,
+      };
+      console.log(data);
 
-    const result = validateOrganization.safeParse(data);
+      const result = validateOrganization.safeParse(data);
+      console.log(result.success);
+      if (result.success) {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/createOrganization`,
+          {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(data),
+          }
+        );
 
-    if (result.success) {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/createOrganization`,
-        {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify(data),
+        console.log(res.ok);
+
+        if (!res.ok) {
+          error("There is an error for registration");
+          setIsSubmitting(false);
+          return null;
         }
-      );
 
-      if (!res.ok) {
-        error("There is an error for registration");
-        setIsSubmitting(false);
-        return null;
-      }
+        const id = await res.json();
 
-      const id = await res.json();
+        const oraganizationDataForNavBarProfile = {
+          id: id.id,
+          name: organizationName,
+          image: profileImage,
+        } as OrganizationProps;
 
-      const oraganizationDataForNavBarProfile = {
-        id: id.id,
-        name: organizationName,
-        image: profileImage,
-      } as OrganizationProps;
+        setOrganization((data: OrganizationProps[]) => [
+          ...data,
+          oraganizationDataForNavBarProfile,
+        ]);
 
-      setOrganization((data: OrganizationProps[]) => [
-        ...data,
-        oraganizationDataForNavBarProfile,
-      ]);
+        console.log(id.id, userId);
 
-      // setOrganization(oraganizationDataForNavBarProfile);
+        const organizerRes = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/createOrganizer`,
+          {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify({
+              organizationId: id.id,
+              userId: userId.id,
+              globalPermission: ["allPermission"],
+            }),
+          }
+        );
+        console.log(organizerRes.ok);
 
-      const organizerRes = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/createOrganizer`,
-        {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify({
-            organizationId: id.id,
-            userId,
-            globalPermission: ["allPermission"],
-          }),
+        if (!organizerRes.ok) {
+          error("There is an error for registration");
+          setIsSubmitting(false);
+          return null;
         }
-      );
 
-      if (!organizerRes.ok) {
-        error("There is an error for registration");
+        success("registration data sent succesfully");
+
+        setFullName("");
+        setNumberType("");
+        setNumber("");
+        setCompanyName("");
+        setAddress("");
+        setPhoneNumber("");
+        setEmail("");
+        setOrganizationName("");
+        setProfileImage("");
+
         setIsSubmitting(false);
-        return null;
+
+        router.push(`/organization/dashboard/${id.id}`);
+        return;
+      } else {
+        const formattedError = result.error.format();
+
+        if (formattedError.fullName?._errors) {
+          error(String(formattedError.fullName?._errors));
+        } else if (formattedError.numberType) {
+          error(String(formattedError.numberType?._errors));
+        } else if (formattedError.number) {
+          error(String(formattedError.number?._errors));
+        } else if (formattedError.companyName) {
+          error(String(formattedError.companyName?._errors));
+        } else if (formattedError.organizationName) {
+          error(String(formattedError.organizationName?._errors));
+        } else if (formattedError.address) {
+          error(String(formattedError.address?._errors));
+        } else if (formattedError.phoneNumber) {
+          error(String(formattedError.phoneNumber?._errors));
+        } else if (formattedError.email) {
+          error(String(formattedError.email._errors));
+        } else if (formattedError.postImageLink) {
+          error(String(formattedError.postImageLink._errors));
+        } else error("an unknown error occur in validation process");
       }
 
-      success("registration data sent succesfully");
-
-      setFullName("");
-      setNumberType("");
-      setNumber("");
-      setCompanyName("");
-      setAddress("");
-      setPhoneNumber("");
-      setEmail("");
-      setOrganizationName("");
-      setPreviewImage("");
-
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
       setIsSubmitting(false);
-
-      router.push(`/organization/dashboard/${id.id}`);
-      return;
-    } else {
-      const formattedError = result.error.format();
-
-      if (formattedError.fullName?._errors) {
-        error(String(formattedError.fullName?._errors));
-      } else if (formattedError.numberType) {
-        error(String(formattedError.numberType?._errors));
-      } else if (formattedError.number) {
-        error(String(formattedError.number?._errors));
-      } else if (formattedError.companyName) {
-        error(String(formattedError.companyName?._errors));
-      } else if (formattedError.organizationName) {
-        error(String(formattedError.organizationName?._errors));
-      } else if (formattedError.address) {
-        error(String(formattedError.address?._errors));
-      } else if (formattedError.phoneNumber) {
-        error(String(formattedError.phoneNumber?._errors));
-      } else if (formattedError.email) {
-        error(String(formattedError.email._errors));
-      } else if (formattedError.postImageLink) {
-        error(String(formattedError.postImageLink._errors));
-      } else error("an unknown error occur in validation process");
+    } catch (e) {
+      error(e + "There is an error for registration");
     }
-
-    setIsSubmitting(false);
   }
 
   return (
@@ -341,9 +371,6 @@ export default function CreateOrganizationFormBasic() {
         }}
         options={{
           tags: ["organization image"],
-          // publicId: `${organizationName}/${Date.now()}`,
-          // publicId: "b2c",
-
           sources: ["local"],
           googleApiKey: "<image_search_google_api_key>",
           showAdvancedOptions: false,
@@ -382,15 +409,6 @@ export default function CreateOrganizationFormBasic() {
       >
         {({ open }) => {
           return (
-            // <Button
-            //   variant="default"
-            //   className="rounded-full mt-5 ml-3"
-            //   onClick={() => {
-            //     open();
-            //   }}
-            // >
-            //   <Camera />
-            // </Button>
             <button
               onClick={() => {
                 open();

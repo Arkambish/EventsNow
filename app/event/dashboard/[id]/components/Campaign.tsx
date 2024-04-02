@@ -7,7 +7,7 @@ import { getSession } from "next-auth/react";
 import { EventContextType, UseEventContext } from "../EventDashContext";
 
 export default function Campaign() {
-  const [createPost, setCreatePost] = useState(false);
+  const [createPost, setCreatePost] = useState<boolean>(false);
   const [user, setUser] = useState<unknown>(null);
   const { setStatus } = UseEventContext() as EventContextType;
 
