@@ -272,7 +272,7 @@ export interface ProfContext {
   register: any;
   userImage: string;
   setUserImage: React.Dispatch<React.SetStateAction<string>>;
-  registerEvent: RegisterEventType[];
+  registerEvent: EventType[];
 }
 
 export type RegisterEventType = {
@@ -306,7 +306,6 @@ export interface ChildrenType {
   children: React.ReactNode;
 }
 
-
 export type VoidFunc = () => void;
 
 export interface ProfContext {
@@ -336,7 +335,9 @@ export interface ProfContext {
   register: any;
   userImage: string;
   setUserImage: React.Dispatch<React.SetStateAction<string>>;
-  registerEvent: RegisterEventType[];
+  registerEvent: EventType[];
+  ticket: Ticket;
+  setTicket: React.Dispatch<React.SetStateAction<Ticket>>;
 }
 
 export type Ticket = {
@@ -346,4 +347,3 @@ export type Ticket = {
   classType: string;
   image: string;
 };
-
