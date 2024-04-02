@@ -9,8 +9,6 @@ import { error, success } from "@/util/Toastify";
 import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
 
-
-
 declare global {
   interface Window {
     payhere: any;
@@ -35,7 +33,6 @@ type PaymentModalProps = {
   setTicketArrTemp: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-
 const PaymentModal = (props: PaymentModalProps) => {
   const scriptRef = useRef<any>();
 
@@ -53,7 +50,7 @@ const PaymentModal = (props: PaymentModalProps) => {
     .update(merchantSecret)
     .digest("hex")
     .toUpperCase();
-  let amountFormatted = (amount)
+  let amountFormatted = amount
     .toLocaleString("en-us", { minimumFractionDigits: 2 })
     .replaceAll(",", "");
 
@@ -62,7 +59,6 @@ const PaymentModal = (props: PaymentModalProps) => {
     .update(merchantId + orderId + amountFormatted + currency + hashedSecret)
     .digest("hex")
     .toUpperCase();
-
 
   var payment = {
     sandbox: true, // if the account is sandbox or real
@@ -185,8 +181,7 @@ const PaymentModal = (props: PaymentModalProps) => {
         success("Payment completed");
         props.setIsActiveProceedTicketModal(false);
 
-        props.setTicketArrTemp("");
-
+        props.setTicketArrTemp([""]);
       };
 
       window.payhere.onDismissed = function onDismissed() {
@@ -206,14 +201,11 @@ const PaymentModal = (props: PaymentModalProps) => {
     };
   }, [params.id, props.ticketArrTemp, props.totalPrice, userId, props]);
 
-
-
   function pay() {
     console.log("before");
     window.payhere.startPayment(payment);
     console.log("after");
   }
-
 
   return (
     <>

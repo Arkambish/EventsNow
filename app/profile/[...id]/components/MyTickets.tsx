@@ -20,6 +20,7 @@ export default function MyTickets() {
           {ticket.length > 0 ? (
             ticket.map((ticket: any) => (
               <TicketMockup
+                key={ticket._id}
                 image={ticket.image}
                 type={ticket.classType}
                 price={ticket.price}
