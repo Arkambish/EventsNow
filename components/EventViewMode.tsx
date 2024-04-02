@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { HiOutlineViewGrid, HiOutlineViewList } from "react-icons/hi";
-
 import EventCard from "@/components/EventCard";
 import Pagination from "@mui/material/Pagination";
-import { Event } from "@/app/admin/Type";
 import { formatDate } from "@/util/helper";
 import EventListView from "./EventListView";
 import { EventType } from "@/app/Type";
@@ -16,34 +14,19 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
   const [sortBy, setSortBy] = useState("");
   const [eventsPerPage, setEventsPerPage] = useState(2);
 
-  function getEventsPerPage() {
-    if (window.innerWidth >= 1024) {
-      return 4;
-    } else if (window.innerWidth >= 768) {
-      return 3;
-    } else {
-      return 1;
-    }
-  }
-
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1440) {
-        setEventsPerPage(5); // Large screens
-      } else if (window.innerWidth >= 1280) {
-        setEventsPerPage(4); // Large screens
-      } else if (window.innerWidth >= 1024) {
-        console.log("medium screen", window.innerWidth);
-        setEventsPerPage(3); // Medium screens
+      if (document.documentElement.clientWidth >= 1448) {
+        setEventsPerPage(4);
+      } else if (document.documentElement.clientWidth >= 1024) {
+        setEventsPerPage(3); // Large screens
+      } else if (document.documentElement.clientWidth >= 768) {
+        setEventsPerPage(2); // Medium screens
       } else {
-        setEventsPerPage(2); // Small screens or default
+        setEventsPerPage(1); // Small screens
       }
     };
     handleResize();
-    // window.addEventListener("resize", handleResize);
-    // return () => {
-    //   window.removeEventListener("resize", handleResize);
-    // };
   }, []);
 
   const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

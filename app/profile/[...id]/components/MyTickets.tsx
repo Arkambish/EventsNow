@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import ProfileDetails from "./ProfileDetails";
-import Upcoming_Events from "@/components/Upcoming_Events";
-import Org_RequestHandle from "./Org_RequestHandle";
-import EventHost from "@/components/EventHost";
-import MyEventCard from "./MyEventCard";
+
 import EmptyStateComponent from "@/components/EmptyStateComponent";
 export default function MyTickets() {
   return (
@@ -13,7 +9,7 @@ export default function MyTickets() {
           My Tickets
         </div>
         <div className="mt-10 mx-10">
-          <EmptyStateComponent message="No ticket create yet" />
+          <EmptyStateComponent message="No ticket created yet" />
           {/* <MyEventCard
             id="1"
             OrgName={"Stein Studios "}

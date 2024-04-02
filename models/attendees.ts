@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 
 const AttendantSchema = new mongoose.Schema(
   {
-    quantity: {
-      type: Number,
+    ticketType: {
+      type: String,
       required: [true, "Please enter quantity"],
     },
     eventId: {

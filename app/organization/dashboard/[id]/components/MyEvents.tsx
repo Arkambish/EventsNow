@@ -1,17 +1,11 @@
 import React from "react";
-
 import { useOrg } from "../OrgContext";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
-import { Event } from "../Type";
 import EventCardOrgDash from "./EventCardOrgDash";
-
-interface contextProps {
-  isSlideBar: boolean;
-  events: Event[];
-}
+import { OrgContext } from "@/app/Type";
 
 export default function MyEvents() {
-  const { events, isSlideBar } = useOrg() as contextProps;
+  const { events, isSlideBar } = useOrg() as OrgContext;
 
   return (
     <div className="flex rounded-lg  md:ml-2 pl-2 shadow-3xl bg-[#fff] pt-8 md:pl-12 flex-col justify-start items-start gap-12">
@@ -30,14 +24,6 @@ export default function MyEvents() {
             <EmptyStateComponent message="No event in the organization" />
           ) : (
             events.map((event) => (
-              // <EventCardNewOrg
-              //   key={event._id}
-              //   event="nadagama"
-              //   date="2002-2-1"
-              //   time="9.00"
-              //   location="matara"
-              // />
-
               <EventCardOrgDash
                 id={event._id}
                 key={event._id}

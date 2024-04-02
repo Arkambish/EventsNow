@@ -1,5 +1,4 @@
 "use client";
-import { voidFunc } from "@/app/organization/dashboard/[id]/Type";
 
 import React, {
   createContext,
@@ -13,7 +12,12 @@ import { useParams, useRouter } from "next/navigation";
 import { AuthContext, useAuth } from "@/app/AuthContext";
 
 import { Post } from "../../host/[id]/SelectTemplate";
-import { AttendanceType, EventType } from "@/app/Type";
+
+import { set } from "mongoose";
+import { ca, ro } from "date-fns/locale";
+import { error, success } from "@/util/Toastify";
+import { AttendanceType, EventType, voidFunc } from "@/app/Type";
+
 
 export interface EventContextType {
   id: String;
@@ -75,6 +79,9 @@ export interface EventContextType {
   setNewTicketPrice: React.Dispatch<React.SetStateAction<number>>;
   setNewTicketClass: React.Dispatch<React.SetStateAction<string>>;
   setNewTicketImage: React.Dispatch<React.SetStateAction<string>>;
+
+  createTicketHandler: voidFunc;
+
 }
 
 type EventUserDeatils = {
@@ -178,6 +185,30 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [newTicketClass, setNewTicketClass] = useState<string>("");
   const [newTicketImage, setNewTicketImage] = useState<string>("");
 
+  const createTicketHandler = async () => {
+    try {
+      const res = await fetch(`/api/v1/ticket/addTicket`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          price: newTicketPrice,
+          image: newTicketImage,
+          eventId: params.id,
+          classType: newTicketClass,
+        }),
+      });
+      if (!res.ok) {
+        error("Failed to create ticket");
+
+        return;
+      }
+      setAllTickets([...allTickets, await res.json()]);
+      success("Ticket created successfully");
+    } catch (e) {}
+  };
+
   useEffect(() => {
     const getEvent = async () => {
       const res = await fetch(`/api/v1/event/getOneEvent`, {
@@ -270,6 +301,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     }
     handleContext();
 
+
     async function getTickets() {
       const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
       if (!res.ok) {
@@ -280,6 +312,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     }
     getTickets();
   }, [params.id, router, setEventPublish, status, id]);
+
 
   return (
     <EventContext.Provider
@@ -343,6 +376,9 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         setNewTicketPrice,
         setNewTicketClass,
         setNewTicketImage,
+
+        createTicketHandler,
+
       }}
     >
       {children}

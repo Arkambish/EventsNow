@@ -2,7 +2,7 @@ import React, { memo, useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
-import { Item, User } from "./NavBar";
+import { Item } from "./NavBar";
 import Login from "../Login";
 import { MdContactless } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
@@ -10,17 +10,15 @@ import { RiLoginCircleFill } from "react-icons/ri";
 import { FaLock } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
+import { UserType } from "@/app/Type";
 
 interface props {
   isMenuOpen: boolean;
   userActive: boolean;
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   clickLogoutBtn: () => void;
-  user: User;
+  user: UserType;
 }
-
-// setIsMenuOpen={setIsMenuOpen}
-// isMenuOpen={isMenuOpen}
 
 const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
   isMenuOpen,

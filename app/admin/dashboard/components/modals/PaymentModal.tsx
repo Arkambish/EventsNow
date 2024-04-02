@@ -1,7 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
-// import { UseEventContext } from "../../EventDashContext";
-import { EventContextType, EventType } from "@/app/Type";
-import { FaPrint } from "react-icons/fa6";
+import { EventType } from "@/app/Type";
 import { formatDate } from "@/util/helper";
 import Pay from "../Pay";
 
@@ -12,8 +10,6 @@ export default memo(function PaymentModal({
   setShowPaymentModal: (value: boolean) => void;
   organizationId: string;
 }) {
-  // const { setStatus, attendances } = UseEventContext() as EventContextType;
-
   const [eventDetails, setEventDetails] = useState<EventType[]>([]);
   const [income, setIncome] = useState<number>(0);
   const [rate, setRate] = useState<number>();

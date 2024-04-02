@@ -4,6 +4,7 @@ import ContainerWithStroke from "./ContainerWithStroke";
 import Image from "next/image";
 import Template from "./hostPage/Template";
 import Template1 from "./hostPage/Template1";
+import Link from "next/link";
 export default function Hostpage() {
   const [showTemplate, setShowTemplate] = useState<boolean>(false);
   const [isTemplate1, setIsTemplate1] = useState<boolean>(false);
