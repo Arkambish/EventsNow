@@ -278,7 +278,7 @@ export interface ProfContext {
 export type RegisterEventType = {
   _id: string;
   eventName: string;
-  postImageLink: string;
+  dashboardImage: string;
 };
 // Auth context
 
@@ -305,7 +305,6 @@ export type OrganizationProps = {
 export interface ChildrenType {
   children: React.ReactNode;
 }
-
 
 export type VoidFunc = () => void;
 
@@ -346,4 +345,3 @@ export type Ticket = {
   classType: string;
   image: string;
 };
-

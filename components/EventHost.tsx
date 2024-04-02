@@ -3,6 +3,7 @@ import { ProfContext, RegisterEventType } from "@/app/Type";
 import MyEventCard from "@/app/profile/[...id]/components/MyEventCard";
 import React, { useState } from "react";
 import EmptyStateComponent from "./EmptyStateComponent";
+import { log } from "console";
 type RigisterEvent = {
   register: any[];
 };
@@ -13,6 +14,8 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
     setBtnState(selectedBtn);
   };
   const { register, registerEvent } = useProf() as ProfContext;
+  console.log("Eventtttttttttt");
+  console.log(registerEvent);
 
   return (
     <div className="flex h-screen flex-col items-center font-IBM pr-4 ml-5 ">
@@ -48,7 +51,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
                     id={event._id}
                     key={event._id}
                     OrgName={event.eventName}
-                    image={event.postImageLink}
+                    image={event.dashboardImage}
                     btn="Dashboard"
                   />
                 ))
