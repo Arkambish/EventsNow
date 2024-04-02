@@ -125,7 +125,8 @@ export interface EventContextType {
   handleSetting: voidFunc;
   isSideBar: boolean;
   setIsSideBar: (value: boolean) => void;
-
+  isPageBuilder: boolean;
+  setIsPageBuilder: React.Dispatch<React.SetStateAction<boolean>>;
   user: EventUserDeatils[];
   setStatus: React.Dispatch<React.SetStateAction<string>>;
   eventPosts: PostType[];
