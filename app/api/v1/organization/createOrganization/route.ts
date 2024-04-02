@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import connectMongoDB from "../../../../../lib/mongo/mongodb";
 import Organization from "../../../../../models/organizationModel";
-export async function POST(req) {
+export async function POST(req : Request) {
   const {
     fullName,
     numberType,
@@ -12,7 +12,7 @@ export async function POST(req) {
     phoneNumber,
     email,
     postImageLink,
-  } = await req.json();
+  }  = await req.json();
 
   connectMongoDB();
   const res = await Organization.create({

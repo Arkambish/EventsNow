@@ -7,8 +7,10 @@ import { useParams, useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PaymentModal from "@/components/PaymentModal";
 
+
 import { Ticket } from "@/app/Type";
 import { set } from "mongoose";
+
 
 export default memo(function TicketModal({
   setIsActiveProceedTicketModal,
@@ -18,12 +20,14 @@ export default memo(function TicketModal({
   totalPrice,
   setIsActiveTicketModal
 }: {
+  setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   ticketArrayTemp: string[];
   ticketTypes: Ticket[];
   totalPrice: number;
   setIsActiveTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   setTicketArrayTemp: React.Dispatch<React.SetStateAction<string[]>>;
+
 }) {
   const paymentDetails = {
     items: "test",

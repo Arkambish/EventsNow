@@ -36,13 +36,15 @@ export default function Myteam() {
             {user.length === 0 ? (
               <EmptyStateComponent message="No user in the event" />
             ) : (
-              user.map((user) => (
-                <TeamMemberCard
-                  key={user.email}
-                  name={user.name}
-                  email={user.email}
-                />
-              ))
+              // user &&(
+              // user.map((user) => (
+              //   <TeamMemberCard
+              //     key={user.email}
+              //     name={user.name}
+              //     email={user.email}
+              //   />
+              // )))
+              "case here "
             )}
           </div>
         </div>
