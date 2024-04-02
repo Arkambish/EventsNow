@@ -84,7 +84,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
                     id={e._id}
                     key={e._id}
                     OrgName={e.eventName}
-                    image={e.postImageLink}
+                    image={e.dashboardImage}
                     btn="Event"
                   />
                 ))
