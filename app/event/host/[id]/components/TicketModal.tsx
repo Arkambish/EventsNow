@@ -23,6 +23,7 @@ export default memo(function TicketModal({
   setIsActiveTicketModal
 }: {
 
+
   setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
 
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
