@@ -27,11 +27,9 @@ export default function EventRegisterFormBasic() {
   const [eventEndDate, setEventEndDate] = useState<Date>(new Date());
   const [startTime, setStartTime] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
-  const [duration, setDuration] = useState<string>("");
-  const [eventTimeZone, setEventTimeZone] = useState<string>("");
+  
   const [description, setDescription] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [previewImage, setPreviewImage] = useState<string>("");
   const params  =  useParams();
   const router : AppRouterInstance = useRouter();
 
@@ -39,7 +37,7 @@ export default function EventRegisterFormBasic() {
   const [dashboardImage, setdashboardImage] = useState<string>("");
 
   const validateEvent = z.object({
-    eventName: z.string().min(1, "Enter event name "),
+    eventName: z.string().min(1, "Enter event name ").max(10,"event name should be less than 10 characters"),
     selectedTab: z.string().min(1, { message: "select the event type" }),
     eventLocation: z.string().min(1, { message: " Enter event location " }),
     eventStartDate: z.date(),
@@ -96,10 +94,10 @@ export default function EventRegisterFormBasic() {
 
       setEventStartDate(new Date());
       setStartTime("");
-      setDuration("");
-      setEventTimeZone("");
       setDescription("");
-      setPreviewImage("");
+      setEndTime("");
+      setEventLocation("");
+      setEventEndDate(new Date());
       setEventName("");
       setcoverImage("");
       setdashboardImage("");

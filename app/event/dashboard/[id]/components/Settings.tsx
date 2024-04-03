@@ -23,8 +23,7 @@ export default function Settings() {
     eventStartTime,
 
     endTime,
-    eventVisibility,
-    setEventVisibility,
+
     setEventname,
     setEventLocation,
     setEventType,
@@ -42,23 +41,7 @@ export default function Settings() {
     setEventCoverImage,
   } = UseEventContext() as EventContextType;
 
-  //event visibility switch
-  const handleChange = (checked: boolean) => {
-    setEventVisibility(checked);
-  };
-
   const handleUpdate = async () => {
-    // console.log({
-    //   eventType,
-    //   eventname,
-    //   eventLocation,
-    //   eventDate,
-    //   eventStartTime,
-    //   duration,
-    //   endTime,
-    //   eventVisibility,
-    // });
-
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/event/updateEvent`,
@@ -66,16 +49,17 @@ export default function Settings() {
           method: "PUT",
           body: JSON.stringify({
             id: id,
+
             eventName: eventname,
             selectedTab: eventType,
             eventStartedDate: eventDate,
             startTime: eventStartTime,
+            endTime: endTime,
+            eventLocation: eventLocation,
 
             eventDashboardImage: eventDashboardImage,
             eventCoverImage: eventCoverImage,
-            eventEndDate,
-
-            eventVisibility: eventVisibility,
+            eventEndDate: eventEndDate,
           }),
         }
       );
@@ -97,22 +81,6 @@ export default function Settings() {
           <div className="  xl:flex content-start  font-mono pb-4 ">
             <div className=" text-custom-orange font-medium text-3xl">
               SETTINGS
-            </div>
-            <div className="flex w-full gap-4 xl:justify-end">
-              <div className="grid  content-center text-[#666] text-lg">
-                Event visibility
-              </div>
-              <Switch
-                className="grid  self-center"
-                onChange={handleChange}
-                checked={eventVisibility}
-                offColor="#E9E9E9"
-                onColor="#D47151"
-                offHandleColor="#D47151"
-                onHandleColor="#E9E9E9"
-                height={20}
-                width={40}
-              />
             </div>
           </div>
           <div className="text-[#666] grid gap-6 ">
@@ -364,7 +332,7 @@ export default function Settings() {
                           sources: ["local"],
                           googleApiKey: "<image_search_google_api_key>",
                           showAdvancedOptions: false,
-                          // cropping: true,
+                          cropping: true,
                           multiple: false,
                           showSkipCropButton: false,
                           croppingAspectRatio: 0.75,

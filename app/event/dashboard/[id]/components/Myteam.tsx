@@ -33,19 +33,28 @@ export default function Myteam() {
             </button>
           </div> */}
           <div className="mt-6 grid overflow-auto h-80 md:w-full">
-            {user.length === 0 ? (
+            {/* {user.length == 0 || user == null? (
               <EmptyStateComponent message="No user in the event" />
             ) : (
-              // user &&(
-              // user.map((user) => (
-              //   <TeamMemberCard
-              //     key={user.email}
-              //     name={user.name}
-              //     email={user.email}
-              //   />
-              // )))
-              "case here "
-            )}
+             (
+              user.map((user) => (
+                <TeamMemberCard
+                  key={user.email}
+                  name={user.name}
+                  email={user.email}
+                />
+              )))
+              
+            )} */}
+
+{(user && Array.isArray(user))? user.map((user) =>  (
+              <TeamMemberCard
+              key={user.email}
+              name={user.name}
+              email={user.email}
+            />
+            )): <EmptyStateComponent message="No user in the event" />} 
+            
           </div>
         </div>
       </Container>
