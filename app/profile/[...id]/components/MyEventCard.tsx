@@ -9,11 +9,15 @@ interface MyEventCard {
 }
 
 function MyEventCard({ image, OrgName, btn, id }: MyEventCard) {
+  const imageURL = image;
+
   return (
     <div className="max-w-lg w-fit lg:max-w-full lg:flex rounded-lg ">
       <div
         className="h-48 lg:h-auto lg:w-60 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-        style={{ backgroundImage: `url(${image})` }}
+        style={{
+          backgroundImage: `url(${imageURL})`,
+        }}
       ></div>
       <div className="bg-[#D9D9D9] lg:border-gray-400  rounded-b lg:rounded-b-none lg:rounded-r p-5  flex flex-col leading-normal">
         <div className="mb-8 justify-between flex  gap-10  items-start">

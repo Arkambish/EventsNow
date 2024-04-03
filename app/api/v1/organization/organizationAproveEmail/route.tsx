@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { transporter, mailOptions } from "@/config/nodemailer";
 import { OraganizationApprovalEmail } from "@/lib/email/OraganizationApprovalEmail";
+import Handlebars from "handlebars";
 
 export async function POST(req: Request) {
   const { email, name } = await req.json();

@@ -71,24 +71,23 @@ export default function HostSideBar({
 
   const id = useParams<{ id: string }>().id;
   const [allBuyTicketsArrayTemp, setAllBuyTicketsArrayTemp] = useState<
-  string[]
->([]);
-const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
-const[totalTicketPrice,setTotalTicketPrice]=useState<number>(0)
-const params = useParams<{ id: string }>();
+    string[]
+  >([]);
+  const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
+  const [totalTicketPrice, setTotalTicketPrice] = useState<number>(0);
+  const params = useParams<{ id: string }>();
 
-useEffect(() => {
-  async function getTicketTypes() {
-    const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
-    if (!res.ok) {
-      return;
+  useEffect(() => {
+    async function getTicketTypes() {
+      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+      setAllTicketTypes(data);
     }
-    const data = await res.json();
-    setAllTicketTypes(data);
-  }
-  getTicketTypes();
-}, [params.id]);
-
+    getTicketTypes();
+  }, [params.id]);
 
   async function userRegistrationForEventHandler() {
     const res = await fetch(
@@ -426,25 +425,24 @@ useEffect(() => {
           </div>
         </button>
         {isActiveTicketModal && (
-          // <TicketModal setIsActvieTicketModal={setIsActvieTicketModal} />
           <ShowTicketsForUserModal
-          totalPrice={totalTicketPrice}
-          setTotalPrice={setTotalTicketPrice}
+            totalPrice={totalTicketPrice}
+            setTotalPrice={setTotalTicketPrice}
             setIsActiveTicketModal={setIsActiveTicketModal}
             setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}
             ticketArrayTemp={allBuyTicketsArrayTemp}
             setTicketArrayTemp={setAllBuyTicketsArrayTemp}
             ticketTypes={allTicketTypes}
-
           />
         )}
         {isActiveProceedTicketModal && (
           <TicketModal
-          setTicketArrayTemp={setAllBuyTicketsArrayTemp}
-          setIsActiveTicketModal={setIsActiveTicketModal}
-          totalPrice={totalTicketPrice}
-          ticketTypes={allTicketTypes}
-          ticketArrayTemp={allBuyTicketsArrayTemp}
+            setIsActvieTicketModal={setIsActiveTicketModal}
+            setTicketArrayTemp={setAllBuyTicketsArrayTemp}
+            setIsActiveTicketModal={setIsActiveTicketModal}
+            totalPrice={totalTicketPrice}
+            ticketTypes={allTicketTypes}
+            ticketArrayTemp={allBuyTicketsArrayTemp}
             setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}
           />
         )}

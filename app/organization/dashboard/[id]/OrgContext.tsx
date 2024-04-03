@@ -75,7 +75,7 @@ function OrgContextProvider({ children }: ChildrenType) {
           }
 
           const organizationDetails: GettingOrganizationData = await res.json();
-          console.log(organizationDetails, "organizationDetails");
+
           if (organizationDetails.message === "No organization") {
             router.push("/404");
           }
@@ -97,12 +97,7 @@ function OrgContextProvider({ children }: ChildrenType) {
           console.log(res2.ok, "res2.ok");
 
           const organizationUser: OrganizationTeamType[] = await res2.json();
-          console.log(organizationUser, "organizationUser");
 
-          console.log(
-            organizationDetails.organization.email,
-            "organizationDetails.organization.email"
-          );
           const team: OrganizationTeamType[] = organizationUser.filter(
             (user: OrganizationTeamType) =>
               user.userData.email !== organizationDetails.organization.email
@@ -115,7 +110,7 @@ function OrgContextProvider({ children }: ChildrenType) {
             `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationEvent/${params.id}`
           );
 
-          console.log(res3.ok, "res3.ok");
+
           const organizationEvent: EventType[] = await res3.json();
           setEvents(organizationEvent);
 

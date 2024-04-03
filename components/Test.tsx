@@ -2,7 +2,7 @@
 import { generateQRCodeImage } from "@/util/helper";
 import Image from "next/image";
 import React, { useState } from "react";
-import QRCodeScanner from "./Test1";
+
 
 interface Test {
   word: string;

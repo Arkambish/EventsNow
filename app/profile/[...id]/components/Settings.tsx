@@ -19,7 +19,7 @@ import {
 } from "next-cloudinary";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import Image from "next/image";
-import { ZodNull } from "zod";
+import { ZodNull, z } from "zod";
 
 type Detailss = {
   userDeatails: UserDetails;
@@ -42,12 +42,12 @@ export default function Settings() {
   const [gender, setGender] = useState<string>("");
   const [tshirt, setTshirt] = useState<string>("");
   const [meal, setMeal] = useState<string>("");
+  const [profileImage, setProfileImage] = useState("");
 
   const toggleOtherInfo = () => {
     setShowOtherInfo(!showOtherInfo);
   };
 
-  const [profileImage, setProfileImage] = useState("");
   useEffect(
     function () {
       async function postOther() {
@@ -85,35 +85,110 @@ export default function Settings() {
     passwordExists,
     setUserImage,
   } = useProf() as Detailss;
-
+  const SettingsValidation = z.object({
+    firstName: z
+      .string()
+      .min(1, "Enter your first name")
+      .regex(/^[a-zA-Z ]*$/, {
+        message: "Cannot enter number or symbol for first name",
+      }),
+    lastName: z
+      .string()
+      .min(1, "Enter your last name")
+      .regex(/^[a-zA-Z ]*$/, {
+        message: "Cannot enter number or symbol for last name",
+      }),
+    // birthday: z.date().refine(
+    //   (date) => {
+    //     // Custom validation logic for date of birth
+    //     const currentDate = new Date();
+    //     const minimumDate = new Date("1900-01-01");
+    //     return date <= currentDate && date >= minimumDate;
+    //   },
+    //   { message: "Invalid date of birth" }
+    // ),
+    mobileNumber: z
+      .string()
+      .min(1, { message: "Enter your mobile number" })
+      .regex(/^[0-9]+$/, {
+        message: "Mobile number must contain only numbers",
+      }),
+    primaryEmail: z.string().email({ message: "Invalid email" }),
+    address: z.string().min(1, "Enter your primary address"),
+    gender: z.enum(["male", "female"]).optional(),
+    tshirt: z
+      .enum([
+        "extra small",
+        "small",
+        "medium",
+        "large",
+        "extra large",
+        "XXL",
+        "XXXL",
+      ])
+      .optional(),
+    meal: z
+      .string()
+      .min(1, "Enter your first name")
+      .regex(/^[a-zA-Z ]*$/, {
+        message: "Cannot enter number or symbol for meal",
+      }),
+  });
   const handleSave = async () => {
     try {
       const data = {
         firstName: fname,
         lastName: lname,
         birthday: birth,
-        mobileNumber: mobile,
+        mobileNumber: mobile?.toString(),
         primaryEmail: pemail,
         address: address,
         gender: gender,
         tshirtSize: tshirt,
         meal: meal,
       };
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/user/updateUser/${params.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
+      const result = SettingsValidation.safeParse(data);
+      if (result.success) {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/updateUser/${params.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+        if (!res.ok) {
+          error("Failed to save settings");
+          return;
         }
-      );
-      if (!res.ok) {
-        error("Failed to save settings");
-        return;
+        success("Data save successfully");
+      } else {
+        const formattedError = result.error.format();
+
+        if (formattedError.firstName?._errors) {
+          error(String(formattedError.firstName?._errors));
+        } else if (formattedError.lastName?._errors) {
+          error(String(formattedError.lastName?._errors));
+          // } else if (formattedError.birthday?._errors) {
+          //   error(String(formattedError.birthday?._errors));
+        } else if (formattedError.mobileNumber?._errors) {
+          error(String(formattedError.mobileNumber?._errors));
+        } else if (formattedError.primaryEmail?._errors) {
+          error(String(formattedError.primaryEmail?._errors));
+        } else if (formattedError.address?._errors) {
+          error(String(formattedError.address?._errors));
+        } else if (formattedError.gender?._errors) {
+          error(String(formattedError.gender?._errors));
+        } else if (formattedError.tshirt?._errors) {
+          error(String(formattedError.tshirt?._errors));
+        } else if (formattedError.meal?._errors) {
+          error(String(formattedError.meal?._errors));
+        } else {
+          error("An unknown error occurred in the validation process");
+        }
       }
-      success("Data save successfully");
     } catch (error) {
       console.error("Error saving settings:", error);
     }

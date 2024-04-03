@@ -16,7 +16,9 @@ type Params = {
   id: string;
 };
 
+
 export const GET = async (req: Request, { params }: { params: Params }) => {
+
   try {
     const id = params.id;
 

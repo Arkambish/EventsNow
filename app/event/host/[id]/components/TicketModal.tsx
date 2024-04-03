@@ -1,3 +1,4 @@
+
 import React, { memo, useEffect, useState } from "react";
 // import { UseEventContext } from "../../EventDashContext";
 import { EventContextType } from "@/app/Type";
@@ -12,6 +13,7 @@ import { Ticket } from "@/app/Type";
 import { set } from "mongoose";
 
 
+
 export default memo(function TicketModal({
   setIsActiveProceedTicketModal,
   ticketArrayTemp,
@@ -20,8 +22,10 @@ export default memo(function TicketModal({
   totalPrice,
   setIsActiveTicketModal
 }: {
-  
-  
+
+
+  setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   ticketArrayTemp: string[];
   ticketTypes: Ticket[];
@@ -112,6 +116,7 @@ export default memo(function TicketModal({
                   </tr>
                 </thead>
                 <tbody>
+
                   {/* <tr>
                     <td className="px-6 py-4">General</td>
                     <td className="px-6 py-4">1000</td>
@@ -130,6 +135,7 @@ export default memo(function TicketModal({
                     <td className="px-6 py-4">2</td>
                     <td className="px-6 py-4">20000</td>
                   </tr> */}
+
                   {ticketTypes.map((ticket, index) => (
                     <tr key={index}>
                       <td className="px-6 py-4">{ticket.classType}</td>

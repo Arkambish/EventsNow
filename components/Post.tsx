@@ -236,6 +236,11 @@ Post) {
     
 
     if (comment.length > 0) {
+      console.log({
+        userImage: user?.user?.image,
+        postId: id,
+        description: comment,
+      });
       const res = await fetch("/api/v1/post/createComment", {
         method: "POST",
         headers: {

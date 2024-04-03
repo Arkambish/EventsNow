@@ -1,8 +1,9 @@
 import { useProf } from "@/app/profile/[...id]/ProfContext";
-import { ProfContext, RegisterEventType } from "@/app/Type";
+import { ProfContext, EventType } from "@/app/Type";
 import MyEventCard from "@/app/profile/[...id]/components/MyEventCard";
 import React, { useState } from "react";
 import EmptyStateComponent from "./EmptyStateComponent";
+import { log } from "console";
 type RigisterEvent = {
   register: any[];
 };
@@ -43,12 +44,12 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
           {btnState === 1 && (
             <>
               {registerEvent.length > 0 ? (
-                registerEvent.map((event: RegisterEventType) => (
+                registerEvent.map((event: EventType) => (
                   <MyEventCard
                     id={event._id}
                     key={event._id}
                     OrgName={event.eventName}
-                    image={event.postImageLink}
+                    image={event.dashboardImage}
                     btn="Dashboard"
                   />
                 ))
@@ -81,7 +82,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
                     id={e._id}
                     key={e._id}
                     OrgName={e.eventName}
-                    image={e.postImageLink}
+                    image={e.dashboardImage}
                     btn="Event"
                   />
                 ))

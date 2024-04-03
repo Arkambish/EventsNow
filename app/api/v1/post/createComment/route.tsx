@@ -6,6 +6,8 @@ import Comment from "@/models/comment";
 export async function POST(req: NextRequest) {
   const { userId,userImage, postId, description } = await req.json();
 
+  console.log({ userImage, postId, description });
+
   await connectMongoDB();
 
   if (!userImage || !postId || !description || !userId) {
