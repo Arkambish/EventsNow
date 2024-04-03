@@ -11,7 +11,7 @@ export const GET = async (req: Request, { params }: any) => {
     await connectMongoDB();
     const user = await Permission.find({ userId: id }).populate({
       path: "eventPermission.eventId",
-      select: " eventName postImageLink",
+      select: " eventName dashboardImage",
     });
 
     const eventDetails = user.map((event: any) => {
