@@ -227,8 +227,6 @@ export default function NavBar() {
                   id="navbar-default"
                 >
                   <ul className=" justify-center items-center text-xl font-medium flex   p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white  md:dark:bg-navWhite dark:border-gray-700">
-                    {/* home button */}
-
                     {pathname.startsWith("/organization/dashboard") ? (
                       <Link href={`/createevent/${organizationId}`}>
                         <Login

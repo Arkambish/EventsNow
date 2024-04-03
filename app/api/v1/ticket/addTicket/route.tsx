@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       eventId,
       classType,
     });
-
+    console.log(ticket);
     if (!ticket) {
       return NextResponse.json(
         { message: "ticket Creation Failed" },
@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ticket }, { status: 201 });
   } catch (e) {
+    console.log(e);
     return NextResponse.json(
       { message: "server ticket Creation Failed" },
       { status: 400 }

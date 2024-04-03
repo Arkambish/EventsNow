@@ -6,7 +6,7 @@ import { UseEventContext, EventContextType } from "../EventDashContext";
 import TicketMockup from "./TicketMockup";
 
 export default function Tickets() {
-const { allTickets } = UseEventContext() as EventContextType;
+  const { allTickets } = UseEventContext() as EventContextType;
 
   return (
     <Container>

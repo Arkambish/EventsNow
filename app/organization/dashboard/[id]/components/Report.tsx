@@ -2,7 +2,9 @@ import View_Report from "@/app/organization/dashboard/[id]/components/View_Repor
 import React, { useState } from "react";
 import { useOrg } from "../OrgContext";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
-import { EventType } from "@/app/Type";
+import { AttendanceType, EventType } from "@/app/Type";
+import EventReport from "./EventReport";
+import RevenueReport from "./RevenueReport";
 
 interface contextProps {
   isSlideBar: boolean;
@@ -12,7 +14,9 @@ interface contextProps {
 export default function Report() {
   const [selectedEvent, setSelectedEvent] = useState<string>("Choose an event");
   const { isSlideBar, events } = useOrg() as contextProps;
-
+  const [isAttendanceReport, setIsAttendanceReport] = useState(false);
+  const [isRevenueReport, setIsRevenueReport] = useState(false);
+  const [attendances, setAttendances] = useState<AttendanceType[]>([]);
   function report() {
     if (selectedEvent === "Choose an event") {
       return <EmptyStateComponent message="Choose an event" />;
@@ -21,22 +25,54 @@ export default function Report() {
     } else {
       return (
         <>
-          <View_Report
-            eventName={selectedEvent}
-            isSlideBar={isSlideBar}
-            img="couldWithThreeDots.svg"
-            discription1="ATTENDANCE REPORT"
-          />
-          <View_Report
-            eventName={selectedEvent}
-            isSlideBar={isSlideBar}
-            img="revenueReport.svg"
-            discription1="REVENUE REPORT"
-          />
+          <button onClick={() => setIsAttendanceReport(true)}>
+            <View_Report
+              eventName={selectedEvent}
+              isSlideBar={isSlideBar}
+              img="couldWithThreeDots.svg"
+              discription1="ATTENDANCE REPORT"
+            />
+          </button>
+          <button onClick={() => setIsRevenueReport(true)}>
+            <View_Report
+              eventName={selectedEvent}
+              isSlideBar={isSlideBar}
+              img="revenueReport.svg"
+              discription1="REVENUE REPORT"
+            />
+          </button>
         </>
       );
     }
   }
+
+  const handleEventChange = async (e: any) => {
+    setSelectedEvent(e.target.value);
+    // Find the selected event object from the events array
+    const selectedEventObj = events.find(
+      (event) => event.eventName === e.target.value
+    );
+
+    // Update revenue based on the selected event
+    if (selectedEventObj) {
+      const getAttendence = async () => {
+        const res = await fetch(
+          `/api/v1/attendant/getAttendants/${selectedEventObj._id}`
+        );
+        if (!res.ok) {
+          return;
+        }
+        const data = await res.json();
+
+        return data;
+      };
+
+      const attendances = await getAttendence();
+      setAttendances(attendances);
+    } else {
+      setAttendances([]); // Set revenue to 0 if no event is selected
+    }
+  };
 
   return (
     <div className="flex md:ml-2 rounded-lg font-custom-orange shadow-3xl pl-2 bg-[#fff] pt-8 md:pl-12 flex-col justify-start items-start gap-12">
@@ -57,7 +93,7 @@ export default function Report() {
         <div className="text-[#666] text-xl">Select the event</div>
         <div className="w-full md:w-3/4">
           <select
-            onChange={(e) => setSelectedEvent(e.target.value)}
+            onChange={handleEventChange}
             value={selectedEvent}
             id="countries"
             className="bg-white border hover:bg-slate-200 focus:outline-custom-orange border-[#848484] text-[#848484] focus:ring-custom-orange focus:border-custom-orange text-sm rounded-lg  block w-full p-2.5 "
@@ -91,6 +127,15 @@ export default function Report() {
       <div className="flex h-56 w-full overflow-auto flex-col gap-5 mb-5">
         {report()}
       </div>
+
+      {isAttendanceReport && (
+        <EventReport
+          setStatus={setIsAttendanceReport}
+          attendances={attendances}
+        />
+      )}
+
+      {isRevenueReport && <RevenueReport setStatus={setIsRevenueReport} />}
     </div>
   );
 }

@@ -280,7 +280,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setEventStartTime(event.startTime);
 
       setEndTime(event.endTime);
-      // setStartTime(event.startTime);
       setEventPublish(event.isPublished);
       setEventVisibility(event.isPublished);
       setEventCoverImage(event.coverImage);

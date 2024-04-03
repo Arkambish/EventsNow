@@ -25,10 +25,22 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
     id,
   } = UseEventContext() as EventContextType;
 
-  console.log (typeof newTicketPrice, newTicketPrice, newTicketClass, newTicketImage, setNewTicketPrice, setNewTicketClass, setNewTicketImage, setAllTickets, id);
+  console.log(
+    typeof newTicketPrice,
+    newTicketPrice,
+    newTicketClass,
+    newTicketImage,
+    setNewTicketPrice,
+    setNewTicketClass,
+    setNewTicketImage,
+    setAllTickets,
+    id
+  );
 
   const createTicketHandlerLocal = async () => {
     try {
+      console.log(newTicketPrice, newTicketImage, id, newTicketClass);
+
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/addTicket`,
         {
@@ -44,6 +56,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
           }),
         }
       );
+      console.log(!res.ok);
       if (!res.ok) {
         error("Failed to create ticket");
         return;
@@ -160,7 +173,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
                 );
               }}
             </CldUploadWidget>
-            
+
             <div className="flex">
               {newTicketImage.length > 0 && (
                 <div className=" mt-5 border-2 w-auto border-solId rounded-xl   ">

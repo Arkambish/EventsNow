@@ -273,16 +273,20 @@ Post) {
           <div className="flex gap-4 sm:w-32 w-24">
             {isLike ? (
               <button onClick={handleClickOffLikeButton}>
-                <div className="bg-red-900">
-                  <IoMdHeart size={25} />
-                </div>
+                <Image
+                  src={"/images/event/post/heart-red .svg"}
+                  alt="like"
+                  width={30}
+                  height={34}
+                  className={styles.zoom}
+                />
               </button>
             ) : (
               <button onClick={handleClickLikeButton}>
                 <Image
-                  src={"/images/reusableComponents/React.svg"}
+                  src={"/images/event/post/heart-white .svg"}
                   alt="like"
-                  width={40}
+                  width={30}
                   height={34}
                   className={styles.zoom}
                 />

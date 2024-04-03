@@ -13,6 +13,8 @@ import {
 } from "next-cloudinary";
 import Image from "next/image";
 import { OrganizationType } from "@/app/Type";
+import { z } from "zod";
+
 const ProfileSettings = dynamic(
   () => import("@/app/organization/dashboard/[id]/components/ProfileSettings")
 );
@@ -39,42 +41,53 @@ export default function Setting() {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [isEditingAdvanced, setIsEditingAdvanced] = useState<boolean>(false);
 
+  const validate = z.object({
+    accountNumber: z.number().min(5, "Enter accountNumber "),
+    accountName: z.string().min(5, "Enter accountName "),
+  });
+
   async function handleSave() {
     if (!bank || !branch || !payout || !accountName || !accountNumber) {
       error("Please fill all the fields");
       return;
     }
 
-    if (
-      bank === organization.bank &&
-      branch === organization.branch &&
-      payout === organization.payout &&
-      accountName === organization.accountName &&
-      accountNumber === organization.accountNumber
-    ) {
-      error("No changes detected");
-      return;
-    }
+    const result = validate.safeParse({ accountNumber, accountName });
 
-    const data = { bank, branch, payout, accountName, accountNumber };
-
-    const res = await fetch(
-      `/api/v1/organization/updateOrganization/${organization._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+    if (result.success) {
+      if (
+        bank === organization.bank &&
+        branch === organization.branch &&
+        payout === organization.payout &&
+        accountName === organization.accountName &&
+        accountNumber === organization.accountNumber
+      ) {
+        error("No changes detected");
+        return;
       }
-    );
 
-    if (!res.ok) {
-      error("Failed to update organization details");
-      return;
+      const data = { bank, branch, payout, accountName, accountNumber };
+
+      const res = await fetch(
+        `/api/v1/organization/updateOrganization/${organization._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!res.ok) {
+        error("Failed to update organization details");
+        return;
+      }
+      setIsEditingAdvanced(false);
+      success("Organization details updated successfully");
+    } else {
+      error(result.error.errors[0].message);
     }
-    setIsEditingAdvanced(false);
-    success("Organization details updated successfully");
   }
 
   async function handleImageSaveButton() {
@@ -253,7 +266,7 @@ export default function Setting() {
         <div className="w-full  lg:w-3/4">
           <select
             {...(!isEditingAdvanced && { disabled: true })}
-            id="countries"
+            id="bank"
             value={bank}
             onChange={(e) => setBank(e.target.value)}
             className="mt-3 focus:outline-custom-orange w-full  block flex-1  bg-transparent py-1.5 pl-1 text-gray-600  placeholder:text-gray-400  sm:text-sm sm:leading-6 border-2 rounded-[12px]"
@@ -265,7 +278,7 @@ export default function Setting() {
             <option value="NSB">NSB</option>
           </select>
           <select
-            id="countries"
+            id="branch"
             {...(!isEditingAdvanced && { disabled: true })}
             value={branch}
             onChange={(e) => setBranch(e.target.value)}
