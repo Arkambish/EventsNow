@@ -52,6 +52,9 @@ export default function EventRegisterFormBasic() {
   });
 
   async function sendEventData(e: any) {
+    try{
+      
+    
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -105,6 +108,10 @@ export default function EventRegisterFormBasic() {
       error(result.error.errors[0].message);
     }
     setIsSubmitting(false);
+    }catch(err){
+      error("There is an error for create event");
+      setIsSubmitting(false);
+    }
   }
 
   return (
