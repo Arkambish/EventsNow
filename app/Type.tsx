@@ -279,7 +279,7 @@ export interface ProfContext {
 export type RegisterEventType = {
   _id: string;
   eventName: string;
-  postImageLink: string;
+  dashboardImage: string;
 };
 // Auth context
 
