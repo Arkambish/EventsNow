@@ -1,14 +1,10 @@
-import React, { memo, useEffect, useState } from "react";
-// import { UseEventContext } from "../../EventDashContext";
-import { EventContextType } from "@/app/Type";
-import { FaPrint } from "react-icons/fa6";
+import React, { memo } from "react";
 
 import { useParams, useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PaymentModal from "@/components/PaymentModal";
 
 import { Ticket } from "@/app/Type";
-import { set } from "mongoose";
 
 export default memo(function TicketModal({
   setIsActiveProceedTicketModal,

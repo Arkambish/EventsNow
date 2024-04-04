@@ -300,7 +300,7 @@ export default function Setting() {
               value={accountName}
               onChange={(e) => setAccountName(e.target.value)}
               className=" focus:outline-custom-orange w-full  block flex-1  bg-transparent py-1.5 pl-1 text-gray-600  placeholder:text-gray-600  focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
-              placeholder=" Account Name  "
+              placeholder=" Gues Name "
             />
             <input
               required

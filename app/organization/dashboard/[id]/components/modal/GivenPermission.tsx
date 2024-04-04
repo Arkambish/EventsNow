@@ -13,7 +13,13 @@ export default memo(function GivenPermission() {
 
   async function deletePermission() {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/deleteUserPermission/${permissionID}`
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/deleteUserPermission/${permissionID}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     if (!res.ok) {
