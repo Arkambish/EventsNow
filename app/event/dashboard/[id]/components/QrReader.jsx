@@ -28,25 +28,16 @@ const QrReader = () => {
       const qrScanner = new QrScanner(
         video,
         (result) => {
-          console.log("decoded qr code:", result.data);
           const cleanedDataString = result.data
             .replace(/\\/g, "")
             .replace(/^"|"$/g, ""); // Remove backslashes and surrounding quotation marks
           const dataObject = JSON.parse(cleanedDataString);
 
-          console.log(dataObject);
-
           setScannedText(result.data);
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
-          setQuantity(dataObject.quantity);
+          setQuantity(dataObject.class.ticket);
           setIsActiveMark(true);
-          console.log(
-            dataObject.eventId,
-            dataObject.useId,
-            dataObject.quantity
-          );
-          console.log(result.data.split(",")[2].split(":")[1].split("}")[0]);
         },
         {
           returnDetailedScanResult: true,
@@ -55,10 +46,8 @@ const QrReader = () => {
         }
       );
       qrScanner.start();
-      console.log("start");
 
       return () => {
-        console.log(qrScanner);
         qrScanner.stop();
         qrScanner.destroy();
       };
@@ -69,7 +58,6 @@ const QrReader = () => {
     if (!scannedEvent.length > 0 || !scannedUser.length > 0 || !quantity > 0) {
       return;
     }
-    console.log(scannedEvent, scannedUser, quantity);
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/attendant/markAttendant`,
@@ -81,13 +69,14 @@ const QrReader = () => {
         body: JSON.stringify({
           eventId: scannedEvent,
           userId: scannedUser,
-          quantity,
+          ticketType: quantity,
         }),
       }
     );
 
     if (!res.ok) {
       error("Failed to mark attendance");
+      return;
     }
 
     const data = await res.json();
@@ -143,7 +132,7 @@ const QrReader = () => {
                 User id:<span className="text-slate-400"> {scannedUser}</span>
               </p>
               <p className="quantity font-bold text-lg">
-                Quantity: <span className="text-slate-400"> {quantity}</span>
+                Ticket Type: <span className="text-slate-400"> {quantity}</span>
               </p>
             </div>
             <button

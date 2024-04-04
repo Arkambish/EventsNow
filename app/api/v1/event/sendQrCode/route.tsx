@@ -12,10 +12,8 @@ import { v2 as cloudinary } from "cloudinary";
 
 export async function POST(req: Request) {
   const data = await req.json();
-  console.log(data);
 
   const image = await uploadToCloudinary(data.qr);
-  console.log(image);
 
   const user = await User.findOne({ _id: data.userid });
 

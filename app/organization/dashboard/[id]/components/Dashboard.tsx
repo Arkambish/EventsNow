@@ -1,18 +1,33 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useOrg } from "../OrgContext";
-import { Event } from "../Type";
+import { EventType } from "@/app/Type";
 
 interface ContentProps {
   revenue: number;
   ticketSold: number;
   isSlideBar: boolean;
-  events: Event[];
+  events: EventType[];
 }
 
 export default function Dashboard() {
   const { revenue, ticketSold, isSlideBar, events } = useOrg() as ContentProps;
   const [selectedEvent, setSelectedEvent] = useState<string>("Choose an event");
+  const [revenueSet, setRevenueSet] = useState(0);
+
+  const handleEventChange = (e: any) => {
+    setSelectedEvent(e.target.value);
+    // Find the selected event object from the events array
+    const selectedEventObj = events.find(
+      (event) => event.eventName === e.target.value
+    );
+    // Update revenue based on the selected event
+    if (selectedEventObj) {
+      setRevenueSet(selectedEventObj.income);
+    } else {
+      setRevenueSet(0); // Set revenue to 0 if no event is selected
+    }
+  };
 
   return (
     <div className="flex rounded-lg  shadow-3xl md:pl-10 md:ml-2 pl-5 bg-[#fff] pt-8 lg:pl-12 flex-col justify-start items-start gap-12">
@@ -29,7 +44,7 @@ export default function Dashboard() {
           >
             <div className="w-full md:w-3/4">
               <select
-                onChange={(e) => setSelectedEvent(e.target.value)}
+                onChange={handleEventChange}
                 value={selectedEvent}
                 id="countries"
                 className="bg-white border hover:bg-slate-200 focus:outline-custom-orange border-[#848484] text-[#848484] focus:ring-custom-orange focus:border-custom-orange text-sm rounded-lg  block w-full p-2.5 "
@@ -60,11 +75,6 @@ export default function Dashboard() {
                     ))}
                   </>
                 )}
-                {/* <option selected>Choose an event</option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option> */}
               </select>
             </div>
           </div>
@@ -88,17 +98,17 @@ export default function Dashboard() {
           <div className="text-[#666666] md:text-xl text-lg">REVENUE</div>
           {revenue > 0 ? (
             <div className="md:text-2xl font-medium  text-lg  ">
-              LKR {revenue}
+              LKR {revenueSet}
             </div>
           ) : (
-            <div className=" font-medium italic  text-lg md:text-xl ">
-              no revenue
+            <div className=" font-medium   text-lg md:text-xl ">
+              LKR {revenueSet}
             </div>
           )}
         </div>
       </div>
 
-      <div
+      {/* <div
         className={`flex border-t-[1px] border-custom-orange shadow-normalComponent gap-8 md:gap-10 rounded-xl bg-white ${
           isSlideBar ? "md:w-11/12 md:pl-5" : "md:w-4/5 md:pl-10"
         }  w-11/12	   lg:w-4/5 xl:w-4/5 mb-2  2xl:w-3/5 pt-2 pb-2 md:pl-10 lg:pl-24`}
@@ -122,7 +132,7 @@ export default function Dashboard() {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

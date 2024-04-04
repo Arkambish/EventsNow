@@ -5,7 +5,8 @@ import Dashboard_Btn from "@/app/organization/dashboard/[id]/components/Dashboar
 import { useOrg } from "../OrgContext";
 import { HiArrowCircleRight } from "react-icons/hi";
 import { HiArrowCircleLeft } from "react-icons/hi";
-import { voidFunc } from "../Type";
+import { voidFunc } from "@/app/Type";
+// import { voidFunc } from "../Type";
 
 interface contextProps {
   handleDashboard: voidFunc;

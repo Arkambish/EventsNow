@@ -13,13 +13,14 @@ import {
   AiOutlineUpCircle,
 } from "react-icons/ai";
 import { MdOutlineLogout, MdOutlineManageAccounts } from "react-icons/md";
-import { OrganizationProps, User } from "./NavBar";
+import { OrganizationProps } from "./NavBar";
 import Link from "next/link";
 
 import { useAuth } from "@/app/AuthContext";
+import { UserType } from "@/app/Type";
 
 interface NavBarProfileProps {
-  user: User;
+  user: UserType;
   showProfile: boolean;
   setShowProfile: Dispatch<SetStateAction<boolean>>;
   clickLogoutBtn: () => void;
@@ -115,7 +116,6 @@ const NavBarProfile = memo(function NavBarProfile({
               </button>
             )}
           </div>
-          {/* {organization.length === 0 ? <div>No organization</div>} */}
 
           <div
             className={`divide-y ${

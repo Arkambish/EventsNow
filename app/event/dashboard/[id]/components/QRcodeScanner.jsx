@@ -21,7 +21,6 @@ const QRScanner = () => {
       const qrScanner = new QrScanner(
         video,
         (result) => {
-          console.log("decoded qr code:", result);
           setScannedText(result.data);
           setScannedEvent(result.data.split(",")[0]);
           setScannedUser(result.data.split(",")[1]);
@@ -34,10 +33,8 @@ const QRScanner = () => {
         }
       );
       qrScanner.start();
-      console.log("start");
 
       return () => {
-        console.log(qrScanner);
         qrScanner.stop();
         qrScanner.destroy();
       };

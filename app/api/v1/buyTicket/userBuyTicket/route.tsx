@@ -6,7 +6,7 @@ import BuyTicket from "@/models/buyTicket";
 export async function POST(req: NextRequest) {
   const { classType, price, image, quantity, eventId, userId } =
     await req.json();
-  console.log(classType, price, image, quantity, userId, eventId);
+
   try {
     connectMongoDB();
     const buyTicket = await BuyTicket.create({

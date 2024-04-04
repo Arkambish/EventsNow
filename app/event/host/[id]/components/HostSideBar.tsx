@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+
 import Image from "next/image";
 import PostTab from "./PostTab";
 import CoverPhoto from "./CoverPhoto";
@@ -12,6 +13,7 @@ import { get, set } from "lodash";
 import { is } from "date-fns/locale";
 import PaymentModal from "@/components/PaymentModal";
 import TicketModal from "./TicketModal";
+import ShowTicketsForUserModal from "@/app/event/host/[id]/components/ShowTicketsForUserModal";
 
 interface HostSideBar {
   EventName: String;
@@ -22,6 +24,13 @@ interface HostSideBar {
   activeComponent: string; // Add prop for active component
   handleComponentChange: (component: string) => void; // Add prop for handling component change
 }
+type Ticket = {
+  _id: string;
+  eventId: string;
+  price: number;
+  classType: string;
+  image: string;
+};
 
 interface customUser {
   email: string;
@@ -46,7 +55,9 @@ export default function HostSideBar({
     null
   );
 
-  const [isActiveTicketModal, setIsActvieTicketModal] =
+  const [isActiveTicketModal, setIsActiveTicketModal] =
+    useState<boolean>(false);
+  const [isActiveProceedTicketModal, setIsActiveProceedTicketModal] =
     useState<boolean>(false);
   function buyTckets() {}
 
@@ -59,6 +70,24 @@ export default function HostSideBar({
   };
 
   const id = useParams<{ id: string }>().id;
+  const [allBuyTicketsArrayTemp, setAllBuyTicketsArrayTemp] = useState<
+    string[]
+  >([]);
+  const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
+  const [totalTicketPrice, setTotalTicketPrice] = useState<number>(0);
+  const params = useParams<{ id: string }>();
+
+  useEffect(() => {
+    async function getTicketTypes() {
+      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+      setAllTicketTypes(data);
+    }
+    getTicketTypes();
+  }, [params.id]);
 
   async function userRegistrationForEventHandler() {
     const res = await fetch(
@@ -377,7 +406,7 @@ export default function HostSideBar({
         </div>
 
         <button
-          onClick={() => setIsActvieTicketModal(true)}
+          onClick={() => setIsActiveTicketModal(true)}
           disabled={preview ? true : false}
           className={`flex  button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4 ${
             preview ? "cursor-not-allowed" : ""
@@ -396,7 +425,26 @@ export default function HostSideBar({
           </div>
         </button>
         {isActiveTicketModal && (
-          <TicketModal setIsActvieTicketModal={setIsActvieTicketModal} />
+          <ShowTicketsForUserModal
+            totalPrice={totalTicketPrice}
+            setTotalPrice={setTotalTicketPrice}
+            setIsActiveTicketModal={setIsActiveTicketModal}
+            setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}
+            ticketArrayTemp={allBuyTicketsArrayTemp}
+            setTicketArrayTemp={setAllBuyTicketsArrayTemp}
+            ticketTypes={allTicketTypes}
+          />
+        )}
+        {isActiveProceedTicketModal && (
+          <TicketModal
+            setIsActvieTicketModal={setIsActiveTicketModal}
+            setTicketArrayTemp={setAllBuyTicketsArrayTemp}
+            setIsActiveTicketModal={setIsActiveTicketModal}
+            totalPrice={totalTicketPrice}
+            ticketTypes={allTicketTypes}
+            ticketArrayTemp={allBuyTicketsArrayTemp}
+            setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}
+          />
         )}
         {/* <PaymentModal
           item={paymentDetails?.items}

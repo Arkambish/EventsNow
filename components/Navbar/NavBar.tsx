@@ -21,6 +21,7 @@ import NavBarProfile from "./NavBarProfile";
 import ResponsiveMenuBar from "./ResponsiveMenuBar";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaCircle } from "react-icons/fa";
+import { UserType } from "@/app/Type";
 
 export type OrganizationProps = {
   map: any;
@@ -33,14 +34,14 @@ type ID = {
   id: string;
 };
 
-export type User = {
-  _id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  image: string;
-  role: string;
-};
+// export type User = {
+//   _id: string;
+//   email: string;
+//   firstName: string;
+//   lastName: string;
+//   image: string;
+//   role: string;
+// };
 
 export interface AuthContext {
   organizationId: string | null;
@@ -71,31 +72,25 @@ export const getUser = async ({ email }: any) => {
 export default function NavBar() {
   const [userActive, setUserActive] = useState<boolean>(false);
   const [newUserPath, setNewUserPath] = useState<boolean>(false);
-  // const [organization, setOrganization] = useState<OrganizationProps[]>([]);
-  const [user, setUser] = useState<User>({
+  const [user, setUser] = useState<UserType>({
     _id: "",
     email: "",
     firstName: "",
     lastName: "",
     image: "",
     role: "",
+    wishListId: [],
+    registeredEvents: [],
+    mobileNumber: 0,
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const [showProfile, setShowProfile] = useState<boolean>(false);
 
-  const {
-    emailAuth,
-    eventPublish,
-    setEmail,
-    organization,
-    setOrganization,
-    organizationId,
-  } = useAuth() as AuthContext;
+  const { emailAuth, eventPublish, setEmail, setOrganization, organizationId } =
+    useAuth() as AuthContext;
 
-  // const ResponsiveMenuBar = dynamic(() => import("./ResponsiveMenuBar"));
-  // const NavBarProfile = dynamic(() => import("./NavBarProfile"));
   const pathname = usePathname();
 
   function toggleMenu() {
@@ -110,29 +105,10 @@ export default function NavBar() {
     router.push("/");
   }
 
-  const getUserOrganization = async ({ id }: ID) => {
-    // const organization = await fetch(
-    //   `${process.env.NEXT_PUBLIC_URL}/api/v1/user/userOrganization`,
-    //   {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ id }),
-    //   }
-    // );
-    // if (!organization.ok) {
-    //   setIsLoading(false);
-    //   return;
-    // }
-    // const organizationData = await organization.json();
-    // setOrganization(organizationData);
-  };
-
   // get data from api
   useEffect(
     function () {
       async function session() {
-        // setIsLoading(true);
-
         if (pathname.startsWith("/organization/newUser")) {
           setNewUserPath(true);
         }
@@ -148,12 +124,7 @@ export default function NavBar() {
               setUser(data);
 
               const organization = await fetch(
-                `${process.env.NEXT_PUBLIC_URL}/api/v1/user/userOrganization`,
-                {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ id: data._id }),
-                }
+                `${process.env.NEXT_PUBLIC_URL}/api/v1/user/userOrganization/${data._id}`
               );
 
               if (!organization.ok) {
@@ -164,9 +135,7 @@ export default function NavBar() {
               const organizationData = await organization.json();
 
               setOrganization(organizationData);
-              // getUserOrganization({ id: data._id });
             } else {
-              // clickLogoutBtn();
               setUserActive(false);
             }
           } else {
@@ -217,7 +186,7 @@ export default function NavBar() {
               <Spinner />
             </nav>
           ) : (
-            <nav className="dark:bg-navWhite">
+            <nav className="bg-navWhite">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
                 {/* Events now logo and name */}
                 {pathname.startsWith("/event/dashboard") ? (
@@ -258,8 +227,6 @@ export default function NavBar() {
                   id="navbar-default"
                 >
                   <ul className=" justify-center items-center text-xl font-medium flex   p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white  md:dark:bg-navWhite dark:border-gray-700">
-                    {/* home button */}
-
                     {pathname.startsWith("/organization/dashboard") ? (
                       <Link href={`/createevent/${organizationId}`}>
                         <Login
@@ -305,21 +272,6 @@ export default function NavBar() {
                         </Link>
                       </>
                     )}
-
-                    {/* <li>
-                  <Link href={"/"}>
-                    <button
-                      className=" block button py-2 px-3 text-white  rounded md:bg-transparent md:text-eventBrown-700 md:p-0 dark:text-eventBrown md:dark:text-eventBrown"
-                      aria-current="page"
-                    >
-                      Home
-                    </button>
-                  </Link>
-                </li>
-
-                <Link href={"/about"}>
-                  <NavBarButton text={"About"} />
-                </Link> */}
 
                     {/* when user exist */}
                     {userActive && (

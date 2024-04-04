@@ -5,7 +5,6 @@ const validator = require("validator");
 const organizationSchema = new mongoose.Schema({
   fullName: {
     type: String,
-
     required: [true, "Please enter your full name"],
   },
   numberType: {

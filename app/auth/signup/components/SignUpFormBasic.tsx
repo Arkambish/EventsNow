@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { error, success } from "../../../../util/Toastify";
 import Image from "next/image";
+import { z } from "zod";
 
 export default function LoginFormBasic() {
   const [firstName, setFristName] = useState<string>("");
@@ -16,7 +17,29 @@ export default function LoginFormBasic() {
   const [passwordConfirm, setCPassword] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const router = useRouter();
-
+  const validateSignUpForm = z.object({
+    firstName: z
+      .string()
+      .min(1, "Enter your first name")
+      .regex(/^[a-zA-Z ]*$/, {
+        message: "Cannot enter number or symbol for name",
+      }),
+    lastName: z
+      .string()
+      .min(1, "Enter your last name")
+      .regex(/^[a-zA-Z ]*$/, {
+        message: "Cannot enter number or symbol for name",
+      }),
+    email: z.string().email({ message: "Invalid email" }),
+    password: z.string().min(6, "Password must be at least 6 characters long"),
+    passwordConfirm: z
+      .string()
+      .min(6, "Password must be at least 6 characters long")
+      .refine((value) => value === password, {
+        message: "Passwords do not match",
+        path: ["passwordConfirm"],
+      }),
+  });
   async function sendLoginData(e: any) {
     e.preventDefault();
     setIsSubmitting(true);
@@ -28,77 +51,71 @@ export default function LoginFormBasic() {
         password,
         passwordConfirm,
       };
+      const result = validateSignUpForm.safeParse(data);
+      if (result.success) {
+        const user = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/exist`,
+          {
+            mode: "no-cors",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+          }
+        );
 
-      if (!firstName || !lastName || !email || !password || !passwordConfirm) {
-        error("Please fill the form");
-        setIsSubmitting(false);
-        return;
-      }
+        const dat = await user.json();
 
-      const email_pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-      if (!email_pattern.test(email)) {
-        setIsSubmitting(false);
-        error("Your Email is not valied");
-        return;
-      }
-      if (!(password.length > 6)) {
-        setIsSubmitting(false);
-        error("Password length is short");
-        return;
-      }
-      if (password !== passwordConfirm) {
-        setIsSubmitting(false);
-        error("Password and Password confirm is not the same");
-        return;
-      }
-
-      const user = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/user/exist`,
-        {
-          mode: "no-cors",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }),
+        if (dat.user !== null) {
+          setIsSubmitting(false);
+          error("Already exist this email");
+          return;
         }
-      );
 
-      const dat = await user.json();
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/user/signup`,
+          {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data),
+          }
+        );
 
-      if (dat.user !== null) {
-        setIsSubmitting(false);
-        error("Already exist this email");
-        return;
-      }
-
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/user/signup`,
-        {
-          method: "POST",
-          mode: "no-cors",
-          body: JSON.stringify(data),
+        if (!res.ok) {
+          setIsSubmitting(false);
+          error("There is a error for registartion");
+          return;
         }
-      );
 
-      if (!res.ok) {
+        setFristName("");
+        setLastName("");
+        setemail("");
+        setpassword("");
+        setCPassword("");
+        setSpinner(false);
+        success("Successfully created your account");
+        router.push("/auth/login");
         setIsSubmitting(false);
-        error("There is a error for registartion");
-        return;
+      } else {
+        const formattedError = result.error.format();
+        if (formattedError.firstName?._errors) {
+          error(String(formattedError.firstName?._errors));
+        } else if (formattedError.lastName?._errors) {
+          error(String(formattedError.lastName?._errors));
+        } else if (formattedError.email) {
+          error(String(formattedError.email?._errors));
+        }
+        if (formattedError.password?._errors) {
+          error(String(formattedError.password?._errors));
+        }
+        if (formattedError.passwordConfirm?._errors) {
+          error(String(formattedError.passwordConfirm?._errors));
+        } else error("an unknown error occur in validation process");
       }
-
-      setFristName("");
-      setLastName("");
-      setemail("");
-      setpassword("");
-      setCPassword("");
-      setSpinner(false);
-      success("Successfully created your account");
-      router.push("/auth/login");
-      setIsSubmitting(false);
     } catch (e) {
       setIsSubmitting(false);
-      console.log(e);
+      error("There is a error for registartion");
     }
   }
 

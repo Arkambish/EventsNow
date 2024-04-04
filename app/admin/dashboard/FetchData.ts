@@ -1,6 +1,5 @@
 export const getAllOrganization = async () => {
-  const res = await fetch(
-    // `api/v1/organization/getAllOrganization`,
+  const Org = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getAllOrganization`,
     {
       cache: "no-store",
@@ -9,12 +8,11 @@ export const getAllOrganization = async () => {
       },
     }
   );
-  return res;
+  return Org;
 };
 
 export const getAllUser = async () => {
-  const res = await fetch(
-    // `api/v1/user/getAllUser`
+  const user = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getAllUser`,
     {
       cache: "no-store",
@@ -23,18 +21,17 @@ export const getAllUser = async () => {
       },
     }
   );
-  return res;
+  return user;
 };
 
 export const getAllEvents = async () => {
-  const res = await fetch(
+  const event = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getAllEvents`,
     {
       next: {
         revalidate: 1,
       },
     }
-    // `${process.env.NEXT_PUBLIC_URL}api/v1/event/getAllEvents`
   );
-  return res;
+  return event;
 };

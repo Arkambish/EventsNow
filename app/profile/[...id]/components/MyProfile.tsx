@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileDetails from "./ProfileDetails";
-import { ProfContext, UserDetails, useProf } from "../ProfContext";
-
+import { useProf } from "../ProfContext";
+import { ProfContext, UserDetails } from "@/app/Type";
 type Details = {
   userDeatails: UserDetails;
 };

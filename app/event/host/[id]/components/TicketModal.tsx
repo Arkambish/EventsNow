@@ -1,18 +1,28 @@
-import React, { memo, useState } from "react";
-// import { UseEventContext } from "../../EventDashContext";
-import { EventContextType } from "@/app/Type";
-import { FaPrint } from "react-icons/fa6";
-import { UseEventContext } from "@/app/event/dashboard/[id]/EventDashContext";
+import React, { memo } from "react";
+
+import { useParams, useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PaymentModal from "@/components/PaymentModal";
 
-export default memo(function TicketModal({
-  setIsActvieTicketModal,
-}: {
-  setIsActvieTicketModal: any;
-}) {
-  // const [isActive, setIsActvie] = useState(false);
+import { Ticket } from "@/app/Type";
 
+export default memo(function TicketModal({
+  setIsActiveProceedTicketModal,
+  ticketArrayTemp,
+  setTicketArrayTemp,
+  ticketTypes,
+  totalPrice,
+  setIsActiveTicketModal,
+}: {
+  setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+
+  setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+  ticketArrayTemp: string[];
+  ticketTypes: Ticket[];
+  totalPrice: number;
+  setIsActiveTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setTicketArrayTemp: React.Dispatch<React.SetStateAction<string[]>>;
+}) {
   const paymentDetails = {
     items: "test",
     oder_id: "test",
@@ -39,14 +49,20 @@ export default memo(function TicketModal({
       >
         <div className="border-[1px] border-custom-orange rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
           <div className="flex justify-between bg-slate-300">
-            <button className="text-slate-400 ml-3">
+            <button
+              className="text-slate-400 ml-3"
+              onClick={() => {
+                setIsActiveProceedTicketModal(false);
+                setIsActiveTicketModal(true);
+              }}
+            >
               <IoMdArrowRoundBack size={25} />
             </button>
             <div className="text-lg text-bold">Ticket Details</div>
 
             <div className="mr-4">
               <button
-                onClick={() => setIsActvieTicketModal(false)}
+                onClick={() => setIsActiveProceedTicketModal(false)}
                 type="button"
                 className="text-gray-400 w-full   bg-transparent  rounded-lg text-sm  h-8 ms-auto inline-flex justify-end items-center "
                 data-modal-hide="static-modal"
@@ -72,7 +88,7 @@ export default memo(function TicketModal({
 
           <div>
             <div className="flex justify-between items-center px-4 py-2"></div>
-            <div className="h-60 overflow-auto">
+            <div className="h-full overflow-auto">
               <table className="w-full text-left text-sm font-light">
                 <thead className="border-b w-full font-medium ">
                   <tr>
@@ -91,39 +107,44 @@ export default memo(function TicketModal({
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="px-6 py-4">General</td>
-                    <td className="px-6 py-4">1000</td>
-                    <td className="px-6 py-4">10</td>
-                    <td className="px-6 py-4">10000</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4">VIP</td>
-                    <td className="px-6 py-4">5000</td>
-                    <td className="px-6 py-4">5</td>
-                    <td className="px-6 py-4">25000</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4">VVIP</td>
-                    <td className="px-6 py-4">10000</td>
-                    <td className="px-6 py-4">2</td>
-                    <td className="px-6 py-4">20000</td>
-                  </tr>
-
+                  {ticketTypes.map((ticket, index) => (
+                    <tr key={index}>
+                      <td className="px-6 py-4">{ticket.classType}</td>
+                      <td className="px-6 py-4">{ticket.price}</td>
+                      <td className="px-6 py-4">
+                        {
+                          ticketArrayTemp.filter(
+                            (item) => item === ticket.classType
+                          ).length
+                        }
+                      </td>
+                      <td className="px-6 py-4">
+                        {ticketArrayTemp.filter(
+                          (item) => item === ticket.classType
+                        ).length * ticket.price}
+                      </td>
+                    </tr>
+                  ))}
                   <tr>
                     <th scope="col" className="px-6 py-4">
                       Total Amount
                     </th>
                     <td className="px-6 py-4"></td>
                     <td className="px-6 py-4"></td>
-                    <td className="px-6 py-4 font-bold">LKR 2000</td>
+                    <td className="px-6 py-4 font-bold">{totalPrice}</td>
                   </tr>
                   <tr>
                     <th scope="col" className="px-6 py-4">
                       <PaymentModal
+                        setIsActiveProceedTicketModal={
+                          setIsActiveProceedTicketModal
+                        }
+                        totalPrice={totalPrice}
+                        ticketArrTemp={ticketArrayTemp}
+                        setTicketArrTemp={setTicketArrayTemp}
                         item={paymentDetails?.items}
                         orderId={paymentDetails?.oder_id}
-                        amount={paymentDetails.fullAmount}
+                        amount={totalPrice}
                         currency={paymentDetails?.currency}
                         first_name={paymentDetails?.first_name}
                         last_name={paymentDetails?.last_name}

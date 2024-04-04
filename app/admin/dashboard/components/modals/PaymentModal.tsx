@@ -1,7 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
-// import { UseEventContext } from "../../EventDashContext";
-import { EventContextType, EventType } from "@/app/Type";
-import { FaPrint } from "react-icons/fa6";
+import { EventType } from "@/app/Type";
 import { formatDate } from "@/util/helper";
 import Pay from "../Pay";
 
@@ -12,8 +10,6 @@ export default memo(function PaymentModal({
   setShowPaymentModal: (value: boolean) => void;
   organizationId: string;
 }) {
-  // const { setStatus, attendances } = UseEventContext() as EventContextType;
-
   const [eventDetails, setEventDetails] = useState<EventType[]>([]);
   const [income, setIncome] = useState<number>(0);
   const [rate, setRate] = useState<number>();
@@ -26,7 +22,7 @@ export default memo(function PaymentModal({
         `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationsEvent/${organizationId}`
       );
       const data = await response.json();
-      console.log(data.events);
+
       const eventIds = data.events.map((event: EventType) => event._id);
       setEventId(eventIds);
       setEventDetails(data.events);
@@ -45,7 +41,6 @@ export default memo(function PaymentModal({
   }
 
   function handleRateField(value: number) {
-    console.log(value);
     if (value < 0 || value > 100) return;
     if (value === 0) {
       setRate(0);

@@ -41,7 +41,7 @@ export default function Payments() {
       setIsLoading(true);
       const data = await paymentsOrganizationData();
       setOrganizationData(data);
-      console.log(data);
+
       setIsLoading(false);
     }
     paymentsOrganization();

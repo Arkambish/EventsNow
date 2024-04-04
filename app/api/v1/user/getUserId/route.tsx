@@ -14,6 +14,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ id: data._id });
   } catch (e) {
-    console.log(e);
+    return NextResponse.json(
+      { message: "error of the server" },
+      { status: 500 }
+    );
   }
 }

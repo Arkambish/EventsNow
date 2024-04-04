@@ -54,6 +54,8 @@ export default function LoginForm() {
           return;
         }
         const { data } = await res.json();
+        if (!data) return;
+
         setIsPageSubmitting(false);
         if (data.role === "admin") {
           router.push("/admin/dashboard");
@@ -78,7 +80,6 @@ export default function LoginForm() {
         error("Enter username and password");
         return;
       }
-    
 
       const res = await fetch("/api/v1/user/checkLogin", {
         method: "POST",
@@ -105,7 +106,6 @@ export default function LoginForm() {
         password: enteredPassword,
       });
 
-    
       // remember this has error solve it later
       // if (!result?.error && result)
       if (result?.status === 200 && result?.ok) {

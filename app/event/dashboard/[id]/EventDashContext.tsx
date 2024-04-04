@@ -1,5 +1,4 @@
 "use client";
-import { voidFunc } from "@/app/organization/dashboard/[id]/Type";
 
 import React, {
   createContext,
@@ -11,13 +10,13 @@ import React, {
 } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { AuthContext, useAuth } from "@/app/AuthContext";
-// import { Post } from "../../host/[id]/components/PostTab";
 
 import { Post } from "../../host/[id]/SelectTemplate";
+
 import { set } from "mongoose";
-import { ca } from "date-fns/locale";
+import { ca, ro } from "date-fns/locale";
 import { error, success } from "@/util/Toastify";
-import { AttendanceType, EventType } from "@/app/Type";
+import { AttendanceType, EventType, voidFunc } from "@/app/Type";
 
 export interface EventContextType {
   id: String;
@@ -42,6 +41,8 @@ export interface EventContextType {
   allComment: Comment[];
   setAllComment: Dispatch<SetStateAction<Comment[]>>;
 
+  isPageBuilder: boolean;
+  setIsPageBuilder: Dispatch<SetStateAction<boolean>>;
   eventname: String;
   eventLocation: String;
   eventType: String;
@@ -79,6 +80,8 @@ export interface EventContextType {
   setNewTicketPrice: React.Dispatch<React.SetStateAction<number>>;
   setNewTicketClass: React.Dispatch<React.SetStateAction<string>>;
   setNewTicketImage: React.Dispatch<React.SetStateAction<string>>;
+
+  createTicketHandler: voidFunc;
 }
 
 type EventUserDeatils = {
@@ -103,15 +106,15 @@ const EventContext = createContext<EventContextType | string>("");
 
 function EventContextProvider({ children }: { children: React.ReactNode }) {
   const { setEventPublish } = useAuth() as AuthContext;
-  const [status, setStatus] = useState("tickets");
+  const [status, setStatus] = useState<string>("overview");
   const params = useParams<{ id: string }>();
-  const [isSideBar, setIsSideBar] = useState(true);
+  const [isSideBar, setIsSideBar] = useState<boolean>(true);
 
   const [eventPosts, setEventPosts] = useState<Post[]>([]);
   const [allComment, setAllComment] = useState<Comment[]>([]);
   const [allTickets, setAllTickets] = useState<Ticket[]>([]);
 
-  const [isloading, setIsloading] = useState(false);
+  const [isPageBuilder, setIsPageBuilder] = useState<boolean>(false);
 
   const handleOverview: voidFunc = () => {
     setStatus("overview");
@@ -181,6 +184,30 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [newTicketPrice, setNewTicketPrice] = useState<number>(0);
   const [newTicketClass, setNewTicketClass] = useState<string>("");
   const [newTicketImage, setNewTicketImage] = useState<string>("");
+
+  const createTicketHandler = async () => {
+    try {
+      const res = await fetch(`/api/v1/ticket/addTicket`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          price: newTicketPrice,
+          image: newTicketImage,
+          eventId: params.id,
+          classType: newTicketClass,
+        }),
+      });
+      if (!res.ok) {
+        error("Failed to create ticket");
+
+        return;
+      }
+      setAllTickets([...allTickets, await res.json()]);
+      success("Ticket created successfully");
+    } catch (e) {}
+  };
 
   useEffect(() => {
     const getEvent = async () => {
@@ -253,7 +280,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setEventStartTime(event.startTime);
 
       setEndTime(event.endTime);
-      // setStartTime(event.startTime);
       setEventPublish(event.isPublished);
       setEventVisibility(event.isPublished);
       setEventCoverImage(event.coverImage);
@@ -288,6 +314,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   return (
     <EventContext.Provider
       value={{
+        isPageBuilder,
+        setIsPageBuilder,
         attendances,
         isPreview,
         setIsPreview,
@@ -347,6 +375,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         setNewTicketPrice,
         setNewTicketClass,
         setNewTicketImage,
+
+        createTicketHandler,
       }}
     >
       {children}
