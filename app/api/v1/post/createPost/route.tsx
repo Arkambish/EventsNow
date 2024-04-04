@@ -7,8 +7,6 @@ export async function POST(req: NextRequest) {
     const { userName, userImage, eventId, description, image } =
       await req.json();
 
-    console.log({ userName, userImage, eventId, description, image });
-
     if (!userName || !userImage || !eventId || !description || !image) {
       return NextResponse.json(
         { message: "Please fill all the fields" },
@@ -29,7 +27,6 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
   } catch (e) {
-    console.log(e);
     return NextResponse.json(
       { message: " server Error Failed to create post" },
       { status: 500 }

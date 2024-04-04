@@ -122,8 +122,6 @@ export default function CreateOrganizationFormBasic() {
 
       const userId = await getUserId();
 
-      console.log(userId);
-
       setIsSubmitting(true);
 
       const data: OrganizationDataType = {
@@ -137,10 +135,9 @@ export default function CreateOrganizationFormBasic() {
         email,
         postImageLink: profileImage,
       };
-      console.log(data);
 
       const result = validateOrganization.safeParse(data);
-      console.log(result.success);
+
       if (result.success) {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/createOrganization`,
@@ -150,8 +147,6 @@ export default function CreateOrganizationFormBasic() {
             body: JSON.stringify(data),
           }
         );
-
-        console.log(res.ok);
 
         if (!res.ok) {
           error("There is an error for registration");
@@ -172,8 +167,6 @@ export default function CreateOrganizationFormBasic() {
           oraganizationDataForNavBarProfile,
         ]);
 
-        console.log(id.id, userId);
-
         const organizerRes = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/createOrganizer`,
           {
@@ -186,7 +179,6 @@ export default function CreateOrganizationFormBasic() {
             }),
           }
         );
-        console.log(organizerRes.ok);
 
         if (!organizerRes.ok) {
           error("There is an error for registration");

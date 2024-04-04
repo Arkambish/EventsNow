@@ -4,9 +4,7 @@ import connectMongoDB from "../../../../../lib/mongo/mongodb";
 import Comment from "@/models/comment";
 
 export async function POST(req: NextRequest) {
-  const { userId,userImage, postId, description } = await req.json();
-
-  console.log({ userImage, postId, description });
+  const { userId, userImage, postId, description } = await req.json();
 
   await connectMongoDB();
 

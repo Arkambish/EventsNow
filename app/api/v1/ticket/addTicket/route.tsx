@@ -5,7 +5,6 @@ import TicketType from "@/models/ticketType";
 
 export async function POST(req: NextRequest) {
   const { price, image, eventId, classType } = await req.json();
-  console.log(price, image, eventId, classType);
   try {
     connectMongoDB();
     const ticket = await TicketType.create({
@@ -14,7 +13,6 @@ export async function POST(req: NextRequest) {
       eventId,
       classType,
     });
-    console.log(ticket);
     if (!ticket) {
       return NextResponse.json(
         { message: "ticket Creation Failed" },
@@ -24,7 +22,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ticket }, { status: 201 });
   } catch (e) {
-    console.log(e);
     return NextResponse.json(
       { message: "server ticket Creation Failed" },
       { status: 400 }

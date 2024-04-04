@@ -9,8 +9,6 @@ export default function NewUser() {
   const organizationId = router.get("organizationId");
   const userId = router.get("userId");
 
-  console.log(organizationId, userId);
-
   useEffect(() => {
     async function createOrganizer() {
       if (!organizationId || !userId) {

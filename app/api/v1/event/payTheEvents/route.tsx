@@ -6,7 +6,6 @@ import Event from "@/models/eventModel";
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
     const data = await request.json();
-    console.log(data.events);
 
     await connectMongoDB();
 

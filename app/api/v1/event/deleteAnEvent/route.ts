@@ -13,7 +13,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ data });
   } catch (e) {
-    console.log(e);
-    return NextResponse.error(); // Return an error response
+    return NextResponse.json(
+      { message: "error of the server" },
+      { status: 500 }
+    );
+    // return NextResponse.error(); // Return an error response
   }
 }

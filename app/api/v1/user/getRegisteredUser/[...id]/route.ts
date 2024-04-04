@@ -13,8 +13,6 @@ export const GET = async (req: Request, { params }: any) => {
       "registeredEvents"
     );
     const data = registerdEventsUser.registeredEvents.map((user: any) => user);
-    console.log("Testttttttt");
-    console.log(data);
 
     return new NextResponse(JSON.stringify(data), { status: 200 });
   } catch (error) {

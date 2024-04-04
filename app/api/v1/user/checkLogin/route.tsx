@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     if (!data) {
       return NextResponse.json({ data: "Invalid user name or password" });
     }
-   
 
     const checkPassword = await comparePassword(password, data.password);
 
@@ -23,6 +22,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ data });
   } catch (e) {
-    console.log(e);
+    return NextResponse.json(
+      { message: "error of the server" },
+      { status: 500 }
+    );
   }
 }

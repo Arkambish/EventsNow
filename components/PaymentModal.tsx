@@ -125,7 +125,6 @@ const PaymentModal = (props: PaymentModalProps) => {
       ) {
         {
           props.ticketArrTemp.map(async (ticket: string) => {
-            console.log("Ticket Type:", userId);
             const value = {
               useId: userId,
               eventId: params.id,
@@ -133,9 +132,6 @@ const PaymentModal = (props: PaymentModalProps) => {
             };
 
             const qrImg = await generateQRCodeImage(JSON.stringify(value));
-            // const image = await uploadToCloudinary(qrImg);
-            console.log("QR Code Image Data:", qrImg);
-            // console.log("QR Code Image :", image);
 
             const res = await fetch(
               `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
@@ -202,9 +198,7 @@ const PaymentModal = (props: PaymentModalProps) => {
   }, [params.id, props.ticketArrTemp, props.totalPrice, userId, props]);
 
   function pay() {
-    console.log("before");
     window.payhere.startPayment(payment);
-    console.log("after");
   }
 
   return (

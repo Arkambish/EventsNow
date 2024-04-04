@@ -23,7 +23,6 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
   const [isDissableBtn, setIsDissableBtn] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  console.log("user", user);
 
   function handleEdit(value: string) {
     setTitle(value);

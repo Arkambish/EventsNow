@@ -8,8 +8,6 @@ export async function GET(req: Request, { params }: any) {
     connectMongoDB();
 
     const data = await User.findOne({ _id: id }).select("+password");
-    console.log(data);
-    console.log("Connected to momgooose");
 
     if (!data) {
       return NextResponse.json("No User");
@@ -17,7 +15,7 @@ export async function GET(req: Request, { params }: any) {
 
     return NextResponse.json(data);
   } catch (error) {
-    console.log(error);
+   
     return NextResponse.json("Internal Server Error", { status: 500 });
   }
 }

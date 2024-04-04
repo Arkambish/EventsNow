@@ -25,22 +25,8 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
     id,
   } = UseEventContext() as EventContextType;
 
-  console.log(
-    typeof newTicketPrice,
-    newTicketPrice,
-    newTicketClass,
-    newTicketImage,
-    setNewTicketPrice,
-    setNewTicketClass,
-    setNewTicketImage,
-    setAllTickets,
-    id
-  );
-
   const createTicketHandlerLocal = async () => {
     try {
-      console.log(newTicketPrice, newTicketImage, id, newTicketClass);
-
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/addTicket`,
         {
@@ -56,13 +42,11 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
           }),
         }
       );
-      console.log(!res.ok);
       if (!res.ok) {
         error("Failed to create ticket");
         return;
       }
       const newData = await res.json();
-      console.log(newData);
 
       setAllTickets((prev) => {
         if (!prev) return [newData.ticket];
@@ -72,7 +56,6 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
       success("Ticket created successfully");
       setTicketDetail(false);
     } catch (err) {
-      console.log(err);
       error("Failed to create ticket 2");
     }
   };

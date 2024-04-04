@@ -3,7 +3,6 @@ import { generateQRCodeImage } from "@/util/helper";
 import Image from "next/image";
 import React, { useState } from "react";
 
-
 interface Test {
   word: string;
   card: string;
@@ -25,7 +24,6 @@ export default function Test() {
 
   const handleGenerateQRCode = async () => {
     const qrImageData = await generateQRCodeImage(JSON.stringify(value));
-    console.log("QR Code Image Data:", qrImageData);
     setQRImage(qrImageData);
   };
 

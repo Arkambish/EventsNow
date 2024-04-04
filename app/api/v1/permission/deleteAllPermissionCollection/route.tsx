@@ -22,6 +22,9 @@ export async function DELETE() {
 
     return NextResponse.json({ message: "data delete success" });
   } catch (e) {
-    console.log(e);
+    return NextResponse.json(
+      { message: "error of the server" },
+      { status: 500 }
+    );
   }
 }

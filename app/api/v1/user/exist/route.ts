@@ -24,6 +24,9 @@ export async function POST(req: Request, response: NextApiResponse) {
       return NextResponse.json({ user });
     }
   } catch (e) {
-    console.log(e);
+    return NextResponse.json(
+      { message: "error of the server" },
+      { status: 500 }
+    );
   }
 }

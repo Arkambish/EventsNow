@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { ticketType, eventId, userId } = await req.json();
-  console.log(ticketType, eventId, userId);
+
   try {
     connectMongoDB();
 
@@ -33,7 +33,6 @@ export async function POST(req: NextRequest) {
     }
     return NextResponse.json(attendant, { status: 201 });
   } catch (e) {
-    console.log(e);
     return NextResponse.json(
       { message: "ticket Creation Failed" },
       { status: 400 }

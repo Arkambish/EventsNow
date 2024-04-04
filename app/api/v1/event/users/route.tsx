@@ -28,7 +28,6 @@ export async function POST(req: Request) {
 
     const user = data.filter((permission: Permission) => {
       return permission.eventPermission?.find((p) => {
-        // console.log(p.eventId, new ObjectId(id));
         const eventObjectId =
           typeof p.eventId === "string" ? new ObjectId(p.eventId) : p.eventId;
 

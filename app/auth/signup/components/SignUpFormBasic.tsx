@@ -115,7 +115,7 @@ export default function LoginFormBasic() {
       }
     } catch (e) {
       setIsSubmitting(false);
-      console.log(e);
+      error("There is a error for registartion");
     }
   }
 
