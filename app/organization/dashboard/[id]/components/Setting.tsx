@@ -14,10 +14,13 @@ import {
 import Image from "next/image";
 import { OrganizationType } from "@/app/Type";
 import { z } from "zod";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
 
 const ProfileSettings = dynamic(
   () => import("@/app/organization/dashboard/[id]/components/ProfileSettings")
 );
+import Switch from "react-switch";
+import { is } from "date-fns/locale";
 
 interface contextProps {
   organization: OrganizationType;
@@ -42,7 +45,7 @@ export default function Setting() {
   const [isEditingAdvanced, setIsEditingAdvanced] = useState<boolean>(false);
 
   const validate = z.object({
-    accountNumber: z.number().min(5, "Enter accountNumber "),
+    // accountNumber: z.number().min(5, "Enter accountNumber "),
     accountName: z.string().min(5, "Enter accountName "),
   });
 
@@ -52,7 +55,7 @@ export default function Setting() {
       return;
     }
 
-    const result = validate.safeParse({ accountNumber, accountName });
+    const result = validate.safeParse({ accountName });
 
     if (result.success) {
       if (
@@ -112,12 +115,31 @@ export default function Setting() {
     setProfileImage("");
   }
 
+  function handleChange() {
+    setIsEditing(!isEditing);
+  }
+
+  function handleadvanceDetailsChneg() {
+    setIsEditingAdvanced(!isEditingAdvanced);
+  }
+
   return (
     <div className="flex rounded-lg  shadow-3xl md:pl-10 md:ml-2 pl-5 bg-[#fff] pt-8 lg:pl-12 flex-col justify-start items-start gap-12">
       <div className="md:w-11/12 w-11/12  lg:w-full flex flex-col gap-3">
         <div className="lg:text-3xl text-2xl  sm:w-full lg:w-9/12 md:w-full flex justify-between font-semibold text-custom-orange	font-IBM">
           ACCOUNT DETAILS
-          {!isEditing && (
+          <Switch
+            className="grid  self-center"
+            onChange={handleChange}
+            checked={isEditing}
+            offColor="#E9E9E9"
+            onColor="#D47151"
+            offHandleColor="#D47151"
+            onHandleColor="#E9E9E9"
+            height={20}
+            width={40}
+          />
+          {/* {!isEditing && (
             <button
               onClick={() => setIsEditing(true)}
               className=" text-white px-4 py-2 rounded-lg"
@@ -137,7 +159,7 @@ export default function Setting() {
                 />
               </svg>
             </button>
-          )}
+          )} */}
         </div>
         <div className="md:w-full mt-2 lg:w-3/4 text-[#525252]">
           <ProfileSettings
@@ -161,8 +183,6 @@ export default function Setting() {
             }}
             options={{
               tags: ["organization image"],
-              // publicId: `${organizationName}/${Date.now()}`,
-              // publicId: "b2c",
 
               sources: ["local"],
               googleApiKey: "<image_search_google_api_key>",
@@ -207,8 +227,10 @@ export default function Setting() {
                     open();
                   }}
                 >
-                  <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
-                    <FaCloudUploadAlt />
+                  <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 bg-slate-800 rounded-lg">
+                    <div className="ml-2  bg-white p-1 rounded-full text-custom-orange">
+                      <FaCloudUploadAlt />
+                    </div>
                     upload image
                   </div>
                 </button>
@@ -225,12 +247,13 @@ export default function Setting() {
                 height={500}
                 alt="event cover image"
               />
-              <div className=" flex justify-end items-end mr-5">
+              <div className=" flex justify-end items-end mr-5 mb-3">
                 <button
                   onClick={handleImageSaveButton}
-                  className="bg-custom-orange button p-1 px-2 text-white rounded-2xl"
+                  className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
                 >
-                  save image
+                  <HiOutlineBadgeCheck size={22} />
+                  Save image
                 </button>
               </div>
             </div>
@@ -240,7 +263,18 @@ export default function Setting() {
       <div className="w-11/12 lg:w-full ">
         <div className="flex font-semibold	 justify-between lg:text-3xl text-2xl sm:w-full lg:w-9/12 md:w-full  text-custom-orange	font-IBM">
           ADVANCED DETAILS
-          {!isEditingAdvanced && (
+          <Switch
+            className="grid  self-center"
+            onChange={handleadvanceDetailsChneg}
+            checked={isEditingAdvanced}
+            offColor="#E9E9E9"
+            onColor="#D47151"
+            offHandleColor="#D47151"
+            onHandleColor="#E9E9E9"
+            height={20}
+            width={40}
+          />
+          {/* {!isEditingAdvanced && (
             <button
               onClick={() => setIsEditingAdvanced(true)}
               className=" text-white px-4 py-2 rounded-lg"
@@ -260,7 +294,7 @@ export default function Setting() {
                 />
               </svg>
             </button>
-          )}
+          )} */}
         </div>
 
         <div className="w-full  lg:w-3/4">
@@ -331,18 +365,10 @@ export default function Setting() {
             <div className="w-full mt-4 gap-2  flex justify-end">
               <button
                 onClick={() => handleSave()}
-                className="bg-custom-orange button flex justify-center items-center gap-2  text-white px-4 py-1 rounded-lg"
+                className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
               >
-                {" "}
-                <IoSaveOutline size={18} />
-                save
-              </button>
-              <button
-                onClick={() => setIsEditingAdvanced(false)}
-                className="button flex justify-center items-center gap-2 bg-custom-orange button  text-white px-4 py-1 rounded-lg"
-              >
-                <FaRegWindowClose size={18} />
-                close
+                <HiOutlineBadgeCheck size={22} />
+                Save details
               </button>
             </div>
           )}

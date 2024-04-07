@@ -5,28 +5,33 @@ import React from "react";
 interface Dashboard_Btn {
   onClick: () => void;
   text: string;
-  img: string;
   isSlideBar: boolean;
+  children: React.ReactNode;
+  isActive?: boolean;
 }
 
 export default function Dashboard_Btn({
   onClick,
   isSlideBar,
   text,
-  img,
+  children,
+  isActive,
 }: Dashboard_Btn) {
   return (
-    <button onClick={onClick} className="  hover:opacity-80  my-12 mt-2 ">
-      <div className=" flex lg:gap-3 xl:gap-5 gap-5	">
-        <Image
-          src={`/images/organization/${img}`}
-          alt="team"
-          width={24}
-          height={24}
-        />
-
+    <button
+      onClick={onClick}
+      className={`${
+        isActive && "bg-custom-orange  text-slate-700 rounded-lg"
+      } h-10 my-5 w-full hover:bg-custom-orange hover:rounded-lg  hover:opacity-80 hover:text-slate-700 `}
+    >
+      <div className=" flex lg:gap-3 xl:gap-5 gap-5 ml-9	">
+        {children}
         {isSlideBar ? (
-          <div className=" font-sans  text-center text-base font-semibold text-black  leading-normal">
+          <div
+            className={` font-sans hover:text-slate-700  text-center text-base font-semibold text-black  leading-normal ${
+              isActive && "text-slate-700"
+            }`}
+          >
             {text}
           </div>
         ) : (

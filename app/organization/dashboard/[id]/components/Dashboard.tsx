@@ -47,7 +47,7 @@ export default function Dashboard() {
                 onChange={handleEventChange}
                 value={selectedEvent}
                 id="countries"
-                className="bg-white border hover:bg-slate-200 focus:outline-custom-orange border-[#848484] text-[#848484] focus:ring-custom-orange focus:border-custom-orange text-sm rounded-lg  block w-full p-2.5 "
+                className="bg-white border hover:bg-slate-200 focus:outline-custom-orange border-[#848484] text-[#848484] focus:ring-custom-orange focus:border-custom-orange text-sm rounded-lg  block w-full p-2 "
               >
                 {events.length === 0 ? (
                   <option

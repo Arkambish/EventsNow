@@ -3,6 +3,7 @@ import React, { memo, useState } from "react";
 import { useOrg } from "../OrgContext";
 import { IoSaveOutline } from "react-icons/io5";
 import { FaRegWindowClose } from "react-icons/fa";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
 
 interface Details {
   name: string;
@@ -130,17 +131,10 @@ const ProfileSettings = memo(function ProfileSettings({
         <div className="w-full mt-4 gap-2  flex justify-end">
           <button
             onClick={handleSave}
-            className="button flex justify-center items-center gap-2 bg-custom-orange button  text-white px-4 py-1 rounded-lg"
+            className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
           >
-            <IoSaveOutline size={18} />
-            save
-          </button>
-          <button
-            onClick={() => setIsEditing(false)}
-            className="button flex justify-center items-center gap-2 bg-custom-orange button  text-white px-4 py-1 rounded-lg"
-          >
-            <FaRegWindowClose size={18} />
-            close
+            <HiOutlineBadgeCheck size={22} />
+            Save details
           </button>
         </div>
       )}

@@ -9,6 +9,14 @@ import OrganizationRequestPending from "@/components/OrganizationRequestPending"
 import Dashboard_Btn from "@/app/organization/dashboard/[id]/components/Dashboard_Btn";
 import Spinner from "@/components/Spinner";
 
+import {
+  HiOutlineHome,
+  HiOutlineServer,
+  HiOutlineDocumentText,
+  HiOutlineUsers,
+  HiOutlineCog,
+} from "react-icons/hi";
+
 import Profile from "./Profile";
 import { OrgContext } from "@/app/Type";
 
@@ -24,6 +32,7 @@ export default function CheckActive() {
     handleSetting,
     isLoading,
     isActive,
+    status,
   } = useOrg() as OrgContext;
 
   return (
@@ -84,7 +93,7 @@ export default function CheckActive() {
                 <div
                   className={
                     isDashboardOpen
-                      ? "absolute shadow-2xl flex flex-col  left-0 top-20 w-[65%] sm:hidden h-fit bg-[#ecf0fc]  ease-in duration-50"
+                      ? "absolute shadow-2xl flex flex-col  left-0 top-20 w-[65%] sm:hidden h-100vh bg-[#ecf0fc]  ease-in duration-50"
                       : "fixed left-[100%] top-0 p-10 ease-in duration-50"
                   }
                 >
@@ -100,35 +109,46 @@ export default function CheckActive() {
                   </button>
                   <div className=" flex flex-col mx-5">
                     <Dashboard_Btn
+                      isActive={status === "dashboard"}
                       isSlideBar={isSlideBar}
-                      img="Dashboard.svg"
                       text="Dashboard"
                       onClick={() => handleDashboard()}
-                    />
+                    >
+                      <HiOutlineHome size={23} />
+                    </Dashboard_Btn>
+
                     <Dashboard_Btn
+                      isActive={status === "myEvents"}
                       isSlideBar={isSlideBar}
-                      img="event.svg"
                       text="Events"
                       onClick={() => handleMyEvent()}
-                    />
+                    >
+                      <HiOutlineServer size={23} />
+                    </Dashboard_Btn>
                     <Dashboard_Btn
+                      isActive={status === "report"}
                       isSlideBar={isSlideBar}
-                      img="report.svg"
                       text="Report"
                       onClick={() => handleReport()}
-                    />
+                    >
+                      <HiOutlineDocumentText size={23} />
+                    </Dashboard_Btn>
                     <Dashboard_Btn
+                      isActive={status === "myTeam"}
                       isSlideBar={isSlideBar}
-                      img="Team.svg"
                       text="Team"
                       onClick={() => handleMyTeam()}
-                    />
+                    >
+                      <HiOutlineUsers size={23} />
+                    </Dashboard_Btn>
                     <Dashboard_Btn
+                      isActive={status === "setting"}
                       isSlideBar={isSlideBar}
-                      img="Setting.svg"
                       text="Setting"
                       onClick={() => handleSetting()}
-                    />
+                    >
+                      <HiOutlineCog size={23} />
+                    </Dashboard_Btn>
                   </div>
                 </div>
               </div>

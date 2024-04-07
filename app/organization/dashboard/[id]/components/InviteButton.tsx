@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useOrg } from "../OrgContext";
 import { error, success } from "@/util/Toastify";
 import { OrgContext } from "@/app/Type";
+import { HiOutlineUserAdd } from "react-icons/hi";
 
 export default function InviteButton() {
   const { organization, isSlideBar } = useOrg() as OrgContext;
@@ -56,12 +57,11 @@ export default function InviteButton() {
         />
       </div>
       <button
-        className={`bg-custom-orange p-1 w-20 rounded-2xl`}
+        className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
         onClick={handleclick}
       >
-        <div className="flex button text-white text-sm font-bold justify-center">
-          Invite
-        </div>
+        <HiOutlineUserAdd size={19} />
+        Invite
       </button>
     </div>
   );

@@ -3,10 +3,17 @@ import React, { use, useState } from "react";
 import Dashboard from "@/app/organization/dashboard/[id]/components/DashboardSide";
 import Dashboard_Btn from "@/app/organization/dashboard/[id]/components/Dashboard_Btn";
 import { useOrg } from "../OrgContext";
-import { HiArrowCircleRight } from "react-icons/hi";
-import { HiArrowCircleLeft } from "react-icons/hi";
+import {
+  HiOutlineHome,
+  HiArrowCircleRight,
+  HiArrowCircleLeft,
+  HiOutlineServer,
+  HiOutlineDocumentText,
+  HiOutlineUsers,
+  HiOutlineCog,
+} from "react-icons/hi";
+
 import { voidFunc } from "@/app/Type";
-// import { voidFunc } from "../Type";
 
 interface contextProps {
   handleDashboard: voidFunc;
@@ -16,6 +23,7 @@ interface contextProps {
   handleReport: voidFunc;
   handleMyTeam: voidFunc;
   handleSetting: voidFunc;
+  status: string;
 }
 
 export default function SideBar() {
@@ -27,6 +35,7 @@ export default function SideBar() {
     handleReport,
     handleMyTeam,
     handleSetting,
+    status,
   } = useOrg() as contextProps;
 
   return (
@@ -46,37 +55,48 @@ export default function SideBar() {
             </div>
           </button>
         </div>
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start   w-full">
           <Dashboard_Btn
+            isActive={status === "dashboard"}
             isSlideBar={isSlideBar}
-            img="Dashboard.svg"
             text="Dashboard"
             onClick={() => handleDashboard()}
-          />
+          >
+            <HiOutlineHome size={23} />
+          </Dashboard_Btn>
+
           <Dashboard_Btn
+            isActive={status === "myEvents"}
             isSlideBar={isSlideBar}
-            img="event.svg"
             text="Events"
             onClick={() => handleMyEvent()}
-          />
+          >
+            <HiOutlineServer size={23} />
+          </Dashboard_Btn>
           <Dashboard_Btn
+            isActive={status === "report"}
             isSlideBar={isSlideBar}
-            img="report.svg"
             text="Report"
             onClick={() => handleReport()}
-          />
+          >
+            <HiOutlineDocumentText size={23} />
+          </Dashboard_Btn>
           <Dashboard_Btn
+            isActive={status === "myTeam"}
             isSlideBar={isSlideBar}
-            img="Team.svg"
             text="Team"
             onClick={() => handleMyTeam()}
-          />
+          >
+            <HiOutlineUsers size={23} />
+          </Dashboard_Btn>
           <Dashboard_Btn
+            isActive={status === "setting"}
             isSlideBar={isSlideBar}
-            img="Setting.svg"
             text="Setting"
             onClick={() => handleSetting()}
-          />
+          >
+            <HiOutlineCog size={23} />
+          </Dashboard_Btn>
         </div>
       </Dashboard>
     </div>
