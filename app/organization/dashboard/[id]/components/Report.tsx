@@ -5,6 +5,13 @@ import EmptyStateComponent from "@/components/EmptyStateComponent";
 import { AttendanceType, EventType } from "@/app/Type";
 import EventReport from "./EventReport";
 import RevenueReport from "./RevenueReport";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/Select";
 
 interface contextProps {
   isSlideBar: boolean;
@@ -47,11 +54,9 @@ export default function Report() {
   }
 
   const handleEventChange = async (e: any) => {
-    setSelectedEvent(e.target.value);
+    setSelectedEvent(e);
     // Find the selected event object from the events array
-    const selectedEventObj = events.find(
-      (event) => event.eventName === e.target.value
-    );
+    const selectedEventObj = events.find((event) => event.eventName === e);
 
     // Update revenue based on the selected event
     if (selectedEventObj) {
@@ -92,7 +97,30 @@ export default function Report() {
       >
         <div className="text-[#666] text-xl">Select the event</div>
         <div className="w-full md:w-3/4">
-          <select
+          <Select onValueChange={handleEventChange}>
+            <SelectTrigger
+              // onChange={(e) => handleEventChange(e)}
+              // value={selectedEvent}
+              className="w-[250px] ring-2 ring-custom-orange"
+            >
+              <SelectValue placeholder="Choose an event" />
+            </SelectTrigger>
+            <SelectContent className="bg-white text-black">
+              {events.length === 0 ? (
+                <SelectItem value="No events">no event</SelectItem>
+              ) : (
+                <>
+                  {events.map((event) => (
+                    <SelectItem key={event._id} value={event.eventName}>
+                      {event.eventName}
+                    </SelectItem>
+                  ))}
+                </>
+              )}
+            </SelectContent>
+          </Select>
+
+          {/* <select
             onChange={handleEventChange}
             value={selectedEvent}
             id="countries"
@@ -121,7 +149,7 @@ export default function Report() {
                 ))}
               </>
             )}
-          </select>
+          </select> */}
         </div>
       </div>
       <div className="flex h-56 w-full overflow-auto flex-col gap-5 mb-5">

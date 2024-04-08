@@ -3,6 +3,14 @@ import React, { useState } from "react";
 import { useOrg } from "../OrgContext";
 import { EventType } from "@/app/Type";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/Select";
+
 interface ContentProps {
   revenue: number;
   ticketSold: number;
@@ -16,11 +24,9 @@ export default function Dashboard() {
   const [revenueSet, setRevenueSet] = useState(0);
 
   const handleEventChange = (e: any) => {
-    setSelectedEvent(e.target.value);
+    setSelectedEvent(e);
     // Find the selected event object from the events array
-    const selectedEventObj = events.find(
-      (event) => event.eventName === e.target.value
-    );
+    const selectedEventObj = events.find((event) => event.eventName === e);
     // Update revenue based on the selected event
     if (selectedEventObj) {
       setRevenueSet(selectedEventObj.income);
@@ -43,7 +49,29 @@ export default function Dashboard() {
             } md:px-5 md:py-2  xl:px-10 xl:py-5 rounded-xl`}
           >
             <div className="w-full md:w-3/4">
-              <select
+              <Select>
+                <SelectTrigger
+                  onChange={handleEventChange}
+                  value={selectedEvent}
+                  className="w-[250px] ring-2 ring-custom-orange"
+                >
+                  <SelectValue placeholder="Choose an event" />
+                </SelectTrigger>
+                <SelectContent className="bg-white text-black">
+                  {events.length === 0 ? (
+                    <SelectItem value="No events">no event</SelectItem>
+                  ) : (
+                    <>
+                      {events.map((event) => (
+                        <SelectItem key={event._id} value={event.eventName}>
+                          {event.eventName}
+                        </SelectItem>
+                      ))}
+                    </>
+                  )}
+                </SelectContent>
+              </Select>
+              {/* <select
                 onChange={handleEventChange}
                 value={selectedEvent}
                 id="countries"
@@ -75,7 +103,7 @@ export default function Dashboard() {
                     ))}
                   </>
                 )}
-              </select>
+              </select> */}
             </div>
           </div>
         </div>
