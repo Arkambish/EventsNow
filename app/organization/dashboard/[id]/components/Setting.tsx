@@ -227,7 +227,7 @@ export default function Setting() {
                     open();
                   }}
                 >
-                  <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 bg-slate-800 rounded-lg">
+                  <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-lg">
                     <div className="ml-2  bg-white p-1 rounded-full text-custom-orange">
                       <FaCloudUploadAlt />
                     </div>
