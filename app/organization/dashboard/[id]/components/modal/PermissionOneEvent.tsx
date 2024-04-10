@@ -255,7 +255,6 @@ const PermissionName = memo(function PermissionName({
     <div className="bg-[#D9D9D9]  flex justify-between w-10/12">
       <div className="ml-2">{name}</div>
       <div className="flex gap-3 items-center mr-8">
-        select
         <input
           checked={checked}
           id="red-checkbox"

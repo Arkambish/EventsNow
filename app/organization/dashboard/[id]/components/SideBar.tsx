@@ -13,7 +13,7 @@ import {
   HiOutlineCog,
 } from "react-icons/hi";
 
-import { voidFunc } from "@/app/Type";
+import { PermissionType, voidFunc } from "@/app/Type";
 
 interface contextProps {
   handleDashboard: voidFunc;
@@ -24,6 +24,7 @@ interface contextProps {
   handleMyTeam: voidFunc;
   handleSetting: voidFunc;
   status: string;
+  userPermission: PermissionType;
 }
 
 export default function SideBar() {
@@ -36,10 +37,13 @@ export default function SideBar() {
     handleMyTeam,
     handleSetting,
     status,
+    userPermission,
   } = useOrg() as contextProps;
 
+  const isAllPermissionAvailable =
+    userPermission?.globalPermission?.includes("allPermission");
   return (
-    <div>
+    <div className="">
       <Dashboard>
         <div>
           <button
@@ -55,15 +59,17 @@ export default function SideBar() {
             </div>
           </button>
         </div>
-        <div className="flex flex-col items-start   w-full">
-          <Dashboard_Btn
-            isActive={status === "dashboard"}
-            isSlideBar={isSlideBar}
-            text="Dashboard"
-            onClick={() => handleDashboard()}
-          >
-            <HiOutlineHome size={23} />
-          </Dashboard_Btn>
+        <div className="flex flex-col items-start    w-full">
+          {isAllPermissionAvailable && (
+            <Dashboard_Btn
+              isActive={status === "dashboard"}
+              isSlideBar={isSlideBar}
+              text="Dashboard"
+              onClick={() => handleDashboard()}
+            >
+              <HiOutlineHome size={23} />
+            </Dashboard_Btn>
+          )}
 
           <Dashboard_Btn
             isActive={status === "myEvents"}
@@ -73,30 +79,38 @@ export default function SideBar() {
           >
             <HiOutlineServer size={23} />
           </Dashboard_Btn>
-          <Dashboard_Btn
-            isActive={status === "report"}
-            isSlideBar={isSlideBar}
-            text="Report"
-            onClick={() => handleReport()}
-          >
-            <HiOutlineDocumentText size={23} />
-          </Dashboard_Btn>
-          <Dashboard_Btn
-            isActive={status === "myTeam"}
-            isSlideBar={isSlideBar}
-            text="Team"
-            onClick={() => handleMyTeam()}
-          >
-            <HiOutlineUsers size={23} />
-          </Dashboard_Btn>
-          <Dashboard_Btn
-            isActive={status === "setting"}
-            isSlideBar={isSlideBar}
-            text="Setting"
-            onClick={() => handleSetting()}
-          >
-            <HiOutlineCog size={23} />
-          </Dashboard_Btn>
+
+          {isAllPermissionAvailable && (
+            <Dashboard_Btn
+              isActive={status === "report"}
+              isSlideBar={isSlideBar}
+              text="Report"
+              onClick={() => handleReport()}
+            >
+              <HiOutlineDocumentText size={23} />
+            </Dashboard_Btn>
+          )}
+
+          {isAllPermissionAvailable && (
+            <Dashboard_Btn
+              isActive={status === "myTeam"}
+              isSlideBar={isSlideBar}
+              text="Team"
+              onClick={() => handleMyTeam()}
+            >
+              <HiOutlineUsers size={23} />
+            </Dashboard_Btn>
+          )}
+          {isAllPermissionAvailable && (
+            <Dashboard_Btn
+              isActive={status === "setting"}
+              isSlideBar={isSlideBar}
+              text="Setting"
+              onClick={() => handleSetting()}
+            >
+              <HiOutlineCog size={23} />
+            </Dashboard_Btn>
+          )}
         </div>
       </Dashboard>
     </div>
