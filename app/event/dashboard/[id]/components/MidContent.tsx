@@ -13,6 +13,7 @@ import Attendance from "./overviewModal/Attendance";
 import Revenue from "./overviewModal/Revenue";
 import QrReader from "./QrReader";
 import Tickets from "./Tickets";
+import RegisteredUsersList from "./RegisteredUsersList";
 
 export default function MidContent() {
   const { status } = UseEventContext() as EventContextType;
@@ -32,6 +33,8 @@ export default function MidContent() {
       {status === "revenue" && <Revenue />}
 
       {status === "qrreader" && <QrReader />}
+
+      {status === "registeredusers" && <RegisteredUsersList />}
     </div>
   );
 }
