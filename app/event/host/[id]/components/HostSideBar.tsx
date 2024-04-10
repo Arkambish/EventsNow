@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
+
 import Image from "next/image";
 import PostTab from "./PostTab";
 import CoverPhoto from "./CoverPhoto";
@@ -338,7 +339,7 @@ export default function HostSideBar({
                   height={32}
                 />
               </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
+              <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
                 Remove Registration
               </div>
             </button>
@@ -358,7 +359,7 @@ export default function HostSideBar({
                   height={32}
                 />
               </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2 ">
+              <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2 ">
                 Register event
               </div>
             </button>
@@ -378,7 +379,7 @@ export default function HostSideBar({
                   height={32}
                 />
               </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
+              <div className="font-medium text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
                 Remove Wish List
               </div>
             </button>
@@ -398,7 +399,7 @@ export default function HostSideBar({
                   height={32}
                 />
               </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
+              <div className="font-medium text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
                 Add to Wish List
               </div>
             </button>
