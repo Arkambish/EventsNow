@@ -1,3 +1,5 @@
+import { getUser } from "@/components/Navbar/NavBar";
+import { getSession } from "next-auth/react";
 import qrCode from "qrcode";
 
 export function formatDate(dateString: any) {
@@ -8,7 +10,7 @@ export function formatDate(dateString: any) {
 
 export const generateQRCodeImage = async (value: any, options = {}) => {
   try {
-    const qrImageData : string = await qrCode.toDataURL(value, options);
+    const qrImageData: string = await qrCode.toDataURL(value, options);
     return qrImageData;
   } catch (error) {
     console.error("Error generating QR code:", error);
@@ -39,11 +41,37 @@ export async function uploadToCloudinary(imageData: any) {
     const data = await res.json();
 
     // Get the public URL of the uploaded image
-    const imageUrl : string = data.secure_url;
+    const imageUrl: string = data.secure_url;
 
     return imageUrl;
   } catch (error) {
     console.error("Error uploading image to Cloudinary:", error);
     throw error;
   }
+}
+
+export async function getUserDetails({
+  organizationId,
+}: {
+  organizationId: string | string[] | undefined;
+}) {
+  const session = await getSession();
+  const userDetails = await getUser({ email: session?.user?.email });
+
+  const userPermissionRes = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/checkUserPermission`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        organizationId: organizationId,
+        userId: userDetails._id,
+      }),
+    }
+  );
+
+  const userPermissionData = await userPermissionRes.json();
+  return userPermissionData;
 }

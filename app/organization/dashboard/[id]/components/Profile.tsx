@@ -35,7 +35,9 @@ export default function Profile() {
     <div className=" lg:p-3 p-0 flex flex-col h-fit w-fit items-start justify-start rounded-xl shadow-3xl bg-custom-lightorange">
       {isPermissionAvailable && (
         <Link href={`/createevent/${id}`}>
-          <button className={`bg-custom-orange button  h-8 rounded-lg`}>
+          <button
+            className={`bg-custom-orange button  lg:m-0 m-2  h-8 rounded-lg`}
+          >
             <div className="flex  flex-row ml-2 mr-2  gap-2 p-0 items-center justify-center">
               <Image
                 src={`/images/reusableComponents/createevent.svg`}
@@ -51,7 +53,7 @@ export default function Profile() {
         </Link>
       )}
 
-      <div className="mt-2">
+      <div className="mt-2 lg:p-0 p-2">
         <div className="p-2  bg-white w-fit rounded-md flex items-center justify-center whitespace-nowrap">
           <svg
             className="mr-2"

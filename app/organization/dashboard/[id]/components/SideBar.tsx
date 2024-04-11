@@ -14,6 +14,7 @@ import {
 } from "react-icons/hi";
 
 import { PermissionType, voidFunc } from "@/app/Type";
+import CheckPermission from "./CheckPermission";
 
 interface contextProps {
   handleDashboard: voidFunc;
@@ -37,11 +38,8 @@ export default function SideBar() {
     handleMyTeam,
     handleSetting,
     status,
-    userPermission,
   } = useOrg() as contextProps;
 
-  const isAllPermissionAvailable =
-    userPermission?.globalPermission?.includes("allPermission");
   return (
     <div className="">
       <Dashboard>
@@ -60,7 +58,7 @@ export default function SideBar() {
           </button>
         </div>
         <div className="flex flex-col items-start    w-full">
-          {isAllPermissionAvailable && (
+          <CheckPermission>
             <Dashboard_Btn
               isActive={status === "dashboard"}
               isSlideBar={isSlideBar}
@@ -69,7 +67,7 @@ export default function SideBar() {
             >
               <HiOutlineHome size={23} />
             </Dashboard_Btn>
-          )}
+          </CheckPermission>
 
           <Dashboard_Btn
             isActive={status === "myEvents"}
@@ -80,7 +78,7 @@ export default function SideBar() {
             <HiOutlineServer size={23} />
           </Dashboard_Btn>
 
-          {isAllPermissionAvailable && (
+          <CheckPermission>
             <Dashboard_Btn
               isActive={status === "report"}
               isSlideBar={isSlideBar}
@@ -89,9 +87,8 @@ export default function SideBar() {
             >
               <HiOutlineDocumentText size={23} />
             </Dashboard_Btn>
-          )}
-
-          {isAllPermissionAvailable && (
+          </CheckPermission>
+          <CheckPermission>
             <Dashboard_Btn
               isActive={status === "myTeam"}
               isSlideBar={isSlideBar}
@@ -100,8 +97,8 @@ export default function SideBar() {
             >
               <HiOutlineUsers size={23} />
             </Dashboard_Btn>
-          )}
-          {isAllPermissionAvailable && (
+          </CheckPermission>
+          <CheckPermission>
             <Dashboard_Btn
               isActive={status === "setting"}
               isSlideBar={isSlideBar}
@@ -110,7 +107,7 @@ export default function SideBar() {
             >
               <HiOutlineCog size={23} />
             </Dashboard_Btn>
-          )}
+          </CheckPermission>
         </div>
       </Dashboard>
     </div>

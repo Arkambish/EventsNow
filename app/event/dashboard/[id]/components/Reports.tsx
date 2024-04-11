@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "./Container";
 import GetReportComponent from "./GetReportComponent";
+import CheckPermission from "./CheckPermission";
 
 export default function Reports() {
   const getAttendanceReport = () => {};
@@ -17,18 +18,28 @@ export default function Reports() {
         </div>
 
         <div className="mt-12 grid gap-8 lg:mr-16">
-          <GetReportComponent
-            reportName="ATTENDANCE REPORT"
-            image="attendanceReport"
-            getReport={getAttendanceReport}
-            size={80}
-          />
-          <GetReportComponent
-            reportName="REVENUE REPORT"
-            image="revenueReport"
-            getReport={getRevenueReport}
-            size={95}
-          />
+          <CheckPermission
+            provideGlobalPermission={["View Attendees"]}
+            provideEventPermission={["View Attendees"]}
+          >
+            <GetReportComponent
+              reportName="ATTENDANCE REPORT"
+              image="attendanceReport"
+              getReport={getAttendanceReport}
+              size={80}
+            />
+          </CheckPermission>
+          <CheckPermission
+            provideGlobalPermission={["Manage Payments"]}
+            provideEventPermission={["Manage Payments"]}
+          >
+            <GetReportComponent
+              reportName="REVENUE REPORT"
+              image="revenueReport"
+              getReport={getRevenueReport}
+              size={95}
+            />
+          </CheckPermission>
         </div>
       </div>
     </Container>

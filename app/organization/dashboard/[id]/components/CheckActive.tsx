@@ -42,8 +42,8 @@ export default function CheckActive() {
       ) : (
         <div>
           {isActive ? (
-            <div>
-              <div className="grid  grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5">
+            <div className="2xl:flex 2xl:justify-center">
+              <div className="grid max-w-[1500px]   grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5">
                 <div
                   className={`lg:col-span-2   md:block hidden ${
                     isSlideBar

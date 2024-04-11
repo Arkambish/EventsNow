@@ -17,6 +17,7 @@ import {
 } from "@/app/Type";
 import { get } from "http";
 import { getSession } from "next-auth/react";
+import { getUserDetails } from "@/util/helper";
 
 export type Modal =
   | ""
@@ -71,24 +72,28 @@ function OrgContextProvider({ children }: ChildrenType) {
   useEffect(
     function () {
       async function getData() {
-        const session = await getSession();
-        const userDetails = await getUser({ email: session?.user?.email });
+        // const session = await getSession();
+        // const userDetails = await getUser({ email: session?.user?.email });
 
-        const userPermissionRes = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/checkUserPermission`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              organizationId: params.id,
-              userId: userDetails._id,
-            }),
-          }
-        );
+        // const userPermissionRes = await fetch(
+        //   `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/checkUserPermission`,
+        //   {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       organizationId: params.id,
+        //       userId: userDetails._id,
+        //     }),
+        //   }
+        // );
 
-        const userPermissionData = await userPermissionRes.json();
+        const userPermissionData = await getUserDetails({
+          organizationId: params.id,
+        });
+
+        // const userPermissionData = await userPermissionRes.json();
         console.log(userPermissionData);
         setUserPermission(userPermissionData);
 

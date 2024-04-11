@@ -24,7 +24,7 @@ export default function Dashboard_Btn({
         isActive && " text-custom-orange rounded-lg"
       } h-10 my-5 w-full  hover:rounded-lg  hover:opacity-80  `}
     >
-      <div className="hover:text-custom-orange flex lg:gap-3 xl:gap-5 gap-5 ml-9	">
+      <div className="hover:text-custom-orange flex lg:gap-3 xl:gap-5 gap-5 ml-5	">
         {children}
         {isSlideBar ? (
           <div

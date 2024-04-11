@@ -49,9 +49,8 @@ export default function Dashboard() {
             } md:px-5 md:py-2  xl:px-10 xl:py-5 rounded-xl`}
           >
             <div className="w-full md:w-3/4">
-              <Select>
+              <Select onValueChange={handleEventChange}>
                 <SelectTrigger
-                  onChange={handleEventChange}
                   value={selectedEvent}
                   className="w-[250px] ring-2 ring-custom-orange"
                 >
