@@ -46,6 +46,8 @@ export default function Template({
             Location={event.selectedTab}
             Time={`${event.startTime} to ${event.endTime}`}
             Date={date}
+            activeComponent={activeComponent}
+            handleComponentChange={handleComponentChange}
           />
         </div>
 

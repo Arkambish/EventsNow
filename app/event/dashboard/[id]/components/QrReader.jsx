@@ -135,11 +135,12 @@ const QrReader = () => {
                 User id:<span className="text-slate-400"> {scannedUser}</span>
               </p>
               <p className="scannedText font-bold text-lg">
-                Ticket Quantity: <span className="text-slate-400"> {quantity}</span>
-              </p>
-              <p className="scannedText font-bold text-lg">
                 Ticket Type: <span className="text-slate-400"> {ticketType}</span>
               </p>
+              <p className="scannedText font-bold text-lg">
+                Ticket Quantity: <span className="text-slate-400"> {quantity}</span>
+              </p>
+              
 
             </div>
             <button
