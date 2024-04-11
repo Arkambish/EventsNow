@@ -227,51 +227,42 @@ export default function NavBar() {
                   id="navbar-default"
                 >
                   <ul className=" justify-center items-center text-xl font-medium flex   p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white  md:dark:bg-navWhite dark:border-gray-700">
-                    {pathname.startsWith("/organization/dashboard") ? (
-                      <Link href={`/createevent/${organizationId}`}>
-                        <Login
-                          titleOfbutton={"HOST EVENT"}
-                          image={"createevent.svg"}
-                        />
-                      </Link>
-                    ) : (
-                      <>
-                        {pathname.startsWith("/event/dashboard") && (
-                          <div>
-                            {eventPublish ? (
-                              <div className="text-green-600 text-sm	 flex items-center gap-2">
-                                <div className="text-green-600">
-                                  <FaCircle size={15} />
-                                </div>
-                                publish
+                    <>
+                      {pathname.startsWith("/event/dashboard") && (
+                        <div>
+                          {eventPublish ? (
+                            <div className="text-green-600 text-sm	 flex items-center gap-2">
+                              <div className="text-green-600">
+                                <FaCircle size={15} />
                               </div>
-                            ) : (
-                              <div className=" text-red-600 text-sm	 flex items-center gap-2">
-                                <div className="text-red-600">
-                                  <FaCircle size={15} />
-                                </div>
-                                Not publish
+                              publish
+                            </div>
+                          ) : (
+                            <div className=" text-red-600 text-sm	 flex items-center gap-2">
+                              <div className="text-red-600">
+                                <FaCircle size={15} />
                               </div>
-                            )}
-                            <div></div>
-                          </div>
-                        )}
-                        <li>
-                          <Link href={"/"}>
-                            <button
-                              className=" block button py-2 px-3 text-white  rounded md:bg-transparent md:text-eventBrown-700 md:p-0 dark:text-eventBrown md:dark:text-eventBrown"
-                              aria-current="page"
-                            >
-                              Home
-                            </button>
-                          </Link>
-                        </li>
-
-                        <Link href={"/about"}>
-                          <NavBarButton text={"About"} />
+                              Not publish
+                            </div>
+                          )}
+                          <div></div>
+                        </div>
+                      )}
+                      <li>
+                        <Link href={"/"}>
+                          <button
+                            className=" block button py-2 px-3 text-white  rounded md:bg-transparent md:text-eventBrown-700 md:p-0 dark:text-eventBrown md:dark:text-eventBrown"
+                            aria-current="page"
+                          >
+                            Home
+                          </button>
                         </Link>
-                      </>
-                    )}
+                      </li>
+
+                      <Link href={"/about"}>
+                        <NavBarButton text={"About"} />
+                      </Link>
+                    </>
 
                     {/* when user exist */}
                     {userActive && (

@@ -21,15 +21,15 @@ export default function Dashboard_Btn({
     <button
       onClick={onClick}
       className={`${
-        isActive && "bg-custom-orange  text-slate-700 rounded-lg"
-      } h-10 my-5 w-full hover:bg-custom-orange hover:rounded-lg  hover:opacity-80 hover:text-slate-700 `}
+        isActive && " text-custom-orange rounded-lg"
+      } h-10 my-5 w-full  hover:rounded-lg  hover:opacity-80  `}
     >
-      <div className=" flex lg:gap-3 xl:gap-5 gap-5 ml-9	">
+      <div className="hover:text-custom-orange flex lg:gap-3 xl:gap-5 gap-5 ml-5	">
         {children}
         {isSlideBar ? (
           <div
-            className={` font-sans hover:text-slate-700  text-center text-base font-semibold text-black  leading-normal ${
-              isActive && "text-slate-700"
+            className={` font-sans hover:text-custom-orange text-center text-base font-semibold text-black  leading-normal ${
+              isActive && "text-custom-orange"
             }`}
           >
             {text}
