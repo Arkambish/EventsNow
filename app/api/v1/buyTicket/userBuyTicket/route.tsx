@@ -4,16 +4,12 @@ import Event from "../../../../../models/eventModel";
 import BuyTicket from "@/models/buyTicket";
 
 export async function POST(req: NextRequest) {
-  const { classType, price, image, quantity, eventId, userId } =
-    await req.json();
+  const { ticketId, eventId, userId } = await req.json();
 
   try {
     connectMongoDB();
     const buyTicket = await BuyTicket.create({
-      classType,
-      price,
-      image,
-      quantity,
+      ticketId,
       eventId,
       userId,
     });
