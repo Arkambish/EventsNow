@@ -11,6 +11,12 @@ import OrganizationRequestPending from "@/components/OrganizationRequestPending"
 import Dashboard_Btn from "@/app/organization/dashboard/[id]/components/Dashboard_Btn";
 import Profile from "./profile";
 import Spinner from "@/components/Spinner";
+import {
+  HiOutlineCalendarDays,
+  HiOutlineCog8Tooth,
+  HiOutlineUserCircle,
+} from "react-icons/hi2";
+import { HiOutlineBookmarkAlt, HiOutlineCash } from "react-icons/hi";
 // import ProfContext from './../ProfContext'
 
 export default function CheckActive() {
@@ -107,35 +113,35 @@ export default function CheckActive() {
                       text="My Profile"
                       onClick={() => handleProfile()}
                     >
-                      ""
+                      <HiOutlineUserCircle size={25} />
                     </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
                       text="Wish List"
                       onClick={() => handleWishList()}
                     >
-                      ""
+                      <HiOutlineBookmarkAlt size={25} />
                     </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
                       text="My Events"
                       onClick={() => handleMyEvents()}
                     >
-                      ""
+                      <HiOutlineCalendarDays size={25} />
                     </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
                       text="My Tickets"
                       onClick={() => handlemyTickets()}
                     >
-                      ""
+                      <HiOutlineCash size={25} />
                     </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
                       text="Settings"
                       onClick={() => handleSetting()}
                     >
-                      ""
+                      <HiOutlineCog8Tooth size={25} />
                     </Dashboard_Btn>
                   </div>
                 </div>

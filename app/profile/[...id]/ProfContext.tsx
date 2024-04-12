@@ -1,17 +1,15 @@
 "use client";
-import { da } from "date-fns/locale";
 import { useParams, useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
-  ProfContext,
   UserDetails,
   VoidFunc,
   EventType,
   Ticket,
+  ProfContexts,
 } from "@/app/Type";
-import { error } from "@/util/Toastify";
 
-const ProfContext = createContext<ProfContext | string>("");
+const ProfContext = createContext<ProfContexts | string>("");
 
 interface ProfContextProviderProps {
   children: React.ReactNode;

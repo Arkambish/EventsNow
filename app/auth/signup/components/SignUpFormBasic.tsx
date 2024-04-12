@@ -122,7 +122,7 @@ export default function LoginFormBasic() {
   return (
     <div className="mx-auto  flex justify-center">
       <div className="">
-        <div className=" mt-2 leading-none	 text-center text-[#455273] font-khand text-[40px] sm:text-[64px] font-semibold">
+        <div className=" my-2 leading-none mb-8 	 text-center text-[#455273] font-khand text-[35px] sm:text-[50px] font-semibold">
           Create account
         </div>
         <form
@@ -137,7 +137,7 @@ export default function LoginFormBasic() {
             id="firstName"
             value={firstName}
             onChange={(e) => setFristName(e.target.value)}
-            className="focus:outline-custom-orange my-5 w-full h-8 block flex-1  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
             placeholder="Enter your first name  "
           ></input>
 
@@ -148,7 +148,7 @@ export default function LoginFormBasic() {
             id="lastName"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="focus:outline-custom-orange my-5 w-full h-8 block flex-1  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
             placeholder="Enter your last name  "
           ></input>
 
@@ -159,7 +159,7 @@ export default function LoginFormBasic() {
             id="email"
             value={email}
             onChange={(e) => setemail(e.target.value)}
-            className="focus:outline-custom-orange my-5 w-full h-8 block flex-1  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
             placeholder="Enter your email "
           ></input>
 
@@ -170,7 +170,7 @@ export default function LoginFormBasic() {
             id="password"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
-            className="focus:outline-custom-orange my-5 w-full h-8 block flex-1  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
             placeholder="Create password  "
           ></input>
 
@@ -181,12 +181,12 @@ export default function LoginFormBasic() {
             id="cPassword"
             value={passwordConfirm}
             onChange={(e) => setCPassword(e.target.value)}
-            className="focus:outline-custom-orange my-5 w-full h-8 block flex-1  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
             placeholder="Confirm password  "
           ></input>
 
           {isSubmitting ? (
-            <button className="button flex text-center mt-10 mb-10 xl:mb-20  px-2 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base font-mono ">
+            <button className="my-3 button flex text-center mt-12 mb-10 xl:mb-20  px-2 justify-center bg-custom-orange text-white font-semibold rounded-md  text-base font-mono ">
               <div className="flex gap-2 justify-center items-center">
                 <div> Creating</div>
                 <Image
@@ -200,9 +200,9 @@ export default function LoginFormBasic() {
           ) : (
             <button
               type="submit"
-              className="button flex text-center p-1 justify-center w-full bg-custom-orange text-white font-semibold rounded-lg  text-base font-mono"
+              className="my-3 button flex text-center mt-8 p-1 justify-center w-full bg-custom-orange text-white font-semibold rounded-md  text-base font-mono"
             >
-              CREAT ACCOUNT
+              CREATE ACCOUNT
             </button>
           )}
         </form>

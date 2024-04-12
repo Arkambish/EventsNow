@@ -22,6 +22,7 @@ import ResponsiveMenuBar from "./ResponsiveMenuBar";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaCircle } from "react-icons/fa";
 import { UserType } from "@/app/Type";
+import Notification from "./Notification";
 
 export type OrganizationProps = {
   map: any;
@@ -269,11 +270,11 @@ export default function NavBar() {
                       <>
                         {/* crete event button */}
 
-                        <button
+                        {/* <button
                           type="button"
                           className={`${
                             pathname.startsWith("/admin") ? "hidden" : "flex"
-                          } button relative h-8 inline-flex items-center p-2 text-sm font-medium text-center text-white bg-custom-orange rounded-lg `}
+                          } button  relative h-8 flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-custom-orange rounded-lg `}
                         >
                           <svg
                             className="w-5 h-5"
@@ -291,7 +292,9 @@ export default function NavBar() {
                           <div className="absolute inline-flex items-center justify-center w-6 h-4 text-xs font-bold text-white bg-red-600  rounded-full -top-2 -end-3 ">
                             2
                           </div>
-                        </button>
+                        </button> */}
+                        <Notification />
+
                         <div
                           className={`${
                             pathname.startsWith("/organization/dashboard") ||

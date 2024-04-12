@@ -8,6 +8,7 @@ import Settings from "./Settings";
 import Wishlist from "./wishlist";
 import MyEvents from "./MyEvents";
 import MyTickets from "./MyTickets";
+import { ProfContext } from "@/app/Type";
 
 export default function Content() {
   type ProfStatus =
@@ -20,6 +21,7 @@ export default function Content() {
   interface ContentProps {
     status: ProfStatus;
   }
+
   const { status } = useProf() as ContentProps;
   return (
     <div>

@@ -319,7 +319,7 @@ export interface ChildrenType {
 
 export type VoidFunc = () => void;
 
-export interface ProfContext {
+export interface ProfContexts {
   lname: string;
   fname: string;
   isLoading: boolean;

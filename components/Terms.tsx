@@ -9,7 +9,7 @@ export default function Terms() {
           By signing up, I have read an agree to{" "}
         </div>
         <div className="text-center">
-          <Link className="text-[#0151FC]" href="/">
+          <Link className="text-[#0151FC] mx-1" href="/">
             Terms
           </Link>
           and{" "}
