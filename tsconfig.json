@@ -48,6 +48,6 @@
     "app/api/v1/post/getOnePost/[...id]/route.jsx",
     "app/event/dashboard/[id]/components/QRcodeScanner.jsx",
     "app/event/dashboard/[id]/components/QrReader.jsx"
-  ],
+, "models/registeredUser.ts"  ],
   "exclude": ["node_modules"]
 }
