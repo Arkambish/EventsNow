@@ -205,7 +205,7 @@ export default function NavBar() {
                   </Link>
                 ) : (
                   <Link href="/">
-                    <button className="button">
+                    <button className="button animate-pulse">
                       <div className="flex items-center gap-3">
                         <Image
                           src="/images/reusableComponents/nav-logo.svg"
