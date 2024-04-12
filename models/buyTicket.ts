@@ -1,27 +1,12 @@
 import Event from "./eventModel";
+import TicketType from "./ticketType";
 
 const mongoose = require("mongoose");
 
 const BuyticketSchema = new mongoose.Schema({
-  classType: {
-    type: String,
-    unique: true,
-    required: [true, "Please enter classType"],
-  },
-
-  price: {
-    type: Number,
-    unique: true,
-    required: [true, "Please enter price"],
-  },
-
-  image: {
-    type: String,
-    required: [true, "Please enter image"],
-  },
-  quantity: {
-    type: Number,
-    required: [true, "Please enter quantity"],
+  ticketId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: TicketType,
   },
 
   eventId: {
