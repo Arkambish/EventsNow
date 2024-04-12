@@ -2,35 +2,40 @@ import React, { useState, useEffect } from "react";
 import Container from "./Container";
 import { EventContextType, UseEventContext } from "../EventDashContext";
 import { MdArrowBack } from "react-icons/md";
-import { useParams } from "next/navigation";
-import { UserType } from "@/app/Type";
+
 
 import { error } from "@/util/Toastify";
 import TeamMemberCard from "./TeamMemberCard";
 
 export default function RegisteredUsersList() {
-  const { setStatus, allRegisteredUsers } =
+  const { setStatus,event } =
     UseEventContext() as EventContextType;
-  const [allRegUserDetails, setAllRegUserDetails] = useState<UserType[]>([]);
+  const [allRegisteredUsers, setAllRegisteredUsers] = useState([]);
   useEffect(() => {
-    console.log("fuck");
     
-    for (let i = 0; i < allRegisteredUsers.length; i++) {
-      console.log(i);
-      const getUserDetails = async (user: UserType) => {
-        try {
-          const response = await fetch(`/api/v1/user/getOneUserById/${user}`);
-          const data = await response.json();
-          
-          await setAllRegUserDetails((prev) => [...prev, data]);
-        } catch (e) {
-          error("Error in fetching user details");
+    const fetchAllRegisteredUsers = async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/event/getRegisteredUsersForEvent`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: event._id }),
         }
-      };
-      getUserDetails(allRegisteredUsers[i]);
-      
+      );
+      if (!res.ok) {
+        error("Error in fetching data");
+        return;
+      }
+      const data = await res.json();
+      console.log(data);
+      setAllRegisteredUsers(data);
     }
-  }, [allRegisteredUsers]);
+    fetchAllRegisteredUsers();
+   
+    
+    
+  }, [event._id]);
   return (
     <Container>
       <div className="pl-10 mb-5 grid gap-2 mt-8 mr-10 pb-20">
@@ -47,11 +52,11 @@ export default function RegisteredUsersList() {
         </div>
         <div className="">
           <div className="grid gap-3">
-            {allRegUserDetails.map((user: UserType) => (
+            {allRegisteredUsers.map((user:any) => (
               <TeamMemberCard
                 key={user._id}
-                name={user.firstName + " " + user.lastName}
-                email={user.email}
+                name={user.userId.firstName + " " + user.userId.lastName}
+                email={user.userId.email}
                 />
             ))}
           </div>
