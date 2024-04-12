@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 import Organization from "./organizationModel";
-import RegisteredUser from "./registeredUser";
+import RegisteredUser from "./registeredUserModel";
 
 const eventSchema = new mongoose.Schema({
   eventName: {

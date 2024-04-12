@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const validator = require("validator");
 import bcrypt from "bcrypt";
-import RegisteredUser from "./registeredUser";
+import RegisteredUser from "./registeredUserModel";
 
 // const bcrypt = require("bcryptjs");
 

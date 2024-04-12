@@ -143,24 +143,29 @@ export default function HostSideBar({
     };
     getUser();
   }, [id]);
-
+  
+//check user registered for the event
   useEffect(() => {
-    const getEvent = async () => {
+    const checkUserRegistered = async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getEvent`,
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/event/checkUserRegistered`,
         {
           method: "POST",
-          mode: "cors",
-          body: JSON.stringify(id),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId:userId, eventId: id }),
         }
       );
+      if (!res.ok) {
+        error("Error checking user registration");
+        return;
+      }
       const data = await res.json();
-      setRegisteredUserList(data.registerUser);
+      setIsRegistered(data);
+    }
+    checkUserRegistered();
 
-      const register = data.registerUser?.includes(userId || "");
-      setIsRegistered(register);
-    };
-    getEvent();
   }, [id, userId]);
 
   //get user data
