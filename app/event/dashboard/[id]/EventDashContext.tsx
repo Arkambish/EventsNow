@@ -12,11 +12,12 @@ import { useParams, useRouter } from "next/navigation";
 import { AuthContext, useAuth } from "@/app/AuthContext";
 
 import { Post } from "../../host/[id]/SelectTemplate";
+import { UserDetails } from "@/app/Type";
 
 import { set } from "mongoose";
 import { ca, ro } from "date-fns/locale";
 import { error, success } from "@/util/Toastify";
-import { AttendanceType, EventType, voidFunc } from "@/app/Type";
+import { AttendanceType, EventType, voidFunc,UserType } from "@/app/Type";
 
 export interface EventContextType {
   id: String;
@@ -81,6 +82,8 @@ export interface EventContextType {
   setNewTicketClass: React.Dispatch<React.SetStateAction<string>>;
   setNewTicketImage: React.Dispatch<React.SetStateAction<string>>;
 
+  allRegisteredUsers: UserType[];
+
   createTicketHandler: voidFunc;
 }
 
@@ -113,6 +116,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [eventPosts, setEventPosts] = useState<Post[]>([]);
   const [allComment, setAllComment] = useState<Comment[]>([]);
   const [allTickets, setAllTickets] = useState<Ticket[]>([]);
+  const [allRegisteredUsers, setAllRegisteredUsers] = useState<UserType[]>([]);
 
   const [isPageBuilder, setIsPageBuilder] = useState<boolean>(false);
 
@@ -278,6 +282,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setEventDate(event.eventStartDate);
       setEventEndDate(event.eventEndDate);
       setEventStartTime(event.startTime);
+      setAllRegisteredUsers(event.registerUser);
 
       setEndTime(event.endTime);
       setEventPublish(event.isPublished);
@@ -377,6 +382,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         setNewTicketImage,
 
         createTicketHandler,
+
+        allRegisteredUsers,
       }}
     >
       {children}

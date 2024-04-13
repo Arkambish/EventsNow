@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import User from "@/models/userModel";
 import connectMongoDB from "@/lib/mongo/mongodb";
 
-export const GET = async (req: Request, { params }: any) => {
+export const GET : any = async (req: Request, { params }: any) => {
   const id = params.id;
 
   try {
