@@ -8,6 +8,14 @@ import { HiArrowCircleLeft } from "react-icons/hi";
 import Container from "./Container";
 import { UseEventContext, EventContextType } from "../EventDashContext";
 import CheckPermission from "./CheckPermission";
+import { AiOutlineHome } from "react-icons/ai";
+import { RiPagesLine } from "react-icons/ri";
+import { AiOutlineTeam } from "react-icons/ai";
+import { TbReport } from "react-icons/tb";
+import { MdOutlinePublishedWithChanges } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
+import { TiTicket } from "react-icons/ti";
+import { TbFileBarcode } from "react-icons/tb";
 
 export default function SideBar() {
   const {
@@ -57,9 +65,9 @@ export default function SideBar() {
             >
               <EventDashButton
                 isSlideBar={isSideBar}
-                img="overview.svg"
                 text="Overview"
                 onClick={() => handleOverview()}
+                children={<AiOutlineHome size={23} />}
               />
               <CheckPermission
                 provideGlobalPermission={["Manage Host Page"]}
@@ -67,16 +75,16 @@ export default function SideBar() {
               >
                 <EventDashButton
                   isSlideBar={isSideBar}
-                  img="bookmark.svg"
                   text="Host Page"
                   onClick={handleHostPage}
+                  children={<RiPagesLine size={23} />}
                 />
               </CheckPermission>
               <EventDashButton
                 isSlideBar={isSideBar}
-                img="team.svg"
                 text="My Team"
                 onClick={() => handleMyteam()}
+                children={<AiOutlineTeam size={23} />}
               />
               <CheckPermission
                 provideGlobalPermission={["Get Reports"]}
@@ -84,9 +92,9 @@ export default function SideBar() {
               >
                 <EventDashButton
                   isSlideBar={isSideBar}
-                  img="file_dock.svg"
                   text="Reports"
                   onClick={() => handleReports()}
+                  children={<TbReport size={23} />}
                 />
               </CheckPermission>
               <CheckPermission
@@ -95,9 +103,9 @@ export default function SideBar() {
               >
                 <EventDashButton
                   isSlideBar={isSideBar}
-                  img="bell_pin.svg"
                   text="Campaign"
                   onClick={() => handleCampaign()}
+                  children={<MdOutlinePublishedWithChanges size={23} />}
                 />
               </CheckPermission>
               <CheckPermission
@@ -106,9 +114,9 @@ export default function SideBar() {
               >
                 <EventDashButton
                   isSlideBar={isSideBar}
-                  img="Setting.svg"
                   text="Settings"
                   onClick={() => handleSetting()}
+                  children={<IoSettingsOutline size={23} />}
                 />
               </CheckPermission>
               <CheckPermission
@@ -117,9 +125,9 @@ export default function SideBar() {
               >
                 <EventDashButton
                   isSlideBar={isSideBar}
-                  img="Setting.svg"
                   text="Tickets"
                   onClick={() => handleTicket()}
+                  children={<TiTicket size={23} />}
                 />
               </CheckPermission>
               <CheckPermission
@@ -128,9 +136,9 @@ export default function SideBar() {
               >
                 <EventDashButton
                   isSlideBar={isSideBar}
-                  img="setting.svg"
                   text="QR Reader"
                   onClick={() => handleQRreader()}
+                  children={<TbFileBarcode size={23} />}
                 />
               </CheckPermission>
             </div>
