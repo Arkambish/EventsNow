@@ -17,9 +17,21 @@ import { UserDetails } from "@/app/Type";
 import { set } from "mongoose";
 import { ca, ro } from "date-fns/locale";
 import { error, success } from "@/util/Toastify";
-import { AttendanceType, EventType, voidFunc,UserType } from "@/app/Type";
+
+import {
+  AttendanceType,
+  EventPermissionType,
+  EventType,
+  voidFunc,
+  UserType
+} from "@/app/Type";
+import { getUserDetails } from "@/util/helper";
+
 
 export interface EventContextType {
+  isLoading: boolean;
+  globalPermission: string[];
+  eventPermission: string[];
   id: String;
   status: String;
   handleOverview: voidFunc;
@@ -181,8 +193,12 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [eventCoverImage, setEventCoverImage] = useState<string>("");
   const [eventDashboardImage, setEventDashboardImage] = useState<string>("");
 
+  const [globalPermission, setGlobalPermission] = useState<string[]>([]);
+  const [eventPermission, setEventPermission] = useState<string[]>([]);
+
   const [attendances, setAttendances] = useState<AttendanceType[]>([]);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   //new ticket details
   const [newTicketPrice, setNewTicketPrice] = useState<number>(0);
@@ -270,7 +286,24 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     };
 
     async function handleContext() {
+      setIsLoading(true);
       const event = await getEvent();
+
+      const userPermissionData = await getUserDetails({
+        organizationId: event.organizationId,
+      });
+
+      setGlobalPermission(userPermissionData.globalPermission);
+      const getEventPermission = userPermissionData.eventPermission.filter(
+        (item: EventPermissionType) => item.eventId === params.id
+      );
+
+      setEventPermission(
+        getEventPermission[0]?.eventPermission
+          ? getEventPermission[0]?.eventPermission
+          : []
+      );
+
       if (event.message === "No event") {
         router.push("/404");
         return;
@@ -292,6 +325,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setEventEndTime(event.eventEndDate);
 
       const user = await getUser();
+
       if (!user) {
         return;
       }
@@ -314,11 +348,13 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setAllTickets(data);
     }
     getTickets();
+    setIsLoading(false);
   }, [params.id, router, setEventPublish, status, id]);
 
   return (
     <EventContext.Provider
       value={{
+        isLoading,
         isPageBuilder,
         setIsPageBuilder,
         attendances,
@@ -383,7 +419,12 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
         createTicketHandler,
 
+
         allRegisteredUsers,
+
+        eventPermission,
+        globalPermission,
+
       }}
     >
       {children}

@@ -2,17 +2,22 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter, useParams, notFound } from "next/navigation";
 import { useAuth } from "@/app/AuthContext";
-import { AuthContext } from "@/components/Navbar/NavBar";
+import { AuthContext, getUser } from "@/components/Navbar/NavBar";
 import {
   ChildrenType,
+  EventPermissionType,
   EventType,
   OrgContext,
   OrgDashboardType,
   OrganizationTeamType,
   OrganizationType,
+  PermissionType,
   UserType,
   voidFunc,
 } from "@/app/Type";
+import { get } from "http";
+import { getSession } from "next-auth/react";
+import { getUserDetails } from "@/util/helper";
 
 export type Modal =
   | ""
@@ -32,7 +37,7 @@ type GettingOrganizationData = {
 };
 const orgContext = createContext<OrgContext | string>("");
 function OrgContextProvider({ children }: ChildrenType) {
-  const [status, setStatus] = useState<OrgDashboardType>("dashboard");
+  const [status, setStatus] = useState<OrgDashboardType>("myEvents");
   const [revenue, setRevenue] = useState<number>(0);
   const [ticketSold, setTicketSold] = useState<number>(0);
   const [events, setEvents] = useState<EventType[]>([]);
@@ -57,10 +62,41 @@ function OrgContextProvider({ children }: ChildrenType) {
   const [organizationImage, setOrganizationImage] = useState<string>("");
   const id: string | any = params.id;
   const [eventPermission, setEventPermission] = useState<EventPermission[]>([]);
-
+  const [userPermission, setUserPermission] = useState<PermissionType>({
+    _id: "",
+    organizationId: "",
+    userId: "",
+    globalPermission: [],
+    eventPermission: [],
+  });
   useEffect(
     function () {
       async function getData() {
+        // const session = await getSession();
+        // const userDetails = await getUser({ email: session?.user?.email });
+
+        // const userPermissionRes = await fetch(
+        //   `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/checkUserPermission`,
+        //   {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       organizationId: params.id,
+        //       userId: userDetails._id,
+        //     }),
+        //   }
+        // );
+
+        const userPermissionData = await getUserDetails({
+          organizationId: params.id,
+        });
+
+        // const userPermissionData = await userPermissionRes.json();
+        console.log(userPermissionData);
+        setUserPermission(userPermissionData);
+
         setIsLoading(true);
         try {
           const res = await fetch(
@@ -92,7 +128,6 @@ function OrgContextProvider({ children }: ChildrenType) {
           const res2 = await fetch(
             `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers/${params.id}`
           );
-          console.log(res2.ok, "res2.ok");
 
           const organizationUser: OrganizationTeamType[] = await res2.json();
 
@@ -108,9 +143,21 @@ function OrgContextProvider({ children }: ChildrenType) {
             `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationEvent/${params.id}`
           );
 
-
           const organizationEvent: EventType[] = await res3.json();
-          setEvents(organizationEvent);
+
+          if (userPermissionData.globalPermission.length > 0) {
+            setEvents(organizationEvent);
+          } else {
+            const getEventPermissionId = userPermissionData.eventPermission.map(
+              (permission: EventPermissionType) => permission.eventId
+            );
+
+            const EventHasPermission = organizationEvent.filter(
+              (event: EventType) => getEventPermissionId.includes(event._id)
+            );
+
+            setEvents(EventHasPermission);
+          }
 
           setIsLoading(false);
         } catch (error) {
@@ -153,6 +200,7 @@ function OrgContextProvider({ children }: ChildrenType) {
     <orgContext.Provider
       value={{
         events,
+        userPermission,
         handleSetting,
         isSlideBar,
         setIsSlideBar,

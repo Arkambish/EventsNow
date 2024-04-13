@@ -104,34 +104,39 @@ export default function CheckActive() {
                   <div className=" flex flex-col mx-5">
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
-                      img="profile.svg"
                       text="My Profile"
                       onClick={() => handleProfile()}
-                    />
+                    >
+                      ""
+                    </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
-                      img="wishlist.svg"
                       text="Wish List"
                       onClick={() => handleWishList()}
-                    />
+                    >
+                      ""
+                    </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
-                      img="myevents.svg"
                       text="My Events"
                       onClick={() => handleMyEvents()}
-                    />
+                    >
+                      ""
+                    </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
-                      img="mytickets.svg"
                       text="My Tickets"
                       onClick={() => handlemyTickets()}
-                    />
+                    >
+                      ""
+                    </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
-                      img="Setting.svg"
                       text="Settings"
                       onClick={() => handleSetting()}
-                    />
+                    >
+                      ""
+                    </Dashboard_Btn>
                   </div>
                 </div>
               </div>

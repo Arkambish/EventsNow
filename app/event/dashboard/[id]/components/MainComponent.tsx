@@ -9,6 +9,7 @@ import Event from "../components/Event";
 import SelectTemplate from "@/app/event/host/[id]/SelectTemplate";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import Build from "./pageBuilder/Build";
+import Spinner from "@/components/Spinner";
 
 export default function MainComponent() {
   const {
@@ -34,6 +35,7 @@ export default function MainComponent() {
     setIsPageBuilder,
     handleQRreader,
     isPageBuilder,
+    isLoading,
   } = UseEventContext() as EventContextType;
   const [isDashboardOpen, setIsDashboardOpen] = useState<boolean>(false);
 
@@ -115,111 +117,117 @@ export default function MainComponent() {
               </div>
             </button>
           </div>
-          <div
-            className={
-              isDashboardOpen
-                ? "absolute z-10 shadow-2xl flex flex-col  left-0 top-20 w-[65%] sm:hidden h-fit bg-[#ecf0fc]  ease-in duration-50"
-                : "fixed left-[100%] top-0 p-10 ease-in duration-50"
-            }
-            ref={menuBarRef}
-          >
-            <button onClick={() => setIsDashboardOpen(false)}>
-              <div className="mx-2 my-2 w-fit p-1 mb-3 ">
-                {/* <MdClose size={20} /> */}
-                <Image
-                  src="/images/reusableComponents/close.svg"
-                  alt="close"
-                  width={29}
-                  height={29}
-                />
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              <div
+                className={
+                  isDashboardOpen
+                    ? "absolute z-10 shadow-2xl flex flex-col  left-0 top-20 w-[65%] sm:hidden h-fit bg-[#ecf0fc]  ease-in duration-50"
+                    : "fixed left-[100%] top-0 p-10 ease-in duration-50"
+                }
+                ref={menuBarRef}
+              >
+                <button onClick={() => setIsDashboardOpen(false)}>
+                  <div className="mx-2 my-2 w-fit p-1 mb-3 ">
+                    {/* <MdClose size={20} /> */}
+                    <Image
+                      src="/images/reusableComponents/close.svg"
+                      alt="close"
+                      width={29}
+                      height={29}
+                    />
+                  </div>
+                </button>
+                <div className=" flex flex-col mx-5">
+                  <EventDashButton
+                    isSlideBar={isSideBar}
+                    img="overview.svg"
+                    text="Overview"
+                    onClick={() => handleOverview()}
+                  />
+                  <EventDashButton
+                    isSlideBar={isSideBar}
+                    img="bookmark.svg"
+                    text="Host Page"
+                    onClick={() => handleHostPage()}
+                  />
+                  <EventDashButton
+                    isSlideBar={isSideBar}
+                    img="team.svg"
+                    text="My Team"
+                    onClick={() => handleMyteam()}
+                  />
+                  <EventDashButton
+                    isSlideBar={isSideBar}
+                    img="file_dock.svg"
+                    text="Reports"
+                    onClick={() => handleReports()}
+                  />
+                  <EventDashButton
+                    isSlideBar={isSideBar}
+                    img="bell_pin.svg"
+                    text="Campaign"
+                    onClick={() => handleCampaign()}
+                  />
+                  <EventDashButton
+                    isSlideBar={isSideBar}
+                    img="setting.svg"
+                    text="Settings"
+                    onClick={() => handleSetting()}
+                  />
+
+                  <EventDashButton
+                    isSlideBar={isSideBar}
+                    img="setting.svg"
+                    text="Tickets"
+                    onClick={() => handleTicket()}
+                  />
+
+                  <EventDashButton
+                    isSlideBar={isSideBar}
+                    img="setting.svg"
+                    text="QR Reader"
+                    onClick={() => handleQRreader()}
+                  />
+                </div>
               </div>
-            </button>
-            <div className=" flex flex-col mx-5">
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="overview.svg"
-                text="Overview"
-                onClick={() => handleOverview()}
-              />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="bookmark.svg"
-                text="Host Page"
-                onClick={() => handleHostPage()}
-              />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="team.svg"
-                text="My Team"
-                onClick={() => handleMyteam()}
-              />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="file_dock.svg"
-                text="Reports"
-                onClick={() => handleReports()}
-              />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="bell_pin.svg"
-                text="Campaign"
-                onClick={() => handleCampaign()}
-              />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="setting.svg"
-                text="Settings"
-                onClick={() => handleSetting()}
-              />
-
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="setting.svg"
-                text="Tickets"
-                onClick={() => handleTicket()}
-              />
-
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="setting.svg"
-                text="QR Reader"
-                onClick={() => handleQRreader()}
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2">
-            <div
-              className={` md:block hidden ${
-                isSideBar
-                  ? "md:col-span-3 md:ml-2  col-span-4 lg:col-span-2 "
-                  : "md:col-span-1   "
-              }`}
-            >
-              <SideBar />
-            </div>
-            <div
-              className={`lg:col-span-7 col-span-12  ${
-                isSideBar ? "md:col-span-5 " : "md:col-span-7 "
-              }`}
-            >
-              <MidContent />
-            </div>
-            <div
-              className={`lg:col-span-3 md:block hidden
-         ${isSideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
-            >
-              <Event
-                EventName={eventname}
-                Location={eventLocation}
-                Time={eventStartTime}
-                endTime={endTime}
-                endDate={eventEndDate.substring(0, 10)}
-                Date={eventDate.substring(0, 10)}
-                eventCover={eventDashboardImage}
-                setIsPreview={setIsPreview}
-              />
-            </div>
-          </div>
+              <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2">
+                <div
+                  className={` md:block hidden ${
+                    isSideBar
+                      ? "md:col-span-3 md:ml-2  col-span-4 lg:col-span-2 "
+                      : "md:col-span-1   "
+                  }`}
+                >
+                  <SideBar />
+                </div>
+                <div
+                  className={`lg:col-span-7 col-span-12  ${
+                    isSideBar ? "md:col-span-5 " : "md:col-span-7 "
+                  }`}
+                >
+                  <MidContent />
+                </div>
+                <div
+                  className={`lg:col-span-3 md:block hidden
+             ${isSideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
+                >
+                  <Event
+                    EventName={eventname}
+                    Location={eventLocation}
+                    Time={eventStartTime}
+                    endTime={endTime}
+                    endDate={eventEndDate.substring(0, 10)}
+                    Date={eventDate.substring(0, 10)}
+                    eventCover={eventDashboardImage}
+                    setIsPreview={setIsPreview}
+                  />
+                </div>
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>
