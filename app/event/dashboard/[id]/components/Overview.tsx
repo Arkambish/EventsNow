@@ -1,7 +1,20 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import OverviewSubComponent from "./OverviewSubComponent";
 export default function Overview() {
+  const [totalTicketSale, setTotalTicketSale] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTotalTicketSale(data.totalTicketsBorrowed);
+      })
+      .catch((error) =>
+        console.error("Error fetching total ticket sale:", error)
+      );
+  }, []);
   return (
     <Container>
       <div className="h-full mt-5 mb-8 sm:mb-56">
@@ -18,16 +31,23 @@ export default function Overview() {
             image="tickets.svg"
             text="Total ticket Sale"
             linkToDetails="totalTicket"
+            details={
+              totalTicketSale !== null
+                ? totalTicketSale.toString()
+                : "Loading..."
+            }
           />
           <OverviewSubComponent
             image="attendence.svg"
             text="Total attendence"
             linkToDetails="totalAttendence"
+            details="15467"
           />
           <OverviewSubComponent
             image="revenue.svg"
             text="Total revenue"
             linkToDetails="totalRevenue"
+            details="18234"
           />
         </div>
       </div>

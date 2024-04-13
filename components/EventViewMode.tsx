@@ -61,16 +61,20 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
 
   return (
     <div>
-      <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between">
-        <div className="font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8 ">
+      <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between mt-4">
+        <div className="font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-4 md:ms-12 lg:ms-12 ">
           Upcoming Events
         </div>
-        <div className="ms-12 sm:ms-0 justify-center items-center flex flex-col md:flex-col lg:flex-row gap-2 md:gap-2 lg:gap-6 mr-0 md:mr-20 lg:mr-20 text-gray-600">
-          <div className=" mt-2 md:mt-6 lg:mt-10 flex flex-row">
-            Sort By
-            <div className="relative ml-4">
+        <div className=" justify-between items-center flex flex-row gap-4 md:gap-2 lg:gap-6 mr-0 md:mr-0 lg:mr-20 text-gray-600 ml-2 md:ml-8 lg:ml-8">
+          <div className=" mt-2 md:mt-4 lg:mt-6 flex flex-row border border-[#906953] p-1  rounded-lg text-white shadow-normalComponent ">
+            <div className="sm:ms-2 ms-0 hidden lg:flex text-[#906953]">
+              {" "}
+              Sort By
+            </div>
+
+            <div className="relative ml-0 lg:ml-4 text-gray-800 cursor-pointer ">
               <select
-                className="appearance-none bg-white border border-gray-300 px-4 py-1 rounded-md shadow-sm text-sm focus:outline-none focus:border-custom-brown items-center"
+                className="border border-[#906953] px-4 py-1 rounded-md shadow-sm text-sm focus:outline-none  items-center"
                 value={sortBy}
                 onChange={handleSortByChange}
               >
@@ -81,17 +85,20 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
               </select>
             </div>
           </div>
-          <div className="mt-2 md:mt-2 lg:mt-10 flex flex-row gap-4 mr-20">
-            View As
-            <div className="mt-1 flex flex-row gap-3 cursor-pointer">
+          <div className="mt-2 md:mt-4 lg:mt-6 flex flex-row gap-4 sm:mr-12 mr-0 border border-[#906953] p-1 rounded-lg text-white shadow-normalComponent  ">
+            <div className="ms-2 hidden md:flex lg:flex text-[#906953]">
+              {" "}
+              View As
+            </div>
+            <div className="mt-1 flex flex-row sm:gap-3 gap-6 cursor-pointer mr-2 p-1">
               <HiOutlineViewGrid
-                className={`cursor-pointer hover:bg-gray-400   ${
+                className={`cursor-pointer text-[#906953] hover:text-black   ${
                   viewMode === "grid" ? "" : ""
                 }`}
                 onClick={() => handleViewChange("grid")}
               />
               <HiOutlineViewList
-                className={`cursor-pointer hover:bg-gray-400 ${
+                className={`cursor-pointer text-[#906953] hover:text-black ${
                   viewMode === "list" ? "" : ""
                 }`}
                 onClick={() => handleViewChange("list")}

@@ -16,8 +16,11 @@ export default function EventDashButton({
   img,
 }: Dashboard_Btn) {
   return (
-    <button onClick={onClick} className="  hover:opacity-80  my-12 mt-2">
-      <div className=" flex lg:gap-3 xl:gap-5 gap-5	">
+    <button
+      onClick={onClick}
+      className=" text-myBrown hover:text-black  my-12 mt-2"
+    >
+      <div className=" flex lg:gap-3 xl:gap-5 gap-5 text-myBrown	">
         <Image
           src={`/images/eventDash/${img}`}
           alt="team"
@@ -26,7 +29,7 @@ export default function EventDashButton({
         />
 
         {isSlideBar ? (
-          <div className=" font-sans  text-center text-base font-semibold text-black  leading-normal">
+          <div className=" font-sans text-myBrown  text-center text-base font-semibold text-black  leading-normal hover:text-black">
             {text}
           </div>
         ) : (
