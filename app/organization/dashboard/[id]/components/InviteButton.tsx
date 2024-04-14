@@ -1,63 +1,71 @@
-import React, { useState } from "react";
-import Image from "next/image";
+import { useState } from "react";
+
 import { useOrg } from "../OrgContext";
 import { error, success } from "@/util/Toastify";
-import { OrgContext } from "@/app/Type";
+import { OrgContext, UserType } from "@/app/Type";
 import { HiOutlineUserAdd } from "react-icons/hi";
+import ComboboxComponent from "@/components/ComboboxComboboxComponent";
+import { FetchPost } from "@/hooks/useFetch";
+import { ca } from "date-fns/locale";
+
+export type People = {
+  id: number;
+  name: string;
+};
 
 export default function InviteButton() {
-  const { organization, isSlideBar } = useOrg() as OrgContext;
-  const [email, setEmail] = useState<string>("");
+  const { organization, isSlideBar, peopleEmail } = useOrg() as OrgContext;
+
+  const [email, setEmail] = useState<People>({ id: 0, name: "" });
 
   async function handleclick() {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/inviteTeamMember`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          organizationId: organization?._id,
-        }),
+    // const res = await fetch(
+    //   `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/inviteTeamMember`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       email: email.name,
+    //       organizationId: organization?._id,
+    //     }),
+    //   }
+    // );
+
+    try {
+      const data = await FetchPost({
+        endpoint: "organization/inviteTeamMember",
+        body: { email: email.name, organizationId: organization?._id },
+      });
+
+      if (data === "No User  exists") {
+        error("No User  exists in the system");
       }
-    );
-
-    const data = await res.json();
-
-    if (data === "No User  exists") {
-      error("No User  exists in the system");
-    }
-    if (data === "Email sent successfully") {
-      success("Invitation sent successfully");
+      if (data === "Email sent successfully") {
+        success("Invitation sent successfully");
+        setEmail({ id: 0, name: "" });
+      }
+    } catch (e) {
+      error("Something went wrong while fetching data");
     }
   }
 
   return (
     <div className="flex gap-10 ">
       <div
-        className={`flex flex-row border-2 border-gray-400 bg-white rounded-lg ${
+        className={`flex flex-row  rounded-lg ${
           isSlideBar ? "md:w-48" : "md:w-72 "
         } sm:w-48 w-40   h-10`}
       >
-        <Image
-          src="/images/reusableComponents/Search (1).svg"
-          width={20}
-          height={14}
-          alt="search"
-          className="bg-white ms-2"
-        />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-          placeholder={"Search by email"}
-          className="flex-1 focus:outline-none rounded-lg text-xs ms-2 "
+        <ComboboxComponent
+          data={peopleEmail}
+          select={email}
+          setSelect={setEmail}
         />
       </div>
       <button
-        className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
+        className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button  px-2 text-white rounded-lg"
         onClick={handleclick}
       >
         <HiOutlineUserAdd size={19} />

@@ -167,7 +167,6 @@ function EventCardOrgDash({
                 onClick={handleDelete}
                 className="button max-sm:hidden text-center hide flex gap-2 bg-rose-900 text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM  "
               >
-
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -181,7 +180,6 @@ function EventCardOrgDash({
               </button>
             </Link>
           </div>
-
         </div>
 
         <div className="grid  gap-2 pl-4 pb-4">

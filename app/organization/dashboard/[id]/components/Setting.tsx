@@ -31,6 +31,7 @@ import Switch from "react-switch";
 import { is } from "date-fns/locale";
 import { set } from "mongoose";
 import { Input } from "@/components/Input";
+import { FetchPut } from "@/hooks/useFetch";
 
 interface contextProps {
   organization: OrganizationType;
@@ -81,21 +82,11 @@ export default function Setting() {
 
       const data = { bank, branch, payout, accountName, accountNumber };
 
-      const res = await fetch(
-        `/api/v1/organization/updateOrganization/${organization._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const resData = await FetchPut({
+        endpoint: `organization/updateOrganization/${organization._id}`,
+        body: data,
+      });
 
-      if (!res.ok) {
-        error("Failed to update organization details");
-        return;
-      }
       setIsEditingAdvanced(false);
       success("Organization details updated successfully");
     } else {
@@ -104,23 +95,10 @@ export default function Setting() {
   }
 
   async function handleImageSaveButton() {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/updateOrganizationPrifilePic`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id,
-          image: profileImage,
-        }),
-      }
-    );
-    if (!res.ok) {
-      error("Failed to save settings");
-      return;
-    }
+    const data = await FetchPut({
+      endpoint: `organization/updateOrganizationPrifilePic`,
+      body: { id, image: profileImage },
+    });
     setOrganizationImage(profileImage);
     setProfileImage("");
   }
