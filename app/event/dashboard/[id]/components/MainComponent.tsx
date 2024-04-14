@@ -10,6 +10,17 @@ import SelectTemplate from "@/app/event/host/[id]/SelectTemplate";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import Build from "./pageBuilder/Build";
 import Spinner from "@/components/Spinner";
+import {
+  HiArrowCircleRight,
+  HiOutlineDocumentText,
+  HiOutlineUsers,
+} from "react-icons/hi";
+import { MdOutlinePublishedWithChanges } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
+import { TiTicket } from "react-icons/ti";
+import { TbFileBarcode } from "react-icons/tb";
+import { AiOutlineHome } from "react-icons/ai";
+import { RiPagesLine } from "react-icons/ri";
 
 export default function MainComponent() {
   const {
@@ -143,51 +154,51 @@ export default function MainComponent() {
                 <div className=" flex flex-col mx-5">
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="overview.svg"
                     text="Overview"
                     onClick={() => handleOverview()}
+                    children={<AiOutlineHome size={23} />}
                   />
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="bookmark.svg"
+                    children={<RiPagesLine size={23} />}
                     text="Host Page"
                     onClick={() => handleHostPage()}
                   />
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="team.svg"
+                    children={<HiOutlineUsers size={23} />}
                     text="My Team"
                     onClick={() => handleMyteam()}
                   />
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="file_dock.svg"
+                    children={<HiOutlineDocumentText size={23} />}
                     text="Reports"
                     onClick={() => handleReports()}
                   />
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="bell_pin.svg"
+                    children={<MdOutlinePublishedWithChanges size={23} />}
                     text="Campaign"
                     onClick={() => handleCampaign()}
                   />
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="setting.svg"
+                    children={<IoSettingsOutline size={23} />}
                     text="Settings"
                     onClick={() => handleSetting()}
                   />
 
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="setting.svg"
+                    children={<TiTicket size={23} />}
                     text="Tickets"
                     onClick={() => handleTicket()}
                   />
 
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="setting.svg"
+                    children={<TbFileBarcode size={23} />}
                     text="QR Reader"
                     onClick={() => handleQRreader()}
                   />

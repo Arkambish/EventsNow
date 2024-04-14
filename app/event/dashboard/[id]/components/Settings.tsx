@@ -85,7 +85,7 @@ export default function Settings() {
           </div>
           <div className="text-[#666] grid gap-6 ">
             <ContainerWithStroke>
-              <div className="md:px-8 xl:px-16 grid gap-2 pt-3 pb-8 max-md:px-3 ">
+              <div className="lg:px-8 grid gap-2 pt-3 pb-8 max-md:px-3 md:px-8 ">
                 <div className="w-full text-left text-lg ">Event Name</div>
                 <div className="w-full flex justify-start ">
                   <input
@@ -99,9 +99,7 @@ export default function Settings() {
                   />
                 </div>
               </div>
-            </ContainerWithStroke>
 
-            <ContainerWithStroke>
               <div className="lg:px-8 grid gap-2 pt-3 pb-8 max-md:px-3 md:px-8">
                 <div className="w-full text-left text-lg ">Event Type</div>
                 <div className="w-full sm:max-md:flex 2xl:flex  justify-between  ">
@@ -147,9 +145,7 @@ export default function Settings() {
                   </div>
                 </div>
               </div>
-            </ContainerWithStroke>
 
-            <ContainerWithStroke>
               <div className="sm:grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2 max-md:gap-3 max-md:px-3 py-4">
                 <div className="md:px-8 l xl:px-6 grid md:gap-2 pt-3 pb-5 ">
                   <div className="w-full text-left text-lg ">

@@ -118,7 +118,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<string>("overview");
   const params = useParams<{ id: string }>();
   const [isSideBar, setIsSideBar] = useState<boolean>(true);
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [eventPosts, setEventPosts] = useState<Post[]>([]);
   const [allComment, setAllComment] = useState<Comment[]>([]);
   const [allTickets, setAllTickets] = useState<Ticket[]>([]);
@@ -191,7 +191,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
   const [attendances, setAttendances] = useState<AttendanceType[]>([]);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   //new ticket details
   const [newTicketPrice, setNewTicketPrice] = useState<number>(0);

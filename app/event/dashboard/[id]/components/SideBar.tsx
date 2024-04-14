@@ -3,7 +3,11 @@ import React, { use, useState } from "react";
 
 import EventDashButton from "./EventDashButton";
 
-import { HiArrowCircleRight } from "react-icons/hi";
+import {
+  HiArrowCircleRight,
+  HiOutlineDocumentText,
+  HiOutlineUsers,
+} from "react-icons/hi";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import Container from "./Container";
 import { UseEventContext, EventContextType } from "../EventDashContext";
@@ -84,7 +88,7 @@ export default function SideBar() {
                 isSlideBar={isSideBar}
                 text="My Team"
                 onClick={() => handleMyteam()}
-                children={<AiOutlineTeam size={23} />}
+                children={<HiOutlineUsers size={23} />}
               />
               <CheckPermission
                 provideGlobalPermission={["Get Reports"]}
@@ -94,7 +98,7 @@ export default function SideBar() {
                   isSlideBar={isSideBar}
                   text="Reports"
                   onClick={() => handleReports()}
-                  children={<TbReport size={23} />}
+                  children={<HiOutlineDocumentText size={23} />}
                 />
               </CheckPermission>
               <CheckPermission
