@@ -4,6 +4,7 @@ import { useOrg } from "../OrgContext";
 import { IoSaveOutline } from "react-icons/io5";
 import { FaRegWindowClose } from "react-icons/fa";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
+import { FetchPut } from "@/hooks/useFetch";
 
 interface Details {
   name: string;
@@ -35,21 +36,10 @@ const ProfileSettings = memo(function ProfileSettings({
     }
 
     if (editedName !== organizationName) {
-      const res = await fetch(
-        `/api/v1/organization/updateOrganization/${organizationID}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ organizationName: editedName }),
-        }
-      );
-
-      if (!res.ok) {
-        error("Failed to update organization name");
-        return;
-      }
+      const data = await FetchPut({
+        endpoint: `organization/updateOrganization/${organizationID}`,
+        body: { organizationName: editedName },
+      });
       setIsEditing(false);
       success("Organization name updated successfully");
     }

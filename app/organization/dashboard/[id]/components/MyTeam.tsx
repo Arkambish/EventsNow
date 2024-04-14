@@ -12,6 +12,7 @@ import InviteButton from "./InviteButton";
 import { MdRefresh } from "react-icons/md";
 import Spinner from "@/components/Spinner";
 import { OrgContext, OrganizationTeamType } from "@/app/Type";
+import { FetchGet } from "@/hooks/useFetch";
 
 export default function MyTeam() {
   const { modal, team, id, setTeam, organization } = useOrg() as OrgContext;
@@ -19,11 +20,10 @@ export default function MyTeam() {
 
   async function handleTeam() {
     setLoading(true);
-    const res2 = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers/${id}`
-    );
 
-    const organizationTeam: OrganizationTeamType[] = await res2.json();
+    const organizationTeam: OrganizationTeamType[] = await FetchGet({
+      endpoint: `permission/getOrganiztionUsers/${id}`,
+    });
 
     const team = organizationTeam.filter(
       (user: OrganizationTeamType) => user.userData.email !== organization.email
