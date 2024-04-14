@@ -4,11 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    await connectMongoDB(); // Await the connection establishment
+    await connectMongoDB();
 
     const { _id } = await req.json();
 
-    // Assuming User is a Mongoose model, use deleteOne() method
     const data = await Event.deleteOne({ _id });
 
     return NextResponse.json({ data });
