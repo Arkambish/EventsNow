@@ -88,6 +88,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
                     eventUpdates={e.eventUpdates}
                     marketingUpdates={e.marketingUpdates}
                     eventImage={e.eventId.coverImage}
+                    eventId={e.eventId._id}
                     />
                   
                 ))
