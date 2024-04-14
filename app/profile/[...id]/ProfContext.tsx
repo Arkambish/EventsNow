@@ -18,7 +18,7 @@ interface ProfContextProviderProps {
 }
 
 function ProfContextProvider({ children }: ProfContextProviderProps) {
-  const [status, setStatus] = useState("myEvents");
+  const [status, setStatus] = useState("myProfile");
   const [isActive, setIsActive] = useState(true);
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
   const [isSlideBar, setIsSlideBar] = useState(true);

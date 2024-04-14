@@ -9,7 +9,7 @@ type RigisterEvent = {
   register: any[];
 };
 function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
-  const [btnState, setBtnState] = useState(2);
+  const [btnState, setBtnState] = useState(1);
 
   const handleToggle = (selectedBtn: number) => {
     setBtnState(selectedBtn);
