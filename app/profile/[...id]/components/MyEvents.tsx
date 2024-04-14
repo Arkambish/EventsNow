@@ -15,8 +15,9 @@ export default function MyEvents() {
     }
   };
   return (
-    <div className="flex flex-col md:flex-row rounded-lg shadow-3xl  bg-[#fff] pt-8 justify-start items-start gap-12 ">
-      <div className="w-fit ml-0">
+    <div className=" md:flex-row rounded-lg shadow-3xl  bg-[#fff] pt-8 justify-start items-start gap-12  ">
+      
+      <div className="grid justify-start ml-0  ">
         <div className="text-3xl font-semibold text-custom-orange font-IBM ml-[55px]">
           My Events
         </div>
@@ -24,6 +25,7 @@ export default function MyEvents() {
           <EventHost btn1={"MANAGE EVENTS"} btn2={"REGISTERED EVENTS"} />
         </div>
       </div>
+      
     </div>
   );
 }

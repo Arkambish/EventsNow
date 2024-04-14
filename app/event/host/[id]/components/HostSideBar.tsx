@@ -102,7 +102,9 @@ export default function HostSideBar({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: email, eventId: id , sendEventUpdates:eventUpdates, sendMarketingUpdates:marketingUpdates}),
+      
       }
+      
     );
     if (!res.ok) {
       error("Error registration for event");

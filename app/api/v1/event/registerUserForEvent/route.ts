@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const registerUser = await RegistrationUser.create({
       userId: user._id,
       eventId: data.eventId,
-      evetUpdates: data.sendEventUpdates,
+      eventUpdates: data.sendEventUpdates,
       marketingUpdates: data.sendMarketingUpdates,
     });
     

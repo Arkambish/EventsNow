@@ -14,7 +14,7 @@ const registereduserschema   = new mongoose.Schema({
         ref: Event,
         required: true
     },
-    evetUpdates: {
+    eventUpdates: {
         type: Boolean,
         required: true
     },

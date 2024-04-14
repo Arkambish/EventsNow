@@ -4,19 +4,21 @@ import MyEventCard from "@/app/profile/[...id]/components/MyEventCard";
 import React, { useState } from "react";
 import EmptyStateComponent from "./EmptyStateComponent";
 import { log } from "console";
+import RegisteredEventCard from "@/app/profile/[...id]/components/RegisteredEventCard";
 type RigisterEvent = {
   register: any[];
 };
 function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
-  const [btnState, setBtnState] = useState(1);
+  const [btnState, setBtnState] = useState(2);
 
   const handleToggle = (selectedBtn: number) => {
     setBtnState(selectedBtn);
   };
   const { register, registerEvent } = useProf() as ProfContext;
+  
 
   return (
-    <div className="flex h-screen flex-col items-center font-IBM pr-4 ml-5 ">
+    <div className="   font-IBM p-auto ml-5 ">
       <div className="bg-initial rounded-2xl m-4 md:w-2/2 flex items-center justify-center">
         <button
           className={`${
@@ -39,7 +41,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
           {btn2}
         </button>
       </div>
-      <div className="m-4 p-2 font-IBM rounded-2xl bg-white  gap-4 h-80 overflow-auto">
+      <div className="m-4 p-2 font-IBM rounded-2xl bg-white  gap-4 h-screen overflow-auto">
         <div className="flex flex-col gap-2 justify-start w-full">
           {btnState === 1 && (
             <>
@@ -75,21 +77,24 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
             <EmptyStateComponent message="No manege events found." />
           ))} */}
           {btnState === 2 && (
-            <>
+            <div className="grid gap-4">
               {register.length > 0 ? (
+                
                 register.map((e: any) => (
-                  <MyEventCard
-                    id={e._id}
+                  <RegisteredEventCard
                     key={e._id}
-                    OrgName={e.eventName}
-                    image={e.dashboardImage}
-                    btn="Event"
-                  />
+                    eventName={e.eventId.eventName}
+                    regUserId={e._id}
+                    eventUpdates={e.eventUpdates}
+                    marketingUpdates={e.marketingUpdates}
+                    eventImage={e.eventId.coverImage}
+                    />
+                  
                 ))
               ) : (
                 <EmptyStateComponent message="No registered events found." />
               )}
-            </>
+            </div>
           )}
         </div>
       </div>
