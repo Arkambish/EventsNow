@@ -18,6 +18,8 @@ import {
 import { get } from "http";
 import { getSession } from "next-auth/react";
 import { getUserDetails } from "@/util/helper";
+import { People } from "./components/InviteButton";
+import { FetchGet } from "@/hooks/useFetch";
 
 export type Modal =
   | ""
@@ -69,32 +71,31 @@ function OrgContextProvider({ children }: ChildrenType) {
     globalPermission: [],
     eventPermission: [],
   });
+
+  const [peopleEmail, setPeopleEmail] = useState<People[]>([]);
+
   useEffect(
     function () {
       async function getData() {
-        // const session = await getSession();
-        // const userDetails = await getUser({ email: session?.user?.email });
+        const fetchPeople = async () => {
+          const data = await FetchGet({ endpoint: "user/getAllUser" });
 
-        // const userPermissionRes = await fetch(
-        //   `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/checkUserPermission`,
-        //   {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //       organizationId: params.id,
-        //       userId: userDetails._id,
-        //     }),
-        //   }
-        // );
+          const email = data.map((person: UserType) => {
+            return {
+              id: person._id,
+              name: person.email,
+            };
+          });
+          setPeopleEmail(email);
+        };
+        fetchPeople();
 
         const userPermissionData = await getUserDetails({
           organizationId: params.id,
         });
 
         // const userPermissionData = await userPermissionRes.json();
-        console.log(userPermissionData);
+
         setUserPermission(userPermissionData);
 
         setIsLoading(true);
@@ -125,11 +126,10 @@ function OrgContextProvider({ children }: ChildrenType) {
           setIsActive(organizationDetails.organization.isActive);
 
           // get users in organization
-          const res2 = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers/${params.id}`
-          );
 
-          const organizationUser: OrganizationTeamType[] = await res2.json();
+          const organizationUser: OrganizationTeamType[] = await FetchGet({
+            endpoint: `permission/getOrganiztionUsers/${params.id}`,
+          });
 
           const team: OrganizationTeamType[] = organizationUser.filter(
             (user: OrganizationTeamType) =>
@@ -139,11 +139,10 @@ function OrgContextProvider({ children }: ChildrenType) {
           setTeam(team);
           setOrganizationId(params.id);
           // get events in organization
-          const res3 = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationEvent/${params.id}`
-          );
 
-          const organizationEvent: EventType[] = await res3.json();
+          const organizationEvent: EventType[] = await FetchGet({
+            endpoint: `organization/getOrganizationEvent/${params.id}`,
+          });
 
           if (userPermissionData.globalPermission.length > 0) {
             setEvents(organizationEvent);
@@ -199,6 +198,7 @@ function OrgContextProvider({ children }: ChildrenType) {
   return (
     <orgContext.Provider
       value={{
+        peopleEmail,
         events,
         userPermission,
         handleSetting,
