@@ -167,7 +167,7 @@ export default function Settings() {
                   <div className="w-full text-left text-lg ">
                     Event End Date
                   </div>
-                  <div className="w-full flex justify-start ">
+                  <div className="w-full flex justify-start  ">
                     <input
                       type="text"
                       placeholder=""
@@ -209,7 +209,7 @@ export default function Settings() {
                   </div>
                 </div>
 
-                <div className=" xl:px-6 md:px-8 grid gap-2 pt-3 pb-5">
+                <div className="  xl:px-6 md:px-8 grid gap-2 pt-3 pb-5">
                   <div className="w-full text-left text-lg ">
                     Set cover image
                   </div>
