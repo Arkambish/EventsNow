@@ -15,24 +15,11 @@ export type People = {
 
 export default function InviteButton() {
   const { organization, isSlideBar, peopleEmail } = useOrg() as OrgContext;
+  console.log(peopleEmail, "peopleEmail");
 
   const [email, setEmail] = useState<People>({ id: 0, name: "" });
 
   async function handleclick() {
-    // const res = await fetch(
-    //   `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/inviteTeamMember`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email: email.name,
-    //       organizationId: organization?._id,
-    //     }),
-    //   }
-    // );
-
     try {
       const data = await FetchPost({
         endpoint: "organization/inviteTeamMember",
