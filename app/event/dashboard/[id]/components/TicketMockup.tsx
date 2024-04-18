@@ -17,7 +17,6 @@ export default function TicketMockup({
   price,
   id,
 }: TicketMockupProps) {
-  
   const { allTickets, setAllTickets } = UseEventContext() as EventContextType;
   async function deleteTicket() {
     const res = await fetch(
@@ -36,11 +35,6 @@ export default function TicketMockup({
 
   return (
     <div className=" bg-gray-200 hover:border border-gray-400  w-[14rem]  rounded-xl  shadow-inner ">
-      <button onClick={deleteTicket}>
-        <div className=" button text-end text-lg font-semibold text-white bg-red-600 rounded-lg px-1 ">
-          Delete
-        </div>
-      </button>
       <div className="p-4 text-center w-[14rem] h-[9rem] overflow-hidden object-cover">
         <Image
           src={image}
@@ -50,12 +44,17 @@ export default function TicketMockup({
           className="rounded-xl shadow-md"
         />
       </div>
-
-      <div className="text-black text-center font-semibold">Type: {type}</div>
-      <div className="text-black text-center pb-2 font-semibold">
-        Price: {price} /=
+      <div className="flex flex-row">
+        <div className="text-black text-center font-semibold">Type: {type}</div>
+        <div className="text-black text-center pb-2 font-semibold">
+          Price: {price} /=
+        </div>
+        <button onClick={deleteTicket}>
+          <div className=" button text-end text-lg font-semibold text-white bg-red-600 rounded-lg px-1 ">
+            Delete
+          </div>
+        </button>
       </div>
     </div>
   );
 }
-

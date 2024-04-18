@@ -1,8 +1,21 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import OverviewSubComponent from "./OverviewSubComponent";
 import CheckPermission from "./CheckPermission";
 export default function Overview() {
+  const [totalTicketSale, setTotalTicketSale] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTotalTicketSale(data.totalTicketsBorrowed);
+      })
+      .catch((error) =>
+        console.error("Error fetching total ticket sale:", error)
+      );
+  }, []);
   return (
     <Container>
       <div className="h-full mt-5 mb-8 sm:mb-56">
@@ -15,37 +28,28 @@ export default function Overview() {
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 justify-between gap-8 ">
-          <CheckPermission
-            provideGlobalPermission={["Manage Payments"]}
-            provideEventPermission={["Manage Payments"]}
-          >
-            <OverviewSubComponent
-              image="tickets.svg"
-              text="Total ticket Sale"
-              linkToDetails="totalTicket"
-            />
-          </CheckPermission>
-
-          <CheckPermission
-            provideGlobalPermission={["View Attendees"]}
-            provideEventPermission={["View Attendees"]}
-          >
-            <OverviewSubComponent
-              image="attendence.svg"
-              text="Total attendence"
-              linkToDetails="totalAttendence"
-            />
-          </CheckPermission>
-          <CheckPermission
-            provideGlobalPermission={["Manage Payments"]}
-            provideEventPermission={["Manage Payments"]}
-          >
-            <OverviewSubComponent
-              image="revenue.svg"
-              text="Total revenue"
-              linkToDetails="totalRevenue"
-            />
-          </CheckPermission>
+          <OverviewSubComponent
+            image="tickets.svg"
+            text="Total ticket Sale"
+            linkToDetails="totalTicket"
+            details={
+              totalTicketSale !== null
+                ? totalTicketSale.toString()
+                : "Loading..."
+            }
+          />
+          <OverviewSubComponent
+            image="attendence.svg"
+            text="Total attendence"
+            linkToDetails="totalAttendence"
+            details="15467"
+          />
+          <OverviewSubComponent
+            image="revenue.svg"
+            text="Total revenue"
+            linkToDetails="totalRevenue"
+            details="18234"
+          />
         </div>
       </div>
     </Container>
