@@ -10,54 +10,73 @@ type GetFetchProps = {
 };
 
 export const FetchPost = async ({ endpoint, body = {} }: PostFetchProps) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    console.log(response.ok);
+    if (!response.ok) {
+      error("Something went wrong while fetching data from post request");
+      return;
     }
-  );
 
-  if (!response.ok) {
-    error("Something went wrong while fetching data");
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.log(e);
+    error("Something went wrong");
+    return;
   }
-
-  const data = await response.json();
-  return data;
 };
 
 export const FetchPut = async ({ endpoint, body = {} }: PostFetchProps) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    if (!response.ok) {
+      error("Something went wrong while fetching data");
     }
-  );
 
-  if (!response.ok) {
-    error("Something went wrong while fetching data");
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.log(e);
+    return;
   }
-
-  const data = await response.json();
-  return data;
 };
 
 export const FetchGet = async ({ endpoint }: GetFetchProps) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`
-  );
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`
+    );
 
-  if (!response.ok) {
-    error("Something went wrong while fetching data");
+    if (!response.ok) {
+      error("Something went wrong while fetching data");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+    return;
   }
-
-  const data = await response.json();
-  return data;
 };
