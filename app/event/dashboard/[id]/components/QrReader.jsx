@@ -4,6 +4,7 @@ import Switch from "react-switch";
 import QRScanner from "./QRcodeScanner";
 import QrScanner from "qr-scanner";
 import { error, success } from "@/util/Toastify";
+import { FetchPost } from "@/hooks/useFetch";
 
 const QrReader = () => {
   const videoElementRef = useRef(null);
@@ -59,46 +60,45 @@ const QrReader = () => {
       return;
     }
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/v1/attendant/markAttendant`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+    try {
+      const res = await FetchPost({
+        endpoint: "attendant/markAttendant",
+        body: {
           eventId: scannedEvent,
           userId: scannedUser,
           ticketType: quantity,
-        }),
+        },
+      });
+
+      if (!res.ok) {
+        error("Failed to mark attendance");
+        return;
       }
-    );
 
-    if (!res.ok) {
+      const data = await res.json();
+      if (data.message === "User Already Attending") {
+        error("User Already Attending");
+        return;
+      }
+
+      success("Attendance marked successfully");
+      setScannedEvent("");
+      setScannedUser("");
+      setQuantity("");
+    } catch (err) {
+      console.error(err);
       error("Failed to mark attendance");
-      return;
     }
-
-    const data = await res.json();
-    if (data.message === "User Already Attending") {
-      error("User Already Attending");
-      return;
-    }
-
-    success("Attendance marked successfully");
-    setScannedEvent("");
-    setScannedUser("");
-    setQuantity();
   }
 
   return (
     <div>
       <Container>
         <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
-          <div className=" font-mono text-custom-orange font-medium text-3xl ">
+          <div className="  text-custom-orange font-medium text-3xl ">
             QR READER
           </div>
-          <div className=" text-[#455273] font-mono mr-8">
+          <div className=" text-[#455273]  mr-8">
             Turn on the camera and scan the qr code
           </div>
         </div>

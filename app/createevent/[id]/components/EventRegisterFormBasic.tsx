@@ -449,7 +449,7 @@ export default function EventRegisterFormBasic() {
         )}
 
         {isSubmitting ? (
-          <button className="button flex text-center mt-10 mb-10 xl:mb-20  px-2 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base font-mono ">
+          <button className="button flex text-center mt-10 mb-10 xl:mb-20  px-2 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base  ">
             <div className="flex gap-2 justify-center items-center">
               <div> Creating</div>
               <Image
@@ -463,7 +463,7 @@ export default function EventRegisterFormBasic() {
         ) : (
           <button
             onClick={sendEventData}
-            className="button flex text-center mt-10 mb-10 xl:mb-20 py-2 px-4 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base font-mono "
+            className="button flex text-center mt-10 mb-10 xl:mb-20 py-2 px-4 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base  "
           >
             CREATE EVENT
           </button>

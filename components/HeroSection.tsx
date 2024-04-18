@@ -63,7 +63,7 @@ export default function HeroSection() {
                 alt="search"
               />
 
-              <div className=" hidden md:grid font-mono text-white text-lg mx-1 my-auto">
+              <div className=" hidden md:grid  text-white text-lg mx-1 my-auto">
                 search events
               </div>
             </button>

@@ -35,13 +35,13 @@ export default function OverviewSubComponent({
           width={80}
           height={80}
         />
-        <div className="text-[#273B4A]  font-mono tracking-tight">
+        <div className="text-[#273B4A]   tracking-tight">
           {text}
           {/* Total Ticket Sale */}
         </div>
         <button
           onClick={handleOverview}
-          className="pl-0.5 justify-self-start font-mono text-[#455273] font-normal hover:text-sky-600 "
+          className="pl-0.5 justify-self-start  text-[#455273] font-normal hover:text-sky-600 "
         >
           view details
         </button>

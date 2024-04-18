@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EmptyStateComponent({message}: {message: string}) {
+export default function EmptyStateComponent({ message }: { message: string }) {
   return (
     <div className="grid h-full w-full p-10 ">
       <div className=" mr-10 grid justify-items-center   px-10 pb-8 bg-[#F9F7FA] rounded-xl place-self-center">
@@ -27,9 +27,7 @@ export default function EmptyStateComponent({message}: {message: string}) {
             fill="#2B2A7F"
           />
         </svg>
-        <div className="text-[#252526] text-center font-mono  sm:w-60 ">
-          {message}
-        </div>
+        <div className="text-[#252526] text-center   sm:w-60 ">{message}</div>
       </div>
     </div>
   );

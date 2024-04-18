@@ -17,10 +17,10 @@ export default function EditPost() {
         </div>
       </button>
       <div className="lg:pl-10 mb-5 grid gap-2  md:mr-10 pb-8">
-        <div className=" font-mono gap-3 flex text-custom-orange font-medium text-3xl ">
+        <div className="  gap-3 flex text-custom-orange font-medium text-3xl ">
           Edit Post
         </div>
-        <div className=" text-[#455273] font-mono mr-8">
+        <div className=" text-[#455273]  mr-8">
           You can edit the post that you have created.
         </div>
       </div>

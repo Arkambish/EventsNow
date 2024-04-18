@@ -12,6 +12,7 @@ import {
   CloudinaryUploadWidgetResults,
 } from "next-cloudinary";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { FetchPut } from "@/hooks/useFetch";
 export default function Settings() {
   const {
     id,
@@ -43,26 +44,21 @@ export default function Settings() {
 
   const handleUpdate = async () => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/event/updateEvent`,
-        {
-          method: "PUT",
-          body: JSON.stringify({
-            id: id,
+      const res = await FetchPut({
+        endpoint: `event/updateEvent/${id}`,
+        body: {
+          eventName: eventname,
+          selectedTab: eventType,
+          eventStartedDate: eventDate,
+          startTime: eventStartTime,
+          endTime: endTime,
+          eventLocation: eventLocation,
+          eventDashboardImage: eventDashboardImage,
+          eventCoverImage: eventCoverImage,
+          eventEndDate: eventEndDate,
+        },
+      });
 
-            eventName: eventname,
-            selectedTab: eventType,
-            eventStartedDate: eventDate,
-            startTime: eventStartTime,
-            endTime: endTime,
-            eventLocation: eventLocation,
-
-            eventDashboardImage: eventDashboardImage,
-            eventCoverImage: eventCoverImage,
-            eventEndDate: eventEndDate,
-          }),
-        }
-      );
       if (!res.ok) {
         error("Error updating event");
         return;
@@ -70,7 +66,8 @@ export default function Settings() {
 
       success("Event updated successfully");
     } catch (e) {
-      error(e);
+      console.error(e);
+      error("Error updating event");
     }
   };
 
@@ -78,7 +75,7 @@ export default function Settings() {
     <Container>
       <div className=" lg:ml-16 mb-5 grid gap-2 lg:px-6 mt-8 lg:mr-16 pb-20">
         <div className="">
-          <div className="  xl:flex content-start  font-mono pb-4 ">
+          <div className="  xl:flex content-start   pb-4 ">
             <div className=" text-custom-orange font-medium text-3xl">
               SETTINGS
             </div>

@@ -8,6 +8,7 @@ import {
 } from "next-cloudinary";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { error, success } from "@/util/Toastify";
+import { FetchPost } from "@/hooks/useFetch";
 
 interface TicketDetailProps {
   setTicketDetail: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,26 +28,15 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
 
   const createTicketHandlerLocal = async () => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/addTicket`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            price: newTicketPrice,
-            image: newTicketImage,
-            eventId: id,
-            classType: newTicketClass,
-          }),
-        }
-      );
-      if (!res.ok) {
-        error("Failed to create ticket");
-        return;
-      }
-      const newData = await res.json();
+      const newData = await FetchPost({
+        endpoint: "ticket/addTicket",
+        body: {
+          price: newTicketPrice,
+          image: newTicketImage,
+          eventId: id,
+          classType: newTicketClass,
+        },
+      });
 
       setAllTickets((prev) => {
         if (!prev) return [newData.ticket];

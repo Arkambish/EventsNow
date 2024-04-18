@@ -24,9 +24,7 @@ export default function BestPost({
         />
       </div>
       <div className="flex flex-row justify-evenly mt-8 mb-8 ">
-        <div className="text-myBrown text-2xl font-mono font-semibold">
-          {title}
-        </div>
+        <div className="text-myBrown text-2xl  font-semibold">{title}</div>
         <button className="bg-myBrown text-white rounded-md pl-4 pr-4 ">
           {year}
         </button>
