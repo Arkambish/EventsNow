@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 
-import { useParams, useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PaymentModal from "@/components/PaymentModal";
 
@@ -13,6 +12,7 @@ export default memo(function TicketModal({
   ticketTypes,
   totalPrice,
   setIsActiveTicketModal,
+  setTotalPrice
 }: {
   setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -22,6 +22,7 @@ export default memo(function TicketModal({
   totalPrice: number;
   setIsActiveTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   setTicketArrayTemp: React.Dispatch<React.SetStateAction<string[]>>;
+  setTotalPrice:React.Dispatch<React.SetStateAction<number>>;
 }) {
   const paymentDetails = {
     items: "test",
@@ -45,7 +46,7 @@ export default memo(function TicketModal({
         id="static-modal"
         data-modal-backdrop="static"
         aria-hidden="true"
-        className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0  max-h-full"
       >
         <div className="border-[1px] border-custom-orange rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
           <div className="flex justify-between bg-slate-300">
@@ -114,13 +115,13 @@ export default memo(function TicketModal({
                       <td className="px-6 py-4">
                         {
                           ticketArrayTemp.filter(
-                            (item) => item === ticket.classType
+                            (item) => item === ticket._id
                           ).length
                         }
                       </td>
                       <td className="px-6 py-4">
                         {ticketArrayTemp.filter(
-                          (item) => item === ticket.classType
+                          (item) => item === ticket._id
                         ).length * ticket.price}
                       </td>
                     </tr>
@@ -140,6 +141,7 @@ export default memo(function TicketModal({
                           setIsActiveProceedTicketModal
                         }
                         totalPrice={totalPrice}
+                        setTotalPrice={setTotalPrice}
                         ticketArrTemp={ticketArrayTemp}
                         setTicketArrTemp={setTicketArrayTemp}
                         item={paymentDetails?.items}

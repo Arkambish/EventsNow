@@ -4,28 +4,30 @@ import Image from "next/image";
 
 interface TicketMockupProps {
   image: string;
-  type: string;
+  typeId: string;
   price: number;
   key: string;
     totalPrice:number;
     setTotalPrice:React.Dispatch<React.SetStateAction<number>>;
     setTicketArray:React.Dispatch<React.SetStateAction<string[]>>;
     ticketArray:string[];
+    type:string
 }
 export default function TicketCard({
   image,
-  type,
+  typeId,
   price,
   key,
   totalPrice,
   setTotalPrice,
   setTicketArray,
-  ticketArray
+  ticketArray,
+  type
 }: TicketMockupProps) {
     const updateQuantity = (): void => {
         setTotalPrice(totalPrice+price);
         
-        setTicketArray((prev) => [...prev, type]);
+        setTicketArray((prev) => [...prev, typeId]);
 
     }
   return (
@@ -57,7 +59,7 @@ export default function TicketCard({
                 Add
             </button>
             <div className="">Quantity:{ticketArray.length==0 ?0 :ticketArray.filter(
-                          (item) => item === type
+                          (item) => item === typeId
                         ).length}</div>
         </div>
       </div>

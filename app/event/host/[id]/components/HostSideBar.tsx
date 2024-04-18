@@ -235,19 +235,6 @@ export default function HostSideBar({
     setIsAddWishList(false);
   }
 
-  const paymentDetails = {
-    items: "test",
-    oder_id: "test",
-    currency: "LKR",
-    first_name: "test",
-    last_name: "test",
-    fullAmount: 200,
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    country: "",
-  };
 
   return (
     <div className="xl:w-96  bg-white items-end md:w-80">
@@ -461,6 +448,7 @@ export default function HostSideBar({
             setTicketArrayTemp={setAllBuyTicketsArrayTemp}
             setIsActiveTicketModal={setIsActiveTicketModal}
             totalPrice={totalTicketPrice}
+            setTotalPrice={setTotalTicketPrice}
             ticketTypes={allTicketTypes}
             ticketArrayTemp={allBuyTicketsArrayTemp}
             setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}

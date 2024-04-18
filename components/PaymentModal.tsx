@@ -8,6 +8,7 @@ import { error, success } from "@/util/Toastify";
 
 import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
+import { FetchPost } from "@/hooks/useFetch";
 
 declare global {
   interface Window {
@@ -30,7 +31,8 @@ type PaymentModalProps = {
   ticketArrTemp: string[];
   totalPrice: number;
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setTicketArrTemp: React.Dispatch<React.SetStateAction<string[]>>;
+  setTicketArrTemp: React.Dispatch<React.SetStateAction<string[]>>
+  setTotalPrice:React.Dispatch<React.SetStateAction<number>>;
 };
 
 const PaymentModal = (props: PaymentModalProps) => {
@@ -125,10 +127,25 @@ const PaymentModal = (props: PaymentModalProps) => {
       ) {
         {
           props.ticketArrTemp.map(async (ticket: string) => {
+            //store ticket buy data
+
+            try{
+              const data = await FetchPost({
+                endpoint: "buyTicket/userBuyTicket",
+                body: { ticketId: ticket, eventId: params.id, userId: userId },
+              });
+              if(data == "user buy ticket Failed,try again"){
+                error("user buy ticket Failed,try again")
+              }
+              success("user buy ticket successfully")
+            }catch(e){
+                error(e);
+            }
+
             const value = {
               useId: userId,
               eventId: params.id,
-              class: { ticket },
+              class: ticket,
             };
 
             const qrImg = await generateQRCodeImage(JSON.stringify(value));
@@ -177,7 +194,8 @@ const PaymentModal = (props: PaymentModalProps) => {
         success("Payment completed");
         props.setIsActiveProceedTicketModal(false);
 
-        props.setTicketArrTemp([""]);
+        props.setTicketArrTemp([]);
+        props.setTotalPrice(0);
       };
 
       window.payhere.onDismissed = function onDismissed() {

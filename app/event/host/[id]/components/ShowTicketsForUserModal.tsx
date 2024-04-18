@@ -54,6 +54,7 @@ export default function ShowTicketsForUserModal({
             ticketTypes.map((ticket) => (
               <TicketCard
                 image={ticket.image}
+                typeId={ticket._id}
                 type={ticket.classType}
                 price={ticket.price}
                 key={ticket._id}

@@ -12,7 +12,6 @@ import {
 import { error } from "@/util/Toastify";
 
 const ProfContext = createContext<ProfContextType | string>("");
-
 interface ProfContextProviderProps {
   children: React.ReactNode;
 }
