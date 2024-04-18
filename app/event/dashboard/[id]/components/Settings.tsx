@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "./Container";
-import Switch from "react-switch";
 import ContainerWithStroke from "./ContainerWithStroke";
 import Image from "next/image";
-import { Button } from "@material-tailwind/react";
 import { UseEventContext, EventContextType } from "../EventDashContext";
 import { error, success } from "@/util/Toastify";
 import {
@@ -164,7 +162,7 @@ export default function Settings() {
                   <div className="w-full text-left text-lg ">
                     Event End Date
                   </div>
-                  <div className="w-full flex justify-start  ">
+                  <div className="w-full flex justify-start">
                     <input
                       type="text"
                       placeholder=""
@@ -274,7 +272,7 @@ export default function Settings() {
                                 open();
                               }}
                             >
-                              <div className="p-1 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
+                              <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-lg">
                                 <FaCloudUploadAlt />
                                 upload image
                               </div>
@@ -366,7 +364,7 @@ export default function Settings() {
                                 open();
                               }}
                             >
-                              <div className="p-1 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
+                              <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-lg">
                                 <FaCloudUploadAlt />
                                 upload image
                               </div>
