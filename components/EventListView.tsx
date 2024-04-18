@@ -23,7 +23,7 @@ export default function EventListView({
   img,
 }: EventListViewProps) {
   return (
-    <div className=" flex gap-3 rounded-lg xl:w-3/5 lg:w-2/5  bg-[#D9D9D9]">
+    <div className=" flex gap-3 rounded-lg 2xl:w-2/5 xl:w-2/5 lg:w-2/5  bg-[#D9D9D9]">
       <div className="rounded-lg">
         <Image
           src={img}
@@ -33,7 +33,7 @@ export default function EventListView({
           className="rounded-l-lg"
         />
       </div>
-      <div className="p-3 w-full flex flex-col justify-start gap-3">
+      <div className="p-3 w-full  flex flex-col justify-start gap-3">
         <div className="flex justify-between sm:flex-row flex-col sm:gap-10 gap-2  mb-4">
           <div className="capitalize font-bold text-2xl	">{name}</div>
           <button className="button">
