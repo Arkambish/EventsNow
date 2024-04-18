@@ -23,10 +23,9 @@ import {
   EventPermissionType,
   EventType,
   voidFunc,
-  UserType
+  UserType,
 } from "@/app/Type";
 import { getUserDetails } from "@/util/helper";
-
 
 export interface EventContextType {
   isLoading: boolean;
@@ -419,12 +418,10 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
         createTicketHandler,
 
-
         allRegisteredUsers,
 
         eventPermission,
         globalPermission,
-
       }}
     >
       {children}

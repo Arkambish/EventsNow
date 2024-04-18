@@ -40,6 +40,11 @@ interface customUser {
   _id: string;
 }
 
+export type TicketArray = {
+  typeId: string;
+  type: string;
+};
+
 export default function HostSideBar({
   EventName,
   Location,
@@ -74,7 +79,7 @@ export default function HostSideBar({
 
   const id = useParams<{ id: string }>().id;
   const [allBuyTicketsArrayTemp, setAllBuyTicketsArrayTemp] = useState<
-    string[]
+    TicketArray[]
   >([]);
   const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
   const [totalTicketPrice, setTotalTicketPrice] = useState<number>(0);
@@ -101,10 +106,13 @@ export default function HostSideBar({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email, eventId: id , sendEventUpdates:eventUpdates, sendMarketingUpdates:marketingUpdates}),
-      
+        body: JSON.stringify({
+          email: email,
+          eventId: id,
+          sendEventUpdates: eventUpdates,
+          sendMarketingUpdates: marketingUpdates,
+        }),
       }
-      
     );
     if (!res.ok) {
       error("Error registration for event");
@@ -145,8 +153,8 @@ export default function HostSideBar({
     };
     getUser();
   }, [id]);
-  
-//check user registered for the event
+
+  //check user registered for the event
   useEffect(() => {
     const checkUserRegistered = async () => {
       const res = await fetch(
@@ -156,7 +164,7 @@ export default function HostSideBar({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId:userId, eventId: id }),
+          body: JSON.stringify({ userId: userId, eventId: id }),
         }
       );
       if (!res.ok) {
@@ -165,9 +173,8 @@ export default function HostSideBar({
       }
       const data = await res.json();
       setIsRegistered(data);
-    }
+    };
     checkUserRegistered();
-
   }, [id, userId]);
 
   //get user data
@@ -234,20 +241,6 @@ export default function HostSideBar({
     success("Event removed from the wishlist ");
     setIsAddWishList(false);
   }
-
-  const paymentDetails = {
-    items: "test",
-    oder_id: "test",
-    currency: "LKR",
-    first_name: "test",
-    last_name: "test",
-    fullAmount: 200,
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    country: "",
-  };
 
   return (
     <div className="xl:w-96  bg-white items-end md:w-80">
@@ -357,7 +350,9 @@ export default function HostSideBar({
           ) : (
             <button
               disabled={preview ? true : false}
-              onClick={()=>{setIsRegModalShow(true)}}
+              onClick={() => {
+                setIsRegModalShow(true);
+              }}
               className={`flex button xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4 ${
                 preview ? "cursor-not-allowed" : ""
               } `}
@@ -376,13 +371,15 @@ export default function HostSideBar({
             </button>
           )}
 
-         {/* Registration Modal */}
-          {isRegModalShow && <RegistrationForEventModal
-          setVisible={setIsRegModalShow}
-          userRegistrationFunction={userRegistrationForEventHandler}
-          setEventsUpdatesFunction={setEventUpdates}
-          setMarketingUpdatesFunction={setMarketingUpdates}
-          />}
+          {/* Registration Modal */}
+          {isRegModalShow && (
+            <RegistrationForEventModal
+              setVisible={setIsRegModalShow}
+              userRegistrationFunction={userRegistrationForEventHandler}
+              setEventsUpdatesFunction={setEventUpdates}
+              setMarketingUpdatesFunction={setMarketingUpdates}
+            />
+          )}
 
           {isAddWishList ? (
             <button
@@ -461,6 +458,7 @@ export default function HostSideBar({
             setTicketArrayTemp={setAllBuyTicketsArrayTemp}
             setIsActiveTicketModal={setIsActiveTicketModal}
             totalPrice={totalTicketPrice}
+            setTotalPrice={setTotalTicketPrice}
             ticketTypes={allTicketTypes}
             ticketArrayTemp={allBuyTicketsArrayTemp}
             setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}
