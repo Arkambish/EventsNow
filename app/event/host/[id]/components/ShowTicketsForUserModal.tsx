@@ -3,6 +3,7 @@ import React, { Dispatch, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import TicketCard from "./TicketCard";
 import { Ticket } from "@/app/Type";
+import { TicketArray } from "./HostSideBar";
 
 export default function ShowTicketsForUserModal({
   setIsActiveTicketModal,
@@ -15,7 +16,7 @@ export default function ShowTicketsForUserModal({
 }: {
   setIsActiveTicketModal: Dispatch<boolean>;
   setIsActiveProceedTicketModal: any;
-  ticketArrayTemp: string[];
+  ticketArrayTemp: TicketArray[];
   setTicketArrayTemp: any;
   ticketTypes: Ticket[];
   totalPrice: number;

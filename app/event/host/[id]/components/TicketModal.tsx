@@ -4,6 +4,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import PaymentModal from "@/components/PaymentModal";
 
 import { Ticket } from "@/app/Type";
+import { TicketArray } from "./HostSideBar";
 
 export default memo(function TicketModal({
   setIsActiveProceedTicketModal,
@@ -12,17 +13,17 @@ export default memo(function TicketModal({
   ticketTypes,
   totalPrice,
   setIsActiveTicketModal,
-  setTotalPrice
+  setTotalPrice,
 }: {
   setIsActvieTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
 
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
-  ticketArrayTemp: string[];
+  ticketArrayTemp: TicketArray[];
   ticketTypes: Ticket[];
   totalPrice: number;
   setIsActiveTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setTicketArrayTemp: React.Dispatch<React.SetStateAction<string[]>>;
-  setTotalPrice:React.Dispatch<React.SetStateAction<number>>;
+  setTicketArrayTemp: React.Dispatch<React.SetStateAction<TicketArray[]>>;
+  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const paymentDetails = {
     items: "test",
@@ -115,13 +116,13 @@ export default memo(function TicketModal({
                       <td className="px-6 py-4">
                         {
                           ticketArrayTemp.filter(
-                            (item) => item === ticket._id
+                            (item) => item.typeId === ticket._id
                           ).length
                         }
                       </td>
                       <td className="px-6 py-4">
                         {ticketArrayTemp.filter(
-                          (item) => item === ticket._id
+                          (item) => item.typeId === ticket._id
                         ).length * ticket.price}
                       </td>
                     </tr>

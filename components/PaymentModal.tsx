@@ -9,6 +9,7 @@ import { error, success } from "@/util/Toastify";
 import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
 import { FetchPost } from "@/hooks/useFetch";
+import { TicketArray } from "@/app/event/host/[id]/components/HostSideBar";
 
 declare global {
   interface Window {
@@ -28,11 +29,11 @@ type PaymentModalProps = {
   address: string;
   city: string;
   country: string;
-  ticketArrTemp: string[];
+  ticketArrTemp: TicketArray[];
   totalPrice: number;
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setTicketArrTemp: React.Dispatch<React.SetStateAction<string[]>>
-  setTotalPrice:React.Dispatch<React.SetStateAction<number>>;
+  setTicketArrTemp: React.Dispatch<React.SetStateAction<TicketArray[]>>;
+  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const PaymentModal = (props: PaymentModalProps) => {
@@ -126,54 +127,44 @@ const PaymentModal = (props: PaymentModalProps) => {
         paymentId: string
       ) {
         {
-          props.ticketArrTemp.map(async (ticket: string) => {
+          console.log(props.ticketArrTemp);
+          props.ticketArrTemp.map(async (ticket: TicketArray) => {
             //store ticket buy data
-
-            try{
-              const data = await FetchPost({
-                endpoint: "buyTicket/userBuyTicket",
-                body: { ticketId: ticket, eventId: params.id, userId: userId },
-              });
-              if(data == "user buy ticket Failed,try again"){
-                error("user buy ticket Failed,try again")
-              }
-              success("user buy ticket successfully")
-            }catch(e){
-                error(e);
-            }
 
             const value = {
               useId: userId,
               eventId: params.id,
-              class: ticket,
+              class: ticket.typeId,
+              classType: ticket.type,
             };
 
             const qrImg = await generateQRCodeImage(JSON.stringify(value));
 
-            const res = await fetch(
-              `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
+            console.log(qrImg);
+            const data = await FetchPost({
+              endpoint: "event/sendQrCode",
+              body: {
+                qr: qrImg,
+                userid: userId,
+              },
+            });
+
+            if (data !== "Email sent successfully") error("server error");
+            try {
+              const data = await FetchPost({
+                endpoint: "buyTicket/userBuyTicket",
+                body: {
+                  ticketId: ticket,
+                  eventId: params.id,
+                  userId: userId,
                 },
-                body: JSON.stringify({
-                  qr: qrImg,
-                  userid: userId,
-                }),
+              });
+              if (data == "user buy ticket Failed,try again") {
+                error("user buy ticket Failed,try again");
               }
-            );
-
-            if (!res.ok) {
-              console.error("Error sending qr code");
-              error("Error sending qr code");
-              return;
-            }
-
-            const message = await res.json();
-            if (message === "No User  exists") {
-              error("No User exists");
-              return;
+              success("user buy ticket successfully");
+            } catch (e) {
+              error(e);
             }
           });
         }
