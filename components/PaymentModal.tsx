@@ -8,7 +8,7 @@ import { error, success } from "@/util/Toastify";
 
 import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
-import { FetchPost } from "@/hooks/useFetch";
+import { FetchPost, FetchPut } from "@/hooks/useFetch";
 import { TicketArray } from "@/app/event/host/[id]/components/HostSideBar";
 
 declare global {
@@ -127,31 +127,33 @@ const PaymentModal = (props: PaymentModalProps) => {
         paymentId: string
       ) {
         {
-          console.log(props.ticketArrTemp);
           props.ticketArrTemp.map(async (ticket: TicketArray) => {
             //store ticket buy data
-
-            const value = {
-              useId: userId,
-              eventId: params.id,
-              class: ticket.typeId,
-              classType: ticket.type,
-            };
-
-            const qrImg = await generateQRCodeImage(JSON.stringify(value));
-
-            console.log(qrImg);
-            const data = await FetchPost({
-              endpoint: "event/sendQrCode",
-              body: {
-                qr: qrImg,
-                userid: userId,
-              },
-            });
-
-            if (data !== "Email sent successfully") error("server error");
             try {
-              const data = await FetchPost({
+              const value = {
+                useId: userId,
+                eventId: params.id,
+                class: ticket.typeId,
+                classType: ticket.type,
+              };
+
+              const qrImg = await generateQRCodeImage(JSON.stringify(value));
+
+              const qrdata = await FetchPost({
+                endpoint: "event/sendQrCode",
+                body: {
+                  qr: qrImg,
+                  userid: userId,
+                },
+              });
+              console.log(qrdata);
+
+              if (qrdata !== "Email sent successfully") {
+                error("server error");
+                return;
+              }
+
+              const buyTicketData = await FetchPost({
                 endpoint: "buyTicket/userBuyTicket",
                 body: {
                   ticketId: ticket,
@@ -159,28 +161,40 @@ const PaymentModal = (props: PaymentModalProps) => {
                   userId: userId,
                 },
               });
-              if (data == "user buy ticket Failed,try again") {
+              console.log(buyTicketData);
+              if (buyTicketData == "user buy ticket Failed,try again") {
                 error("user buy ticket Failed,try again");
+                return;
               }
               success("user buy ticket successfully");
             } catch (e) {
+              console.log(e);
               error(e);
             }
           });
         }
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              id: params.id,
-              amount: props.totalPrice,
-            }),
-          }
-        );
+        // const response = await fetch(
+        //   `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
+        //   {
+        //     method: "PUT",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       id: params.id,
+        //       amount: props.totalPrice,
+        //     }),
+        //   }
+        // );
+
+        const updateData = await FetchPut({
+          endpoint: `event/payment`,
+          body: {
+            id: params.id,
+            amount: props.totalPrice,
+          },
+        });
+        console.log(updateData);
 
         success("Payment completed");
         props.setIsActiveProceedTicketModal(false);
