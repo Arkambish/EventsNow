@@ -5,6 +5,7 @@ import QRScanner from "./QRcodeScanner";
 import QrScanner from "qr-scanner";
 import { error, success } from "@/util/Toastify";
 import { FetchPost } from "@/hooks/useFetch";
+import { UseEventContext } from "../EventDashContext";
 
 const QrReader = () => {
   const videoElementRef = useRef(null);
@@ -14,6 +15,8 @@ const QrReader = () => {
   const [quantity, setQuantity] = useState();
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
+
+  const { id } = UseEventContext();
 
   // if (scannedEvent.length > 0 || scannedUser.length > 0 || quantity > 0) {
   //   setIsActiveMark(true);
@@ -34,10 +37,12 @@ const QrReader = () => {
             .replace(/^"|"$/g, ""); // Remove backslashes and surrounding quotation marks
           const dataObject = JSON.parse(cleanedDataString);
 
+          console.log(dataObject);
+
           setScannedText(result.data);
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
-          setQuantity(dataObject.class.ticket);
+          setQuantity(dataObject.classType);
           setIsActiveMark(true);
         },
         {
@@ -57,38 +62,51 @@ const QrReader = () => {
 
   async function handleMarkAttendance() {
     if (!scannedEvent.length > 0 || !scannedUser.length > 0 || !quantity > 0) {
+      console.log("non");
       return;
     }
 
-    try {
-      const res = await FetchPost({
-        endpoint: "attendant/markAttendant",
-        body: {
-          eventId: scannedEvent,
-          userId: scannedUser,
-          ticketType: quantity,
-        },
-      });
+    if (id !== scannedEvent) error("wrong qr code");
+    console.log(scannedEvent, quantity, scannedUser);
 
-      if (!res.ok) {
-        error("Failed to mark attendance");
-        return;
-      }
+    // const res = await fetch(
+    //   `${process.env.NEXT_PUBLIC_URL}/api/v1/attendant/markAttendant`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       eventId: scannedEvent,
+    //       userId: scannedUser,
+    //       ticketType: quantity,
+    //     }),
+    //   }
+    // );
 
-      const data = await res.json();
-      if (data.message === "User Already Attending") {
-        error("User Already Attending");
-        return;
-      }
+    // if (!res.ok) {
+    //   error("Failed to mark attendance");
+    //   return;
+    // }
 
-      success("Attendance marked successfully");
-      setScannedEvent("");
-      setScannedUser("");
-      setQuantity("");
-    } catch (err) {
-      console.error(err);
-      error("Failed to mark attendance");
+    const data = await FetchPost({
+      endpoint: "attendant/markAttendant",
+      body: {
+        eventId: scannedEvent,
+        userId: scannedUser,
+        ticketType: quantity,
+      },
+    });
+
+    if (data.message === "User Already Attending") {
+      error("User Already Attending");
+      return;
     }
+
+    success("Attendance marked successfully");
+    setScannedEvent("");
+    setScannedUser("");
+    setQuantity();
   }
 
   return (

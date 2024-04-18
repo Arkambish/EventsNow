@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 import Organization from "./organizationModel";
+import RegisteredUser from "./registeredUserModel";
 
 const eventSchema = new mongoose.Schema({
   eventName: {
@@ -58,7 +59,7 @@ const eventSchema = new mongoose.Schema({
 
   registerUser: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: "User",
+    ref: "RegisteredUser",
   },
   income: {
     type: Number,
