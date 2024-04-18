@@ -15,6 +15,8 @@ import PaymentModal from "@/components/PaymentModal";
 import TicketModal from "./TicketModal";
 import ShowTicketsForUserModal from "@/app/event/host/[id]/components/ShowTicketsForUserModal";
 import RegistrationForEventModal from "./RegistrationForEventModal";
+import Modal from "@/components/Modal";
+import { Dialog } from "@headlessui/react";
 
 interface HostSideBar {
   EventName: String;
@@ -54,6 +56,16 @@ export default function HostSideBar({
   preview = false,
   handleComponentChange,
 }: HostSideBar) {
+  const [isRemoveWishListModal, setIsRemoveWishListModal] =
+    useState<boolean>(false);
+  const [isAddWishListModal, setIsAddWishListModal] = useState<boolean>(false);
+  const [isRegModalShow, setIsRegModalShow] = useState<boolean>(false);
+
+  const [isRemoveRegistation, setIsRemoveRegistation] =
+    useState<boolean>(false);
+
+  console.log(isRemoveRegistation);
+
   const [eventUpdates, setEventUpdates] = useState(false);
   const [marketingUpdates, setMarketingUpdates] = useState(false);
   const [activeButton, setActiveButton] = useState<number | null>(1);
@@ -84,7 +96,6 @@ export default function HostSideBar({
   const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
   const [totalTicketPrice, setTotalTicketPrice] = useState<number>(0);
   const params = useParams<{ id: string }>();
-  const [isRegModalShow, setIsRegModalShow] = useState<boolean>(false);
 
   useEffect(() => {
     async function getTicketTypes() {
@@ -142,6 +153,7 @@ export default function HostSideBar({
 
     success("remove user from event successfully");
     setIsRegistered(false);
+    setIsRemoveRegistation(false);
   }
 
   useEffect(() => {
@@ -218,6 +230,7 @@ export default function HostSideBar({
 
     success("Event added to the wishlist ");
     setIsAddWishList(true);
+    setIsAddWishListModal(false);
   }
 
   //remove from wishlist
@@ -240,6 +253,7 @@ export default function HostSideBar({
 
     success("Event removed from the wishlist ");
     setIsAddWishList(false);
+    setIsRemoveWishListModal(false);
   }
 
   return (
@@ -332,7 +346,7 @@ export default function HostSideBar({
           {isRegistered ? (
             <button
               disabled={preview ? true : false}
-              onClick={removeUserFromRegisteredEvent}
+              onClick={() => setIsRemoveRegistation(true)}
               className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-custom-orange rounded-l-2xl items-center xl:px-4"
             >
               <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
@@ -373,18 +387,59 @@ export default function HostSideBar({
 
           {/* Registration Modal */}
           {isRegModalShow && (
-            <RegistrationForEventModal
-              setVisible={setIsRegModalShow}
-              userRegistrationFunction={userRegistrationForEventHandler}
-              setEventsUpdatesFunction={setEventUpdates}
-              setMarketingUpdatesFunction={setMarketingUpdates}
-            />
+            <Modal setIsOpen={setIsRegModalShow} isOpen={isRegModalShow}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Registration For Event
+              </Dialog.Title>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">
+                  <div className="flex my-auto gap-2 ">
+                    <input
+                      type="checkbox"
+                      className="my-auto"
+                      onChange={(e) => setEventUpdates(e.target.checked)}
+                    />
+                    I want to get updates on community page of the event via my
+                    emails
+                  </div>
+                  <div className="flex my-auto gap-2">
+                    <input
+                      type="checkbox"
+                      className="my-auto"
+                      onChange={(e) => setMarketingUpdates(e.target.checked)}
+                    />
+                    I want to get marketing updates of the event via emails
+                  </div>
+                </p>
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={userRegistrationForEventHandler}
+                >
+                  Register
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={() => setIsRegModalShow(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Modal>
           )}
 
           {isAddWishList ? (
             <button
               disabled={preview ? true : false}
-              onClick={removeFromWishlistHandler}
+              onClick={() => setIsRemoveWishListModal(true)}
+              // onClick={removeFromWishlistHandler}
               className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
             >
               <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
@@ -402,7 +457,8 @@ export default function HostSideBar({
           ) : (
             <button
               disabled={preview ? true : false}
-              onClick={addTowishlistHandler}
+              // onClick={addTowishlistHandler}
+              onClick={() => setIsAddWishListModal(true)}
               className={`${
                 preview ? "cursor-not-allowed" : ""
               }  flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4`}
@@ -464,6 +520,110 @@ export default function HostSideBar({
             setIsActiveProceedTicketModal={setIsActiveProceedTicketModal}
           />
         )}
+
+        {isAddWishListModal && (
+          <Modal setIsOpen={setIsAddWishListModal} isOpen={isAddWishListModal}>
+            <Dialog.Title
+              as="h3"
+              className="text-lg font-medium leading-6 text-gray-900"
+            >
+              Add to wishlist
+            </Dialog.Title>
+            <div className="mt-2">
+              <p className="text-sm text-gray-500">
+                Are you sure you want to add this event to your wishlist?
+              </p>
+            </div>
+
+            <div className="mt-4 flex gap-2">
+              <button
+                type="button"
+                className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                onClick={addTowishlistHandler}
+              >
+                Add to wishlist
+              </button>
+              <button
+                type="button"
+                className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                onClick={() => setIsAddWishListModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </Modal>
+        )}
+        {isRemoveWishListModal && (
+          <Modal
+            setIsOpen={setIsRemoveWishListModal}
+            isOpen={isRemoveWishListModal}
+          >
+            <Dialog.Title
+              as="h3"
+              className="text-lg font-medium leading-6 text-gray-900"
+            >
+              Remove from wishlist
+            </Dialog.Title>
+            <div className="mt-2">
+              <p className="text-sm text-gray-500">
+                Are you sure you want to remove this event from your wishlist?
+              </p>
+            </div>
+
+            <div className="mt-4 flex gap-2">
+              <button
+                type="button"
+                className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                onClick={removeFromWishlistHandler}
+              >
+                Remove from wishlist
+              </button>
+              <button
+                type="button"
+                className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                onClick={() => setIsRemoveWishListModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </Modal>
+        )}
+        {isRemoveRegistation && (
+          <Modal
+            setIsOpen={setIsRemoveRegistation}
+            isOpen={isRemoveRegistation}
+          >
+            <Dialog.Title
+              as="h3"
+              className="text-lg font-medium leading-6 text-gray-900"
+            >
+              Remove registration
+            </Dialog.Title>
+            <div className="mt-2">
+              <p className="text-sm text-gray-500">
+                Are you sure you want to remove registration for this event?
+              </p>
+            </div>
+
+            <div className="mt-4 flex gap-2">
+              <button
+                type="button"
+                className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                onClick={removeUserFromRegisteredEvent}
+              >
+                Remove registration
+              </button>
+              <button
+                type="button"
+                className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                onClick={() => setIsRemoveRegistation(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </Modal>
+        )}
+
         {/* <PaymentModal
           item={paymentDetails?.items}
           orderId={paymentDetails?.oder_id}
