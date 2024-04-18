@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import Switch from "react-switch";
 import ContainerWithStroke from "./ContainerWithStroke";
@@ -13,6 +13,7 @@ import {
 } from "next-cloudinary";
 import { FaCloudUploadAlt } from "react-icons/fa";
 export default function Settings() {
+  const [allRegisteredUsers, setAllRegisteredUsers] = useState([]);
   const {
     id,
 
@@ -40,6 +41,33 @@ export default function Settings() {
     setEventDashboardImage,
     setEventCoverImage,
   } = UseEventContext() as EventContextType;
+
+  useEffect(() => {
+
+    try {
+      const fetchAllRegisteredUsers = async () => {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getRegisteredUsersForEvent`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: id }),
+          }
+        );
+        if (!res.ok) {
+          error("Error in fetching data");
+          return;
+        }
+        const data = await res.json();
+        setAllRegisteredUsers(data);
+      };
+      fetchAllRegisteredUsers();
+    } catch (e) {
+      error(e);
+    }
+  } , [id]);
 
   const handleUpdate = async () => {
     try {
@@ -72,6 +100,39 @@ export default function Settings() {
     } catch (e) {
       error(e);
     }
+
+    
+    //sending email about the updates to the users
+    allRegisteredUsers.map(async (registration: any) => {
+
+      try {
+       
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendEmailOfEventChanges`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              userEmail: registration.userId.email,
+
+              EventId: id,
+              eventName: eventname,
+              selectedTab: eventType,
+              startTime: eventStartTime,
+              eventLocation: eventLocation,
+              eventCoverImage: eventCoverImage,
+            }),
+          }
+        );
+        if (!res.ok) {
+          error("Error sending email");
+          return;
+        }
+
+        success("Email sent successfully to Registered users");
+      } catch (e) {
+        error(e);
+      }
+    });
   };
 
   return (
