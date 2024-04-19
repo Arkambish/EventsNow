@@ -39,6 +39,12 @@ export type AttendanceType = {
   updatedAt: string;
 };
 
+export type RevenueType = {
+  classType:String;
+  quantity: number;
+  amount: number;
+}
+
 export type PostType = {
   _id: string;
   userImage: string;
@@ -171,6 +177,7 @@ export interface EventContextType {
   setEventEndDate: React.Dispatch<React.SetStateAction<string>>;
   eventEndDate: string;
   attendances: AttendanceType[];
+  revenues:RevenueType[];
   setEventDashboardImage: React.Dispatch<React.SetStateAction<string>>;
   setEventCoverImage: React.Dispatch<React.SetStateAction<string>>;
 }

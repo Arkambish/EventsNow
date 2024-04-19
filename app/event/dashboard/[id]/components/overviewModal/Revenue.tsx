@@ -1,10 +1,13 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { UseEventContext } from "../../EventDashContext";
 import { EventContextType } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
 
 export default memo(function RevenueDetails() {
-  const { setStatus } = UseEventContext() as EventContextType;
+
+ 
+  
+  const { setStatus , revenues } = UseEventContext() as EventContextType;
 
   return (
     <>
@@ -65,7 +68,33 @@ export default memo(function RevenueDetails() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="border-b dark:border-neutral-500">
+                        {revenues.length === 0 ? (
+                           <tr className="border-b dark:border-neutral-500">
+                           <td className="whitespace-nowrap px-6 py-4 font-medium">
+                             _
+                           </td>
+                           <td className="whitespace-nowrap px-6 py-4">class</td>
+                           <td className="whitespace-nowrap px-6 py-4">_</td>
+                           
+                         </tr>
+                       ) : (
+                         revenues.map((revenue, index) => (
+                           <tr
+                             className="border-b dark:border-neutral-500"
+                           >
+                             <td className="whitespace-nowrap px-6 py-4">
+                               {revenue.classType}
+                             </td>
+                             <td className="whitespace-nowrap px-6 py-4">
+                               {revenue.quantity}
+                             </td>
+                             <td className="whitespace-nowrap px-6 py-4">
+                               {revenue.amount}
+                             </td>
+                           </tr>
+                         ))
+                        )}
+                        {/* <tr className="border-b dark:border-neutral-500">
                           <td className="whitespace-nowrap px-6 py-4 font-medium">
                             A
                           </td>
@@ -91,7 +120,7 @@ export default memo(function RevenueDetails() {
                           <td className="whitespace-nowrap px-6 py-4">
                             200 x 10=1000
                           </td>
-                        </tr>
+                        </tr> */}
                       </tbody>
                     </table>
                   </div>
@@ -101,9 +130,12 @@ export default memo(function RevenueDetails() {
           </div>
           <div className="bg-slate-500 rounded-md flex justify-between p-2">
             <div className="text-lg font-bold	 text-white">
-              Toral Revenue- LKR: 100
+              Toral Revenue- LKR: {}
             </div>
-            <button className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
+            <button 
+              className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+              // onClick={handlePrintButton}
+            >
               <FaPrint />
               Print
             </button>

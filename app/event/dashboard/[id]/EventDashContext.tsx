@@ -1,5 +1,4 @@
 "use client";
-
 import React, {
   createContext,
   useState,
@@ -19,6 +18,7 @@ import { ca, ro } from "date-fns/locale";
 import { error, success } from "@/util/Toastify";
 
 import {
+  RevenueType,
   AttendanceType,
   EventPermissionType,
   EventType,
@@ -82,6 +82,7 @@ export interface EventContextType {
   setEventEndDate: React.Dispatch<React.SetStateAction<string>>;
   eventEndDate: string;
   attendances: AttendanceType[];
+  revenues: RevenueType[];
   setEventDashboardImage: React.Dispatch<React.SetStateAction<string>>;
   setEventCoverImage: React.Dispatch<React.SetStateAction<string>>;
 
@@ -196,6 +197,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [eventPermission, setEventPermission] = useState<string[]>([]);
 
   const [attendances, setAttendances] = useState<AttendanceType[]>([]);
+  const [revenues, setRevenues] = useState<RevenueType[]>([]);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -284,6 +286,15 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       return data;
     };
 
+   const getRevenue = async () => { 
+    const res = await fetch (`/api/v1/revenue/getRevenue/${id}`);
+    if (!res.ok){
+      return;
+    }
+    const data = await res.json();
+    return data;
+  };
+
     async function handleContext() {
       setIsLoading(true);
       const event = await getEvent();
@@ -335,6 +346,9 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
       const attendance = await getAttendence();
       setAttendances(attendance);
+
+      const revenues = await getRevenue();
+      setRevenues(revenues);
     }
     handleContext();
 
@@ -357,6 +371,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         isPageBuilder,
         setIsPageBuilder,
         attendances,
+        revenues,
         isPreview,
         setIsPreview,
         setEventEndDate,

@@ -4,10 +4,11 @@ import { EventContextType } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
 
 export default memo(function AttendanceDetails() {
-  const { setStatus, attendances } = UseEventContext() as EventContextType;
+
+const { setStatus, attendances } = UseEventContext() as EventContextType;
 
   return (
-    <>
+    <>/
       <div
         style={{
           backgroundColor: "#D9D9D9CC",

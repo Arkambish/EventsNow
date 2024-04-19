@@ -6,6 +6,9 @@ import CheckPermission from "./CheckPermission";
 export default function Reports() {
   const getAttendanceReport = () => {};
   const getRevenueReport = () => {};
+
+  
+
   return (
     <Container>
       <div className="pl-10 mb-5 grid gap-2 mt-8 mr-10 pb-8">

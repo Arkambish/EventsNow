@@ -2,6 +2,7 @@
 import React from "react";
 import ContainerWithStroke from "./ContainerWithStroke";
 import Image from "next/image";
+
 interface Props {
   reportName: string;
   image: string;
