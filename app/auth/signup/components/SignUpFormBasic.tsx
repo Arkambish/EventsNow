@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 
 import { error, success } from "../../../../util/Toastify";
 import Image from "next/image";
@@ -206,7 +206,7 @@ export default function LoginFormBasic() {
             </button>
           )}
         </form>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </div>
     </div>
   );

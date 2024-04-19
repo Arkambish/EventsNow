@@ -1,7 +1,9 @@
 "use client";
+import type { da } from "date-fns/locale";
 import { useParams, useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
+  ProfContext as ProfContextType,
   UserDetails,
   VoidFunc,
   EventType,
@@ -9,8 +11,7 @@ import {
   ProfContexts,
 } from "@/app/Type";
 
-const ProfContext = createContext<ProfContexts | string>("");
-
+const ProfContext = createContext<ProfContextType | string>("");
 interface ProfContextProviderProps {
   children: React.ReactNode;
 }

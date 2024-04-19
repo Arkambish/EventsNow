@@ -28,7 +28,7 @@ export default function HeroSection() {
     <div>
       <div className="grid lg:grid-cols-2 ">
         <div className=" bg-[#D7CFC7] h-[500px] md:h-[565px] xl:h-[836px] ">
-          <div className=" text-[#906953] text-center font-khand text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl md:py-16 xl:pt-32 xl:px-12 font-semibold py-16 sm:py-12 md:px-6">
+          <div className=" text-[#906953]  text-center font-khand text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl md:py-16 xl:pt-32 xl:px-12 font-semibold py-16 sm:py-12 md:px-6">
             “Where Moments Become Memories”
           </div>
           <div className="sm:hidden text-[#4A4A4A] text-center font-khand text-sm  font-medium px-8 pb-12 ">
@@ -117,4 +117,3 @@ export default function HeroSection() {
     </div>
   );
 }
-

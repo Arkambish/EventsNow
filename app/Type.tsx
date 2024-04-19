@@ -1,3 +1,5 @@
+import { People } from "./organization/dashboard/[id]/components/InviteButton";
+
 export type UserType = {
   _id: string;
   email: string;
@@ -195,6 +197,7 @@ export type OrgDashboardType =
   | "setting";
 
 export interface OrgContext {
+  peopleEmail: People[];
   userPermission: PermissionType;
   handleSetting: voidFunc;
   isSlideBar: boolean;

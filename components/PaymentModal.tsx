@@ -8,6 +8,8 @@ import { error, success } from "@/util/Toastify";
 
 import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
+import { FetchPost, FetchPut } from "@/hooks/useFetch";
+import { TicketArray } from "@/app/event/host/[id]/components/HostSideBar";
 
 declare global {
   interface Window {
@@ -27,10 +29,11 @@ type PaymentModalProps = {
   address: string;
   city: string;
   country: string;
-  ticketArrTemp: string[];
+  ticketArrTemp: TicketArray[];
   totalPrice: number;
   setIsActiveProceedTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setTicketArrTemp: React.Dispatch<React.SetStateAction<string[]>>;
+  setTicketArrTemp: React.Dispatch<React.SetStateAction<TicketArray[]>>;
+  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const PaymentModal = (props: PaymentModalProps) => {
@@ -124,60 +127,80 @@ const PaymentModal = (props: PaymentModalProps) => {
         paymentId: string
       ) {
         {
-          props.ticketArrTemp.map(async (ticket: string) => {
-            const value = {
-              useId: userId,
-              eventId: params.id,
-              class: { ticket },
-            };
+          props.ticketArrTemp.map(async (ticket: TicketArray) => {
+            //store ticket buy data
+            try {
+              const value = {
+                useId: userId,
+                eventId: params.id,
+                class: ticket.typeId,
+                classType: ticket.type,
+              };
 
-            const qrImg = await generateQRCodeImage(JSON.stringify(value));
+              const qrImg = await generateQRCodeImage(JSON.stringify(value));
 
-            const res = await fetch(
-              `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendQrCode`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
+              const qrdata = await FetchPost({
+                endpoint: "event/sendQrCode",
+                body: {
                   qr: qrImg,
                   userid: userId,
-                }),
+                },
+              });
+              console.log(qrdata);
+
+              if (qrdata !== "Email sent successfully") {
+                error("server error");
+                return;
               }
-            );
 
-            if (!res.ok) {
-              console.error("Error sending qr code");
-              error("Error sending qr code");
-              return;
-            }
-
-            const message = await res.json();
-            if (message === "No User  exists") {
-              error("No User exists");
-              return;
+              const buyTicketData = await FetchPost({
+                endpoint: "buyTicket/userBuyTicket",
+                body: {
+                  ticketId: ticket,
+                  eventId: params.id,
+                  userId: userId,
+                },
+              });
+              console.log(buyTicketData);
+              if (buyTicketData == "user buy ticket Failed,try again") {
+                error("user buy ticket Failed,try again");
+                return;
+              }
+              success("user buy ticket successfully");
+            } catch (e) {
+              console.log(e);
+              error(e);
             }
           });
         }
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              id: params.id,
-              amount: props.totalPrice,
-            }),
-          }
-        );
+        // const response = await fetch(
+        //   `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
+        //   {
+        //     method: "PUT",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       id: params.id,
+        //       amount: props.totalPrice,
+        //     }),
+        //   }
+        // );
+
+        const updateData = await FetchPut({
+          endpoint: `event/payment`,
+          body: {
+            id: params.id,
+            amount: props.totalPrice,
+          },
+        });
+        console.log(updateData);
 
         success("Payment completed");
         props.setIsActiveProceedTicketModal(false);
 
-        props.setTicketArrTemp([""]);
+        props.setTicketArrTemp([]);
+        props.setTotalPrice(0);
       };
 
       window.payhere.onDismissed = function onDismissed() {
