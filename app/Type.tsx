@@ -287,6 +287,8 @@ export interface ProfContext {
   userImage: string;
   setUserImage: React.Dispatch<React.SetStateAction<string>>;
   registerEvent: EventType[];
+  ticket: Ticket;
+  setTicket: React.Dispatch<React.SetStateAction<Ticket>>;
 }
 
 export type RegisterEventType = {

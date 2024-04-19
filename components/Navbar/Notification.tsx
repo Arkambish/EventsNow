@@ -1,12 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import { FetchGet } from "@/hooks/useFetch";
+import React, { useEffect, useState } from "react";
 
-function Notification() {
-  const [dropdownOpen, setDropdownOpen] = useState(true);
+function Notification(orgId: any) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+  useEffect(() => {
+    const sendNotification = async () => {
+      const data = FetchGet({
+        endpoint: `notification/getNotification/${orgId}`,
+      });
+    };
+  }, []);
 
   return (
     <div>

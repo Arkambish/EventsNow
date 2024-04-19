@@ -18,6 +18,8 @@ import { BiMapPin, BiCalendar, BiAlarm } from "react-icons/bi";
 import axios from "axios";
 import { EventType } from "@/app/Type";
 import Modal from "@/components/Modal";
+import { FetchPost } from "@/hooks/useFetch";
+import { useParams } from "next/navigation";
 
 interface EventCardOrgDash {
   img: string;
@@ -72,6 +74,7 @@ function EventCardOrgDash({
       console.error("Error deleting......", error);
     }
   };
+
   return (
     <div className=" w-full  bg-[#D9D9D9] my-4  max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 ">
       <div

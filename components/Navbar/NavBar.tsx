@@ -293,7 +293,7 @@ export default function NavBar() {
                             2
                           </div>
                         </button> */}
-                        <Notification />
+                        <Notification orgId={organizationId} />
 
                         <div
                           className={`${
