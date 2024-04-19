@@ -12,10 +12,10 @@ type Params = {
   id: string;
 };
 
+
 export async function GET(request: Request, { params }: { params: Params }) {
   try {
     const id = params.id;
-
     await connectMongoDB();
 
     const ticket = await BuyTicket.find({ userId: id });
@@ -23,7 +23,7 @@ export async function GET(request: Request, { params }: { params: Params }) {
       return NextResponse.json([]);
     }
     return NextResponse.json(ticket);
-  } catch (error) {
+    }catch (error) {
     return new NextResponse("Errror in fetching data" + error, { status: 500 });
   }
 }

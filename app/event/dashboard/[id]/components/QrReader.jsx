@@ -11,6 +11,7 @@ const QrReader = () => {
   const [scannedEvent, setScannedEvent] = useState("");
   const [scannedUser, setScannedUser] = useState("");
   const [quantity, setQuantity] = useState();
+  const [ticketType, setTicketType] = useState();
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
 
@@ -37,6 +38,7 @@ const QrReader = () => {
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
           setQuantity(dataObject.class.ticket);
+          setTicketType(dataObject.class.ticketType);
           setIsActiveMark(true);
         },
         {
@@ -69,7 +71,8 @@ const QrReader = () => {
         body: JSON.stringify({
           eventId: scannedEvent,
           userId: scannedUser,
-          ticketType: quantity,
+          ticketQuantity: quantity,
+          ticketType: ticketType,
         }),
       }
     );
@@ -131,9 +134,14 @@ const QrReader = () => {
               <p className="scannedText font-bold text-lg">
                 User id:<span className="text-slate-400"> {scannedUser}</span>
               </p>
-              <p className="quantity font-bold text-lg">
-                Ticket Type: <span className="text-slate-400"> {quantity}</span>
+              <p className="scannedText font-bold text-lg">
+                Ticket Type: <span className="text-slate-400"> {ticketType}</span>
               </p>
+              <p className="scannedText font-bold text-lg">
+                Ticket Quantity: <span className="text-slate-400"> {quantity}</span>
+              </p>
+              
+
             </div>
             <button
               onClick={handleMarkAttendance}

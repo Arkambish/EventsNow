@@ -7,9 +7,8 @@ interface CoverPhoto {
 
 export default function CoverPhoto({ image }: CoverPhoto) {
   return (
-    <div className="overflow-hidden xl:w-[71rem]  md:w-[57rem] sm:w-full ">
+    <div className="overflow-hidden object-cover xl:w-[71rem]  md:w-[57rem]  h-[32rem] md:h-[36rem] xl:h-screen ">
       <Image
-        // src={"/images/event/HostPage/cover2.jpg"}
         src={`${image}`}
         alt="hay"
         width={1000}

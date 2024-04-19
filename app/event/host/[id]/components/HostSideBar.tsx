@@ -1,5 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { FaRegRegistered } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { IoIosCard } from "react-icons/io";
+import { IoLocation } from "react-icons/io5";
+import { SlCalender } from "react-icons/sl";
+import { IoIosTime } from "react-icons/io";
+import { FaRegHeart } from "react-icons/fa";
+
 
 import Image from "next/image";
 import PostTab from "./PostTab";
@@ -245,7 +253,7 @@ export default function HostSideBar({
 
       <div className="flex md:w-64 xl:h-14 md:h-10 rounded-3xl bg-[#F9EBE9] items-center xl:mx-16 md:mx-8 xl:my-12 md:my-8 ">
         <button
-          className={` md:text-md  font-medium ml-2 w-40 h-8 xl:h-12 rounded-3xl  ${
+          className={` md:text-sm  font-medium ml-2 w-40 h-8 xl:h-12 rounded-3xl  ${
             activeButton === 1
               ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
               : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
@@ -257,10 +265,10 @@ export default function HostSideBar({
             }
           }}
         >
-          EVENT HOST
+          EVENT
         </button>
         <button
-          className={` md:text-md button cursor-pointer font-medium mr-2 w-40 h-8 xl:h-12 rounded-3xl  ${
+          className={` md:text-sm button cursor-pointer font-medium mr-2 w-40 h-8 xl:h-12 rounded-3xl  ${
             activeButton === 2
               ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
               : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
@@ -282,13 +290,8 @@ export default function HostSideBar({
 
       <div className="grid grid-rows-3 gap-6 xl:ml-12 md:ml-8 text-left mt-8">
         <div>
-          <div className="w-8 h-8 ">
-            <Image
-              src="/images/reusableComponents/Pin_fill.svg"
-              alt="print"
-              width={32}
-              height={32}
-            />
+          <div className="text-[#AC736D] ">
+            <IoLocation size={30}/>
           </div>
           <div className="text-[#353C4E] xl:text-2xl md:text-xl  align-top -mt-8 font-['Roboto'] ml-12">
             {Location}
@@ -296,13 +299,8 @@ export default function HostSideBar({
         </div>
 
         <div>
-          <div className="w-8 h-8 ">
-            <Image
-              src="/images/reusableComponents/Date_org.svg"
-              alt="print"
-              width={32}
-              height={32}
-            />
+          <div className="text-[#AC736D]">
+          <SlCalender size={25}/>
           </div>
           <div className="text-[#353C4E] xl:text-2xl  md:text-xl font-['Roboto'] align-top -mt-8 ml-12">
             {Date}
@@ -310,13 +308,8 @@ export default function HostSideBar({
         </div>
 
         <div>
-          <div className="w-8 h-8 ">
-            <Image
-              src="/images/reusableComponents/Clock_fill.svg"
-              alt="print"
-              width={32}
-              height={32}
-            />
+          <div className="text-[#AC736D]">
+          <IoIosTime size={25}/>
           </div>
           <div className="text-[#353C4E] xl:text-2xl  md:text-xl  font-['Roboto'] align-top -mt-8 ml-12">
             {Time}
@@ -328,38 +321,33 @@ export default function HostSideBar({
             <button
               disabled={preview ? true : false}
               onClick={removeUserFromRegisteredEvent}
-              className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-custom-orange rounded-l-2xl items-center xl:px-4"
+              className="button  xl:h-14 h-12 bg-custom-orange rounded-l-xl items-center xl:px-4 px-2"
             >
-              <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
-                <Image
-                  src="https://res.cloudinary.com/dpk9utvby/image/upload/v1710478589/ew/tecmf69jzdyv2sn22saa.svg"
-                  alt="print"
-                  width={32}
-                  height={32}
-                />
+              <div className="flex p-1">
+              <div className=" text-white">           
+                  <FaRegRegistered size={20}/>              
+               </div>
+              <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
+                Unregister
               </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Remove Registration
               </div>
             </button>
           ) : (
             <button
               disabled={preview ? true : false}
               onClick={userRegistrationForEventHandler}
-              className={`flex button xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4 ${
+              className={`button xl:h-14 h-12  bg-custom-orange rounded-l-xl items-center xl:px-4 px-2 ${
                 preview ? "cursor-not-allowed" : ""
               } `}
             >
-              <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
-                <Image
-                  src="https://res.cloudinary.com/dpk9utvby/image/upload/v1710478589/ew/tecmf69jzdyv2sn22saa.svg"
-                  alt="print"
-                  width={32}
-                  height={32}
-                />
+              <div className="flex p-1 ">
+              <div className=" text-white">            
+                <FaRegRegistered size={20}/>               
               </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2 ">
-                Register event
+
+              <div className="font-medium xl:text-md text-white text-left leading-tight xl:ml-4 md:ml-2 mx-auto">
+                Register
+              </div>
               </div>
             </button>
           )}
@@ -368,18 +356,15 @@ export default function HostSideBar({
             <button
               disabled={preview ? true : false}
               onClick={removeFromWishlistHandler}
-              className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
+              className="button  xl:h-14 h-12 bg-[#455273] rounded-r-xl items-center xl:px-4 px-2"
             >
-              <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
-                <Image
-                  src="https://res.cloudinary.com/dpk9utvby/image/upload/v1710478589/ew/tecmf69jzdyv2sn22saa.svg"
-                  alt="print"
-                  width={32}
-                  height={32}
-                />
+              <div className="p-1 flex">
+              <div className="text-white">
+              <FaHeart size={20}/>
               </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Remove Wish List
+              <div className="font-medium text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
+                Remove
+              </div>
               </div>
             </button>
           ) : (
@@ -388,18 +373,15 @@ export default function HostSideBar({
               onClick={addTowishlistHandler}
               className={`${
                 preview ? "cursor-not-allowed" : ""
-              }  flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4`}
+              }  button  xl:h-14 h-12 bg-[#455273] rounded-r-xl items-center xl:px-4 px-2`}
             >
-              <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
-                <Image
-                  src="https://res.cloudinary.com/dpk9utvby/image/upload/v1710478589/ew/tecmf69jzdyv2sn22saa.svg"
-                  alt="print"
-                  width={32}
-                  height={32}
-                />
+              <div className="flex p-1">
+              <div className=" text-white">
+              <FaRegHeart size={20}/>
               </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Add to Wish List
+              <div className="font-medium md:text-md text-sm  text-white text-left leading-tight xl:ml-4 md:ml-2">
+                Wish List
+              </div>
               </div>
             </button>
           )}
@@ -408,20 +390,17 @@ export default function HostSideBar({
         <button
           onClick={() => setIsActiveTicketModal(true)}
           disabled={preview ? true : false}
-          className={`flex  button xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4 ${
+          className={`  button w-40  h-12  bg-[#D47151] rounded-xl xl:px-4 px-2 ${
             preview ? "cursor-not-allowed" : ""
           } `}
         >
-          <div className=" w-10 h-8 mt-2 ml-2 xl:ml-0">
-            <Image
-              src="https://res.cloudinary.com/dpk9utvby/image/upload/v1710478589/ew/tecmf69jzdyv2sn22saa.svg"
-              alt="print"
-              width={32}
-              height={32}
-            />
+          <div className="flex p-1">
+          <div className="text-white">
+            <IoIosCard size={20}/>
           </div>
-          <div className="font-medium xl:text-lg text-md text-white text-left leading-tight ml-4">
+          <div className="font-medium xl:text-md text-sm text-white text-left leading-tight ml-4">
             Buy tickets
+          </div>
           </div>
         </button>
         {isActiveTicketModal && (
