@@ -5,6 +5,7 @@ import OverviewSubComponent from "./OverviewSubComponent";
 import CheckPermission from "./CheckPermission";
 import { useParams } from "next/navigation";
 import { EventContextType, UseEventContext } from "../EventDashContext";
+import { FetchGet } from "@/hooks/useFetch";
 
 export default function Overview() {
   const { event, id } = UseEventContext() as EventContextType;
@@ -15,15 +16,9 @@ export default function Overview() {
   useEffect(() => {
     const fetchTotalTicketSale = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data = await response.json();
+        const data = await FetchGet({
+          endpoint: `ticket/countTickets/${id}`,
+        });
         setTotalTicketSale(data.data);
       } catch (error) {
         console.error("Error fetching total ticket sale:", error);
@@ -32,10 +27,9 @@ export default function Overview() {
 
     const fetchTotalAttendance = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/v1/attendant/countAttendant/${id}`
-        );
-        const data = await response.json();
+        const data = await FetchGet({
+          endpoint: `attendant/countAttendant/${id}`,
+        });
         setTotalAttendance(data.data);
       } catch (error) {
         console.error("Error fetching total attendance:", error);
