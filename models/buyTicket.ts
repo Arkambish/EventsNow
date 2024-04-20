@@ -18,9 +18,7 @@ const BuyticketSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter userId"],
   },
-  quantity: {
-    type: Number,
-  },
+ 
 });
 
 const BuyTicket =
