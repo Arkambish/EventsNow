@@ -1,14 +1,23 @@
 "use client";
 import Image from "next/image";
+import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
 import Link from "next/link";
 
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { success } from "@/util/Toastify";
 import { error } from "@/util/Toastify";
 import { useOrg } from "../OrgContext";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { HiOutlineHome } from "react-icons/hi";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { BiMapPin, BiCalendar, BiAlarm } from "react-icons/bi";
 
 import axios from "axios";
 import { EventType } from "@/app/Type";
+import Modal from "@/components/Modal";
 
 interface EventCardOrgDash {
   img: string;
@@ -37,6 +46,7 @@ function EventCardOrgDash({
   id,
 }: EventCardOrgDash) {
   const { events, setEvents } = useOrg() as ContextData;
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleDelete = async () => {
     try {
@@ -68,152 +78,104 @@ function EventCardOrgDash({
         className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
         style={{ backgroundImage: `url(${img as string})` }}
       ></div>
-      <div className="lg:col-span-4 rounded-r-xl pt-1 ">
+      <div className="lg:col-span-4 rounded-r-xl pt-1 justify-start items-start">
         <div className="  flex justify-between px-6 my-2">
           <div className="  text-[#353535] font-semibold sm:font-bold text-lg sm:text-24">
             {name}
           </div>
           <div className="flex flex-col gap-3">
-            <Link href={`/event/dashboard/${id}`}>
-              <button className="button max-sm:hidden text-center hide flex gap-2 bg-[#D47151] text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM ">
-                <svg
-                  width="21"
-                  height="20"
-                  viewBox="0 0 21 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            <div className=" w-56 text-right">
+              <Menu as="div" className="relative inline-block text-left">
+                <div>
+                  <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+                    <HiOutlineDotsVertical />
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
                 >
-                  <g id="Filter">
-                    <path
-                      id="Vector 7"
-                      d="M4.375 10L4.375 3.33333"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      id="Vector 9"
-                      d="M16.1919 16.667L16.1919 15.0003"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      id="Vector 8"
-                      d="M4.375 16.667L4.375 13.3337"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      id="Vector 10"
-                      d="M16.1919 10L16.1919 3.33333"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      id="Vector 11"
-                      d="M10.2837 5.83301L10.2837 3.33301"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      id="Vector 12"
-                      d="M10.2837 16.667L10.2837 10.0003"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <ellipse
-                      id="Ellipse 36"
-                      cx="4.37514"
-                      cy="11.6667"
-                      rx="1.68813"
-                      ry="1.66667"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <ellipse
-                      id="Ellipse 37"
-                      cx="10.2833"
-                      cy="7.49967"
-                      rx="1.68813"
-                      ry="1.66667"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <ellipse
-                      id="Ellipse 38"
-                      cx="16.192"
-                      cy="12.4997"
-                      rx="1.68813"
-                      ry="1.66667"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </g>
-                </svg>
-                Dashboard
-              </button>
-            </Link>
-            <Link href="">
-              {" "}
-              <button
-                onClick={handleDelete}
-                className="button max-sm:hidden text-center hide flex gap-2 bg-rose-900 text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM  "
-              >
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  height="1em"
-                  width="1em"
-                  className="mt-1"
-                >
-                  <path d="M20.37 8.91l-1 1.73-12.13-7 1-1.73 3.04 1.75 1.36-.37 4.33 2.5.37 1.37 3.03 1.75M6 19V7h5.07L18 11v8a2 2 0 01-2 2H8a2 2 0 01-2-2m2 0h8v-6.8L10.46 9H8v10z" />
-                </svg>
-                Delete
-              </button>
-            </Link>
+                  <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+                    <div className="px-1 py-1 ">
+                      <Link href={`/event/dashboard/${id}`}>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              className={`${
+                                active
+                                  ? "bg-custom-orange text-white"
+                                  : "text-gray-900"
+                              } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            >
+                              {active ? (
+                                <EditActiveIcon
+                                  className="mr-2 h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <EditInactiveIcon
+                                  className="mr-2 h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              )}
+                              Dashboard
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </Link>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => setIsOpen(true)}
+                            className={`${
+                              active
+                                ? "bg-custom-orange text-white"
+                                : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          >
+                            {active ? (
+                              <DeleteActiveIcon
+                                className="mr-2 h-5 w-5 "
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <DeleteInactiveIcon
+                                className="mr-2 h-5 w-5 "
+                                aria-hidden="true"
+                              />
+                            )}
+                            Delete
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            </div>
           </div>
-
         </div>
 
         <div className="grid  gap-2 pl-4 pb-4">
-          <div className=" flex">
-            <Image
-              src="/images/admin/Pin_fill_blue.svg"
-              alt="calendar"
-              width={35}
-              height={40}
-            />
+          <div className=" flex  items-center">
+            <BiMapPin size={22} />
             <div className="ml-2 my-auto font-mono text-[#353C4E] text-sm font-medium">
               {location}
             </div>
           </div>
-          <div className="flex  ">
-            <Image
-              src="/images/admin/Clock_fill_blue.svg"
-              alt="calendar"
-              width={31}
-              height={40}
-            />
+          <div className="flex   items-center ">
+            <BiAlarm size={22} />
             <div className="ml-2 my-auto font-mono text-[#353C4E] text-sm font-medium">
               {time}
             </div>
           </div>
-          <div className=" flex">
-            <Image
-              src="/images/admin/Date_range_light_blue.svg"
-              alt="calendar"
-              width={35}
-              height={40}
-            />
+          <div className=" flex  items-center">
+            <BiCalendar size={22} />
             <div className=" ml-2 my-auto font-mono text-[#353C4E] text-sm font-medium">
               {date.substring(0, 10)}
             </div>
@@ -303,12 +265,126 @@ function EventCardOrgDash({
                 />
               </g>
             </svg>
-            d
           </button>
         </div>
       </div>
+      {isOpen && (
+        <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+          <Dialog.Title
+            as="h3"
+            className="text-lg font-medium leading-6 text-gray-900"
+          >
+            Confirm Deletion
+          </Dialog.Title>
+          <div className="mt-2">
+            <p className="text-sm text-gray-500">
+              Are you sure you want to delete this item?By clicking "Delete,"
+              you will permanently remove the selected data in your account.
+            </p>
+          </div>
+
+          <div className="mt-4 flex gap-2">
+            <button
+              type="button"
+              className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+            <button
+              type="button"
+              className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
 
 export default EventCardOrgDash;
+
+function EditInactiveIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 13V16H7L16 7L13 4L4 13Z"
+        fill="#EDE9FE"
+        stroke="#D47151"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+function EditActiveIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 13V16H7L16 7L13 4L4 13Z"
+        fill="#c5c3c3"
+        stroke="#fff"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+function DeleteInactiveIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="5"
+        y="6"
+        width="10"
+        height="10"
+        fill="#EDE9FE"
+        stroke="#D47151"
+        strokeWidth="2"
+      />
+      <path d="M3 6H17" stroke="#D47151" strokeWidth="2" />
+      <path d="M8 6V4H12V6" stroke="#D47151" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function DeleteActiveIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="5"
+        y="6"
+        width="10"
+        height="10"
+        fill="#c5c3c3"
+        stroke="#fff"
+        strokeWidth="2"
+      />
+      <path d="M3 6H17" stroke="#fff" strokeWidth="2" />
+      <path d="M8 6V4H12V6" stroke="#fff" strokeWidth="2" />
+    </svg>
+  );
+}

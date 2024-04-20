@@ -1,29 +1,34 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+
 import { FiPlusCircle } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 
 
 
+import { TicketArray } from "./HostSideBar";
+
 interface TicketMockupProps {
   image: string;
-  type: string;
+  typeId: string;
   price: number;
   key: string;
-    totalPrice:number;
-    setTotalPrice:React.Dispatch<React.SetStateAction<number>>;
-    setTicketArray:React.Dispatch<React.SetStateAction<string[]>>;
-    ticketArray:string[];
+  totalPrice: number;
+  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
+  setTicketArray: React.Dispatch<React.SetStateAction<TicketArray[]>>;
+  ticketArray: TicketArray[];
+  type: string;
 }
 export default function TicketCard({
   image,
-  type,
+  typeId,
   price,
   key,
   totalPrice,
   setTotalPrice,
   setTicketArray,
-  ticketArray
+  ticketArray,
+  type,
 }: TicketMockupProps) {
 
   const [visible , setVisible] = useState(false);
@@ -52,6 +57,7 @@ export default function TicketCard({
     <div className=" rounded-[10px] border-2 border-[#E2E2E2] pb-4">
       
       <div className=" w-64 h-60 p-4 overflow-hidden object-cover">
+
         <Image
           src={image}
           width={250}
@@ -78,6 +84,7 @@ export default function TicketCard({
 
         </div>
 
+
         <div className="space-y-2 pt-2">
             <button 
             className=" w-24 rounded border-[1px] border-[#37A234] px-2 my-auto text-sm font-semibold text-[#37A234] flex  gap-2 " 
@@ -96,6 +103,7 @@ export default function TicketCard({
               </div>     
                 Remove
             </button>  
+
         </div>
 
       </div>

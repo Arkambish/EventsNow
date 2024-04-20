@@ -16,11 +16,22 @@ import { OrganizationType } from "@/app/Type";
 import { z } from "zod";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/Select";
+
 const ProfileSettings = dynamic(
   () => import("@/app/organization/dashboard/[id]/components/ProfileSettings")
 );
 import Switch from "react-switch";
 import { is } from "date-fns/locale";
+import { set } from "mongoose";
+import { Input } from "@/components/Input";
+import { FetchPut } from "@/hooks/useFetch";
 
 interface contextProps {
   organization: OrganizationType;
@@ -71,21 +82,11 @@ export default function Setting() {
 
       const data = { bank, branch, payout, accountName, accountNumber };
 
-      const res = await fetch(
-        `/api/v1/organization/updateOrganization/${organization._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const resData = await FetchPut({
+        endpoint: `organization/updateOrganization/${organization._id}`,
+        body: data,
+      });
 
-      if (!res.ok) {
-        error("Failed to update organization details");
-        return;
-      }
       setIsEditingAdvanced(false);
       success("Organization details updated successfully");
     } else {
@@ -94,23 +95,10 @@ export default function Setting() {
   }
 
   async function handleImageSaveButton() {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/updateOrganizationPrifilePic`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id,
-          image: profileImage,
-        }),
-      }
-    );
-    if (!res.ok) {
-      error("Failed to save settings");
-      return;
-    }
+    const data = await FetchPut({
+      endpoint: `organization/updateOrganizationPrifilePic`,
+      body: { id, image: profileImage },
+    });
     setOrganizationImage(profileImage);
     setProfileImage("");
   }
@@ -121,6 +109,24 @@ export default function Setting() {
 
   function handleadvanceDetailsChneg() {
     setIsEditingAdvanced(!isEditingAdvanced);
+  }
+
+  function handleBank(e: string) {
+    setBank(e);
+  }
+  function handlebranch(e: string) {
+    setBranch(e);
+  }
+
+  function handleAccountType(e: string) {
+    setAccountName(e);
+  }
+
+  function handlePayout(e: string) {
+    setPayout(e);
+  }
+  function handleAcccountNumber(e: string) {
+    setAccountNumber(e);
   }
 
   return (
@@ -227,7 +233,7 @@ export default function Setting() {
                     open();
                   }}
                 >
-                  <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 bg-slate-800 rounded-lg">
+                  <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-lg">
                     <div className="ml-2  bg-white p-1 rounded-full text-custom-orange">
                       <FaCloudUploadAlt />
                     </div>
@@ -297,8 +303,23 @@ export default function Setting() {
           )} */}
         </div>
 
-        <div className="w-full  lg:w-3/4">
-          <select
+        <div className="w-full mt-4 flex flex-col gap-3 lg:w-3/4">
+          <Select onValueChange={handleBank}>
+            <SelectTrigger
+              {...(!isEditingAdvanced && { disabled: true })}
+              value={bank}
+              className="w-3/4 ring-2 ring-custom-orange "
+            >
+              <SelectValue placeholder={bank ? bank : "Select bank"} />
+            </SelectTrigger>
+            <SelectContent className="bg-white text-black font-medium		 cursor-pointer">
+              <SelectItem value="Sampath">Sampath</SelectItem>
+              <SelectItem value="BOC">BOC</SelectItem>
+              <SelectItem value="peoples">peoples</SelectItem>
+              <SelectItem value="NSB">NSB</SelectItem>
+            </SelectContent>
+          </Select>
+          {/* <select
             {...(!isEditingAdvanced && { disabled: true })}
             id="bank"
             value={bank}
@@ -310,8 +331,24 @@ export default function Setting() {
             <option value="BOC">BOC</option>
             <option value="peoples">peoples</option>
             <option value="NSB">NSB</option>
-          </select>
-          <select
+          </select> */}
+
+          <Select onValueChange={handlebranch}>
+            <SelectTrigger
+              {...(!isEditingAdvanced && { disabled: true })}
+              value={branch}
+              className="w-3/4 ring-2 ring-custom-orange "
+            >
+              <SelectValue placeholder={branch ? branch : "Select branch"} />
+            </SelectTrigger>
+            <SelectContent className="bg-white text-black font-medium		 cursor-pointer">
+              <SelectItem value="matara">matara</SelectItem>
+              <SelectItem value="colombo">colombo</SelectItem>
+              <SelectItem value="gampaha">gampaha</SelectItem>
+              <SelectItem value="kandy">kandy</SelectItem>
+            </SelectContent>
+          </Select>
+          {/* <select
             id="branch"
             {...(!isEditingAdvanced && { disabled: true })}
             value={branch}
@@ -323,9 +360,45 @@ export default function Setting() {
             <option value="colombo">colombo</option>
             <option value="gampaha">gampaha</option>
             <option value="kandy">kandy</option>
-          </select>
-          <div className="my-5 flex gap-1">
-            <input
+          </select> */}
+
+          <Select onValueChange={handleAccountType}>
+            <SelectTrigger
+              {...(!isEditingAdvanced && { disabled: true })}
+              value={accountName}
+              className="w-3/4 ring-2 ring-custom-orange "
+            >
+              {" "}
+              <SelectValue
+                placeholder={accountName ? accountName : "Select Account Type"}
+              />
+            </SelectTrigger>
+            <SelectContent className="bg-white text-black font-medium		 cursor-pointer">
+              <SelectItem value="saving">saving</SelectItem>
+              <SelectItem value="fix">fix</SelectItem>
+            </SelectContent>
+          </Select>
+          <Input
+            {...(!isEditingAdvanced && { disabled: true })}
+            className="w-3/4 ring-2 ring-custom-orange "
+            value={accountNumber}
+            placeholder="Account Number "
+            onChange={(e) => handleAcccountNumber(e.target.value)}
+          />
+          {/* <input
+            required
+            {...(!isEditingAdvanced && { disabled: true })}
+            type="text"
+            name="firstName"
+            id="firstName"
+            value={accountNumber}
+            onChange={(e) => setAccountNumber(e.target.value)}
+            className="focus:outline-custom-orange  w-full  block flex-1  bg-transparent py-1.5 pl-1  placeholder:text-gray-600  text-gray-600 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
+            placeholder="Account Number "
+          /> */}
+
+          {/* <div className="my-5 flex gap-1">
+           <input
               required
               type="text"
               name="firstName"
@@ -335,7 +408,7 @@ export default function Setting() {
               onChange={(e) => setAccountName(e.target.value)}
               className=" focus:outline-custom-orange w-full  block flex-1  bg-transparent py-1.5 pl-1 text-gray-600  placeholder:text-gray-600  focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
               placeholder=" Gues Name "
-            />
+            /> 
             <input
               required
               {...(!isEditingAdvanced && { disabled: true })}
@@ -347,20 +420,27 @@ export default function Setting() {
               className="focus:outline-custom-orange  w-full  block flex-1  bg-transparent py-1.5 pl-1  placeholder:text-gray-600  text-gray-600 focus:ring-0 sm:text-sm sm:leading-6 border-2 rounded-[12px]"
               placeholder="Account Number "
             />
-          </div>
-          <select
-            id="countries"
-            {...(!isEditingAdvanced && { disabled: true })}
-            value={payout}
-            onChange={(e) => setPayout(e.target.value)}
-            className="focus:outline-custom-orange text-gray-600  w-full  block flex-1  bg-transparent py-1.5 pl-1  placeholder:text-gray-400  sm:text-sm sm:leading-6 border-2 rounded-[12px]"
-          >
-            <option selected>payout frequency</option>
-            <option value="1 week">1 week</option>
-            <option value="2 week">2 week</option>
-            <option value="3 week">3 week</option>
-            <option value="4 week">4 week</option>
-          </select>
+          </div> */}
+
+          <Select onValueChange={handlePayout}>
+            <SelectTrigger
+              {...(!isEditingAdvanced && { disabled: true })}
+              value={payout}
+              className="w-3/4 ring-2 ring-custom-orange "
+            >
+              {" "}
+              <SelectValue
+                placeholder={payout ? payout : "Select Payment Frequency"}
+              />
+            </SelectTrigger>
+            <SelectContent className="bg-white text-black font-medium		 cursor-pointer">
+              <SelectItem value="1 week">1 week</SelectItem>
+              <SelectItem value="2 week">2 week</SelectItem>
+              <SelectItem value="3 week">3 week</SelectItem>
+              <SelectItem value="4 week">4 week</SelectItem>
+            </SelectContent>
+          </Select>
+
           {isEditingAdvanced && (
             <div className="w-full mt-4 gap-2  flex justify-end">
               <button

@@ -15,9 +15,8 @@ type User = {
   email: string;
   firstName: string;
   role: string;
- image: string;
+  image: string;
 };
-
 
 export async function comparePassword(password: string, hashPassword: string) {
   const isValid = await compare(password, hashPassword);

@@ -3,7 +3,15 @@ import React from "react";
 
 import ProfCard from "./ProfCard";
 import { useOrg } from "../OrgContext";
-import { EventType, OrganizationTeamType, OrganizationType } from "@/app/Type";
+import {
+  EventType,
+  OrganizationTeamType,
+  OrganizationType,
+  PermissionType,
+} from "@/app/Type";
+import Link from "next/link";
+import Login from "@/components/Login";
+import Image from "next/image";
 
 interface contextProps {
   editedName: string;
@@ -11,15 +19,41 @@ interface contextProps {
   events: EventType[];
   organization: OrganizationType;
   organizationImage: string;
+  id: string;
+  userPermission: PermissionType;
 }
 
 export default function Profile() {
-  const { editedName, team, events, organizationImage } =
+  const { editedName, team, events, organizationImage, id, userPermission } =
     useOrg() as contextProps;
 
+  const isPermissionAvailable =
+    userPermission?.globalPermission?.includes("allPermission") ||
+    userPermission?.globalPermission?.includes("Manage Event");
+
   return (
-    <div className=" lg:p-3 p-0 h-fit w-fit items-center justify-center rounded-xl shadow-3xl bg-custom-lightorange">
-      <div className="p-2">
+    <div className=" lg:p-3 p-0 flex flex-col h-fit w-fit items-start justify-start rounded-xl shadow-3xl bg-custom-lightorange">
+      {isPermissionAvailable && (
+        <Link href={`/createevent/${id}`}>
+          <button
+            className={`bg-custom-orange button  lg:m-0 m-2  h-8 rounded-lg`}
+          >
+            <div className="flex  flex-row ml-2 mr-2  gap-2 p-0 items-center justify-center">
+              <Image
+                src={`/images/reusableComponents/createevent.svg`}
+                alt="Picture of the button"
+                width={20}
+                height={20}
+              />
+              <div className=" text-white text-sm font-medium  ">
+                HOST EVENT
+              </div>
+            </div>
+          </button>
+        </Link>
+      )}
+
+      <div className="mt-2 lg:p-0 p-2">
         <div className="p-2  bg-white w-fit rounded-md flex items-center justify-center whitespace-nowrap">
           <svg
             className="mr-2"

@@ -6,6 +6,20 @@ import Pagination from "@mui/material/Pagination";
 import { formatDate } from "@/util/helper";
 import EventListView from "./EventListView";
 import { EventType } from "@/app/Type";
+import {
+  HiOutlineLocationMarker,
+  HiOutlinePencil,
+  HiOutlineLibrary,
+  HiOutlineCalendar,
+} from "react-icons/hi";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/Select";
 
 const EventViewMode = ({ event }: { event: EventType[] }) => {
   const [eventarr, setEventarr] = useState<EventType[]>(event);
@@ -29,8 +43,8 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
     handleResize();
   }, []);
 
-  const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedSortBy = e.target.value;
+  const handleSortByChange = (e: string) => {
+    const selectedSortBy = e;
     setSortBy(selectedSortBy);
     if (selectedSortBy === "name") {
       const sortedEvents = [...eventarr].sort((a, b) =>
@@ -61,37 +75,66 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
 
   return (
     <div>
-      <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between">
-        <div className="font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8 ">
+      <div className="mb-10 flex flex-col md:flex-row lg:flex-row items-end justify-between">
+        <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8 ">
           Upcoming Events
         </div>
         <div className="ms-12 sm:ms-0 justify-center items-center flex flex-col md:flex-col lg:flex-row gap-2 md:gap-2 lg:gap-6 mr-0 md:mr-20 lg:mr-20 text-gray-600">
           <div className=" mt-2 md:mt-6 lg:mt-10 flex flex-row">
-            Sort By
-            <div className="relative ml-4">
-              <select
-                className="appearance-none bg-white border border-gray-300 px-4 py-1 rounded-md shadow-sm text-sm focus:outline-none focus:border-custom-brown items-center"
-                value={sortBy}
-                onChange={handleSortByChange}
-              >
-                <option value="location">Location</option>
-                <option value="name">Name</option>
-                <option value="organization">Organization</option>
-                <option value="date">Date</option>
-              </select>
+            <div className=" ml-4">
+              <Select onValueChange={handleSortByChange}>
+                <SelectTrigger
+                  // onChange={(e) => handleEventChange(e)}
+                  // value={selectedEvent}
+                  className="w-[150px] ring-0 h-8 ring-custom-orange font-semibold"
+                >
+                  <SelectValue placeholder="Sort By" />
+                </SelectTrigger>
+                <SelectContent className="bg-white text-black">
+                  <SelectItem value="location">
+                    <div className="hover:text-custom-orange flex gap-2 justify-center items-center">
+                      <HiOutlineLocationMarker size={18} />
+                      <div>Location</div>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="name">
+                    <div className="hover:text-custom-orange flex gap-2">
+                      <HiOutlinePencil size={18} />
+                      <div>Name</div>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="organization">
+                    <div className="hover:text-custom-orange flex gap-2 justify-center items-center">
+                      <HiOutlineLibrary size={18} />
+                      <div>Organization</div>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="date">
+                    <div className="hover:text-custom-orange flex gap-2 justify-center items-center">
+                      <HiOutlineCalendar size={18} />
+                      <div>Date</div>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
-          <div className="mt-2 md:mt-2 lg:mt-10 flex flex-row gap-4 mr-20">
+          <div
+            className="mt-2 md:mt-2
+          font-semibold text-md lg:mt-10 flex flex-row gap-4 mr-20"
+          >
             View As
             <div className="mt-1 flex flex-row gap-3 cursor-pointer">
               <HiOutlineViewGrid
-                className={`cursor-pointer hover:bg-gray-400   ${
+                size={20}
+                className={`cursor-pointer hover:text-custom-orange   ${
                   viewMode === "grid" ? "" : ""
                 }`}
                 onClick={() => handleViewChange("grid")}
               />
               <HiOutlineViewList
-                className={`cursor-pointer hover:bg-gray-400 ${
+                size={20}
+                className={`cursor-pointer hover:text-custom-orange ${
                   viewMode === "list" ? "" : ""
                 }`}
                 onClick={() => handleViewChange("list")}

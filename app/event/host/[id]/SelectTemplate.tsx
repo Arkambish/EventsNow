@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Template from "./template1/Template1";
 import { EventType } from "@/app/Type";
+import NoPreviewPage from "../../dashboard/[id]/components/NoPreviewPage";
 
 export type Post = {
   _id: string;
@@ -27,8 +28,10 @@ export default function SelectTemplate({
 }) {
   return (
     <div>
-      {event.template === "template1" && (
+      {event.template === "template1" ? (
         <Template event={event} preview={false} />
+      ) : (
+        <NoPreviewPage />
       )}
     </div>
   );

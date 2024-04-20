@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { error, success } from "@/util/Toastify";
 import { getSession } from "next-auth/react";
+
 import { FaRegRegistered } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { IoIosCard } from "react-icons/io";
@@ -12,6 +13,9 @@ import { IoLocation } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
 import { IoIosTime } from "react-icons/io";
 import { FaTicketSimple } from "react-icons/fa6";
+
+
+import RegistrationForEventModalSmall from "./RegistrationForEventModalSmall";
 
 interface SmallView {
   EventName: String;
@@ -47,7 +51,13 @@ export default function SmallView({
   preview = false,
   handleComponentChange,
 }: SmallView) {
+
   const [activeButton, setActiveButton] = useState<number | null>(1);
+
+  const [isRegModalShow, setIsRegModalShow] = useState<boolean>(false);
+  const [eventUpdates, setEventUpdates] = useState(false);
+  const [marketingUpdates, setMarketingUpdates] = useState(false);
+
   const [userId, setUserId] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [registeredUserList, setRegisteredUserList] = useState<string[] | null>(
@@ -96,7 +106,7 @@ export default function SmallView({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email, eventId: id }),
+        body: JSON.stringify({ email: email, eventId: id , sendEventUpdates:eventUpdates, sendMarketingUpdates:marketingUpdates}),
       }
     );
     if (!res.ok) {
@@ -106,6 +116,7 @@ export default function SmallView({
 
     success("registered for event successfully");
     setIsRegistered(true);
+    setIsRegModalShow(false);
   }
 
   async function removeUserFromRegisteredEvent() {
@@ -139,22 +150,26 @@ export default function SmallView({
   }, [id]);
 
   useEffect(() => {
-    const getEvent = async () => {
+    const checkUserRegistered = async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getEvent`,
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/event/checkUserRegistered`,
         {
           method: "POST",
-          mode: "cors",
-          body: JSON.stringify(id),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId:userId, eventId: id }),
         }
       );
+      if (!res.ok) {
+        error("Error checking user registration");
+        return;
+      }
       const data = await res.json();
-      setRegisteredUserList(data.registerUser);
+      setIsRegistered(data);
+    }
+    checkUserRegistered();
 
-      const register = data.registerUser?.includes(userId || "");
-      setIsRegistered(register);
-    };
-    getEvent();
   }, [id, userId]);
 
   //get user data
@@ -238,6 +253,12 @@ export default function SmallView({
 
   return (
     <div>
+      {isRegModalShow && <RegistrationForEventModalSmall
+          setVisible={setIsRegModalShow}
+          userRegistrationFunction={userRegistrationForEventHandler}
+          setEventsUpdatesFunction={setEventUpdates}
+          setMarketingUpdatesFunction={setMarketingUpdates}
+          />}
       <div className=' text-center text-[#454545cc] text-4xl font-normal pt-8 font-["Roboto"]'>
         {EventName}
       </div>
@@ -294,11 +315,10 @@ export default function SmallView({
             </button>
           ) : (
             <button
-              disabled={preview ? true : false}
-              onClick={userRegistrationForEventHandler}
-              className={`flex button w-24 h-12  bg-custom-orange rounded-l-xl items-center ${
-                preview ? "cursor-not-allowed" : ""
-              } `}
+
+            onClick={()=>{setIsRegModalShow(true)}}
+              className="flex xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4"
+
             >
               <div className="flex px-2.5 space-x-2">
                 <div className="text-white">
@@ -310,6 +330,8 @@ export default function SmallView({
               </div>
             </button>
           )}
+
+
 
           {isAddWishList ? (
             <button

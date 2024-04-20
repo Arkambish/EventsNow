@@ -1,3 +1,5 @@
+import { People } from "./organization/dashboard/[id]/components/InviteButton";
+
 export type UserType = {
   _id: string;
   email: string;
@@ -9,6 +11,15 @@ export type UserType = {
   registeredEvents: string[];
   mobileNumber: Number;
 };
+
+export type PermissionType = {
+  _id: string;
+  organizationId: string;
+  globalPermission: string[];
+  userId: string;
+  eventPermission: EventPermissionType[];
+};
+
 export type UserDetails = {
   _id: string;
   email: string;
@@ -187,6 +198,8 @@ export type OrgDashboardType =
   | "setting";
 
 export interface OrgContext {
+  peopleEmail: People[];
+  userPermission: PermissionType;
   handleSetting: voidFunc;
   isSlideBar: boolean;
   setIsSlideBar: React.Dispatch<React.SetStateAction<boolean>>;

@@ -4,6 +4,8 @@ import Switch from "react-switch";
 import QRScanner from "./QRcodeScanner";
 import QrScanner from "qr-scanner";
 import { error, success } from "@/util/Toastify";
+import { FetchPost } from "@/hooks/useFetch";
+import { UseEventContext } from "../EventDashContext";
 
 const QrReader = () => {
   const videoElementRef = useRef(null);
@@ -14,6 +16,8 @@ const QrReader = () => {
   const [ticketType, setTicketType] = useState();
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
+
+  const { id } = UseEventContext();
 
   // if (scannedEvent.length > 0 || scannedUser.length > 0 || quantity > 0) {
   //   setIsActiveMark(true);
@@ -34,11 +38,15 @@ const QrReader = () => {
             .replace(/^"|"$/g, ""); // Remove backslashes and surrounding quotation marks
           const dataObject = JSON.parse(cleanedDataString);
 
+          console.log(dataObject);
+
           setScannedText(result.data);
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
+
           setQuantity(dataObject.class.ticket);
           setTicketType(dataObject.class.ticketType);
+
           setIsActiveMark(true);
         },
         {
@@ -58,31 +66,25 @@ const QrReader = () => {
 
   async function handleMarkAttendance() {
     if (!scannedEvent.length > 0 || !scannedUser.length > 0 || !quantity > 0) {
+      console.log("non");
       return;
     }
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/v1/attendant/markAttendant`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          eventId: scannedEvent,
-          userId: scannedUser,
-          ticketQuantity: quantity,
-          ticketType: ticketType,
-        }),
-      }
-    );
 
-    if (!res.ok) {
-      error("Failed to mark attendance");
-      return;
-    }
+    if (id !== scannedEvent) error("wrong qr code");
+    console.log(scannedEvent, quantity, scannedUser);
 
-    const data = await res.json();
+
+
+    const data = await FetchPost({
+      endpoint: "attendant/markAttendant",
+      body: {
+        eventId: scannedEvent,
+        userId: scannedUser,
+        ticketType: quantity,
+      },
+    });
+
     if (data.message === "User Already Attending") {
       error("User Already Attending");
       return;

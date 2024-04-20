@@ -2,17 +2,24 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter, useParams, notFound } from "next/navigation";
 import { useAuth } from "@/app/AuthContext";
-import { AuthContext } from "@/components/Navbar/NavBar";
+import { AuthContext, getUser } from "@/components/Navbar/NavBar";
 import {
   ChildrenType,
+  EventPermissionType,
   EventType,
   OrgContext,
   OrgDashboardType,
   OrganizationTeamType,
   OrganizationType,
+  PermissionType,
   UserType,
   voidFunc,
 } from "@/app/Type";
+import { get } from "http";
+import { getSession } from "next-auth/react";
+import { getUserDetails } from "@/util/helper";
+import { People } from "./components/InviteButton";
+import { FetchGet } from "@/hooks/useFetch";
 
 export type Modal =
   | ""
@@ -32,7 +39,7 @@ type GettingOrganizationData = {
 };
 const orgContext = createContext<OrgContext | string>("");
 function OrgContextProvider({ children }: ChildrenType) {
-  const [status, setStatus] = useState<OrgDashboardType>("dashboard");
+  const [status, setStatus] = useState<OrgDashboardType>("myEvents");
   const [revenue, setRevenue] = useState<number>(0);
   const [ticketSold, setTicketSold] = useState<number>(0);
   const [events, setEvents] = useState<EventType[]>([]);
@@ -57,10 +64,40 @@ function OrgContextProvider({ children }: ChildrenType) {
   const [organizationImage, setOrganizationImage] = useState<string>("");
   const id: string | any = params.id;
   const [eventPermission, setEventPermission] = useState<EventPermission[]>([]);
+  const [userPermission, setUserPermission] = useState<PermissionType>({
+    _id: "",
+    organizationId: "",
+    userId: "",
+    globalPermission: [],
+    eventPermission: [],
+  });
+
+  const [peopleEmail, setPeopleEmail] = useState<People[]>([]);
 
   useEffect(
     function () {
       async function getData() {
+        const fetchPeople = async () => {
+          const data = await FetchGet({ endpoint: "user/getAllUser" });
+
+          const email = data.map((person: UserType) => {
+            return {
+              id: person._id,
+              name: person.email,
+            };
+          });
+          setPeopleEmail(email);
+        };
+        fetchPeople();
+
+        const userPermissionData = await getUserDetails({
+          organizationId: params.id,
+        });
+
+        // const userPermissionData = await userPermissionRes.json();
+
+        setUserPermission(userPermissionData);
+
         setIsLoading(true);
         try {
           const res = await fetch(
@@ -89,12 +126,10 @@ function OrgContextProvider({ children }: ChildrenType) {
           setIsActive(organizationDetails.organization.isActive);
 
           // get users in organization
-          const res2 = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/getOrganiztionUsers/${params.id}`
-          );
-          console.log(res2.ok, "res2.ok");
 
-          const organizationUser: OrganizationTeamType[] = await res2.json();
+          const organizationUser: OrganizationTeamType[] = await FetchGet({
+            endpoint: `permission/getOrganiztionUsers/${params.id}`,
+          });
 
           const team: OrganizationTeamType[] = organizationUser.filter(
             (user: OrganizationTeamType) =>
@@ -104,13 +139,24 @@ function OrgContextProvider({ children }: ChildrenType) {
           setTeam(team);
           setOrganizationId(params.id);
           // get events in organization
-          const res3 = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationEvent/${params.id}`
-          );
 
+          const organizationEvent: EventType[] = await FetchGet({
+            endpoint: `organization/getOrganizationEvent/${params.id}`,
+          });
 
-          const organizationEvent: EventType[] = await res3.json();
-          setEvents(organizationEvent);
+          if (userPermissionData.globalPermission.length > 0) {
+            setEvents(organizationEvent);
+          } else {
+            const getEventPermissionId = userPermissionData.eventPermission.map(
+              (permission: EventPermissionType) => permission.eventId
+            );
+
+            const EventHasPermission = organizationEvent.filter(
+              (event: EventType) => getEventPermissionId.includes(event._id)
+            );
+
+            setEvents(EventHasPermission);
+          }
 
           setIsLoading(false);
         } catch (error) {
@@ -152,7 +198,9 @@ function OrgContextProvider({ children }: ChildrenType) {
   return (
     <orgContext.Provider
       value={{
+        peopleEmail,
         events,
+        userPermission,
         handleSetting,
         isSlideBar,
         setIsSlideBar,

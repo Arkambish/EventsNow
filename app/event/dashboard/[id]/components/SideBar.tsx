@@ -7,6 +7,7 @@ import { HiArrowCircleRight } from "react-icons/hi";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import Container from "./Container";
 import { UseEventContext, EventContextType } from "../EventDashContext";
+import CheckPermission from "./CheckPermission";
 
 export default function SideBar() {
   const {
@@ -20,6 +21,8 @@ export default function SideBar() {
     isSideBar,
     setIsSideBar,
     handleQRreader,
+    globalPermission,
+    eventPermission,
   } = UseEventContext() as EventContextType;
 
   return (
@@ -58,50 +61,78 @@ export default function SideBar() {
                 text="Overview"
                 onClick={() => handleOverview()}
               />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="bookmark.svg"
-                text="Host Page"
-                onClick={handleHostPage}
-              />
+              <CheckPermission
+                provideGlobalPermission={["Manage Host Page"]}
+                provideEventPermission={["Manage Host Page"]}
+              >
+                <EventDashButton
+                  isSlideBar={isSideBar}
+                  img="bookmark.svg"
+                  text="Host Page"
+                  onClick={handleHostPage}
+                />
+              </CheckPermission>
               <EventDashButton
                 isSlideBar={isSideBar}
                 img="team.svg"
                 text="My Team"
                 onClick={() => handleMyteam()}
               />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="file_dock.svg"
-                text="Reports"
-                onClick={() => handleReports()}
-              />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="bell_pin.svg"
-                text="Campaign"
-                onClick={() => handleCampaign()}
-              />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="Setting.svg"
-                text="Settings"
-                onClick={() => handleSetting()}
-              />
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="Setting.svg"
-                text="Tickets"
-                onClick={() => handleTicket()}
-              />
-              
-
-              <EventDashButton
-                isSlideBar={isSideBar}
-                img="setting.svg"
-                text="QR Reader"
-                onClick={() => handleQRreader()}
-              />
+              <CheckPermission
+                provideGlobalPermission={["Get Reports"]}
+                provideEventPermission={["Get Reports"]}
+              >
+                <EventDashButton
+                  isSlideBar={isSideBar}
+                  img="file_dock.svg"
+                  text="Reports"
+                  onClick={() => handleReports()}
+                />
+              </CheckPermission>
+              <CheckPermission
+                provideGlobalPermission={["Manage Marketing Campaign"]}
+                provideEventPermission={["Manage Marketing Campaign"]}
+              >
+                <EventDashButton
+                  isSlideBar={isSideBar}
+                  img="bell_pin.svg"
+                  text="Campaign"
+                  onClick={() => handleCampaign()}
+                />
+              </CheckPermission>
+              <CheckPermission
+                provideGlobalPermission={["Manage Event", "Manage Profile"]}
+                provideEventPermission={["Manage Event", "Manage Profile"]}
+              >
+                <EventDashButton
+                  isSlideBar={isSideBar}
+                  img="Setting.svg"
+                  text="Settings"
+                  onClick={() => handleSetting()}
+                />
+              </CheckPermission>
+              <CheckPermission
+                provideGlobalPermission={["Manage Event", "Manage Payments"]}
+                provideEventPermission={["Manage Event", "Manage Payments"]}
+              >
+                <EventDashButton
+                  isSlideBar={isSideBar}
+                  img="Setting.svg"
+                  text="Tickets"
+                  onClick={() => handleTicket()}
+                />
+              </CheckPermission>
+              <CheckPermission
+                provideGlobalPermission={["Mark Attendance"]}
+                provideEventPermission={["Mark Attendance"]}
+              >
+                <EventDashButton
+                  isSlideBar={isSideBar}
+                  img="setting.svg"
+                  text="QR Reader"
+                  onClick={() => handleQRreader()}
+                />
+              </CheckPermission>
             </div>
           </div>
         </div>
