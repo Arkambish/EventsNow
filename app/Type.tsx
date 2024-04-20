@@ -139,6 +139,7 @@ export interface EventContextType {
   eventType: String;
   eventDate: String;
   eventStartTime: String;
+  income: number; 
 
   endTime: String;
   eventVisibility: boolean;
