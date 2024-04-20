@@ -1,10 +1,47 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { UseEventContext } from "../../EventDashContext";
-import { EventContextType } from "@/app/Type";
+import { EventContextType, RegisterEventType, Ticket } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
+import { GET } from "@/app/api/v1/event/getAllEvents/route";
+import { useParams } from "next/navigation";
 
 export default memo(function RevenueDetails() {
-  const { setStatus } = UseEventContext() as EventContextType;
+  const { setStatus ,income } = UseEventContext() as EventContextType;
+  const params = useParams<{id: string}>();
+  const [allTicketTypes , setAllTicketTypes] = useState<Ticket[]>([]);
+  const [allSoldTicketTypes , setAllSoldTicketTypes] = useState<any[]>([]);
+ 
+
+  useEffect (()=>
+  {
+  async function getTicketData() {
+    
+    const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`); 
+    if (!res.ok) {
+      return;
+    }
+    const data = await res.json();  
+    setAllTicketTypes(data);
+    console.log("ticket data", data);
+  }
+  getTicketData();
+  } , [params.id]);
+
+  useEffect (()=>{
+        
+        async function getSoldTicketData (){
+          const res = await fetch(`/api/v1/buyTicket/getBuyTicket/${params.id}`);
+          if (!res.ok) {
+            return;
+          }
+          const data = await res.json();
+          setAllSoldTicketTypes(data);
+        };
+        getSoldTicketData();
+        
+      } , [params.id]);
+     
+
 
   return (
     <>
@@ -15,7 +52,7 @@ export default memo(function RevenueDetails() {
         id="static-modal"
         data-modal-backdrop="static"
         aria-hidden="true"
-        className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0 h-screen max-h-full"
       >
         <div className="border-[1px] border-custom-orange rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
           <div className="mr-4">
@@ -65,33 +102,22 @@ export default memo(function RevenueDetails() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="border-b dark:border-neutral-500">
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            A
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">10</td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            1000 x 10=1000
-                          </td>
-                        </tr>
-                        <tr className="border-b dark:border-neutral-500">
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            B
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">50</td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            500 x 50=1000
-                          </td>
-                        </tr>
-                        <tr className="border-b dark:border-neutral-500">
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            C
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">10</td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            200 x 10=1000
-                          </td>
-                        </tr>
+                        {allTicketTypes.map((ticket) => (
+                          <tr key={ticket._id}>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              {ticket.classType}
+                              
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              {allSoldTicketTypes.filter((soldTicket) => soldTicket.ticketId === ticket._id).length}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              {allSoldTicketTypes.filter((soldTicket) => soldTicket.ticketId === ticket._id).length * ticket.price}
+                            </td>
+                          </tr>
+                        ))
+
+                        }
                       </tbody>
                     </table>
                   </div>
@@ -101,7 +127,7 @@ export default memo(function RevenueDetails() {
           </div>
           <div className="bg-slate-500 rounded-md flex justify-between p-2">
             <div className="text-lg font-bold	 text-white">
-              Toral Revenue- LKR: 100
+              Toral Revenue- LKR: {income}
             </div>
             <button className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
               <FaPrint />

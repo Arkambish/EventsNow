@@ -5,13 +5,36 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { error, success } from "@/util/Toastify";
 import { getSession } from "next-auth/react";
+
+import { FaRegRegistered } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { IoIosCard } from "react-icons/io";
+import { IoLocation } from "react-icons/io5";
+import { SlCalender } from "react-icons/sl";
+import { IoIosTime } from "react-icons/io";
+import { FaTicketSimple } from "react-icons/fa6";
+
+
 import RegistrationForEventModalSmall from "./RegistrationForEventModalSmall";
+
 interface SmallView {
   EventName: String;
   Location: String;
   Time: String;
   Date: String;
+  preview?: boolean;
+  activeComponent: string; // Add prop for active component
+  handleComponentChange?: (component: string) => void; // Add prop for handle component change
 }
+
+type Ticket = {
+  _id: string;
+  eventId: string;
+  price: number;
+  classType: string;
+  image: string;
+};
+
 interface customUser {
   email: string;
   name: string;
@@ -24,20 +47,56 @@ export default function SmallView({
   Location,
   Time,
   Date,
+  activeComponent,
+  preview = false,
+  handleComponentChange,
 }: SmallView) {
+
+  const [activeButton, setActiveButton] = useState<number | null>(1);
+
   const [isRegModalShow, setIsRegModalShow] = useState<boolean>(false);
   const [eventUpdates, setEventUpdates] = useState(false);
   const [marketingUpdates, setMarketingUpdates] = useState(false);
+
   const [userId, setUserId] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [registeredUserList, setRegisteredUserList] = useState<string[] | null>(
     null
   );
 
+  const [isActiveTicketModal, setIsActiveTicketModal] =
+    useState<boolean>(false);
+  const [isActiveProceedTicketModal, setIsActiveProceedTicketModal] =
+    useState<boolean>(false);
+  function buyTckets() {}
+
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
   const [isAddWishList, setIsAddWishList] = useState<boolean>(false);
+
+  const handleClick = (buttonNumber: number) => {
+    setActiveButton(buttonNumber);
+  };
+
   const id = useParams<{ id: string }>().id;
+  const [allBuyTicketsArrayTemp, setAllBuyTicketsArrayTemp] = useState<
+    string[]
+  >([]);
+  const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
+  const [totalTicketPrice, setTotalTicketPrice] = useState<number>(0);
+  const params = useParams<{ id: string }>();
+
+  useEffect(() => {
+    async function getTicketTypes() {
+      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+      setAllTicketTypes(data);
+    }
+    getTicketTypes();
+  }, [params.id]);
 
   async function userRegistrationForEventHandler() {
     const res = await fetch(
@@ -178,6 +237,20 @@ export default function SmallView({
     setIsAddWishList(false);
   }
 
+  const paymentDetails = {
+    items: "test",
+    oder_id: "test",
+    currency: "LKR",
+    first_name: "test",
+    last_name: "test",
+    fullAmount: 200,
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    country: "",
+  };
+
   return (
     <div>
       {isRegModalShow && <RegistrationForEventModalSmall
@@ -190,86 +263,70 @@ export default function SmallView({
         {EventName}
       </div>
 
-      <div className="text-left mx-12 text-[#455273] text-2xl font-bold mt-8 ">
+      <div className="mx-12 sm:mx-32 text-cenetr text-[#455273] text-2xl font-bold mt-8 ">
         QUICK FACTS
       </div>
 
-      <div className="grid grid-rows-3 gap-6  text-left mt-8 mx-16">
+      <div className="grid grid-rows-3 gap-6  text-left mt-8 mx-16 sm:mx-36">
         <div>
-          <div className="w-8 h-8 ">
-            <Image
-              src="/images/reusableComponents/Pin_fill.svg"
-              alt="print"
-              width={32}
-              height={32}
-            />
+          <div className="text-[#AC736D] ">
+            <IoLocation size={25} />
           </div>
-          <div className="text-[#353C4E] text-xl  align-top -mt-8 font-['Roboto'] ml-12">
+          <div className="text-[#353C4E] xl:text-2xl md:text-xl  align-top -mt-8 font-['Roboto'] ml-12">
             {Location}
           </div>
         </div>
 
         <div>
-          <div className="w-8 h-8 ">
-            <Image
-              src="/images/reusableComponents/Date_org.svg"
-              alt="print"
-              width={32}
-              height={32}
-            />
+          <div className="text-[#AC736D]">
+            <SlCalender size={20} />
           </div>
-          <div className="text-[#353C4E] text-xl font-['Roboto'] align-top -mt-8 ml-12">
+          <div className="text-[#353C4E] xl:text-2xl  md:text-xl font-['Roboto'] align-top -mt-6 ml-12">
             {Date}
           </div>
         </div>
 
         <div>
-          <div className="w-8 h-8 ">
-            <Image
-              src="/images/reusableComponents/Clock_fill.svg"
-              alt="print"
-              width={32}
-              height={32}
-            />
+          <div className="text-[#AC736D]">
+            <IoIosTime size={25} />
           </div>
-          <div className="text-[#353C4E] text-xl  font-['Roboto'] align-top -mt-8 ml-12">
+          <div className="text-[#353C4E] xl:text-2xl  md:text-xl  font-['Roboto'] align-top -mt-6 ml-12">
             {Time}
           </div>
         </div>
+      </div>
 
-        <div className="flex xl:pt-12 md:pt-14 items-center ">
+      <div className="mx-16 sm:mx-36 space-y-4 mt-8">
+        <div className="flex  items-center ">
           {isRegistered ? (
             <button
+              disabled={preview ? true : false}
               onClick={removeUserFromRegisteredEvent}
-              className="flex xl:w-36 w-32 xl:h-16 h-12 bg-custom-orange rounded-l-2xl items-center xl:px-4"
+              className="flex button w-32  h-12 bg-custom-orange rounded-l-xl items-center "
             >
-              <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
-                <Image
-                  src="/images/Event/HostPage/Paper_fill.svg"
-                  alt="print"
-                  width={28}
-                  height={28}
-                />
-              </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Remove Registration
+              <div className="flex px-2.5 space-x-2">
+                <div className="text-white">
+                  <FaRegRegistered size={20} />
+                </div>
+                <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
+                  Unregister
+                </div>
               </div>
             </button>
           ) : (
             <button
+
             onClick={()=>{setIsRegModalShow(true)}}
               className="flex xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4"
+
             >
-              <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
-                <Image
-                  src="/images/event/HostPage/Paper_fill.svg"
-                  alt="print"
-                  width={28}
-                  height={28}
-                />
-              </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2 ">
-                Register event
+              <div className="flex px-2.5 space-x-2">
+                <div className="text-white">
+                  <FaRegRegistered />
+                </div>
+                <div className="font-medium text-sm text-white text-left leading-tight ">
+                  Register
+                </div>
               </div>
             </button>
           )}
@@ -278,61 +335,56 @@ export default function SmallView({
 
           {isAddWishList ? (
             <button
+              disabled={preview ? true : false}
               onClick={removeFromWishlistHandler}
-              className="flex xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
+              className="flex button xl:w-36 w-32 xl:h-14 h-12 bg-[#455273] rounded-r-xl items-center xl:px-4"
             >
-              <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
-                <Image
-                  src="/images/event/HostPage/Paper_fill.svg"
-                  alt="print"
-                  width={28}
-                  height={28}
-                />
-              </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Remove Wish List
+              <div className="flex px-2.5 space-x-2">
+                <div className="text-white">
+                  <FaHeart />
+                </div>
+                <div className="font-medium text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
+                  Remove
+                </div>
               </div>
             </button>
           ) : (
             <button
+              disabled={preview ? true : false}
               onClick={addTowishlistHandler}
-              className="flex xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
+              className={`${
+                preview ? "cursor-not-allowed" : ""
+              }  button   h-12  bg-[#455273] rounded-r-xl items-center `}
             >
-              <div className=" w-10 h-10 mt-2 md:ml-4 xl:ml-0">
-                <Image
-                  src="/images/event/HostPage/Paper_fill.svg"
-                  alt="print"
-                  width={28}
-                  height={28}
-                />
-              </div>
-              <div className="font-medium xl:text-lg text-md text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Add to Wish List
+              <div className="flex px-2.5 space-x-2">
+                <div className=" text-white">
+                  <FaHeart />
+                </div>
+                <div className="font-medium text-sm text-white text-left leading-tight ">
+                  Wish List
+                </div>
               </div>
             </button>
           )}
         </div>
 
-        <button className="flex xl:w-72 w-64 xl:h-16 h-12  bg-[#D47151] rounded-2xl items-center xl:px-4  ">
-          <div className=" w-10 h-8 mt-2 ml-2 xl:ml-0">
-            <Image
-              src="/images/event/HostPage/Check_fill.svg"
-              alt="print"
-              width={32}
-              height={32}
-            />
-          </div>
-          <div className="font-medium xl:text-lg text-md text-white text-left leading-tight ml-4">
-            Buy tickets
+        <button className="h-10 w-36 bg-[#D47151] rounded-xl items-center  ">
+          <div className="flex p-2 pl-6 space-x-3">
+            <div className="text-white">
+              <FaTicketSimple size={20} />
+            </div>
+            <div className="font-medium text-sm text-white text-left leading-tight ">
+              Buy tickets
+            </div>
           </div>
         </button>
       </div>
 
-      <div className="text-center text-[#455273] text-2xl font-bold mt-12 ">
+      <div className="text-center text-[#455273] text-xl font-bold mt-10 ">
         COMMUNITY
       </div>
 
-      <div className="flex items-center justify-center">
+      <div className="items-center justify-center mx-auto sm:mx-28">
         <PostTab />
       </div>
     </div>

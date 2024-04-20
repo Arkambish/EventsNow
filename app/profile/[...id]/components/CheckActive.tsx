@@ -103,6 +103,7 @@ export default function CheckActive() {
                   </button>
                   <div className=" flex flex-col mx-5">
                     <Dashboard_Btn
+                      isActive={true}
                       isSlideBar={isSlideBar}
                       text="My Profile"
                       onClick={() => handleProfile()}
@@ -111,6 +112,9 @@ export default function CheckActive() {
                     </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
+
+                      isActive={false}
+
                       text="Wish List"
                       onClick={() => handleWishList()}
                     >
@@ -118,6 +122,8 @@ export default function CheckActive() {
                     </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
+                      isActive={false}
+
                       text="My Events"
                       onClick={() => handleMyEvents()}
                     >
@@ -125,6 +131,9 @@ export default function CheckActive() {
                     </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
+
+                      isActive={false}
+
                       text="My Tickets"
                       onClick={() => handlemyTickets()}
                     >
@@ -132,6 +141,9 @@ export default function CheckActive() {
                     </Dashboard_Btn>
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
+
+                      isActive={false}
+
                       text="Settings"
                       onClick={() => handleSetting()}
                     >
