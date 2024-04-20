@@ -52,6 +52,7 @@ export interface EventContextType {
   setIsPreview: Dispatch<SetStateAction<boolean>>;
   endTime: String;
   eventVisibility: boolean;
+  income: number;
 
   setEventname: (value: string) => void;
   setEventLocation: (value: string) => void;
@@ -170,6 +171,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [eventEndDate, setEventEndDate] = useState<string>("");
   const [eventStartTime, setEventStartTime] = useState<string>("");
   const [eventEndTime, setEventEndTime] = useState<string>("");
+  const [income, setIncome] = useState<number>(0);
 
   const [endTime, setEndTime] = useState<string>("");
   const [startTime, setStartTime] = useState<string>("");
@@ -278,6 +280,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setEventDate(event.eventStartDate);
       setEventEndDate(event.eventEndDate);
       setEventStartTime(event.startTime);
+      setIncome(event.income);
 
       setEndTime(event.endTime);
       setEventPublish(event.isPublished);
@@ -347,6 +350,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         eventType,
         eventDate,
         eventStartTime,
+        income,
 
         endTime,
         eventVisibility,
