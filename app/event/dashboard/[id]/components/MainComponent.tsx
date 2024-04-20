@@ -151,52 +151,62 @@ export default function MainComponent() {
                     isSlideBar={isSideBar}
                     text="Overview"
                     onClick={() => handleOverview()}
-                    children={<AiOutlineHome size={23} />}
-                  />
+                  >
+                    <AiOutlineHome size={23} />
+                  </EventDashButton>
+
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    children={<RiPagesLine size={23} />}
                     text="Host Page"
                     onClick={() => handleHostPage()}
-                  />
+                  >
+                    <RiPagesLine size={23} />
+                  </EventDashButton>
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    children={<HiOutlineUsers size={23} />}
                     text="My Team"
                     onClick={() => handleMyteam()}
-                  />
+                  >
+                    <HiOutlineUsers size={23} />
+                  </EventDashButton>
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    children={<HiOutlineDocumentText size={23} />}
                     text="Reports"
                     onClick={() => handleReports()}
-                  />
+                  >
+                    <HiOutlineDocumentText size={23} />
+                  </EventDashButton>
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    children={<MdOutlinePublishedWithChanges size={23} />}
                     text="Campaign"
                     onClick={() => handleCampaign()}
-                  />
+                  >
+                    <MdOutlinePublishedWithChanges size={23} />
+                  </EventDashButton>
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    children={<IoSettingsOutline size={23} />}
                     text="Settings"
                     onClick={() => handleSetting()}
-                  />
+                  >
+                    <IoSettingsOutline size={23} />
+                  </EventDashButton>
 
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    children={<TiTicket size={23} />}
                     text="Tickets"
                     onClick={() => handleTicket()}
-                  />
+                  >
+                    <TiTicket size={23} />
+                  </EventDashButton>
 
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    children={<TbFileBarcode size={23} />}
                     text="QR Reader"
                     onClick={() => handleQRreader()}
-                  />
+                  >
+                    {" "}
+                    <TbFileBarcode size={23} />
+                  </EventDashButton>
                 </div>
               </div>
               {isLoading ? (

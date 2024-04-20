@@ -9,7 +9,7 @@ interface OverviewSubComponentProps {
   image: string;
   text: string;
   linkToDetails: string;
-  details: string;
+  details: number | null | string;
 }
 export default function OverviewSubComponent({
   image,

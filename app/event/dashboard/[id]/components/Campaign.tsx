@@ -28,70 +28,68 @@ export default function Campaign() {
         <div className="  text-custom-orange font-medium text-3xl pb-4 ">
           CAMPAIGN
         </div>
-        <div className="flex flex-col ml-48">
-          {" "}
-          <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
-            <div className="text-lg py-2 font-semibold">
-              Use Event’s Community page .
-            </div>
-            <div className=" text-sm pb-4">
-              You can use event community page for marketings
-            </div>
-            <button
-              onClick={() => setCreatePost(true)}
-              className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
-            >
-              <Image
-                className="my-auto mx-2"
-                src="/images/eventDash/Subtract.svg"
-                alt="print"
-                width={20}
-                height={20}
-              />
-              Create a post
-            </button>
+
+        <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
+          <div className="text-lg py-2 font-semibold">
+            Use Event’s Community page .
           </div>
-          <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
-            <div className="text-lg py-2 font-semibold">Edit Event Post .</div>
-            <div className=" text-sm pb-4">
-              You can use event community page for edit post
-            </div>
-            <button
-              onClick={() => setStatus("editpost")}
-              className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
-            >
-              <Image
-                className="my-auto mx-2"
-                src="/images/eventDash/Subtract.svg"
-                alt="print"
-                width={20}
-                height={20}
-              />
-              Edit post
-            </button>
+          <div className=" text-sm pb-4">
+            You can use event community page for marketings
           </div>
-          <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center">
-            <div className="text-lg py-2 font-semibold">
-              Send Emails to your Attendees.
-            </div>
-            <div className="text-sm pb-4">
-              Click on button below to create your first email campaign. Send
-              event invitations, event reminders and more
-            </div>
-            <button
-              onClick={() => setStatus("sendemail")}
-              className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
-            >
-              <Image
-                className="my-auto mx-2"
-                src="/images/eventDash/Subtract.svg"
-                alt="print"
-                width={20}
-                height={20}
-              />
-              Create a campaign
-            </button>
+          <button
+            onClick={() => setCreatePost(true)}
+            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+          >
+            <Image
+              className="my-auto mx-2"
+              src="/images/eventDash/Subtract.svg"
+              alt="print"
+              width={20}
+              height={20}
+            />
+            Create a post
+          </button>
+        </div>
+        <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
+          <div className="text-lg py-2 font-semibold">Edit Event Post .</div>
+          <div className=" text-sm pb-4">
+            You can use event community page for edit post
           </div>
+          <button
+            onClick={() => setStatus("editpost")}
+            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+          >
+            <Image
+              className="my-auto mx-2"
+              src="/images/eventDash/Subtract.svg"
+              alt="print"
+              width={20}
+              height={20}
+            />
+            Edit post
+          </button>
+        </div>
+        <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center">
+          <div className="text-lg py-2 font-semibold">
+            Send Emails to your Attendees.
+          </div>
+          <div className="text-sm pb-4">
+            Click on button below to create your first email campaign. Send
+            event invitations, event reminders and more
+          </div>
+          <button
+            onClick={() => setStatus("sendemail")}
+            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+          >
+            <Image
+              className="my-auto mx-2"
+              src="/images/eventDash/Subtract.svg"
+              alt="print"
+              width={20}
+              height={20}
+            />
+            Create a campaign
+          </button>
         </div>
 
         {createPost && <CreatePost setCreatePost={setCreatePost} user={user} />}

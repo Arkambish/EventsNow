@@ -3,19 +3,49 @@ import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import OverviewSubComponent from "./OverviewSubComponent";
 import CheckPermission from "./CheckPermission";
+import { useParams } from "next/navigation";
+import { EventContextType, UseEventContext } from "../EventDashContext";
+
 export default function Overview() {
+  const { event, id } = UseEventContext() as EventContextType;
+  // const { id } = useParams();
   const [totalTicketSale, setTotalTicketSale] = useState<number | null>(null);
+  const [totalAttendance, setTotalAttendance] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets`)
-      .then((response) => response.json())
-      .then((data) => {
-        setTotalTicketSale(data.totalTicketsBorrowed);
-      })
-      .catch((error) =>
-        console.error("Error fetching total ticket sale:", error)
-      );
-  }, []);
+    const fetchTotalTicketSale = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setTotalTicketSale(data.data);
+      } catch (error) {
+        console.error("Error fetching total ticket sale:", error);
+      }
+    };
+
+    const fetchTotalAttendance = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/attendant/countAttendant/${id}`
+        );
+        const data = await response.json();
+        setTotalAttendance(data.data);
+      } catch (error) {
+        console.error("Error fetching total attendance:", error);
+      }
+    };
+
+    fetchTotalTicketSale();
+    fetchTotalAttendance();
+  }, [id]);
+
   return (
     <Container>
       <div className="h-full mt-5 mb-8 sm:mb-56">
@@ -32,23 +62,19 @@ export default function Overview() {
             image="tickets.svg"
             text="Total ticket Sale"
             linkToDetails="totalTicket"
-            details={
-              totalTicketSale !== null
-                ? totalTicketSale.toString()
-                : "Loading..."
-            }
+            details={totalTicketSale !== null ? totalTicketSale : "Loading..."}
           />
           <OverviewSubComponent
             image="attendence.svg"
             text="Total attendence"
             linkToDetails="totalAttendence"
-            details="15467"
+            details={totalAttendance !== null ? totalAttendance : "Loading..."}
           />
           <OverviewSubComponent
             image="revenue.svg"
             text="Total revenue"
             linkToDetails="totalRevenue"
-            details="18234"
+            details={event.income ? event.income : "Loading..."}
           />
         </div>
       </div>

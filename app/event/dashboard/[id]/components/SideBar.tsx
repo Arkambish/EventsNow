@@ -77,8 +77,9 @@ export default function SideBar() {
                     isSlideBar={isSideBar}
                     text="Overview"
                     onClick={() => handleOverview()}
-                    children={<AiOutlineHome size={23} />}
-                  />
+                  >
+                    <AiOutlineHome size={23} />
+                  </EventDashButton>
                   <CheckPermission
                     provideGlobalPermission={["Manage Host Page"]}
                     provideEventPermission={["Manage Host Page"]}
@@ -87,15 +88,17 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Host Page"
                       onClick={handleHostPage}
-                      children={<RiPagesLine size={23} />}
-                    />
+                    >
+                      <RiPagesLine size={23} />
+                    </EventDashButton>
                   </CheckPermission>
                   <EventDashButton
                     isSlideBar={isSideBar}
                     text="My Team"
                     onClick={() => handleMyteam()}
-                    children={<HiOutlineUsers size={23} />}
-                  />
+                  >
+                    <HiOutlineUsers size={23} />
+                  </EventDashButton>
                   <CheckPermission
                     provideGlobalPermission={["Get Reports"]}
                     provideEventPermission={["Get Reports"]}
@@ -104,8 +107,9 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Reports"
                       onClick={() => handleReports()}
-                      children={<HiOutlineDocumentText size={23} />}
-                    />
+                    >
+                      <HiOutlineDocumentText size={23} />
+                    </EventDashButton>
                   </CheckPermission>
                   <CheckPermission
                     provideGlobalPermission={["Manage Marketing Campaign"]}
@@ -115,8 +119,9 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Campaign"
                       onClick={() => handleCampaign()}
-                      children={<MdOutlinePublishedWithChanges size={23} />}
-                    />
+                    >
+                      <MdOutlinePublishedWithChanges size={23} />
+                    </EventDashButton>
                   </CheckPermission>
                   <CheckPermission
                     provideGlobalPermission={["Manage Event", "Manage Profile"]}
@@ -126,8 +131,9 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Settings"
                       onClick={() => handleSetting()}
-                      children={<IoSettingsOutline size={23} />}
-                    />
+                    >
+                      <IoSettingsOutline size={23} />
+                    </EventDashButton>
                   </CheckPermission>
                   <CheckPermission
                     provideGlobalPermission={[
@@ -140,8 +146,9 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Tickets"
                       onClick={() => handleTicket()}
-                      children={<TiTicket size={23} />}
-                    />
+                    >
+                      <TiTicket size={23} />
+                    </EventDashButton>
                   </CheckPermission>
                   <CheckPermission
                     provideGlobalPermission={["Mark Attendance"]}
@@ -151,8 +158,9 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="QR Reader"
                       onClick={() => handleQRreader()}
-                      children={<TbFileBarcode size={23} />}
-                    />
+                    >
+                      <TbFileBarcode size={23} />
+                    </EventDashButton>
                   </CheckPermission>
                 </div>
               </div>

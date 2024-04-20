@@ -15,16 +15,20 @@ interface TicketDetailProps {
 }
 
 const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
-  const {
-    newTicketPrice,
-    newTicketClass,
-    newTicketImage,
-    setNewTicketPrice,
-    setNewTicketClass,
-    setNewTicketImage,
-    setAllTickets,
-    id,
-  } = UseEventContext() as EventContextType;
+  // const {
+  //   newTicketPrice,
+  //   newTicketClass,
+  //   newTicketImage,
+  //   setNewTicketPrice,
+  //   setNewTicketClass,
+  //   setNewTicketImage,
+  //   setAllTickets,
+  //   id,
+  // } = UseEventContext() as EventContextType;
+  const [newTicketPrice, setNewTicketPrice] = React.useState<number>(0);
+  const [newTicketClass, setNewTicketClass] = React.useState<string>("");
+  const [newTicketImage, setNewTicketImage] = React.useState<string>("");
+  const { setAllTickets, id } = UseEventContext() as EventContextType;
 
   const createTicketHandlerLocal = async () => {
     try {
@@ -45,6 +49,9 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
 
       success("Ticket created successfully");
       setTicketDetail(false);
+      setNewTicketPrice(0);
+      setNewTicketClass("");
+      setNewTicketImage("");
     } catch (err) {
       error("Failed to create ticket 2");
     }
