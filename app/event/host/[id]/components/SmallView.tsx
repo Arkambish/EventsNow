@@ -13,8 +13,6 @@ import { SlCalender } from "react-icons/sl";
 import { IoIosTime } from "react-icons/io";
 import { FaTicketSimple } from "react-icons/fa6";
 
-
-
 interface SmallView {
   EventName: String;
   Location: String;
@@ -22,7 +20,7 @@ interface SmallView {
   Date: String;
   preview?: boolean;
   activeComponent: string; // Add prop for active component
-  handleComponentChange: (component: string) => void; // Add prop for handling component change
+  handleComponentChange?: (component: string) => void; // Add prop for handle component change
 }
 
 type Ticket = {
@@ -238,8 +236,6 @@ export default function SmallView({
     country: "",
   };
 
-
-  
   return (
     <div>
       <div className=' text-center text-[#454545cc] text-4xl font-normal pt-8 font-["Roboto"]'>
@@ -251,9 +247,9 @@ export default function SmallView({
       </div>
 
       <div className="grid grid-rows-3 gap-6  text-left mt-8 mx-16 sm:mx-36">
-      <div>
+        <div>
           <div className="text-[#AC736D] ">
-            <IoLocation size={25}/>
+            <IoLocation size={25} />
           </div>
           <div className="text-[#353C4E] xl:text-2xl md:text-xl  align-top -mt-8 font-['Roboto'] ml-12">
             {Location}
@@ -262,7 +258,7 @@ export default function SmallView({
 
         <div>
           <div className="text-[#AC736D]">
-          <SlCalender size={20}/>
+            <SlCalender size={20} />
           </div>
           <div className="text-[#353C4E] xl:text-2xl  md:text-xl font-['Roboto'] align-top -mt-6 ml-12">
             {Date}
@@ -271,7 +267,7 @@ export default function SmallView({
 
         <div>
           <div className="text-[#AC736D]">
-          <IoIosTime size={25}/>
+            <IoIosTime size={25} />
           </div>
           <div className="text-[#353C4E] xl:text-2xl  md:text-xl  font-['Roboto'] align-top -mt-6 ml-12">
             {Time}
@@ -288,8 +284,8 @@ export default function SmallView({
               className="flex button w-32  h-12 bg-custom-orange rounded-l-xl items-center "
             >
               <div className="flex px-2.5 space-x-2">
-                <div className="text-white">           
-                    <FaRegRegistered size={20}/>              
+                <div className="text-white">
+                  <FaRegRegistered size={20} />
                 </div>
                 <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
                   Unregister
@@ -305,11 +301,11 @@ export default function SmallView({
               } `}
             >
               <div className="flex px-2.5 space-x-2">
-                <div className="text-white">            
-                 <FaRegRegistered />               
+                <div className="text-white">
+                  <FaRegRegistered />
                 </div>
                 <div className="font-medium text-sm text-white text-left leading-tight ">
-                 Register
+                  Register
                 </div>
               </div>
             </button>
@@ -329,7 +325,6 @@ export default function SmallView({
                   Remove
                 </div>
               </div>
-
             </button>
           ) : (
             <button
@@ -339,7 +334,6 @@ export default function SmallView({
                 preview ? "cursor-not-allowed" : ""
               }  button   h-12  bg-[#455273] rounded-r-xl items-center `}
             >
-
               <div className="flex px-2.5 space-x-2">
                 <div className=" text-white">
                   <FaHeart />
@@ -348,19 +342,18 @@ export default function SmallView({
                   Wish List
                 </div>
               </div>
-
             </button>
           )}
         </div>
 
         <button className="h-10 w-36 bg-[#D47151] rounded-xl items-center  ">
           <div className="flex p-2 pl-6 space-x-3">
-          <div className="text-white">
-           <FaTicketSimple size={20}/>
-          </div>
-          <div className="font-medium text-sm text-white text-left leading-tight ">
-            Buy tickets
-          </div>
+            <div className="text-white">
+              <FaTicketSimple size={20} />
+            </div>
+            <div className="font-medium text-sm text-white text-left leading-tight ">
+              Buy tickets
+            </div>
           </div>
         </button>
       </div>

@@ -85,6 +85,7 @@ export default function Template1({ setIsTemplate1 }: Props) {
 
               <div className="md:hidden">
                 <SmallView
+                  activeComponent=""
                   EventName={"'KUWENI'"}
                   Location={"Matara"}
                   Time={"12.00 to 14.00"}

@@ -35,35 +35,45 @@ export default function SideBar() {
         </div>
         <div className="flex flex-col items-start ">
           <Dashboard_Btn
+            isActive={true}
             isSlideBar={isSlideBar}
-            img="profile.svg"
             text="My Profile"
             onClick={() => handleProfile()}
-          />
+          >
+            ""
+          </Dashboard_Btn>
           <Dashboard_Btn
             isSlideBar={isSlideBar}
-            img="wishlist.svg"
+            isActive={false}
             text="Wish List"
             onClick={() => handleWishList()}
-          />
+          >
+            ""
+          </Dashboard_Btn>
           <Dashboard_Btn
             isSlideBar={isSlideBar}
-            img="myevents.svg"
+            isActive={false}
             text="My Events"
             onClick={() => handleMyEvents()}
-          />
+          >
+            ""
+          </Dashboard_Btn>
           <Dashboard_Btn
             isSlideBar={isSlideBar}
-            img="mytickets.svg"
+            isActive={false}
             text="My Tickets"
             onClick={() => handlemyTickets()}
-          />
+          >
+            ""
+          </Dashboard_Btn>
           <Dashboard_Btn
             isSlideBar={isSlideBar}
-            img="Setting.svg"
+            isActive={false}
             text="Settings"
             onClick={() => handleSetting()}
-          />
+          >
+            ""
+          </Dashboard_Btn>
         </div>
       </Dashboard>
     </div>
