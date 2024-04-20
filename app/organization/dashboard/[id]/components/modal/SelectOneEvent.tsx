@@ -132,7 +132,7 @@ const EvntsDetails = memo(function EvntsDetails({
                 </svg>
               </svg>
 
-              <div className="text-white font-mono self-center text-center text-base font-medium mr-2">
+              <div className="text-white  self-center text-center text-base font-medium mr-2">
                 Edit
               </div>
             </div>

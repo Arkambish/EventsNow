@@ -87,16 +87,8 @@ export interface EventContextType {
   setEventCoverImage: React.Dispatch<React.SetStateAction<string>>;
 
   allTickets: Ticket[];
-  newTicketPrice: number;
-  newTicketClass: string;
-  newTicketImage: string;
-  setNewTicketPrice: React.Dispatch<React.SetStateAction<number>>;
-  setNewTicketClass: React.Dispatch<React.SetStateAction<string>>;
-  setNewTicketImage: React.Dispatch<React.SetStateAction<string>>;
 
   allRegisteredUsers: UserType[];
-
-  createTicketHandler: voidFunc;
 }
 
 type EventUserDeatils = {
@@ -124,7 +116,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<string>("overview");
   const params = useParams<{ id: string }>();
   const [isSideBar, setIsSideBar] = useState<boolean>(true);
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [eventPosts, setEventPosts] = useState<Post[]>([]);
   const [allComment, setAllComment] = useState<Comment[]>([]);
   const [allTickets, setAllTickets] = useState<Ticket[]>([]);
@@ -199,36 +191,30 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
   const [attendances, setAttendances] = useState<AttendanceType[]>([]);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  //new ticket details
-  const [newTicketPrice, setNewTicketPrice] = useState<number>(0);
-  const [newTicketClass, setNewTicketClass] = useState<string>("");
-  const [newTicketImage, setNewTicketImage] = useState<string>("");
+  // const createTicketHandler = async () => {
+  //   try {
+  //     const res = await fetch(`/api/v1/ticket/addTicket`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         price: newTicketPrice,
+  //         image: newTicketImage,
+  //         eventId: params.id,
+  //         classType: newTicketClass,
+  //       }),
+  //     });
+  //     if (!res.ok) {
+  //       error("Failed to create ticket");
 
-  const createTicketHandler = async () => {
-    try {
-      const res = await fetch(`/api/v1/ticket/addTicket`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          price: newTicketPrice,
-          image: newTicketImage,
-          eventId: params.id,
-          classType: newTicketClass,
-        }),
-      });
-      if (!res.ok) {
-        error("Failed to create ticket");
-
-        return;
-      }
-      setAllTickets([...allTickets, await res.json()]);
-      success("Ticket created successfully");
-    } catch (e) {}
-  };
+  //       return;
+  //     }
+  //     setAllTickets([...allTickets, await res.json()]);
+  //     success("Ticket created successfully");
+  //   } catch (e) {}
+  // };
 
   useEffect(() => {
     const getEvent = async () => {
@@ -416,14 +402,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         setEventCoverImage,
         setAllTickets,
         allTickets,
-        newTicketPrice,
-        newTicketClass,
-        newTicketImage,
-        setNewTicketPrice,
-        setNewTicketClass,
-        setNewTicketImage,
 
-        createTicketHandler,
+        // createTicketHandler,
 
         allRegisteredUsers,
 

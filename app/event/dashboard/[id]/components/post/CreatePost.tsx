@@ -9,6 +9,7 @@ import {
 } from "next-cloudinary";
 import { error, success } from "@/util/Toastify";
 import { useParams } from "next/navigation";
+import { FetchPost } from "@/hooks/useFetch";
 
 interface Props {
   user: any;
@@ -23,7 +24,6 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
   const [isDissableBtn, setIsDissableBtn] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-
   function handleEdit(value: string) {
     setTitle(value);
     if (value.length > 0) {
@@ -32,7 +32,6 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
       setIsDissableBtn(true);
     }
   }
-
   const handlePostButton = async () => {
     setIsSubmitting(true);
 
@@ -43,17 +42,12 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
       description: title,
       image: profileImage,
     };
+
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/post/createPost`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const res = await FetchPost({
+        endpoint: "post/createPost",
+        body: data,
+      });
 
       if (!res.ok) {
         setIsSubmitting(false);
@@ -65,8 +59,8 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
       setIsSubmitting(false);
       setCreatePost(false);
     } catch (e) {
-      console.log(e);
-      error(e);
+      console.error(e);
+      error("There was an error creating the post");
     }
   };
   return (

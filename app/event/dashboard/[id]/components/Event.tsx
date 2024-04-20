@@ -36,7 +36,7 @@ export default function Event({
         height={200}
       />
 
-      <div className="text-[#353535] font-mono text-2xl py-4  font-medium  ">
+      <div className="text-[#353535]  text-2xl py-4  font-medium  ">
         {EventName}
       </div>
 
@@ -50,7 +50,7 @@ export default function Event({
             height={32}
           />
 
-          <div className="text-[#353C4E] text-base text-start align-top font-mono grid content-center">
+          <div className="text-[#353C4E] text-base text-start align-top  grid content-center">
             {Location}
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function Event({
             height={32}
           />
 
-          <div className="text-[#353C4E] text-base text-start font-mono align-top grid content-center">
+          <div className="text-[#353C4E] text-base text-start  align-top grid content-center">
             {Date} to {endDate}
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function Event({
             height={32}
           />
 
-          <div className="text-[#353C4E] text-base text-start  font-mono align-top grid content-center">
+          <div className="text-[#353C4E] text-base text-start   align-top grid content-center">
             {Time}-{endTime}
           </div>
         </div>

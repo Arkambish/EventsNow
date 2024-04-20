@@ -100,10 +100,10 @@ const QrReader = () => {
     <div>
       <Container>
         <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
-          <div className=" font-mono text-custom-orange font-medium text-3xl ">
+          <div className="  text-custom-orange font-medium text-3xl ">
             QR READER
           </div>
-          <div className=" text-[#455273] font-mono mr-8">
+          <div className=" text-[#455273]  mr-8">
             Turn on the camera and scan the qr code
           </div>
         </div>

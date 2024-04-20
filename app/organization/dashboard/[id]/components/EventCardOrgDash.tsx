@@ -164,19 +164,19 @@ function EventCardOrgDash({
         <div className="grid  gap-2 pl-4 pb-4">
           <div className=" flex  items-center">
             <BiMapPin size={22} />
-            <div className="ml-2 my-auto font-mono text-[#353C4E] text-sm font-medium">
+            <div className="ml-2 my-auto  text-[#353C4E] text-sm font-medium">
               {location}
             </div>
           </div>
           <div className="flex   items-center ">
             <BiAlarm size={22} />
-            <div className="ml-2 my-auto font-mono text-[#353C4E] text-sm font-medium">
+            <div className="ml-2 my-auto  text-[#353C4E] text-sm font-medium">
               {time}
             </div>
           </div>
           <div className=" flex  items-center">
             <BiCalendar size={22} />
-            <div className=" ml-2 my-auto font-mono text-[#353C4E] text-sm font-medium">
+            <div className=" ml-2 my-auto  text-[#353C4E] text-sm font-medium">
               {date.substring(0, 10)}
             </div>
           </div>

@@ -39,13 +39,13 @@ function EventCardEventDash({
 
       <div className={`col-span-2 grid grid-rows-9  ${values1} ml-5`}>
         <div
-          className={` ml-2 ${values2} font-mono text-[#353535] text-2xl font-bold grid grid-cols-3	`}
+          className={` ml-2 ${values2}  text-[#353535] text-2xl font-bold grid grid-cols-3	`}
         >
           <div className="col-span-1">{name}</div>
           <div className="col-span-1">
             <button
               onClick={() => organizationRedirectHandler()}
-              className={` hover:bg-[#676C9B] font-mono w-[146px] h-[30px] rounded-[29px] text-white bg-[#4E5381] text-[13px] font-medium ${values3}`}
+              className={` hover:bg-[#676C9B]  w-[146px] h-[30px] rounded-[29px] text-white bg-[#4E5381] text-[13px] font-medium ${values3}`}
             >
               <div className="justify-center flex gap-3">
                 <svg
@@ -80,7 +80,7 @@ function EventCardEventDash({
             height={32}
             alt="event picture"
           />
-          <div className="ml-5 my-auto mystyle font-mono text-[#353c4e] font-normal	text-[16px]	">
+          <div className="ml-5 my-auto mystyle  text-[#353c4e] font-normal	text-[16px]	">
             {location}
           </div>
         </div>
@@ -92,7 +92,7 @@ function EventCardEventDash({
             height={32}
             alt="event picture"
           />
-          <div className="ml-5 my-auto mystyle font-mono text-[#353c4e] font-normal	text-[16px]	">
+          <div className="ml-5 my-auto mystyle  text-[#353c4e] font-normal	text-[16px]	">
             {date}
           </div>
         </div>
@@ -105,7 +105,7 @@ function EventCardEventDash({
               height={32}
               alt="event picture"
             />
-            <div className="ml-5 my-auto font-mono text-[#353c4e] font-normal	text-[16px]	">
+            <div className="ml-5 my-auto  text-[#353c4e] font-normal	text-[16px]	">
               {time}
             </div>
           </div>

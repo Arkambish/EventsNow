@@ -11,9 +11,7 @@ export default function Campaign() {
   const [user, setUser] = useState<unknown>(null);
   const { setStatus } = UseEventContext() as EventContextType;
 
-  
   useEffect(() => {
-    
     const getUser = async () => {
       const user = await getSession();
 
@@ -27,17 +25,10 @@ export default function Campaign() {
   return (
     <Container>
       <div className="pl-10 mb-5 grid gap-2 mt-8 mr-10 pb-20">
-        <div className="flex justify-between">
-        <div className=" font-mono text-custom-orange font-medium text-3xl pb-4 ">
+        <div className="  text-custom-orange font-medium text-3xl pb-4 ">
           CAMPAIGN
         </div>
-        <button 
-        onClick={() => setStatus("registeredusers")}
-         className=" border-2 border-custom-orange rounded-md hover:bg-[#fff1ed]  text-custom-orange font-mono text-base font-normal  drop-shadow-md my-auto px-2 py-0.5 ">
-          Registered Users
-        </button>
-        </div>
-        
+
         <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
           <div className="text-lg py-2 font-semibold">
             Use Event’s Community page .
@@ -47,7 +38,7 @@ export default function Campaign() {
           </div>
           <button
             onClick={() => setCreatePost(true)}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white font-mono text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -59,7 +50,6 @@ export default function Campaign() {
             Create a post
           </button>
         </div>
-
         <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
           <div className="text-lg py-2 font-semibold">Edit Event Post .</div>
           <div className=" text-sm pb-4">
@@ -67,7 +57,7 @@ export default function Campaign() {
           </div>
           <button
             onClick={() => setStatus("editpost")}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white font-mono text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -79,7 +69,6 @@ export default function Campaign() {
             Edit post
           </button>
         </div>
-
         <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center">
           <div className="text-lg py-2 font-semibold">
             Send Emails to your Attendees.
@@ -90,7 +79,7 @@ export default function Campaign() {
           </div>
           <button
             onClick={() => setStatus("sendemail")}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white font-mono text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"

@@ -2,20 +2,20 @@
 import React from "react";
 import ContainerWithStroke from "./ContainerWithStroke";
 import Image from "next/image";
-import Link from "next/link";
 import { UseEventContext } from "../EventDashContext";
 import { EventContextType } from "@/app/Type";
-import { link } from "fs";
 
 interface OverviewSubComponentProps {
   image: string;
   text: string;
   linkToDetails: string;
+  details: number | null | string;
 }
 export default function OverviewSubComponent({
   image,
   text,
   linkToDetails,
+  details,
 }: OverviewSubComponentProps) {
   const { setStatus } = UseEventContext() as EventContextType;
 
@@ -35,16 +35,16 @@ export default function OverviewSubComponent({
           width={80}
           height={80}
         />
-        <div className="text-[#273B4A]  font-mono tracking-tight">
+        <div className="text-[#273B4A]   tracking-tight">
           {text}
           {/* Total Ticket Sale */}
         </div>
-        <button
-          onClick={handleOverview}
-          className="pl-0.5 justify-self-start font-mono text-[#455273] font-normal hover:text-sky-600 "
+        <div
+          // onClick={handleOverview}
+          className="pl-0.5 justify-self-start  text-[#455273] font-normal hover:text-sky-600 "
         >
-          view details
-        </button>
+          {details}
+        </div>
       </div>
     </ContainerWithStroke>
   );

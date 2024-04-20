@@ -10,6 +10,13 @@ import SelectTemplate from "@/app/event/host/[id]/SelectTemplate";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import Build from "./pageBuilder/Build";
 import Spinner from "@/components/Spinner";
+import { HiOutlineDocumentText, HiOutlineUsers } from "react-icons/hi";
+import { MdOutlinePublishedWithChanges } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
+import { TiTicket } from "react-icons/ti";
+import { TbFileBarcode } from "react-icons/tb";
+import { AiOutlineHome } from "react-icons/ai";
+import { RiPagesLine } from "react-icons/ri";
 
 export default function MainComponent() {
   const {
@@ -68,58 +75,57 @@ export default function MainComponent() {
 
   return (
     <div>
-      {isPreview ? (
-        <div className=" ">
-          <button
-            onClick={() => setIsPreview(false)}
-            className=" bg-custom-orange w-full flex justify-center items-center gap-3 text-white text-lg font-bold"
-          >
-            <IoArrowBackCircleOutline size={22} />
-            Back
-          </button>
-          <SelectTemplate event={event} preview={true} />
-        </div>
-      ) : isPageBuilder ? (
-        <div className=" ">
-          <button
-            onClick={() => setIsPageBuilder(false)}
-            className=" bg-custom-orange w-full flex justify-center items-center gap-3 text-white text-lg font-bold"
-          >
-            <IoArrowBackCircleOutline size={22} />
-            Back
-          </button>
-          <Build />
-        </div>
-      ) : (
-        <div>
-          <div
-            className={`fixed 
+      <div>
+        {isPreview ? (
+          <div className=" ">
+            <button
+              onClick={() => setIsPreview(false)}
+              className=" bg-custom-orange w-full flex justify-center items-center gap-3 text-white text-lg font-bold"
+            >
+              <IoArrowBackCircleOutline size={22} />
+              Back
+            </button>
+            <SelectTemplate event={event} preview={true} />
+          </div>
+        ) : isPageBuilder ? (
+          <div className=" ">
+            <button
+              onClick={() => setIsPageBuilder(false)}
+              className=" bg-custom-orange w-full flex justify-center items-center gap-3 text-white text-lg font-bold"
+            >
+              <IoArrowBackCircleOutline size={22} />
+              Back
+            </button>
+            <Build />
+          </div>
+        ) : (
+          <div>
+            <div
+              className={`fixed 
         -left-14
         top-40`}
-          >
-            <button onClick={() => setIsDashboardOpen(!isDashboardOpen)}>
-              <div className="  mr-5 h-10  md:hidden  flex justify-center items-center rounded-full   ">
-                {/* {isDashboardOpen ? (
+            >
+              <button onClick={() => setIsDashboardOpen(!isDashboardOpen)}>
+                <div className="  mr-5 h-10  md:hidden  flex justify-center items-center rounded-full   ">
+                  {/* {isDashboardOpen ? (
               <BiArrowFromRight size={25} />
             ) : (
               <BiArrowFromLeft size={25} />
             )} */}
-                <div className="bg-myBrown w-[100px] h-[55px] flex items-center   rounded-full">
-                  <div className="bg-custom-orange w-[95px] h-[46px] flex justify-end pr-3 rounded-full">
-                    <Image
-                      src="/images/reusableComponents/responsiveMenuBar.svg"
-                      alt="menu bar"
-                      width={20}
-                      height={20}
-                    />
+                  <div className="bg-myBrown w-[100px] h-[55px] flex items-center   rounded-full">
+                    <div className="bg-custom-orange w-[95px] h-[46px] flex justify-end pr-3 rounded-full">
+                      <Image
+                        src="/images/reusableComponents/responsiveMenuBar.svg"
+                        alt="menu bar"
+                        width={20}
+                        height={20}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </button>
-          </div>
-          {isLoading ? (
-            <Spinner />
-          ) : (
+              </button>
+            </div>
+
             <>
               <div
                 className={
@@ -143,93 +149,107 @@ export default function MainComponent() {
                 <div className=" flex flex-col mx-5">
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="overview.svg"
                     text="Overview"
                     onClick={() => handleOverview()}
-                  />
+                  >
+                    <AiOutlineHome size={23} />
+                  </EventDashButton>
+
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="bookmark.svg"
                     text="Host Page"
                     onClick={() => handleHostPage()}
-                  />
+                  >
+                    <RiPagesLine size={23} />
+                  </EventDashButton>
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="team.svg"
                     text="My Team"
                     onClick={() => handleMyteam()}
-                  />
+                  >
+                    <HiOutlineUsers size={23} />
+                  </EventDashButton>
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="file_dock.svg"
                     text="Reports"
                     onClick={() => handleReports()}
-                  />
+                  >
+                    <HiOutlineDocumentText size={23} />
+                  </EventDashButton>
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="bell_pin.svg"
                     text="Campaign"
                     onClick={() => handleCampaign()}
-                  />
+                  >
+                    <MdOutlinePublishedWithChanges size={23} />
+                  </EventDashButton>
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="setting.svg"
                     text="Settings"
                     onClick={() => handleSetting()}
-                  />
+                  >
+                    <IoSettingsOutline size={23} />
+                  </EventDashButton>
 
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="setting.svg"
                     text="Tickets"
                     onClick={() => handleTicket()}
-                  />
+                  >
+                    <TiTicket size={23} />
+                  </EventDashButton>
 
                   <EventDashButton
                     isSlideBar={isSideBar}
-                    img="setting.svg"
                     text="QR Reader"
                     onClick={() => handleQRreader()}
-                  />
+                  >
+                    {" "}
+                    <TbFileBarcode size={23} />
+                  </EventDashButton>
                 </div>
               </div>
-              <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2">
-                <div
-                  className={` md:block hidden ${
-                    isSideBar
-                      ? "md:col-span-3 md:ml-2  col-span-4 lg:col-span-2 "
-                      : "md:col-span-1   "
-                  }`}
-                >
-                  <SideBar />
-                </div>
-                <div
-                  className={`lg:col-span-7 col-span-12  ${
-                    isSideBar ? "md:col-span-5 " : "md:col-span-7 "
-                  }`}
-                >
-                  <MidContent />
-                </div>
-                <div
-                  className={`lg:col-span-3 md:block hidden
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2">
+                  <div
+                    className={` md:block hidden ${
+                      isSideBar
+                        ? "md:col-span-3 md:ml-2  col-span-4 lg:col-span-2 "
+                        : "md:col-span-1   "
+                    }`}
+                  >
+                    <SideBar />
+                  </div>
+                  <div
+                    className={`lg:col-span-7 col-span-12  ${
+                      isSideBar ? "md:col-span-5 " : "md:col-span-7 "
+                    }`}
+                  >
+                    <MidContent />
+                  </div>
+                  <div
+                    className={`lg:col-span-3 md:block hidden
              ${isSideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
-                >
-                  <Event
-                    EventName={eventname}
-                    Location={eventLocation}
-                    Time={eventStartTime}
-                    endTime={endTime}
-                    endDate={eventEndDate.substring(0, 10)}
-                    Date={eventDate.substring(0, 10)}
-                    eventCover={eventDashboardImage}
-                    setIsPreview={setIsPreview}
-                  />
+                  >
+                    <Event
+                      EventName={eventname}
+                      Location={eventLocation}
+                      Time={eventStartTime}
+                      endTime={endTime}
+                      endDate={eventEndDate.substring(0, 10)}
+                      Date={eventDate.substring(0, 10)}
+                      eventCover={eventDashboardImage}
+                      setIsPreview={setIsPreview}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

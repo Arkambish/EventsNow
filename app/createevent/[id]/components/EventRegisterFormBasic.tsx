@@ -8,8 +8,6 @@ import { z } from "zod";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-
-
 import { error, success } from "@/util/Toastify";
 import {
   CldUploadWidget,
@@ -27,17 +25,20 @@ export default function EventRegisterFormBasic() {
   const [eventEndDate, setEventEndDate] = useState<Date>(new Date());
   const [startTime, setStartTime] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
-  
+
   const [description, setDescription] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const params  =  useParams();
-  const router : AppRouterInstance = useRouter();
+  const params = useParams();
+  const router: AppRouterInstance = useRouter();
 
   const [coverImage, setcoverImage] = useState<string>("");
   const [dashboardImage, setdashboardImage] = useState<string>("");
 
   const validateEvent = z.object({
-    eventName: z.string().min(1, "Enter event name ").max(10,"event name should be less than 10 characters"),
+    eventName: z
+      .string()
+      .min(1, "Enter event name ")
+      .max(15, "event name should be less than 15 characters"),
     selectedTab: z.string().min(1, { message: "select the event type" }),
     eventLocation: z.string().min(1, { message: " Enter event location " }),
     eventStartDate: z.date(),
@@ -52,63 +53,61 @@ export default function EventRegisterFormBasic() {
   });
 
   async function sendEventData(e: any) {
-    try{
-      
-    
-    e.preventDefault();
-    setIsSubmitting(true);
+    try {
+      e.preventDefault();
+      setIsSubmitting(true);
 
-    const data = {
-      eventName,
-      selectedTab,
-      eventLocation,
-      eventStartDate,
-      startTime,
-      endTime,
-      eventEndDate,
-      description,
-      coverImage,
-      dashboardImage,
-      organizationId: params.id,
-    };
+      const data = {
+        eventName,
+        selectedTab,
+        eventLocation,
+        eventStartDate,
+        startTime,
+        endTime,
+        eventEndDate,
+        description,
+        coverImage,
+        dashboardImage,
+        organizationId: params.id,
+      };
 
-    const result = validateEvent.safeParse(data);
+      const result = validateEvent.safeParse(data);
 
-    if (result.success) {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/event/createEvent`,
-        {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify(data),
+      if (result.success) {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/event/createEvent`,
+          {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!res.ok) {
+          error("There is an error for create event");
+          setIsSubmitting(false);
+          return;
         }
-      );
+        const { event } = await res.json();
 
-      if (!res.ok) {
-        error("There is an error for create event");
-        setIsSubmitting(false);
-        return;
+        router.push(`/event/dashboard/${event._id}`);
+
+        success("event created succesfully");
+
+        setEventStartDate(new Date());
+        setStartTime("");
+        setDescription("");
+        setEndTime("");
+        setEventLocation("");
+        setEventEndDate(new Date());
+        setEventName("");
+        setcoverImage("");
+        setdashboardImage("");
+      } else {
+        error(result.error.errors[0].message);
       }
-      const { event } = await res.json();
-
-      router.push(`/event/dashboard/${event._id}`);
-
-      success("event created succesfully");
-
-      setEventStartDate(new Date());
-      setStartTime("");
-      setDescription("");
-      setEndTime("");
-      setEventLocation("");
-      setEventEndDate(new Date());
-      setEventName("");
-      setcoverImage("");
-      setdashboardImage("");
-    } else {
-      error(result.error.errors[0].message);
-    }
-    setIsSubmitting(false);
-    }catch(err){
+      setIsSubmitting(false);
+    } catch (err) {
       error("There is an error for create event");
       setIsSubmitting(false);
     }
@@ -384,7 +383,6 @@ export default function EventRegisterFormBasic() {
             }}
             options={{
               tags: ["events image"],
-             
 
               sources: ["local"],
               googleApiKey: "<image_search_google_api_key>",
@@ -451,7 +449,7 @@ export default function EventRegisterFormBasic() {
         )}
 
         {isSubmitting ? (
-          <button className="button flex text-center mt-10 mb-10 xl:mb-20  px-2 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base font-mono ">
+          <button className="button flex text-center mt-10 mb-10 xl:mb-20  px-2 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base  ">
             <div className="flex gap-2 justify-center items-center">
               <div> Creating</div>
               <Image
@@ -465,7 +463,7 @@ export default function EventRegisterFormBasic() {
         ) : (
           <button
             onClick={sendEventData}
-            className="button flex text-center mt-10 mb-10 xl:mb-20 py-2 px-4 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base font-mono "
+            className="button flex text-center mt-10 mb-10 xl:mb-20 py-2 px-4 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base  "
           >
             CREATE EVENT
           </button>

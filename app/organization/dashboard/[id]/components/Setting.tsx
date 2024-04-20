@@ -237,7 +237,7 @@ export default function Setting() {
                     <div className="ml-2  bg-white p-1 rounded-full text-custom-orange">
                       <FaCloudUploadAlt />
                     </div>
-                    upload image
+                    <div className="text-custom-orange"> upload image</div>
                   </div>
                 </button>
               );
