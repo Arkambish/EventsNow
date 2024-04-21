@@ -1,6 +1,20 @@
-import React, { useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  memo,
+  useEffect,
+  useState,
+} from "react";
 import { EventPermission, useOrg } from "../OrgContext";
 import { OrgContext } from "@/app/Type";
+import Modal from "@/components/Modal";
+import { Dialog } from "@headlessui/react";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { RiAddCircleFill } from "react-icons/ri";
+import { success } from "@/util/Toastify";
+import AllPermission from "./modal/AllPermission";
+import SelectOneEvent from "./modal/SelectOneEvent";
+import PermissionOneEvent from "./modal/PermissionOneEvent";
 interface PresonDetailsBar {
   name: string;
   email: string;
@@ -24,12 +38,43 @@ export default function PersonDetailsBar({
     setEventPermission,
   } = useOrg() as OrgContext;
 
+  const [isEditButton, setIsEditButton] = useState<boolean>(false);
+  const [isAllPermission, setIsAllPermission] = useState<boolean>(false);
+  const [isSelectEvent, setIsSelectEvent] = useState<boolean>(false);
+  const [isSelectEventPermission, setIsSelectEventPermission] =
+    useState<boolean>(false);
+
   const handleEditButton = () => {
-    setModal("givenPermission");
+    setIsEditButton(true);
     setModalUserName(name);
     setPermissionID(permissionDocumentId);
     setGlobalPermission(globalPermission);
     setEventPermission(eventPermission);
+  };
+
+  const handleAllPermissionBackButton = () => {
+    setIsEditButton(true);
+    setIsAllPermission(false);
+  };
+
+  const handleSelectEventBackButton = () => {
+    setIsEditButton(true);
+    setIsSelectEvent(false);
+  };
+
+  const handleSelectEventPermissionBackButton = () => {
+    setIsSelectEventPermission(false);
+    setIsSelectEvent(true);
+  };
+
+  const handleAllEventButton = () => {
+    setIsEditButton(false);
+    setIsAllPermission(true);
+  };
+
+  const handleSelectEventButton = () => {
+    setIsEditButton(false);
+    setIsSelectEvent(true);
   };
 
   return (
@@ -44,6 +89,7 @@ export default function PersonDetailsBar({
       <div className="xl:col-span-1  grid ">
         <button
           onClick={handleEditButton}
+          // onClick={() => setIsEditButton(true)}
           className={`bg-custom-orange h-[34px] justify-self-end rounded-[5px] w-[114px]`}
         >
           <div className="flex justify-around pl-1">
@@ -64,13 +110,84 @@ export default function PersonDetailsBar({
                 />
               </svg>
             </svg>
-            <button>
-              <div className="text-white  self-center text-center text-base font-medium mr-2">
-                Edit
-              </div>
-            </button>
+
+            <div className="text-white  self-center text-center text-base font-medium mr-2">
+              Edit
+            </div>
           </div>
         </button>
+
+        {isEditButton && (
+          <Modal setIsOpen={setIsEditButton} isOpen={isEditButton}>
+            <Dialog.Title
+              as="h3"
+              className="text-lg font-medium leading-6 text-gray-900"
+            >
+              Change permissions for {name}
+            </Dialog.Title>
+            <div className="mt-4">
+              <p className="text-sm text-gray-500">
+                <div className="flex w-full  justify-between ">
+                  {/* <button onClick={deletePermission}> */}
+                  <button>
+                    <div className="flex  rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                      <AiFillCloseCircle />
+                      <div>Remove</div>
+                    </div>
+                  </button>
+                  <button onClick={handleAllEventButton}>
+                    <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                      <RiAddCircleFill />
+                      <div>All Events</div>
+                    </div>
+                  </button>
+                  <button onClick={handleSelectEventButton}>
+                    <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                      <RiAddCircleFill />
+                      <div>Chose Events</div>
+                    </div>
+                  </button>
+                </div>
+              </p>
+            </div>
+
+            <div className="mt-4 flex gap-2">
+              <button
+                type="button"
+                className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                onClick={() => setIsEditButton(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </Modal>
+        )}
+
+        {isAllPermission && (
+          <AllPermission
+            isOpen={isAllPermission}
+            setIsOpen={setIsAllPermission}
+            handleBackButton={handleAllPermissionBackButton}
+          />
+        )}
+
+        {isSelectEvent && (
+          <SelectOneEvent
+            setIsOpen={setIsSelectEvent}
+            isOpen={isSelectEvent}
+            handleBackButton={handleSelectEventBackButton}
+            setIsSelectEventPermission={setIsSelectEventPermission}
+            // setIsSelectEvent={setIsSelectEvent}
+          />
+        )}
+
+        {isSelectEventPermission && (
+          <PermissionOneEvent
+            isOpen={isSelectEventPermission}
+            setIsOpen={setIsSelectEventPermission}
+            handleBackButton={handleSelectEventPermissionBackButton}
+          />
+        )}
       </div>
     </div>
   );

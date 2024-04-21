@@ -1,63 +1,47 @@
-import React, { memo } from "react";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import React, { Dispatch, SetStateAction, memo, useState } from "react";
 import { RiAddCircleFill } from "react-icons/ri";
 
 import { useOrg } from "../../OrgContext";
 import { EventType, OrgContext } from "@/app/Type";
+import Modal from "@/components/Modal";
+import { Dialog } from "@headlessui/react";
+import PermissionOneEvent from "./PermissionOneEvent";
 
-export default memo(function SelectOneEvent() {
-  const { setModal, events, modalUserName } = useOrg() as OrgContext;
+type AllPermissionProps = {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  handleBackButton: () => void;
+  setIsSelectEventPermission: Dispatch<SetStateAction<boolean>>;
+  // handleSelectEventPermissionBackButton: () => void;
+};
+
+export default memo(function SelectOneEvent({
+  isOpen,
+  setIsOpen,
+  handleBackButton,
+  setIsSelectEventPermission,
+}: // handleSelectEventPermissionBackButton,
+AllPermissionProps) {
+  const { events, modalUserName } = useOrg() as OrgContext;
+  // const [isSelectEventPermission, setIsSelectEventPermission] =
+  //   useState<boolean>(false);
+
+  // function handleBack() {
+  //   setIsOpen(true);
+  //   setIsSelectEventPermission(false);
+  // }
 
   return (
     <>
-      <div
-        style={{
-          backgroundColor: "#D9D9D9CC",
-        }}
-        id="static-modal"
-        data-modal-backdrop="static"
-        aria-hidden="true"
-        className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
-      >
-        <div className="border-[1px] border-custom-orange rounded-md bg-white  w-2/5 relative top-[25%] left-[25%]">
-          <div className="mr-4 flex items-center justify-between ">
-            <button
-              onClick={() => setModal("givenPermission")}
-              type="button"
-              className="text-gray-400  ml-5 button bg-transparent  rounded-lg text-sm  h-8  "
-              data-modal-hide="static-modal"
-            >
-              <IoMdArrowRoundBack size={20} />
-            </button>
-            <button>
-              <button
-                onClick={() => setModal("")}
-                type="button"
-                className="text-gray-400   button bg-transparent  rounded-lg text-sm  h-8 ms-auto  "
-                data-modal-hide="static-modal"
-              >
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-              </button>
-            </button>
-          </div>
-          <div className="mb-5    md:p-3 mx-5  items-start w- space-y-4 gap-1 flex flex-col">
-            <div className="text-xl	 font-normal">
-              change permissions for {modalUserName}
-            </div>
+      <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+        <Dialog.Title
+          as="h3"
+          className="text-lg font-medium leading-6 text-gray-900"
+        >
+          Change permissions for {modalUserName}
+        </Dialog.Title>
+        <div className="mt-4">
+          <p className="text-sm text-gray-500">
             <div className="flex w-full  justify-center ">
               <button>
                 <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
@@ -66,26 +50,38 @@ export default memo(function SelectOneEvent() {
                 </div>
               </button>
             </div>
-            <div className="w-full flex flex-col gap-2">
+            <div className="w-full flex flex-col gap-2 mt-3">
               {events?.map((event) => (
                 <EvntsDetails
                   name={event.eventName}
                   key={event._id}
                   event={event}
+                  setIsOpen={setIsOpen}
+                  setIsSelectEventPermission={setIsSelectEventPermission}
                 />
               ))}
             </div>
-            <div className="flex w-11/12  justify-end  ">
+            {/* <div className="flex w-11/12  justify-end  ">
               <button className="button">
                 <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
                   <RiAddCircleFill />
                   <div>Done</div>
                 </div>
               </button>
-            </div>
-          </div>
+            </div> */}
+          </p>
         </div>
-      </div>
+
+        <div className="mt-4 flex gap-2">
+          <button
+            type="button"
+            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            onClick={handleBackButton}
+          >
+            Back
+          </button>
+        </div>
+      </Modal>
     </>
   );
 });
@@ -93,16 +89,21 @@ export default memo(function SelectOneEvent() {
 const EvntsDetails = memo(function EvntsDetails({
   name,
   event,
+  setIsOpen,
+  setIsSelectEventPermission,
 }: {
   name: string;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
   event: EventType;
+  setIsSelectEventPermission: Dispatch<SetStateAction<boolean>>;
 }) {
   const { setModal, setSelectEventForPermission, events } =
     useOrg() as OrgContext;
 
   function editButton(event: EventType) {
-    setModal("permissionOneEvent");
     setSelectEventForPermission(event);
+    setIsSelectEventPermission(true);
+    setIsOpen(false);
   }
   return (
     <div>

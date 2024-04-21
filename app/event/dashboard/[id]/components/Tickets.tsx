@@ -30,7 +30,7 @@ export default function Tickets() {
                 <EmptyStateComponent message="You have not created any tickets yet" />
               ) : (
                 allTickets.map((ticket) => (
-                  <div className="m-4" key={ticket._id}>
+                  <div className="m-2" key={ticket._id}>
                     <TicketMockup
                       id={ticket._id}
                       image={ticket.image}

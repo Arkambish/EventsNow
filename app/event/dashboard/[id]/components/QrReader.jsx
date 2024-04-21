@@ -19,10 +19,6 @@ const QrReader = () => {
 
   const { id } = UseEventContext();
 
-  // if (scannedEvent.length > 0 || scannedUser.length > 0 || quantity > 0) {
-  //   setIsActiveMark(true);
-  // }
-
   function handleChange() {
     setIsVideoOn(!isVideoOn);
   }
@@ -44,8 +40,7 @@ const QrReader = () => {
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
 
-          setQuantity(dataObject.class.ticket);
-          setTicketType(dataObject.class.ticketType);
+          setTicketType(dataObject.classType);
 
           setIsActiveMark(true);
         },
@@ -70,11 +65,8 @@ const QrReader = () => {
       return;
     }
 
-
     if (id !== scannedEvent) error("wrong qr code");
     console.log(scannedEvent, quantity, scannedUser);
-
-
 
     const data = await FetchPost({
       endpoint: "attendant/markAttendant",
@@ -137,13 +129,9 @@ const QrReader = () => {
                 User id:<span className="text-slate-400"> {scannedUser}</span>
               </p>
               <p className="scannedText font-bold text-lg">
-                Ticket Type: <span className="text-slate-400"> {ticketType}</span>
+                Ticket Type:{" "}
+                <span className="text-slate-400"> {ticketType}</span>
               </p>
-              <p className="scannedText font-bold text-lg">
-                Ticket Quantity: <span className="text-slate-400"> {quantity}</span>
-              </p>
-              
-
             </div>
             <button
               onClick={handleMarkAttendance}

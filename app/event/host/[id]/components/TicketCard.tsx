@@ -52,19 +52,19 @@ export default function TicketCard({
   };
 
   const removeQuantity = (): void => {
-    //   totalPrice !== 0 ? setTotalPrice(totalPrice - price) : setTotalPrice(0);
-    //   setTicketArray((prevTicketArray) => {
-    //     const updatedTicketArray = [...prevTicketArray];
-    //     const ticketIndex = updatedTicketArray.indexOf(type);
-    //     if (ticketIndex !== -1) {
-    //       // Decrement quantity if the ticket exists
-    //       updatedTicketArray[ticketIndex] =
-    //         updatedTicketArray[ticketIndex] === "1"
-    //           ? ""
-    //           : String(Number(updatedTicketArray[ticketIndex]) - 1);
-    //     }
-    //     return updatedTicketArray;
-    //   });
+    // totalPrice !== 0 ? setTotalPrice(totalPrice - price) : setTotalPrice(0);
+    // setTicketArray((prevTicketArray) => {
+    //   const updatedTicketArray = [...prevTicketArray];
+    //   const ticketIndex = updatedTicketArray.indexOf(type);
+    //   if (ticketIndex !== -1) {
+    //     // Decrement quantity if the ticket exists
+    //     updatedTicketArray[ticketIndex] =
+    //       updatedTicketArray[ticketIndex] === "1"
+    //         ? ""
+    //         : String(Number(updatedTicketArray[ticketIndex]) - 1);
+    //   }
+    //   return updatedTicketArray;
+    // });
   };
 
   return (
