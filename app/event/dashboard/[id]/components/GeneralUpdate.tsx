@@ -9,6 +9,7 @@ import {
 } from "next-cloudinary";
 import { error, success } from "@/util/Toastify";
 import { useParams } from "next/navigation";
+import { FetchPost } from "@/hooks/useFetch";
 
 interface Props {
   setGenaralUpdate: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,37 +26,43 @@ export default memo(function GenaralUpdate({ setGenaralUpdate }: Props) {
 
   const handlePostButton = async () => {
     setIsSubmitting(true);
-    const res = await fetch(`/api/v1/event/sendGenaralUpdate`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        eventId: params.id,
-        subject: subject,
-        message: message,
-      }),
-    });
-    if (!res.ok) {
+
+    try {
+      const res = await FetchPost({
+        endpoint: "event/sendGenaralUpdate",
+        body: {
+          eventId: params.id,
+          subject: subject,
+          message: message,
+        },
+      });
+
+      if (!res.ok) {
+        error("Error sending email");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const returnMessage = await res.json();
+
+      if (returnMessage.message === "No users registered for the event") {
+        error("No users registered for the event");
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (returnMessage.message === "Email sent successfully") {
+        success("Email sent successfully");
+        setIsSubmitting(false);
+        setMessage("");
+        setSubject("");
+        setGenaralUpdate(false);
+        return;
+      }
+    } catch (err) {
+      console.error(err);
       error("Error sending email");
       setIsSubmitting(false);
-      return;
-    }
-    const returnMessage = await res.json();
-
-    if (returnMessage.message === "No users registered for the event") {
-      error("No users registered for the event");
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (returnMessage.message === "Email sent successfully") {
-      success("Email sent successfully");
-      setIsSubmitting(false);
-      setMessage("");
-      setSubject("");
-      setGenaralUpdate(false);
-      return;
     }
   };
 

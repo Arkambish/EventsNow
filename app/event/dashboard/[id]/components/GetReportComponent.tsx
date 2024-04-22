@@ -32,7 +32,7 @@ export default function GetReportComponent({
           </div>
         </div>
         <button
-          className="bg-custom-orange rounded-md py-1 my-auto text-white font-mono text-base font-normal pr-7 mx-6 drop-shadow-md flex "
+          className="bg-custom-orange rounded-md py-1 my-auto text-white  text-base font-normal pr-7 mx-6 drop-shadow-md flex "
           onClick={getReport}
         >
           <Image

@@ -19,10 +19,10 @@ export default function SendEmail() {
         </div>
       </button>
       <div className="lg:pl-10 mb-5 grid gap-2  md:mr-10 pb-8">
-        <div className=" font-mono gap-3 flex text-custom-orange font-medium text-3xl ">
+        <div className="  gap-3 flex text-custom-orange font-medium text-3xl ">
           Email Campaign
         </div>
-        <div className=" text-[#455273] font-mono mr-8">
+        <div className=" text-[#455273]  mr-8">
           You can send the emails to registerd users.
         </div>
       </div>
@@ -34,7 +34,7 @@ export default function SendEmail() {
           </div>
           <button
             onClick={() => setGenaralUpdate(true)}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white font-mono text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -56,7 +56,7 @@ export default function SendEmail() {
           </div>
           <button
             onClick={() => setGenaralUpdate(true)}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white font-mono text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -73,7 +73,7 @@ export default function SendEmail() {
     </Container>
     // <Container>
     //   <div className="pl-10 mb-5 grid gap-2 mt-8 mr-10 pb-20">
-    //     <div className=" font-mono text-custom-orange font-medium text-3xl pb-4 ">
+    //     <div className="  text-custom-orange font-medium text-3xl pb-4 ">
     //       UPDATES
     //     </div>
     // <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
@@ -83,7 +83,7 @@ export default function SendEmail() {
     //   </div>
     //   <button
     //     onClick={() => setCreatePost(true)}
-    //     className="bg-custom-orange rounded-md py-1 m-auto text-white font-mono text-base font-normal pr-7 drop-shadow-md flex "
+    //     className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
     //   >
     //     <Image
     //       className="my-auto mx-2"
@@ -106,7 +106,7 @@ export default function SendEmail() {
     //   </div>
     //   <button
     //     onClick={() => setStatus("editpost")}
-    //     className="bg-custom-orange rounded-md py-1 m-auto text-white font-mono text-base font-normal pr-7 drop-shadow-md flex "
+    //     className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
     //   >
     //     <Image
     //       className="my-auto mx-2"

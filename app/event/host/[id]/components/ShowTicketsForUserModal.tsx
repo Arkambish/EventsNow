@@ -1,9 +1,10 @@
-import { set } from "mongoose";
-import React, { Dispatch, useState } from "react";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { IoCloseSharp } from "react-icons/io5";
 import TicketCard from "./TicketCard";
 import { Ticket } from "@/app/Type";
 import { TicketArray } from "./HostSideBar";
+import WidthChangeModal from "@/components/WidthChangeModal";
+import { Dialog } from "@headlessui/react";
 
 export default function ShowTicketsForUserModal({
   setIsActiveTicketModal,
@@ -13,14 +14,16 @@ export default function ShowTicketsForUserModal({
   ticketTypes,
   totalPrice,
   setTotalPrice,
+  isActiveTicketModal,
 }: {
-  setIsActiveTicketModal: Dispatch<boolean>;
+  setIsActiveTicketModal: Dispatch<SetStateAction<boolean>>;
   setIsActiveProceedTicketModal: any;
   ticketArrayTemp: TicketArray[];
   setTicketArrayTemp: any;
   ticketTypes: Ticket[];
   totalPrice: number;
   setTotalPrice: any;
+  isActiveTicketModal: boolean;
 }) {
   const handleVisible = () => {
     setIsActiveTicketModal(false);
@@ -31,57 +34,67 @@ export default function ShowTicketsForUserModal({
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "#D9D9D9CC",
-      }}
-      id="static-modal"
-      data-modal-backdrop="static"
-      aria-hidden="true"
-      className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full"
-    >
-      <div className="border-[1px] border-custom-orange rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
-        <div className="flex justify-between bg-slate-300">
+    <>
+      <WidthChangeModal
+        isOpen={isActiveTicketModal}
+        setIsOpen={setIsActiveTicketModal}
+      >
+        <div className="flex justify-end ">
           <button
-            className="text-slate-400 ml-3"
+            className="w-8 text-slate-600 p-1 bg-slate-400 rounded-full"
             onClick={handleBackArrowClick}
           >
-            <IoMdArrowRoundBack size={25} />
+            <IoCloseSharp size={25} />
           </button>
         </div>
-        <div className="pl-6">Select Your Tickets from Here</div>
+        <div className="pl-6">
+          <Dialog.Title
+            as="h3"
+            className="text-lg font-medium leading-6 text-gray-900"
+          >
+            Select Your Tickets from Here
+          </Dialog.Title>
+        </div>
         <div className="flex flex-wrap gap-3 m-6 ">
           {ticketTypes ? (
             ticketTypes.map((ticket) => (
-              <TicketCard
-                image={ticket.image}
-                typeId={ticket._id}
-                type={ticket.classType}
-                price={ticket.price}
-                key={ticket._id}
-                totalPrice={totalPrice}
-                setTotalPrice={setTotalPrice}
-                setTicketArray={setTicketArrayTemp}
-                ticketArray={ticketArrayTemp}
-              />
+              <>
+                <TicketCard
+                  image={ticket.image}
+                  typeId={ticket._id}
+                  type={ticket.classType}
+                  price={ticket.price}
+                  key={ticket._id}
+                  totalPrice={totalPrice}
+                  setTotalPrice={setTotalPrice}
+                  setTicketArray={setTicketArrayTemp}
+                  ticketArray={ticketArrayTemp}
+                />
+              </>
             ))
           ) : (
             <div>No Tickets Available</div>
           )}
         </div>
         {ticketTypes && ticketArrayTemp.length > 0 && (
-          <div className="w-full flex justify-between">
-            <div className="pl-6">Total Price : {totalPrice} </div>
-            <button
-              onClick={handleVisible}
-              type="button"
-              className=" rounded-md border border-transparent shadow-sm py-1 px-2 my-auto  bg-custom-orange  text-base font-medium text-white hover:opacity-70  button  sm:ml-3 sm:w-auto sm:text-sm mr-10 mb-5"
-            >
-              Proceed
-            </button>
-          </div>
+          <>
+            <div className="w-full border-2 mb-2"></div>
+            <div className="w-full flex justify-between">
+              <div className="pl-6">
+                <span className="font-bold mr-2">Total Price :</span> Rs.{" "}
+                {totalPrice}{" "}
+              </div>
+              <button
+                onClick={handleVisible}
+                type="button"
+                className=" rounded-md border border-transparent shadow-sm py-1 px-2 my-auto  bg-custom-orange  text-base font-medium text-white hover:opacity-70  button  sm:ml-3 sm:w-auto sm:text-sm mr-10 mb-5"
+              >
+                Proceed
+              </button>
+            </div>
+          </>
         )}
-      </div>
-    </div>
+      </WidthChangeModal>
+    </>
   );
 }

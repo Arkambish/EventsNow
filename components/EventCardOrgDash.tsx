@@ -36,7 +36,7 @@ function EventCardOrgDash({
         className={` md:col-span-5 ${values1} md:grid md:grid-rows-9  md:ml-5 ml-2`}
       >
         <div
-          className={` ml-2  ${values2} font-mono text-[#353535] text-2xl font-bold	row-span-3`}
+          className={` ml-2  ${values2}  text-[#353535] text-2xl font-bold	row-span-3`}
         >
           {name}
         </div>
@@ -48,7 +48,7 @@ function EventCardOrgDash({
             height={32}
             alt="event picture"
           />
-          <div className="ml-5 my-3 mystyle font-mono text-[#353c4e] font-normal	text-[16px]	">
+          <div className="ml-5 my-3 mystyle  text-[#353c4e] font-normal	text-[16px]	">
             {location}
           </div>
         </div>
@@ -60,7 +60,7 @@ function EventCardOrgDash({
             height={32}
             alt="event picture"
           />
-          <div className="ml-5 my-3 mystyle font-mono text-[#353c4e] font-normal	text-[16px]	">
+          <div className="ml-5 my-3 mystyle  text-[#353c4e] font-normal	text-[16px]	">
             {date}
           </div>
         </div>
@@ -72,7 +72,7 @@ function EventCardOrgDash({
             height={32}
             alt="event picture"
           />
-          <div className="ml-5 my-3 font-mono text-[#353c4e] font-normal	text-[13px][16px]	">
+          <div className="ml-5 my-3  text-[#353c4e] font-normal	text-[13px][16px]	">
             {time}
           </div>
         </div>
@@ -81,7 +81,7 @@ function EventCardOrgDash({
       <div className="md:col-span-3  md:ml-0 ml-2 md:mb-0 mb-2">
         <button
           onClick={() => eventDashboardHandler()}
-          className=" hover:bg-[#D47165] font-mono bg-custom-orange w-30 lg:p-2 p-1 rounded-[29px] text-white bg-custom text-[13px] font-medium md:mt-4 mt-0"
+          className=" hover:bg-[#D47165]  bg-custom-orange w-30 lg:p-2 p-1 rounded-[29px] text-white bg-custom text-[13px] font-medium md:mt-4 mt-0"
         >
           <div className="justify-center flex gap-3">
             <svg

@@ -12,10 +12,10 @@ export default function Myteam() {
     <div>
       <Container>
         <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
-          <div className=" font-mono text-custom-orange font-medium text-3xl ">
+          <div className="  text-custom-orange font-medium text-3xl ">
             MY TEAM
           </div>
-          <div className=" text-[#455273] font-mono mr-8">
+          <div className=" text-[#455273]  mr-8">
             Experience the power of collaborating by easily inviting your team
             members and assigning roles
           </div>
@@ -26,7 +26,7 @@ export default function Myteam() {
               className="  focus:outline-custom-orange border-2 rounded-lg pl-4 md:pr-16 placeholder:text-[#ABB7C2] placeholder:font-Inter placeholder:text-base placeholder:font-normal"
             />
             <button
-              className="bg-custom-orange  rounded-md md:max-lg:mt-3 lg:ml-12 py-0.5 md:py-1 text-white font-mono text-base font-normal px-4 drop-shadow-md"
+              className="bg-custom-orange  rounded-md md:max-lg:mt-3 lg:ml-12 py-0.5 md:py-1 text-white  text-base font-normal px-4 drop-shadow-md"
               onClick={handleInvite}
             >
               Invite
@@ -47,14 +47,17 @@ export default function Myteam() {
               
             )} */}
 
-{(user && Array.isArray(user))? user.map((user) =>  (
-              <TeamMemberCard
-              key={user.email}
-              name={user.name}
-              email={user.email}
-            />
-            )): <EmptyStateComponent message="No user in the event" />} 
-            
+            {user && Array.isArray(user) ? (
+              user.map((user) => (
+                <TeamMemberCard
+                  key={user.email}
+                  name={user.name}
+                  email={user.email}
+                />
+              ))
+            ) : (
+              <EmptyStateComponent message="No user in the event" />
+            )}
           </div>
         </div>
       </Container>

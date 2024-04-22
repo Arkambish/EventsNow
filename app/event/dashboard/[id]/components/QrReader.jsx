@@ -13,14 +13,11 @@ const QrReader = () => {
   const [scannedEvent, setScannedEvent] = useState("");
   const [scannedUser, setScannedUser] = useState("");
   const [quantity, setQuantity] = useState();
+  const [ticketType, setTicketType] = useState();
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
 
   const { id } = UseEventContext();
-
-  // if (scannedEvent.length > 0 || scannedUser.length > 0 || quantity > 0) {
-  //   setIsActiveMark(true);
-  // }
 
   function handleChange() {
     setIsVideoOn(!isVideoOn);
@@ -42,7 +39,9 @@ const QrReader = () => {
           setScannedText(result.data);
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
-          setQuantity(dataObject.classType);
+
+          setTicketType(dataObject.classType);
+
           setIsActiveMark(true);
         },
         {
@@ -69,26 +68,6 @@ const QrReader = () => {
     if (id !== scannedEvent) error("wrong qr code");
     console.log(scannedEvent, quantity, scannedUser);
 
-    // const res = await fetch(
-    //   `${process.env.NEXT_PUBLIC_URL}/api/v1/attendant/markAttendant`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       eventId: scannedEvent,
-    //       userId: scannedUser,
-    //       ticketType: quantity,
-    //     }),
-    //   }
-    // );
-
-    // if (!res.ok) {
-    //   error("Failed to mark attendance");
-    //   return;
-    // }
-
     const data = await FetchPost({
       endpoint: "attendant/markAttendant",
       body: {
@@ -113,10 +92,10 @@ const QrReader = () => {
     <div>
       <Container>
         <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
-          <div className=" font-mono text-custom-orange font-medium text-3xl ">
+          <div className="  text-custom-orange font-medium text-3xl ">
             QR READER
           </div>
-          <div className=" text-[#455273] font-mono mr-8">
+          <div className=" text-[#455273]  mr-8">
             Turn on the camera and scan the qr code
           </div>
         </div>
@@ -149,8 +128,9 @@ const QrReader = () => {
               <p className="scannedText font-bold text-lg">
                 User id:<span className="text-slate-400"> {scannedUser}</span>
               </p>
-              <p className="quantity font-bold text-lg">
-                Ticket Type: <span className="text-slate-400"> {quantity}</span>
+              <p className="scannedText font-bold text-lg">
+                Ticket Type:{" "}
+                <span className="text-slate-400"> {ticketType}</span>
               </p>
             </div>
             <button

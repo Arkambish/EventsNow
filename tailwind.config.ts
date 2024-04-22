@@ -34,6 +34,7 @@ const config: Config = {
         navWhite: "#D7CFC7",
         "custom-gray": "#F8F8F8",
         dashboard: "#E9E9E9",
+        new: "#906953",
       },
       fontFamily: {
         Inter: ["Inter", "sans - serif"],

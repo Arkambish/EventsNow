@@ -1,19 +1,55 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-
-import Modal from "./ModalContext";
+import axios from "axios";
+import Modal from "@/components/Modal";
 import DetailsModalContent from "@/app/admin/dashboard/components/modals/DetailsModal";
 import DenyModalContent from "./modals/DenyModal";
 import { OrganizationType } from "@/app/Type";
+import { Dialog, Menu, Transition } from "@headlessui/react";
+import { useAdmin } from "../AdminContextFile";
+import { success } from "@/util/Toastify";
+import { error } from "@/util/Toastify";
+
+interface Data {
+  organization: OrganizationType;
+}
+
+type ContextData = {
+  setOrganization: React.Dispatch<React.SetStateAction<OrganizationType[]>>;
+  setNotification: React.Dispatch<React.SetStateAction<OrganizationType[]>>;
+  notification: OrganizationType[];
+};
 
 interface Available_Orgs {
   organization: OrganizationType;
 }
 
 export default function Available_Orgs({ organization }: Available_Orgs) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [showDenyModal, setShowDenyModal] = useState(false);
+  const { setOrganization, setNotification, notification } =
+    useAdmin() as ContextData;
+  const handleDeny = async () => {
+    try {
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/denyOrganization/${organization._id}`,
+        {
+          isActive: false,
+        }
+      );
+
+      const updatedNotifications = [...notification, organization];
+      success("Organization Denied successfully");
+      setNotification(updatedNotifications); // Add denied organization to the notification list
+      setOrganization((prev: OrganizationType[]) =>
+        prev.filter((org) => org._id !== organization._id)
+      ); // Remove denied organization from the organization list
+    } catch (error) {
+      console.error("Error updating organization:", error);
+    }
+  };
   const value =
     organization.fullName.length > 10
       ? "w-[250px] md:w-[250px] lg:w-[720px]"
@@ -40,7 +76,10 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
             </div>
             <div className="flex flex-col md:flex-col lg:flex-row gap-4 ml-0">
               <button
-                onClick={() => setShowDenyModal(true)}
+                onClick={() => {
+                  setShowDenyModal(true);
+                  setIsOpen(true);
+                }}
                 className=" w-20 h-[30px] rounded-3xl bg-[#B63535] mt-2 ml-0 md:ml-12 lg:ml-0 "
               >
                 <div className="flex justify-center text-white text-sans font-medium ">
@@ -48,7 +87,10 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
                 </div>
               </button>
               <button
-                onClick={() => setShowDetailsModal(true)}
+                onClick={() => {
+                  setShowDetailsModal(true);
+                  setIsOpen(true);
+                }}
                 className=" w-20 h-[30px] rounded-3xl bg-[#4E8171] mt-2 ml-0 md:ml-12 lg:ml-0 "
               >
                 <div className="flex justify-center text-white text-sans font-medium ">
@@ -87,14 +129,120 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
       </div>
 
       {showDetailsModal && (
-        <Modal title="Details" onClose={() => setShowDetailsModal(false)}>
-          <DetailsModalContent organization={organization} />
-        </Modal>
+        <div>
+          {" "}
+          {isOpen && (
+            <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Organization Details
+              </Dialog.Title>
+              <div className="flex flex-col h-72 overflow-y-auto px-8 py-8">
+                <div className="flex flex-row gap-2 justify-center">
+                  <div className="flex flex-col space-y-2 mr-4">
+                    {" "}
+                    <h2>Organization Name </h2>
+                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                      {" "}
+                      {organization.organizationName}
+                    </div>
+                  </div>
+
+                  <Image
+                    src={organization.postImageLink}
+                    alt={organization.organizationName}
+                    width={200}
+                    height={200}
+                  />
+                </div>
+                <div className="flex flex-col space-y-4 ml-8 mt-4 ">
+                  <div className="flex flex-col space-y-1">
+                    {" "}
+                    <h2>Phone number</h2>
+                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                      {" "}
+                      {organization.phoneNumber}
+                    </div>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    {" "}
+                    <h2>Address</h2>
+                    <div className="font-underlined border-b border-gray-400 text-gray-300 max-w-48 overflow-ellipsis overflow-hidden">
+                      {" "}
+                      {organization.address}
+                    </div>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    {" "}
+                    <h2>Company Name</h2>
+                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                      {" "}
+                      {organization.companyName}
+                    </div>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    {" "}
+                    <h2>Founded</h2>
+                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                      {" "}
+                      {organization.fullName}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Modal>
+          )}
+        </div>
       )}
       {showDenyModal && (
-        <Modal title="Deny" onClose={() => setShowDenyModal(false)}>
-          <DenyModalContent organization={organization} />
-        </Modal>
+        <div>
+          {" "}
+          {isOpen && (
+            <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Confirm Denying
+              </Dialog.Title>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">
+                  Are you sure you want to Deny this organization ? Clicking
+                  "Deny" will remove this organization from EventsNow.
+                </p>
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={handleDeny}
+                >
+                  Deny
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Modal>
+          )}
+        </div>
       )}
     </div>
   );

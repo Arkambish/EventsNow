@@ -28,7 +28,7 @@ export default function EventCardDisabled({
         </div>
 
         <div className="grid grid-cols-3 ">
-          <div className="text ml-5 col-span-2  text-xl font-mono  font-extrabold ">
+          <div className="text ml-5 col-span-2  text-xl   font-extrabold ">
             {name}
           </div>
         </div>

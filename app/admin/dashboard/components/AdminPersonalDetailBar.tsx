@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import Modal from "./ModalContext";
+import Modal from "@/components/Modal";
 import BlacklistModalContent from "./modals/BlacklistModal";
 import MakeAdminModalContent from "./modals/MakeAdminModal";
 import Image from "next/image";
 import { UserType } from "@/app/Type";
+import { Dialog, Menu, Transition } from "@headlessui/react";
+import { success } from "@/util/Toastify";
+import { error } from "@/util/Toastify";
 
 interface PresonDetailsBar {
   name: string;
@@ -20,8 +23,57 @@ export default function AdminPersonDetailsBar({
   role,
   setUser,
 }: PresonDetailsBar) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showBlacklistModal, setShowBlacklistModal] = useState(false);
   const [showMakeAdminModal, setMakeAdminModal] = useState(false);
+  const adminUser = async () => {
+    try {
+      const makeAdminRes = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/makeAdmin`,
+        {
+          method: "PUT",
+          body: JSON.stringify({ id: userId }),
+        }
+      );
+
+      if (!makeAdminRes.ok) {
+        error("Failed to make user an admin");
+        return;
+      }
+
+      success("User is now an admin");
+      setMakeAdminModal(false);
+      setUser((user: UserType[]) => {
+        const userChangers = user.map((user: UserType) => {
+          if (user._id === userId) {
+            user.role = "admin";
+          }
+          return user;
+        });
+        return userChangers;
+      });
+    } catch (error) {
+      console.error("Error make admin user:", error);
+    }
+  };
+  const blacklistUser = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/app/api/v1/blacklist/${userId}`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to blacklist user");
+      }
+
+      const data = await response.json();
+    } catch (error) {
+      console.error("Error blacklisting user:", error);
+    }
+  };
 
   return (
     <div>
@@ -37,7 +89,10 @@ export default function AdminPersonDetailsBar({
           {role !== "admin" && (
             <>
               <button
-                onClick={() => setMakeAdminModal(true)}
+                onClick={() => {
+                  setMakeAdminModal(true);
+                  setIsOpen(true);
+                }}
                 className={`bg-custom-blue h-[34px]  rounded-[5px] w-20 md:w-32 xl:w-44  shadow-3xl`}
               >
                 <div className="flex justify-around pl-1">
@@ -49,13 +104,16 @@ export default function AdminPersonDetailsBar({
                       alt="cancel"
                     />
                   </div>
-                  <div className="text-white font-mono self-center text-center text-base font-medium mr-2 hidden lg:flex ">
+                  <div className="text-white  self-center text-center text-base font-medium mr-2 hidden lg:flex ">
                     Make admin
                   </div>
                 </div>
               </button>
               <button
-                onClick={() => setShowBlacklistModal(true)}
+                onClick={() => {
+                  setShowBlacklistModal(true);
+                  setIsOpen(true);
+                }}
                 className={`bg-custom-green h-[34px]  rounded-[5px] w-20 md:w-32 xl:w-44  shadow-3xl `}
               >
                 <div className="flex justify-around pl-1">
@@ -67,7 +125,7 @@ export default function AdminPersonDetailsBar({
                       alt="cancel"
                     />
                   </div>
-                  <div className="text-white font-mono self-center text-center text-base font-medium xl:mr-2 hidden lg:flex ">
+                  <div className="text-white  self-center text-center text-base font-medium xl:mr-2 hidden lg:flex ">
                     Block user
                   </div>
                 </div>
@@ -88,7 +146,7 @@ export default function AdminPersonDetailsBar({
                         alt="cancel"
                       />
                     </div>
-                    <div className="text-white font-mono self-center text-center text-base font-medium xl:mr-6 hidden lg:flex ">
+                    <div className="text-white  self-center text-center text-base font-medium xl:mr-6 hidden lg:flex ">
                       Admin
                     </div>
                   </div>
@@ -100,19 +158,81 @@ export default function AdminPersonDetailsBar({
       </div>
 
       {showBlacklistModal && (
-        <Modal title="Details" onClose={() => setShowBlacklistModal(false)}>
-          <BlacklistModalContent userId={""} />
-        </Modal>
+        <div>
+          {" "}
+          {isOpen && (
+            <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Confirm Blacklisting user
+              </Dialog.Title>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">
+                  Are you sure you want to Blacklist this user? This action is
+                  irreversible.
+                </p>
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={blacklistUser}
+                >
+                  Add to blacklist
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Modal>
+          )}
+        </div>
       )}
 
       {showMakeAdminModal && (
-        <Modal title="Details" onClose={() => setMakeAdminModal(false)}>
-          <MakeAdminModalContent
-            setMakeAdminModal={setMakeAdminModal}
-            userId={userId}
-            setUser={setUser}
-          />
-        </Modal>
+        <div>
+          {" "}
+          {isOpen && (
+            <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Confirm Make Admin user
+              </Dialog.Title>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">
+                  Are you sure you want to make this user as admin? This action
+                  is irreversible.
+                </p>
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={adminUser}
+                >
+                  Make admin
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Modal>
+          )}
+        </div>
       )}
     </div>
   );

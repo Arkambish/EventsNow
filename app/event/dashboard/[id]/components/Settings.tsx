@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Container from "./Container";
-import Switch from "react-switch";
 import ContainerWithStroke from "./ContainerWithStroke";
 import Image from "next/image";
-import { Button } from "@material-tailwind/react";
 import { UseEventContext, EventContextType } from "../EventDashContext";
 import { error, success } from "@/util/Toastify";
 import {
@@ -12,6 +10,7 @@ import {
   CloudinaryUploadWidgetResults,
 } from "next-cloudinary";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { FetchPut } from "@/hooks/useFetch";
 export default function Settings() {
   const [allRegisteredUsers, setAllRegisteredUsers] = useState([]);
   const {
@@ -43,7 +42,6 @@ export default function Settings() {
   } = UseEventContext() as EventContextType;
 
   useEffect(() => {
-
     try {
       const fetchAllRegisteredUsers = async () => {
         const res = await fetch(
@@ -67,30 +65,25 @@ export default function Settings() {
     } catch (e) {
       error(e);
     }
-  } , [id]);
+  }, [id]);
 
   const handleUpdate = async () => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/v1/event/updateEvent`,
-        {
-          method: "PUT",
-          body: JSON.stringify({
-            id: id,
+      const res = await FetchPut({
+        endpoint: `event/updateEvent/${id}`,
+        body: {
+          eventName: eventname,
+          selectedTab: eventType,
+          eventStartedDate: eventDate,
+          startTime: eventStartTime,
+          endTime: endTime,
+          eventLocation: eventLocation,
+          eventDashboardImage: eventDashboardImage,
+          eventCoverImage: eventCoverImage,
+          eventEndDate: eventEndDate,
+        },
+      });
 
-            eventName: eventname,
-            selectedTab: eventType,
-            eventStartedDate: eventDate,
-            startTime: eventStartTime,
-            endTime: endTime,
-            eventLocation: eventLocation,
-
-            eventDashboardImage: eventDashboardImage,
-            eventCoverImage: eventCoverImage,
-            eventEndDate: eventEndDate,
-          }),
-        }
-      );
       if (!res.ok) {
         error("Error updating event");
         return;
@@ -101,12 +94,9 @@ export default function Settings() {
       error(e);
     }
 
-    
     //sending email about the updates to the users
     allRegisteredUsers.map(async (registration: any) => {
-
       try {
-       
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/v1/event/sendEmailOfEventChanges`,
           {
@@ -139,14 +129,14 @@ export default function Settings() {
     <Container>
       <div className=" lg:ml-16 mb-5 grid gap-2 lg:px-6 mt-8 lg:mr-16 pb-20">
         <div className="">
-          <div className="  xl:flex content-start  font-mono pb-4 ">
+          <div className="  xl:flex content-start   pb-4 ">
             <div className=" text-custom-orange font-medium text-3xl">
               SETTINGS
             </div>
           </div>
           <div className="text-[#666] grid gap-6 ">
             <ContainerWithStroke>
-              <div className="md:px-8 xl:px-16 grid gap-2 pt-3 pb-8 max-md:px-3 ">
+              <div className="lg:px-8 grid gap-2 pt-3 pb-8 max-md:px-3 md:px-8 ">
                 <div className="w-full text-left text-lg ">Event Name</div>
                 <div className="w-full flex justify-start ">
                   <input
@@ -160,9 +150,7 @@ export default function Settings() {
                   />
                 </div>
               </div>
-            </ContainerWithStroke>
 
-            <ContainerWithStroke>
               <div className="lg:px-8 grid gap-2 pt-3 pb-8 max-md:px-3 md:px-8">
                 <div className="w-full text-left text-lg ">Event Type</div>
                 <div className="w-full sm:max-md:flex 2xl:flex  justify-between  ">
@@ -208,9 +196,7 @@ export default function Settings() {
                   </div>
                 </div>
               </div>
-            </ContainerWithStroke>
 
-            <ContainerWithStroke>
               <div className="sm:grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2 max-md:gap-3 max-md:px-3 py-4">
                 <div className="md:px-8 l xl:px-6 grid md:gap-2 pt-3 pb-5 ">
                   <div className="w-full text-left text-lg ">
@@ -232,7 +218,7 @@ export default function Settings() {
                   <div className="w-full text-left text-lg ">
                     Event End Date
                   </div>
-                  <div className="w-full flex justify-start ">
+                  <div className="w-full flex justify-start">
                     <input
                       type="text"
                       placeholder=""
@@ -274,7 +260,7 @@ export default function Settings() {
                   </div>
                 </div>
 
-                <div className=" xl:px-6 md:px-8 grid gap-2 pt-3 pb-5">
+                <div className=" xl:px-6 md:px-8 grid gap-2 pt-3 ">
                   <div className="w-full text-left text-lg ">
                     Set cover image
                   </div>
@@ -342,7 +328,7 @@ export default function Settings() {
                                 open();
                               }}
                             >
-                              <div className="p-1 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
+                              <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-lg">
                                 <FaCloudUploadAlt />
                                 upload image
                               </div>
@@ -434,7 +420,7 @@ export default function Settings() {
                                 open();
                               }}
                             >
-                              <div className="p-1 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
+                              <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-lg">
                                 <FaCloudUploadAlt />
                                 upload image
                               </div>
