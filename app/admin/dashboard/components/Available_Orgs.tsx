@@ -27,8 +27,8 @@ interface Available_Orgs {
 
 export default function Available_Orgs({ organization }: Available_Orgs) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [showDenyModal, setShowDenyModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
+  const [showDenyModal, setShowDenyModal] = useState<boolean>(false);
   const { setOrganization, setNotification, notification } =
     useAdmin() as ContextData;
   const handleDeny = async () => {
@@ -77,6 +77,8 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
             <div className="flex flex-col md:flex-col lg:flex-row gap-4 ml-0">
               <button
                 onClick={() => {
+                  setShowDetailsModal(false);
+
                   setShowDenyModal(true);
                   setIsOpen(true);
                 }}

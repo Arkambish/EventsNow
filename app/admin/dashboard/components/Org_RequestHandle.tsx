@@ -31,15 +31,13 @@ interface OrgRequestHandleProps {
 
 export default function Org_RequestHandle({
   organization,
-}: OrgRequestHandleProps) 
- {
+}: OrgRequestHandleProps) {
   const { setOrganization, setNotification, notification } =
-  useAdmin() as ContextData;
+    useAdmin() as ContextData;
   // const [showDetailsModal, setShowDetailsModal] = useState(false);
   // const [showAllowModal, setShowAllowModal] = useState(false);
   // const [showDenyModal, setShowDenyModal] = useState(false);
-  // const [isOpen, setIsOpen] = useState(false);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
   const [showAllowModal, setShowAllowModal] = useState<boolean>(false);
@@ -62,12 +60,12 @@ export default function Org_RequestHandle({
         error("Failed to save");
         return;
       }
-      setComment("");
+      setComment(false);
       success("Messsage sent successfully");
     } catch (error) {
       console.error("Error saving settings:", error);
- 
-
+    }
+  };
   const handleAllow = async () => {
     try {
       const allowOrgRes = await axios.put(
@@ -129,7 +127,8 @@ export default function Org_RequestHandle({
                 setShowDetailsModal(true);
                 setIsOpen(true);
               }}
-              className="w-fit h-fit rounded-2xl bg-[#4E8171] ml-auto lg:ml-20 md:ml-3"            >
+              className="w-fit h-fit rounded-2xl bg-[#4E8171] ml-auto lg:ml-20 md:ml-3"
+            >
               <div className="justify-center p-2 text-white text-sans font-medium">
                 Details
               </div>
@@ -139,6 +138,8 @@ export default function Org_RequestHandle({
           <div className="flex flex-row mt-2 sm:mt-2 sm:ms-0 md:ms-4 lg:ms-0">
             <button
               onClick={() => {
+                setShowDetailsModal(false);
+                setShowDenyModal(false);
                 setShowAllowModal(true);
                 setIsOpen(true);
               }}
@@ -150,6 +151,8 @@ export default function Org_RequestHandle({
             </button>
             <button
               onClick={() => {
+                setShowDetailsModal(false);
+                setShowAllowModal(false);
                 setShowDenyModal(true);
                 setIsOpen(true);
               }}
@@ -160,7 +163,7 @@ export default function Org_RequestHandle({
               </div>
             </button>
             <button
-              onClick={() => setIsOpen(true)}
+              onClick={() => setComment(true)}
               className="w-fit h-fit rounded-xl bg-[#ee8a3d] ml-12 sm:ml-10 "
             >
               <div className="justify-center  text-white text-sans font-small whitespace-nowrap p-2 hover:bg-orange-500 hover:rounded-xl">
@@ -171,7 +174,7 @@ export default function Org_RequestHandle({
         </div>
       </div>
 
-      {isOpen && (
+      {comment && (
         <Modall setIsOpen={setIsOpen} isOpen={isOpen}>
           <Dialog.Title
             as="h3"
@@ -186,7 +189,6 @@ export default function Org_RequestHandle({
             </p>
             <textarea
               id="comment"
-              value={comment}
               onChange={(e: any) => setComment(e.target.value)}
               rows={6}
               className="border-none border-b border-black w-full text-sm rounded-md rounded-t-none p-1 my-2"
@@ -373,6 +375,3 @@ export default function Org_RequestHandle({
     </div>
   );
 }
-
-
-
