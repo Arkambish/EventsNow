@@ -24,3 +24,22 @@
 .button:active {
   transform: scale(0.95);
 }
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d47151; /* Color of the scrollbar handle */
+  border-radius: 10px;
+  height: 5px;
+}
+
+/* Handle on hover */

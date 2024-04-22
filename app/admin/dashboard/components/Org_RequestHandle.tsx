@@ -30,6 +30,7 @@ export default function Org_RequestHandle({
         organizationName: organization.organizationName,
         comment: comment,
         senderId: organization._id,
+        email: organization.email,
       };
 
       const res = FetchPost({

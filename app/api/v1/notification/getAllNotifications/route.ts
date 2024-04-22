@@ -1,18 +1,23 @@
 import connectMongoDB from "@/lib/mongo/mongodb";
 import Notification from "@/models/notification";
+import User from "@/models/userModel";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request, { params }: any) {
   try {
     await connectMongoDB();
 
-    const { organizationName, comment, senderId } = await req.json();
+    const { topic, comment, email } = await req.json();
+
+    const reciever = await User.findOne({ email });
+
+    const recieverId = await reciever._id;
 
     console.log("t1");
     const createNotification = await Notification.create({
-      organizationName,
+      topic,
       comment,
-      senderId,
+      recieverId,
     });
     console.log("t2");
 

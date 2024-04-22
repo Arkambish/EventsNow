@@ -75,3 +75,31 @@ export async function getUserDetails({
   const userPermissionData = await userPermissionRes.json();
   return userPermissionData;
 }
+
+// Function to get the time difference in human-readable format
+export function getTimeDifference(dateString: string) {
+  const providedDate = new Date(dateString);
+  const currentDate = new Date();
+  const timeDifference = currentDate.getTime() - providedDate.getTime();
+  const secondsDifference = Math.floor(timeDifference / 1000);
+  const minutesDifference = Math.floor(secondsDifference / 60);
+  const hoursDifference = Math.floor(minutesDifference / 60);
+  const daysDifference = Math.floor(hoursDifference / 24);
+  const monthsDifference = Math.floor(daysDifference / 30);
+
+  if (secondsDifference < 60) {
+    return `${secondsDifference} second${
+      secondsDifference === 1 ? "" : "s"
+    } ago`;
+  } else if (minutesDifference < 60) {
+    return `${minutesDifference} minute${
+      minutesDifference === 1 ? "" : "s"
+    } ago`;
+  } else if (hoursDifference < 24) {
+    return `${hoursDifference} hour${hoursDifference === 1 ? "" : "s"} ago`;
+  } else if (daysDifference < 30) {
+    return `${daysDifference} day${daysDifference === 1 ? "" : "s"} ago`;
+  } else {
+    return `${monthsDifference} month${monthsDifference === 1 ? "" : "s"} ago`;
+  }
+}
