@@ -186,10 +186,12 @@ export default function NavBar() {
               <Spinner />
             </nav>
           ) : (
-            <nav className="bg-navWhite">
+            <nav className="bg-navWhite ">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
-                {/* Events now logo and name */}
-                {pathname.startsWith("/event/dashboard") ? (
+                {/*  */}
+                {pathname.startsWith(
+                  "/evenEvents now logo and namet/dashboard"
+                ) ? (
                   <Link href={`/organization/dashboard/${organizationId}`}>
                     <button
                       className={`bg-custom-orange button  h-8 rounded-2xl`}
@@ -319,7 +321,12 @@ export default function NavBar() {
                         {/* my profile part */}
 
                         <button
-                          className="button"
+                          className={`${
+                            pathname.startsWith("/admin")
+                              ? "hidden"
+                              : "flex gap-4 button"
+                          } `}
+                          // className="button"
                           onClick={() =>
                             setShowProfile(
                               (showProfile: boolean) => !showProfile

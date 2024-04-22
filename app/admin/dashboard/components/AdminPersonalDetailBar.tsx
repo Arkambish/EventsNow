@@ -77,7 +77,11 @@ export default function AdminPersonDetailsBar({
 
   return (
     <div>
-      <div className="my-2 sm:my-4 justify-between ms-2 sm:ms-0 mt-6 bg-[#D9D9D9] w-full   xl:w-[900px] lg:w-[720px]  col-span-2 grid grid-cols-12  rounded-[5px] mb-2 shadow-3xl">
+      <div
+        className={`${
+          role === "admin" ? "bg-custom-orange " : "bg-[#D9D9D9]"
+        } my-2 sm:my-4 border-2  justify-between ms-2 sm:ms-0 mt-6  w-full   xl:w-[900px] lg:w-[720px]  col-span-2 grid grid-cols-12  rounded-[5px] mb-2 shadow-3xl`}
+      >
         <div className="text-base font-light lg:col-span-3  hidden lg:flex ms-2">
           {name}
         </div>
@@ -133,7 +137,7 @@ export default function AdminPersonDetailsBar({
             </>
           )}
 
-          {role === "admin" && (
+          {/* {role === "admin" && (
             <>
               <div className="">
                 <button className="bg-custom-blue  h-[34px] rounded-[5px]  w-[3.9rem] sm:w-[5.4rem] md:w-[7.3rem] xl:w-36 shadow-3xl ">
@@ -153,7 +157,7 @@ export default function AdminPersonDetailsBar({
                 </button>
               </div>
             </>
-          )}
+          )} */}
         </div>
       </div>
 
