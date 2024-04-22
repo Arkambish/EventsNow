@@ -52,7 +52,7 @@ export default function Org_RequestHandle({
         email: organization.email,
       };
 
-      const res = FetchPost({
+      const res = await FetchPost({
         endpoint: `notification/getAllNotifications`,
         body: data,
       });
@@ -68,6 +68,8 @@ export default function Org_RequestHandle({
   };
   const handleAllow = async () => {
     try {
+      allowNotification();
+
       const allowOrgRes = await axios.put(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/updateOrganization/${organization._id}`,
         {
@@ -102,6 +104,48 @@ export default function Org_RequestHandle({
       }
     } catch (error) {
       console.error("Error updating......", error);
+    }
+  };
+  const allowNotification = async () => {
+    try {
+      const data = {
+        topic: "Congratulations",
+        comment: `${organization.organizationName} is accepted`,
+        email: organization.email,
+      };
+
+      const res = await FetchPost({
+        endpoint: `notification/getAllNotifications`,
+        body: data,
+      });
+      if (!res) {
+        error("Failed to save");
+        return;
+      }
+      success("Messsage sent successfully");
+    } catch (error) {
+      console.error("Error saving settings:", error);
+    }
+  };
+  const denyNotification = async () => {
+    try {
+      const data = {
+        topic: "Alert",
+        comment: `${organization.organizationName} is rejected`,
+        email: organization.email,
+      };
+
+      const res = await FetchPost({
+        endpoint: `notification/getAllNotifications`,
+        body: data,
+      });
+      if (!res) {
+        error("Failed to save");
+        return;
+      }
+      success("Messsage sent successfully");
+    } catch (error) {
+      console.error("Error saving settings:", error);
     }
   };
 
@@ -356,7 +400,10 @@ export default function Org_RequestHandle({
                 <button
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  onClick={handleAllow}
+                  onClick={() => {
+                    handleAllow();
+                    denyNotification();
+                  }}
                 >
                   Deny
                 </button>

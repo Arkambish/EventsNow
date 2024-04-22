@@ -2,7 +2,7 @@ import { FetchPut } from "@/hooks/useFetch";
 import React, { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { NotificationType } from "./NavBar";
-import { getTimeDifference } from "@/util/helper";
+import { getTimeAgo, getTimeDifference } from "@/util/helper";
 interface notificationty {
   comment: string;
   //   recieverId: string;
@@ -53,7 +53,7 @@ function NotificationButton({
 
           <p className="text-slate-300 text-start text-sm mx-2">{comment}</p>
           <p className=" text-custom-orange mx-2 font-IBM text-sm text-end mb-2 ">
-            {getTimeDifference(createdAt)}
+            {getTimeAgo(createdAt)}
           </p>
         </div>
       </button>

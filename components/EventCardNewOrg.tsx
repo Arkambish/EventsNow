@@ -7,6 +7,8 @@ import { z } from "zod";
 import Modal from "@/components/Modal";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { EventType } from "@/app/Type";
+import { FetchPost } from "@/hooks/useFetch";
+import { success, error } from "@/util/Toastify";
 
 interface eventorg {
   event: EventType;
@@ -15,6 +17,35 @@ interface eventorg {
 export default function EventCardNewOrg({ event }: eventorg) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [notificationModal, setNotificationModal] = useState<boolean>(false);
+
+  const sendNotification = async () => {
+    try {
+      const data = {
+        topic: "Event reminder",
+        comment: `${
+          event.eventName
+        } will be started on ${event.eventStartDate.substring(
+          0,
+          10
+        )}. be ready for the excitement`,
+        userIds: event.registerUser,
+      };
+
+      const notifyUser = await FetchPost({
+        endpoint: `notification/postNotificationById`,
+        body: data,
+      });
+      if (!notifyUser) {
+        error("error in sending notification");
+      }
+
+      success("Notification sent successfully");
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
   return (
     <div>
       <div className=" bg-[#D9D9D9] my-4 ml-4 mr-12 rounded-xl border-spacing-1 shadow-lg grid lg:grid-cols-3 overflow-hidden">
@@ -28,7 +59,10 @@ export default function EventCardNewOrg({ event }: eventorg) {
               {event.eventName}
             </div>
             <div className="flex max-sm:hidden content-center">
-              <button className=" text-center  bg-[#4E8171] text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM ">
+              <button
+                onClick={() => setNotificationModal(true)}
+                className=" text-center  bg-[#4E8171] text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM "
+              >
                 send notification
               </button>
               <button
@@ -92,7 +126,10 @@ export default function EventCardNewOrg({ event }: eventorg) {
         </div>
 
         <div className="flex sm:hidden content-center mb-6">
-          <button className=" text-center  bg-[#4E8171] text-white text-sm rounded-2xl px-2 my-auto py-1 ml-4 font-IBM ">
+          <button
+            onClick={() => setNotificationModal(true)}
+            className=" text-center  bg-[#4E8171] text-white text-sm rounded-2xl px-2 my-auto py-1 ml-4 font-IBM "
+          >
             send notification
           </button>
           <button
@@ -184,6 +221,36 @@ export default function EventCardNewOrg({ event }: eventorg) {
             </Modal>
           )}
         </div>
+      )}
+      {notificationModal && (
+        <Modal setIsOpen={setNotificationModal} isOpen={notificationModal}>
+          <Dialog.Title
+            as="h3"
+            className="text-lg font-medium leading-6 text-gray-900"
+          >
+            Send Notification
+          </Dialog.Title>
+          <div className="flex flex-col h-fit">
+            Do you want to send notifications to registerd users?
+          </div>
+
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={() => sendNotification()}
+              type="button"
+              className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            >
+              Send notification
+            </button>
+            <button
+              type="button"
+              className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              onClick={() => setNotificationModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </Modal>
       )}
     </div>
   );

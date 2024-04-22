@@ -85,21 +85,53 @@ export function getTimeDifference(dateString: string) {
   const minutesDifference = Math.floor(secondsDifference / 60);
   const hoursDifference = Math.floor(minutesDifference / 60);
   const daysDifference = Math.floor(hoursDifference / 24);
-  const monthsDifference = Math.floor(daysDifference / 30);
 
-  if (secondsDifference < 60) {
+  const monthsDifference =
+    (currentDate.getFullYear() - providedDate.getFullYear()) * 12 +
+    currentDate.getMonth() -
+    providedDate.getMonth();
+
+  if (!isNaN(secondsDifference) && secondsDifference < 60) {
     return `${secondsDifference} second${
       secondsDifference === 1 ? "" : "s"
     } ago`;
-  } else if (minutesDifference < 60) {
+  } else if (!isNaN(minutesDifference) && minutesDifference < 60) {
     return `${minutesDifference} minute${
       minutesDifference === 1 ? "" : "s"
     } ago`;
-  } else if (hoursDifference < 24) {
+  } else if (!isNaN(hoursDifference) && hoursDifference < 24) {
     return `${hoursDifference} hour${hoursDifference === 1 ? "" : "s"} ago`;
-  } else if (daysDifference < 30) {
+  } else if (!isNaN(daysDifference) && daysDifference < 30) {
     return `${daysDifference} day${daysDifference === 1 ? "" : "s"} ago`;
   } else {
     return `${monthsDifference} month${monthsDifference === 1 ? "" : "s"} ago`;
+  }
+}
+export function getTimeAgo(date: any) {
+  const currentDate: any = new Date();
+  const millisecondsAgo = currentDate - date;
+
+  const secondsAgo = millisecondsAgo / 1000;
+  const minutesAgo = secondsAgo / 60;
+  const hoursAgo = minutesAgo / 60;
+  const daysAgo = hoursAgo / 24;
+  const weeksAgo = daysAgo / 7;
+  const monthsAgo = daysAgo / 30;
+  const yearsAgo = daysAgo / 365;
+
+  if (secondsAgo < 60) {
+    return `${Math.floor(secondsAgo)} seconds ago`;
+  } else if (minutesAgo < 60) {
+    return `${Math.floor(minutesAgo)} minutes ago`;
+  } else if (hoursAgo < 24) {
+    return `${Math.floor(hoursAgo)} hours ago`;
+  } else if (daysAgo < 7) {
+    return `${Math.floor(daysAgo)} days ago`;
+  } else if (weeksAgo < 4) {
+    return `${Math.floor(weeksAgo)} weeks ago`;
+  } else if (monthsAgo < 12) {
+    return `${Math.floor(monthsAgo)} months ago`;
+  } else {
+    return `${Math.floor(yearsAgo)} years ago`;
   }
 }

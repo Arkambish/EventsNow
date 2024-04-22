@@ -3,7 +3,7 @@ import Notification from "@/models/notification";
 import User from "@/models/userModel";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request, { params }: any) {
+export async function POST(req: Request) {
   try {
     await connectMongoDB();
 
