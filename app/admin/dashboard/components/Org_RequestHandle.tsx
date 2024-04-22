@@ -93,6 +93,8 @@ export default function Org_RequestHandle({
             </div>
             <button
               onClick={() => {
+                setShowAllowModal(false);
+                setShowDenyModal(false);
                 setShowDetailsModal(true);
                 setIsOpen(true);
               }}
@@ -107,6 +109,7 @@ export default function Org_RequestHandle({
           <div className="flex flex-row mt-4 sm:mt-2 sm:ms-0 md:ms-4 lg:ms-0 xl:ms-0">
             <button
               onClick={() => {
+                setShowDetailsModal(false);
                 setShowAllowModal(true);
                 setIsOpen(true);
               }}
@@ -118,6 +121,7 @@ export default function Org_RequestHandle({
             </button>
             <button
               onClick={() => {
+                setShowDetailsModal(false);
                 setShowDenyModal(true);
                 setIsOpen(true);
               }}

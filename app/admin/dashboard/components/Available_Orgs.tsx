@@ -77,6 +77,7 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
             <div className="flex flex-col md:flex-col lg:flex-row gap-4 ml-0">
               <button
                 onClick={() => {
+                  setShowDetailsModal(false);
                   setShowDenyModal(true);
                   setIsOpen(true);
                 }}
@@ -88,6 +89,7 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
               </button>
               <button
                 onClick={() => {
+                  setShowDenyModal(false);
                   setShowDetailsModal(true);
                   setIsOpen(true);
                 }}
