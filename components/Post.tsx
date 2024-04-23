@@ -86,7 +86,7 @@ Post) {
   });
 
   const commentRef = useRef<HTMLDivElement>(null);
-  const allCommentRef = useRef<HTMLDivElement>(null);
+
 
   // handle comment button
   useEffect(() => {
@@ -167,31 +167,7 @@ Post) {
   , [user]);
 
 
-  // handle all comment
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        allCommentRef.current &&
-        !allCommentRef.current.contains(event.target as Node)
-      ) {
-        // Clicked outside of modal, so close it
-        setHasComment(false);
-      }
-    };
 
-    // Add event listener when the modal is open
-    if (hasComment) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      // Remove event listener when the modal is closed
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    // Cleanup function to remove event listener
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [setHasComment, hasComment]);
 
   useEffect(() => {
    
@@ -315,7 +291,7 @@ Post) {
 
   return (
   
-      <div className="xl:w-[500px] sm:w-[24rem] w-[20rem] border text-white m-8 rounded-2xl pb-4">
+      <div className="xl:w-[500px] sm:w-[24rem] w-[20rem] border border-zinc-900 text-white m-8 rounded-2xl pb-4">
         <div className="px-5 pt-5">
           
           <div className="flex gap-7 items-center mb-4">
@@ -459,8 +435,8 @@ Post) {
           </button>}
 
           {hasComment ? (
-            <div ref={allCommentRef} className="grid gap-2 mt-4">
-                {allComment.map((comment) => (
+            <div className="grid gap-2 mt-4 max-h-36 overflow-y-scroll ">
+                {allComment.map((comment ) => (
                   <CommentBtn
                     allComments={allComment}
                     setAllComment={setAllComment}
