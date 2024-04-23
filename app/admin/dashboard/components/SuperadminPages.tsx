@@ -1,6 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { MdRefresh } from "react-icons/md";
+import { MdOutlineDensitySmall, MdRefresh } from "react-icons/md";
+import ComboboxComponent from "@/components/ComboboxComboboxComponent";
+import { People } from "@/app/organization/dashboard/[id]/components/InviteButton";
+import { IoSearch } from "react-icons/io5";
+import { useAdmin } from "../AdminContextFile";
+import { AdminContext, OrganizationType } from "@/app/Type";
 
 interface superadminpages {
   title: String;
@@ -8,11 +13,21 @@ interface superadminpages {
   customComponent: React.ReactNode;
   text: String;
   reloadPage?: () => void;
+
+  serachData?: {
+    data: any;
+    select: People;
+    setSelect: React.Dispatch<React.SetStateAction<People>>;
+    handleSearchBtn?: () => void;
+    placeholder: string;
+    handleAllBtn?: () => void;
+  };
 }
 
 const handleClick = () => {};
 
 export default function SuperadminPages({
+  serachData,
   text,
   title,
   reloadPage,
@@ -20,6 +35,9 @@ export default function SuperadminPages({
   customComponent,
 }: superadminpages) {
   const showSearchBar = title !== "All organization requests";
+
+  // const { organization } = useAdmin() as AdminContext;
+  // console.log(serachData.data);
 
   return (
     <div
@@ -42,20 +60,30 @@ export default function SuperadminPages({
               <div className="hidden md:flex lg:flex font-normal text-gray-500 mb-4">
                 {text}
               </div>
-              <div className="flex flex-row border-2 border-gray-400 bg-white rounded-lg sm:w-36 md:w-64 lg:w-64 h-10 md:h-8">
-                <input
-                  type="text"
-                  placeholder={"Search....."}
-                  className="flex-1 focus:outline-none rounded-lg text-xs ms-2 "
-                />
-                <Image
-                  src="/images/reusableComponents/Search (1).svg"
-                  width={20}
-                  height={20}
-                  alt="search"
-                  className="bg-white mr-2 w-auto h-auto"
-                />
-              </div>
+
+              {/* <div className="flex flex-row border-2 border-gray-400 bg-white rounded-lg sm:w-36 md:w-64 lg:w-64 h-10 md:h-8"></div> */}
+              {serachData && (
+                <div className="flex gap-2  items-center">
+                  <ComboboxComponent
+                    data={serachData.data}
+                    select={serachData.select}
+                    setSelect={serachData.setSelect}
+                    placeholder={serachData.placeholder}
+                  />
+                  <button
+                    onClick={serachData.handleAllBtn}
+                    className="p-1 border-2 ring-2 ring-custom-orange   rounded-sm"
+                  >
+                    <MdOutlineDensitySmall />
+                  </button>
+                  <button
+                    onClick={serachData.handleSearchBtn}
+                    className="p-1 border-2 ring-2 ring-custom-orange   rounded-sm"
+                  >
+                    <IoSearch />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

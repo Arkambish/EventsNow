@@ -11,8 +11,20 @@ import { RiAddCircleFill } from "react-icons/ri";
 import { useOrg } from "../../OrgContext";
 import { error, success } from "@/util/Toastify";
 import { OrgContext } from "@/app/Type";
+import Modal from "@/components/Modal";
+import { Dialog } from "@headlessui/react";
 
-export default memo(function AllPermission() {
+type AllPermissionProps = {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  handleBackButton: () => void;
+};
+
+export default memo(function AllPermission({
+  isOpen,
+  setIsOpen,
+  handleBackButton,
+}: AllPermissionProps) {
   const [viewOnlyEvent, setViewOnlyEvent] = useState<boolean>(false);
   const [viewattendees, setViewattendees] = useState<boolean>(false);
   const [manageEvent, setManageEvent] = useState<boolean>(false);
@@ -85,8 +97,15 @@ export default memo(function AllPermission() {
       ` ${process.env.NEXT_PUBLIC_URL}/api/v1/permission/updateGlobalPermission/${permissionID}`,
       { method: "PUT", body: JSON.stringify(formDataKeysArray) }
     );
+
+    console.log(res.ok);
+
+    const dat = await res.json();
+    console.log(dat);
+
     if (!res.ok) {
       error("error for updating permission");
+      return;
     }
 
     success("permission updated");
@@ -96,7 +115,106 @@ export default memo(function AllPermission() {
 
   return (
     <>
-      <div
+      <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+        <Dialog.Title
+          as="h3"
+          className="text-lg font-medium leading-6 text-gray-900"
+        >
+          Change permissions for {modalUserName}
+        </Dialog.Title>
+        <div className="mt-4">
+          <p className="text-sm text-gray-500">
+            <div className="flex w-full  justify-center ">
+              <button>
+                <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                  <RiAddCircleFill />
+                  <div>Chose Permission</div>
+                </div>
+              </button>
+            </div>
+            <form
+              onSubmit={doneButton}
+              className="flex w-full flex-col gap-3 mt-3"
+            >
+              <PermissionName
+                name="View Only Event"
+                checked={viewOnlyEvent}
+                setCheck={setViewOnlyEvent}
+              />
+              <PermissionName
+                name="Manage Event"
+                checked={manageEvent}
+                setCheck={setManageEvent}
+              />{" "}
+              <PermissionName
+                name="View Attendees"
+                checked={viewattendees}
+                setCheck={setViewattendees}
+              />
+              <PermissionName
+                name="Register Attendees"
+                checked={registerAttendees}
+                setCheck={setRegisterAttendees}
+              />
+              <PermissionName
+                name="Mark Attendance"
+                checked={markAttendance}
+                setCheck={setMarkAttendance}
+              />
+              <PermissionName
+                name="Manage Payments"
+                checked={managePayments}
+                setCheck={setManagePayments}
+              />
+              <PermissionName
+                name="Manage Profile"
+                checked={manageProfile}
+                setCheck={setManageProfile}
+              />
+              <PermissionName
+                name="Manage Payout Details"
+                checked={managePayoutDetails}
+                setCheck={setManagePayoutDetails}
+              />
+              <PermissionName
+                name="Get Reports"
+                checked={getReports}
+                setCheck={setGetReports}
+              />
+              <PermissionName
+                name="Manage Host Page"
+                checked={mangeHostPage}
+                setCheck={setMangeHostPage}
+              />
+              <PermissionName
+                name="Manage Marketing Campaign"
+                checked={manageMarketingCampaign}
+                setCheck={setManageMarketingCampaign}
+              />
+              <div className="flex w-11/12  justify-end  ">
+                <button type="submit" className="button">
+                  <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                    <RiAddCircleFill />
+                    <div>Done</div>
+                  </div>
+                </button>
+              </div>
+            </form>
+          </p>
+        </div>
+
+        <div className="mt-4 flex gap-2">
+          <button
+            type="button"
+            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            onClick={handleBackButton}
+          >
+            Back
+          </button>
+        </div>
+      </Modal>
+
+      {/* <div
         style={{
           backgroundColor: "#D9D9D9CC",
         }}
@@ -219,7 +337,7 @@ export default memo(function AllPermission() {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 });
@@ -237,7 +355,6 @@ const PermissionName = memo(function PermissionName({
     <div className="bg-[#D9D9D9]  flex justify-between w-10/12">
       <div className="ml-2">{name}</div>
       <div className="flex gap-3 items-center mr-8">
-        select
         <input
           checked={checked}
           id="red-checkbox"

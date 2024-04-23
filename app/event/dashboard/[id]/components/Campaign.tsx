@@ -99,7 +99,13 @@ export default function Campaign() {
           </button>
         </div>
 
-        {createPost && <CreatePost setCreatePost={setCreatePost} user={user} />}
+        {createPost && (
+          <CreatePost
+            setCreatePost={setCreatePost}
+            user={user}
+            createPost={createPost}
+          />
+        )}
       </div>
     </Container>
   );

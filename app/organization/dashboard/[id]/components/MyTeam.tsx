@@ -15,7 +15,7 @@ import { OrgContext, OrganizationTeamType } from "@/app/Type";
 import { FetchGet } from "@/hooks/useFetch";
 
 export default function MyTeam() {
-  const { modal, team, id, setTeam, organization } = useOrg() as OrgContext;
+  const { team, id, setTeam, organization } = useOrg() as OrgContext;
   const [loading, setLoading] = useState<boolean>(false);
 
   async function handleTeam() {
@@ -34,20 +34,20 @@ export default function MyTeam() {
     setLoading(false);
   }
 
-  function handleModal() {
-    switch (modal) {
-      case "givenPermission":
-        return <GivenPermission />;
-      case "allPermission":
-        return <AllPermission />;
-      case "permissionOneEvent":
-        return <PermissionOneEvent />;
-      case "selectOneEvent":
-        return <SelectOneEvent />;
-      case "":
-        return;
-    }
-  }
+  // function handleModal() {
+  //   switch (modal) {
+  //     case "givenPermission":
+  //       return <GivenPermission />;
+  //     // case "allPermission":
+  //     //   return <AllPermission />;
+  //     case "permissionOneEvent":
+  //       return <PermissionOneEvent />;
+  //     case "selectOneEvent":
+  //       return <SelectOneEvent />;
+  //     case "":
+  //       return;
+  //   }
+  // }
   return (
     <div className="flex pl-5 rounded-lg  shadow-3xl  md:ml-2 bg-[#fff] pt-8 md:pl-12 flex-col justify-start items-start gap-12">
       <div className="flex flex-col gap-3 justify-start items-start">
@@ -90,7 +90,7 @@ export default function MyTeam() {
           ))
         )}
 
-        {handleModal()}
+        {/* {handleModal()} */}
       </div>
     </div>
   );

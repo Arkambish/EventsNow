@@ -11,12 +11,14 @@ type ComboboxComponent = {
   data: People[];
   select: People;
   setSelect: React.Dispatch<React.SetStateAction<People>>;
+  placeholder: string;
 };
 
 export default function ComboboxComponent({
   data,
   select,
   setSelect,
+  placeholder,
 }: ComboboxComponent) {
   // const [email, setEmail] = useState<People>({ id: 0, name: "" });
   const [query, setQuery] = useState("");
@@ -33,13 +35,13 @@ export default function ComboboxComponent({
   return (
     <div>
       <Combobox value={select} onChange={setSelect}>
-        <div className="relative mt-1">
+        <div className="relative mt-1 -z-8">
           {/* <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"> */}
           <Combobox.Input
             className="w-full border-2 py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:outline-none focus:ring-0 border-custom-orange rounded-lg"
             displayValue={(dataObj: any) => dataObj.name}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search by email"
+            placeholder={placeholder}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon

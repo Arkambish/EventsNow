@@ -8,7 +8,6 @@ import { SlCalender } from "react-icons/sl";
 import { IoIosTime } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 
-
 import Image from "next/image";
 import PostTab from "./PostTab";
 import CoverPhoto from "./CoverPhoto";
@@ -310,7 +309,7 @@ export default function HostSideBar({
       <div className="grid grid-rows-3 gap-6 xl:ml-12 md:ml-8 text-left mt-8">
         <div>
           <div className="text-[#AC736D] ">
-            <IoLocation size={30}/>
+            <IoLocation size={30} />
           </div>
           <div className="text-[#353C4E] xl:text-2xl md:text-xl  align-top -mt-8 font-['Roboto'] ml-12">
             {Location}
@@ -319,7 +318,7 @@ export default function HostSideBar({
 
         <div>
           <div className="text-[#AC736D]">
-          <SlCalender size={25}/>
+            <SlCalender size={25} />
           </div>
           <div className="text-[#353C4E] xl:text-2xl  md:text-xl font-['Roboto'] align-top -mt-8 ml-12">
             {Date}
@@ -328,7 +327,7 @@ export default function HostSideBar({
 
         <div>
           <div className="text-[#AC736D]">
-          <IoIosTime size={25}/>
+            <IoIosTime size={25} />
           </div>
           <div className="text-[#353C4E] xl:text-2xl  md:text-xl  font-['Roboto'] align-top -mt-8 ml-12">
             {Time}
@@ -339,7 +338,6 @@ export default function HostSideBar({
           {isRegistered ? (
             <button
               disabled={preview ? true : false}
-
               onClick={() => setIsRemoveRegistation(true)}
               className="flex button py-2.5 xl:py-3.5 bg-custom-orange rounded-l-2xl items-center xl:px-4"
 
@@ -356,7 +354,6 @@ export default function HostSideBar({
           ) : (
             <button
               disabled={preview ? true : false}
-
               onClick={() => {
                 setIsRegModalShow(true);
               }}
@@ -430,19 +427,17 @@ export default function HostSideBar({
           {isAddWishList ? (
             <button
               disabled={preview ? true : false}
-
               onClick={() => setIsRemoveWishListModal(true)}
               // onClick={removeFromWishlistHandler}
               className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
-
             >
               <div className="p-1 flex">
-              <div className="text-white">
-              <FaHeart size={20}/>
-              </div>
-              <div className="font-medium text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Remove
-              </div>
+                <div className="text-white">
+                  <FaHeart size={20} />
+                </div>
+                <div className="font-medium text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
+                  Remove
+                </div>
               </div>
             </button>
           ) : (
@@ -455,12 +450,12 @@ export default function HostSideBar({
               }  button  xl:h-14 h-12 bg-[#455273] rounded-r-xl items-center xl:px-4 px-2`}
             >
               <div className="flex p-1">
-              <div className=" text-white">
-              <FaRegHeart size={20}/>
-              </div>
-              <div className="font-medium md:text-md text-sm  text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Wish List
-              </div>
+                <div className=" text-white">
+                  <FaRegHeart size={20} />
+                </div>
+                <div className="font-medium md:text-md text-sm  text-white text-left leading-tight xl:ml-4 md:ml-2">
+                  Wish List
+                </div>
               </div>
             </button>
           )}
@@ -474,12 +469,12 @@ export default function HostSideBar({
           } `}
         >
           <div className="flex p-1">
-          <div className="text-white">
-            <IoIosCard size={20}/>
-          </div>
-          <div className="font-medium xl:text-md text-sm text-white text-left leading-tight ml-4">
-            Buy tickets
-          </div>
+            <div className="text-white">
+              <IoIosCard size={20} />
+            </div>
+            <div className="font-medium xl:text-md text-sm text-white text-left leading-tight ml-4">
+              Buy tickets
+            </div>
           </div>
         </button>
         {isActiveTicketModal && (
@@ -491,10 +486,12 @@ export default function HostSideBar({
             ticketArrayTemp={allBuyTicketsArrayTemp}
             setTicketArrayTemp={setAllBuyTicketsArrayTemp}
             ticketTypes={allTicketTypes}
+            isActiveTicketModal={isActiveTicketModal}
           />
         )}
         {isActiveProceedTicketModal && (
           <TicketModal
+            isActiveProceedTicketModal={isActiveProceedTicketModal}
             setIsActvieTicketModal={setIsActiveTicketModal}
             setTicketArrayTemp={setAllBuyTicketsArrayTemp}
             setIsActiveTicketModal={setIsActiveTicketModal}

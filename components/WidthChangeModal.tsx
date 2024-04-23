@@ -9,7 +9,11 @@ type ModalType = {
   children: React.ReactNode;
 };
 
-export default function Modal({ setIsOpen, isOpen, children }: ModalType) {
+export default function WidthChangeModal({
+  setIsOpen,
+  isOpen,
+  children,
+}: ModalType) {
   function closeModal() {
     setIsOpen(false);
   }
@@ -41,8 +45,9 @@ export default function Modal({ setIsOpen, isOpen, children }: ModalType) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                {/* <div className=" w-fit rounded-2xl  bg-white"> */}
-                <Dialog.Panel className="w-full  max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                {/* <div className="bg-red-300"> */}
+                {/* <div className="w-full  max-w-s transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"> */}
+                <Dialog.Panel className="w-full  max-w-fit transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   {children}
                 </Dialog.Panel>
                 {/* </div> */}

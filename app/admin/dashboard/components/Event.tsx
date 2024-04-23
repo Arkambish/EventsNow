@@ -6,11 +6,48 @@ import EmptyStateComponent from "@/components/EmptyStateComponent";
 import Spinner from "@/components/Spinner";
 import { getAllEvents } from "../FetchData";
 import EventCardNewOrg from "@/components/EventCardNewOrg";
-import { AdminContext } from "@/app/Type";
+import { AdminContext, EventType } from "@/app/Type";
+import { People } from "@/app/organization/dashboard/[id]/components/InviteButton";
 
 export default function Event() {
   const { event, setEvent } = useAdmin() as AdminContext;
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [filterEventData, setFilterEventData] = useState<EventType[]>(event);
+
+  const [selectEvent, setSelectEvent] = useState<People>({
+    id: "",
+    name: "",
+  });
+
+  const searchEventData = event.map((event: EventType) => ({
+    id: event._id,
+    name: event.eventName,
+  }));
+
+  function handleSearchBtn() {
+    if (selectEvent.name === "") {
+      setFilterEventData(event);
+      return;
+    }
+    setFilterEventData(() => {
+      return event.filter((event) => event.eventName === selectEvent.name);
+    });
+  }
+
+  function handleAllBtn() {
+    setSelectEvent({ id: "", name: "" });
+    setFilterEventData(event);
+  }
+
+  const serachData = {
+    data: searchEventData,
+    select: selectEvent,
+    setSelect: setSelectEvent,
+    handleSearchBtn,
+    placeholder: "Event name",
+    handleAllBtn,
+  };
 
   async function reloadPage() {
     setIsLoading(true);
@@ -31,6 +68,7 @@ export default function Event() {
   return (
     <div>
       <SuperadminPages
+        serachData={serachData}
         title="All Events"
         description="You can see all the events currently available from here."
         text="Search Events"
@@ -42,7 +80,9 @@ export default function Event() {
             ) : event.length === 0 ? (
               <EmptyStateComponent message="No Events" />
             ) : (
-              event.map((e) => <EventCardNewOrg key={e._id} event={e} />)
+              filterEventData.map((e) => (
+                <EventCardNewOrg key={e._id} event={e} />
+              ))
             )}
             {}
           </>
