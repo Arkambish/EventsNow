@@ -23,6 +23,13 @@ import {
   TwitterShareButton,
 } from "react-share";
 import { set } from "mongoose";
+import { FaRegComment } from "react-icons/fa6";
+import { IoShareSocialOutline } from "react-icons/io5";
+import { IoHeartOutline,IoHeartSharp } from "react-icons/io5";
+import { FiSend } from "react-icons/fi";
+
+
+
 interface Post {
   profilePic: string;
   name: string;
@@ -46,6 +53,7 @@ export type User = {
 type Comment = {
   _id: string;
   userImage: string;
+  userName: string;
   postId: string;
   description: string;
   userId: string;
@@ -70,6 +78,7 @@ Post) {
   const [isShare, setIsShare] = useState(false);
 
   const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState<string | null>();
 
   const [user, setUser] = useState<User | Session>({
     user: { image: "", email: "", name: "" },
@@ -106,9 +115,29 @@ Post) {
   }, [isComment, setIsComment]);
 
   
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const userData = await fetch("/api/v1/user/getUserId", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email: user?.user?.email,
+  //       }),
+  //     });
+  //     const userID  = await userData.json();
+  //  setUserId(userID.id);
+  //   }
+    
+    
+  //  getUser();
+   
+  // }, [user]);
+
   useEffect(() => {
     const getUser = async () => {
-      const userData = await fetch("/api/v1/user/getUserId", {
+      const userData = await fetch("/api/v1/user/getOneUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,14 +146,26 @@ Post) {
           email: user?.user?.email,
         }),
       });
-      const userID  = await userData.json();
-   setUserId(userID.id);
+      const data  = await userData.json();
+      if (data && data.data) {
+        if (data.data.firstName) {
+          setUserName(data.data.firstName);
+          
+        }
+        if (data.data._id) {
+          setUserId(data.data._id);
+        }
+      }
+
     }
+    
     
     
    getUser();
    
-  }, [user]);
+  }
+  , [user]);
+
 
   // handle all comment
   useEffect(() => {
@@ -153,6 +194,7 @@ Post) {
   }, [setHasComment, hasComment]);
 
   useEffect(() => {
+   
     const getUser = async () => {
       const user = await getSession();
 
@@ -244,6 +286,7 @@ Post) {
         },
         body: JSON.stringify({
           userId:userId,
+          userName: userName,
           userImage: user?.user?.image,
           postId: id,
           description: comment,
@@ -258,6 +301,7 @@ Post) {
           {
             _id: data.comment._id,
             userImage: data.comment.userImage,
+            userName: data.comment.userName,
             postId: data.comment.postId,
             description: data.comment.description,
             userId: data.comment.userId,
@@ -267,76 +311,68 @@ Post) {
     }
   }
 
+
+
   return (
-    <>
-      <div className="xl:w-571 sm:w-[24rem] w-[20rem]  bg-initial text-white m-8 rounded-xl pb-2">
-        <div className="p-5">
-          <div className="flex gap-7">
+  
+      <div className="xl:w-[500px] sm:w-[24rem] w-[20rem] border text-white m-8 rounded-2xl pb-4">
+        <div className="px-5 pt-5">
+          
+          <div className="flex gap-7 items-center mb-4">
             <Image
               src={`${profilePic}`}
               alt="profile picture"
-              width={60}
+              width={50}
               height={10}
-              className="rounded-full"
+              className="rounded-full  border-rose-700 border-2"
             />
-            <div>
-              <div className="text-black sm:text-24 text-lg font-bold font-Inter">
+            
+              <div className="">
+              <div className="text-black sm:text-24 text-base  font-semibold font-Inter">
                 {name}
-              </div>
+            
             </div>
+            <div className="text-black mt-2 font-Inter">"{caption}"</div>
+              </div>
           </div>
-          <div className="text-black mt-3 font-Inter">{caption}</div>
+          
         </div>
-        <button>
+        
           <Image
             src={`${post}`}
             alt="post"
             width={661}
             height={363}
-            className="fit"
+            className="fit rounded-sm border-y-2"
           />
-        </button>
-        <div className="px-5 my-2 mb-2">
-          <div className="flex gap-4 sm:w-32 w-24">
+       
+        <div className=" content-start px-5">
+          <div className="flex gap-5 py-2">
             {isLike ? (
-              <button onClick={handleClickOffLikeButton}>
-                <Image
-                  src={"/images/event/post/heart-red .svg"}
-                  alt="like"
-                  width={30}
-                  height={34}
-                  className={styles.zoom}
+              <button className={styles.zoom} onClick={handleClickOffLikeButton}>
+                <IoHeartSharp 
+                color="#ed3e4f"
+                size={30}
                 />
               </button>
             ) : (
-              <button onClick={handleClickLikeButton}>
-                <Image
-                  src={"/images/event/post/heart-white .svg"}
-                  alt="like"
-                  width={30}
-                  height={34}
-                  className={styles.zoom}
+              <button className={styles.zoom} onClick={handleClickLikeButton}>
+                <IoHeartOutline
+                color="#535454"
+                size={30}
                 />
               </button>
             )}
 
-            <button onClick={() => handleClickCommentButton()}>
-              <Image
-                src={"/images/reusableComponents/Comment.svg"}
-                alt="comment"
-                width={40}
-                height={34}
-                className={styles.zoom}
-              />
+            <button className={`${styles.zoom} my-auto `} onClick={() => handleClickCommentButton()}>
+            <FaRegComment 
+            color="#535454"
+            size={26} />
             </button>
-            <button onClick={() => handleClickShareButton()}>
-              <Image
-                src={"/images/reusableComponents/Share.svg"}
-                alt="share"
-                width={40}
-                height={34}
-                className={styles.zoom}
-              />
+            <button className={styles.zoom} onClick={() => handleClickShareButton()}>
+            <IoShareSocialOutline
+            color="#535454"
+            size={28} />
             </button>
           </div>
           {isComment && (
@@ -351,10 +387,10 @@ Post) {
                 height={35}
                 className="rounded-full mt-1"
               />
-              <div className="border-[1px] gap-3 border-slate-500 rounded-3xl p-1 pl-2 pr-2 flex items-center">
+              <div className="flex p-1 content-center border rounded-3xl px-4">
                 <input
                   type="text"
-                  className="outline-none text-gray-700 p-1 bg-initial "
+                  className="outline-none  text-black "
                   placeholder="Write a comment"
                   onChange={(e) => setComment(e.target.value)}
                   value={comment}
@@ -362,13 +398,16 @@ Post) {
                 <button
                   onClick={sentComment}
                   disabled={comment.length > 0 ? false : true}
-                  className={`${
-                    comment.length > 0
-                      ? "bg-slate-600"
-                      : "bg-slate-400 cursor-not-allowed"
-                  } rounded-md w-8 inline-flex justify-center items-center button h-6`}
+             
                 >
-                  <BsSend />
+                  <FiSend 
+                  size={22}
+                  className={`${
+                      comment.length > 0
+                        ? "text-slate-600"
+                        : "text-slate-400 cursor-not-allowed"}`
+                    }
+                  />
                 </button>
               </div>
             </div>
@@ -410,18 +449,17 @@ Post) {
             </div>
           )}
 
-          <div className="text-black font-Inter">
-            {`Liked by ${like} peoples`}
-          </div>
-          <button onClick={handleCommentBtn}>
-            <div className="text-black font-Inter">
-              {` ${allComment.length} comments`}
+          {like>0 &&<div className="text-black font-Inter font-semibold ">
+            {` ${like} likes`}
+          </div>}
+          {allComment.length>0 &&<button onClick={handleCommentBtn}>
+            <div className="text-neutral-500 font-Inter ">
+              {`View all ${allComment.length} comments`}
             </div>
-          </button>
+          </button>}
 
           {hasComment ? (
-            <div ref={allCommentRef}>
-              <div className=" mt-2 border-[1px] p-2 border-black rounded-lg h-20 overflow-auto mb-2 flex flex-col gap-2 ">
+            <div ref={allCommentRef} className="grid gap-2 mt-4">
                 {allComment.map((comment) => (
                   <CommentBtn
                     allComments={allComment}
@@ -430,17 +468,19 @@ Post) {
                     id={comment._id}
                     key={comment._id}
                     userImage={comment.userImage}
+                    userName={comment.userName}
                     description={comment.description}
                   />
                 ))}
-              </div>
+              
             </div>
           ) : (
             ""
           )}
         </div>
       </div>
-    </>
+      
+    
   );
 }
 

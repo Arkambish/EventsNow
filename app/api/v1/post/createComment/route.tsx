@@ -4,11 +4,13 @@ import connectMongoDB from "../../../../../lib/mongo/mongodb";
 import Comment from "@/models/comment";
 
 export async function POST(req: NextRequest) {
-  const { userId, userImage, postId, description } = await req.json();
+  const { userId,userName, userImage, postId, description } = await req.json();
+  console.log("hi from createComment route");
+  console.log(userId,userName, userImage, postId, description);
 
   await connectMongoDB();
 
-  if (!userImage || !postId || !description || !userId) {
+  if (!userImage || !postId || !description || !userId || !userName) {
     return NextResponse.json(
       { message: "Please fill all the fields" },
       { status: 400 }
@@ -17,6 +19,7 @@ export async function POST(req: NextRequest) {
 
   const comment = await Comment.create({
     userId,
+    userName,
     userImage,
     postId,
     description,

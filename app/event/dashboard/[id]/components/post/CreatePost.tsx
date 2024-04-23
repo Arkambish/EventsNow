@@ -48,7 +48,7 @@ export default memo(function CreatePost({ setCreatePost, user }: Props) {
         endpoint: "post/createPost",
         body: data,
       });
-
+console.log("test 1 ")
       if (!res.ok) {
         setIsSubmitting(false);
         error("There was an error creating the post");

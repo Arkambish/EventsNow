@@ -49,7 +49,16 @@ export default function PostTab() {
     postFunction();
   }, [id, email]);
 
+  useEffect(() => {
+    const getUser = async () => {
+      const session = await getSession();
+      setEmail(session?.user?.email);
+    };
+    getUser();
+  }, []);
+
   function checkLike({ post }: any) {
+  
     {
       const like = post.likeBy.find((like: any) => like.email === email);
       if (like) {

@@ -32,11 +32,7 @@ const postSchema = new mongoose.Schema(
     likeBy: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: User,
-    },
-    comment: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: Comment,
-      unique: true,
+      default: [],
     },
   },
   {
