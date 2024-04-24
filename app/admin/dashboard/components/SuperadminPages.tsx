@@ -46,7 +46,7 @@ export default function SuperadminPages({
     >
       <div className="flex flex-col md:flex-row lg:flex-row sm:justify-center md:justify-between lg:justify-between ">
         <div className="flex flex-col p-4 sm:justify-center md:justify-start  lg:justify-start xl:ms-12 ">
-          <div className="text-custom-orange text-4xl font-semibold mb-8 ">
+          <div className="text-custom-orange text-3xl font-semibold mb-8 ">
             {title}
           </div>
           <div className="text-normal font-normal flex text-[#353535]  ">

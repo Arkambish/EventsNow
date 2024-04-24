@@ -59,13 +59,13 @@ function Notification({
 
           {dropdownOpen && (
             <div
-              className="absolute right-0 mt-2  bg-gray-700 rounded-md shadow-lg  max-h-80 h-fit z-20 overflow-y-auto  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
+              className="absolute right-0 mt-2  bg-gray-800 rounded-md shadow-lg  max-h-80 h-fit z-20 overflow-y-auto  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
               style={{ width: 300 }}
             >
               <div className="sticky top-0 z-10">
-                <h1 className="bg-custom-orange text-white font-khand w-full p-2">
+                <div className="bg-gray-700 text-lg text-white font-khand w-full p-2">
                   Notifications
-                </h1>
+                </div>
               </div>
               {notification.map((n: notificationty) => (
                 <NotificationButton

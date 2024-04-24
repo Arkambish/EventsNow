@@ -10,6 +10,7 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import { useAdmin } from "../AdminContextFile";
 import { success } from "@/util/Toastify";
 import { error } from "@/util/Toastify";
+import WidthChangeModal from "@/components/WidthChangeModal";
 
 interface Data {
   organization: OrganizationType;
@@ -81,7 +82,7 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
                   setShowDenyModal(true);
                   setIsOpen(true);
                 }}
-                className=" w-20 h-[30px] rounded-3xl bg-[#B63535] mt-2 ml-0 md:ml-12 lg:ml-0 "
+                className=" w-20 h-[30px] rounded-3xl bg-red-600 mt-2 ml-0 md:ml-12 lg:ml-0 "
               >
                 <div className="flex justify-center text-white text-sans font-medium ">
                   Deny
@@ -134,24 +135,15 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
         <div>
           {" "}
           {isOpen && (
-            <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+            <WidthChangeModal setIsOpen={setIsOpen} isOpen={isOpen}>
               <Dialog.Title
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
                 Organization Details
               </Dialog.Title>
-              <div className="flex flex-col h-72 overflow-y-auto px-8 py-8">
+              <div className="flex lg:flex-row flex-col  h-72 overflow-y-auto px-8 py-8">
                 <div className="flex flex-row gap-2 justify-center">
-                  <div className="flex flex-col space-y-2 mr-4">
-                    {" "}
-                    <h2>Organization Name </h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
-                      {" "}
-                      {organization.organizationName}
-                    </div>
-                  </div>
-
                   <Image
                     src={organization.postImageLink}
                     alt={organization.organizationName}
@@ -159,35 +151,48 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
                     height={200}
                   />
                 </div>
-                <div className="flex flex-col space-y-4 ml-8 mt-4 ">
-                  <div className="flex flex-col space-y-1">
-                    {" "}
-                    <h2>Phone number</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+
+                <div className="flex flex-col space-y-4 ml-8 mt-4 w-96 gap-7">
+                  <div className="flex md:flex-row flex-col md:gap-0 gap-4 justify-between mr-8">
+                    <div className="flex flex-col space-y-2 mr-4">
                       {" "}
-                      {organization.phoneNumber}
+                      <h2 className="font-bold">Organization Name </h2>
+                      <div className="font-underlined border-b border-gray-400 text-gray-800">
+                        {" "}
+                        {organization.organizationName}
+                      </div>
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      {" "}
+                      <h2 className="font-bold">Phone number</h2>
+                      <div className="font-underlined border-b border-gray-400 text-gray-800 ">
+                        {" "}
+                        {organization.phoneNumber}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex md:flex-row flex-col md:gap-0 gap-4 justify-between mr-8">
+                    <div className="flex flex-col space-y-1">
+                      {" "}
+                      <h2 className="font-bold">Address</h2>
+                      <div className="font-underlined border-b border-gray-400 text-gray-800 max-w-48 overflow-ellipsis overflow-hidden ">
+                        {" "}
+                        {organization.address}
+                      </div>
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      {" "}
+                      <h2 className="font-bold">Company Name</h2>
+                      <div className="font-underlined border-b border-gray-400 text-gray-800 ">
+                        {" "}
+                        {organization.companyName}
+                      </div>
                     </div>
                   </div>
                   <div className="flex flex-col space-y-1">
                     {" "}
-                    <h2>Address</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300 max-w-48 overflow-ellipsis overflow-hidden">
-                      {" "}
-                      {organization.address}
-                    </div>
-                  </div>
-                  <div className="flex flex-col space-y-1">
-                    {" "}
-                    <h2>Company Name</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
-                      {" "}
-                      {organization.companyName}
-                    </div>
-                  </div>
-                  <div className="flex flex-col space-y-1">
-                    {" "}
-                    <h2>Founded</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                    <h2 className="font-bold">Founded</h2>
+                    <div className="font-underlined border-b border-gray-400 text-gray-800 ">
                       {" "}
                       {organization.fullName}
                     </div>
@@ -204,7 +209,7 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
                   Cancel
                 </button>
               </div>
-            </Modal>
+            </WidthChangeModal>
           )}
         </div>
       )}

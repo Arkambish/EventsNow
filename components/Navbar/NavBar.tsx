@@ -133,12 +133,11 @@ export default function NavBar() {
             if (data) {
               setUserActive(true);
               setUser(data);
-              console.log(data._id);
 
               const notificationData = await FetchGet({
                 endpoint: `notification/getNotification/${data._id}`,
               });
-              console.log(notificationData);
+
               notificationData
                 ? setNotification(notificationData.filternotification.reverse())
                 : setNotification([]);
@@ -205,21 +204,6 @@ export default function NavBar() {
     },
     [emailAuth, pathname, organizationId, setOrganization]
   );
-  // useEffect(() => {
-  //   const fetchNotifications = async () => {
-  //     try {
-  //       console.log(user._id);
-  //       const data = await FetchGet({
-  //         endpoint: `notification/getNotification/${user._id}`,
-  //       });
-  //       console.log(data);
-  //       data ? setNotification(data.filternotification) : setNotification([]);
-  //     } catch (error) {
-  //       console.error("Error fetching notifications:", error);
-  //     }
-  //   };
-  //   fetchNotifications();
-  // }, [user._id]);
 
   return (
     <div>
@@ -234,9 +218,7 @@ export default function NavBar() {
             <nav className="bg-navWhite ">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
                 {/*  */}
-                {pathname.startsWith(
-                  "/evenEvents now logo and namet/dashboard"
-                ) ? (
+                {pathname.startsWith("/event/dashboard") ? (
                   <Link href={`/organization/dashboard/${organizationId}`}>
                     <button
                       className={`bg-custom-orange button  h-8 rounded-2xl`}
@@ -252,7 +234,7 @@ export default function NavBar() {
                   </Link>
                 ) : (
                   <Link href="/">
-                    <button className="button animate-pulse">
+                    <button className="button ">
                       <div className="flex items-center gap-3">
                         <Image
                           src="/images/reusableComponents/nav-logo.svg"

@@ -14,6 +14,7 @@ import Modall from "@/components/Modal";
 import { useParams } from "next/navigation";
 import { FetchPost } from "@/hooks/useFetch";
 import { error, success } from "@/util/Toastify";
+import WidthChangeModal from "@/components/WidthChangeModal";
 
 interface Data {
   organization: OrganizationType;
@@ -37,8 +38,9 @@ export default function Org_RequestHandle({
   // const [showDetailsModal, setShowDetailsModal] = useState(false);
   // const [showAllowModal, setShowAllowModal] = useState(false);
   // const [showDenyModal, setShowDenyModal] = useState(false);
-  const [comment, setComment] = useState<boolean>(false);
+  const [comment, setComment] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [commentModal, setCommentModal] = useState<boolean>(false);
   const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
   const [showAllowModal, setShowAllowModal] = useState<boolean>(false);
   const [showDenyModal, setShowDenyModal] = useState<boolean>(false);
@@ -60,7 +62,7 @@ export default function Org_RequestHandle({
         error("Failed to save");
         return;
       }
-      setComment(false);
+      setCommentModal(false);
       success("Messsage sent successfully");
     } catch (error) {
       console.error("Error saving settings:", error);
@@ -173,7 +175,7 @@ export default function Org_RequestHandle({
                 setShowDetailsModal(true);
                 setIsOpen(true);
               }}
-              className="w-fit h-fit rounded-2xl bg-[#4E8171] ml-auto lg:ml-20 md:ml-3"
+              className="w-fit h-fit rounded-xl bg-[#4E8171] ml-auto lg:ml-20 md:ml-3"
             >
               <div className="justify-center p-2 text-white text-sans font-medium">
                 Details
@@ -191,9 +193,9 @@ export default function Org_RequestHandle({
                 setShowAllowModal(true);
                 setIsOpen(true);
               }}
-              className="w-fit h-fit rounded-xl bg-[#3C9313] ms-2 sm:ms-0"
+              className="w-fit h-fit rounded-lg bg-green-600 ms-2 sm:ms-0"
             >
-              <div className="justify-center text-white text-sans font-small p-2">
+              <div className="button justify-center text-white text-sans font-small p-2">
                 Allow
               </div>
             </button>
@@ -206,17 +208,17 @@ export default function Org_RequestHandle({
                 setShowDenyModal(true);
                 setIsOpen(true);
               }}
-              className="w-fit h-fit rounded-xl bg-[#B63535] ml-12 sm:ml-10 "
+              className="button w-fit h-fit rounded-lg bg-red-600 ml-12 sm:ml-10 "
             >
               <div className="justify-center text-white text-sans font-small p-2">
                 Deny
               </div>
             </button>
             <button
-              onClick={() => setComment(true)}
-              className="w-fit h-fit rounded-xl bg-[#ee8a3d] ml-12 sm:ml-10 "
+              onClick={() => setCommentModal(true)}
+              className="button w-fit h-fit rounded-lg bg-slate-500 ml-12 sm:ml-10 "
             >
-              <div className="justify-center  text-white text-sans font-small whitespace-nowrap p-2 hover:bg-orange-500 hover:rounded-xl">
+              <div className="justify-center  text-white text-sans font-small whitespace-nowrap p-2  hover:rounded-xl">
                 Add comment
               </div>
             </button>
@@ -224,8 +226,8 @@ export default function Org_RequestHandle({
         </div>
       </div>
 
-      {comment && (
-        <Modall setIsOpen={setIsOpen} isOpen={isOpen}>
+      {commentModal && (
+        <Modall setIsOpen={setCommentModal} isOpen={commentModal}>
           <Dialog.Title
             as="h3"
             className="text-lg font-medium rounded-xl leading-6 text-gray-900 "
@@ -258,7 +260,7 @@ export default function Org_RequestHandle({
             <button
               type="button"
               className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-              onClick={() => setIsOpen(false)}
+              onClick={() => setCommentModal(false)}
             >
               Cancel
             </button>
@@ -267,26 +269,16 @@ export default function Org_RequestHandle({
       )}
       {showDetailsModal && (
         <div>
-          {" "}
           {isOpen && (
-            <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+            <WidthChangeModal setIsOpen={setIsOpen} isOpen={isOpen}>
               <Dialog.Title
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
                 Organization Details
               </Dialog.Title>
-              <div className="flex flex-col h-72 overflow-y-auto px-8 py-8">
+              <div className="flex lg:flex-row flex-col  h-72 overflow-y-auto px-8 py-8">
                 <div className="flex flex-row gap-2 justify-center">
-                  <div className="flex flex-col space-y-2 mr-4">
-                    {" "}
-                    <h2>Organization Name </h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
-                      {" "}
-                      {organization.organizationName}
-                    </div>
-                  </div>
-
                   <Image
                     src={organization.postImageLink}
                     alt={organization.organizationName}
@@ -294,35 +286,48 @@ export default function Org_RequestHandle({
                     height={200}
                   />
                 </div>
-                <div className="flex flex-col space-y-4 ml-8 mt-4 ">
-                  <div className="flex flex-col space-y-1">
-                    {" "}
-                    <h2>Phone number</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+
+                <div className="flex flex-col space-y-4 ml-8 mt-4 w-96 gap-7">
+                  <div className="flex md:flex-row flex-col md:gap-0 gap-4 justify-between mr-8">
+                    <div className="flex flex-col space-y-2 mr-4">
                       {" "}
-                      {organization.phoneNumber}
+                      <h2 className="font-bold">Organization Name </h2>
+                      <div className="font-underlined border-b border-gray-400 text-gray-800">
+                        {" "}
+                        {organization.organizationName}
+                      </div>
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      {" "}
+                      <h2 className="font-bold">Phone number</h2>
+                      <div className="font-underlined border-b border-gray-400 text-gray-800 ">
+                        {" "}
+                        {organization.phoneNumber}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex md:flex-row flex-col md:gap-0 gap-4 justify-between mr-8">
+                    <div className="flex flex-col space-y-1">
+                      {" "}
+                      <h2 className="font-bold">Address</h2>
+                      <div className="font-underlined border-b border-gray-400 text-gray-800 max-w-48 overflow-ellipsis overflow-hidden ">
+                        {" "}
+                        {organization.address}
+                      </div>
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      {" "}
+                      <h2 className="font-bold">Company Name</h2>
+                      <div className="font-underlined border-b border-gray-400 text-gray-800 ">
+                        {" "}
+                        {organization.companyName}
+                      </div>
                     </div>
                   </div>
                   <div className="flex flex-col space-y-1">
                     {" "}
-                    <h2>Address</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300 max-w-48 overflow-ellipsis overflow-hidden">
-                      {" "}
-                      {organization.address}
-                    </div>
-                  </div>
-                  <div className="flex flex-col space-y-1">
-                    {" "}
-                    <h2>Company Name</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
-                      {" "}
-                      {organization.companyName}
-                    </div>
-                  </div>
-                  <div className="flex flex-col space-y-1">
-                    {" "}
-                    <h2>Founded</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                    <h2 className="font-bold">Founded</h2>
+                    <div className="font-underlined border-b border-gray-400 text-gray-800 ">
                       {" "}
                       {organization.fullName}
                     </div>
@@ -339,7 +344,7 @@ export default function Org_RequestHandle({
                   Cancel
                 </button>
               </div>
-            </Modal>
+            </WidthChangeModal>
           )}
         </div>
       )}
@@ -366,7 +371,7 @@ export default function Org_RequestHandle({
               <div className="mt-4 flex gap-2">
                 <button
                   type="button"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   onClick={handleAllow}
                 >
                   Allow
