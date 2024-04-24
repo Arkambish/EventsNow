@@ -272,6 +272,7 @@ Post) {
 
       if (data.message === "comment created successfully") {
         setComment("");
+        setIsComment(false);
         setAllComment((prev) => [
           ...prev,
           {

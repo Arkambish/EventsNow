@@ -5,8 +5,7 @@ import Comment from "@/models/comment";
 
 export async function POST(req: NextRequest) {
   const { userId,userName, userImage, postId, description } = await req.json();
-  console.log("hi from createComment route");
-  console.log(userId,userName, userImage, postId, description);
+  
 
   await connectMongoDB();
 
