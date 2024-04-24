@@ -288,6 +288,8 @@ export interface ProfContext {
   userImage: string;
   setUserImage: React.Dispatch<React.SetStateAction<string>>;
   registerEvent: EventType[];
+  ticket: Ticket;
+  setTicket: React.Dispatch<React.SetStateAction<Ticket>>;
 }
 
 export type RegisterEventType = {
@@ -323,7 +325,7 @@ export interface ChildrenType {
 
 export type VoidFunc = () => void;
 
-export interface ProfContext {
+export interface ProfContexts {
   lname: string;
   fname: string;
   isLoading: boolean;

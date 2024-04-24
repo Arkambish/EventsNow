@@ -5,6 +5,7 @@ import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
 import { EventType } from "./Type";
+import Notification from "@/components/Navbar/Notification";
 
 async function getOutDateEvent() {
   try {

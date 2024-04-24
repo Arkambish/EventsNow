@@ -27,8 +27,8 @@ interface Available_Orgs {
 
 export default function Available_Orgs({ organization }: Available_Orgs) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [showDenyModal, setShowDenyModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
+  const [showDenyModal, setShowDenyModal] = useState<boolean>(false);
   const { setOrganization, setNotification, notification } =
     useAdmin() as ContextData;
   const handleDeny = async () => {

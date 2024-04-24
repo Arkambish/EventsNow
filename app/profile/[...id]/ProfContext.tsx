@@ -8,8 +8,8 @@ import {
   VoidFunc,
   EventType,
   Ticket,
+  ProfContexts,
 } from "@/app/Type";
-import { error } from "@/util/Toastify";
 
 const ProfContext = createContext<ProfContextType | string>("");
 interface ProfContextProviderProps {

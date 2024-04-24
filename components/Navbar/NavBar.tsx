@@ -22,6 +22,8 @@ import ResponsiveMenuBar from "./ResponsiveMenuBar";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaCircle } from "react-icons/fa";
 import { UserType } from "@/app/Type";
+import Notification from "./Notification";
+import { FetchGet } from "@/hooks/useFetch";
 
 export type OrganizationProps = {
   map: any;
@@ -52,6 +54,14 @@ export interface AuthContext {
   organization: OrganizationProps[];
   setOrganization: React.Dispatch<React.SetStateAction<OrganizationProps[]>>;
 }
+export type NotificationType = {
+  comment: string;
+  recieverId: string;
+  topic: string;
+  _id: string;
+  isClicked: boolean;
+  createdAt: string;
+};
 
 export const getUser = async ({ email }: any) => {
   const user = await fetch(
@@ -97,6 +107,7 @@ export default function NavBar() {
     setIsMenuOpen(!isMenuOpen);
   }
   const router = useRouter();
+  const [notification, setNotification] = useState<NotificationType[]>([]);
 
   async function clickLogoutBtn() {
     await signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_URL}` });
@@ -122,6 +133,15 @@ export default function NavBar() {
             if (data) {
               setUserActive(true);
               setUser(data);
+              console.log(data._id);
+
+              const notificationData = await FetchGet({
+                endpoint: `notification/getNotification/${data._id}`,
+              });
+              console.log(notificationData);
+              notificationData
+                ? setNotification(notificationData.filternotification.reverse())
+                : setNotification([]);
 
               const organization = await fetch(
                 `${process.env.NEXT_PUBLIC_URL}/api/v1/user/userOrganization/${data._id}`
@@ -143,6 +163,14 @@ export default function NavBar() {
 
             const data = await getUser({ email });
 
+            const notificationData = await FetchGet({
+              endpoint: `notification/getNotification/${data._id}`,
+            });
+            console.log(notificationData);
+            notificationData
+              ? setNotification(notificationData.filternotification)
+              : setNotification([]);
+
             if (data) {
               setUserActive(true);
               setUser(data);
@@ -159,6 +187,7 @@ export default function NavBar() {
                 setIsLoading(false);
                 return;
               }
+              console.log(data._id);
 
               const organizationData = await organization.json();
 
@@ -171,10 +200,26 @@ export default function NavBar() {
         }
         setIsLoading(false);
       }
+
       session();
     },
     [emailAuth, pathname, organizationId, setOrganization]
   );
+  // useEffect(() => {
+  //   const fetchNotifications = async () => {
+  //     try {
+  //       console.log(user._id);
+  //       const data = await FetchGet({
+  //         endpoint: `notification/getNotification/${user._id}`,
+  //       });
+  //       console.log(data);
+  //       data ? setNotification(data.filternotification) : setNotification([]);
+  //     } catch (error) {
+  //       console.error("Error fetching notifications:", error);
+  //     }
+  //   };
+  //   fetchNotifications();
+  // }, [user._id]);
 
   return (
     <div>
@@ -271,11 +316,11 @@ export default function NavBar() {
                       <>
                         {/* crete event button */}
 
-                        <button
+                        {/* <button
                           type="button"
                           className={`${
                             pathname.startsWith("/admin") ? "hidden" : "flex"
-                          } button relative h-8 inline-flex items-center p-2 text-sm font-medium text-center text-white bg-custom-orange rounded-lg `}
+                          } button  relative h-8 flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-custom-orange rounded-lg `}
                         >
                           <svg
                             className="w-5 h-5"
@@ -293,7 +338,12 @@ export default function NavBar() {
                           <div className="absolute inline-flex items-center justify-center w-6 h-4 text-xs font-bold text-white bg-red-600  rounded-full -top-2 -end-3 ">
                             2
                           </div>
-                        </button>
+                        </button> */}
+                        <Notification
+                          notification={notification}
+                          setNotification={setNotification}
+                        />
+
                         <div
                           className={`${
                             pathname.startsWith("/organization/dashboard") ||

@@ -15,11 +15,10 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
     setBtnState(selectedBtn);
   };
   const { register, registerEvent } = useProf() as ProfContext;
-  
 
   return (
     <div className="   font-IBM p-auto ml-5 ">
-      <div className="bg-initial rounded-2xl m-4 md:w-2/2 flex items-center justify-center">
+      <div className="bg-initial rounded-2xl m-4 md:w-fit flex items-center justify-center">
         <button
           className={`${
             btnState === 1
@@ -41,6 +40,29 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
           {btn2}
         </button>
       </div>
+      {/* <div className="flex md:w-64 xl:h-14 md:h-10 rounded-3xl bg-[#F9EBE9] items-center xl:mx-16 md:mx-8 xl:my-12 md:my-8 whitespace-nowrap ">
+        <button
+          className={` md:text-sm  font-medium ml-2 w-fit h-fit xl:h-12 rounded-3xl whitespace-nowrap  ${
+            btnState === 1
+              ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+              : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+          }`}
+          onClick={() => handleToggle(1)}
+        >
+          {btn1}
+        </button>
+        <button
+          className={` md:text-sm button cursor-pointer font-medium mr-2 w-fit h-fit xl:h-12 rounded-3xl whitespace-nowrap  ${
+            btnState === 2
+              ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+              : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+          }`}
+          onClick={() => handleToggle(2)}
+        >
+          {btn2}
+        </button>
+      </div> */}
+
       <div className="m-4 p-2 font-IBM rounded-2xl bg-white  gap-4 h-screen overflow-auto">
         <div className="flex flex-col gap-2 justify-start w-full">
           {btnState === 1 && (
@@ -79,7 +101,6 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
           {btnState === 2 && (
             <div className="grid gap-4">
               {register.length > 0 ? (
-                
                 register.map((e: any) => (
                   <RegisteredEventCard
                     key={e._id}
@@ -89,8 +110,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
                     marketingUpdates={e.marketingUpdates}
                     eventImage={e.eventId.coverImage}
                     eventId={e.eventId._id}
-                    />
-                  
+                  />
                 ))
               ) : (
                 <EmptyStateComponent message="No registered events found." />

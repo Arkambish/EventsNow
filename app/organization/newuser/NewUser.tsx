@@ -1,4 +1,5 @@
 "use client";
+import { FetchPost } from "@/hooks/useFetch";
 import { error, success } from "@/util/Toastify";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -36,9 +37,33 @@ export default function NewUser() {
         error("User already exists in the organization");
       }
     }
+    const sendNotification = async () => {
+      try {
+        const data = {
+          topic: "Congratulations",
+          comment: "You have been added to the organization team",
+          userIds: userId,
+        };
+
+        console.log([userId]);
+
+        const notifyUser = await FetchPost({
+          endpoint: `notification/postNotificationById`,
+          body: data,
+        });
+        if (!notifyUser) {
+          error("error in sending notification");
+        }
+
+        success("Notification sent successfully");
+      } catch (error) {
+        console.error("Error", error);
+      }
+    };
 
     // Check if the code is running in a browser environment
     createOrganizer();
+    sendNotification();
   }, [organizationId, userId]); // Include the missing dependencies 'organizationId' and 'userId' in the dependency array.
 
   return (

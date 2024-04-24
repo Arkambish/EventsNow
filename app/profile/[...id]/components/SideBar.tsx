@@ -1,21 +1,36 @@
 "use client";
-import Dashboard from "@/app/organization/dashboard/[id]/components/DashboardSide";
-import Dashboard_Btn from "@/app/organization/dashboard/[id]/components/Dashboard_Btn";
+import Dashboard from "./Dashboard";
+import Dashboard_Btn from "./Dashboard_Btn";
 import { useProf } from "../ProfContext";
 import { ProfContext } from "@/app/Type";
-import { HiArrowCircleRight } from "react-icons/hi";
+import {
+  HiArrowCircleRight,
+  HiOutlineBookmarkAlt,
+  HiOutlineCash,
+} from "react-icons/hi";
 import { HiArrowCircleLeft } from "react-icons/hi";
+import {
+  HiOutlineCalendarDays,
+  HiOutlineCog8Tooth,
+  HiOutlineReceiptPercent,
+  HiOutlineUserCircle,
+} from "react-icons/hi2";
+import { useState } from "react";
 
 export default function SideBar() {
   const {
     handleProfile,
+    isActive,
     isSlideBar,
+
     setIsSlideBar,
     handleWishList,
     handleMyEvents,
     handlemyTickets,
     handleSetting,
   } = useProf() as ProfContext;
+  const [activeButton, setActiveButton] = useState("myProfile");
+
   return (
     <div className="">
       <Dashboard>
@@ -35,52 +50,59 @@ export default function SideBar() {
         </div>
         <div className="flex flex-col items-start ">
           <Dashboard_Btn
-            isActive={true}
             isSlideBar={isSlideBar}
             text="My Profile"
-            onClick={() => handleProfile()}
+            onClick={() => {
+              handleProfile();
+              setActiveButton("myProfile");
+            }}
+            isActive={activeButton === "myProfile"}
           >
-            ""
+            <HiOutlineUserCircle size={25} />
           </Dashboard_Btn>
           <Dashboard_Btn
             isSlideBar={isSlideBar}
-
-            isActive={false}
-
             text="Wish List"
-            onClick={() => handleWishList()}
+            onClick={() => {
+              handleWishList();
+              setActiveButton("wishList");
+            }}
+            isActive={activeButton === "wishList"}
           >
-            ""
+            <HiOutlineBookmarkAlt size={25} />
           </Dashboard_Btn>
           <Dashboard_Btn
             isSlideBar={isSlideBar}
-
-            isActive={false}
-
             text="My Events"
-            onClick={() => handleMyEvents()}
+            onClick={() => {
+              handleMyEvents();
+              setActiveButton("My Events");
+            }}
+            isActive={activeButton === "My Events"}
           >
-            ""
+            <HiOutlineCalendarDays size={25} />
           </Dashboard_Btn>
           <Dashboard_Btn
             isSlideBar={isSlideBar}
-
-            isActive={false}
-
             text="My Tickets"
-            onClick={() => handlemyTickets()}
+            onClick={() => {
+              handlemyTickets();
+              setActiveButton("My Tickets");
+            }}
+            isActive={activeButton === "My Tickets"}
           >
-            ""
+            <HiOutlineCash size={25} />
           </Dashboard_Btn>
           <Dashboard_Btn
             isSlideBar={isSlideBar}
-
-            isActive={false}
-
             text="Settings"
-            onClick={() => handleSetting()}
+            onClick={() => {
+              handleSetting();
+              setActiveButton("Settings");
+            }}
+            isActive={activeButton === "Settings"}
           >
-            ""
+            <HiOutlineCog8Tooth size={25} />
           </Dashboard_Btn>
         </div>
       </Dashboard>

@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { getAllEvents, getAllOrganization, getAllUser } from "./FetchData";
 import { getSession } from "next-auth/react";
 import { getUser } from "@/components/Navbar/NavBar";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   AdminContext,
   EventType,
@@ -13,6 +13,8 @@ import {
   UserType,
   voidFunc,
 } from "@/app/Type";
+import { FetchPost } from "@/hooks/useFetch";
+import { error, success } from "@/util/Toastify";
 
 interface AdminContextProps {
   children: React.ReactNode;
@@ -30,6 +32,7 @@ function AdminContextProvider({ children }: AdminContextProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const router = useRouter();
+  const params = useParams();
 
   const handleNotification: voidFunc = () => {
     setStatus("Notification");
@@ -110,6 +113,7 @@ function AdminContextProvider({ children }: AdminContextProps) {
 
       setIsLoading(false);
     }
+
     getData();
   }, [router]);
 
