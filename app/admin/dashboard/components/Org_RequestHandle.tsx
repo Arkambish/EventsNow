@@ -168,6 +168,8 @@ export default function Org_RequestHandle({
             </div>
             <button
               onClick={() => {
+                setShowAllowModal(false);
+                setShowDenyModal(false);
                 setShowDetailsModal(true);
                 setIsOpen(true);
               }}
@@ -183,7 +185,9 @@ export default function Org_RequestHandle({
             <button
               onClick={() => {
                 setShowDetailsModal(false);
+
                 setShowDenyModal(false);
+
                 setShowAllowModal(true);
                 setIsOpen(true);
               }}
@@ -196,7 +200,9 @@ export default function Org_RequestHandle({
             <button
               onClick={() => {
                 setShowDetailsModal(false);
+
                 setShowAllowModal(false);
+
                 setShowDenyModal(true);
                 setIsOpen(true);
               }}

@@ -9,7 +9,7 @@ import { FetchPost } from "@/hooks/useFetch";
 import { ca } from "date-fns/locale";
 
 export type People = {
-  id: number;
+  id: number | string;
   name: string;
 };
 
@@ -49,6 +49,7 @@ export default function InviteButton() {
           data={peopleEmail}
           select={email}
           setSelect={setEmail}
+          placeholder="Enter email address"
         />
       </div>
       <button

@@ -73,7 +73,7 @@ export default function HostSideBar({
   const [isRemoveRegistation, setIsRemoveRegistation] =
     useState<boolean>(false);
 
-  console.log(isRemoveRegistation);
+
 
   const [eventUpdates, setEventUpdates] = useState(false);
   const [marketingUpdates, setMarketingUpdates] = useState(false);
@@ -288,7 +288,7 @@ export default function HostSideBar({
 
       <div className="flex md:w-64 xl:h-14 md:h-10 rounded-3xl bg-[#F9EBE9] items-center xl:mx-16 md:mx-8 xl:my-12 md:my-8 ">
         <button
-          className={` md:text-sm  font-medium ml-2 w-40 h-8 xl:h-12 rounded-3xl  ${
+          className={` md:text-sm button font-medium ml-2 w-40 h-8 xl:h-12 rounded-3xl  ${
             activeButton === 1
               ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
               : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
@@ -356,15 +356,16 @@ export default function HostSideBar({
             <button
               disabled={preview ? true : false}
               onClick={() => setIsRemoveRegistation(true)}
-              className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-custom-orange rounded-l-2xl items-center xl:px-4"
+              className="flex button py-2.5 xl:py-3.5 bg-custom-orange rounded-l-2xl items-center xl:px-4"
+
             >
-              <div className="flex p-1">
-                <div className=" text-white">
-                  <FaRegRegistered size={20} />
-                </div>
-                <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
-                  Unregister
-                </div>
+              <div className="flex py-1 px-2">
+              <div className=" text-white">           
+                  <FaRegRegistered size={20}/>              
+               </div>
+              <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
+                Unregister
+              </div>
               </div>
             </button>
           ) : (
@@ -373,18 +374,19 @@ export default function HostSideBar({
               onClick={() => {
                 setIsRegModalShow(true);
               }}
-              className={`flex button xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4 ${
+              className={`flex button py-2.5 xl:py-3.5 bg-custom-orange rounded-l-2xl items-center xl:px-4 ${
+
                 preview ? "cursor-not-allowed" : ""
               } `}
             >
-              <div className="flex p-1 ">
-                <div className=" text-white">
-                  <FaRegRegistered size={20} />
-                </div>
+              <div className="flex py-1 px-2 ">
+              <div className=" text-white">            
+                <FaRegRegistered size={20}/>               
+              </div>
 
-                <div className="font-medium xl:text-md text-white text-left leading-tight xl:ml-4 md:ml-2 mx-auto">
-                  Register
-                </div>
+              <div className="font-medium xl:text-md text-white text-left leading-tight xl:ml-4 md:ml-2 mx-auto ">
+                Register
+              </div>
               </div>
             </button>
           )}

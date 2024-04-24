@@ -25,8 +25,15 @@ export default function Campaign() {
   return (
     <Container>
       <div className="pl-10 mb-5 grid gap-2 mt-8 mr-10 pb-20">
+        <div className="flex justify-between">
         <div className="  text-custom-orange font-medium text-3xl pb-4 ">
           CAMPAIGN
+        </div>
+        <button 
+        onClick={() => setStatus("registeredusers")}
+         className=" border-2 border-custom-orange rounded-md hover:bg-[#fff1ed]  text-custom-orange font-mono text-base font-normal  drop-shadow-md my-auto px-2 py-0.5 ">
+          Registered Users
+        </button>
         </div>
 
         <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">

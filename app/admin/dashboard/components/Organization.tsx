@@ -7,12 +7,40 @@ import EmptyStateComponent from "@/components/EmptyStateComponent";
 import { getAllOrganization } from "../FetchData";
 import Spinner from "@/components/Spinner";
 import { AdminContext, OrganizationType } from "@/app/Type";
+import { People } from "@/app/organization/dashboard/[id]/components/InviteButton";
 
 export default function Organization() {
   const { organization, setOrganization, setNotification } =
     useAdmin() as AdminContext;
+  const [filterOrganizationData, setFilterOrganizationData] =
+    useState<OrganizationType[]>(organization);
+  const [selectOrganization, setSelectOrganization] = useState<People>({
+    id: "",
+    name: "",
+  });
 
+  function handleSearchBtn() {
+    console.log(selectOrganization);
+    if (selectOrganization.name === "") {
+      setFilterOrganizationData(organization);
+      return;
+    }
+    setFilterOrganizationData(() => {
+      return organization.filter(
+        (org) => org.organizationName === selectOrganization.name
+      );
+    });
+  }
+
+  function handleAllBtn() {
+    setSelectOrganization({ id: "", name: "" });
+    setFilterOrganizationData(organization);
+  }
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const searchOrganizationData = organization.map((org: OrganizationType) => ({
+    id: org._id,
+    name: org.organizationName,
+  }));
 
   async function reloadPage() {
     setIsLoading(true);
@@ -42,9 +70,19 @@ export default function Organization() {
     setIsLoading(false);
   }
 
+  const serachData = {
+    data: searchOrganizationData,
+    select: selectOrganization,
+    setSelect: setSelectOrganization,
+    handleSearchBtn,
+    placeholder: "Organizations name",
+    handleAllBtn,
+  };
+
   return (
     <div>
       <SuperadminPages
+        serachData={serachData}
         title="All Organizations"
         description="You can see all the organizations that currently available from here"
         text="Search Organizations"
@@ -56,7 +94,7 @@ export default function Organization() {
             ) : organization.length === 0 ? (
               <EmptyStateComponent message="No Events" />
             ) : (
-              organization.map((me) => (
+              filterOrganizationData.map((me) => (
                 <Available_Orgs key={me._id} organization={me} />
               ))
             )}

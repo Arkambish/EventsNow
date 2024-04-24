@@ -78,7 +78,6 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
               <button
                 onClick={() => {
                   setShowDetailsModal(false);
-
                   setShowDenyModal(true);
                   setIsOpen(true);
                 }}
@@ -90,6 +89,7 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
               </button>
               <button
                 onClick={() => {
+                  setShowDenyModal(false);
                   setShowDetailsModal(true);
                   setIsOpen(true);
                 }}
