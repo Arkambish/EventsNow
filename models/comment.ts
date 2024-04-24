@@ -5,6 +5,10 @@ const commentSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter user ID"],
   },
+  userName: {
+    type: String,
+    required: [true, "Please enter userName"],
+  },
   userImage: {
     type: String,
     required: [true, "Please enter userImage"],
