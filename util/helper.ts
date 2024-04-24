@@ -1,4 +1,5 @@
 import { getUser } from "@/components/Navbar/NavBar";
+import { DateExpression } from "mongoose";
 import { getSession } from "next-auth/react";
 import qrCode from "qrcode";
 
@@ -107,31 +108,40 @@ export function getTimeDifference(dateString: string) {
     return `${monthsDifference} month${monthsDifference === 1 ? "" : "s"} ago`;
   }
 }
-export function getTimeAgo(date: any) {
-  const currentDate: any = new Date();
-  const millisecondsAgo = currentDate - date;
+export function getTimeAgo(date: Date): string {
+  const currentDate: Date = new Date();
+  const millisecondsAgo: number = currentDate.getTime() - date.getTime();
 
-  const secondsAgo = millisecondsAgo / 1000;
-  const minutesAgo = secondsAgo / 60;
-  const hoursAgo = minutesAgo / 60;
-  const daysAgo = hoursAgo / 24;
-  const weeksAgo = daysAgo / 7;
-  const monthsAgo = daysAgo / 30;
-  const yearsAgo = daysAgo / 365;
+  const secondsAgo: number = Math.floor(millisecondsAgo / 1000);
+  const minutesAgo: number = Math.floor(secondsAgo / 60);
+  const hoursAgo: number = Math.floor(minutesAgo / 60);
+  const daysAgo: number = Math.floor(hoursAgo / 24);
+  const weeksAgo: number = Math.floor(daysAgo / 7);
+  const monthsAgo: number = Math.floor(daysAgo / 30);
+  const yearsAgo: number = Math.floor(daysAgo / 365);
+
+  console.log(`Milliseconds ago: ${millisecondsAgo}`);
+  console.log(`Seconds ago: ${secondsAgo}`);
+  console.log(`Minutes ago: ${minutesAgo}`);
+  console.log(`Hours ago: ${hoursAgo}`);
+  console.log(`Days ago: ${daysAgo}`);
+  console.log(`Weeks ago: ${weeksAgo}`);
+  console.log(`Months ago: ${monthsAgo}`);
+  console.log(`Years ago: ${yearsAgo}`);
 
   if (secondsAgo < 60) {
-    return `${Math.floor(secondsAgo)} seconds ago`;
+    return `${secondsAgo} second${secondsAgo > 1 ? "s" : ""} ago`;
   } else if (minutesAgo < 60) {
-    return `${Math.floor(minutesAgo)} minutes ago`;
+    return `${minutesAgo} minute${minutesAgo > 1 ? "s" : ""} ago`;
   } else if (hoursAgo < 24) {
-    return `${Math.floor(hoursAgo)} hours ago`;
+    return `${hoursAgo} hour${hoursAgo > 1 ? "s" : ""} ago`;
   } else if (daysAgo < 7) {
-    return `${Math.floor(daysAgo)} days ago`;
+    return `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`;
   } else if (weeksAgo < 4) {
-    return `${Math.floor(weeksAgo)} weeks ago`;
+    return `${weeksAgo} week${weeksAgo > 1 ? "s" : ""} ago`;
   } else if (monthsAgo < 12) {
-    return `${Math.floor(monthsAgo)} months ago`;
+    return `${monthsAgo} month${monthsAgo > 1 ? "s" : ""} ago`;
   } else {
-    return `${Math.floor(yearsAgo)} years ago`;
+    return `${yearsAgo} year${yearsAgo > 1 ? "s" : ""} ago`;
   }
 }

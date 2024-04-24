@@ -24,6 +24,8 @@ import ShowTicketsForUserModal from "@/app/event/host/[id]/components/ShowTicket
 import RegistrationForEventModal from "./RegistrationForEventModal";
 import Modal from "@/components/Modal";
 import { Dialog } from "@headlessui/react";
+import { FetchPost } from "@/hooks/useFetch";
+import { comment } from "postcss";
 
 interface HostSideBar {
   EventName: String;
@@ -132,6 +134,21 @@ export default function HostSideBar({
         }),
       }
     );
+    const data = {
+      topic: "Registration Alert",
+      comment: `You have been registered for ${EventName}`,
+      email: email,
+    };
+
+    const sendNotification = await FetchPost({
+      endpoint: `notification/getAllNotifications`,
+      body: data,
+    });
+    console.log(sendNotification);
+    if (!sendNotification.ok) {
+      error("Error registration for event");
+      return;
+    }
     if (!res.ok) {
       error("Error registration for event");
       return;

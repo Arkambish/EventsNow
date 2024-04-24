@@ -102,7 +102,7 @@ export default function SideBar() {
             <Dashboard_Btn
               isActive={status === "setting"}
               isSlideBar={isSlideBar}
-              text="Setting"
+              text="Settings"
               onClick={() => handleSetting()}
             >
               <HiOutlineCog size={23} />

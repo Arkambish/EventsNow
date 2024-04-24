@@ -42,6 +42,13 @@ function NotificationButton({
     }
     setClick(false);
   }
+  // const timeAgo = () => {
+  //   const
+  //    = new Date(createdAt); // Convert createdAt string to a Date object
+  //   const timeAgoString = getTimeAgo(createdAtDate); // Calculate time ago based on the Date object
+  //   console.log(timeAgoString);
+  //   return timeAgoString;
+  // };
   return (
     <div>
       <button className=" w-full" onClick={handleClick}>
@@ -53,7 +60,7 @@ function NotificationButton({
 
           <p className="text-slate-300 text-start text-sm mx-2">{comment}</p>
           <p className=" text-custom-orange mx-2 font-IBM text-sm text-end mb-2 ">
-            {getTimeAgo(createdAt)}
+            {/* {timeAgo()} */}
           </p>
         </div>
       </button>

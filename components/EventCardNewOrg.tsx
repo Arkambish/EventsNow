@@ -19,32 +19,32 @@ export default function EventCardNewOrg({ event }: eventorg) {
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState<boolean>(false);
 
-  const sendNotification = async () => {
-    try {
-      const data = {
-        topic: "Event reminder",
-        comment: `${
-          event.eventName
-        } will be started on ${event.eventStartDate.substring(
-          0,
-          10
-        )}. be ready for the excitement`,
-        userIds: event.registerUser,
-      };
+  // const sendNotification = async () => {
+  //   try {
+  //     const data = {
+  //       topic: "Event reminder",
+  //       comment: `${
+  //         event.eventName
+  //       } will be started on ${event.eventStartDate.substring(
+  //         0,
+  //         10
+  //       )}. be ready for the excitement`,
+  //       userIds: event.registerUser,
+  //     };
 
-      const notifyUser = await FetchPost({
-        endpoint: `notification/postNotificationById`,
-        body: data,
-      });
-      if (!notifyUser) {
-        error("error in sending notification");
-      }
+  //     const notifyUser = await FetchPost({
+  //       endpoint: `notification/postNotificationById`,
+  //       body: data,
+  //     });
+  //     if (!notifyUser) {
+  //       error("error in sending notification");
+  //     }
 
-      success("Notification sent successfully");
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
+  //     success("Notification sent successfully");
+  //   } catch (error) {
+  //     console.error("Error", error);
+  //   }
+  // };
 
   return (
     <div>
@@ -236,7 +236,6 @@ export default function EventCardNewOrg({ event }: eventorg) {
 
           <div className="mt-4 flex gap-2">
             <button
-              onClick={() => sendNotification()}
               type="button"
               className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
