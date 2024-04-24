@@ -67,7 +67,6 @@ export default async function Home() {
       )}
 
       <Footer />
-      <Notification />
     </div>
   );
 }
