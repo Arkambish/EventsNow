@@ -25,7 +25,7 @@ export default function Tickets() {
               <GetTicketDatils />
             </div>
 
-            <div className="mt-20 flex flex-wrap">
+            <div className="mt-2 flex flex-wrap">
               {!allTickets || allTickets.length == 0 ? (
                 <EmptyStateComponent message="You have not created any tickets yet" />
               ) : (
