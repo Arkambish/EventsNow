@@ -48,7 +48,7 @@ export default function SideBar() {
             </div>
           </button>
         </div>
-        <div className="flex flex-col items-start ">
+        <div className="flex flex-col ">
           <Dashboard_Btn
             isSlideBar={isSlideBar}
             text="My Profile"
@@ -57,9 +57,8 @@ export default function SideBar() {
               setActiveButton("myProfile");
             }}
             isActive={activeButton === "myProfile"}
-          >
-            <HiOutlineUserCircle size={25} />
-          </Dashboard_Btn>
+            icon={<HiOutlineUserCircle size={25} />}
+          />
           <Dashboard_Btn
             isSlideBar={isSlideBar}
             text="Wish List"
@@ -68,9 +67,8 @@ export default function SideBar() {
               setActiveButton("wishList");
             }}
             isActive={activeButton === "wishList"}
-          >
-            <HiOutlineBookmarkAlt size={25} />
-          </Dashboard_Btn>
+            icon={<HiOutlineBookmarkAlt size={25} />}
+          />
           <Dashboard_Btn
             isSlideBar={isSlideBar}
             text="My Events"
@@ -79,9 +77,8 @@ export default function SideBar() {
               setActiveButton("My Events");
             }}
             isActive={activeButton === "My Events"}
-          >
-            <HiOutlineCalendarDays size={25} />
-          </Dashboard_Btn>
+            icon={<HiOutlineCalendarDays size={25} />}
+          />
           <Dashboard_Btn
             isSlideBar={isSlideBar}
             text="My Tickets"
@@ -90,9 +87,8 @@ export default function SideBar() {
               setActiveButton("My Tickets");
             }}
             isActive={activeButton === "My Tickets"}
-          >
-            <HiOutlineCash size={25} />
-          </Dashboard_Btn>
+            icon={<HiOutlineCash size={25} />}
+          />
           <Dashboard_Btn
             isSlideBar={isSlideBar}
             text="Settings"
@@ -101,9 +97,8 @@ export default function SideBar() {
               setActiveButton("Settings");
             }}
             isActive={activeButton === "Settings"}
-          >
-            <HiOutlineCog8Tooth size={25} />
-          </Dashboard_Btn>
+            icon={<HiOutlineCog8Tooth size={25} />}
+          />
         </div>
       </Dashboard>
     </div>

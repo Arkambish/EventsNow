@@ -8,6 +8,7 @@ export type EventDetails = {
 
 export default function MyProfile() {
   const { eventDetails } = useProf() as any as EventDetails;
+  console.log(eventDetails);
   return (
     <div className="flex flex-col h-screen md:flex-row rounded-lg shadow-3xl bg-[#fff] pt-8 justify-start items-start gap-12 overflow-y-scroll">
       <div className="w-full ml-0 overflow-y-auto">

@@ -8,7 +8,7 @@ import Image from "next/image";
 
 import OrganizationRequestPending from "@/components/OrganizationRequestPending";
 
-import Dashboard_Btn from "@/app/organization/dashboard/[id]/components/Dashboard_Btn";
+import Dashboard_Btn from "./Dashboard_Btn";
 import Profile from "./profile";
 import Spinner from "@/components/Spinner";
 import {
@@ -43,11 +43,11 @@ export default function CheckActive() {
         <div>
           {isActive ? (
             <div>
-              <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5">
+              <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 ">
                 <div
-                  className={`xl:col-span-2  md:block hidden ${
+                  className={`xl:col-span-2   md:block hidden  ${
                     isSlideBar
-                      ? "md:col-span-3 md:ml-2  col-span-4"
+                      ? "md:col-span-3  col-span-3"
                       : "md:col-span-1  col-span-2"
                   }`}
                 >
@@ -94,7 +94,7 @@ export default function CheckActive() {
                   className={
                     isDashboardOpen
                       ? "absolute shadow-2xl flex flex-col  left-0 top-20 w-[65%] sm:hidden h-fit bg-[#ecf0fc]  ease-in duration-50"
-                      : "fixed left-[100%] top-0 p-10 ease-in duration-50"
+                      : "fixed left-[100%] top-0  ease-in duration-50"
                   }
                 >
                   <button onClick={() => setIsDashboardOpen(false)}>
@@ -107,54 +107,42 @@ export default function CheckActive() {
                       />
                     </div>
                   </button>
-                  <div className=" flex flex-col mx-5">
+                  <div className="flex flex-col">
                     <Dashboard_Btn
                       isActive={true}
                       isSlideBar={isSlideBar}
                       text="My Profile"
                       onClick={() => handleProfile()}
-                    >
-                      <HiOutlineUserCircle size={25} />
-                    </Dashboard_Btn>
+                      icon={<HiOutlineUserCircle size={25} />}
+                    />
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
-
                       isActive={false}
-
                       text="Wish List"
                       onClick={() => handleWishList()}
-                    >
-                      <HiOutlineBookmarkAlt size={25} />
-                    </Dashboard_Btn>
+                      icon={<HiOutlineBookmarkAlt size={25} />}
+                    />
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
                       isActive={false}
-
                       text="My Events"
                       onClick={() => handleMyEvents()}
-                    >
-                      <HiOutlineCalendarDays size={25} />
-                    </Dashboard_Btn>
+                      icon={<HiOutlineCalendarDays size={25} />}
+                    />
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
-
                       isActive={false}
-
                       text="My Tickets"
                       onClick={() => handlemyTickets()}
-                    >
-                      <HiOutlineCash size={25} />
-                    </Dashboard_Btn>
+                      icon={<HiOutlineCash size={25} />}
+                    />
                     <Dashboard_Btn
                       isSlideBar={isSlideBar}
-
                       isActive={false}
-
                       text="Settings"
                       onClick={() => handleSetting()}
-                    >
-                      <HiOutlineCog8Tooth size={25} />
-                    </Dashboard_Btn>
+                      icon={<HiOutlineCog8Tooth size={25} />}
+                    />
                   </div>
                 </div>
               </div>

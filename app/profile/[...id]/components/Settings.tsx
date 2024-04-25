@@ -216,7 +216,7 @@ export default function Settings() {
     setProfileImage("");
   }
   return (
-    <div className="flex flex-col md:flex-row rounded-lg shadow-3xl  bg-[#fff] pt-8  justify-start items-start gap-12 ">
+    <div className="flex flex-col md:flex-row rounded-lg shadow-3xl  bg-[#fff] pt-8  justify-start items-start  ">
       <div className="w-full ml-0 ">
         <div className="text-3xl font-semibold  mx-auto text-custom-orange font-IBM ml-[55px]">
           Settings
@@ -224,7 +224,7 @@ export default function Settings() {
         <div className="bg-white w-full sm:w-4/5 md:w-4/5 lg:w-4/5 mx-auto ">
           <div className="">
             <div className="pb-12">
-              <div className=" grid grid-cols-1 mt-[55px] gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className=" grid grid-cols-1 mt-2 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <form className="sm:col-span-4 mx-4">
                   <Profsettings
                     name="first name"
@@ -300,7 +300,7 @@ export default function Settings() {
                             open();
                           }}
                         >
-                          <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
+                          <div className="p-1 mt-4 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
                             <FaCloudUploadAlt />
                             upload image
                           </div>
@@ -329,10 +329,10 @@ export default function Settings() {
                     </div>
                   )}
                 </form>
-                <div className="sm:col-span-4 m-4">
+                <div className="sm:col-span-4 mx-4">
                   <button
                     onClick={toggleOtherInfo}
-                    className="text-custom-orange hover:underline mt-4"
+                    className="text-custom-orange hover:underline mt-1"
                   >
                     {showOtherInfo ? "Hide" : "Show"} Other Informations
                   </button>

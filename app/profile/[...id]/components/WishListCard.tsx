@@ -23,6 +23,7 @@ export default function WishListCArd({
   buttonDesc,
 }: Upcoming_Events) {
   //const margin = EventName.length > 14 ? "mt-4" : " mt-0";
+  console.log(image);
 
   return (
     <div className="bg-[#D9D9D9] h-fit my-6 mx-4 rounded-lg md:grid md:grid-cols-2 sm:grid-cols-2 w-[340px] md:w-[800px] md:h-fit xl:grid-cols-12 xl:h-fit">
