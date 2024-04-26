@@ -11,7 +11,6 @@ export const GET = async (req: Request, { params }: any) => {
   try {
     connectMongoDB();
     const eventDetails = await User.findOne({ _id: id }).populate("wishListId");
-    console.log(eventDetails);
 
     // const data = eventDetails.wishListId.map((user: any) => user);
     const wishListId = await eventDetails.wishListId;

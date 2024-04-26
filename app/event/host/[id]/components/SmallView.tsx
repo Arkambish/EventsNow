@@ -14,7 +14,6 @@ import { SlCalender } from "react-icons/sl";
 import { IoIosTime } from "react-icons/io";
 import { FaTicketSimple } from "react-icons/fa6";
 
-
 import RegistrationForEventModalSmall from "./RegistrationForEventModalSmall";
 
 interface SmallView {
@@ -51,7 +50,6 @@ export default function SmallView({
   preview = false,
   handleComponentChange,
 }: SmallView) {
-
   const [activeButton, setActiveButton] = useState<number | null>(1);
 
   const [isRegModalShow, setIsRegModalShow] = useState<boolean>(false);
@@ -106,7 +104,12 @@ export default function SmallView({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email, eventId: id , sendEventUpdates:eventUpdates, sendMarketingUpdates:marketingUpdates}),
+        body: JSON.stringify({
+          email: email,
+          eventId: id,
+          sendEventUpdates: eventUpdates,
+          sendMarketingUpdates: marketingUpdates,
+        }),
       }
     );
     if (!res.ok) {
@@ -158,7 +161,7 @@ export default function SmallView({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId:userId, eventId: id }),
+          body: JSON.stringify({ userId: userId, eventId: id }),
         }
       );
       if (!res.ok) {
@@ -167,9 +170,8 @@ export default function SmallView({
       }
       const data = await res.json();
       setIsRegistered(data);
-    }
+    };
     checkUserRegistered();
-
   }, [id, userId]);
 
   //get user data
@@ -228,6 +230,8 @@ export default function SmallView({
         body: JSON.stringify({ userId: userId, eventId: id }),
       }
     );
+
+    console.log(res);
     if (!res.ok) {
       error("Error removing from wishlist");
       return;
@@ -253,12 +257,14 @@ export default function SmallView({
 
   return (
     <div>
-      {isRegModalShow && <RegistrationForEventModalSmall
+      {isRegModalShow && (
+        <RegistrationForEventModalSmall
           setVisible={setIsRegModalShow}
           userRegistrationFunction={userRegistrationForEventHandler}
           setEventsUpdatesFunction={setEventUpdates}
           setMarketingUpdatesFunction={setMarketingUpdates}
-          />}
+        />
+      )}
       <div className=' text-center text-[#454545cc] text-4xl font-normal pt-8 font-["Roboto"]'>
         {EventName}
       </div>
@@ -315,10 +321,10 @@ export default function SmallView({
             </button>
           ) : (
             <button
-
-            onClick={()=>{setIsRegModalShow(true)}}
+              onClick={() => {
+                setIsRegModalShow(true);
+              }}
               className="flex xl:w-36 w-32 xl:h-16 h-12  bg-custom-orange rounded-l-2xl items-center xl:px-4"
-
             >
               <div className="flex px-2.5 space-x-2">
                 <div className="text-white">
@@ -330,8 +336,6 @@ export default function SmallView({
               </div>
             </button>
           )}
-
-
 
           {isAddWishList ? (
             <button

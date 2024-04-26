@@ -1,7 +1,15 @@
+import Modal from "@/components/Modal";
+import { FetchGet, FetchPost } from "@/hooks/useFetch";
+import { Dialog } from "@headlessui/react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { useProf } from "../ProfContext";
+import { success, error } from "@/util/Toastify";
 
-function info() {}
+export type EventDetails = {
+  eventDetails: any;
+  userId: string;
+};
 
 interface Upcoming_Events {
   EventName: string;
@@ -11,6 +19,7 @@ interface Upcoming_Events {
   Ratings: string;
   image: string;
   buttonDesc: string;
+  eId: string;
 }
 
 export default function WishListCArd({
@@ -21,9 +30,47 @@ export default function WishListCArd({
   Ratings,
   image,
   buttonDesc,
+  eId,
 }: Upcoming_Events) {
+  const { eventDetails, userId } = useProf() as any as EventDetails;
+
   //const margin = EventName.length > 14 ? "mt-4" : " mt-0";
-  console.log(image);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const removeFromWishList = async () => {
+    try {
+      const user = userId[0];
+      const data = {
+        userId: user,
+        eventId: eId,
+      };
+      // const removeWishlist = await FetchPost({
+      //   endpoint: "event/removeFromWishList",
+      //   body: { userId: user, eventId: eId },
+      // });
+
+      const removeWishlist = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/event/removeFromWishList`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      console.log(removeFromWishList);
+      if (!removeWishlist.ok) {
+        error("Error removing from wishlist");
+        return;
+      }
+      success("Event removed from the wishlist ");
+      setIsOpen(false);
+    } catch (e) {
+      error(e);
+    }
+  };
 
   return (
     <div className="bg-[#D9D9D9] h-fit my-6 mx-4 rounded-lg md:grid md:grid-cols-2 sm:grid-cols-2 w-[340px] md:w-[800px] md:h-fit xl:grid-cols-12 xl:h-fit">
@@ -38,10 +85,7 @@ export default function WishListCArd({
           </div>
 
           <div className="flex justify-end whitespace-nowrap h-fit">
-            <button
-              onClick={() => info()}
-              className="flex items-center bg-[#4E8171] text-white rounded-3xl py-1 px-3"
-            >
+            <button className="flex items-center bg-[#4E8171] text-white rounded-3xl py-1 px-3">
               <div className="mr-2">
                 <svg
                   width="23"
@@ -61,7 +105,12 @@ export default function WishListCArd({
                   </g>
                 </svg>
               </div>
-              <div className="text-xs font-medium">{buttonDesc}</div>
+              <div
+                className="text-xs font-medium"
+                onClick={() => setIsOpen(true)}
+              >
+                {buttonDesc}
+              </div>
             </button>
           </div>
         </div>
@@ -192,6 +241,38 @@ export default function WishListCArd({
           </div>
         </div>
       </div>
+      {isOpen && (
+        <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+          <Dialog.Title
+            as="h3"
+            className="text-lg font-medium rounded-xl leading-6 text-gray-900 "
+          >
+            Remove from Wishlist
+          </Dialog.Title>
+          <div className="mt-2">
+            <p className="text-sm text-gray-500">
+              Are you sure ? Do you want to remove from wishlist
+            </p>
+          </div>
+
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={removeFromWishList}
+              type="submit"
+              className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+            >
+              Remove
+            </button>
+            <button
+              type="button"
+              className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
