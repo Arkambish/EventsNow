@@ -169,6 +169,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     endTime: "",
     __v: 0,
     income: 0,
+    eventLocation: "",
   });
   const [eventname, setEventname] = useState<string>("");
   const [isPreview, setIsPreview] = useState<boolean>(false);
@@ -306,7 +307,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setIncome(event.income);
 
       setAllRegisteredUsers(event.registerUser);
-
 
       setEndTime(event.endTime);
       setEventPublish(event.isPublished);
