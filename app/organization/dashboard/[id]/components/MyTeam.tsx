@@ -74,7 +74,7 @@ export default function MyTeam() {
         {loading ? (
           <Spinner />
         ) : team.length === 0 ? (
-          <EmptyStateComponent message="No user in the organization" />
+          <EmptyStateComponent message="No team members" />
         ) : (
           team.map((user) => (
             <>

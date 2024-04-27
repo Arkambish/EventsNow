@@ -56,7 +56,7 @@ export default function Myteam() {
                 />
               ))
             ) : (
-              <EmptyStateComponent message="No user in the event" />
+              <EmptyStateComponent message="No team members" />
             )}
           </div>
         </div>

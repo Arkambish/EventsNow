@@ -6,6 +6,7 @@ import { MdArrowBack } from "react-icons/md";
 
 import { error } from "@/util/Toastify";
 import TeamMemberCard from "./TeamMemberCard";
+import EmptyStateComponent from "@/components/EmptyStateComponent";
 
 export default function RegisteredUsersList() {
   const { setStatus,event } =
@@ -52,13 +53,14 @@ export default function RegisteredUsersList() {
         </div>
         <div className="">
           <div className="grid gap-3">
-            {allRegisteredUsers.map((user:any) => (
+            {allRegisteredUsers && allRegisteredUsers.length > 0 ? allRegisteredUsers.map((user:any) => (
               <TeamMemberCard
                 key={user._id}
                 name={user.userId.firstName + " " + user.userId.lastName}
                 email={user.userId.email}
                 />
-            ))}
+            )) : <EmptyStateComponent message="No registered users" />}
+            
           </div>
         </div>
       </div>
