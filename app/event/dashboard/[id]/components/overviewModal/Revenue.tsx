@@ -1,9 +1,10 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useRef } from "react";
 import { UseEventContext } from "../../EventDashContext";
 import { EventContextType, RegisterEventType, Ticket } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
 import { GET } from "@/app/api/v1/event/getAllEvents/route";
 import { useParams } from "next/navigation";
+import { useReactToPrint } from "react-to-print";
 
 export default memo(function RevenueDetails() {
   const { setStatus ,income } = UseEventContext() as EventContextType;
@@ -11,6 +12,13 @@ export default memo(function RevenueDetails() {
   const [allTicketTypes , setAllTicketTypes] = useState<Ticket[]>([]);
   const [allSoldTicketTypes , setAllSoldTicketTypes] = useState<any[]>([]);
  
+  const componentRdf = useRef(null);
+
+  const generatePDF = useReactToPrint({
+    content: () => componentRdf.current,
+    documentTitle: "Revenue Report",
+   
+  });
 
   useEffect (()=>
   {
@@ -87,6 +95,7 @@ export default memo(function RevenueDetails() {
                     Revenue of the event
                   </div>
                   <div className=" h-60 overflow-auto">
+                 <div ref={componentRdf} className="w-full">   
                     <table className="w-full text-left text-sm font-light">
                       <thead className="border-b w-full font-medium ">
                         <tr>
@@ -120,6 +129,7 @@ export default memo(function RevenueDetails() {
                         }
                       </tbody>
                     </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -129,7 +139,10 @@ export default memo(function RevenueDetails() {
             <div className="text-lg font-bold	 text-white">
               Toral Revenue- LKR: {income}
             </div>
-            <button className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
+            <button 
+              className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+              onClick={generatePDF}
+              >
               <FaPrint />
               Print
             </button>
