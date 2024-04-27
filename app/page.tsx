@@ -54,7 +54,7 @@ export default async function Home() {
 
       {data.length !== 0 && (
         <div className="flex flex-wrap ms-12">
-          {data.map((e: EventType) => (
+          {data.slice(0, 6).map((e: EventType) => (
             <EventCardDisabled
               key={e._id}
               name={e.eventName}

@@ -300,7 +300,9 @@ export default function Settings() {
                             open();
                           }}
                         >
+
                           <div className="p-1 mt-4 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
+
                             <FaCloudUploadAlt />
                             upload image
                           </div>

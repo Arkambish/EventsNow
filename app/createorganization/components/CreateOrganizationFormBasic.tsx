@@ -406,7 +406,7 @@ export default function CreateOrganizationFormBasic() {
                 open();
               }}
             >
-              <div className="p-1 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
+              <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-2xl">
                 <FaCloudUploadAlt />
                 upload image
               </div>

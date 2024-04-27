@@ -13,6 +13,7 @@ interface Event {
   eventCover: String;
   endTime: String;
   endDate: String;
+  isPublished: boolean;
   setIsPreview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -24,8 +25,14 @@ export default function Event({
   eventCover,
   endTime,
   endDate,
+  isPublished,
   setIsPreview,
 }: Event) {
+  const handlePreviewClick = () => {
+    if (isPublished) {
+      setIsPreview(true);
+    }
+  };
   return (
     <div className=" w-64 xl:w-72   rounded-xl bg-[#D9D9D9] shadow-inner xl:pt-8 xl:px-8 pt-6 px-6  ">
       <Image
@@ -65,7 +72,7 @@ export default function Event({
           />
 
           <div className="text-[#353C4E] text-base text-start  align-top grid content-center">
-            {Date} to {endDate}
+            {Date} to <span>{endDate}</span>
           </div>
         </div>
 
@@ -102,8 +109,10 @@ export default function Event({
           </button>
 
           <button
-            onClick={() => setIsPreview(true)}
-            className="w-28 h-8 rounded-3xl bg-white shrink-0 flex"
+            onClick={() => handlePreviewClick()}
+            className={`w-28 h-8 rounded-3xl bg-white shrink-0 flex ${
+              !isPublished && "opacity-50 pointer-events-none"
+            }`}
           >
             <div className=" pl-4 pt-1  ">
               <Image
@@ -113,6 +122,7 @@ export default function Event({
                 height={60}
               />
             </div>
+
             <div className="w-40 h-4 text-[#535353] text-sm font-['IBM Plex Mono'] font-medium py-1.5 pl-0 mr-2 ">
               Preview
             </div>

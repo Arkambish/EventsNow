@@ -18,6 +18,8 @@ import { TbFileBarcode } from "react-icons/tb";
 import { AiOutlineHome } from "react-icons/ai";
 import { RiPagesLine } from "react-icons/ri";
 
+import { AuthContext, useAuth } from "@/app/AuthContext";
+
 export default function MainComponent() {
   const {
     handleOverview,
@@ -44,6 +46,7 @@ export default function MainComponent() {
     isPageBuilder,
     isLoading,
   } = UseEventContext() as EventContextType;
+  const { eventPublish, setEventPublish } = useAuth() as AuthContext;
   const [isDashboardOpen, setIsDashboardOpen] = useState<boolean>(false);
 
   const menuBarRef = useRef<HTMLDivElement>(null);
@@ -242,6 +245,7 @@ export default function MainComponent() {
                       Date={eventDate.substring(0, 10)}
                       eventCover={eventDashboardImage}
                       setIsPreview={setIsPreview}
+                      isPublished={eventPublish}
                     />
                   </div>
                 </div>
