@@ -17,14 +17,14 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
   const { register, registerEvent } = useProf() as ProfContext;
 
   return (
-    <div className="   font-IBM p-auto ml-5 ">
+    <div className="   font-IBM  ml-5 ">
       <div className="bg-initial rounded-2xl m-4 md:w-fit flex items-center justify-center">
         <button
           className={`${
             btnState === 1
               ? "bg-custom-orange text-white"
               : "bg-transparent text-custom-orange"
-          } rounded-2xl text-center whitespace-nowrap uppercase w-full md:w-2/3 p-3 sm:p-2 md:p-3`}
+          } rounded-2xl text-center whitespace-nowrap uppercase w-full md:w-2/3 p-1 sm:p-2 md:py-1`}
           onClick={() => handleToggle(1)}
         >
           {btn1}
@@ -34,7 +34,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
             btnState === 2
               ? "bg-custom-orange text-white"
               : "bg-transparent text-custom-orange"
-          } rounded-2xl text-center whitespace-nowrap uppercase w-full md:w-2/3 p-3 sm:p-2 md:p-3`}
+          } rounded-2xl text-center whitespace-nowrap uppercase w-full md:w-2/3 p-1 sm:p-2 md:py-1`}
           onClick={() => handleToggle(2)}
         >
           {btn2}

@@ -15,7 +15,7 @@ export default function MyProfile() {
         <div className="text-3xl font-semibold text-custom-orange font-IBM ml-[55px]">
           Wish List
         </div>
-        <div>
+        <div className="m-6 ">
           {eventDetails.length > 0 ? (
             eventDetails.map((e: any) => (
               <WishListCard

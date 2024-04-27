@@ -7,6 +7,8 @@ import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { error, success } from "@/util/Toastify";
+import { IoPencilOutline } from "react-icons/io5";
+import { IoMdRemoveCircleOutline } from "react-icons/io";
 interface notificationty {
   comment: string;
   //   recieverId: string;
@@ -113,27 +115,51 @@ function NotificationButton({
                       <div className="px-1 py-1">
                         <Menu.Item>
                           {({ active }) => (
-                            <button
-                              onClick={handleClick}
+                            <div
                               className={`${
                                 active
                                   ? "bg-custom-orange text-white"
                                   : "text-gray-900"
-                              } group flex w-full text-white items-center rounded-md px-2 py-2 text-sm ${
+                              } group flex w-full text-white items-center rounded-md p-1 text-sm ${
                                 !click ? "hidden" : ""
                               }`}
                             >
-                              Mark as read
-                            </button>
+                              <div>
+                                <IoPencilOutline size={18} />
+                              </div>
+                              <div>
+                                <button
+                                  onClick={handleClick}
+                                  className={`${
+                                    active
+                                      ? "bg-custom-orange text-white"
+                                      : "text-gray-900"
+                                  } group flex w-full text-white items-center rounded-md px-2 py-2 text-sm ${
+                                    !click ? "hidden" : ""
+                                  }`}
+                                >
+                                  Mark as read
+                                </button>
+                              </div>
+                            </div>
                           )}
                         </Menu.Item>
                         <Menu.Item>
-                          <button
-                            onClick={deleteNotification}
-                            className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md px-2 py-2 text-sm`}
+                          <div
+                            className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md p-1 text-sm`}
                           >
-                            Remove this notification
-                          </button>
+                            <div>
+                              <IoMdRemoveCircleOutline size={18} />
+                            </div>
+                            <div>
+                              <button
+                                onClick={deleteNotification}
+                                className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md px-2 py-2 text-sm`}
+                              >
+                                Remove this notification
+                              </button>
+                            </div>
+                          </div>
                         </Menu.Item>
                       </div>
                     </Menu.Items>

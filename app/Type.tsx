@@ -67,6 +67,7 @@ export type EventType = {
   template: string;
   registerUser: string[];
   location: string;
+  eventLocation: string;
   eventEndDate: string;
   endTime: string;
   __v: number;
@@ -150,7 +151,7 @@ export interface EventContextType {
   eventType: String;
   eventDate: String;
   eventStartTime: String;
-  income: number; 
+  income: number;
 
   endTime: String;
   eventVisibility: boolean;
