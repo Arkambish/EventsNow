@@ -5,6 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import NotificationButton from "./NotificationButton";
 import { NotificationType } from "./NavBar";
 import { MdNotifications } from "react-icons/md";
+import NotificationNotFound from "./NotificationNotFound";
 interface notificationty {
   comment: string;
   recieverId: string;
@@ -67,17 +68,21 @@ function Notification({
                   Notifications
                 </div>
               </div>
-              {notification.map((n: notificationty) => (
-                <NotificationButton
-                  key={n._id}
-                  comment={n.comment}
-                  topic={n.topic}
-                  isClicked={n.isClicked}
-                  createdAt={""}
-                  _id={n._id}
-                  setNotification={setNotification}
-                />
-              ))}
+              {notification.length > 0 ? (
+                notification.map((n: notificationty) => (
+                  <NotificationButton
+                    key={n._id}
+                    comment={n.comment}
+                    topic={n.topic}
+                    isClicked={n.isClicked}
+                    createdAt={""}
+                    _id={n._id}
+                    setNotification={setNotification}
+                  />
+                ))
+              ) : (
+                <NotificationNotFound />
+              )}
             </div>
           )}
         </div>

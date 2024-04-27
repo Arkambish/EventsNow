@@ -9,6 +9,14 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import { EventType } from "@/app/Type";
 import { FetchPost } from "@/hooks/useFetch";
 import { success, error } from "@/util/Toastify";
+import { GrLocationPin } from "react-icons/gr";
+import {
+  IoCalendarNumberOutline,
+  IoLocationOutline,
+  IoTimerOutline,
+} from "react-icons/io5";
+import { MdDateRange } from "react-icons/md";
+import { RxClock } from "react-icons/rx";
 
 interface eventorg {
   event: EventType;
@@ -55,7 +63,7 @@ export default function EventCardNewOrg({ event }: eventorg) {
         ></div>
         <div className="lg:col-span-2 rounded-r-xl pt-1">
           <div className="  flex justify-between px-6">
-            <div className=" my-2 text-[#353535] font-semibold sm:font-bold text-lg sm:text-24">
+            <div className=" my-2 text-[#353535] font-semibold sm:font-bold text-lg sm:text-24 capitalize">
               {event.eventName}
             </div>
             <div className="flex max-sm:hidden content-center">
@@ -77,36 +85,30 @@ export default function EventCardNewOrg({ event }: eventorg) {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-2 mb-4">
-            <div className="ml-4 flex">
-              <Image
-                src="/images/admin/Pin_fill_blue.svg"
-                alt="calendar"
-                width={35}
-                height={40}
-              />
+          <div className=" sm:grid-cols-2 gap-2 ">
+            {/* <div className="ml-4 flex">
+              <div>
+                <GrLocationPin size={23} />
+              </div>
               <div className="ml-2 my-auto  text-[#353C4E] text-sm font-medium">
-                {event.location}
+                {event.eventLocation}
+              </div>
+            </div> */}
+            <div className=" ml-4 flex my-3  items-center">
+              <IoLocationOutline size={23} />
+              <div className="ml-2 my-auto  text-[#353C4E] text-sm font-medium capitalize">
+                {event.eventLocation}
               </div>
             </div>
-            <div className="flex ml-4 sm:ml-0">
-              <Image
-                src="/images/admin/Clock_fill_blue.svg"
-                alt="calendar"
-                width={31}
-                height={40}
-              />
+            <div className="flex ml-4 my-3 ">
+              <RxClock size={23} />
               <div className="ml-2 my-auto  text-[#353C4E] text-sm font-medium">
                 {event.startTime}
               </div>
             </div>
-            <div className="ml-4 flex">
-              <Image
-                src="/images/admin/Date_range_light_blue.svg"
-                alt="calendar"
-                width={35}
-                height={40}
-              />
+            <div className="ml-4 flex my-3">
+              <IoCalendarNumberOutline size={23} />
+
               <div className=" ml-2 my-auto  text-[#353C4E] text-sm font-medium">
                 {event.eventStartDate.substring(0, 10)}
               </div>

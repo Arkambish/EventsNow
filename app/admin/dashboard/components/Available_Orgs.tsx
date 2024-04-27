@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "@/components/Modal";
 import DetailsModalContent from "@/app/admin/dashboard/components/modals/DetailsModal";
@@ -11,6 +11,7 @@ import { useAdmin } from "../AdminContextFile";
 import { success } from "@/util/Toastify";
 import { error } from "@/util/Toastify";
 import WidthChangeModal from "@/components/WidthChangeModal";
+import { FetchGet, FetchPost } from "@/hooks/useFetch";
 
 interface Data {
   organization: OrganizationType;
@@ -30,6 +31,8 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
   const [showDenyModal, setShowDenyModal] = useState<boolean>(false);
+  const [totalRegisteredUsersCount, setTotalRegisteredUsersCount] = useState(0);
+  const [events, setEvents] = useState([]);
   const { setOrganization, setNotification, notification } =
     useAdmin() as ContextData;
   const handleDeny = async () => {
@@ -55,6 +58,26 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
     organization.fullName.length > 10
       ? "w-[250px] md:w-[250px] lg:w-[720px]"
       : "lg:w-[720px] w-72 md:w-[250px]";
+
+  useEffect(() => {
+    const getCount = async () => {
+      try {
+        const getEventResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getCount/${organization._id}`
+        );
+        if (!getEventResponse.ok) {
+          error("Failed to fetch event data");
+        }
+        const data = await getEventResponse.json();
+        setTotalRegisteredUsersCount(data.totalRegisteredUsersCount);
+        setEvents(data.events);
+      } catch (e) {
+        error("Error fetching event data");
+      }
+    };
+    getCount();
+  }, [organization._id]);
+
   return (
     <div>
       <div
@@ -120,10 +143,11 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
 
               <div className="col-span-4 sm:col-span-4 m-6">
                 <div className="text-[#353C4E] font-sans text-sm font-bold leading-4 mb-8 md:mb-8 lg:mb-0">
-                  {/* {organization.numberofevents} */} 32
+                  {/* {organization.numberofevents} */} {events.length}
                 </div>
                 <div className="text-[#353C4E] font-sans text-sm font-bold leading-4 mt-6">
-                  {/* {organization.numberofmembers} */}34
+                  {/* {organization.numberofmembers} */}
+                  {totalRegisteredUsersCount}
                 </div>
               </div>
             </div>

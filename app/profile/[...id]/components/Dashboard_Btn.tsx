@@ -5,32 +5,35 @@ interface Dashboard_Btn {
   onClick: () => void;
   text: string;
   isSlideBar: boolean;
-  children: React.ReactNode;
   isActive?: boolean;
   hover?: boolean;
+  icon: JSX.Element;
 }
 
 export default function Dashboard_Btn({
   onClick,
   isSlideBar,
   text,
-  children,
   isActive,
   hover,
+  icon,
 }: Dashboard_Btn) {
   return (
-    <button
+    <div>
+      {/* <button
       onClick={onClick}
       className={`${
-        isActive && " text-custom-orange rounded-lg"
+        isActive && " text-custom-orange rounded-lg text-3xl"
       } h-10 my-5 w-full  hover:rounded-lg  hover:opacity-80  `}
-    >
+    > */}
       <div
-        className={` ${
+        className={`${
           isActive && " text-custom-orange rounded-lg"
-        }hover:text-custom-orange flex lg:gap-3 xl:gap-5 gap-5 ml-5 `}
+        } flex flex-row w-52 mb-12 sm:ms-12 md:ms-20 lg:ms-12 cursor-pointer hover:text-custom-orange `}
+        onClick={onClick}
       >
-        {children}
+        <div className="mr-1">{icon}</div>
+
         {isSlideBar ? (
           <div
             className={` font-sans hover:text-custom-orange text-center text-base font-semibold   leading-normal ${
@@ -43,6 +46,7 @@ export default function Dashboard_Btn({
           ""
         )}
       </div>
-    </button>
+      {/* </button> */}
+    </div>
   );
 }

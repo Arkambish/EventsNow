@@ -13,7 +13,7 @@ import {
   UserType,
   voidFunc,
 } from "@/app/Type";
-import { FetchPost } from "@/hooks/useFetch";
+import { FetchGet, FetchPost } from "@/hooks/useFetch";
 import { error, success } from "@/util/Toastify";
 
 interface AdminContextProps {
@@ -113,7 +113,14 @@ function AdminContextProvider({ children }: AdminContextProps) {
 
       setIsLoading(false);
     }
+    // async function getCountEvent(
 
+    // ){
+    //   try {
+    //     const getEvent = FetchGet({ endpoint: `organization/getCount/${organization}` });
+
+    //   } catch (error) {}
+    // }
     getData();
   }, [router]);
 

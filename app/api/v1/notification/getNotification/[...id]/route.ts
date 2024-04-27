@@ -5,7 +5,6 @@ import { use } from "react";
 
 export async function GET(req: Request, { params }: any) {
   const userId = params.id;
-  console.log(userId);
   try {
     connectMongoDB();
 

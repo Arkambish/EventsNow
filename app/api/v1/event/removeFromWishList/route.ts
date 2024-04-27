@@ -4,23 +4,24 @@ import User from "@/models/userModel";
 
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
-    const data = await request.json();
+    const { userId, eventId } = await request.json();
     await connectMongoDB();
 
-    const getUserById = await User.findOne({ _id: data.userId });
+    const getUserById = await User.findOne({ _id: userId });
     if (!getUserById) {
       return NextResponse.json({ message: "User not found" });
     }
 
     const newWishListArray = getUserById.wishListId.filter(
-      (i: any) => i._id.toString() !== data.eventId.toString()
+      (i: any) => i._id.toString() !== eventId.toString()
     );
 
-    const updatedUser = await User.findByIdAndUpdate(data.userId, {
+    const updatedUser = await User.findByIdAndUpdate(userId, {
       $set: {
         wishListId: newWishListArray,
       },
     });
+    console.log(updatedUser);
 
     if (!updatedUser) {
       return NextResponse.json({ message: "failed to add event to wishList " });
