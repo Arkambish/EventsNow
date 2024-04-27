@@ -7,7 +7,7 @@ import Post from "./Post";
 import { Post as PostType } from "@/app/event/host/[id]/components/PostTab";
 
 export default function EditPost() {
-  const { setStatus, eventPosts } = UseEventContext() as EventContextType;
+  const { setStatus, eventPosts ,setEventPosts} = UseEventContext() as EventContextType;
 
   return (
     <Container>
@@ -34,6 +34,8 @@ export default function EditPost() {
             name={post.userName}
             caption={post.description}
             post={post.image}
+            eventPosts={eventPosts}
+            setEventPosts={setEventPosts}
           />
         ))}
       </div>
