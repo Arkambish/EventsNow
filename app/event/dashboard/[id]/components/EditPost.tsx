@@ -5,6 +5,7 @@ import { MdArrowBack } from "react-icons/md";
 import { EventContextType, UseEventContext } from "../EventDashContext";
 import Post from "./Post";
 import { Post as PostType } from "@/app/event/host/[id]/components/PostTab";
+import EmptyStateComponent from "@/components/EmptyStateComponent";
 
 export default function EditPost() {
   const { setStatus, eventPosts } = UseEventContext() as EventContextType;
@@ -25,7 +26,8 @@ export default function EditPost() {
         </div>
       </div>
       <div className="h-[40rem] overflow-auto">
-        {eventPosts.map((post: PostType) => (
+        {eventPosts.length === 0 && eventPosts ? 
+        eventPosts.map((post: PostType) => (
           <Post
             likes={post.like}
             key={post._id}
@@ -35,7 +37,7 @@ export default function EditPost() {
             caption={post.description}
             post={post.image}
           />
-        ))}
+        )):<EmptyStateComponent message="No post to edit" />}
       </div>
     </Container>
   );
