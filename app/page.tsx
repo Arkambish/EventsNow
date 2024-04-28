@@ -39,7 +39,6 @@ async function getEvent() {
 
 export default async function Home() {
   const data = await getOutDateEvent();
-
   const event = await getEvent();
 
   return (
@@ -65,6 +64,8 @@ export default async function Home() {
           ))}
         </div>
       )}
+
+  
 
       <Footer />
     </div>
