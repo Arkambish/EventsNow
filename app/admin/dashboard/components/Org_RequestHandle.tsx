@@ -153,74 +153,64 @@ export default function Org_RequestHandle({
 
   return (
     <div>
-      <div className="grid grid-cols-12  m-4 w-[250px] md:w-[500px] lg:w-[679px] h-96 sm:h-32 rounded-lg bg-navWhite shadow-3xl">
-        <div className="sm:col-span-5 col-span-full overflow-hidden rounded-lg">
+      <div className="grid border-slate-500 border-b-2  border-2 grid-cols-12 m-4 w-full md:w-[500px] lg:w-[679px] h-fit sm:h-32 rounded-lg shadow-3xl mb-2  ">
+        <div className="sm:col-span-5 col-span-full h-full overflow-hidden rounded-lg">
           <Image
             src={organization.postImageLink}
             alt="image2"
             width={249.64}
-            height={126}
-            className="shadow-xl  w-[300px] lg:w-[249.65px] md:w-[200px] h-[128px]"
+            height={124.5}
+            className="shadow-xl  border-slate-500 w-full h-[110px] md:w-[300px] lg:w-[249.65px] md:h-[124.5px]"
           />
         </div>
-        <div className="grid grid-rows-2 col-span-7 ">
-          <div className="flex sm:items-center items-around sm:mt-0 mt-4">
-            <div className="w-12 sm:w-48 text-[#353535] underline capitalize font-sans text-2xl font-bold ms-2 sm:ms-0">
+        <div className="grid grid-rows-2 col-span-7">
+          <div className="flex items-center my-3">
+            <div className="w-full text-[#353535] capitalize font-sans text-xl font-bold">
               {organization.organizationName}
             </div>
-            <button
-              onClick={() => {
-                setShowAllowModal(false);
-                setShowDenyModal(false);
-                setShowDetailsModal(true);
-                setIsOpen(true);
-              }}
-              className="w-fit h-fit rounded-xl bg-[#4E8171] ml-auto lg:ml-20 md:ml-3"
-            >
-              <div className="justify-center p-2 text-white text-sans font-medium">
+            <div className="mx-6">
+              <button
+                onClick={() => {
+                  setShowAllowModal(false);
+                  setShowDenyModal(false);
+                  setShowDetailsModal(true);
+                  setIsOpen(true);
+                }}
+                className="px-4 py-2 ml-auto bg-[#4E8171] rounded-xl text-white font-medium"
+              >
                 Details
-              </div>
-            </button>
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-row mt-2 sm:mt-2 sm:ms-0 md:ms-4 lg:ms-0">
+          <div className="flex items-center my-2 gap-9">
             <button
               onClick={() => {
                 setShowDetailsModal(false);
-
                 setShowDenyModal(false);
-
                 setShowAllowModal(true);
                 setIsOpen(true);
               }}
-              className="w-fit h-fit rounded-lg bg-green-600 ms-2 sm:ms-0"
+              className="px-4 py-2 mr-4 hover:bg-green-800 bg-green-600 rounded-lg text-white font-medium"
             >
-              <div className="button justify-center text-white text-sans font-small p-2">
-                Allow
-              </div>
+              Allow
             </button>
             <button
               onClick={() => {
                 setShowDetailsModal(false);
-
                 setShowAllowModal(false);
-
                 setShowDenyModal(true);
                 setIsOpen(true);
               }}
-              className="button w-fit h-fit rounded-lg bg-red-600 ml-12 sm:ml-10 "
+              className="px-4 py-2 hover:bg-red-800 bg-red-600 rounded-lg text-white font-medium"
             >
-              <div className="justify-center text-white text-sans font-small p-2">
-                Deny
-              </div>
+              Deny
             </button>
             <button
               onClick={() => setCommentModal(true)}
-              className="button w-fit h-fit rounded-lg bg-slate-500 ml-12 sm:ml-10 "
+              className="px-4 py-2 ml-4 hover:bg-slate-800 bg-slate-500 rounded-lg text-white font-medium whitespace-nowrap"
             >
-              <div className="justify-center  text-white text-sans font-small whitespace-nowrap p-2  hover:rounded-xl">
-                Add comment
-              </div>
+              Add comment
             </button>
           </div>
         </div>

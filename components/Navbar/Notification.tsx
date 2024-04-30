@@ -36,11 +36,10 @@ function Notification({
   }, [notification]);
 
   if (!notification) return;
-  console.log(notification);
   return (
     <div>
-      <div className="flex justify-center">
-        <div className="relative ">
+      <div className="flex justify-center ">
+        <div className="relative max-h-80">
           <button
             onClick={toggleDropdown}
             className="relative z-10 block rounded-md bg-custom-orange p-1 focus:outline-none"
@@ -60,7 +59,7 @@ function Notification({
 
           {dropdownOpen && (
             <div
-              className="absolute right-0 mt-2  bg-gray-800 rounded-md shadow-lg  max-h-80 h-fit z-20 overflow-y-auto  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
+              className="absolute right-0 mt-2 h-[300px]  bg-gray-800 rounded-md shadow-lg  max-h-80  z-20 overflow-y-auto  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
               style={{ width: 300 }}
             >
               <div className="sticky top-0 z-10">

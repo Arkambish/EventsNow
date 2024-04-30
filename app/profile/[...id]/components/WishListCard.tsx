@@ -277,7 +277,7 @@ export default function WishListCArd({
     //     </Modal>
     //   )}
     // </div>
-    <div className=" w-full   bg-[#D9D9D9]   max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 ">
+    <div className=" w-full   bg-[#D9D9D9]   max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 mb-6 ">
       <div
         className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
         style={{ backgroundImage: `url(${image as string})` }}

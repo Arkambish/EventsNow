@@ -34,7 +34,7 @@ export default function OrganizationPayment({
 
         <div className="col-span-full md:col-span-2 lg:col-span-3 flex justify-center sm:justify-start pl-8 sm:mt-0 md:mt-4 lg:mt-0">
           <div className=" justify-auto flex flex-col  md:justify-center lg:justify-around">
-            <div className="flex w-full md:w-1/2  lg:w-full text-slate-500 font-sans text-2xl font-bold mt-2 leading-7  ">
+            <div className="flex w-full md:w-1/2  lg:w-full text-slate-500 font-sans capitalize text-2xl font-bold mt-2 leading-7  ">
               {organization.organizationName}
             </div>
             <div className="flex flex-col md:flex-col lg:flex-row gap-4 ml-0">
@@ -74,8 +74,8 @@ export default function OrganizationPayment({
               </div>
             </div>
           </div> */}
-          <div className="flex flex-wrap gap-2">
-            <div className="flex gap-2">
+          <div className="flex flex-wrap gap-y-[0.5px] gap-x-40">
+            <div className="flex gap-2 mt-1">
               <div className="text-base	font-bold ">AccountName =</div>
               <div>{organization.accountName}</div>
             </div>
@@ -87,6 +87,7 @@ export default function OrganizationPayment({
               <div className="text-base	font-bold ">Bank =</div>
               <div>{organization.bank}</div>
             </div>
+
             <div className="flex gap-2">
               <div className="text-base	font-bold ">Branch =</div>
               <div>{organization.branch}</div>

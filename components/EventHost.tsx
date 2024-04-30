@@ -63,8 +63,8 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
         </button>
       </div> */}
 
-      <div className="m-4 p-2 font-IBM rounded-2xl bg-white  gap-4 h-screen overflow-auto">
-        <div className="flex flex-col gap-2 justify-start w-full">
+      <div className="m-4 p-2 font-IBM rounded-2xl bg-white  gap-4 h-screen w-full overflow-auto ">
+        <div className="grid grid-rows-1 gap-2 justify-start w-full">
           {btnState === 1 && (
             <>
               {registerEvent.length > 0 ? (
