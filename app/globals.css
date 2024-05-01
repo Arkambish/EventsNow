@@ -38,7 +38,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #d47151; /* Color of the scrollbar handle */
+  background: #b4b2b2; /* Color of the scrollbar handle */
   border-radius: 10px;
   height: 5px;
 }
