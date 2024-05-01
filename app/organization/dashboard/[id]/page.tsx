@@ -8,6 +8,7 @@ export default function Organization({
   params: { id: string };
 }) {
   return (
+    // h-[30rem] overflow-hidden
     <div className="py-5 ">
       <OrgContextProvider>
         <CheckActive />

@@ -42,7 +42,7 @@ export default function CheckActive() {
       ) : (
         <div>
           {isActive ? (
-            <div className="2xl:flex 2xl:justify-center">
+            <div className="2xl:flex  2xl:justify-center">
               <div className="grid max-w-[1500px]   grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5">
                 <div
                   className={`lg:col-span-2   md:block hidden ${
@@ -68,7 +68,7 @@ export default function CheckActive() {
                   <Profile />
                 </div>
               </div>
-
+              {/* 
               <div
                 className={`fixed 
             -left-14
@@ -151,7 +151,7 @@ export default function CheckActive() {
                     </Dashboard_Btn>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           ) : (
             <OrganizationRequestPending />

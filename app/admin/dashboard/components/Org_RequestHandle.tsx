@@ -179,7 +179,7 @@ export default function Org_RequestHandle({
             setShowAllowModal(true);
             setIsOpen(true);
           }}
-          className="ml-10 bg-green-500 px-5  py-2 text-sm shadow-sm hover:shadow-lg font-medium  border-2 border-green-500 text-white rounded-full"
+          className="ml-10 bg-green-500 px-3  py-1 text-sm shadow-sm hover:shadow-lg font-medium  border-2 border-green-500 text-white rounded-full"
         >
           Allow
         </button>
@@ -190,7 +190,7 @@ export default function Org_RequestHandle({
             setShowDenyModal(true);
             setIsOpen(true);
           }}
-          className="ml-5 bg-red-500 px-5  py-2 text-sm shadow-sm hover:shadow-lg font-medium  border-2 border-red-500 text-white rounded-full"
+          className="ml-5 bg-red-500 px-3  py-1 text-sm shadow-sm hover:shadow-lg font-medium  border-2 border-red-500 text-white rounded-full"
         >
           Deny
         </button>
@@ -210,7 +210,7 @@ export default function Org_RequestHandle({
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute mt-0 mr-8 right-0  w-56  divide-gray-100 rounded-md bg-slate-500 shadow-lg ring-1 ring-black/5 focus:outline-none ">
+              <Menu.Items className="absolute mt-0 mr-8 right-0  w-56  divide-gray-100 rounded-md bg-white text-black shadow-lg ring-1 ring-black/5 focus:outline-none ">
                 <div className="px-1 py-1">
                   <Menu.Item>
                     {({ active }) => (
@@ -221,22 +221,14 @@ export default function Org_RequestHandle({
                           setShowDetailsModal(true);
                           setIsOpen(true);
                         }}
-                        className={`${
-                          active
-                            ? "bg-custom-orange text-white"
-                            : "text-gray-900"
-                        } group flex w-full text-white items-center rounded-md p-1 text-sm`}
+                        className={` group flex w-full text-black items-center  rounded-md p-1 text-sm hover:bg-slate-200`}
                       >
-                        <div>
+                        <div className="text-black">
                           <CgDetailsMore size={18} />
                         </div>
                         <div>
                           <button
-                            className={`${
-                              active
-                                ? "bg-custom-orange text-white"
-                                : "text-gray-900"
-                            } group flex w-full text-white items-center rounded-md px-2 py-2 text-sm `}
+                            className={` group flex w-full text-black items-center rounded-md px-2 py-2 text-sm `}
                           >
                             Show Details
                           </button>
@@ -247,14 +239,14 @@ export default function Org_RequestHandle({
                   <Menu.Item>
                     <div
                       onClick={() => setCommentModal(true)}
-                      className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md p-1 text-sm`}
+                      className={`group flex w-full hover:bg-slate-200 text-black items-center rounded-md p-1 text-sm`}
                     >
                       <div>
                         <BiCommentDetail size={18} />
                       </div>
                       <div>
                         <button
-                          className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md px-2 py-2 text-sm`}
+                          className={`group flex w-full  text-black items-center rounded-md px-2 py-2 text-sm`}
                         >
                           Comment
                         </button>
@@ -412,7 +404,7 @@ export default function Org_RequestHandle({
               <div className="mt-4 flex gap-2">
                 <button
                   type="button"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   onClick={handleAllow}
                 >
                   Allow

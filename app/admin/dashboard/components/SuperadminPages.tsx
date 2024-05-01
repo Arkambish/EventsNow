@@ -41,7 +41,7 @@ export default function SuperadminPages({
 
   return (
     <div
-      className="font-mono shadow-3xl rounded-lg  flex flex-col ms-0 sm:ms-2 "
+      className="font-mono h-full shadow-3xl rounded-lg  flex flex-col ms-0 sm:ms-2 "
       onClick={handleClick}
     >
       <div className="flex flex-col md:flex-row lg:flex-row sm:justify-center md:justify-between lg:justify-between ">
@@ -89,7 +89,7 @@ export default function SuperadminPages({
         )}
       </div>
       {/* refresh button */}
-      <div className="border-2 mt-6  border-slate-400 ml-5 button p-1 rounded-xl w-24 xl:ms-16">
+      <div className="border-2   border-slate-400 ml-5 button p-1 rounded-xl w-24 xl:ms-16">
         <button onClick={reloadPage}>
           <div className="flex text-slate-500   justify-center items-center gap-1">
             <div>Refresh</div>
@@ -98,8 +98,10 @@ export default function SuperadminPages({
         </button>
       </div>
 
-      <div className=" md:w-[550px] lg:w-[720px] xl:w-[900px] ms-4 mt-6 xl:ms-12  h-96 overflow-y-auto">
-        {customComponent}
+      <div className="h-full">
+        <div className=" md:w-[550px] lg:w-[720px] xl:w-[900px] ms-4 mt-6 xl:ms-12  h-[15rem] overflow-y-auto">
+          {customComponent}
+        </div>
       </div>
     </div>
   );

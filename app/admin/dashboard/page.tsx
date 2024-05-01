@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <>
+    <div className=" h-[31rem]">
       <AdminContextProvider>
         <AdminDashboard />
       </AdminContextProvider>
-    </>
+    </div>
   );
 }

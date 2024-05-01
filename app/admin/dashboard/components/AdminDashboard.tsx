@@ -35,14 +35,14 @@ export default function AdminDashboard() {
   const [activeButton, setActiveButton] = useState("Notification");
 
   return (
-    <div>
+    <div className="h-full	 ">
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className=" md:flex lg:flex flex flex-col md:flex-row lg:flex-row h-[500px] mt-5">
-          <div className="hidden sm:flex-col md:flex lg:flex sm:w-full md:w-1/5 lg:w-1/6  ms-1 h-[500px] rounded-lg">
+        <div className=" md:flex lg:flex flex flex-col md:flex-row lg:flex-row h-full mt-5">
+          <div className="hidden sm:flex-col md:flex lg:flex sm:w-full md:w-1/5 lg:w-1/6  ms-1 h-full rounded-lg">
             <div className="flex flex-col   shadow-3xl items-center rounded-lg ">
-              <div className=" flex flex-row mt-2 h-[500px] rounded-lg ">
+              <div className=" flex flex-row mt-2 h-full rounded-lg ">
                 <div className="sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4 sm:hidden md:flex lg:flex justify-center rounded-lg ">
                   <div className="sm:hidden md:flex md:flex-col lg:flex lg:flex-col md:w-3/4 lg:w-3/4 sm:w-full mt-8 sm:ms-0 md:ms-0 lg:ms-0 rounded-lg bg-gray-50">
                     <SuperadminButton
@@ -103,8 +103,7 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
-
-          <div className="sm:w-full  w-full  mr-0 lg:mr-2 md:mr-0 h-screen lg:ms-1 md:ms-1 sm:ms-0 xl:ms-1  ">
+          <div className="sm:w-full  w-full overflow-hidden   mr-0 lg:mr-2 md:mr-0 h-full lg:ms-1 md:ms-1 sm:ms-0 xl:ms-1  ">
             <div>
               {status === "" && <Notification />}
               {status === "Notification" && <Notification />}

@@ -111,7 +111,7 @@ function EventCardOrgDash({
                             <button
                               className={`${
                                 active
-                                  ? "bg-custom-orange text-white"
+                                  ? "bg-slate-200 text-black"
                                   : "text-gray-900"
                               } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             >
@@ -137,7 +137,7 @@ function EventCardOrgDash({
                             onClick={() => setIsOpen(true)}
                             className={`${
                               active
-                                ? "bg-custom-orange text-white"
+                                ? "bg-slate-200 text-black"
                                 : "text-gray-900"
                             } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                           >
@@ -320,8 +320,8 @@ function EditInactiveIcon(props: any) {
     >
       <path
         d="M4 13V16H7L16 7L13 4L4 13Z"
-        fill="#EDE9FE"
-        stroke="#D47151"
+        fill="#fff"
+        stroke="#000000"
         strokeWidth="2"
       />
     </svg>
@@ -338,8 +338,8 @@ function EditActiveIcon(props: any) {
     >
       <path
         d="M4 13V16H7L16 7L13 4L4 13Z"
-        fill="#c5c3c3"
-        stroke="#fff"
+        fill="#fff"
+        stroke="#000000"
         strokeWidth="2"
       />
     </svg>
@@ -359,12 +359,12 @@ function DeleteInactiveIcon(props: any) {
         y="6"
         width="10"
         height="10"
-        fill="#EDE9FE"
-        stroke="#D47151"
+        fill="#fff"
+        stroke="#000000"
         strokeWidth="2"
       />
-      <path d="M3 6H17" stroke="#D47151" strokeWidth="2" />
-      <path d="M8 6V4H12V6" stroke="#D47151" strokeWidth="2" />
+      <path d="M3 6H17" stroke="#000000" strokeWidth="2" />
+      <path d="M8 6V4H12V6" stroke="#000000" strokeWidth="2" />
     </svg>
   );
 }
@@ -382,12 +382,12 @@ function DeleteActiveIcon(props: any) {
         y="6"
         width="10"
         height="10"
-        fill="#c5c3c3"
-        stroke="#fff"
+        fill="#fff"
+        stroke="#000000"
         strokeWidth="2"
       />
-      <path d="M3 6H17" stroke="#fff" strokeWidth="2" />
-      <path d="M8 6V4H12V6" stroke="#fff" strokeWidth="2" />
+      <path d="M3 6H17" stroke="#000000" strokeWidth="2" />
+      <path d="M8 6V4H12V6" stroke="#000000" strokeWidth="2" />
     </svg>
   );
 }
