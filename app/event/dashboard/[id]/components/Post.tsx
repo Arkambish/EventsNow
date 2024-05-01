@@ -1,18 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect} from "react";
 
 import { useState } from "react";
+import { EventContextType, UseEventContext } from "../EventDashContext";
 
 import { getSession } from "next-auth/react";
 import { Session } from "next-auth";
 
 import { error, success } from "@/util/Toastify";
-import CommentBtn from "./CommentBtn";
-import { EventContextType, UseEventContext } from "../EventDashContext";
+
 import { IoMdSettings } from "react-icons/io";
 import { IoSave } from "react-icons/io5";
+import { MdDeleteOutline } from "react-icons/md";
+import Modal from "@/components/Modal";
+import { Dialog } from "@headlessui/react";
+
 
 interface Post {
   profilePic: string;
@@ -21,6 +25,8 @@ interface Post {
   post: string;
   id: string;
   likes: number;
+  eventPosts:any;
+  setEventPosts: any;
 }
 
 export type User = {
@@ -39,15 +45,13 @@ export default function Post({
   post,
   id,
   likes,
+  eventPosts,
+  setEventPosts
 }: Post) {
-  const [like, setLike] = useState(likes);
+  
   const [captionText, setCaptionText] = useState(caption);
-  const [comment, setComment] = useState("");
-  const [isComment, setIsComment] = useState(false);
-  const [isLike, setIsLike] = useState(false);
-  const [hasComment, setHasComment] = useState(false);
-  const [isShare, setIsShare] = useState(false);
-  const { allComment, setAllComment } = UseEventContext() as EventContextType;
+
+  const [commentCount, setCommentCount] = useState(0);
 
   const [user, setUser] = useState<User | Session>({
     user: { image: "", email: "", name: "" },
@@ -55,65 +59,18 @@ export default function Post({
   });
 
   const [checkEditCaption, setcheckEditCaption] = useState(false);
-  const [checkSaveCaption, setcheckSaveCaption] = useState(false);
 
-  const commentRef = useRef<HTMLDivElement>(null);
-  const allCommentRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+ 
 
-  // handle comment button
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        commentRef.current &&
-        !commentRef.current.contains(event.target as Node)
-      ) {
-        // Clicked outside of modal, so close it
-        setIsComment(false);
-      }
-    };
+ 
 
-    // Add event listener when the modal is open
-    if (isComment) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      // Remove event listener when the modal is closed
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
+ 
 
-    // Cleanup function to remove event listener
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isComment, setIsComment]);
 
-  // handle all comment
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        allCommentRef.current &&
-        !allCommentRef.current.contains(event.target as Node)
-      ) {
-        // Clicked outside of modal, so close it
-        setHasComment(false);
-      }
-    };
-
-    // Add event listener when the modal is open
-    if (hasComment) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      // Remove event listener when the modal is closed
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    // Cleanup function to remove event listener
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [setHasComment, hasComment]);
 
   useEffect(() => {
-    const getUser = async () => {
+    const getComment = async () => {
       const user = await getSession();
 
       if (user) {
@@ -129,18 +86,13 @@ export default function Post({
       });
       const data = await res.json();
 
-      setAllComment(data.data);
+      setCommentCount(data.data.length);
     };
-    getUser();
-  }, [id, setAllComment]);
+    getComment();
+  }, [id]);
 
-  function handleCommentBtn() {
-    allComment.length > 0 ? setHasComment((comment) => !comment) : "";
-  }
 
-  async function editCaption() {
-    setcheckEditCaption(true);
-  }
+  
 
   async function saveCaption() {
     if (caption !== captionText) {
@@ -163,24 +115,85 @@ export default function Post({
 
     setcheckEditCaption(false);
   }
+  const handleDeletePost = async () => {
+    const res = await fetch("/api/v1/post/deletePost", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    if (res.ok) {
+      success("Post deleted successfully");
+      const updatedPosts = eventPosts.filter((post : any) => post._id !== id);
+      setEventPosts(updatedPosts);
+    } else {
+      error("Error in deleting post");
+    }
+  }
 
   return (
     <>
-      <div className="xl:w-571 sm:w-[24rem] w-[20rem]  bg-initial text-white m-8 rounded-xl pb-2">
-        <div className="p-5">
-          <div className="flex gap-7">
+    
+
+{visible && (
+  <Modal setIsOpen={setVisible} isOpen={visible}>
+    <Dialog.Title
+      as="h3"
+      className="text-lg font-medium leading-6 text-gray-900"
+    >
+      Are you sure want to delete the post ?
+    </Dialog.Title>
+    <div className="mt-2">
+      <p className="text-sm text-gray-500">
+        Once you delete the post, it cannot be recovered.
+      </p>
+    </div>
+    <div className="mt-4 flex gap-4">
+      <button
+        type="button"
+        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-rose-700 border border-transparent rounded-md hover:bg-rose-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+        onClick={handleDeletePost}
+      >
+        Delete
+      </button>
+      <button
+        type="button"
+        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+        onClick={() => setVisible(false)}
+      >
+        Cancel
+      </button>
+    </div>
+    
+
+  </Modal>
+)}
+    
+      <div className="xl:w-[500px] sm:w-[24rem] w-[20rem] border border-zinc-900 text-white m-8 rounded-2xl pb-4">
+        <div className="p-5 pt-5">
+          <div className="flex gap-7 items-center mb-4 justify-between">
+            <div className="flex items-center gap-4">
             <Image
               src={`${profilePic}`}
               alt="profile picture"
               width={60}
               height={10}
-              className="rounded-full"
+              className="rounded-full border-rose-700 border-2"
             />
             <div>
-              <div className="text-black sm:text-24 text-lg font-bold font-Inter">
+              <div className="text-black sm:text-24 text-base font-semibold font-Inter">
                 {name}
               </div>
             </div>
+            </div>
+            <button className=" button" onClick={()=>setVisible(true)}>
+            <MdDeleteOutline
+            className="mx-1"
+            color="black" 
+            size={27}/>
+            </button>
           </div>
           <div className="flex justify-between">
             <input
@@ -188,20 +201,20 @@ export default function Post({
               onChange={(e) => setCaptionText(e.target.value)}
               value={captionText}
               type="text"
-              className="bg-initial w-11/12 text-black mt-3 font-Inter outline-none"
+              className="bg-white w-11/12 text-black  font-Inter outline-none"
             />
 
             {checkEditCaption ? (
-              <button onClick={saveCaption} className="text-black button">
+              <button onClick={saveCaption} className="text-black button m-auto">
                 <IoSave size={22} />
               </button>
             ) : (
-              <button onClick={editCaption} className="text-black button">
+              <button onClick={()=>setcheckEditCaption(true)} className="text-black button m-auto">
                 <IoMdSettings size={22} />
               </button>
             )}
           </div>
-          {/* <div className="text-black mt-3 font-Inter">{caption}</div> */}
+        
         </div>
         <button>
           <Image
@@ -214,156 +227,23 @@ export default function Post({
         </button>
         <div className="px-5 my-2 mb-2">
           <div className="flex gap-4 sm:w-32 w-24">
-            {/* {isLike ? (
-              <button onClick={handleClickOffLikeButton}>
-                <div className="bg-red-900">
-                  <IoMdHeart size={25} />
-                </div>
-              </button>
-            ) : (
-              <button onClick={handleClickLikeButton}>
-                <Image
-                  src={"/images/reusableComponents/React.svg"}
-                  alt="like"
-                  width={40}
-                  height={34}
-                  className={styles.zoom}
-                />
-              </button>
-            )}
-
-            <button onClick={() => handleClickCommentButton()}>
-              <Image
-                src={"/images/reusableComponents/Comment.svg"}
-                alt="comment"
-                width={40}
-                height={34}
-                className={styles.zoom}
-              />
-            </button>
-            <button onClick={() => handleClickShareButton()}>
-              <Image
-                src={"/images/reusableComponents/Share.svg"}
-                alt="share"
-                width={40}
-                height={34}
-                className={styles.zoom}
-              />
-            </button> */}
+          
           </div>
-          {/* {isComment && (
-            <div
-              ref={commentRef}
-              className="mt-2 mb-2 items-center flex gap-4 "
-            >
-              <Image
-                src={user?.user?.image ?? ""}
-                alt="user-photo"
-                width={35}
-                height={35}
-                className="rounded-full mt-1"
-              />
-              <div className="border-[1px] gap-3 border-slate-500 rounded-3xl p-1 pl-2 pr-2 flex items-center">
-                <input
-                  type="text"
-                  className="outline-none text-gray-700 p-1 bg-initial "
-                  placeholder="Write a comment"
-                  onChange={(e) => setComment(e.target.value)}
-                  value={comment}
-                />
-                <button
-                  onClick={sentComment}
-                  disabled={comment.length > 0 ? false : true}
-                  className={`${
-                    comment.length > 0
-                      ? "bg-slate-600"
-                      : "bg-slate-400 cursor-not-allowed"
-                  } rounded-md w-8 inline-flex justify-center items-center button h-6`}
-                >
-                  <BsSend />
-                </button>
-              </div>
-            </div>
-          )}
-          {isShare && (
-            <div className="flex gap-3 mb-3 mt-3 mx-6">
-              <Image
-                src={"/images/reusableComponents/FacebookIconPost.svg"}
-                alt="facebook"
-                width={40}
-                height={34}
-                className={styles.zoom}
-              />
-              <Image
-                src={"/images/reusableComponents/TwitterIconPost.svg"}
-                alt="facebook"
-                width={40}
-                height={34}
-                className={styles.zoom}
-              />
-              <Image
-                src={"/images/reusableComponents/InstagramIconPost.svg"}
-                alt="facebook"
-                width={40}
-                height={34}
-                className={styles.zoom}
-              />
-              <Image
-                src={"/images/reusableComponents/threads-app-icon.svg"}
-                alt="facebook"
-                width={31}
-                height={28}
-                className={styles.zoom}
-              />
-            </div>
-          )} */}
+        
 
           <div className="text-black font-Inter">
-            {`Liked by ${like} peoples`}
+            {`${likes} likes`}
           </div>
-          <button onClick={handleCommentBtn}>
+          
             <div className="text-black font-Inter">
-              {` ${allComment.length} comments`}
+              {` ${commentCount} comments`}
             </div>
-          </button>
+         
 
-          {hasComment ? (
-            <div ref={allCommentRef}>
-              <div className=" mt-2 border-[1px] p-2 border-black rounded-lg h-20 overflow-auto mb-2 flex flex-col gap-2 ">
-                {allComment.map((comment) => (
-                  <CommentBtn
-                    id={comment._id}
-                    key={comment._id}
-                    userImage={comment.userImage}
-                    description={comment.description}
-                  />
-                ))}
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
         </div>
       </div>
     </>
   );
 }
 
-{
-  /* function commentBtn({user}: {user: User | Session}) {
-  return (
-    <>
-      <Image
-        src={user?.user?.image ?? ""}
-        alt="user-photo"
-        width={35}
-        height={35}
-        className="rounded-full mt-1"
-      />
-      <div className=" text-black p-1 pl-2 pr-2 flex items-center">
-        it is a great event
-      </div>
-    </>
-  );
-} */
-}
+
