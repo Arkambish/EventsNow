@@ -29,7 +29,7 @@ export default function Dashboard_Btn({
       <div
         className={`${
           isActive && " text-custom-orange rounded-lg"
-        } flex flex-row w-52 mb-12 sm:ms-12 md:ms-20 lg:ms-12 cursor-pointer hover:text-custom-orange `}
+        } flex flex-row w-52 mb-12 sm:ms-8 md:ms-8 lg:ms-8 cursor-pointer hover:text-custom-orange `}
         onClick={onClick}
       >
         <div className="mr-1">{icon}</div>

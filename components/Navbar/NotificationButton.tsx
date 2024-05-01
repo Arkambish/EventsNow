@@ -48,6 +48,7 @@ function NotificationButton({
         return newArray;
       });
     }
+    console.log("Hi");
     setClick(false);
   }
   // const timeAgo = () => {
@@ -78,7 +79,7 @@ function NotificationButton({
   };
   return (
     <div>
-      <button className="w-full">
+      <button className="w-full max-h-80">
         <div
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
@@ -110,12 +111,13 @@ function NotificationButton({
                     <Menu.Items
                       onMouseEnter={() => setIsOpen(true)}
                       onMouseLeave={() => setIsOpen(false)}
-                      className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black/5 focus:outline-none"
+                      className="absolute right-0 mt-[calc(-100% - 8px)] w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black/5 focus:outline-none z-10"
                     >
                       <div className="px-1 py-1">
                         <Menu.Item>
                           {({ active }) => (
                             <div
+                              onClick={handleClick}
                               className={`${
                                 active
                                   ? "bg-custom-orange text-white"
@@ -129,7 +131,7 @@ function NotificationButton({
                               </div>
                               <div>
                                 <button
-                                  onClick={handleClick}
+                                  //onClick={handleClick}
                                   className={`${
                                     active
                                       ? "bg-custom-orange text-white"
@@ -146,6 +148,7 @@ function NotificationButton({
                         </Menu.Item>
                         <Menu.Item>
                           <div
+                            onClick={deleteNotification}
                             className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md p-1 text-sm`}
                           >
                             <div>
@@ -153,7 +156,6 @@ function NotificationButton({
                             </div>
                             <div>
                               <button
-                                onClick={deleteNotification}
                                 className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md px-2 py-2 text-sm`}
                               >
                                 Remove this notification

@@ -38,7 +38,7 @@ export default function ComboboxComponent({
         <div className="relative mt-1 -z-8">
           {/* <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"> */}
           <Combobox.Input
-            className="w-full border-2 py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:outline-none focus:ring-0 border-custom-orange rounded-lg"
+            className="w-full border-2 py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:outline-none focus:ring-0 border-gray-400 rounded-lg"
             displayValue={(dataObj: any) => dataObj.name}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={placeholder}

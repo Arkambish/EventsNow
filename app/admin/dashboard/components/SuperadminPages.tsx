@@ -72,13 +72,13 @@ export default function SuperadminPages({
                   />
                   <button
                     onClick={serachData.handleAllBtn}
-                    className="p-1 border-2 ring-2 ring-custom-orange   rounded-sm"
+                    className="p-1 border-2 ring-2 ring-gray-400   rounded-sm"
                   >
                     <MdOutlineDensitySmall />
                   </button>
                   <button
                     onClick={serachData.handleSearchBtn}
-                    className="p-1 border-2 ring-2 ring-custom-orange   rounded-sm"
+                    className="p-1 border-2 ring-2 ring-gray-400   rounded-sm"
                   >
                     <IoSearch />
                   </button>
@@ -89,16 +89,16 @@ export default function SuperadminPages({
         )}
       </div>
       {/* refresh button */}
-      <div className="border-2 ml-5 button p-1 rounded-xl w-24">
+      <div className="border-2 mt-6  border-slate-400 ml-5 button p-1 rounded-xl w-24 xl:ms-16">
         <button onClick={reloadPage}>
-          <div className="flex text-slate-500  justify-center items-center gap-3">
+          <div className="flex text-slate-500   justify-center items-center gap-1">
             <div>Refresh</div>
             <MdRefresh size={20} />
           </div>
         </button>
       </div>
 
-      <div className=" md:w-[550px] lg:w-[720px] xl:w-[900px] ms-4 mt-6 xl:ms-12 h-80 overflow-y-auto">
+      <div className=" md:w-[550px] lg:w-[720px] xl:w-[900px] ms-4 mt-6 xl:ms-12  h-96 overflow-y-auto">
         {customComponent}
       </div>
     </div>

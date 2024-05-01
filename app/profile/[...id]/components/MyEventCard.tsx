@@ -12,7 +12,7 @@ interface MyEventCardProps {
 
 function MyEventCard({ image, OrgName, btn, id }: MyEventCardProps) {
   return (
-    <div className="max-w-lg w-fit lg:max-w-full  lg:flex rounded-lg border border-gray-200 overflow-hidden">
+    <div className="max-w-lg  w-fit lg:max-w-full  lg:flex rounded-lg border border-gray-200 overflow-hidden">
       <div className="relative h-52 lg:h-auto lg:w-52">
         <Image
           alt={"event image"}

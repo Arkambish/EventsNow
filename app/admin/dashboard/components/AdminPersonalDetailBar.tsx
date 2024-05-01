@@ -80,7 +80,7 @@ export default function AdminPersonDetailsBar({
       <div
         className={`${
           role === "admin" ? "bg-custom-orange " : "bg-[#D9D9D9]"
-        } my-2 sm:my-4 border-2  justify-between ms-2 sm:ms-0 mt-6  w-full   xl:w-[900px] lg:w-[720px]  col-span-2 grid grid-cols-12  rounded-[5px] mb-2 shadow-3xl`}
+        } my-2 sm:my-4 border-2  justify-between ms-4 sm:ms-4 mt-6  w-full      col-span-2 grid grid-cols-12  rounded-[5px] mb-2 shadow-3xl overflow-x-hidden`}
       >
         <div className="text-base font-light lg:col-span-3  hidden lg:flex ms-2">
           {name}
