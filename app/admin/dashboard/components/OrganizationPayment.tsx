@@ -20,7 +20,7 @@ export default function OrganizationPayment({
   return (
     <div>
       <div
-        className={`grid grid-cols-1 lg:grid-cols-11 md:grid-cols-1  sm:m-6  ${value} h-auto md:h-auto lg:h-32 rounded-lg bg-[#D9D9D9] mt-6 ms-10 lg:ms-0 md:ms-20 shadow-3xl`}
+        className={`grid grid-cols-1 lg:grid-cols-11 md:grid-cols-1  sm:m-6  ${value} h-auto md:h-auto lg:h-32 rounded-lg bg-[#D9D9D9] mt-6 ms-4 lg:ms-4 md:ms-20 shadow-3xl`}
       >
         <div className="col-span-full lg:col-span-3 md:col-span-full overflow-hidden  rounded-lg ">
           <Image
