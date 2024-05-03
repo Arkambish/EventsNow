@@ -8,6 +8,7 @@ import { UserType } from "@/app/Type";
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
+    console.log(data);
     
 
     await connectMongoDB();
@@ -78,7 +79,7 @@ export async function POST(request: NextRequest) {
         message: "failed to register user to  event ",
       });
     }
-
+  
     return NextResponse.json(registerUser, { status: 201 });
   } catch (e) {
     return NextResponse.json(
