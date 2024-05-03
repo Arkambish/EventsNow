@@ -308,12 +308,12 @@ export default function Setting() {
             <SelectTrigger
               {...(!isEditingAdvanced && { disabled: true })}
               value={bank}
-              className="w-3/4 ring-2 ring-custom-orange "
+              className="w-3/4 "
             >
               <SelectValue placeholder={bank ? bank : "Select bank"} />
             </SelectTrigger>
             <SelectContent className="bg-white text-black font-medium		 cursor-pointer">
-              <SelectItem value="Sampath">Sampath</SelectItem>
+              <SelectItem  value="Sampath">Sampath</SelectItem>
               <SelectItem value="BOC">BOC</SelectItem>
               <SelectItem value="peoples">peoples</SelectItem>
               <SelectItem value="NSB">NSB</SelectItem>
@@ -337,7 +337,7 @@ export default function Setting() {
             <SelectTrigger
               {...(!isEditingAdvanced && { disabled: true })}
               value={branch}
-              className="w-3/4 ring-2 ring-custom-orange "
+              className="w-3/4  "
             >
               <SelectValue placeholder={branch ? branch : "Select branch"} />
             </SelectTrigger>
@@ -366,7 +366,7 @@ export default function Setting() {
             <SelectTrigger
               {...(!isEditingAdvanced && { disabled: true })}
               value={accountName}
-              className="w-3/4 ring-2 ring-custom-orange "
+              className="w-3/4  "
             >
               {" "}
               <SelectValue
@@ -380,7 +380,7 @@ export default function Setting() {
           </Select>
           <Input
             {...(!isEditingAdvanced && { disabled: true })}
-            className="w-3/4 ring-2 ring-custom-orange "
+            className="w-3/4 focus:ring-1 focus:ring-slate-300 "
             value={accountNumber}
             placeholder="Account Number "
             onChange={(e) => handleAcccountNumber(e.target.value)}
@@ -426,14 +426,14 @@ export default function Setting() {
             <SelectTrigger
               {...(!isEditingAdvanced && { disabled: true })}
               value={payout}
-              className="w-3/4 ring-2 ring-custom-orange "
+              className="w-3/4 "
             >
               {" "}
               <SelectValue
                 placeholder={payout ? payout : "Select Payment Frequency"}
               />
             </SelectTrigger>
-            <SelectContent className="bg-white text-black font-medium		 cursor-pointer">
+            <SelectContent className="bg-white text-black font-medium		 ">
               <SelectItem value="1 week">1 week</SelectItem>
               <SelectItem value="2 week">2 week</SelectItem>
               <SelectItem value="3 week">3 week</SelectItem>

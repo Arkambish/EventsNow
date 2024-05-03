@@ -6,6 +6,7 @@ import Event from "@/models/eventModel";
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
     const data = await request.json();
+    console.log(data.id)
     await connectMongoDB();
 
     const updatedEvent = await Event.findByIdAndUpdate(data.id, {
@@ -16,16 +17,18 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         eventStartDate: data.eventStartedDate,
         startTime: data.startTime,
         endTime: data.endTime,
-        isPublished: data.eventVisibility,
         dashboardImage: data.eventDashboardImage,
         coverImage: data.eventCoverImage,
         eventEndDate: data.eventEndDate,
       },
     });
+ 
 
-    if (!updatedEvent) {
-      return NextResponse.json({ message: "failed to update event details" });
-    }
+   
+     
+     
+      
+    
 
     return NextResponse.json(
       { message: "Event details updated successfully" },

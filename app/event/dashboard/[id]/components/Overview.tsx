@@ -68,7 +68,7 @@ export default function Overview() {
             image="revenue.svg"
             text="Total revenue"
             linkToDetails="totalRevenue"
-            details={event.income ? event.income : "Loading..."}
+            details={event.income !== null ? event.income : "Loading..."}
           />
         </div>
       </div>

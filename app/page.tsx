@@ -43,7 +43,7 @@ export default async function Home() {
   const event = await getEvent();
 
   return (
-    <div>
+    <div className="">
       <HeroSection />
 
       <EventViewMode event={event} />
@@ -53,7 +53,7 @@ export default async function Home() {
       </div>
 
       {data.length !== 0 && (
-        <div className="flex flex-wrap ms-12">
+        <div className="flex-wrap justify-center items-center flex ">
           {data.slice(0, 6).map((e: EventType) => (
             <EventCardDisabled
               key={e._id}

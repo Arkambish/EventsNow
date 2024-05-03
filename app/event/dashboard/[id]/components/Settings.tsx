@@ -68,10 +68,35 @@ export default function Settings() {
   }, [id]);
 
   const handleUpdate = async () => {
+    console.log(
+  //     eventname,
+  //       eventType,
+  //        eventDate,
+  // eventStartTime,
+  //   endTime,
+  //        eventLocation,
+  //       eventDashboardImage,
+  //     eventCoverImage,
+  //      eventEndDate,
+       id
+
+    )
+    // const data ={
+    //   eventName: eventname,
+    //       selectedTab: eventType,
+    //       eventStartedDate: eventDate,
+    //       startTime: eventStartTime,
+    //       endTime: endTime,
+    //       eventLocation: eventLocation,
+    //       eventDashboardImage: eventDashboardImage,
+    //       eventCoverImage: eventCoverImage,
+    //       eventEndDate: eventEndDate,
+    // }
     try {
       const res = await FetchPut({
-        endpoint: `event/updateEvent/${id}`,
+        endpoint: `event/updateEvent`,
         body: {
+          id:id,
           eventName: eventname,
           selectedTab: eventType,
           eventStartedDate: eventDate,
@@ -84,13 +109,11 @@ export default function Settings() {
         },
       });
 
-      if (!res.ok) {
-        error("Error updating event");
-        return;
-      }
+     
 
-      success("Event updated successfully");
+      success(res.message);
     } catch (e) {
+      console.log(e);
       error(e);
     }
 
