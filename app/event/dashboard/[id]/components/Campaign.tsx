@@ -31,7 +31,7 @@ export default function Campaign() {
         </div>
         <button 
         onClick={() => setStatus("registeredusers")}
-         className=" border-2 border-custom-orange rounded-md hover:bg-[#fff1ed]  text-custom-orange font-mono text-base font-normal  drop-shadow-md my-auto px-2 py-0.5 ">
+         className=" border-2  rounded-md hover:bg-slate-100   text-custom-orange font-mono text-base font-normal  drop-shadow-md my-auto px-2 py-0.5 ">
           Registered Users
         </button>
         </div>

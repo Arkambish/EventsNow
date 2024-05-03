@@ -25,7 +25,7 @@ function Profsetti({ name, type, value, setFname }: Details) {
           type={type}
           placeholder={`Enter your ${name}`}
           autoComplete="email"
-          className={`block w-full p-2  rounded-md focus:outline-none py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-custom-orange placeholder:text-gray-300  focus:ring-2 focus:ring-inset focus:ring-custom-orange sm:text-sm sm:leading-6 ${
+          className={`block w-full p-2  rounded-md focus:outline-none py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-slate-100 placeholder:text-gray-300  focus:ring-1 focus:ring-inset  focus:ring-slate-300 text-sm sm:leading-6 ${
             name == "Primary email address" ? "lowercase" : "capitalize"
           }`}
         />

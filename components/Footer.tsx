@@ -135,7 +135,7 @@ export default function Footer() {
                   EventNow’s Privacy
                 </div>
               </div>
-              <button className="flex flex-start sm:w-1/2 w-full mb-4 sm:w-1/2 ">
+              <button className="flex flex-start  w-full mb-4 sm:w-1/2 ">
                 <input
                   type="submit"
                   value="Submit"
