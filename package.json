@@ -75,6 +75,7 @@
     "react-qr-scanner": "^1.0.0-alpha.11",
     "react-share": "^5.1.0",
     "react-switch": "^7.0.0",
+    "react-to-print": "^2.15.1",
     "validator": "^13.11.0",
     "zod": "^3.22.4"
   },

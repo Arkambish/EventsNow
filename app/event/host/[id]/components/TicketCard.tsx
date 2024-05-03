@@ -30,42 +30,35 @@ export default function TicketCard({
 }: TicketMockupProps) {
   const [visible, setVisible] = useState(false);
 
-  // const updateQuantity = (): void => {
-  //   setTotalPrice(totalPrice + price);
-
-  // const ticket = {
-  //   typeId,
-  //   type,
-  // };
-
-  //   setTicketArray((prev) => [...prev, ticket]);
-  // };
-
+  
   const updateQuantity = (): void => {
     const ticket = {
       typeId,
       type,
     };
-    setVisible(true);
+    
     setTotalPrice(totalPrice + price);
     setTicketArray((prev) => [...prev, ticket]);
   };
 
   const removeQuantity = (): void => {
-    // totalPrice !== 0 ? setTotalPrice(totalPrice - price) : setTotalPrice(0);
-    // setTicketArray((prevTicketArray) => {
-    //   const updatedTicketArray = [...prevTicketArray];
-    //   const ticketIndex = updatedTicketArray.indexOf(type);
-    //   if (ticketIndex !== -1) {
-    //     // Decrement quantity if the ticket exists
-    //     updatedTicketArray[ticketIndex] =
-    //       updatedTicketArray[ticketIndex] === "1"
-    //         ? ""
-    //         : String(Number(updatedTicketArray[ticketIndex]) - 1);
-    //   }
-    //   return updatedTicketArray;
-    // });
-  };
+    const ticket = {
+      typeId,
+      type,
+    };
+    //check if the ticket is already in the array
+    const index = ticketArray.findIndex((item) => item.typeId === typeId);
+    //if the ticket is in the array then remove it from the array
+    if (index !== -1) {
+      setTotalPrice(totalPrice - price);
+      setTicketArray(ticketArray.filter((item) => item.typeId !== typeId));
+    }
+   
+  };    
+
+
+
+
 
   return (
     <div className=" rounded-[10px] border-2 border-[#E2E2E2] pb-4">
@@ -120,3 +113,4 @@ export default function TicketCard({
     </div>
   );
 }
+

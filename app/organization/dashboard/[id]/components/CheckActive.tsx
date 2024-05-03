@@ -8,7 +8,7 @@ import Image from "next/image";
 import OrganizationRequestPending from "@/components/OrganizationRequestPending";
 import Dashboard_Btn from "@/app/organization/dashboard/[id]/components/Dashboard_Btn";
 import Spinner from "@/components/Spinner";
-
+import Style from "./../../../../navbar.module.css";
 import {
   HiOutlineHome,
   HiOutlineServer,
@@ -42,7 +42,7 @@ export default function CheckActive() {
       ) : (
         <div>
           {isActive ? (
-            <div className="2xl:flex  2xl:justify-center">
+            <div className="">
               <div className="grid max-w-[1500px]   grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5">
                 <div
                   className={`lg:col-span-2   md:block hidden ${
@@ -55,7 +55,7 @@ export default function CheckActive() {
                 </div>
 
                 <div
-                  className={`lg:col-span-7 col-span-12  ${
+                  className={`lg:col-span-7 col-span-12 h-full   ${
                     isSlideBar ? "md:col-span-6 " : "md:col-span-8 "
                   }`}
                 >
@@ -68,7 +68,7 @@ export default function CheckActive() {
                   <Profile />
                 </div>
               </div>
-              {/* 
+
               <div
                 className={`fixed 
             -left-14
@@ -91,9 +91,14 @@ export default function CheckActive() {
               </div>
               <div>
                 <div
+                  style={{
+                    animation: `${
+                      isDashboardOpen ? Style.slideIn : Style.slideOut
+                    } 0.5s forwards`,
+                  }}
                   className={
                     isDashboardOpen
-                      ? "absolute shadow-2xl flex flex-col  left-0 top-20 w-[65%] sm:hidden h-100vh bg-[#ecf0fc]  ease-in duration-50"
+                      ? "absolute shadow-2xl flex flex-col  left-0 top-0 w-[65%] sm:hidden h-full overflow-hidden bg-[#ecf0fc]  ease-in duration-50"
                       : "fixed left-[100%] top-0 p-10 ease-in duration-50"
                   }
                 >
@@ -151,7 +156,7 @@ export default function CheckActive() {
                     </Dashboard_Btn>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
           ) : (
             <OrganizationRequestPending />

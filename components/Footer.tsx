@@ -1,7 +1,80 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import { useState } from "react";
+import { z } from "zod";
+import { error, success } from "@/util/Toastify";
+
 
 export default function Footer() {
+  const [first_name, setFirst_name] = useState<string>("");
+  const [last_name, setLast_name] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phone_number, setPhone_number] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [checked, setChecked] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+
+  const validateform = z.object({
+    first_name: z.string().min(1, {message : "First name is required"}),
+    last_name: z.string().min(1),
+    email: z.string().email({message: "Invalid email"}),
+    phone_number: z.string().min(10,{message: "Phone number is required"}),
+    description: z.string().max(1000,{message: "Description is required"}),
+    checked: z.boolean().refine(value => value === true, { message: "Do you agree to the terms and conditions?" }),
+  })
+
+  async function submitForm(e: any) {
+    try {
+
+      e.preventDefault();
+      setIsSubmitting(true);
+
+      const data = {
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        description,
+        checked
+      }
+      
+      const result = validateform.safeParse(data);
+
+      if (result.success) {
+       const res = await fetch(`/api/v1/contact`, 
+       {
+        method: "POST",
+        mode : "cors",
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (!res.ok) {
+      alert("There is an error submitting datails");
+      setIsSubmitting(false);
+      return;
+    } 
+    success("Contact form submitted successfully");
+
+    setFirst_name("");
+    setLast_name("");
+    setEmail("");
+    setPhone_number("");
+    setDescription("");
+    setChecked(false);
+    setIsSubmitting(false);
+
+  }else{
+    error("There is an error submitting the form");
+  }
+  setIsSubmitting(false);
+}catch{
+  error("There is an error submitting the form");
+  setIsSubmitting(false);
+}
+}
   return (
     <>
       <div className="h-12 bg-myBrown"></div>
@@ -94,6 +167,10 @@ export default function Footer() {
                 <div className="mb-2">First Name</div>
                 <input
                   type="text"
+                  name="first_name"
+                  id="first_name"
+                  value={first_name}
+                  onChange={(e) => setFirst_name(e.target.value)}
                   className="rounded-lg p-1 bg-custom-lightorange border-solid border-2 border-gray-600 mr-2"
                 />
               </div>
@@ -101,6 +178,10 @@ export default function Footer() {
                 <div className="mb-2">Last Name</div>
                 <input
                   type="text"
+                  name="last_name"
+                  id="last_name"
+                  value={last_name}
+                  onChange={(e) => setLast_name(e.target.value)}
                   className="rounded-lg p-1 bg-custom-lightorange border-solid border-2 border-gray-600 outline-none "
                 />
               </div>
@@ -108,6 +189,10 @@ export default function Footer() {
                 <div className="mb-2">Email</div>
                 <input
                   type="text"
+                  name="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="rounded-lg p-1 bg-custom-lightorange border-solid border-2 border-gray-600 outline-none "
                 />
               </div>
@@ -115,6 +200,10 @@ export default function Footer() {
                 <div className="mb-2">Phone number</div>
                 <input
                   type="text"
+                  name="phone_number"
+                  id="phone_number"
+                  value={phone_number}
+                  onChange={(e) => setPhone_number(e.target.value)}
                   className="rounded-lg p-1 bg-custom-lightorange border-solid border-2 border-gray-600 outline-none "
                 />
               </div>
@@ -122,6 +211,9 @@ export default function Footer() {
                 <div className="mb-2">What would you like to discuss</div>
                 <textarea
                   name="description"
+                  id="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   rows={5}
                   cols={40}
                   className="rounded-lg bg-custom-lightorange border-solid border-2 border-gray-600 outline-none w-full"
@@ -129,16 +221,23 @@ export default function Footer() {
               </div>
 
               <div className="flex sm:flex-row  mb-4">
-                <input type="checkbox" />
+                <input 
+                  type="checkbox"
+                  name="checked"
+                  id="checked"
+                  value={checked.toString()}
+                  onChange={(e) => setChecked(e.target.checked)}
+                />
                 <div className="text-black text-xs ml-2 w-100">
                   By checking and clicking Submit, you are agreeing to
                   EventNow’s Privacy
                 </div>
               </div>
-              <button className="flex flex-start  w-full mb-4 sm:w-1/2 ">
+              <button className="flex flex-start sm:w-1/2 w-full mb-4 sm:w-1/2 ">
                 <input
                   type="submit"
                   value="Submit"
+                  onClick={submitForm}
                   className="bg-custom-orange text-white sm:text-base text-xs sm:w-24  w-12 sm:p-2 p-1 rounded-2xl "
                 />
               </button>

@@ -25,10 +25,12 @@ export default function Reports() {
             <GetReportComponent
               reportName="ATTENDANCE REPORT"
               image="attendanceReport"
-              getReport={getAttendanceReport}
+              // getReport={getAttendanceReport}
+              linkToDetails="totalAttendence"
               size={80}
             />
           </CheckPermission>
+          
           <CheckPermission
             provideGlobalPermission={["Manage Payments"]}
             provideEventPermission={["Manage Payments"]}
@@ -36,7 +38,8 @@ export default function Reports() {
             <GetReportComponent
               reportName="REVENUE REPORT"
               image="revenueReport"
-              getReport={getRevenueReport}
+              // getReport={getRevenueReport}
+              linkToDetails="totalRevenue"
               size={95}
             />
           </CheckPermission>

@@ -79,7 +79,7 @@ export default function PersonDetailsBar({
 
   return (
     //parent div eken 3n 2k kiyala gaththe meka.wenas krla gann onnm.mn dila tynne meke mulu loku div ekatam col-span-2 kiyala-ashan
-    <div className=" item-center flex-wrap  bg-[#D9D9D9] w-full flex justify-between  xl:grid xl:grid-cols-12 items-center  rounded-[5px]">
+    <div className=" item-center flex-wrap  bg-[#D9D9D9] w-full flex justify-between   items-center  rounded-[5px]">
       <div className="text-base font-light md:ml-2 ml-0  md:mb-0 mb-1 xl:col-span-5	">
         {name}
       </div>
@@ -127,7 +127,7 @@ export default function PersonDetailsBar({
             </Dialog.Title>
             <div className="mt-4">
               <p className="text-sm text-gray-500">
-                <div className="flex w-full  justify-between ">
+                <div className="flex sm:w-full w-fit sm:gap-0 gap-2 sm:flex-row flex-col justify-between ">
                   {/* <button onClick={deletePermission}> */}
                   <button>
                     <div className="flex  rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
