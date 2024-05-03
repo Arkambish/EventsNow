@@ -19,6 +19,10 @@ export async function DELETE() {
     // await Attendant.deleteMany();
     // await BuyTicket.deleteMany();
     // await Post.deleteMany();
+    // await Event.deleteMany();
+    // await Organization.deleteMany();
+    // await Permission.deleteMany();
+    // await User.deleteMany();
 
     return NextResponse.json({ message: "data delete success" });
   } catch (e) {

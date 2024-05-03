@@ -24,6 +24,7 @@ import { FaCircle } from "react-icons/fa";
 import { UserType } from "@/app/Type";
 import Notification from "./Notification";
 import { FetchGet } from "@/hooks/useFetch";
+import Style from "./../../app/navbar.module.css";
 
 export type OrganizationProps = {
   map: any;
@@ -397,6 +398,11 @@ export default function NavBar() {
                 </div>
               </div>
               <div
+                style={{
+                  animation: `${
+                    isMenuOpen ? Style.slideInFromRight : Style.slideOutToRight
+                  } 0.5s forwards`,
+                }}
                 className={
                   isMenuOpen
                     ? "fixed shadow-2xl  right-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0fc] p-5 ease-in duration-50 z-50"
