@@ -75,18 +75,18 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
 
   return (
     <div>
-      <div className="mb-10 flex flex-col md:flex-row lg:flex-row items-end justify-between">
-        <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8 ">
+      <div className="mb-10 flex flex-col md:flex-row lg:flex-row  items-center justify-between">
+        <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg  ms-8">
           Upcoming Events
         </div>
-        <div className="ms-12 sm:ms-0 justify-center items-center flex flex-col md:flex-col lg:flex-row gap-2 md:gap-2 lg:gap-6 mr-0 md:mr-20 lg:mr-20 text-gray-600">
+        <div className="ms-12 sm:ms-0 justify-center items-center flex flex-col md:flex-col lg:flex-row gap-2 md:gap-2 lg:gap-6 mr-0 md:mr-20 lg:mr-20 text-gray-600 ">
           <div className=" mt-2 md:mt-6 lg:mt-10 flex flex-row">
-            <div className=" ml-4">
+            <div className=" sm:ml-4">
               <Select onValueChange={handleSortByChange}>
                 <SelectTrigger
                   // onChange={(e) => handleEventChange(e)}
                   // value={selectedEvent}
-                  className="w-[150px] ring-0 h-8 ring-custom-orange font-semibold"
+                  className="w-[150px] ring-0 ring-slate-100 h-8 font-semibold"
                 >
                   <SelectValue placeholder="Sort By" />
                 </SelectTrigger>
@@ -120,8 +120,8 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
             </div>
           </div>
           <div
-            className="mt-2 md:mt-2
-          font-semibold text-md lg:mt-10 flex flex-row gap-4 mr-20"
+            className="mt-2 md:mt-2 
+          font-semibold text-md lg:mt-10 flex flex-row gap-4 sm:mr-20"
           >
             View As
             <div className="mt-1 flex flex-row gap-3 cursor-pointer">

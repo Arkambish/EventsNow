@@ -59,11 +59,14 @@ function Notification({
 
           {dropdownOpen && (
             <div
-              className="absolute right-0 mt-2 h-[300px]  bg-gray-800 rounded-md shadow-lg  max-h-80  z-20 overflow-y-auto  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
+              // className="absolute right-0 mt-2 h-[300px]  bg-gray-800 rounded-md shadow-lg  max-h-80  z-20 overflow-y-auto  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
+
+              className="absolute right-0 mt-2 h-[300px]  bg-gray-800 rounded-md shadow-lg  max-h-80  z-20 overflow-y-scroll  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
+              
               style={{ width: 300 }}
             >
               <div className="sticky top-0 z-10">
-                <div className="bg-gray-700 text-lg text-white font-khand w-full p-2">
+                <div className="bg-gray-700 text-base text-white font-khand w-full py-2 px-5">
                   Notifications
                 </div>
               </div>
