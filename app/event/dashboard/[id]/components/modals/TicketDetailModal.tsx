@@ -58,12 +58,10 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
   };
 
   return (
-    <div className="sm:flex sm:items-start mb-2">
+    <div className="sm:flex sm:items-start mb-2 ">
       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
         <div className="mt-2 mb-4">
           <div className="flex flex-col space-y-4">
-            <div className="mb-4">Enter Ticket Details</div>
-
             <label htmlFor="price">Price:</label>
             <input
               type="text"
@@ -145,7 +143,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
                       open();
                     }}
                   >
-                    <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-2xl">
+                    <div className="p-1 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-2xl">
                       <FaCloudUploadAlt />
                       upload image
                     </div>

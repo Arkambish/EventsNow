@@ -68,7 +68,12 @@ export default function SendEmail() {
             Event changes
           </button>
         </div>
-        {generalUpdate && <GeneralUpdate setGenaralUpdate={setGenaralUpdate} />}
+        {generalUpdate && (
+          <GeneralUpdate
+            generalUpdate={generalUpdate}
+            setGenaralUpdate={setGenaralUpdate}
+          />
+        )}
       </div>
     </Container>
     // <Container>

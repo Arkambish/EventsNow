@@ -127,29 +127,31 @@ const NavBarProfile = memo(function NavBarProfile({
                 No organization
               </div>
             ) : (
-              organization.map((org: OrganizationProps) => (
-                <Link
-                  onClick={() => setShowProfile(false)}
-                  key={org.id}
-                  href={`/organization/dashboard/${org.id}`}
-                  className="flex px-4  justify-center items-center py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
-                >
-                  <div className="flex-shrink-0">
-                    <Image
-                      src={org.image}
-                      alt="profile picture"
-                      width={20}
-                      height={10}
-                      className="rounded-full w-auto h-auto"
-                    />
-                  </div>
-                  <div className="w-full ps-3">
-                    <div className="text-gray-500 text-sm font-medium text-md mb-1.5 dark:text-gray-400">
-                      {org.name}
+              <div className="max-h-36 overflow-auto navBar-profile">
+                {organization.map((org: OrganizationProps) => (
+                  <Link
+                    onClick={() => setShowProfile(false)}
+                    key={org.id}
+                    href={`/organization/dashboard/${org.id}`}
+                    className="flex px-4  justify-center items-center py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    <div className="flex-shrink-0">
+                      <Image
+                        src={org.image}
+                        alt="profile picture"
+                        width={20}
+                        height={10}
+                        className="rounded-full w-auto h-auto"
+                      />
                     </div>
-                  </div>
-                </Link>
-              ))
+                    <div className="w-full ps-3">
+                      <div className="text-gray-500 text-sm font-medium text-md mb-1.5 dark:text-gray-400">
+                        {org.name}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             )}
           </div>
 
