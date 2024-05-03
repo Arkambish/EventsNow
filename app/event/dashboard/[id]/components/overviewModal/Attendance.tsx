@@ -2,9 +2,18 @@ import React, { memo } from "react";
 import { UseEventContext } from "../../EventDashContext";
 import { EventContextType } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
+import { useReactToPrint } from 'react-to-print';
+import { useRef } from "react";
 
 export default memo(function AttendanceDetails() {
   const { setStatus, attendances } = UseEventContext() as EventContextType;
+  const componentpdf = useRef(null);
+
+  const generatePDF = useReactToPrint({
+    content: () => componentpdf.current,
+    documentTitle: "Attendance Report",
+    
+  });
 
   return (
     <>
@@ -50,6 +59,8 @@ export default memo(function AttendanceDetails() {
                     Attendance of the event
                   </div>
                   <div className=" h-60 overflow-auto">
+           
+                    <div ref={componentpdf} className="w-full ">
                     <table className="w-full text-left text-sm font-light">
                       <thead className="border-b w-full font-medium ">
                         <tr>
@@ -111,6 +122,7 @@ export default memo(function AttendanceDetails() {
                         {}
                       </tbody>
                     </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -120,7 +132,10 @@ export default memo(function AttendanceDetails() {
             <div className="text-lg font-bold	 text-white">
               Toral Attendence: {attendances.length}
             </div>
-            <button className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
+            <button
+             className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+             onClick={generatePDF}
+             >
               <FaPrint />
               Print
             </button>

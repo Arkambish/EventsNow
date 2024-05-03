@@ -31,6 +31,8 @@ export async function POST(req: NextRequest) {
     eventEndDate,
     endTime,
   });
+
+  
   if (!event) {
     return NextResponse.json(
       { message: "Event Creation Failed" },

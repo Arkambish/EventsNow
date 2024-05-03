@@ -2,19 +2,31 @@
 import React from "react";
 import ContainerWithStroke from "./ContainerWithStroke";
 import Image from "next/image";
+import { UseEventContext } from "../EventDashContext";
+import { EventContextType } from "../EventDashContext";
+
 interface Props {
   reportName: string;
   image: string;
-  getReport: () => void;
+  linkToDetails: string;
   size: number;
 }
 
 export default function GetReportComponent({
   reportName,
   image,
-  getReport,
   size,
+  linkToDetails,
 }: Props) {
+
+  const {setStatus} = UseEventContext() as EventContextType;
+
+  function getReport() {
+    linkToDetails === "totalAttendence" && setStatus("attendance");
+    linkToDetails === "totalTicket" && setStatus("attendance");
+    linkToDetails === "totalRevenue" && setStatus("revenue");
+  }
+
   return (
     <ContainerWithStroke>
       <div className="sm:flex justify-between lg:pr-20 pl-4 text-left sm:text-center mb-4">
