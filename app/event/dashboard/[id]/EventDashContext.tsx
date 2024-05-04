@@ -242,7 +242,10 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       const data = await res.json();
+  
+      
       return data;
+
     };
 
     const getUser = async () => {

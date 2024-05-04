@@ -40,7 +40,7 @@ export default function CheckActive() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+        <div className="lg:px-16">
           {isActive ? (
             <div>
               <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 ">

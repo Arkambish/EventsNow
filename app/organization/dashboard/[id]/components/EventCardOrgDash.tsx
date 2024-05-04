@@ -76,21 +76,21 @@ function EventCardOrgDash({
   };
 
   return (
-    <div className=" w-full  bg-[#D9D9D9] my-4  max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 ">
+    <div className="  w-full border-2 my-4  max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 ">
       <div
         className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
         style={{ backgroundImage: `url(${img as string})` }}
       ></div>
       <div className="lg:col-span-4 rounded-r-xl pt-1 justify-start items-start">
-        <div className="  flex justify-between px-6 my-2">
+        <div className="  flex justify-between px-6 mt-2 mb-1">
           <div className="  text-[#353535] font-semibold sm:font-bold text-lg sm:text-24">
             {name}
           </div>
           <div className="flex flex-col gap-3">
-            <div className=" w-56 text-right">
+            <div className=" text-right">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+                  <Menu.Button className="inline-flex w-full justify-center rounded-full  px-3 py-2 text-xl font-medium text-black hover:bg-slate-100 focus:outline-none">
                     <HiOutlineDotsVertical />
                   </Menu.Button>
                 </div>
@@ -164,7 +164,7 @@ function EventCardOrgDash({
           </div>
         </div>
 
-        <div className="grid  gap-2 pl-4 pb-4">
+        <div className="grid  gap-2 pl-6 pb-6">
           <div className=" flex  items-center">
             <BiMapPin size={22} />
             <div className="ml-2 my-auto  text-[#353C4E] text-sm font-medium">
@@ -184,7 +184,7 @@ function EventCardOrgDash({
             </div>
           </div>
         </div>
-        <div className="flex sm:hidden content-center ">
+        {/* <div className="flex sm:hidden content-center ">
           <button className="button text-center mb-8 flex gap-2 bg-[#D47151] text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM ">
             <svg
               width="21"
@@ -269,7 +269,7 @@ function EventCardOrgDash({
               </g>
             </svg>
           </button>
-        </div>
+        </div> */}
       </div>
       {isOpen && (
         <Modal setIsOpen={setIsOpen} isOpen={isOpen}>

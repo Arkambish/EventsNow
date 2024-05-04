@@ -7,13 +7,15 @@ import { MdArrowBack } from "react-icons/md";
 import { error } from "@/util/Toastify";
 import TeamMemberCard from "./TeamMemberCard";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
+import Spinner from "@/components/Spinner";
 
 export default function RegisteredUsersList() {
   const { setStatus,event } =
     UseEventContext() as EventContextType;
   const [allRegisteredUsers, setAllRegisteredUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    
+    setLoading(true);
     const fetchAllRegisteredUsers = async () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/event/getRegisteredUsersForEvent`,
         {
@@ -29,8 +31,9 @@ export default function RegisteredUsersList() {
         return;
       }
       const data = await res.json();
-      console.log(data);
+      
       setAllRegisteredUsers(data);
+      setLoading(false);
     }
     fetchAllRegisteredUsers();
    
@@ -52,16 +55,16 @@ export default function RegisteredUsersList() {
           You can see all user that registered for this event here
         </div>
         <div className="">
-          <div className="grid gap-3">
+          {!loading ? <div className="grid gap-3">
             {allRegisteredUsers && allRegisteredUsers.length > 0 ? allRegisteredUsers.map((user:any) => (
               <TeamMemberCard
                 key={user._id}
                 name={user.userId.firstName + " " + user.userId.lastName}
                 email={user.userId.email}
                 />
-            )) : <EmptyStateComponent message="No registered users" />}
+            )) : <EmptyStateComponent message="No registered users" />} </div>: <Spinner/>}
             
-          </div>
+          
         </div>
       </div>
     </Container>

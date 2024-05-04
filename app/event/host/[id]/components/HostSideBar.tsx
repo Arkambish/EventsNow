@@ -119,6 +119,7 @@ export default function HostSideBar({
   }, [params.id]);
 
   async function userRegistrationForEventHandler() {
+    console.log("userRegistrationForEventHandler");
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/registerUserForEvent`,
       {
@@ -144,12 +145,14 @@ export default function HostSideBar({
       endpoint: `notification/getAllNotifications`,
       body: data,
     });
-    console.log(sendNotification);
-    if (!sendNotification.ok) {
+    
+    if (sendNotification.message!="Notification created successfully") {
       error("Error registration for event");
       return;
     }
     if (!res.ok) {
+      console.log("res");
+
       error("Error registration for event");
       return;
     }
@@ -446,7 +449,7 @@ export default function HostSideBar({
               disabled={preview ? true : false}
               onClick={() => setIsRemoveWishListModal(true)}
               // onClick={removeFromWishlistHandler}
-              className="flex button xl:w-36 w-32 xl:h-16 h-12 bg-[#455273] rounded-r-2xl items-center xl:px-4"
+              className="button  xl:h-14 h-12 bg-[#455273] rounded-r-xl items-center xl:px-4 px-2"
             >
               <div className="p-1 flex">
                 <div className="text-white">
