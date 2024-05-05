@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request, { params }: any) {
   try {
     const orgId = params.id;
+    console.log(orgId);
 
     // Fetch events belonging to the organization
     const events = await Event.find({ organizationId: orgId });

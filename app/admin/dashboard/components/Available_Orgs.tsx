@@ -67,12 +67,14 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
         );
         if (!getEventResponse.ok) {
           error("Failed to fetch event data");
+          return;
         }
         const data = await getEventResponse.json();
         setTotalRegisteredUsersCount(data.totalRegisteredUsersCount);
         setEvents(data.events);
       } catch (e) {
         error("Error fetching event data");
+        return;
       }
     };
     getCount();
