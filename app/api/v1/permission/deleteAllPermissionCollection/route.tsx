@@ -2,10 +2,13 @@ import connectMongoDB from "@/lib/mongo/mongodb";
 import Attendant from "@/models/attendees";
 import BuyTicket from "@/models/buyTicket";
 import Comment from "@/models/comment";
+import Contact from "@/models/contacts";
 import Event from "@/models/eventModel";
+import Notification from "@/models/notification";
 import Organization from "@/models/organizationModel";
 import Permission from "@/models/permissionModel";
 import Post from "@/models/post";
+import RegisteredUser from "@/models/registeredUserModel";
 import TicketType from "@/models/ticketType";
 import User from "@/models/userModel";
 
@@ -23,6 +26,9 @@ export async function DELETE() {
     // await Organization.deleteMany();
     // await Permission.deleteMany();
     // await User.deleteMany();
+    // await RegisteredUser.deleteMany();
+    // await Notification.deleteMany();
+    // await Contact.deleteMany();
 
     return NextResponse.json({ message: "data delete success" });
   } catch (e) {

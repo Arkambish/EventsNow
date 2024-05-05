@@ -175,19 +175,13 @@ export default function NavBar() {
               setUserActive(true);
               setUser(data);
               const organization = await fetch(
-                `${process.env.NEXT_PUBLIC_URL}/api/v1/user/userOrganization`,
-                {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ id: data._id }),
-                }
+                `${process.env.NEXT_PUBLIC_URL}/api/v1/user/userOrganization/${data._id}`
               );
 
               if (!organization.ok) {
                 setIsLoading(false);
                 return;
               }
-              console.log(data._id);
 
               const organizationData = await organization.json();
 
