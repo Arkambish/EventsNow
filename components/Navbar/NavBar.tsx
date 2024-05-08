@@ -206,11 +206,11 @@ export default function NavBar() {
         <div>
           {/* check data has loaded */}
           {isLoading ? (
-            <nav className="dark:bg-navWhite ">
+            <nav className="dark:bg-navWhite  backdrop-blur	">
               <Spinner />
             </nav>
           ) : (
-            <nav className="bg-navWhite ">
+            <nav className="bg-navWhite backdrop-blur-3xl		">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
                 {/*  */}
                 {pathname.startsWith("/event/dashboard") ? (

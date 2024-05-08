@@ -11,7 +11,7 @@ NavBarButton) {
   return (
     <li>
       <button className="button">
-        <div className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-eventBrown md:p-0 dark:text-white md:dark:hover:text-eventBrown dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+        <div className="block py-2 px-3 text-gray-900 rounded bg-gray-100 md:bg-transparent md:border-0 md:text-eventBrown md:p-0  md:dark:text-eventBrown dark:bg-gray-700 dark:text-white md:dark:bg-transparent">
           {text}
         </div>
       </button>
