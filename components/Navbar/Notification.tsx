@@ -44,7 +44,7 @@ function Notification({
             onClick={toggleDropdown}
             className="relative z-10 block rounded-md  p-1 focus:outline-none"
           >
-            <MdNotifications size={23} className="text-white" />
+            <MdNotifications size={23} className=" text-eventBrown" />
 
             {/* {notificationExists && (
               <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-600 animate-pulse  rounded-full -top-2 -end-3 "></div>

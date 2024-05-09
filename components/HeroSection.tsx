@@ -53,17 +53,17 @@ export default function HeroSection() {
           <div className="justify-center items-center pb-10 mx-10 flex md:py-8 xl:py-8">
             <button
               onClick={() => info()}
-              className=" md:w-48 w-12 md:h-11 h-8 rounded-l-full  bg-[#D47151]  flex  "
+              className=" md:w-48 w-12 md:h-11 h-8 rounded-l-full justify-center items-center bg-[#D47151]  flex gap-3 "
             >
               <Image
-                className="self-center mx-auto"
+                className="self-center "
                 src={"/images/heroSection/search.png"}
                 width={20}
                 height={20}
                 alt="search"
               />
 
-              <div className=" hidden md:grid  text-white text-lg mx-1 my-auto">
+              <div className=" hidden md:grid  text-white text-center text-lg mx-1 my-auto">
                 search events
               </div>
             </button>

@@ -229,7 +229,7 @@ export default function NavBar() {
                   </Link>
                 ) : (
                   <Link href="/">
-                    <button className="button ">
+                    <button className="button hover:opacity-85">
                       <div className="flex items-center gap-3">
                         <Image
                           src="/images/reusableComponents/nav-logo.svg"
@@ -238,7 +238,7 @@ export default function NavBar() {
                           height={20}
                         />
 
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-eventBrown    ">
+                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-eventBrown   ">
                           EventNow
                         </span>
                       </div>
@@ -275,7 +275,7 @@ export default function NavBar() {
                       <li>
                         <Link href={"/"}>
                           <button
-                            className=" block button py-2 px-3 text-white  rounded md:bg-transparent md:text-eventBrown-700 md:p-0 dark:text-eventBrown md:dark:text-eventBrown"
+                            className=" block button py-2 px-3 text-white  rounded md:bg-transparent md:text-eventBrown-700 md:p-0 dark:text-eventBrown md:dark:text-eventBrown hover:opacity-85"
                             aria-current="page"
                           >
                             Home

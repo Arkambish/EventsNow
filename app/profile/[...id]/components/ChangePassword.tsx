@@ -78,9 +78,9 @@ const ChangePassword = () => {
   }
 
   return (
-    <div className="sm:col-span-4 capitalize mt-6">
+    <div className="sm:col-span-4 capitalize mt-6 mx-4">
       <h2 className="text-xl font-semibold">Change Password</h2>
-      <form onSubmit={handleSubmit} className="mt-4">
+      <form onSubmit={handleSubmit} className="mt-4 sm:col-span-4">
         <div className="mb-4">
           <label
             htmlFor="current-password"
@@ -94,7 +94,7 @@ const ChangePassword = () => {
             placeholder="Enter your Current Password"
             value={currentPassword}
             onChange={handleCurrentPasswordChange}
-            className="block w-full rounded-md border-2 border-custom-orange p-2 text-gray-900 placeholder-gray-400  focus:ring-custom-orange focus:border-custom-orange focus:outline-none sm:text-sm"
+            className="w-full px-3 py-1.5 border rounded-md focus:outline-none focus:border-slate-700  my-3 sm:text-sm"
           />
         </div>
 
@@ -112,12 +112,12 @@ const ChangePassword = () => {
               value={newPassword}
               placeholder="Enter your New Password"
               onChange={handleNewPasswordChange}
-              className="block w-full rounded-md border-2 border-custom-orange p-2 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange focus:outline-none sm:text-sm pr-10" // Added padding for the toggle button
+              className="w-full px-3 py-1.5 border rounded-md focus:outline-none focus:border-slate-700  my-3 sm:text-sm " // Added padding for the toggle button
             />
             <button
               type="button"
               onClick={toggleConfirmPasswordVisibility}
-              className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+              className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none "
             >
               {showConfirmPassword ? (
                 <HiEyeOff className="h-5 w-5 text-gray-400" />
@@ -141,7 +141,7 @@ const ChangePassword = () => {
             value={confirmPassword}
             placeholder="Re-Enter your New Password"
             onChange={handleConfirmPasswordChange}
-            className="block w-full rounded-md border-2 border-custom-orange p-2 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange focus:outline-none sm:text-sm"
+            className="w-full px-3 py-1.5 border rounded-md focus:outline-none focus:border-slate-700  my-3 sm:text-sm"
           />
         </div>
         {errorMessage && (

@@ -34,15 +34,12 @@ export default function LoginFormBasic() {
     password: z.string().min(6, "Password must be at least 6 characters long"),
     passwordConfirm: z
       .string()
-      .min(6, "Password must be at least 6 characters long")
-      .refine((value) => value === password, {
-        message: "Passwords do not match",
-        path: ["passwordConfirm"],
-      }),
-  });
+  }).refine((data) => data.password === data.passwordConfirm, {path: ["passwordConfirm"],
+  message: "Password Doesnot Match"
+});
   async function sendLoginData(e: any) {
     e.preventDefault();
-    setIsSubmitting(true);
+    
     try {
       const data = {
         firstName,
@@ -53,6 +50,7 @@ export default function LoginFormBasic() {
       };
       const result = validateSignUpForm.safeParse(data);
       if (result.success) {
+        setIsSubmitting(true);
         const user = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/v1/user/exist`,
           {
@@ -137,7 +135,7 @@ export default function LoginFormBasic() {
             id="firstName"
             value={firstName}
             onChange={(e) => setFristName(e.target.value)}
-            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:border-slate-700  my-3"
             placeholder="Enter your first name  "
           ></input>
 
@@ -148,7 +146,7 @@ export default function LoginFormBasic() {
             id="lastName"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:border-slate-700  my-3"
             placeholder="Enter your last name  "
           ></input>
 
@@ -159,7 +157,7 @@ export default function LoginFormBasic() {
             id="email"
             value={email}
             onChange={(e) => setemail(e.target.value)}
-            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:border-slate-700 my-3"
             placeholder="Enter your email "
           ></input>
 
@@ -170,7 +168,7 @@ export default function LoginFormBasic() {
             id="password"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
-            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:border-slate-700  my-3"
             placeholder="Create password  "
           ></input>
 
@@ -181,18 +179,18 @@ export default function LoginFormBasic() {
             id="cPassword"
             value={passwordConfirm}
             onChange={(e) => setCPassword(e.target.value)}
-            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:outline-custom-orange my-3"
+            className="w-full px-3 py-[4px] border rounded-md focus:outline-none focus:border-slate-700  my-3"
             placeholder="Confirm password  "
           ></input>
 
           {isSubmitting ? (
-            <button className="my-3 button flex text-center mt-12 mb-10 xl:mb-20  px-2 justify-center bg-custom-orange text-white font-semibold rounded-md  text-base font-mono ">
+            <button className="hover:opacity-85 my-3 button flex text-center mt-8 p-1 justify-center w-full content-center bg-custom-orange text-white font-semibold rounded-md  text-base font-mono">
               <div className="flex gap-2 justify-center items-center">
-                <div> Creating</div>
+                <div> CREATING</div>
                 <Image
                   src="/images/reusableComponents/Loading.svg"
                   alt="loading btn"
-                  width={40}
+                  width={25}
                   height={40}
                 />
               </div>
@@ -200,7 +198,7 @@ export default function LoginFormBasic() {
           ) : (
             <button
               type="submit"
-              className="my-3 button flex text-center mt-8 p-1 justify-center w-full bg-custom-orange text-white font-semibold rounded-md  text-base font-mono"
+              className=" hover:opacity-85 my-3 button flex text-center mt-8 p-1 justify-center w-full content-center bg-custom-orange text-white font-semibold rounded-md  text-base font-mono"
             >
               CREATE ACCOUNT
             </button>
