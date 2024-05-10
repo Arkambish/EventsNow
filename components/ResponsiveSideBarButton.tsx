@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 
-interface Dashboard_Btn {
+interface ResponsiveSideBarButton {
   onClick?: () => void;
   text: string;
   isSlideBar?: boolean;
@@ -10,25 +10,25 @@ interface Dashboard_Btn {
   isActive?: boolean;
 }
 
-export default function Dashboard_Btn({
+export default function ResponsiveSideBarButton({
   onClick,
   isSlideBar,
   text,
   children,
   isActive,
-}: Dashboard_Btn) {
+}: ResponsiveSideBarButton) {
   return (
     <button
       onClick={onClick}
       className={`${
         isActive && " text-custom-orange rounded-lg"
-      } h-10 my-5 w-full  hover:rounded-lg  hover:opacity-80  `}
+      } h-10 my-3 w-full  hover:rounded-lg  hover:opacity-80  `}
     >
       <div className="hover:text-custom-orange flex lg:gap-3 xl:gap-5 gap-5 ml-5	">
-        {children}
+        <div className="text-gray-700">{children}</div>
         {isSlideBar ? (
           <div
-            className={` font-sans hover:text-custom-orange text-center text-base font-semibold text-black  leading-normal ${
+            className={`  hover:text-custom-orange text-center text-lg  text-black  leading-normal ${
               isActive && "text-custom-orange"
             }`}
           >
