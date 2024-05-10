@@ -29,14 +29,14 @@ export default function Dashboard_Btn({
       <div
         className={`${
           isActive && " text-custom-orange rounded-lg"
-        } flex gap-7 mb-12 sm:ms-8 md:ms-8 lg:ms-0 cursor-pointer hover:opacity-70`}
+        } flex gap-4 mb-12 sm:ms-8 md:ms-8 lg:ms-0 cursor-pointer hover:opacity-70`}
         onClick={onClick}
       >
-        <div className="">{icon}</div>
+        <div className="flex content-center">{icon}</div>
 
         {isSlideBar ? (
           <div
-            className={` font-sans text-center text-base font-semibold   leading-normal ${
+            className={` font-sans text-center text-base flex content-center font-semibold   leading-normal ${
               isActive && "text-custom-orange"
             }`}
           >

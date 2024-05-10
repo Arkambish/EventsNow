@@ -206,7 +206,7 @@ export default function NavBar() {
         <div>
           {/* check data has loaded */}
           {isLoading ? (
-            <nav className="bg-slate-100 backdrop-blur-sm	">
+            <nav className="bg-slate-100 opacity-85">
               <Spinner />
             </nav>
           ) : (

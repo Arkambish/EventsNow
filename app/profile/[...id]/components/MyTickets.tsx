@@ -11,12 +11,12 @@ export type TicketType = {
 export default function MyTickets() {
   const { ticket } = useProf() as any as TicketType;
   return (
-    <div className="flex flex-col md:flex-row rounded-lg shadow-3xl h-screen bg-[#fff] pt-8  justify-start items-start  ">
-      <div className="w-fit ml-0">
-        <div className="text-3xl font-semibold text-custom-orange font-IBM ml-[55px]">
+    <div className="flex flex-col md:flex-row rounded-lg bg-slate-100 pt-8  h-full w-full  ">
+      <div className="ml-0 w-full p-6">
+        <div className="text-3xl font-semibold text-stone-600 font-IBM ml-[55px]">
           My Tickets
         </div>
-        <div className="mt-10 ml-5 overflow-y-scroll overflow-auto flex flex-wrap flex-row">
+        <div className="w-full  overflow-y-scroll sm:max-h-80 xl:max-h-96 scroll-smooth">
           {ticket.length > 0 ? (
             ticket.map((ticket: any) => (
               <TicketMockup

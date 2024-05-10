@@ -216,13 +216,13 @@ export default function Settings() {
     setProfileImage("");
   }
   return (
-    <div className="flex flex-col md:flex-row rounded-lg shadow-3xl  bg-[#fff] pt-8  justify-start items-start  ">
+    <div className="flex flex-col md:flex-row rounded-lg   bg-slate-100 pt-8  justify-start items-start  ">
       <div className="w-full ml-0 ">
-        <div className="text-3xl font-semibold  mx-auto text-custom-orange font-IBM ml-[55px]">
+        <div className="text-3xl font-semibold  mx-auto text-stone-600 font-IBM ml-[55px]">
           Settings
         </div>
-        <div className="bg-white w-full sm:w-4/5 md:w-4/5 lg:w-4/5 mx-auto ">
-          <div className="">
+        <div className=" w-full px-10 mx-auto  ">
+          <div className=" overflow-y-scroll sm:max-h-80 xl:max-h-96 scroll-smooth">
             <div className="pb-12">
               <div className=" grid grid-cols-1 mt-2 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <form className="sm:col-span-4 mx-4">
@@ -300,9 +300,7 @@ export default function Settings() {
                             open();
                           }}
                         >
-
                           <div className="p-1 mt-4 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-2xl">
-
                             <FaCloudUploadAlt />
                             upload image
                           </div>
@@ -334,9 +332,9 @@ export default function Settings() {
                 <div className="sm:col-span-4 mx-4">
                   <button
                     onClick={toggleOtherInfo}
-                    className="text-custom-orange hover:underline mt-1"
+                    className="text-dashBtnBlue hover:underline mt-1"
                   >
-                    {showOtherInfo ? "Hide" : "Show"} Other Informations
+                    {showOtherInfo ? "Hide" : "Show"} Other Informations ...
                   </button>
                 </div>
 
@@ -400,7 +398,7 @@ export default function Settings() {
                             id="gender"
                             name="gender"
                             autoComplete="gender-name"
-                            className="block w-full rounded-md border-0 capitalize py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-custom-orange focus:ring-2 focus:ring-inset focus:ring-custom-orange sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md  capitalize py-1.5 text-gray-900 shadow-sm ring-0 focus:border-slate-700 border ring-inset  focus:ring-0 focus:ring-inset sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option
                               className="text-gray-100"
@@ -430,14 +428,10 @@ export default function Settings() {
                             id="tShirt"
                             name="tShirt"
                             autoComplete="tShirt-name"
-                            className="block w-full rounded-md border-0 capitalize py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-custom-orange focus:ring-2 focus:ring-inset focus:ring-custom-orange sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md  capitalize py-1.5 text-gray-900 shadow-sm ring-0 focus:border-slate-700 border ring-inset  focus:ring-0 focus:ring-inset sm:max-w-xs sm:text-sm sm:leading-6 "
                           >
                             <option
-                              className="text-gray-100"
-                              value=""
-                              disabled
-                              selected
-                              hidden
+                              
                             >
                               Select T-Shirt Size
                             </option>
@@ -463,11 +457,11 @@ export default function Settings() {
               </div>
             </div>
           </div>
-          <div className=" flex items-center justify-start gap-x-6 sm:col-span-3 mx-4">
+          <div className=" flex items-center justify-start py-5 gap-x-6 sm:col-span-3 mx-4 ">
             <button
               onClick={handleSave}
               type="submit"
-              className="bg-custom-orange button text-white py-2 px-4 rounded-md shadow-sm hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2 sm:text-sm"
+              className=" bg-dashBtnBlue button text-white py-2 px-4 rounded-md shadow-sm hover:opacity-85 focus:outline-none focus:ring-0 sm:text-sm"
             >
               Save
             </button>
