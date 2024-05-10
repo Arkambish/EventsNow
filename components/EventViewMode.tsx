@@ -92,25 +92,25 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
                 </SelectTrigger>
                 <SelectContent className="bg-white text-black">
                   <SelectItem value="location">
-                    <div className="hover:text-custom-orange flex gap-2 justify-center items-center">
+                    <div className=" flex gap-2 justify-center items-center">
                       <HiOutlineLocationMarker size={18} />
                       <div>Location</div>
                     </div>
                   </SelectItem>
                   <SelectItem value="name">
-                    <div className="hover:text-custom-orange flex gap-2">
+                    <div className="flex gap-2">
                       <HiOutlinePencil size={18} />
                       <div>Name</div>
                     </div>
                   </SelectItem>
                   <SelectItem value="organization">
-                    <div className="hover:text-custom-orange flex gap-2 justify-center items-center">
+                    <div className="flex gap-2 justify-center items-center">
                       <HiOutlineLibrary size={18} />
                       <div>Organization</div>
                     </div>
                   </SelectItem>
                   <SelectItem value="date">
-                    <div className="hover:text-custom-orange flex gap-2 justify-center items-center">
+                    <div className=" flex gap-2 justify-center items-center">
                       <HiOutlineCalendar size={18} />
                       <div>Date</div>
                     </div>

@@ -42,7 +42,7 @@ function Notification({
         <div className="relative max-h-80">
           <button
             onClick={toggleDropdown}
-            className="relative z-10 block rounded-md  p-1 focus:outline-none"
+            className="relative z-10 block rounded-md  p-1 focus:outline-none hover:opacity-85"
           >
             <MdNotifications size={23} className=" text-eventBrown" />
 

@@ -201,16 +201,16 @@ export default function NavBar() {
   );
 
   return (
-    <div>
+    <div className={pathname=="/"?`fixed w-full z-10 `:""}>
       {newUserPath ? null : (
         <div>
           {/* check data has loaded */}
           {isLoading ? (
-            <nav className="dark:bg-navWhite  backdrop-blur	">
+            <nav className="bg-slate-100 backdrop-blur-sm	">
               <Spinner />
             </nav>
           ) : (
-            <nav className="bg-navWhite backdrop-blur-3xl		">
+            <nav className="  bg-slate-100 opacity-85">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
                 {/*  */}
                 {pathname.startsWith("/event/dashboard") ? (
@@ -238,7 +238,7 @@ export default function NavBar() {
                           height={20}
                         />
 
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-eventBrown   ">
+                        <span className="self-center text-2xl font-semibold whitespace-nowrap text-eventBrown   ">
                           EventNow
                         </span>
                       </div>
@@ -250,7 +250,7 @@ export default function NavBar() {
                   className="hidden w-full md:flex md:w-auto  items-end"
                   id="navbar-default"
                 >
-                  <ul className=" justify-center items-center text-xl font-medium flex   p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white  md:dark:bg-navWhite dark:border-gray-700">
+                  <ul className=" justify-center items-center text-xl font-medium flex   p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:border-gray-700">
                     <>
                       {pathname.startsWith("/event/dashboard") && (
                         <div>
@@ -275,7 +275,7 @@ export default function NavBar() {
                       <li>
                         <Link href={"/"}>
                           <button
-                            className=" block button py-2 px-3 text-white  rounded md:bg-transparent md:text-eventBrown-700 md:p-0 dark:text-eventBrown md:dark:text-eventBrown hover:opacity-85"
+                            className=" block button py-2 px-3   rounded md:bg-transparent md:text-eventBrown-700 md:p-0  text-eventBrown hover:opacity-85"
                             aria-current="page"
                           >
                             Home
@@ -333,14 +333,14 @@ export default function NavBar() {
                           {user.role === "admin" && (
                             <Link href={"/admin/dashboard"}>
                               <Login
-                                titleOfbutton={"ADMIN DASHBOARD"}
+                                titleOfbutton={"Admin Dashboard "}
                                 image={"createevent.svg"}
                               />
                             </Link>
                           )}
                           <Link href={"/createorganization"}>
                             <Login
-                              titleOfbutton={"HOST EVENT"}
+                              titleOfbutton={"Host event"}
                               image={"createevent.svg"}
                             />
                           </Link>
@@ -392,11 +392,11 @@ export default function NavBar() {
                 </div>
               </div>
               <div
-                style={{
-                  animation: `${
-                    isMenuOpen ? Style.slideInFromRight : Style.slideOutToRight
-                  } 0.5s forwards`,
-                }}
+                // style={{
+                //   animation: `${
+                //     isMenuOpen ? Style.slideInFromRight : Style.slideOutToRight
+                //   } 0.5s forwards`,
+                // }}
                 className={
                   isMenuOpen
                     ? "fixed shadow-2xl  right-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0fc] p-5 ease-in duration-50 z-50"

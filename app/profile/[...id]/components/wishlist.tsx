@@ -8,14 +8,14 @@ export type EventDetails = {
 
 export default function MyProfile() {
   const { eventDetails } = useProf() as any as EventDetails;
-  console.log(eventDetails);
+ 
   return (
-    <div className="flex flex-col h-screen md:flex-row rounded-lg shadow-3xl bg-[#fff] pt-8 justify-start items-start gap-12 overflow-y-scroll">
-      <div className="w-full ml-0 overflow-y-auto">
-        <div className="text-3xl font-semibold text-custom-orange font-IBM ml-[55px]">
+    <div className="flex flex-col  md:flex-row rounded-lg  bg-slate-100 pt-8 justify-start items-start gap-12 h-full">
+      <div className="w-full ml-0">
+        <div className="text-3xl font-semibold text-stone-600 font-IBM ml-[55px]">
           Wish List
         </div>
-        <div className="m-6 ">
+        <div className="m-6   overflow-y-scroll sm:max-h-80 xl:max-h-96 scroll-smooth">
           {eventDetails.length > 0 ? (
             eventDetails.map((e: any) => (
               <WishListCard
@@ -32,6 +32,9 @@ export default function MyProfile() {
             ))
           ) : (
             <EmptyStateComponent message="No events found in the wishlist." />
+            
+            
+           
           )}
         </div>
       </div>

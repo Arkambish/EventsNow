@@ -24,7 +24,7 @@ export default function Content() {
 
   const { status } = useProf() as ContentProps;
   return (
-    <div>
+    <div className="h-full">
       {status === "myProfile" && <MyProfile />}
       {status === "myTickets" && <MyTickets />}
       {status === "wishList" && <Wishlist />}
