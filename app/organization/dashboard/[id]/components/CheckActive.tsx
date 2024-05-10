@@ -19,6 +19,8 @@ import {
 
 import Profile from "./Profile";
 import { OrgContext } from "@/app/Type";
+import ResponsiveSideBarButton from "@/components/ResponsiveSideBarButton";
+import { IoIosClose } from "react-icons/io";
 
 export default function CheckActive() {
   const {
@@ -33,6 +35,10 @@ export default function CheckActive() {
     isLoading,
     isActive,
     status,
+    editedName,
+    team,
+    events,
+    organizationImage,
   } = useOrg() as OrgContext;
 
   return (
@@ -70,14 +76,14 @@ export default function CheckActive() {
               </div>
 
               <div
-                className={`fixed 
+                className={` absolute 
             -left-14
             top-40`}
               >
                 <button onClick={() => setIsDashboardOpen(!isDashboardOpen)}>
                   <div className="  mr-5 h-10  md:hidden  flex justify-center items-center rounded-full   ">
-                    <div className="bg-myBrown w-[100px] h-[55px] flex items-center   rounded-full">
-                      <div className="bg-custom-orange w-[95px] h-[46px] flex justify-end pr-3 rounded-full">
+                    <div className="bg-slate-400 w-[100px] h-[55px] flex items-center   rounded-full">
+                      <div className="bg-slate-300 w-[95px] h-[46px] flex justify-end pr-3 rounded-full">
                         <Image
                           src="/images/reusableComponents/responsiveMenuBar.svg"
                           alt="menu bar"
@@ -98,62 +104,93 @@ export default function CheckActive() {
                   }}
                   className={
                     isDashboardOpen
-                      ? "absolute shadow-2xl flex flex-col  left-0 top-0 w-[65%] sm:hidden h-full overflow-hidden bg-[#ecf0fc]  ease-in duration-50"
+                      ? "absolute shadow-2xl flex flex-col  left-0 top-0 w-[55%] sm:hidden h-full overflow-hidden bg-[#ecf0fc]  ease-in duration-50"
                       : "fixed left-[100%] top-0 p-10 ease-in duration-50"
                   }
                 >
                   <button onClick={() => setIsDashboardOpen(false)}>
-                    <div className="mx-2 my-2 w-fit p-1 mb-3 ">
-                      <Image
-                        src="/images/reusableComponents/close.svg"
-                        alt="close"
-                        width={29}
-                        height={29}
-                      />
+                    <div className="mx-2 text-black my-2 w-fit p-1 mb-3 ">
+                      <IoIosClose size={30} />
                     </div>
                   </button>
                   <div className=" flex flex-col mx-5">
-                    <Dashboard_Btn
+                    <ResponsiveSideBarButton
                       isActive={status === "dashboard"}
                       isSlideBar={isSlideBar}
                       text="Dashboard"
                       onClick={() => handleDashboard()}
                     >
                       <HiOutlineHome size={23} />
-                    </Dashboard_Btn>
+                    </ResponsiveSideBarButton>
 
-                    <Dashboard_Btn
+                    <ResponsiveSideBarButton
                       isActive={status === "myEvents"}
                       isSlideBar={isSlideBar}
                       text="Events"
                       onClick={() => handleMyEvent()}
                     >
                       <HiOutlineServer size={23} />
-                    </Dashboard_Btn>
-                    <Dashboard_Btn
+                    </ResponsiveSideBarButton>
+                    <ResponsiveSideBarButton
                       isActive={status === "report"}
                       isSlideBar={isSlideBar}
                       text="Report"
                       onClick={() => handleReport()}
                     >
                       <HiOutlineDocumentText size={23} />
-                    </Dashboard_Btn>
-                    <Dashboard_Btn
+                    </ResponsiveSideBarButton>
+                    <ResponsiveSideBarButton
                       isActive={status === "myTeam"}
                       isSlideBar={isSlideBar}
                       text="Team"
                       onClick={() => handleMyTeam()}
                     >
                       <HiOutlineUsers size={23} />
-                    </Dashboard_Btn>
-                    <Dashboard_Btn
+                    </ResponsiveSideBarButton>
+                    <ResponsiveSideBarButton
                       isActive={status === "setting"}
                       isSlideBar={isSlideBar}
                       text="Setting"
                       onClick={() => handleSetting()}
                     >
                       <HiOutlineCog size={23} />
-                    </Dashboard_Btn>
+                    </ResponsiveSideBarButton>
+                  </div>
+                  <div className=" border-t-2 pb-5 pt-5 bg-slate-200 rounded-md w-100 h-100  flex flex-col items-center gap-2 mx-5">
+                    <div>
+                      <Image
+                        src={organizationImage}
+                        width={70}
+                        height={50}
+                        alt="organization pic"
+                        className="rounded-lg"
+                      />
+                    </div>
+
+                    <div className="flex flex-col items-start">
+                      <h4 className="block mb-2 font-sans lg:text-2xl text-base antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                        {editedName}
+                      </h4>
+
+                      <div className="md:text-sm lg:text-base font-medium	 flex justify-center items-center  gap-2">
+                        <Image
+                          src="/images/organization/TeamOfUsers.svg"
+                          alt="user count"
+                          width={30}
+                          height={30}
+                        />
+                        User Count -{team.length}
+                      </div>
+                      <div className="md:text-sm lg:text-base font-medium	 flex justify-center items-center gap-3">
+                        <Image
+                          src="/images/organization/Bookmark_light.svg"
+                          alt="user count"
+                          width={26}
+                          height={26}
+                        />
+                        Event Count -{events.length}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

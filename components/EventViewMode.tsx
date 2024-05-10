@@ -75,7 +75,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
 
   return (
     <div>
-      <div className="mb-10 flex flex-col md:flex-row lg:flex-row  items-center justify-between">
+      <div className="mb-10 flex flex-col md:flex-row lg:flex-row  sm:items-center items-start justify-between">
         <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg  ms-8">
           Upcoming Events
         </div>
@@ -121,7 +121,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
           </div>
           <div
             className="mt-2 md:mt-2 
-          font-semibold text-md lg:mt-10 flex flex-row gap-4 sm:mr-20"
+          font-semibold text-md lg:mt-10 lg:flex hidden flex-row gap-4 sm:mr-20"
           >
             View As
             <div className="mt-1 flex flex-row gap-3 cursor-pointer">
