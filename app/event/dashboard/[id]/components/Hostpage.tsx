@@ -6,6 +6,8 @@ import Template from "./hostPage/Template";
 import Template1 from "./hostPage/Template1";
 import { UseEventContext } from "../EventDashContext";
 import { EventContextType } from "@/app/Type";
+import Modal from "@/components/Modal";
+import { Dialog } from "@headlessui/react";
 export default function Hostpage() {
   const { setIsPageBuilder } = UseEventContext() as EventContextType;
 
@@ -71,10 +73,52 @@ export default function Hostpage() {
               </button>
             </ContainerWithStroke>
             {showTemplate && (
-              <Template
-                setShowTemplate={setShowTemplate}
-                handleTemplate1={handleTemplate1}
-              />
+              <Modal setIsOpen={setShowTemplate} isOpen={showTemplate}>
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900"
+                >
+                  select template
+                </Dialog.Title>
+                <div className="flex gap-5 mb-10 p-5">
+                  <button onClick={handleTemplate1}>
+                    <div className="flex flex-col justify-center items-center gap-3">
+                      <Image
+                        src={"/images/createEvent/eventRegFormImg.png"}
+                        alt="template1"
+                        width={40}
+                        height={40}
+                      />
+                      template 1
+                    </div>
+                  </button>
+                  <button>
+                    <div className="flex flex-col justify-center items-center gap-3">
+                      <Image
+                        src={"/images/createEvent/eventRegFormImg.png"}
+                        alt="template1"
+                        width={40}
+                        height={40}
+                      />
+                      template 2
+                    </div>
+                  </button>
+                </div>
+
+                <div className="mt-4 flex gap-2">
+                  <button
+                    type="button"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    onClick={() => setShowTemplate(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </Modal>
+              // <Template
+              //   setShowTemplate={setShowTemplate}
+              //   handleTemplate1={handleTemplate1}
+              // />
             )}
 
             {isTemplate1 && <Template1 setIsTemplate1={setIsTemplate1} />}

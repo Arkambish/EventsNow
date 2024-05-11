@@ -59,5 +59,22 @@
 }
 
 .navBar-profile::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-} */
+  background: #555; /* Color of the scrollbar thumb on hover 
+}*/
+
+.responsive-navBar-profile::-webkit-scrollbar {
+  width: 0px; /* Width of the entire scrollbar */
+}
+
+.responsive-navBar-profile::-webkit-scrollbar-track {
+  background: #ffffff; /* Color of the scrollbar track */
+}
+
+.responsive-navBar-profile::-webkit-scrollbar-thumb {
+  background: #bdbbbb; /* Color of the scrollbar thumb */
+  border-radius: 3px; /* Roundness of the scrollbar thumb */
+}
+
+.responsive-navBar-profile::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb on hover */
+}

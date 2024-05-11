@@ -118,7 +118,7 @@ const NavBarProfile = memo(function NavBarProfile({
           </div>
 
           <div
-            className={`divide-y ${
+            className={`divide-y  ${
               isOrganizationShowButton ? "hidden" : ""
             } divide-gray-100 dark:divide-gray-700`}
           >

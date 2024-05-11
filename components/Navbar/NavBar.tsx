@@ -238,7 +238,7 @@ export default function NavBar() {
                           height={20}
                         />
 
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap text-eventBrown   ">
+                        <span className="self-center lg:flex md:hidden flex text-2xl font-semibold whitespace-nowrap text-eventBrown    ">
                           EventNow
                         </span>
                       </div>
@@ -291,31 +291,6 @@ export default function NavBar() {
                     {/* when user exist */}
                     {userActive && (
                       <>
-                        {/* crete event button */}
-
-                        {/* <button
-                          type="button"
-                          className={`${
-                            pathname.startsWith("/admin") ? "hidden" : "flex"
-                          } button  relative h-8 flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-custom-orange rounded-lg `}
-                        >
-                          <svg
-                            className="w-5 h-5"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 20 16"
-                          >
-                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
-                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
-                          </svg>
-                          <span className="sr-only animate-ping">
-                            Notifications
-                          </span>
-                          <div className="absolute inline-flex items-center justify-center w-6 h-4 text-xs font-bold text-white bg-red-600  rounded-full -top-2 -end-3 ">
-                            2
-                          </div>
-                        </button> */}
                         <Notification
                           notification={notification}
                           setNotification={setNotification}
@@ -399,7 +374,7 @@ export default function NavBar() {
                 // }}
                 className={
                   isMenuOpen
-                    ? "fixed shadow-2xl  right-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0fc] p-5 ease-in duration-50 z-50"
+                    ? "fixed shadow-2xl blur-20  right-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0fc] p-5 ease-in duration-50 z-50"
                     : "fixed left-[100%] top-0 p-10 ease-in duration-50"
                 }
               >
