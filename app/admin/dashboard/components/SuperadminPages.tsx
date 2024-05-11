@@ -41,12 +41,12 @@ export default function SuperadminPages({
 
   return (
     <div
-      className="font-mono h-full shadow-3xl rounded-lg  flex flex-col ms-0 sm:ms-2 "
+      className="font-mono h-full  pt-8  rounded-lg bg-slate-100  flex flex-col ms-0 sm:ms-2 "
       onClick={handleClick}
     >
       <div className="flex flex-col md:flex-row lg:flex-row sm:justify-center md:justify-between lg:justify-between ">
-        <div className="flex flex-col p-4 sm:justify-center md:justify-start  lg:justify-start xl:ms-12 ">
-          <div className="text-custom-orange text-3xl font-semibold mb-8 ">
+        <div className="flex flex-col p-4 sm:justify-center md:justify-start  lg:justify-start xl:ms-12  ">
+          <div className="text-stone-600 text-3xl font-semibold mb-8  ">
             {title}
           </div>
           <div className="text-normal font-normal flex text-[#353535]  ">
@@ -89,9 +89,9 @@ export default function SuperadminPages({
         )}
       </div>
       {/* refresh button */}
-      <div className="border-2   border-slate-400 ml-5 button p-1 rounded-xl w-24 xl:ms-16">
+      <div className="border-0 ml-5 button p-1 mb-3 rounded-xl w-24 xl:ms-16">
         <button onClick={reloadPage}>
-          <div className="flex text-slate-500   justify-center items-center gap-1">
+          <div className="flex text-slate-500 text-sm  justify-center items-center gap-1">
             <div>Refresh</div>
             <MdRefresh size={20} />
           </div>
@@ -99,7 +99,7 @@ export default function SuperadminPages({
       </div>
 
       <div className="h-full">
-        <div className=" md:w-[550px] lg:w-[720px] xl:w-[900px] ms-4 mt-6 xl:ms-12  h-[15rem] overflow-y-auto">
+        <div className=" md:w-[550px] lg:w-[720px] xl:w-[900px] ms-4  xl:ms-12  h-[24rem] overflow-y-scroll">
           {customComponent}
         </div>
       </div>

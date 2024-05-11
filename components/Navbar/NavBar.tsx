@@ -163,6 +163,7 @@ export default function NavBar() {
 
             const data = await getUser({ email });
 
+
             const notificationData = await FetchGet({
               endpoint: `notification/getNotification/${data._id}`,
             });

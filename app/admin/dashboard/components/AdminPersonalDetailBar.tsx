@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,Fragment } from "react";
 import Modal from "@/components/Modal";
 import BlacklistModalContent from "./modals/BlacklistModal";
 import MakeAdminModalContent from "./modals/MakeAdminModal";
@@ -7,6 +7,7 @@ import { UserType } from "@/app/Type";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { success } from "@/util/Toastify";
 import { error } from "@/util/Toastify";
+import { HiOutlineDotsVertical } from "react-icons/hi"
 
 interface PresonDetailsBar {
   name: string;
@@ -79,8 +80,8 @@ export default function AdminPersonDetailsBar({
     <div>
       <div
         className={`${
-          role === "admin" ? "bg-custom-orange " : "bg-[#D9D9D9]"
-        } my-2 sm:my-4 border-2  justify-between ms-4 sm:ms-4 mt-6  w-full      col-span-2 grid grid-cols-12  rounded-[5px] mb-2 shadow-3xl overflow-x-hidden`}
+          role === "admin" ? " bg-slate-500 text-white" : "bg-white"
+        } my-2 sm:my-4 border-2  justify-between ms-4 sm:ms-4 mt-6  w-full      col-span-2 grid grid-cols-12  rounded-[5px] mb-2 overflow-x-hidden h-8`}
       >
         <div className="text-base font-light lg:col-span-3  hidden lg:flex ms-2">
           {name}
@@ -91,50 +92,107 @@ export default function AdminPersonDetailsBar({
 
         <div className="col-span-4  flex gap-2 ">
           {role !== "admin" && (
-            <>
-              <button
+            <Menu as="div" className="relative inline-block text-left  content-center">
+            <div className="flex content-center">
+              <Menu.Button className="inline-flex w-full justify-center rounded-full    text-xl font-medium text-black hover:bg-slate-100 focus:outline-none">
+                <HiOutlineDotsVertical />
+              </Menu.Button>
+            </div>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none font-Inter font-semibold">
+                <div className="px-1 py-1 ">
+                  
+                    <Menu.Item>
+                    <button
                 onClick={() => {
                   setMakeAdminModal(true);
                   setIsOpen(true);
                 }}
-                className={`bg-custom-blue h-[34px]  rounded-[5px] w-20 md:w-32 xl:w-44  shadow-3xl`}
+                className={`group flex w-full text-stone-600 gap-3 hover:bg-slate-100 items-center rounded-md px-2 py-2 text-sm `}
               >
-                <div className="flex justify-around pl-1">
-                  <div className="lg:hidden xl:grid grid">
-                    <Image
-                      src={"/images/admin/Info_fill.png"}
-                      width={25}
-                      height={25}
-                      alt="cancel"
-                    />
-                  </div>
-                  <div className="text-white  self-center text-center text-base font-medium mr-2 hidden lg:flex ">
+                
                     Make admin
-                  </div>
-                </div>
+                  
+                
               </button>
-              <button
+                    </Menu.Item>
+                  
+                  <Menu.Item>
+                  <button
                 onClick={() => {
                   setShowBlacklistModal(true);
                   setIsOpen(true);
                 }}
-                className={`bg-custom-green h-[34px]  rounded-[5px] w-20 md:w-32 xl:w-44  shadow-3xl `}
+                className={` group flex w-full text-stone-600 gap-3 hover:bg-slate-100 items-center rounded-md px-2 py-2 text-sm `}
               >
-                <div className="flex justify-around pl-1">
-                  <div className="lg:hidden xl:grid grid">
-                    <Image
-                      src={"/images/admin/Cancel_fill.png"}
-                      width={25}
-                      height={25}
-                      alt="cancel"
-                    />
-                  </div>
-                  <div className="text-white  self-center text-center text-base font-medium xl:mr-2 hidden lg:flex ">
+                
+                 
+              
                     Block user
-                  </div>
-                </div>
+               
+               
               </button>
-            </>
+                  </Menu.Item>
+                </div>
+              </Menu.Items>
+            </Transition>
+          </Menu>
+
+
+
+
+            // <>
+            //   <button
+            //     onClick={() => {
+            //       setMakeAdminModal(true);
+            //       setIsOpen(true);
+            //     }}
+            //     className={`bg-custom-blue h-[34px]  rounded-[5px] w-20 md:w-32 xl:w-44  shadow-3xl`}
+            //   >
+            //     <div className="flex justify-around pl-1">
+            //       <div className="lg:hidden xl:grid grid">
+            //         <Image
+            //           src={"/images/admin/Info_fill.png"}
+            //           width={25}
+            //           height={25}
+            //           alt="cancel"
+            //         />
+            //       </div>
+            //       <div className="text-white  self-center text-center text-base font-medium mr-2 hidden lg:flex ">
+            //         Make admin
+            //       </div>
+            //     </div>
+            //   </button>
+            //   <button
+            //     onClick={() => {
+            //       setShowBlacklistModal(true);
+            //       setIsOpen(true);
+            //     }}
+            //     className={`bg-custom-green h-[34px]  rounded-[5px] w-20 md:w-32 xl:w-44  shadow-3xl `}
+            //   >
+            //     <div className="flex justify-around pl-1">
+            //       <div className="lg:hidden xl:grid grid">
+            //         <Image
+            //           src={"/images/admin/Cancel_fill.png"}
+            //           width={25}
+            //           height={25}
+            //           alt="cancel"
+            //         />
+            //       </div>
+            //       <div className="text-white  self-center text-center text-base font-medium xl:mr-2 hidden lg:flex ">
+            //         Block user
+            //       </div>
+            //     </div>
+            //   </button>
+            // </>
           )}
 
           {/* {role === "admin" && (

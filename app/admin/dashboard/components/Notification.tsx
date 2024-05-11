@@ -44,7 +44,7 @@ export default function Notification() {
   return (
     <>
       <SuperadminPages
-        title="All organization requests"
+        title="All Organization requests"
         description="Check organization requests and handle them."
         text="Search"
         reloadPage={reloadPage}
@@ -53,7 +53,9 @@ export default function Notification() {
             {isLoading ? (
               <Spinner />
             ) : notification.length === 0 ? (
-              <EmptyStateComponent message="No Organization" />
+              <div className="">
+                <EmptyStateComponent message="No Organization" />
+              </div>
             ) : (
               notification.map((org) => (
                 <Org_RequestHandle key={org._id} organization={org} />
