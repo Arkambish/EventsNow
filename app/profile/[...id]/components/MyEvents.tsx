@@ -15,7 +15,7 @@ export default function MyEvents() {
     }
   };
   return (
-    <div className=" md:flex-row rounded-lg   bg-slate-100 pt-8 justify-start items-start   ">
+    <div className=" md:flex-row rounded-lg    pt-8 justify-start items-start   ">
       <div className="grid ml-0  ">
         <div className=" text-3xl font-semibold text-stone-600 font-IBM ml-[55px]">
           My Events

@@ -40,9 +40,13 @@ export default function CheckActive() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="  h-full w-full sm:px-5 px-3 xl:px-0  ">
+        <div className="   w-full sm:px-5 px-3 xl:px-0  "
+        >
           {isActive ? (
-            <div className="flex justify-center w-full  ">
+            <div className="flex justify-center w-full   "
+            style={{
+              height: "88vh",
+            }}>
               <div className="grid grid-cols-12 md:gap-2 lg:gap-2 xl:gap-5   w-full md:w-auto ">
                 <div
                   className={`xl:col-span-2   md:block hidden w-full  ${

@@ -10,7 +10,7 @@ export default function MyProfile() {
   const { eventDetails } = useProf() as any as EventDetails;
  
   return (
-    <div className="flex flex-col  md:flex-row rounded-lg  bg-slate-100 pt-8 justify-start items-start gap-12 h-full">
+    <div className="flex flex-col  md:flex-row rounded-lg   pt-8 justify-start items-start gap-12 h-full">
       <div className="w-full ml-0">
         <div className="text-3xl font-semibold text-stone-600 font-IBM ml-[55px]">
           Wish List

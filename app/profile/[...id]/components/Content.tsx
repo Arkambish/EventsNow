@@ -24,7 +24,7 @@ export default function Content() {
 
   const { status } = useProf() as ContentProps;
   return (
-    <div className="h-full">
+    <div className="h-full bg-slate-100">
       {status === "myProfile" && <MyProfile />}
       {status === "myTickets" && <MyTickets />}
       {status === "wishList" && <Wishlist />}

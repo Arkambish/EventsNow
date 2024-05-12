@@ -216,7 +216,7 @@ export default function Settings() {
     setProfileImage("");
   }
   return (
-    <div className="flex flex-col md:flex-row rounded-lg   bg-slate-100 pt-8  justify-start items-start  ">
+    <div className="flex flex-col md:flex-row rounded-lg    pt-8  justify-start items-start  ">
       <div className="w-full ml-0 ">
         <div className="text-3xl font-semibold  mx-auto text-stone-600 font-IBM ml-[55px]">
           Settings
