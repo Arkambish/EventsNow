@@ -152,6 +152,9 @@ const PaymentModal = (props: PaymentModalProps) => {
                 error("server error");
                 return;
               }
+              const code = Math.floor(Math.random() * 100000000).toString().padStart(8, '0');
+              console.log(code);
+              console.log("ashan")
 
               const buyTicketData = await FetchPost({
                 endpoint: "buyTicket/userBuyTicket",
@@ -159,6 +162,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                   ticketId: ticket,
                   eventId: params.id,
                   userId: userId,
+                  ticketCode:code
                 },
               });
               console.log(buyTicketData);
