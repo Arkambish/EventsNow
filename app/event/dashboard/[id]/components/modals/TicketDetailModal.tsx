@@ -31,6 +31,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
   const { setAllTickets, id } = UseEventContext() as EventContextType;
 
   const createTicketHandlerLocal = async () => {
+    if(newTicketPrice === 0 || newTicketClass === "" || newTicketImage === "") return error("Please fill all fields");
     try {
       const newData = await FetchPost({
         endpoint: "ticket/addTicket",
