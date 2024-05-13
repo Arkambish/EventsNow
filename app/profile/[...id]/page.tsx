@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <div className="py-5 ">
+    <div className="pt-5 h-full   "
+    >
       <ProfContextProvider>
         <CheckActive />
       </ProfContextProvider>

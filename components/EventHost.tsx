@@ -18,13 +18,13 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
 
   return (
     <div className="   font-IBM  ml-5 ">
-      <div className="bg-initial rounded-2xl m-4 md:w-fit flex items-center justify-center">
+      <div className="bg-white rounded-2xl m-4 md:w-fit flex items-center  justify-start ">
         <button
           className={`${
             btnState === 1
-              ? "bg-custom-orange text-white"
-              : "bg-transparent text-custom-orange"
-          } rounded-2xl text-center whitespace-nowrap uppercase w-full md:w-2/3 p-1 sm:p-2 md:py-1`}
+              ? "bg-dashBtnBlue text-white"
+              : "text-dashBtnBlue"
+          } rounded-2xl text-center whitespace-nowrap w-full md:w-2/3 p-1 sm:px-4 md:py-1`}
           onClick={() => handleToggle(1)}
         >
           {btn1}
@@ -32,9 +32,9 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
         <button
           className={`${
             btnState === 2
-              ? "bg-custom-orange text-white"
-              : "bg-transparent text-custom-orange"
-          } rounded-2xl text-center whitespace-nowrap uppercase w-full md:w-2/3 p-1 sm:p-2 md:py-1`}
+            ? "bg-dashBtnBlue text-white"
+            : "text-dashBtnBlue"
+          } rounded-2xl text-center whitespace-nowrap  w-full md:w-2/3 p-1 sm:px-4 md:py-1`}
           onClick={() => handleToggle(2)}
         >
           {btn2}
@@ -63,8 +63,8 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
         </button>
       </div> */}
 
-      <div className="m-4 p-2 font-IBM rounded-2xl bg-white  gap-4 h-screen w-full overflow-auto ">
-        <div className="grid grid-rows-1 gap-2 justify-start w-full">
+      <div className="  font-IBM rounded-2xl   gap-4  w-full p-6  ">
+        <div className="grid grid-rows-1 gap-2 justify-center w-full overflow-y-scroll sm:max-h-80 xl:max-h-96 scroll-smooth ">
           {btnState === 1 && (
             <>
               {registerEvent.length > 0 ? (
@@ -79,6 +79,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
                 ))
               ) : (
                 <EmptyStateComponent message="No manage events found." />
+              
               )}
             </>
           )}
@@ -99,7 +100,7 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
             <EmptyStateComponent message="No manege events found." />
           ))} */}
           {btnState === 2 && (
-            <div className="grid gap-4">
+            <>
               {register.length > 0 ? (
                 register.map((e: any) => (
                   <RegisteredEventCard
@@ -113,9 +114,11 @@ function ToggleButtons({ btn1, btn2 }: { btn1: string; btn2: string }) {
                   />
                 ))
               ) : (
-                <EmptyStateComponent message="No registered events found." />
+               
+                  <EmptyStateComponent message="No registered events found." />
+               
               )}
-            </div>
+            </>
           )}
         </div>
       </div>
