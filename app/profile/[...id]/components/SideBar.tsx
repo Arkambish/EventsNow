@@ -32,9 +32,9 @@ export default function SideBar() {
   const [activeButton, setActiveButton] = useState("myProfile");
 
   return (
-    <div className="">
+    <div className="  w-full h-full">
       <Dashboard>
-        <div>
+        <div className="h-full">
           <button
             className="lg:hidden block"
             onClick={() => setIsSlideBar(!isSlideBar)}
@@ -48,7 +48,7 @@ export default function SideBar() {
             </div>
           </button>
         </div>
-        <div className="flex flex-col ">
+        <div className="flex flex-col justify-center ">
           <Dashboard_Btn
             isSlideBar={isSlideBar}
             text="My Profile"
@@ -57,7 +57,7 @@ export default function SideBar() {
               setActiveButton("myProfile");
             }}
             isActive={activeButton === "myProfile"}
-            icon={<HiOutlineUserCircle size={25} />}
+            icon={<HiOutlineUserCircle size={22} />}
           />
           <Dashboard_Btn
             isSlideBar={isSlideBar}
@@ -67,7 +67,7 @@ export default function SideBar() {
               setActiveButton("wishList");
             }}
             isActive={activeButton === "wishList"}
-            icon={<HiOutlineBookmarkAlt size={25} />}
+            icon={<HiOutlineBookmarkAlt size={22} />}
           />
           <Dashboard_Btn
             isSlideBar={isSlideBar}
@@ -77,7 +77,7 @@ export default function SideBar() {
               setActiveButton("My Events");
             }}
             isActive={activeButton === "My Events"}
-            icon={<HiOutlineCalendarDays size={25} />}
+            icon={<HiOutlineCalendarDays size={22} />}
           />
           <Dashboard_Btn
             isSlideBar={isSlideBar}
@@ -87,7 +87,7 @@ export default function SideBar() {
               setActiveButton("My Tickets");
             }}
             isActive={activeButton === "My Tickets"}
-            icon={<HiOutlineCash size={25} />}
+            icon={<HiOutlineCash size={22} />}
           />
           <Dashboard_Btn
             isSlideBar={isSlideBar}
@@ -97,7 +97,7 @@ export default function SideBar() {
               setActiveButton("Settings");
             }}
             isActive={activeButton === "Settings"}
-            icon={<HiOutlineCog8Tooth size={25} />}
+            icon={<HiOutlineCog8Tooth size={22} />}
           />
         </div>
       </Dashboard>

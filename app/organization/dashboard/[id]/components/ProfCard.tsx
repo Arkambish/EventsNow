@@ -10,7 +10,7 @@ interface ProfileCard {
 
 function ProfCard({ profilePic, name, eventCount, teamCount }: ProfileCard) {
   return (
-    <div className="border-2 flex flex-col justify-start items-start text-gray-700  bg-clip-border rounded-xl lg:w-full w-11/12 mt-5  bg-white ">
+    <div className="border-2 flex flex-col justify-start items-start text-gray-700  bg-clip-border rounded-xl lg:w-full w-11/12 mt-5  bg-slate-100 ">
       <div className=" mx-4 mt-4 overflow-hidden text-gray-700 shadow-lg bg-clip-border rounded-xl h-fit">
         <Image
           src={`${profilePic}`}

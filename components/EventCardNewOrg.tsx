@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,Fragment } from "react";
 import { SlCalender } from "react-icons/sl";
 import { FaClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -17,6 +17,10 @@ import {
 } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
 import { RxClock } from "react-icons/rx";
+import { HiOutlineDotsVertical } from "react-icons/hi"
+import {  AiTwotoneInfoCircle } from "react-icons/ai";
+import { TbSend } from "react-icons/tb";
+import { MdCancel } from "react-icons/md";
 
 interface eventorg {
   event: EventType;
@@ -56,18 +60,18 @@ export default function EventCardNewOrg({ event }: eventorg) {
 
   return (
     <div>
-      <div className=" bg-[#D9D9D9] my-4 ml-4 mr-12 rounded-xl border-spacing-1 shadow-lg grid lg:grid-cols-3 overflow-hidden">
+      <div className=" bg-[#ffffff] my-4 ml-4 mr-12 rounded-xl border-2 border-spacing-1 shadow-lg grid lg:grid-cols-3 overflow-hidden">
         <div
-          className="lg:rounded-l-xl overflow-hidden bg-no-repeat bg-cover bg-center h-40 "
+          className="lg:rounded-l-xl overflow-hidden bg-no-repeat bg-cover bg-center"
           style={{ backgroundImage: `url(${event.dashboardImage as string})` }}
         ></div>
         <div className="lg:col-span-2 rounded-r-xl pt-1">
           <div className="  flex justify-between px-6">
-            <div className=" my-2 text-[#353535] font-semibold sm:font-bold text-lg sm:text-24 capitalize">
+            <div className=" my-2 text-[#353535] font-semibold sm:font-bold text-lg sm:text-24 capitalize ">
               {event.eventName}
             </div>
-            <div className="flex max-sm:hidden content-center">
-              <button
+            <div className="flex max-sm:hidden content-center  ">
+              {/* <button
                 onClick={() => setNotificationModal(true)}
                 className=" text-center  bg-[#4E8171] text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM "
               >
@@ -81,7 +85,50 @@ export default function EventCardNewOrg({ event }: eventorg) {
                 className=" text-center bg-[#4E8171] text-white rounded-2xl px-2 py-1 my-auto ml-4 font-IBM "
               >
                 details
+              </button> */}
+
+<Menu as="div" className="relative inline-block text-left  content-center">
+                <div>
+                  <Menu.Button className="inline-flex w-full justify-center rounded-full  px-3 py-2 text-xl font-medium text-black hover:bg-slate-100 focus:outline-none">
+                    <HiOutlineDotsVertical />
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none font-Inter font-semibold">
+                    <div className="px-1 py-1 ">
+                      
+                        <Menu.Item>
+                        <button
+                onClick={() => setNotificationModal(true)}
+                className=" group flex w-full text-stone-600 gap-3 hover:bg-slate-100 items-center rounded-md px-2 py-2 text-sm "
+              >
+               <TbSend size={21} /> Send notification
               </button>
+                        </Menu.Item>
+                      
+                      <Menu.Item>
+                      <button
+                onClick={() => {
+                  setShowDetailsModal(true);
+                  setIsOpen(true);
+                }}
+                className=" group flex text-stone-600 w-full items-center rounded-md px-2 py-2 text-sm hover:bg-slate-100 gap-3"
+              >
+                <AiTwotoneInfoCircle size={22}/>Details
+              </button>
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
             </div>
           </div>
 
@@ -153,16 +200,18 @@ export default function EventCardNewOrg({ event }: eventorg) {
             <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
               <Dialog.Title
                 as="h3"
-                className="text-lg font-medium leading-6 text-gray-900"
+                className="text-lg font-medium flex justify-between leading-6 text-gray-900"
               >
                 Event Details
+                
+              <MdCancel size={24} className="hover:cursor-pointer mr-3" onClick={() => setIsOpen(false)}/>
               </Dialog.Title>
               <div className="flex flex-col h-72 overflow-y-auto px-8 py-8">
                 <div className="flex flex-row gap-2 justify-center">
                   <div className="flex flex-col space-y-2 mr-4">
                     {" "}
                     <h2>Organization Name </h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                    <div className="font-underlined border-b border-gray-400 text-gray-500">
                       {" "}
                       {event.eventName}
                     </div>
@@ -179,7 +228,7 @@ export default function EventCardNewOrg({ event }: eventorg) {
                   <div className="flex flex-col space-y-1">
                     {" "}
                     <h2>Start Date</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                    <div className="font-underlined border-b border-gray-400 text-gray-500">
                       {" "}
                       {event.eventStartDate}
                     </div>
@@ -187,7 +236,7 @@ export default function EventCardNewOrg({ event }: eventorg) {
                   <div className="flex flex-col space-y-1">
                     {" "}
                     <h2>Location</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300 max-w-48 overflow-ellipsis overflow-hidden">
+                    <div className="font-underlined border-b border-gray-400 text-gray-500 max-w-48 overflow-ellipsis overflow-hidden">
                       {" "}
                       {event.location}
                     </div>
@@ -195,7 +244,7 @@ export default function EventCardNewOrg({ event }: eventorg) {
                   <div className="flex flex-col space-y-1">
                     {" "}
                     <h2>Income</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                    <div className="font-underlined border-b border-gray-400 text-gray-500">
                       {" "}
                       {event.income}
                     </div>
@@ -203,7 +252,7 @@ export default function EventCardNewOrg({ event }: eventorg) {
                   <div className="flex flex-col space-y-1">
                     {" "}
                     <h2>Status</h2>
-                    <div className="font-underlined border-b border-gray-400 text-gray-300">
+                    <div className="font-underlined border-b border-gray-400 text-gray-500">
                       {" "}
                       {event.isPublished}
                     </div>
@@ -211,15 +260,7 @@ export default function EventCardNewOrg({ event }: eventorg) {
                 </div>
               </div>
 
-              <div className="mt-4 flex gap-2">
-                <button
-                  type="button"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Cancel
-                </button>
-              </div>
+              
             </Modal>
           )}
         </div>

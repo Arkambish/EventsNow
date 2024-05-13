@@ -245,7 +245,7 @@ export default function CreateOrganizationFormBasic() {
           id="fullName"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-custom-orange sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
+          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-gray-400 sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
           placeholder="Enter your full name  "
         ></input>
         <div className="flex gap-2">
@@ -290,7 +290,7 @@ export default function CreateOrganizationFormBasic() {
             value={number}
             disabled={numberType.length == 0}
             onChange={(e) => setNumber(e.target.value)}
-            className="  w-full  block flex-1  bg-transparenttext-gray-900 placeholder:text-gray-400 focus:outline-custom-orange sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
+            className="  w-full  block flex-1  bg-transparent text-gray-900 placeholder:text-gray-400 focus:outline-slate-400 sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
             placeholder={
               numberType.length > 0
                 ? ` Enter  ${numberType} number`

@@ -42,7 +42,7 @@ export default async function Home() {
   const event = await getEvent();
 
   return (
-    <div className="">
+    <div className=" scroll-smooth">
       <HeroSection />
 
       <EventViewMode event={event} />

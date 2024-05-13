@@ -80,7 +80,7 @@ export default function Report() {
   };
 
   return (
-    <div className="flex md:ml-2 rounded-lg font-custom-orange shadow-3xl pl-2 bg-[#fff] pt-8 md:pl-12 flex-col justify-start items-start gap-12">
+    <div className="flex md:ml-2 rounded-lg font-custom-orange  pl-2 bg-slate-100 pt-8 md:pl-12 flex-col justify-start items-start gap-12">
       <div className="flex flex-col gap-3 justify-start items-start">
         <div className="text-3xl font-semibold text-custom-orange	font-IBM">
           REPORTS
@@ -91,7 +91,7 @@ export default function Report() {
       </div>
 
       <div
-        className={`bg-white p-1 ${
+        className={`bg-slate-100  p-1 ${
           isSlideBar ? "lg:md:w-3/4 md:w-11/12" : "md:w-3/4"
         } w-11/12  flex flex-col gap-3 2xl:w-1/2  justify-start items-start md:px-5 md:py-3 xl:px-10 xl:py-5 rounded-xl`}
       >

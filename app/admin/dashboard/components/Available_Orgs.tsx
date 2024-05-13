@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { Fragment,useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "@/components/Modal";
 import DetailsModalContent from "@/app/admin/dashboard/components/modals/DetailsModal";
@@ -12,6 +12,10 @@ import { success } from "@/util/Toastify";
 import { error } from "@/util/Toastify";
 import WidthChangeModal from "@/components/WidthChangeModal";
 import { FetchGet, FetchPost } from "@/hooks/useFetch";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { MdCancel } from "react-icons/md";
+import { AiTwotoneDelete, AiTwotoneInfoCircle } from "react-icons/ai";
+
 
 interface Data {
   organization: OrganizationType;
@@ -83,24 +87,85 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
   return (
     <div>
       <div
-        className={`grid grid-cols-1 lg:grid-cols-11 md:grid-cols-1    ${value} h-auto md:h-auto lg:h-32 rounded-lg bg-[#D9D9D9] mt-6 ms-8 xl:ms-4 lg:ms-8 md:ms-20  shadow-3xl`}
+        className={`grid grid-cols-1 lg:grid-cols-11 border-2 md:grid-cols-1    ${value} h-auto md:h-auto lg:h-32 rounded-lg bg-white mt-6 ms-8 xl:ms-4 lg:ms-8 md:ms-20  `}
       >
-        <div className="col-span-full lg:col-span-3 md:col-span-full overflow-hidden  rounded-lg ">
-          <Image
+        <div className="col-span-full lg:col-span-3 md:col-span-full overflow-hidden  rounded-l-lg ">
+          {/* <Image
             src={organization.postImageLink}
             alt="compo4"
             width={249.65}
             height={126}
             className="sm:h-32 h-auto"
-          />
+          /> */}
+          <div
+        className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
+        style={{ backgroundImage: `url(${organization.postImageLink as string})` }}
+      ></div>
         </div>
 
-        <div className="col-span-full md:col-span-2 lg:col-span-3 flex justify-center sm:justify-start pl-8 sm:mt-0 md:mt-4 lg:mt-0">
-          <div className=" justify-auto flex flex-col  md:justify-center lg:justify-around">
-            <div className="flex w-full md:w-1/2  lg:w-full text-[#353535] font-sans text-2xl font-bold mt-2 leading-7  ">
+        <div className="col-span-full md:col-span-2 lg:col-span-8 flex justify-center sm:justify-start pl-8 sm:mt-0 md:mt-4 lg:mt-0  ">
+          <div className=" justify-auto flex flex-col  md:justify-center lg:justify-around  w-full">
+            <div className="flex w-full md:w-1/2  lg:w-full  mt-1 text-stone-600 font-sans text-xl font-semibold leading-7   justify-between">
+              <div className="">
               {organization.organizationName}
+              </div>
+              <div className="">
+              <Menu as="div" className="relative inline-block text-left">
+                <div>
+                  <Menu.Button className="inline-flex w-full justify-center rounded-full  px-3 py-2 text-xl font-medium text-black hover:bg-slate-100 focus:outline-none">
+                    <HiOutlineDotsVertical />
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+                    <div className="px-1 py-1 ">
+                      
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                            onClick={() => {
+                              setShowDetailsModal(false);
+                              setShowDenyModal(true);
+                              setIsOpen(true);
+                            }}
+                            className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-stone-900 hover:bg-slate-100 gap-3 "
+                          >
+                          
+                          <AiTwotoneDelete size={22} /> Deny
+                            
+                          </button>
+                          )}
+                        </Menu.Item>
+                      
+                      <Menu.Item>
+                      <button
+                onClick={() => {
+                  setShowDenyModal(false);
+                  setShowDetailsModal(true);
+                  setIsOpen(true);
+                }}
+                className=" group flex w-full items-center rounded-md px-2 py-2 text-sm gap-3 text-stone-900 hover:bg-slate-100  "
+              >
+               
+               <AiTwotoneInfoCircle size={22} />Details
+                
+              </button>
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+              </div>
             </div>
-            <div className="flex flex-col md:flex-col lg:flex-row gap-4 ml-0">
+            {/* <div className="flex flex-col md:flex-col lg:flex-row gap-4 ml-0">
               <button
                 onClick={() => {
                   setShowDetailsModal(false);
@@ -125,31 +190,31 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
                   Details
                 </div>
               </button>
-            </div>
-          </div>
-        </div>
+            </div> */}
 
-        <div
-          className={`col-span-full md:col-span-full lg:col-span-5 mr-3 mb-3 sm:mb-0 ms-3 lg:ms-0 md:ms-0 `}
-        >
-          <div className="lg:w-64 w-48 md:w-48 lg:h-24 h-28 md:h-28 rounded bg-[#F4F4F4] mt-2 md:mt-4 lg:mt-5 ml-0 md:ml-6 lg:ml-10 mb-0 md:mb-4 lg:mb-0 ">
-            <div className="grid grid-cols-12">
-              <div className="col-span-8 sm:col-span-8 m-6">
-                <div className="text-[#353C4E] font-sans text-sm font-normal leading-4">
-                  Number of Events
-                </div>
-                <div className="text-[#353C4E] font-sans text-sm font-normal leading-4 mt-3">
-                  Number of Members
-                </div>
-              </div>
+            <div
+              className={`col-span-full md:col-span-full lg:col-span-5 mr-3 mb-3 sm:mb-0 ms-3 lg:ms-0 md:ms-0 `}
+            >
+              <div className="lg:w-64 w-48 md:w-48 rounded      mb-0   ">
+                <div className="grid grid-cols-12">
+                  <div className="col-span-8 sm:col-span-8 m-3">
+                    <div className="text-[#353C4E] font-sans text-sm font-normal leading-4">
+                      Number of Events
+                    </div>
+                    <div className="text-[#353C4E] font-sans text-sm font-normal leading-4 mt-3">
+                      Number of Members
+                    </div>
+                  </div>
 
-              <div className="col-span-4 sm:col-span-4 m-6">
-                <div className="text-[#353C4E] font-sans text-sm font-bold leading-4 mb-8 md:mb-8 lg:mb-0">
-                  {/* {organization.numberofevents} */} {events.length}
-                </div>
-                <div className="text-[#353C4E] font-sans text-sm font-bold leading-4 mt-6">
-                  {/* {organization.numberofmembers} */}
-                  {totalRegisteredUsersCount}
+                  <div className="col-span-4 sm:col-span-4 m-3">
+                    <div className="text-[#353C4E] font-sans text-sm font-bold leading-4 mb-8 md:mb-8 lg:mb-0">
+                      {/* {organization.numberofevents} */} {events.length}
+                    </div>
+                    <div className="text-[#353C4E] font-sans text-sm font-bold leading-4 mt-3">
+                      {/* {organization.numberofmembers} */}
+                      {totalRegisteredUsersCount}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -164,9 +229,13 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
             <WidthChangeModal setIsOpen={setIsOpen} isOpen={isOpen}>
               <Dialog.Title
                 as="h3"
-                className="text-lg font-medium leading-6 text-gray-900"
+                className="text-lg font-medium leading-6 text-gray-900 flex justify-between"
               >
                 Organization Details
+              
+                
+                <MdCancel size={24} className="hover:cursor-pointer mr-3" onClick={() => setIsOpen(false)} />
+             
               </Dialog.Title>
               <div className="flex lg:flex-row flex-col  h-72 overflow-y-auto px-8 py-8">
                 <div className="flex flex-row gap-2 justify-center">
@@ -225,7 +294,7 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
                   </div>
                 </div>
               </div>
-
+{/* 
               <div className="mt-4 flex gap-2">
                 <button
                   type="button"
@@ -234,7 +303,7 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
                 >
                   Cancel
                 </button>
-              </div>
+              </div> */}
             </WidthChangeModal>
           )}
         </div>

@@ -36,16 +36,20 @@ export default function CheckActive() {
   } = useProf() as ProfContext;
 
   return (
-    <div>
+    <div className=" ">
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="lg:px-16">
+        <div className="   w-full sm:px-5 px-3 xl:px-0  "
+        >
           {isActive ? (
-            <div>
-              <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 ">
+            <div className="flex justify-center w-full   "
+            style={{
+              height: "88vh",
+            }}>
+              <div className="grid grid-cols-12 md:gap-2 lg:gap-2 xl:gap-5   w-full md:w-auto ">
                 <div
-                  className={`xl:col-span-2   md:block hidden  ${
+                  className={`xl:col-span-2   md:block hidden w-full  ${
                     isSlideBar
                       ? "md:col-span-3  col-span-3"
                       : "md:col-span-1  col-span-2"
@@ -55,7 +59,7 @@ export default function CheckActive() {
                 </div>
 
                 <div
-                  className={`xl:col-span-7 col-span-12  ${
+                  className={`xl:col-span-7 col-span-12 ${
                     isSlideBar ? "md:col-span-6 " : "md:col-span-8 "
                   }`}
                 >

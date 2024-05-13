@@ -130,7 +130,7 @@ export default function Setting() {
   }
 
   return (
-    <div className="flex rounded-lg  shadow-3xl md:pl-10 md:ml-2 pl-5 bg-[#fff] pt-8 lg:pl-12 flex-col justify-start items-start gap-12">
+    <div className="flex rounded-lg  md:pl-10 md:ml-2 pl-5 bg-slate-100 pt-8 lg:pl-12 flex-col justify-start items-start gap-12">
       <div className="md:w-11/12 w-11/12  lg:w-full flex flex-col gap-3">
         <div className="lg:text-3xl text-2xl  sm:w-full lg:w-9/12 md:w-full flex justify-between font-semibold text-custom-orange	font-IBM">
           ACCOUNT DETAILS
@@ -313,7 +313,7 @@ export default function Setting() {
               <SelectValue placeholder={bank ? bank : "Select bank"} />
             </SelectTrigger>
             <SelectContent className="bg-white text-black font-medium		 cursor-pointer">
-              <SelectItem  value="Sampath">Sampath</SelectItem>
+              <SelectItem value="Sampath">Sampath</SelectItem>
               <SelectItem value="BOC">BOC</SelectItem>
               <SelectItem value="peoples">peoples</SelectItem>
               <SelectItem value="NSB">NSB</SelectItem>

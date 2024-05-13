@@ -92,7 +92,7 @@ export default function Payments() {
   }, []);
 
   return (
-    <div>
+    <>
       <SuperadminPages
         serachData={serachData}
         title="Payments Page"
@@ -113,6 +113,6 @@ export default function Payments() {
           </>
         }
       />
-    </div>
+    </>
   );
 }
