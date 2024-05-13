@@ -48,10 +48,10 @@ export default function CheckActive() {
       ) : (
         <div>
           {isActive ? (
-            <div className="">
+            <div className="flex justify-center">
               <div className="grid max-w-[1500px]   grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5">
                 <div
-                  className={`lg:col-span-2   md:block hidden ${
+                  className={`lg:col-span-2 rounded-lg bg-slate-100  md:block hidden ${
                     isSlideBar
                       ? "md:col-span-3 md:ml-2  col-span-4"
                       : "md:col-span-1  col-span-2"
@@ -61,7 +61,7 @@ export default function CheckActive() {
                 </div>
 
                 <div
-                  className={`lg:col-span-7 col-span-12 h-full   ${
+                  className={`lg:col-span-7 rounded-lg col-span-12 h-full bg-slate-100   ${
                     isSlideBar ? "md:col-span-6 " : "md:col-span-8 "
                   }`}
                 >
@@ -69,7 +69,7 @@ export default function CheckActive() {
                 </div>
                 <div
                   className={`lg:col-span-3 md:block hidden
-             ${isSlideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
+                ${isSlideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-1  "}`}
                 >
                   <Profile />
                 </div>

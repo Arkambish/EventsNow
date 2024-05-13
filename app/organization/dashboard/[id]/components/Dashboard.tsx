@@ -36,7 +36,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex rounded-lg h-[30rem]    shadow-3xl md:pl-10 md:ml-2 pl-5 bg-[#fff] pt-8 lg:pl-12 flex-col justify-start items-start gap-12">
+    <div className="flex rounded-lg h-[30rem]     md:pl-10 md:ml-2 pl-5 bg-slate-100 pt-8 lg:pl-12 flex-col justify-start items-start gap-12">
       <div className="w-full  flex flex-col justify-end">
         <div className="text-3xl font-semibold text-custom-orange	font-IBM">
           Dashboard

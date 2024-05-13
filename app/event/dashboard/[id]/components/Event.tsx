@@ -34,7 +34,7 @@ export default function Event({
     }
   };
   return (
-    <div className=" w-64 xl:w-72   rounded-xl bg-[#D9D9D9] shadow-inner xl:pt-8 xl:px-8 pt-6 px-6  ">
+    <div className=" w-64 xl:w-72   rounded-xl bg-slate-100 shadow-inner xl:pt-8 xl:px-8 pt-6 px-6  ">
       <Image
         className=" rounded-md  "
         src={eventCover as string}

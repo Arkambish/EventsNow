@@ -12,7 +12,6 @@ import {
 
 import Login from "@/components/Login";
 
-
 interface contextProps {
   editedName: string;
   team: OrganizationTeamType[];
@@ -24,17 +23,13 @@ interface contextProps {
 }
 
 export default function Profile() {
-  const { editedName, team, events, organizationImage, id,  } =
+  const { editedName, team, events, organizationImage, id } =
     useOrg() as contextProps;
 
-
-
   return (
-    <div className=" lg:p-3 p-0 flex flex-col h-fit w-fit items-start justify-start rounded-xl shadow-3xl bg-custom-lightorange">
-      
-
+    <div className=" lg:p-3 p-0 flex flex-col h-fit w-fit items-start justify-start rounded-xl  bg-slate-100">
       <div className="mt-2 lg:p-0 p-2">
-        <div className="p-2  bg-white w-fit rounded-md flex items-center justify-center whitespace-nowrap">
+        <div className="p-2  bg-slate-100 w-fit rounded-md flex items-center justify-center whitespace-nowrap">
           <svg
             className="mr-2"
             width="18"

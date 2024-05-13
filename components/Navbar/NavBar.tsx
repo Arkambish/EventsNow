@@ -163,7 +163,6 @@ export default function NavBar() {
 
             const data = await getUser({ email });
 
-
             const notificationData = await FetchGet({
               endpoint: `notification/getNotification/${data._id}`,
             });
@@ -202,7 +201,7 @@ export default function NavBar() {
   );
 
   return (
-    <div className={pathname=="/"?`fixed w-full z-10 `:""}>
+    <div className={pathname == "/" ? `fixed w-full z-10 ` : ""}>
       {newUserPath ? null : (
         <div>
           {/* check data has loaded */}
@@ -414,7 +413,7 @@ export default function NavBar() {
                     !showProfile
                       ? "hidden"
                       : "xl:w-3/12 lg:w-3/12 md:w-1/3 2xl:w-1/5 sm:block hidden"
-                  } rounded-2xl top-13 right-0   bg-gray-700 text-white`}
+                  } rounded-b-2xl top-13 right-0 z-20 opacity-100  bg-slate-100 text-white`}
                 >
                   <NavBarProfile
                     setShowProfile={setShowProfile}
