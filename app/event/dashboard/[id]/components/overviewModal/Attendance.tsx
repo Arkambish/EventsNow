@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { UseEventContext } from "../../EventDashContext";
 import { EventContextType } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
-import { useReactToPrint } from 'react-to-print';
+import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 
 export default memo(function AttendanceDetails() {
@@ -12,7 +12,6 @@ export default memo(function AttendanceDetails() {
   const generatePDF = useReactToPrint({
     content: () => componentpdf.current,
     documentTitle: "Attendance Report",
-    
   });
 
   return (
@@ -59,69 +58,68 @@ export default memo(function AttendanceDetails() {
                     Attendance of the event
                   </div>
                   <div className=" h-60 overflow-auto">
-           
                     <div ref={componentpdf} className="w-full ">
-                    <table className="w-full text-left text-sm font-light">
-                      <thead className="border-b w-full font-medium ">
-                        <tr>
-                          <th scope="col" className="px-6 py-4">
-                            Count
-                          </th>
-                          <th scope="col" className="px-6 py-4">
-                            Time
-                          </th>
-                          <th scope="col" className="px-6 py-4">
-                            UserId
-                          </th>
-                          <th scope="col" className="px-6 py-4">
-                            User Name
-                          </th>
-                          <th scope="col" className="px-6 py-4">
-                            Phone Number
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {attendances.length === 0 ? (
-                          <tr className="border-b dark:border-neutral-500">
-                            <td className="whitespace-nowrap px-6 py-4 font-medium">
-                              _
-                            </td>
-                            <td className="whitespace-nowrap px-6 py-4">_</td>
-                            <td className="whitespace-nowrap px-6 py-4">_</td>
-                            <td className="whitespace-nowrap px-6 py-4">_</td>
-                            <td className="whitespace-nowrap px-6 py-4">_</td>
+                      <table className="w-full text-left text-sm font-light">
+                        <thead className="border-b w-full font-medium ">
+                          <tr>
+                            <th scope="col" className="px-6 py-4">
+                              Count
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Time
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              UserId
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              User Name
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Phone Number
+                            </th>
                           </tr>
-                        ) : (
-                          attendances.map((attendance, index) => (
-                            <tr
-                              key={index}
-                              className="border-b dark:border-neutral-500"
-                            >
+                        </thead>
+                        <tbody>
+                          {attendances.length === 0 ? (
+                            <tr className="border-b dark:border-neutral-500">
                               <td className="whitespace-nowrap px-6 py-4 font-medium">
-                                {index + 1}
-                              </td>
-                              <td className="whitespace-nowrap px-6 py-4">
-                                {attendance.createdAt}
-                              </td>
-                              <td className="whitespace-nowrap px-6 py-4">
-                                {attendance.userId._id}
-                              </td>
-                              <td className="whitespace-nowrap px-6 py-4">
-                                {attendance.userId?.firstName}
-                              </td>
-                              <td className="whitespace-nowrap px-6 py-4">
                                 _
-                                {/* {attendance.userId?.mobileNumber
+                              </td>
+                              <td className="whitespace-nowrap px-6 py-4">_</td>
+                              <td className="whitespace-nowrap px-6 py-4">_</td>
+                              <td className="whitespace-nowrap px-6 py-4">_</td>
+                              <td className="whitespace-nowrap px-6 py-4">_</td>
+                            </tr>
+                          ) : (
+                            attendances.map((attendance, index) => (
+                              <tr
+                                key={index}
+                                className="border-b dark:border-neutral-500"
+                              >
+                                <td className="whitespace-nowrap px-6 py-4 font-medium">
+                                  {index + 1}
+                                </td>
+                                <td className="whitespace-nowrap px-6 py-4">
+                                  {attendance.createdAt}
+                                </td>
+                                <td className="whitespace-nowrap px-6 py-4">
+                                  {attendance.userId._id}
+                                </td>
+                                <td className="whitespace-nowrap px-6 py-4">
+                                  {attendance.userId?.firstName}
+                                </td>
+                                <td className="whitespace-nowrap px-6 py-4">
+                                  _
+                                  {/* {attendance.userId?.mobileNumber
                                 ? attendance.userId?.mobileNumber
                                 : ""} */}
-                              </td>
-                            </tr>
-                          ))
-                        )}
-                        {}
-                      </tbody>
-                    </table>
+                                </td>
+                              </tr>
+                            ))
+                          )}
+                          {}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -133,9 +131,9 @@ export default memo(function AttendanceDetails() {
               Toral Attendence: {attendances.length}
             </div>
             <button
-             className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
-             onClick={generatePDF}
-             >
+              className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+              onClick={generatePDF}
+            >
               <FaPrint />
               Print
             </button>

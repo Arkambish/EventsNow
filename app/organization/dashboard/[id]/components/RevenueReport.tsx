@@ -105,7 +105,7 @@ export default memo(function RevenueDetails({
             <div className="text-lg font-bold	 text-white">
               Toral Revenue- LKR: 100
             </div>
-            <button className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
+            <button className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
               <FaPrint />
               Print
             </button>

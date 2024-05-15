@@ -13,7 +13,7 @@ export default function Tickets() {
       <div className="mb-5 grid gap-2 lg:px-6 mt-8 lg:mr-16 pb-20">
         <div className="">
           <div className="   content-start   pb-4 ">
-            <div className=" text-custom-orange font-medium text-3xl">
+            <div className=" text-stone-600 font-IBM font-medium text-3xl">
               TICKETS
             </div>
 

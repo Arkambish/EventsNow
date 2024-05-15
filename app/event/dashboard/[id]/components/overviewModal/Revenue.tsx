@@ -7,49 +7,42 @@ import { useParams } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
 
 export default memo(function RevenueDetails() {
-  const { setStatus ,income } = UseEventContext() as EventContextType;
-  const params = useParams<{id: string}>();
-  const [allTicketTypes , setAllTicketTypes] = useState<Ticket[]>([]);
-  const [allSoldTicketTypes , setAllSoldTicketTypes] = useState<any[]>([]);
- 
+  const { setStatus, income } = UseEventContext() as EventContextType;
+  const params = useParams<{ id: string }>();
+  const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
+  const [allSoldTicketTypes, setAllSoldTicketTypes] = useState<any[]>([]);
+
   const componentRdf = useRef(null);
 
   const generatePDF = useReactToPrint({
     content: () => componentRdf.current,
     documentTitle: "Revenue Report",
-   
   });
 
-  useEffect (()=>
-  {
-  async function getTicketData() {
-    
-    const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`); 
-    if (!res.ok) {
-      return;
+  useEffect(() => {
+    async function getTicketData() {
+      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+      setAllTicketTypes(data);
+      console.log("ticket data", data);
     }
-    const data = await res.json();  
-    setAllTicketTypes(data);
-    console.log("ticket data", data);
-  }
-  getTicketData();
-  } , [params.id]);
+    getTicketData();
+  }, [params.id]);
 
-  useEffect (()=>{
-        
-        async function getSoldTicketData (){
-          const res = await fetch(`/api/v1/buyTicket/getBuyTicket/${params.id}`);
-          if (!res.ok) {
-            return;
-          }
-          const data = await res.json();
-          setAllSoldTicketTypes(data);
-        };
-        getSoldTicketData();
-        
-      } , [params.id]);
-     
-
+  useEffect(() => {
+    async function getSoldTicketData() {
+      const res = await fetch(`/api/v1/buyTicket/getBuyTicket/${params.id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+      setAllSoldTicketTypes(data);
+    }
+    getSoldTicketData();
+  }, [params.id]);
 
   return (
     <>
@@ -95,40 +88,45 @@ export default memo(function RevenueDetails() {
                     Revenue of the event
                   </div>
                   <div className=" h-60 overflow-auto">
-                 <div ref={componentRdf} className="w-full">   
-                    <table className="w-full text-left text-sm font-light">
-                      <thead className="border-b w-full font-medium ">
-                        <tr>
-                          <th scope="col" className="px-6 py-4">
-                            Ticket Type
-                          </th>
-                          <th scope="col" className="px-6 py-4">
-                            Quantity
-                          </th>
-                          <th scope="col" className="px-6 py-4">
-                            Amount
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {allTicketTypes.map((ticket) => (
-                          <tr key={ticket._id}>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              {ticket.classType}
-                              
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              {allSoldTicketTypes.filter((soldTicket) => soldTicket.ticketId === ticket._id).length}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              {allSoldTicketTypes.filter((soldTicket) => soldTicket.ticketId === ticket._id).length * ticket.price}
-                            </td>
+                    <div ref={componentRdf} className="w-full">
+                      <table className="w-full text-left text-sm font-light">
+                        <thead className="border-b w-full font-medium ">
+                          <tr>
+                            <th scope="col" className="px-6 py-4">
+                              Ticket Type
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Quantity
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Amount
+                            </th>
                           </tr>
-                        ))
-
-                        }
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {allTicketTypes.map((ticket) => (
+                            <tr key={ticket._id}>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                {ticket.classType}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                {
+                                  allSoldTicketTypes.filter(
+                                    (soldTicket) =>
+                                      soldTicket.ticketId === ticket._id
+                                  ).length
+                                }
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                {allSoldTicketTypes.filter(
+                                  (soldTicket) =>
+                                    soldTicket.ticketId === ticket._id
+                                ).length * ticket.price}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -139,10 +137,10 @@ export default memo(function RevenueDetails() {
             <div className="text-lg font-bold	 text-white">
               Toral Revenue- LKR: {income}
             </div>
-            <button 
-              className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+            <button
+              className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
               onClick={generatePDF}
-              >
+            >
               <FaPrint />
               Print
             </button>

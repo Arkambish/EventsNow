@@ -22,7 +22,7 @@ export default function Hostpage() {
       <Container>
         <div className="mt-5">
           <div className="sm:pl-10 mb-5 grid gap-2 mt-3 ">
-            <div className="  text-custom-orange font-medium text-3xl ">
+            <div className="  text-stone-600 font-IBM font-medium text-3xl ">
               Host page
             </div>
             <div className=" text-[#848484] ">

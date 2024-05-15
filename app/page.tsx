@@ -6,6 +6,7 @@ import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
 import { EventType } from "./Type";
 import Notification from "@/components/Navbar/Notification";
+import Welcome from "@/components/Welcome";
 
 async function getOutDateEvent() {
   try {
@@ -44,13 +45,11 @@ export default async function Home() {
   return (
     <div className=" scroll-smooth">
       <HeroSection />
-
+      //mt
       <EventViewMode event={event} />
-
       <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
         Outdated Events
       </div>
-
       {data.length !== 0 && (
         <div className="flex-wrap justify-center items-center flex ">
           {data.slice(0, 6).map((e: EventType) => (
@@ -64,7 +63,6 @@ export default async function Home() {
           ))}
         </div>
       )}
-
       <Footer />
     </div>
   );

@@ -15,7 +15,7 @@ export default function GetTicketDatils() {
     <div className=" justify-items-start flex ">
       <button
         onClick={() => setTicketDetail(true)}
-        className="flex button mt-8 bg-custom-orange text-white rounded-md items-center  px-4 py-2 gap-2   "
+        className="flex button mt-8 bg-dashBtnBlue text-white rounded-md items-center  px-4 py-2 gap-2   "
       >
         <Image
           src="/images/eventDash/icons8-new-ticket.png"

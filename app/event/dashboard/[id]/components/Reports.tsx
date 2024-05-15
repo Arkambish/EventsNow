@@ -9,7 +9,7 @@ export default function Reports() {
   return (
     <Container>
       <div className="pl-10 mb-5 grid gap-2 mt-8 mr-10 pb-8">
-        <div className="  text-custom-orange font-medium text-3xl ">
+        <div className="  text-stone-600 font-IBM font-medium text-3xl ">
           REPORTS
         </div>
         <div className=" text-[#455273]  md:mr-8">
@@ -30,7 +30,7 @@ export default function Reports() {
               size={80}
             />
           </CheckPermission>
-          
+
           <CheckPermission
             provideGlobalPermission={["Manage Payments"]}
             provideEventPermission={["Manage Payments"]}

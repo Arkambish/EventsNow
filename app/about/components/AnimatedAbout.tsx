@@ -2,7 +2,6 @@
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import BestEvent from "./BestEvent";
-
 import gsap from "gsap";
 import { useIntersection } from "react-use";
 
@@ -11,7 +10,8 @@ export default function AnimatedAbout() {
   const visionRef = useRef(null);
   const historyRef = useRef(null);
   const besteventRef = useRef(null);
-  const bestEventsRef = useRef(null);
+  const imageRef = useRef(null);
+  const textRef = useRef(null);
 
   const missionIntersection = useIntersection(missionRef, {
     root: null,
@@ -34,11 +34,6 @@ export default function AnimatedAbout() {
   const bestEventIntersection = useIntersection(besteventRef, {
     root: null,
     rootMargin: "100px",
-    threshold: 0.5,
-  });
-  const intersection = useIntersection(bestEventsRef, {
-    root: null,
-    rootMargin: "0px",
     threshold: 0.5,
   });
 
@@ -99,23 +94,20 @@ export default function AnimatedAbout() {
   }, [bestEventIntersection]);
 
   useEffect(() => {
-    const image = document.querySelector(".main-image");
+    const image = imageRef.current;
+    const text = textRef.current;
 
-    gsap.fromTo(
+    const tl = gsap.timeline();
+
+    // Animate the image from top to bottom
+    tl.fromTo(
       image,
-      { opacity: 0, height: 0 },
-      {
-        opacity: 1,
-        height: "auto",
-        duration: 2,
-        ease: "power4.out",
-      }
+      { opacity: 0, scaleY: 0 },
+      { opacity: 1, scaleY: 1, duration: 2, ease: "power4.out" }
     );
-  }, []);
-  useEffect(() => {
-    const text = document.querySelector(".main-text");
 
-    gsap.fromTo(
+    // Animate the text from bottom to top after the image is loaded
+    tl.fromTo(
       text,
       { opacity: 0, y: 100 },
       {
@@ -123,8 +115,8 @@ export default function AnimatedAbout() {
         y: 0,
         duration: 1,
         ease: "power4.out",
-        delay: 0.9,
-      }
+      },
+      "-=1" // Delay the start of this animation by 1 second to synchronize with the image animation
     );
   }, []);
 
@@ -133,13 +125,17 @@ export default function AnimatedAbout() {
       <div className="xl:h-[600px] md:h-[400px] w-full  bg-no-repeat bg-cover bg-center relative overflow-hidden">
         <Image
           className="main-image"
+          ref={imageRef}
           src="/images/about/mainphoto.png"
           layout="fill"
           objectFit="cover"
           alt="Main photo"
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="main-text flex-auto text-white text-center xl:text-6xl md:text-4xl sm:text-2xl md:py-40 xl:pt-56 py-20 px-20 font-['Khand'] font-semibold">
+          <div
+            ref={textRef}
+            className="main-text flex-auto text-white text-center xl:text-6xl md:text-4xl sm:text-2xl md:py-40 xl:pt-56 py-20 px-20 font-['Khand'] font-semibold"
+          >
             &ldquo;Creating memorable moments through expert event
             management.&rdquo;
           </div>

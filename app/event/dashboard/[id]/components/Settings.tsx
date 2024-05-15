@@ -69,18 +69,17 @@ export default function Settings() {
 
   const handleUpdate = async () => {
     console.log(
-  //     eventname,
-  //       eventType,
-  //        eventDate,
-  // eventStartTime,
-  //   endTime,
-  //        eventLocation,
-  //       eventDashboardImage,
-  //     eventCoverImage,
-  //      eventEndDate,
-       id
-
-    )
+      //     eventname,
+      //       eventType,
+      //        eventDate,
+      // eventStartTime,
+      //   endTime,
+      //        eventLocation,
+      //       eventDashboardImage,
+      //     eventCoverImage,
+      //      eventEndDate,
+      id
+    );
     // const data ={
     //   eventName: eventname,
     //       selectedTab: eventType,
@@ -96,7 +95,7 @@ export default function Settings() {
       const res = await FetchPut({
         endpoint: `event/updateEvent`,
         body: {
-          id:id,
+          id: id,
           eventName: eventname,
           selectedTab: eventType,
           eventStartedDate: eventDate,
@@ -108,8 +107,6 @@ export default function Settings() {
           eventEndDate: eventEndDate,
         },
       });
-
-     
 
       success(res.message);
     } catch (e) {
@@ -153,7 +150,7 @@ export default function Settings() {
       <div className=" lg:ml-16 mb-5 grid gap-2 lg:px-6 mt-8 lg:mr-16 pb-20">
         <div className="">
           <div className="  xl:flex content-start   pb-4 ">
-            <div className=" text-custom-orange font-medium text-3xl">
+            <div className=" text-stone-600 font-IBM font-medium text-3xl">
               SETTINGS
             </div>
           </div>
@@ -351,7 +348,7 @@ export default function Settings() {
                                 open();
                               }}
                             >
-                              <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-lg">
+                              <div className="p-2 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-lg">
                                 <FaCloudUploadAlt />
                                 upload image
                               </div>
@@ -473,7 +470,7 @@ export default function Settings() {
 
         <div className="flex justify-start">
           <button
-            className=" button mt-8 bg-custom-orange text-white rounded-md items-center flex px-4 py-2 gap-2 "
+            className=" button mt-8 bg-dashBtnBlue text-white rounded-md items-center flex px-4 py-2 gap-2 "
             onClick={handleUpdate}
           >
             <svg

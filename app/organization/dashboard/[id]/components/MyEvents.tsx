@@ -16,7 +16,7 @@ export default function MyEvents() {
     <div className="flex rounded-lg  md:ml-2 pl-2  bg-slate-100 pt-8 md:pl-12 flex-col justify-start items-start gap-12">
       <div className="flex justify-between w-full pr-5">
         <div className="flex flex-col gap-3 justify-start items-start ">
-          <div className="text-3xl font-semibold text-custom-orange	font-IBM">
+          <div className="text-3xl font-semibold text-stone-600 font-IBM">
             MY EVENTS
           </div>
           <div className="text-base text-[#848484] font-normal">
@@ -27,7 +27,7 @@ export default function MyEvents() {
         {isPermissionAvailable && (
           <Link href={`/createevent/${id}`}>
             <button
-              className={`bg-custom-orange button  lg:m-0 m-2  h-8 rounded-lg `}
+              className={`bg-dashBtnBlue button  lg:m-0 m-2  h-8 rounded-lg `}
             >
               <div className="flex  flex-row ml-2 mr-2  gap-2 p-0 items-center justify-center">
                 <Image
