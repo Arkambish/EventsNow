@@ -50,6 +50,6 @@
     "app/event/dashboard/[id]/components/QRcodeScanner.jsx",
     "app/event/dashboard/[id]/components/QrReader.jsx",
     "models/registeredUserModel.ts"
-  ],
+, "app/event/dashboard/[id]/components/QrCode.jsx"  ],
   "exclude": ["node_modules"]
 }

@@ -7,7 +7,7 @@ const BuyticketSchema = new mongoose.Schema({
   ticketId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: TicketType,
-  },
+  },  
 
   eventId: {
     type: mongoose.Schema.Types.ObjectId,
