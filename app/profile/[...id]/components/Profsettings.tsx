@@ -16,7 +16,7 @@ function Profsetti({ name, type, value, setFname }: Details) {
       >
         {name}
       </label>
-      <div className="mt-2">
+      <div className="">
         <input
           onChange={(e) => setFname(e.target.value)}
           id={type}
@@ -25,7 +25,7 @@ function Profsetti({ name, type, value, setFname }: Details) {
           type={type}
           placeholder={`Enter your ${name}`}
           autoComplete="email"
-          className={`block w-full p-2  rounded-md focus:outline-none py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-slate-100 placeholder:text-gray-300  focus:ring-1 focus:ring-inset  focus:ring-slate-300 text-sm sm:leading-6 ${
+          className={`w-full px-3 py-[4px] border rounded-md focus:outline-none focus:border-slate-700  my-2 text-sm ${
             name == "Primary email address" ? "lowercase" : "capitalize"
           }`}
         />

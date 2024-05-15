@@ -45,7 +45,7 @@ export default function SideBar() {
         <Spinner />
       ) : (
         <div>
-          <div className=" flex flex-col  items-center shadow-3xl bg-[#FCFCFD] rounded-lg py- text-center  ">
+          <div className=" flex flex-col  items-center  bg-slate-100 rounded-lg py- text-center  ">
             <div className=" grid-rows-8  gap-3 flex flex-col items-center">
               <div
                 className={`mt-8 ${

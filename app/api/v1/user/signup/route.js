@@ -30,7 +30,7 @@ export async function POST(req) {
     password,
     passwordConfirm,
     image:
-      "https://firebasestorage.googleapis.com/v0/b/eventsnow-fb0ee.appspot.com/o/eventCover-Flashback?alt=media&token=6f6021ae-dd93-4d5c-931c-9dc50ae5dd4f",
+      "https://res.cloudinary.com/dpk9utvby/image/upload/v1715337701/userProfile/ap3h2u0wajy8ngzejgjv.jpg",
   });
 
   if (!res) return NextResponse.json({ message: "there is a error" });

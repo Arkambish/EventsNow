@@ -25,10 +25,10 @@ export default function HeroSection() {
     console.log("clicked info");
   };
   return (
-    <div>
+    <div className="">
       <div className="grid lg:grid-cols-2 ">
-        <div className=" bg-[#D7CFC7] h-[500px] md:h-[565px] xl:h-[836px] ">
-          <div className=" text-[#906953]  text-center font-khand text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl md:py-16 xl:pt-32 xl:px-12 font-semibold py-16 sm:py-12 md:px-6">
+        <div className=" bg-custom-brown h-[500px] md:h-[565px] xl:h-[836px] ">
+          <div className=" text-new  text-center font-khand text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl md:py-16 xl:pt-32 xl:px-12 font-semibold py-16 sm:py-12 md:px-6">
             “Where Moments Become Memories”
           </div>
           <div className="sm:hidden text-[#4A4A4A] text-center font-khand text-sm  font-medium px-8 pb-12 ">
@@ -53,24 +53,24 @@ export default function HeroSection() {
           <div className="justify-center items-center pb-10 mx-10 flex md:py-8 xl:py-8">
             <button
               onClick={() => info()}
-              className=" md:w-48 w-12 md:h-11 h-8 rounded-l-full  bg-[#D47151]  flex  "
+              className=" md:w-48 w-12 md:h-11 h-8 rounded-l-full justify-center items-center bg-custom-orange  flex gap-3 "
             >
               <Image
-                className="self-center mx-auto"
+                className="self-center "
                 src={"/images/heroSection/search.png"}
                 width={20}
                 height={20}
                 alt="search"
               />
 
-              <div className=" hidden md:grid  text-white text-lg mx-1 my-auto">
+              <div className=" hidden md:grid  text-white text-center text-lg mx-1 my-auto">
                 search events
               </div>
             </button>
 
             <label className="relative block">
               <input
-                className="outlined-none placeholder:text-slate-400 block bg-white w-full md:h-11 border border-slate-300 py-1 sm:py-1.5 pl-9 pr-3 shadow-sm focus:outline-none focus:border-custom-orange focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                className="outlined-none placeholder:text-slate-400 block bg-white w-full md:h-11 border border-slate-300 py-1 sm:py-1.5 pl-9 pr-3 shadow-sm focus:outline-none focus:border-slate-300 focus:ring-0 sm:text-sm"
                 placeholder="Title, Venue, Organizer..."
                 type="text"
                 name="search"
@@ -110,6 +110,35 @@ export default function HeroSection() {
                 height={1000}
                 className="xl:max-2xl:w-full xl:max-2xl:h-full"
               />
+
+{/* <Image
+                src="/images/heroSection/new/Frame1.jpg"
+                alt="..."
+                width={1000}
+                height={2000}
+                className="xl:max-2xl:w-full xl:max-2xl:h-full"
+              />
+              <Image
+                src="/images/heroSection/new/Frame2.jpg"
+                alt="..."
+                width={2000}
+                height={2000}
+                className="xl:max-2xl:w-full xl:max-2xl:h-full "
+              />
+              <Image
+                src="/images/heroSection/new/Frame3.jpg"
+                alt="..."
+                width={1000}
+                height={2000}
+                className="xl:max-2xl:w-full xl:max-2xl:h-full"
+              />
+              <Image
+                src="/images/heroSection/new/Frame4.jpg"
+                alt="..."
+                width={1000}
+                height={1000}
+                className="xl:max-2xl:w-full xl:max-2xl:h-full"
+              /> */}
             </Carousel>
           </Flowbite>
         </div>

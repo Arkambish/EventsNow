@@ -35,6 +35,7 @@ const config: Config = {
         "custom-gray": "#F8F8F8",
         dashboard: "#E9E9E9",
         new: "#906953",
+        dashBtnBlue:"#394855"
       },
       fontFamily: {
         Inter: ["Inter", "sans - serif"],

@@ -67,7 +67,7 @@ const NavBarProfile = memo(function NavBarProfile({
   }, [showProfile, setShowProfile]);
 
   return (
-    <div ref={profileRef} className="  .modal-content">
+    <div ref={profileRef} className="bg-slate-100 text-black .modal-content">
       <div className="z-20 flex m-3 items-center justify-between">
         <div className="2xl:text-base  xl:text-base lg:text-xs text-xs	 font-medium	">
           {user?.email}
@@ -86,20 +86,20 @@ const NavBarProfile = memo(function NavBarProfile({
             className="rounded-full w-auto h-auto"
           />
         </div>
-        <div className="font-medium	">{`hi ${user?.firstName} !`}</div>
+        <div className="font-medium	">{`Hi ${user?.firstName} !`}</div>
 
         <Link href={`/profile/${user._id}`}>
           <button
             onClick={() => setShowProfile(false)}
-            className="rounded-full 2xl:text-base py-2 px-2 md:px-1 md:py-1 md:text-sm lg:text-sm xl:text-base xl:py-1 xl:px-2 lg:px-2 bg-blue-500 text-white font-semibold  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            className="rounded-full 2xl:text-base py-2 px-2 md:px-1 md:py-1 md:text-sm lg:text-sm xl:text-base xl:py-1 xl:px-2 lg:px-2 bg-gray-300 text-gray-700 font-semibold  shadow-md hover:bg-gray-400 "
           >
             Manage your account
           </button>
         </Link>
       </div>
       <div className=" mt-5 mb-5 md:p-3 lg:p-0 w-full flex xl:w-full  justify-center">
-        <div className="z-20  w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700">
-          <div className="  px-4 py-2 font-medium items-center flex justify-between text-gray-700 rounded-full bg-gray-50 dark:bg-gray-800 dark:text-white">
+        <div className="z-20  w-full max-w-sm bg-gray-200 divide-y divide-gray-100 rounded-lg shadow  ">
+          <div className="  px-4 py-2 font-medium items-center flex justify-between text-gray-700 rounded-full bg-gray-200 ">
             <div className="flex gap-2  items-center">
               <MdOutlineManageAccounts size={25} />
               <div className="2xl:text-base xl:text-base   md:text-sm">
@@ -120,20 +120,20 @@ const NavBarProfile = memo(function NavBarProfile({
           <div
             className={`divide-y  ${
               isOrganizationShowButton ? "hidden" : ""
-            } divide-gray-100 dark:divide-gray-700`}
+            } divide-gray-900 bg-gray-300  `}
           >
             {organization.length === 0 ? (
               <div className="text-custom-orange flex justify-center">
                 No organization
               </div>
             ) : (
-              <div className="max-h-36 overflow-auto navBar-profile">
+              <div className="max-h-36 divide-y-2 divide-gray-500 overflow-auto navBar-profile">
                 {organization.map((org: OrganizationProps) => (
                   <Link
                     onClick={() => setShowProfile(false)}
                     key={org.id}
                     href={`/organization/dashboard/${org.id}`}
-                    className="flex px-4  justify-center items-center py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="flex px-4  justify-center items-center py-3 hover:bg-gray-400  hover:text-black "
                   >
                     <div className="flex-shrink-0">
                       <Image
@@ -145,7 +145,7 @@ const NavBarProfile = memo(function NavBarProfile({
                       />
                     </div>
                     <div className="w-full ps-3">
-                      <div className="text-gray-500 text-sm font-medium text-md mb-1.5 dark:text-gray-400">
+                      <div className="text-gray-500 text-sm font-medium text-md mb-1.5 ">
                         {org.name}
                       </div>
                     </div>
@@ -155,9 +155,9 @@ const NavBarProfile = memo(function NavBarProfile({
             )}
           </div>
 
-          <button onClick={clickLogoutBtn}>
-            <div className="items-center gap-2  flex px-4 py-2 font-medium  text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white 2xl:text-base xl:text-base   md:text-sm text-sm">
-              <MdOutlineLogout />
+          <button className="" onClick={clickLogoutBtn}>
+            <div className="items-center gap-2  flex px-4 py-2 font-medium  text-gray-700 rounded-t-lg bg-gray-200  2xl:text-base xl:text-base   md:text-sm text-sm">
+              <MdOutlineLogout size={23} />
               logout
             </div>
           </button>
