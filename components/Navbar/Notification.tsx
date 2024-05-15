@@ -1,12 +1,10 @@
-"use client";
-import { FetchGet } from "@/hooks/useFetch";
 import React, { useEffect, useState } from "react";
-import { GoDotFill } from "react-icons/go";
-import NotificationButton from "./NotificationButton";
-import { NotificationType } from "./NavBar";
 import { MdNotifications } from "react-icons/md";
+import NotificationButton from "./NotificationButton";
 import NotificationNotFound from "./NotificationNotFound";
-interface notificationty {
+import { NotificationType } from "./NavBar";
+
+interface NotificationTy {
   comment: string;
   recieverId: string;
   topic: string;
@@ -14,20 +12,21 @@ interface notificationty {
   isClicked: boolean;
   createdAt: string;
 }
+
 function Notification({
   notification,
   setNotification,
 }: {
   setNotification: React.Dispatch<React.SetStateAction<NotificationType[]>>;
-  notification: notificationty[];
+  notification: NotificationTy[];
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [notify, setnotify] = useState(true);
   const [notificationExists, setNotificationExists] = useState<boolean>(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
   useEffect(() => {
     if (!notification) return;
     notification.filter((data) => {
@@ -35,10 +34,9 @@ function Notification({
     });
   }, [notification]);
 
-  if (!notification) return;
   return (
     <div>
-      <div className="flex justify-center ">
+      <div className="flex justify-center">
         <div className="relative max-h-80">
           <button
             onClick={toggleDropdown}
@@ -46,7 +44,7 @@ function Notification({
           >
             <MdNotifications size={23} className="text-white" />
             {notificationExists && (
-              <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-600 animate-pulse  rounded-full -top-2 -end-3 "></div>
+              <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-600 animate-pulse rounded-full -top-2 -end-3"></div>
             )}
           </button>
 
@@ -59,10 +57,7 @@ function Notification({
 
           {dropdownOpen && (
             <div
-              // className="absolute right-0 mt-2 h-[300px]  bg-gray-800 rounded-md shadow-lg  max-h-80  z-20 overflow-y-auto  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
-
-              className="absolute right-0 mt-2 h-[300px]  bg-gray-800 rounded-md shadow-lg  max-h-80  z-20 overflow-y-scroll  overflow-x-hidden scroll-mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
-              
+              className="absolute right-0 mt-2 h-[300px] bg-gray-800 rounded-md shadow-lg max-h-80 z-20 overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
               style={{ width: 300 }}
             >
               <div className="sticky top-0 z-10">
@@ -71,13 +66,13 @@ function Notification({
                 </div>
               </div>
               {notification.length > 0 ? (
-                notification.map((n: notificationty) => (
+                notification.map((n: NotificationTy) => (
                   <NotificationButton
                     key={n._id}
                     comment={n.comment}
                     topic={n.topic}
                     isClicked={n.isClicked}
-                    createdAt={""}
+                    createdAt={n.createdAt}
                     _id={n._id}
                     setNotification={setNotification}
                   />
@@ -85,6 +80,14 @@ function Notification({
               ) : (
                 <NotificationNotFound />
               )}
+              <div className="text-center py-4">
+                <a
+                  href="/notification"
+                  className="text-sm text-gray-500 hover:text-gray-300"
+                >
+                  See all notifications
+                </a>
+              </div>
             </div>
           )}
         </div>

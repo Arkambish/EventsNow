@@ -127,6 +127,11 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
                   {/* <FaUser /> */}
                 </Item>
               </Link>
+              <Link href={`/notification`}>
+                <Item fn={() => setIsMenuOpen(false)} text="Notifications">
+                  {/* <FaUser /> */}
+                </Item>
+              </Link>
             </div>
           )}
         </ul>

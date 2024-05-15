@@ -53,7 +53,7 @@ export default function Org_RequestHandle({
   const addComment = async () => {
     try {
       const data = {
-        organizationName: organization.organizationName,
+        topic: `Organization: ${organization.organizationName}`,
         comment: comment,
         senderId: organization._id,
         email: organization.email,
