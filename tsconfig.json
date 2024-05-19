@@ -49,7 +49,9 @@
     "app/api/v1/post/getOnePost/[...id]/route.jsx",
     "app/event/dashboard/[id]/components/QRcodeScanner.jsx",
     "app/event/dashboard/[id]/components/QrReader.jsx",
-    "models/registeredUserModel.ts"
+    "models/registeredUserModel.ts",
+    "app/api/v1/aws/s3-upload/route.js",
+    "components/S3UploadForm.tsx"
   ],
   "exclude": ["node_modules"]
 }
