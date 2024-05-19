@@ -99,14 +99,12 @@ export default function AnimatedAbout() {
 
     const tl = gsap.timeline();
 
-    // Animate the image from top to bottom
     tl.fromTo(
       image,
       { opacity: 0, scaleY: 0 },
       { opacity: 1, scaleY: 1, duration: 2, ease: "power4.out" }
     );
 
-    // Animate the text from bottom to top after the image is loaded
     tl.fromTo(
       text,
       { opacity: 0, y: 100 },
@@ -116,7 +114,7 @@ export default function AnimatedAbout() {
         duration: 1,
         ease: "power4.out",
       },
-      "-=1" // Delay the start of this animation by 1 second to synchronize with the image animation
+      "-=1"
     );
   }, []);
 

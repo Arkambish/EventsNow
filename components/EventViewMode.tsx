@@ -53,7 +53,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
         let delay = 0;
         for (let i = 0; i < eventCards.length; i++) {
           fadeInFromRight(eventCards[i], delay);
-          delay += 0.3; // Adjust the delay between each card
+          delay += 0.3;
         }
       }
     }
@@ -105,7 +105,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
 
   return (
     <div>
-      <div className="mb-10 flex flex-col md:flex-row lg:flex-row  sm:items-center items-start justify-between">
+      <div className="mt-8 mb-10 flex flex-col md:flex-row lg:flex-row  sm:items-center items-start justify-between">
         <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg  ms-8">
           Upcoming Events
         </div>

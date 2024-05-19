@@ -26,7 +26,7 @@ export default function RegistrationForEventModal({
       aria-hidden="true"
       className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full"
     >
-      <div className="border-[1px] border-custom-orange rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
+      <div className="border-[1px] border-dashBtnBlue rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
         <div className="flex justify-between bg-slate-300">
           <button
             className="text-slate-400 ml-3"
@@ -48,8 +48,6 @@ export default function RegistrationForEventModal({
               />
               I want to get updates on community page of the event via my emails
             </div>
-
-            
 
             <div className="flex my-auto gap-2">
               <input

@@ -1,24 +1,17 @@
 import { gsap } from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
-
-gsap.registerPlugin(TextPlugin);
 
 const animateHero = () => {
   const tl = gsap.timeline();
 
-  tl.from("#quote", {
-    duration: 2,
-    text: "",
-    ease: "power2.out",
-    onComplete: function () {
-      this.restart();
-    },
+  tl.set("#quote", {
+    opacity: 0,
   });
 
   tl.to("#quote", {
-    duration: 2,
+    duration: 4,
+    opacity: 1,
     text: "“Where Moments Become Memories”",
-    ease: "none",
+    ease: "power2.out",
   });
 };
 

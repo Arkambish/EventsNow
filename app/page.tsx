@@ -45,7 +45,7 @@ export default async function Home() {
   return (
     <div className=" scroll-smooth">
       <HeroSection />
-      //mt
+
       <EventViewMode event={event} />
       <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
         Outdated Events

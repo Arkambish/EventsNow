@@ -76,7 +76,7 @@ export default function Dashboard() {
       </div>
 
       <div
-        className={`flex shadow-normalComponent border-t-[1px] border-custom-orange gap-8 md:gap-10 rounded-xl bg-white ${
+        className={`flex shadow-normalComponent border-t-[1px] border-dashBtnBlue gap-8 md:gap-10 rounded-xl bg-white ${
           isSlideBar ? "md:w-11/12 md:pl-5" : " md:w-4/5 md:pl-10"
         }  w-11/12	  lg:w-4/5  xl:w-4/5  2xl:w-3/5 pt-2 pb-2  lg:pl-24`}
       >
@@ -103,7 +103,7 @@ export default function Dashboard() {
       </div>
 
       {/* <div
-        className={`flex border-t-[1px] border-custom-orange shadow-normalComponent gap-8 md:gap-10 rounded-xl bg-white ${
+        className={`flex border-t-[1px] border-dashBtnBlue shadow-normalComponent gap-8 md:gap-10 rounded-xl bg-white ${
           isSlideBar ? "md:w-11/12 md:pl-5" : "md:w-4/5 md:pl-10"
         }  w-11/12	   lg:w-4/5 xl:w-4/5 mb-2  2xl:w-3/5 pt-2 pb-2 md:pl-10 lg:pl-24`}
       >
