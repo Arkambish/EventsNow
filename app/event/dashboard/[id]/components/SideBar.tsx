@@ -156,7 +156,7 @@ export default function SideBar() {
                   >
                     <EventDashButton
                       isSlideBar={isSideBar}
-                      text="QR Reader"
+                      text="Mark Attendance"
                       onClick={() => handleQRreader()}
                     >
                       <TbFileBarcode size={23} />

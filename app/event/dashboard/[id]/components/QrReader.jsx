@@ -19,7 +19,7 @@ const QrReader = () => {
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
   const [activeButton, setActiveButton] = useState(1);
-  const [activeComponent, setActiveComponent] = useState("QrCode");
+  const [activeComponent, setActiveComponent] = useState("Code");
   //set active component
  
 

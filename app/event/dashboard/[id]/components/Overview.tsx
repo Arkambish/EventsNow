@@ -16,12 +16,25 @@ export default function Overview() {
   useEffect(() => {
     const fetchTotalTicketSale = async () => {
       try {
-        const data = await FetchGet({
-          endpoint: `ticket/countTickets/${id}`,
-        });
-        setTotalTicketSale(data.data);
+        // const data = await FetchGet({
+        //   endpoint: `ticket/countTickets/${id}`,
+        // });
+
+        const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
+          
+        );
+        console.log(data);
+        const res = await data.json();
+        console.log(res);
+        console.log(res.data)
+
+        if (res && res.data) {
+          setTotalTicketSale(res.data);
+          console.log("asjan")
+        }
       } catch (error) {
         console.error("Error fetching total ticket sale:", error);
+        console.log(error)
       }
     };
 
@@ -30,9 +43,13 @@ export default function Overview() {
         const data = await FetchGet({
           endpoint: `attendant/countAttendant/${id}`,
         });
-        setTotalAttendance(data.data);
+        if (data && data.data){
+          setTotalAttendance(data.data);
+        }
+        
       } catch (error) {
         console.error("Error fetching total attendance:", error);
+        console.log("ashan")
       }
     };
 
