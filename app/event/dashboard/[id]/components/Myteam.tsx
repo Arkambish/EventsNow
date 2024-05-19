@@ -12,7 +12,7 @@ export default function Myteam() {
     <div>
       <Container>
         <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
-          <div className="  text-custom-orange font-medium text-3xl ">
+          <div className="text-stone-600 font-IBM font-medium text-3xl ">
             MY TEAM
           </div>
           <div className=" text-[#455273]  mr-8">

@@ -53,7 +53,7 @@ export default function InviteButton() {
         />
       </div>
       <button
-        className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button  px-2 text-white rounded-lg"
+        className="bg-dashBtnBlue justify-center items-center font-semibold flex gap-2  button  px-2 text-white rounded-lg"
         onClick={handleclick}
       >
         <HiOutlineUserAdd size={19} />

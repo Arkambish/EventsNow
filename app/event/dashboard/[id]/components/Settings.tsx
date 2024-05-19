@@ -69,18 +69,17 @@ export default function Settings() {
 
   const handleUpdate = async () => {
     console.log(
-  //     eventname,
-  //       eventType,
-  //        eventDate,
-  // eventStartTime,
-  //   endTime,
-  //        eventLocation,
-  //       eventDashboardImage,
-  //     eventCoverImage,
-  //      eventEndDate,
-       id
-
-    )
+      //     eventname,
+      //       eventType,
+      //        eventDate,
+      // eventStartTime,
+      //   endTime,
+      //        eventLocation,
+      //       eventDashboardImage,
+      //     eventCoverImage,
+      //      eventEndDate,
+      id
+    );
     // const data ={
     //   eventName: eventname,
     //       selectedTab: eventType,
@@ -96,7 +95,7 @@ export default function Settings() {
       const res = await FetchPut({
         endpoint: `event/updateEvent`,
         body: {
-          id:id,
+          id: id,
           eventName: eventname,
           selectedTab: eventType,
           eventStartedDate: eventDate,
@@ -108,8 +107,6 @@ export default function Settings() {
           eventEndDate: eventEndDate,
         },
       });
-
-     
 
       success(res.message);
     } catch (e) {
@@ -153,7 +150,7 @@ export default function Settings() {
       <div className=" lg:ml-16 mb-5 grid gap-2 lg:px-6 mt-8 lg:mr-16 pb-20">
         <div className="">
           <div className="  xl:flex content-start   pb-4 ">
-            <div className=" text-custom-orange font-medium text-3xl">
+            <div className=" text-stone-600 font-IBM font-medium text-3xl">
               SETTINGS
             </div>
           </div>
@@ -182,8 +179,8 @@ export default function Settings() {
                       onClick={() => setEventType("Onsite")}
                       className={`${
                         eventType === "Onsite"
-                          ? "bg-custom-orange text-white rounded-l-md"
-                          : "bg-white text-custom-orange rounded-l-md  border-custom-orange border-2"
+                          ? "bg-dashBtnBlue text-white rounded-l-md"
+                          : "bg-white text-dashBtnBlue rounded-l-md  border-dashBtnBlue border-2"
                       } px-2  content-center grid `}
                     >
                       Physical Event
@@ -192,14 +189,14 @@ export default function Settings() {
                       onClick={() => setEventType("Online")}
                       className={`${
                         eventType === "Online"
-                          ? "bg-custom-orange text-white rounded-r-md"
-                          : "bg-white text-custom-orange rounded-r-md  border-custom-orange border-2"
+                          ? "bg-dashBtnBlue text-white rounded-r-md"
+                          : "bg-white text-dashBtnBlue-r-md  border-dashBtnBlue border-2"
                       } px-2  content-center grid `}
                     >
                       Online Event
                     </button>
                   </div>
-                  <div className="flex focus:outline-custom-orange border-2 my-auto rounded-md">
+                  <div className="flex focus:outline-dashBtnBlue border-2 my-auto rounded-md">
                     <Image
                       className="grid content-center"
                       src="/images/eventDash/Pin_fill.svg"
@@ -249,7 +246,7 @@ export default function Settings() {
                         setEventEndDate(e.target.value);
                       }}
                       value={eventEndDate.substring(0, 10) as string}
-                      className="focus:outline-custom-orange border-2 rounded-md pl-4 pr-16 placeholder:text-[#ABB7C2] placeholder:font-Inter placeholder:text-base placeholder:font-normal place-self-start w-full"
+                      className="focus:outline-dashBtnBlue border-2 rounded-md pl-4 pr-16 placeholder:text-[#ABB7C2] placeholder:font-Inter placeholder:text-base placeholder:font-normal place-self-start w-full"
                     />
                   </div>
                 </div>
@@ -351,7 +348,7 @@ export default function Settings() {
                                 open();
                               }}
                             >
-                              <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-lg">
+                              <div className="p-2 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-lg">
                                 <FaCloudUploadAlt />
                                 upload image
                               </div>
@@ -443,7 +440,7 @@ export default function Settings() {
                                 open();
                               }}
                             >
-                              <div className="p-2 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-lg">
+                              <div className="p-2 text-white font-semibold flex items-center justify-center gap-2  bg-slate-400 rounded-lg">
                                 <FaCloudUploadAlt />
                                 upload image
                               </div>
@@ -473,7 +470,7 @@ export default function Settings() {
 
         <div className="flex justify-start">
           <button
-            className=" button mt-8 bg-custom-orange text-white rounded-md items-center flex px-4 py-2 gap-2 "
+            className=" button mt-8 bg-dashBtnBlue text-white rounded-md items-center flex px-4 py-2 gap-2 "
             onClick={handleUpdate}
           >
             <svg

@@ -143,7 +143,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
                       open();
                     }}
                   >
-                    <div className="p-1 text-custom-orange font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-2xl">
+                    <div className="p-1 text-dashBtnBlue font-semibold flex items-center justify-center gap-2 border-2 border-dashBtnBlue rounded-2xl">
                       <FaCloudUploadAlt />
                       upload image
                     </div>

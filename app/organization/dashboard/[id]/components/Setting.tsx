@@ -132,15 +132,15 @@ export default function Setting() {
   return (
     <div className="flex rounded-lg  md:pl-10 md:ml-2 pl-5 bg-slate-100 pt-8 lg:pl-12 flex-col justify-start items-start gap-12">
       <div className="md:w-11/12 w-11/12  lg:w-full flex flex-col gap-3">
-        <div className="lg:text-3xl text-2xl  sm:w-full lg:w-9/12 md:w-full flex justify-between font-semibold text-custom-orange	font-IBM">
+        <div className="lg:text-3xl text-2xl  sm:w-full lg:w-9/12 md:w-full flex justify-between font-semibold text-stone-600 font-IBM">
           ACCOUNT DETAILS
           <Switch
             className="grid  self-center"
             onChange={handleChange}
             checked={isEditing}
             offColor="#E9E9E9"
-            onColor="#D47151"
-            offHandleColor="#D47151"
+            onColor="#394855"
+            offHandleColor="#394855"
             onHandleColor="#E9E9E9"
             height={20}
             width={40}
@@ -233,11 +233,11 @@ export default function Setting() {
                     open();
                   }}
                 >
-                  <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 border-2 border-custom-orange rounded-lg">
-                    <div className="ml-2  bg-white p-1 rounded-full text-custom-orange">
+                  <div className="p-1 mt-5 text-white font-semibold flex items-center justify-center gap-2 bg-slate-400 rounded-lg">
+                    <div className="ml-2  bg-slate-400 p-1 rounded-full text-white">
                       <FaCloudUploadAlt />
                     </div>
-                    <div className="text-custom-orange"> upload image</div>
+                    <div className="text-white"> upload image</div>
                   </div>
                 </button>
               );
@@ -256,7 +256,7 @@ export default function Setting() {
               <div className=" flex justify-end items-end mr-5 mb-3">
                 <button
                   onClick={handleImageSaveButton}
-                  className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
+                  className="bg-dashBtnBlue justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
                 >
                   <HiOutlineBadgeCheck size={22} />
                   Save image
@@ -267,15 +267,15 @@ export default function Setting() {
         </div>
       </div>
       <div className="w-11/12 lg:w-full ">
-        <div className="flex font-semibold	 justify-between lg:text-3xl text-2xl sm:w-full lg:w-9/12 md:w-full  text-custom-orange	font-IBM">
+        <div className="flex font-semibold	 justify-between lg:text-3xl text-2xl sm:w-full lg:w-9/12 md:w-full  text-stone-600 font-IBM">
           ADVANCED DETAILS
           <Switch
             className="grid  self-center"
             onChange={handleadvanceDetailsChneg}
             checked={isEditingAdvanced}
             offColor="#E9E9E9"
-            onColor="#D47151"
-            offHandleColor="#D47151"
+            onColor="#394855"
+            offHandleColor="#394855"
             onHandleColor="#E9E9E9"
             height={20}
             width={40}
@@ -445,7 +445,7 @@ export default function Setting() {
             <div className="w-full mt-4 gap-2  flex justify-end">
               <button
                 onClick={() => handleSave()}
-                className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
+                className="bg-dashBtnBlue justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
               >
                 <HiOutlineBadgeCheck size={22} />
                 Save details

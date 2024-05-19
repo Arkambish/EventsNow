@@ -26,7 +26,7 @@ export default function RegistrationForEventModalSmall({
       aria-hidden="true"
       className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full inset-0 h-[calc(100%)] max-h-full"
     >
-      <div className="border-[1px] border-custom-orange rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
+      <div className="border-[1px] border-dashBtnBlue rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
         <div className="flex justify-between bg-slate-300">
           <button
             className="text-slate-400 ml-3"
@@ -49,15 +49,13 @@ export default function RegistrationForEventModalSmall({
               get updates on community page via my emails
             </div>
 
-            
-
             <div className="flex gap-4 text-sm">
               <input
                 type="checkbox"
                 className="my-auto"
                 onChange={(e) => setMarketingUpdatesFunction(e.target.checked)}
               />
-           get marketing updates via emails
+              get marketing updates via emails
             </div>
 
             <button

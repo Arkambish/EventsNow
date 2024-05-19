@@ -35,7 +35,7 @@ const config: Config = {
         "custom-gray": "#F8F8F8",
         dashboard: "#E9E9E9",
         new: "#906953",
-        dashBtnBlue:"#394855"
+        dashBtnBlue: "#394855",
       },
       fontFamily: {
         Inter: ["Inter", "sans - serif"],
@@ -53,7 +53,7 @@ const config: Config = {
       boxShadow: {
         "3xl": " 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset",
         normalComponent:
-          "0px 4px 4px 0px rgba(212, 113, 81, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+          "0px 4px 4px 0px rgba(255, 255, 255, 222) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
       },
     },
   },

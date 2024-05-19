@@ -92,7 +92,7 @@ const QrReader = () => {
     <div>
       <Container>
         <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
-          <div className="  text-custom-orange font-medium text-3xl ">
+          <div className="  text-stone-600 font-IBM font-medium text-3xl ">
             QR READER
           </div>
           <div className=" text-[#455273]  mr-8">
@@ -107,8 +107,8 @@ const QrReader = () => {
               onChange={handleChange}
               checked={isVideoOn}
               offColor="#E9E9E9"
-              onColor="#D47151"
-              offHandleColor="#D47151"
+              onColor="#394855"
+              offHandleColor="#394855"
               onHandleColor="#E9E9E9"
               height={20}
               width={40}
@@ -136,7 +136,7 @@ const QrReader = () => {
             <button
               onClick={handleMarkAttendance}
               className={`button p-2 rounded-full  text-white font-bold ${
-                isActiveMark ? "bg-custom-orange" : "bg-slate-400"
+                isActiveMark ? "bg-dashBtnBlue" : "bg-slate-400"
               }`}
             >
               Mark the attendance
