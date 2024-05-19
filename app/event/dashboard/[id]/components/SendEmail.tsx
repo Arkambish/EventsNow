@@ -34,7 +34,7 @@ export default function SendEmail() {
           </div>
           <button
             onClick={() => setGenaralUpdate(true)}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-dashBtnBlue rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -56,7 +56,7 @@ export default function SendEmail() {
           </div>
           <button
             onClick={() => setGenaralUpdate(true)}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-dashBtnBlue rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"

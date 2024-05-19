@@ -121,7 +121,7 @@ const ProfileSettings = memo(function ProfileSettings({
         <div className="w-full mt-4 gap-2  flex justify-end">
           <button
             onClick={handleSave}
-            className="bg-custom-orange justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
+            className="bg-dashBtnBlue justify-center items-center font-semibold flex gap-2  button p-1 px-2 text-white rounded-lg"
           >
             <HiOutlineBadgeCheck size={22} />
             Save details

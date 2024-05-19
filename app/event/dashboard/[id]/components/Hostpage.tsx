@@ -22,14 +22,14 @@ export default function Hostpage() {
       <Container>
         <div className="mt-5">
           <div className="sm:pl-10 mb-5 grid gap-2 mt-3 ">
-            <div className="  text-custom-orange font-medium text-3xl ">
+            <div className="  text-stone-600 font-IBM font-medium text-3xl ">
               Host page
             </div>
             <div className=" text-[#848484] ">
               You can upload host page or design your own host page
             </div>
           </div>
-          <div className="w-full font-Inter lg:text-base grid gap-8 py-16 font-semibold text-custom-orange rounded-lg sm:px-24 px-4 md:px-8 text-xs xl:px-24 mb-20 ">
+          <div className="w-full font-Inter lg:text-base grid gap-8 py-16 font-semibold text-dashBtnBlue rounded-lg sm:px-24 px-4 md:px-8 text-xs xl:px-24 mb-20 ">
             <ContainerWithStroke>
               <button onClick={() => setIsPageBuilder(true)} className="w-full">
                 <div className=" py-2 flex justify-between mx-4 sm:mx-10">
