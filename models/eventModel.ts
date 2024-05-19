@@ -24,6 +24,18 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please select the event end date"],
   },
+
+  hostPageType: {
+    type: String,
+    enum: ["template", "pageBuilder", "uploadPage"],
+    // required: [true, "Please select the event end date"],
+  },
+  pageBuilder: {
+    type: String,
+  },
+  uploadPage: {
+    type: String,
+  },
   startTime: {
     type: String,
     required: [true, "Please select the event start time"],
@@ -59,7 +71,7 @@ const eventSchema = new mongoose.Schema({
 
   registerUser: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: "RegisteredUser",
+    // ref: "RegisteredUser",
   },
   income: {
     type: Number,

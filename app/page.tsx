@@ -7,6 +7,8 @@ import HeroSection from "@/components/HeroSection";
 import { EventType } from "./Type";
 import Notification from "@/components/Navbar/Notification";
 
+// import S3UploadForm from "@/components/S3UploadForm";
+
 async function getOutDateEvent() {
   try {
     const response = await fetch(
@@ -45,6 +47,8 @@ export default async function Home() {
     <div className=" scroll-smooth">
       <HeroSection />
 
+      {/* <S3UploadForm /> */}
+
       <EventViewMode event={event} />
 
       <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
@@ -64,8 +68,6 @@ export default async function Home() {
           ))}
         </div>
       )}
-
-  
 
       <Footer />
     </div>
