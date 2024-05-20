@@ -51,12 +51,11 @@
     "app/event/dashboard/[id]/components/QrReader.jsx",
 
     "models/registeredUserModel.ts"
-, "app/event/dashboard/[id]/components/QrCode.jsx"  ],
+, "app/event/dashboard/[id]/components/QrCode.jsx"  ,
 
     "models/registeredUserModel.ts",
     "app/api/v1/aws/s3-upload/pagebuilder/route.js",
-    "components/S3UploadForm.tsx"
+    "components/S3UploadForm.tsx",
   ],
-
   "exclude": ["node_modules"]
 }
