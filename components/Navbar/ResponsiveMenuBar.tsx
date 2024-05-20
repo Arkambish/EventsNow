@@ -58,7 +58,7 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
     <div
       className={
         isMenuOpen
-          ? "fixed shadow-2xl  right-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0fc] p-5 ease-in duration-50"
+          ? "fixed shadow-2xl right-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0fc] p-5 ease-in duration-50"
           : "fixed left-[100%] top-0 p-10 ease-in duration-50"
       }
       ref={menuBarRef}
@@ -66,9 +66,9 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
       <div
         className={`w-full ${
           userActive ? "hidden" : "block"
-        } flex items-center justify-end `}
+        } flex items-center justify-end`}
       >
-        <div onClick={() => setIsMenuOpen(false)} className="cursor-pointer ">
+        <div onClick={() => setIsMenuOpen(false)} className="cursor-pointer">
           <IoMdClose size={25} />
         </div>
       </div>
@@ -83,7 +83,7 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
               className="rounded-full w-auto h-auto"
             />
           </Link>
-          <div onClick={() => setIsMenuOpen(false)} className="cursor-pointer ">
+          <div onClick={() => setIsMenuOpen(false)} className="cursor-pointer">
             <IoMdClose size={30} />
           </div>
         </div>
@@ -101,7 +101,7 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
             </Item>
           </Link>
           {!userActive && (
-            <div className="flex flex-col  text-black">
+            <div className="flex flex-col text-black">
               <Link href="/auth/login">
                 <Item fn={() => setIsMenuOpen(false)} text="Login">
                   {/* <RiLoginCircleFill /> */}
@@ -116,7 +116,7 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
           )}
 
           {userActive && (
-            <div className="flex flex-col  text-black">
+            <div className="flex flex-col text-black">
               <Link href={"/createorganization"}>
                 <Item fn={() => setIsMenuOpen(false)} text="Host Event">
                   {/* <IoIosAddCircle /> */}
@@ -144,13 +144,6 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
             />
           </div>
         )}
-        {/* <button
-        onClick={clickLogoutBtn}
-        className="flex gap-3 items-center"
-      >
-        <RiLogoutCircleFill />
-        <div>Logout</div>
-      </button> */}
       </div>
     </div>
   );
