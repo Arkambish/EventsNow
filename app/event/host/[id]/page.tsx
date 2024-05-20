@@ -4,11 +4,9 @@ import PageBuilder from "./components/PageBuilder";
 
 async function getData({ id }: any) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getEvent`,
+    `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getEvent/${id}`,
     {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(id),
+      next: { revalidate: 10 },
     }
   );
 
@@ -19,6 +17,8 @@ async function getData({ id }: any) {
 
 export default async function Home({ params }: any) {
   const data = await getData(params);
+
+  console.log(data.hostPageType);
 
   if (data.hostPageType === "template") {
     return (

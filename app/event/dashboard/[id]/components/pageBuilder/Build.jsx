@@ -120,7 +120,7 @@ export default function Build() {
       console.log(formData);
 
       try {
-        const response = await fetch("/api/v1/aws/s3-upload", {
+        const response = await fetch("/api/v1/aws/s3-upload/pagebuilder", {
           method: "POST",
           body: formData,
         });

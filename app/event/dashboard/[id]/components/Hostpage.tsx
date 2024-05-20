@@ -40,7 +40,7 @@ export default function Hostpage() {
     console.log(formData);
 
     try {
-      const response = await fetch("/api/v1/aws/s3-upload", {
+      const response = await fetch("/api/v1/aws/s3-upload/uploadPage", {
         method: "POST",
         body: formData,
       });
@@ -89,7 +89,7 @@ export default function Hostpage() {
   }
 
   const handleDownload = () => {
-    const url = "https://eventnow.s3.amazonaws.com/Ruchith+Nusara.pdf"; // PDF file URL
+    const url = "https://eventnow.s3.amazonaws.com/eventnow.pdf"; // PDF file URL
     const link = document.createElement("a");
     link.href = url;
     link.setAttribute("download", "Ruchith_Nusara.pdf"); // Set the file name to be downloaded
