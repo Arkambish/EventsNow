@@ -8,7 +8,7 @@ import { error, success } from "@/util/Toastify";
 
 import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
-import { FetchPost, FetchPut } from "@/hooks/useFetch";
+import { FetchPost, FetchPut,FetchGet } from "@/hooks/useFetch";
 import { TicketArray } from "@/app/event/host/[id]/components/HostSideBar";
 
 declare global {
@@ -84,6 +84,7 @@ const PaymentModal = (props: PaymentModalProps) => {
   };
   const params = useParams<{ id: string }>();
   const [userId, setUserId] = useState<string>("");
+  // const [ticketCode,setTicketCode] = useState("");
 
   useEffect(() => {
     const getUserId = async () => {
@@ -127,7 +128,32 @@ const PaymentModal = (props: PaymentModalProps) => {
         paymentId: string
       ) {
         {
+          const exTicketCodes = await FetchGet({
+            endpoint: "buyTicket/getAllTicketCodes"
+            
+          });
+          console.log(exTicketCodes);
+
           props.ticketArrTemp.map(async (ticket: TicketArray) => {
+            // get all excist ticket Codes 
+            
+            console.log(exTicketCodes);
+            //generate code 
+            let ticketCode = "";
+            while (true) {
+            const randomCode = Math.floor(10000000 + Math.random() * 90000000).toString();
+            console.log(randomCode);
+            if (!exTicketCodes.data.includes(randomCode)) {
+              // setTicketCode(randomCode);
+              ticketCode = randomCode;
+              console.log("ashan")
+              console.log(randomCode)
+              console.log(ticketCode)
+              
+              break;
+            }}
+            console.log(ticketCode);
+            
             //store ticket buy data
             try {
               const value = {
@@ -135,6 +161,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                 eventId: params.id,
                 class: ticket.typeId,
                 classType: ticket.type,
+                
               };
 
               const qrImg = await generateQRCodeImage(JSON.stringify(value));
@@ -144,6 +171,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                 body: {
                   qr: qrImg,
                   userid: userId,
+                  ticketCode:ticketCode
                 },
               });
               console.log(qrdata);
@@ -159,6 +187,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                   ticketId: ticket,
                   eventId: params.id,
                   userId: userId,
+                  ticketCode:ticketCode
                 },
               });
               console.log(buyTicketData);
