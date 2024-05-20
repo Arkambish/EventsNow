@@ -1,24 +1,32 @@
 "use client";
 import animateHero from "./AnimateHero";
 import React, { useEffect, useState } from "react";
-import { Carousel, Flowbite, theme, CustomFlowbiteTheme } from "flowbite-react";
+// import { Carousel, Flowbite, theme, CustomFlowbiteTheme } from "flowbite-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/Carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 import Image from "next/image";
-const customTheme: CustomFlowbiteTheme = {
-  carousel: {
-    scrollContainer: {
-      base: "flex h-full snap-mandatory overflow-hidden scroll-smooth ",
-    },
-    indicators: {
-      active: {
-        off: "bg-white hover:bg-white/50  ",
-        on: " bg-gray-800  ",
-      },
-      base: "h-3 w-3 rounded-full",
-      wrapper: "absolute bottom-5 left-1/2 flex -translate-x-1/2 space-x-3",
-    },
-  },
-};
+// const customTheme: CustomFlowbiteTheme = {
+//   carousel: {
+//     scrollContainer: {
+//       base: "flex h-full snap-mandatory overflow-hidden scroll-smooth ",
+//     },
+//     indicators: {
+//       active: {
+//         off: "bg-white hover:bg-white/50  ",
+//         on: " bg-gray-800  ",
+//       },
+//       base: "h-3 w-3 rounded-full",
+//       wrapper: "absolute bottom-5 left-1/2 flex -translate-x-1/2 space-x-3",
+//     },
+//   },
+// };
 
 export default function HeroSection() {
   useEffect(() => {
@@ -86,8 +94,8 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="-z-10 overflow-hidden rounded-none hidden lg:grid">
-          <Flowbite theme={{ theme: customTheme }}>
+        <div className="-z-10 h-[500px] md:h-[565px] xl:h-[836px] overflow-hidden  rounded-none hidden lg:grid">
+          {/* <Flowbite theme={{ theme: customTheme }}>
             <Carousel>
               <Image
                 src="/images/heroSection/Frame1.png"
@@ -118,7 +126,56 @@ export default function HeroSection() {
                 className="xl:max-2xl:w-full xl:max-2xl:h-full"
               />
             </Carousel>
-          </Flowbite>
+          </Flowbite> */}
+
+          <Carousel
+            plugins={[
+              Autoplay({
+                delay: 2000,
+              }),
+            ]}
+          >
+            <CarouselContent>
+              <CarouselItem>
+                <Image
+                  src="/images/heroSection/Frame1.png"
+                  alt="..."
+                  width={1000}
+                  height={2000}
+                  className="xl:max-2xl:w-full xl:max-2xl:h-full"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/images/heroSection/Frame2.png"
+                  alt="..."
+                  width={2000}
+                  height={2000}
+                  className="xl:max-2xl:w-full xl:max-2xl:h-full "
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/images/heroSection/Frame3.png"
+                  alt="..."
+                  width={1000}
+                  height={2000}
+                  className="xl:max-2xl:w-full xl:max-2xl:h-full"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/images/heroSection/Frame4.png"
+                  alt="..."
+                  width={1000}
+                  height={1000}
+                  className="xl:max-2xl:w-full xl:max-2xl:h-full"
+                />
+              </CarouselItem>
+            </CarouselContent>
+            {/* <CarouselPrevious />
+            <CarouselNext /> */}
+          </Carousel>
         </div>
       </div>
     </div>
