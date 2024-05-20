@@ -413,7 +413,7 @@ export default function NavBar() {
                     !showProfile
                       ? "hidden"
                       : "xl:w-3/12 lg:w-3/12 md:w-1/3 2xl:w-1/5 sm:block hidden"
-                  } rounded-b-2xl top-13 right-0 z-20 opacity-100  bg-slate-100 text-white`}
+                  } rounded-b-2xl top-13 right-0 z-50 opacity-100  bg-slate-100 text-white`}
                 >
                   <NavBarProfile
                     setShowProfile={setShowProfile}

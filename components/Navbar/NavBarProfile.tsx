@@ -68,7 +68,7 @@ const NavBarProfile = memo(function NavBarProfile({
 
   return (
     <div ref={profileRef} className="bg-slate-100 text-black .modal-content">
-      <div className="z-20 flex m-3 items-center justify-between">
+      <div className="z-50 flex m-3 items-center justify-between">
         <div className="2xl:text-base  xl:text-base lg:text-xs text-xs	 font-medium	">
           {user?.email}
         </div>

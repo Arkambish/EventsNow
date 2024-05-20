@@ -19,7 +19,7 @@ async function getData({ id }: any) {
 export default async function Home({ params }: any) {
   const data = await getData(params);
   // const posts = await getAllPosts(params);
-
+  console.log(data.template);
   return (
     <div>
       <SelectTemplate event={data} />
