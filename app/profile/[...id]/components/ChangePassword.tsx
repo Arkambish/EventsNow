@@ -149,7 +149,7 @@ const ChangePassword = () => {
         )}
         <button
           type="submit"
-          className="bg-custom-orange text-white py-2 px-4 rounded-md shadow-sm flex items-center gap-2 hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2 sm:text-sm"
+          className="bg-custom-orange text-white py-2 px-4 rounded-md shadow-sm flex items-center gap-2 hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-dashBtnBlue focus:ring-offset-2 sm:text-sm"
         >
           <FontAwesomeIcon icon={faLock} className="text-white" />
           Change Password

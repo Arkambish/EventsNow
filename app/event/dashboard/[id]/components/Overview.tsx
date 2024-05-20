@@ -61,7 +61,7 @@ export default function Overview() {
     <Container>
       <div className="h-full mt-5 mb-8 sm:mb-56">
         <div className="pl-10 mb-5 grid gap-2 mt-3">
-          <div className="  text-custom-orange font-medium text-3xl ">
+          <div className="  text-stone-600 font-IBM font-medium text-3xl ">
             Overview
           </div>
           <div className=" text-[#848484] ">

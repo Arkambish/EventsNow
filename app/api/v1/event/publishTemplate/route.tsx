@@ -5,7 +5,7 @@ import Event from "@/models/eventModel";
 
 export async function PUT(request: NextRequest) {
   try {
-    const { id, template } = await request.json();
+    const { id, template, hostPageType } = await request.json();
 
     await connectMongoDB();
 
@@ -31,7 +31,7 @@ export async function PUT(request: NextRequest) {
     const data = await Event.findByIdAndUpdate(
       id,
       {
-        $set: { template, isPublished: true },
+        $set: { template, isPublished: true, hostPageType },
       },
       { new: true }
     );

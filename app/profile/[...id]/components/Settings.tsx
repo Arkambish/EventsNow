@@ -321,7 +321,7 @@ export default function Settings() {
                       <div className=" flex justify-end items-end mr-5">
                         <button
                           onClick={handleImageSaveButton}
-                          className="bg-custom-orange button p-1 px-2 text-white rounded-2xl"
+                          className="bg-dashBtnBlue button p-1 px-2 text-white rounded-2xl"
                         >
                           save image
                         </button>
@@ -368,7 +368,7 @@ export default function Settings() {
                           Select your birthday:
                         </label>
                         {/* <DatePicker
-                          className="mt-1 p-2 border-2 border-custom-orange rounded-md focus:outline-none focus:ring-custom-orange focus:border-custom-orange block w-full shadow-sm sm:text-sm"
+                          className="mt-1 p-2 border-2 border-custom-orange rounded-md focus:outline-none focus:ring-dashBtnBlue focus:border-custom-orange block w-full shadow-sm sm:text-sm"
                           selected={birth}
                           onChange={(date: Date | null) =>
                             setBirth(date || new Date())
@@ -381,7 +381,7 @@ export default function Settings() {
                           onChange={(date) => setBirth(date)}
                           dateFormat="dd/MM/yyyy"
                           yearDropdownItemNumber={50}
-                          className="mt-1 p-2 border-2 border-custom-orange rounded-md focus:outline-none focus:ring-custom-orange focus:border-custom-orange block w-full shadow-sm sm:text-sm"
+                          className="mt-1 p-2 border-2 border-custom-orange rounded-md focus:outline-none focus:ring-dashBtnBlue focus:border-custom-orange block w-full shadow-sm sm:text-sm"
                         /> */}
                       </div>
                       <div className="sm:col-span-3 capitalize">
@@ -430,11 +430,7 @@ export default function Settings() {
                             autoComplete="tShirt-name"
                             className="block w-full rounded-md  capitalize py-1.5 text-gray-900 shadow-sm ring-0 focus:border-slate-700 border ring-inset  focus:ring-0 focus:ring-inset sm:max-w-xs sm:text-sm sm:leading-6 "
                           >
-                            <option
-                              
-                            >
-                              Select T-Shirt Size
-                            </option>
+                            <option>Select T-Shirt Size</option>
                             <option>extra small</option>
                             <option>small</option>
                             <option>medium</option>

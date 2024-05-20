@@ -105,11 +105,14 @@ const QrReader = () => {
   return (
     <div>
       <Container>
+
         <div className="grid lg:pl-10 mb-5 gap-2 mt-8 md:mr-10 pb-8">
          <div className="flex  "> 
           <div className="  text-custom-orange font-medium text-3xl ">
             Mark Attendence
+
           </div>
+
 
         <div className="flex items-end ml-56 ">
           <div className="flex md:w-64 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
@@ -149,6 +152,7 @@ const QrReader = () => {
 
       {activeComponent === "QrCode" && <QrCode />}
       {activeComponent === "Code" && <Code />}
+
 
         </div>
       </Container>

@@ -20,7 +20,7 @@ export default function View_Report({
     <div
       className={`md:grid ${
         isSlideBar ? " md:w-11/12" : " md:w-11/12"
-      } flex items-center justify-between shadow-normalComponent 2xl:w-3/4 gap-3 w-11/12  md:grid-cols-12 md:h-32 rounded-[10px] bg-[#F8F8F8] border-t-[1px]  border-custom-orange divide-[#848484]`}
+      } flex items-center justify-between shadow-normalComponent 2xl:w-3/4 gap-3 w-11/12  md:grid-cols-12 md:h-32 rounded-[10px] bg-[#F8F8F8] border-t-[1px]  border-dashBtnBlue divide-[#848484]`}
     >
       <div className="md:col-span-4 my-3 md:ml-5 lg:ml-14 overflow-hidden">
         <Image

@@ -218,6 +218,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   // };
 
   useEffect(() => {
+    setIsLoading(true);
     const getEvent = async () => {
       const res = await fetch(`/api/v1/event/getOneEvent`, {
         method: "POST",
@@ -242,10 +243,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       const data = await res.json();
-  
-      
-      return data;
 
+      return data;
     };
 
     const getUser = async () => {
