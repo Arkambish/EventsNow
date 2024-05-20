@@ -17,7 +17,7 @@ export default function Tickets() {
               TICKETS
             </div>
 
-            <div className="text-[#455273]  md:mr-8">
+            <div className="text-[#455273] mt-8 md:mr-8">
               You can create tickets for your event here. You can create
               multiple tickets with different prices and class types.
             </div>

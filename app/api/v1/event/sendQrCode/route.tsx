@@ -36,7 +36,12 @@ console.log(data);
       subject: "Payment Successfull",
       text: `Payment Successfull. Here is your qr code`,
       // html: htmlBody,
-      html: `<img src=${image}  alt="this is qr code"/> this is your qr code`,
+      html: `<div>
+      <img src=${image}  alt="this is qr code"/> this is your qr code
+      <div>
+      your ticket Code : ${data.ticketCode}
+      </div>
+      </div>`,
     });
 
     if (res.accepted.length > 0) {
