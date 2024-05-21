@@ -151,14 +151,14 @@ export default function LoginForm() {
       </div>
 
       {isSubmitting ? (
-        <button className="button flex text-center mt-10 mb-10 xl:mb-20  px-2 justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base  ">
+        <button className="button w-full py-[6px] uppercase bg-custom-orange text-white rounded-md hover:bg-custom-orange focus:outline-none focus:bg-custom-orange ">
           <div className="flex gap-2 justify-center items-center">
-            <div> Login</div>
+            <div> Loading</div>
             <Image
               src="/images/reusableComponents/Loading.svg"
               alt="loading btn"
-              width={40}
-              height={40}
+              width={25}
+              height={25}
             />
           </div>
         </button>

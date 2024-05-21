@@ -3,9 +3,9 @@ import React from "react";
 export default function EmptyStateComponent({ message }: { message: string }) {
   return (
     <div className="grid h-full w-full p-10 ">
-      <div className=" mr-10 grid justify-items-center   px-10 pb-8 bg-[#F9F7FA] rounded-xl place-self-center">
+      <div className="  grid justify-items-center     bg-[#ffffff] rounded-xl place-self-center p-4">
         <svg
-          className="mb-5 mt-5"
+          className=""
           xmlns="http://www.w3.org/2000/svg"
           width="120"
           height="120"

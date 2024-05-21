@@ -34,7 +34,7 @@ export default function SendEmail() {
           </div>
           <button
             onClick={() => setGenaralUpdate(true)}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-dashBtnBlue rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -56,7 +56,7 @@ export default function SendEmail() {
           </div>
           <button
             onClick={() => setGenaralUpdate(true)}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-dashBtnBlue rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -76,56 +76,5 @@ export default function SendEmail() {
         )}
       </div>
     </Container>
-    // <Container>
-    //   <div className="pl-10 mb-5 grid gap-2 mt-8 mr-10 pb-20">
-    //     <div className="  text-custom-orange font-medium text-3xl pb-4 ">
-    //       UPDATES
-    //     </div>
-    // <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
-    //   <div className="text-lg py-2 font-semibold">General update.</div>
-    //   <div className=" text-sm pb-4">
-    //     You can use this page for send email for registers to the event
-    //   </div>
-    //   <button
-    //     onClick={() => setCreatePost(true)}
-    //     className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
-    //   >
-    //     <Image
-    //       className="my-auto mx-2"
-    //       src="/images/eventDash/Subtract.svg"
-    //       alt="print"
-    //       width={20}
-    //       height={20}
-    //     />
-    //     general update
-    //   </button>
-    // </div>
-
-    // <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
-    //   <div className="text-lg py-2 font-semibold">
-    //     Event changes and updates.
-    //   </div>
-    //   <div className=" text-sm pb-4">
-    //     You can use this page for send email for registers to inform about
-    //     event changing and updates
-    //   </div>
-    //   <button
-    //     onClick={() => setStatus("editpost")}
-    //     className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
-    //   >
-    //     <Image
-    //       className="my-auto mx-2"
-    //       src="/images/eventDash/Subtract.svg"
-    //       alt="print"
-    //       width={20}
-    //       height={20}
-    //     />
-    //     Event changes
-    //   </button>
-    // </div>
-
-    //     {createPost && <CreatePost setCreatePost={setCreatePost} user={user} />}
-    //   </div>
-    // </Container>
   );
 }

@@ -40,7 +40,7 @@ function Notification({
         <div className="relative max-h-80">
           <button
             onClick={toggleDropdown}
-            className="relative z-10 block rounded-md bg-custom-orange p-1 focus:outline-none"
+            className="relative z-10 block rounded-md  p-1 focus:outline-none hover:opacity-85"
           >
             <MdNotifications size={23} className="text-white" />
             {notificationExists && (
@@ -61,7 +61,7 @@ function Notification({
               style={{ width: 300 }}
             >
               <div className="sticky top-0 z-10">
-                <div className="bg-gray-700 text-base text-white font-khand w-full py-2 px-5">
+                <div className="bg-slate-100  font-bold text-base text-gray-900 font-khand w-full py-2 px-5">
                   Notifications
                 </div>
               </div>

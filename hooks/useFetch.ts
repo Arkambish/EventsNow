@@ -69,7 +69,7 @@ export const FetchGet = async ({ endpoint }: GetFetchProps) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`
     );
-
+    console.log(endpoint)
     if (!response.ok) {
       error("Something went wrong while fetching data");
     }

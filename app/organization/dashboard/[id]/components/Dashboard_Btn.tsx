@@ -3,9 +3,9 @@ import Image from "next/image";
 import React from "react";
 
 interface Dashboard_Btn {
-  onClick: () => void;
+  onClick?: () => void;
   text: string;
-  isSlideBar: boolean;
+  isSlideBar?: boolean;
   children: React.ReactNode;
   isActive?: boolean;
 }

@@ -77,7 +77,7 @@ export default function GetReportComponent({
     <ContainerWithStroke>
       <div className="sm:flex justify-between lg:pr-20 pl-4 text-left sm:text-center mb-4">
         <Image
-          className="justify-self-center my-3 max-lg:hidden"
+          className="justify-self-center my-3 max-lg:hidden "
           src={`/images/eventDash/${image}.svg`}
           alt="reports "
           width={size}
@@ -90,7 +90,7 @@ export default function GetReportComponent({
           </div>
         </div>
         <button
-          className="bg-custom-orange rounded-md py-1 my-auto text-white  text-base font-normal pr-7 mx-6 drop-shadow-md flex "
+          className="bg-dashBtnBlue rounded-md py-1 my-auto text-white  text-base font-normal pr-7 mx-6 drop-shadow-md flex "
           onClick={getReport}
         >
           <Image
@@ -192,7 +192,7 @@ export default function GetReportComponent({
             Toral Attendence: {attendances.length}
           </div>
           <button
-            className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+            className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
             onClick={generatePDF}
           >
             <FaPrint />
@@ -273,7 +273,7 @@ export default function GetReportComponent({
             Toral Revenue- LKR: {income}
           </div>
           <button
-            className="bg-custom-orange flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+            className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
             onClick={generatePDF}
           >
             <FaPrint />

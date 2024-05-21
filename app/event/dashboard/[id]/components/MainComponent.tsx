@@ -19,6 +19,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { RiPagesLine } from "react-icons/ri";
 
 import { AuthContext, useAuth } from "@/app/AuthContext";
+import ResponsiveSideBarButton from "@/components/ResponsiveSideBarButton";
+import { IoIosClose } from "react-icons/io";
 
 export default function MainComponent() {
   const {
@@ -76,6 +78,12 @@ export default function MainComponent() {
     };
   }, [isDashboardOpen]);
 
+  console.log("isloading", isLoading);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div>
       <div>
@@ -115,8 +123,8 @@ export default function MainComponent() {
             ) : (
               <BiArrowFromLeft size={25} />
             )} */}
-                  <div className="bg-myBrown w-[100px] h-[55px] flex items-center   rounded-full">
-                    <div className="bg-custom-orange w-[95px] h-[46px] flex justify-end pr-3 rounded-full">
+                  <div className="bg-slate-400 w-[100px] h-[55px] flex items-center   rounded-full">
+                    <div className="bg-slate-300 w-[95px] h-[46px] flex justify-end pr-3 rounded-full">
                       <Image
                         src="/images/reusableComponents/responsiveMenuBar.svg"
                         alt="menu bar"
@@ -133,83 +141,101 @@ export default function MainComponent() {
               <div
                 className={
                   isDashboardOpen
-                    ? "absolute z-10 shadow-2xl flex flex-col  left-0 top-20 w-[65%] sm:hidden h-fit bg-[#ecf0fc]  ease-in duration-50"
+                    ? "absolute z-10 shadow-2xl flex flex-col  left-0 top-0 w-[55%] sm:hidden h-full bg-[#ecf0fc]  ease-in duration-50"
                     : "fixed left-[100%] top-0 p-10 ease-in duration-50"
                 }
                 ref={menuBarRef}
               >
                 <button onClick={() => setIsDashboardOpen(false)}>
-                  <div className="mx-2 my-2 w-fit p-1 mb-3 ">
-                    {/* <MdClose size={20} /> */}
-                    <Image
-                      src="/images/reusableComponents/close.svg"
-                      alt="close"
-                      width={29}
-                      height={29}
-                    />
+                  <div className="mx-2 text-black my-2 w-fit p-1 mb-3 ">
+                    <IoIosClose size={30} />
                   </div>
                 </button>
                 <div className=" flex flex-col mx-5">
-                  <EventDashButton
+                  <ResponsiveSideBarButton
                     isSlideBar={isSideBar}
                     text="Overview"
-                    onClick={() => handleOverview()}
+                    onClick={() => {
+                      handleOverview();
+                      setIsDashboardOpen(false);
+                    }}
                   >
                     <AiOutlineHome size={23} />
-                  </EventDashButton>
+                  </ResponsiveSideBarButton>
 
-                  <EventDashButton
+                  <ResponsiveSideBarButton
                     isSlideBar={isSideBar}
                     text="Host Page"
-                    onClick={() => handleHostPage()}
+                    onClick={() => {
+                      handleHostPage();
+                      setIsDashboardOpen(false);
+                    }}
                   >
                     <RiPagesLine size={23} />
-                  </EventDashButton>
-                  <EventDashButton
+                  </ResponsiveSideBarButton>
+                  <ResponsiveSideBarButton
                     isSlideBar={isSideBar}
                     text="My Team"
-                    onClick={() => handleMyteam()}
+                    onClick={() => {
+                      handleMyteam();
+                      setIsDashboardOpen(false);
+                    }}
                   >
                     <HiOutlineUsers size={23} />
-                  </EventDashButton>
-                  <EventDashButton
+                  </ResponsiveSideBarButton>
+                  <ResponsiveSideBarButton
                     isSlideBar={isSideBar}
                     text="Reports"
-                    onClick={() => handleReports()}
+                    onClick={() => {
+                      handleReports();
+                      setIsDashboardOpen(false);
+                    }}
                   >
                     <HiOutlineDocumentText size={23} />
-                  </EventDashButton>
-                  <EventDashButton
+                  </ResponsiveSideBarButton>
+                  <ResponsiveSideBarButton
                     isSlideBar={isSideBar}
                     text="Campaign"
-                    onClick={() => handleCampaign()}
+                    onClick={() => {
+                      handleCampaign();
+                      setIsDashboardOpen(false);
+                    }}
                   >
                     <MdOutlinePublishedWithChanges size={23} />
-                  </EventDashButton>
-                  <EventDashButton
+                  </ResponsiveSideBarButton>
+                  <ResponsiveSideBarButton
                     isSlideBar={isSideBar}
                     text="Settings"
-                    onClick={() => handleSetting()}
+                    onClick={() => {
+                      handleSetting();
+                      setIsDashboardOpen(false);
+                    }}
                   >
                     <IoSettingsOutline size={23} />
-                  </EventDashButton>
+                  </ResponsiveSideBarButton>
 
-                  <EventDashButton
+                  <ResponsiveSideBarButton
                     isSlideBar={isSideBar}
                     text="Tickets"
-                    onClick={() => handleTicket()}
+                    onClick={() => {
+                      handleTicket();
+                      setIsDashboardOpen(false);
+                    }}
                   >
                     <TiTicket size={23} />
-                  </EventDashButton>
+                  </ResponsiveSideBarButton>
 
-                  <EventDashButton
+                  <ResponsiveSideBarButton
                     isSlideBar={isSideBar}
                     text="QR Reader"
-                    onClick={() => handleQRreader()}
+                    onClick={() => {
+                      handleQRreader();
+                      setIsDashboardOpen(false);
+                    }}
                   >
                     {" "}
                     <TbFileBarcode size={23} />
-                  </EventDashButton>
+                  </ResponsiveSideBarButton>
                 </div>
               </div>
               {isLoading ? (

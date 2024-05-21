@@ -63,10 +63,10 @@ export default function Org_RequestHandle({
         endpoint: `notification/getAllNotifications`,
         body: data,
       });
-      if (!res) {
-        error("Failed to save");
-        return;
-      }
+      // if (!res) {
+      //   error("Failed to save");
+      //   return;
+      // }
       setCommentModal(false);
       success("Messsage sent successfully");
     } catch (error) {

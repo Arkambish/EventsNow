@@ -83,19 +83,19 @@ function NotificationButton({
         <div
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
-          className="grid items-center px-4 border-b-2 font-khand border-white -mx-2"
+          className="grid bg-slate-200 items-center px-4 border-b-2 font-khand border-gray-300 -mx-2"
         >
           <div className="flex justify-between">
-            <h2 className="text-white mx-2 text-sm font-bold">{topic}</h2>
+            <h2 className="text-gray-600 mx-2 text-sm font-bold">{topic}</h2>
             {click ? <GoDotFill className="text-green-500 p-1" /> : null}
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-slate-300 text-start text-sm mx-2">{comment}</p>
+            <p className="text-gray-500 text-start text-sm mx-2">{comment}</p>
             {isOpen && (
-              <div className="relative inline-block mt-[-50px]">
+              <div className="relative inline-block ">
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
-                    <Menu.Button className="inline-flex justify-center items-center w-full rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+                    <Menu.Button className="inline-flex justify-center items-center w-full rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white ">
                       <HiOutlineDotsVertical />
                     </Menu.Button>
                   </div>
@@ -111,7 +111,7 @@ function NotificationButton({
                     <Menu.Items
                       onMouseEnter={() => setIsOpen(true)}
                       onMouseLeave={() => setIsOpen(false)}
-                      className="absolute right-0 mt-[calc(-100% - 8px)] w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black/5 focus:outline-none z-10"
+                      className="absolute right-0  w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-10"
                     >
                       <div className="px-1 py-1">
                         <Menu.Item>
@@ -120,9 +120,9 @@ function NotificationButton({
                               onClick={handleClick}
                               className={`${
                                 active
-                                  ? "bg-custom-orange text-white"
+                                  ? "bg-gray-300 text-black"
                                   : "text-gray-900"
-                              } group flex w-full text-white items-center rounded-md p-1 text-sm ${
+                              } group flex w-full text-black items-center rounded-md p-1 text-sm ${
                                 !click ? "hidden" : ""
                               }`}
                             >
@@ -134,9 +134,9 @@ function NotificationButton({
                                   //onClick={handleClick}
                                   className={`${
                                     active
-                                      ? "bg-custom-orange text-white"
+                                      ? "bg-gray-300 text-black"
                                       : "text-gray-900"
-                                  } group flex w-full text-white items-center rounded-md px-2 py-2 text-sm ${
+                                  } group flex w-full text-black items-center rounded-md px-2 py-2 text-sm ${
                                     !click ? "hidden" : ""
                                   }`}
                                 >
@@ -149,14 +149,14 @@ function NotificationButton({
                         <Menu.Item>
                           <div
                             onClick={deleteNotification}
-                            className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md p-1 text-sm`}
+                            className={`group flex w-full hover:bg-gray-300 text-black items-center rounded-md p-1 text-sm`}
                           >
                             <div>
                               <IoMdRemoveCircleOutline size={18} />
                             </div>
                             <div>
                               <button
-                                className={`group flex w-full hover:bg-custom-orange text-white items-center rounded-md px-2 py-2 text-sm`}
+                                className={`group flex w-full hover:bg-gray-300 text-black items-center rounded-md px-2 py-2 text-sm`}
                               >
                                 Remove this notification
                               </button>

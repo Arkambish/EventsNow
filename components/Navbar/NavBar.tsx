@@ -25,6 +25,8 @@ import { UserType } from "@/app/Type";
 import Notification from "./Notification";
 import { FetchGet } from "@/hooks/useFetch";
 import Style from "./../../app/navbar.module.css";
+import path from "path";
+import HomeNavBar from "@/app/home/components/HomeNavBar";
 
 export type OrganizationProps = {
   map: any;
@@ -200,16 +202,17 @@ export default function NavBar() {
   );
 
   return (
-    <div>
+    <div className={(pathname == "/"  || pathname== "/home")? `fixed w-full z-10 ` : ""}>
       {newUserPath ? null : (
         <div>
           {/* check data has loaded */}
           {isLoading ? (
-            <nav className="dark:bg-navWhite ">
+            <nav className={`${pathname == "/home" ? "":"bg-slate-100 opacity-85"} `}>
               <Spinner />
             </nav>
           ) : (
-            <nav className="bg-navWhite ">
+            <nav className="  ">
+              {pathname == "/home" ? <HomeNavBar/> : <div className="bg-slate-100 opacity-85">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
                 {/*  */}
                 {pathname.startsWith("/event/dashboard") ? (
@@ -228,7 +231,7 @@ export default function NavBar() {
                   </Link>
                 ) : (
                   <Link href="/">
-                    <button className="button ">
+                    <button className="button hover:opacity-85">
                       <div className="flex items-center gap-3">
                         <Image
                           src="/images/reusableComponents/nav-logo.svg"
@@ -237,7 +240,7 @@ export default function NavBar() {
                           height={20}
                         />
 
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-eventBrown    ">
+                        <span className="self-center lg:flex md:hidden flex text-2xl font-semibold whitespace-nowrap text-eventBrown    ">
                           EventNow
                         </span>
                       </div>
@@ -249,7 +252,7 @@ export default function NavBar() {
                   className="hidden w-full md:flex md:w-auto  items-end"
                   id="navbar-default"
                 >
-                  <ul className=" justify-center items-center text-xl font-medium flex   p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white  md:dark:bg-navWhite dark:border-gray-700">
+                  <ul className=" justify-center items-center text-xl font-medium flex   p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:border-gray-700">
                     <>
                       {pathname.startsWith("/event/dashboard") && (
                         <div>
@@ -274,7 +277,7 @@ export default function NavBar() {
                       <li>
                         <Link href={"/"}>
                           <button
-                            className=" block button py-2 px-3 text-white  rounded md:bg-transparent md:text-eventBrown-700 md:p-0 dark:text-eventBrown md:dark:text-eventBrown"
+                            className=" block button py-2 px-3   rounded md:bg-transparent md:text-eventBrown-700 md:p-0  text-eventBrown hover:opacity-85"
                             aria-current="page"
                           >
                             Home
@@ -290,31 +293,6 @@ export default function NavBar() {
                     {/* when user exist */}
                     {userActive && (
                       <>
-                        {/* crete event button */}
-
-                        {/* <button
-                          type="button"
-                          className={`${
-                            pathname.startsWith("/admin") ? "hidden" : "flex"
-                          } button  relative h-8 flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-custom-orange rounded-lg `}
-                        >
-                          <svg
-                            className="w-5 h-5"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 20 16"
-                          >
-                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
-                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
-                          </svg>
-                          <span className="sr-only animate-ping">
-                            Notifications
-                          </span>
-                          <div className="absolute inline-flex items-center justify-center w-6 h-4 text-xs font-bold text-white bg-red-600  rounded-full -top-2 -end-3 ">
-                            2
-                          </div>
-                        </button> */}
                         <Notification
                           notification={notification}
                           setNotification={setNotification}
@@ -332,14 +310,14 @@ export default function NavBar() {
                           {user.role === "admin" && (
                             <Link href={"/admin/dashboard"}>
                               <Login
-                                titleOfbutton={"ADMIN DASHBOARD"}
+                                titleOfbutton={"Admin Dashboard "}
                                 image={"createevent.svg"}
                               />
                             </Link>
                           )}
                           <Link href={"/createorganization"}>
                             <Login
-                              titleOfbutton={"HOST EVENT"}
+                              titleOfbutton={"Host event"}
                               image={"createevent.svg"}
                             />
                           </Link>
@@ -391,14 +369,14 @@ export default function NavBar() {
                 </div>
               </div>
               <div
-                style={{
-                  animation: `${
-                    isMenuOpen ? Style.slideInFromRight : Style.slideOutToRight
-                  } 0.5s forwards`,
-                }}
+                // style={{
+                //   animation: `${
+                //     isMenuOpen ? Style.slideInFromRight : Style.slideOutToRight
+                //   } 0.5s forwards`,
+                // }}
                 className={
                   isMenuOpen
-                    ? "fixed shadow-2xl  right-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0fc] p-5 ease-in duration-50 z-50"
+                    ? "fixed shadow-2xl blur-20  right-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0fc] p-5 ease-in duration-50 z-50"
                     : "fixed left-[100%] top-0 p-10 ease-in duration-50"
                 }
               >
@@ -437,7 +415,7 @@ export default function NavBar() {
                     !showProfile
                       ? "hidden"
                       : "xl:w-3/12 lg:w-3/12 md:w-1/3 2xl:w-1/5 sm:block hidden"
-                  } rounded-2xl top-13 right-0   bg-gray-700 text-white`}
+                  } rounded-b-2xl top-13 right-0 z-20 opacity-100  bg-slate-100 text-white`}
                 >
                   <NavBarProfile
                     setShowProfile={setShowProfile}
@@ -446,7 +424,7 @@ export default function NavBar() {
                     clickLogoutBtn={clickLogoutBtn}
                   />
                 </div>
-              </div>
+              </div></div>}
             </nav>
           )}
         </div>

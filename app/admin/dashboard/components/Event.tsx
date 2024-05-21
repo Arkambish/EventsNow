@@ -66,7 +66,7 @@ export default function Event() {
   }
 
   return (
-    <div>
+    <>
       <SuperadminPages
         serachData={serachData}
         title="All Events"
@@ -88,6 +88,6 @@ export default function Event() {
           </>
         }
       />
-    </div>
+    </>
   );
 }

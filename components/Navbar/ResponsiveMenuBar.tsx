@@ -2,7 +2,7 @@ import React, { memo, useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
-import { Item } from "./NavBar";
+import { Item, OrganizationProps } from "./NavBar";
 import Login from "../Login";
 import { MdContactless } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
@@ -11,6 +11,16 @@ import { FaLock } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { UserType } from "@/app/Type";
+import { HiOutlineHome, HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
+import {
+  HiOutlineEyeSlash,
+  HiOutlineQueueList,
+  HiOutlineWallet,
+  HiOutlineWindow,
+} from "react-icons/hi2";
+import { useAuth } from "@/app/AuthContext";
+// import { HiOutlineArrowRightStartOnRectangle } from "react-icons/hi2";
+// import { HiOutlineArrowRightStartOnRectangle } from "react-icons/hi2";
 
 interface props {
   isMenuOpen: boolean;
@@ -20,6 +30,10 @@ interface props {
   user: UserType;
 }
 
+type Organization = {
+  organization: OrganizationProps[];
+};
+
 const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
   isMenuOpen,
   clickLogoutBtn,
@@ -28,7 +42,7 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
   setIsMenuOpen,
 }: props) {
   const menuBarRef = useRef<HTMLDivElement>(null);
-
+  const { organization } = useAuth() as unknown as Organization;
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -136,12 +150,24 @@ const ResponsiveMenuBar = memo(function ResponsiveMenuBar({
           )}
         </ul>
         {userActive && (
-          <div className="mt-10 flex justify-center w-full">
-            <Login
-              image="Sign_in.svg"
-              titleOfbutton="LOGOUT"
-              fn={clickLogoutBtn}
-            />
+          <div className="w-100  overflow-hidden">
+            <div className="flex responsive-navbar-profile overflow-auto gap-3 mt-5">
+              {/* <Link href={`/profile/${user._id}`}> */}
+              <Image
+                src={user.image}
+                alt="profile picture"
+                width={40}
+                height={10}
+                className="rounded-full w-auto h-auto"
+              />
+              {/* </Link> */}
+              <div className="flex flex-col">
+                <div className="font-bold capitalize">
+                  {user.firstName} {user.lastName}
+                </div>
+                <div className="text-slate-500">{user.email}</div>
+              </div>
+            </div>
           </div>
         )}
       </div>

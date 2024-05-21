@@ -7,7 +7,7 @@ const AttendantSchema = new mongoose.Schema(
   {
     ticketType: {
       type: String,
-      required: [true, "Please enter quantity"],
+      required: [true, "Please enter ticketType"],
     },
     eventId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -18,7 +18,7 @@ const AttendantSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: User,
       required: [true, "Please enter userId"],
-      unique: true,
+      // unique: true,
     },
   },
   {

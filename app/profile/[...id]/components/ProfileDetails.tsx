@@ -7,9 +7,9 @@ interface Details {
 
 export default function ProfileDetails({ name, data }: Details) {
   return (
-    <div className="border-gray border-2 flex flex-col lg:flex-row w-full p-1 pl-3 rounded-lg bg-white mt-5">
+    <div className="border-gray border-2 bg-white flex flex-col lg:flex-row w-full p-1 pl-3 rounded-lg mt-5">
       <label
-        className="inline-block whitespace-nowrap my-1 capitalize text-xs md:text-base  sm:my-auto md:my-2 lg:my-auto"
+        className="inline-block whitespace-nowrap my-1  capitalize text-xs md:text-base  sm:my-auto md:my-2 lg:my-auto"
         htmlFor="fname"
       >
         {name} :-

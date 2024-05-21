@@ -154,7 +154,7 @@ export default memo(function GenaralUpdate({
               className={`w-full m-2  button rounded-2xl flex justify-center items-center p-1  text-bold text-lg ${
                 isDissableBtn
                   ? "cursor-not-allowed bg-gray-200 text-gray-400"
-                  : "bg-custom-orange text-white"
+                  : "bg-dashBtnBlue text-white"
               } `}
             >
               Send

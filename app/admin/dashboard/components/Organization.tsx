@@ -80,7 +80,7 @@ export default function Organization() {
   };
 
   return (
-    <div>
+    <>
       <SuperadminPages
         serachData={serachData}
         title="All Organizations"
@@ -101,6 +101,6 @@ export default function Organization() {
           </>
         }
       />
-    </div>
+    </>
   );
 }
