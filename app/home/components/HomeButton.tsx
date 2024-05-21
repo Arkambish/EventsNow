@@ -1,22 +1,25 @@
+
 import React from 'react'
 import Image from 'next/image'
+import {  } from 'next/navigation';
+import Link from 'next/link';
 interface homeButtonProps {
   filled:boolean,
   text:string,
-  image:string
+  
 }
 
-export default function HomeButton({ filled,text,image}: homeButtonProps) {
+export default function HomeButton({ filled,text}: homeButtonProps) {
+
+
+
   return (
-    <button className={`items-center py-3 rounded-full px-7 text-center font-bold text-lg font-dm-sans flex gap-2 ${filled?"text-home-blue bg-white":" border-2 text-white"} `} >
-      {image && <Image
-          src={`/images/reusableComponents/${image}`}
-          alt="Picture of the button"
-          width={25}
-          height={25}
-          className='  self-center'
-        />}
+    
+      <button className={` transition ease-in-out duration-300 delay-50 items-center sm:py-3 py-2 rounded-full px-4 sm:px-7 lg:px-6 xl:px-5 2xl:px-7 text-center font-bold sm:text-lg font-dm-sans flex gap-2 ${filled?"text-home-blue hover:text-white hover:bg-home-blue bg-white":" border-2 text-white hover:text-home-blue hover:border-home-blue "} `} 
+     >
+      
       {text}
     </button>
+    
   )
 }

@@ -36,7 +36,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <AuthProvider>
           <AuthContextProvider>
-            {/* <NavBar /> */}
+            <NavBar />
             {children}
           </AuthContextProvider>
           <TostifyProvider />

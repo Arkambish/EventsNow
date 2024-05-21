@@ -3,12 +3,12 @@ import WorkDescribeComponent from './WorkDescribeComponent'
 
 export default function HowItWorks() {
   return (
-    <div className='h-screen grid  items-center'>
-        <div className="">
-        <div className="mb-12 text-center font-semibold text-[40px] text-white font-manrope">
+    <div className='h-screen grid items-center  max-lg:p-10'>
+        <div className=" ">
+        <div className="sm:mb-12 mb-4 text-center font-semibold text-xl md:text-[40px] text-white font-manrope">
         How it works?
         </div>
-      <div className=" flex gap-5  justify-around mx-40 ">
+      <div className=" sm:flex  grid gap-6  justify-around xl:mx-40 lg:mx-5 ">
       <WorkDescribeComponent
       fillColor={"#9672FF"}
       image={"organization.png"}
@@ -21,7 +21,7 @@ export default function HowItWorks() {
       text={"Easily organized and manage your events. Setup details, invite attendees, and track registrations all in one platform.  "}/>
       <WorkDescribeComponent
       fillColor={"#F2B8EC"}
-      image={"organization.png"}
+      image={"ticket.png"}
       headerText={"Buy Tickets"}
       text={"Secure your spot with just a few clicks. Browse events, select your tickets, and complete your purchase quickly and easily."}/>
       </div>

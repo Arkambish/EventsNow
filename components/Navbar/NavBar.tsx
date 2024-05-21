@@ -25,6 +25,8 @@ import { UserType } from "@/app/Type";
 import Notification from "./Notification";
 import { FetchGet } from "@/hooks/useFetch";
 import Style from "./../../app/navbar.module.css";
+import path from "path";
+import HomeNavBar from "@/app/home/components/HomeNavBar";
 
 export type OrganizationProps = {
   map: any;
@@ -201,16 +203,17 @@ export default function NavBar() {
   );
 
   return (
-    <div className={pathname == "/" ? `fixed w-full z-10 ` : ""}>
+    <div className={(pathname == "/"  || pathname== "/home")? `fixed w-full z-10 ` : ""}>
       {newUserPath ? null : (
         <div>
           {/* check data has loaded */}
           {isLoading ? (
-            <nav className="bg-slate-100 opacity-85">
+            <nav className={`${pathname == "/home" ? "":"bg-slate-100 opacity-85"} `}>
               <Spinner />
             </nav>
           ) : (
-            <nav className="  bg-slate-100 opacity-85">
+            <nav className="  ">
+              {pathname == "/home" ? <HomeNavBar/> : <div className="bg-slate-100 opacity-85">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
                 {/*  */}
                 {pathname.startsWith("/event/dashboard") ? (
@@ -422,7 +425,7 @@ export default function NavBar() {
                     clickLogoutBtn={clickLogoutBtn}
                   />
                 </div>
-              </div>
+              </div></div>}
             </nav>
           )}
         </div>
