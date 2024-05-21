@@ -63,7 +63,7 @@ function Notification() {
           <div key={item._id} className="bg-gray-100 p-4 rounded-md mb-4">
             <p className="text-lg font-semibold mb-1">{item.topic}</p>
             <p className="text-gray-700 mb-2">{item.comment}</p>
-            <p className="text-gray-500">{item.createdAt.substring(0, 10)}</p>
+            <p className="text-gray-500 ">{item.createdAt.substring(0, 10)}</p>
           </div>
         ))}
       </div>
