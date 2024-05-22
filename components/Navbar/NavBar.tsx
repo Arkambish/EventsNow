@@ -208,12 +208,12 @@ export default function NavBar() {
         <div>
           {/* check data has loaded */}
           {isLoading ? (
-            <nav className={`${pathname == "/home" ? "":"bg-slate-100 opacity-85"} `}>
+            <nav className={`${pathname == "/home" ? "":"bg-white "} `}>
               <Spinner />
             </nav>
           ) : (
             <nav className="  ">
-              {pathname == "/home" ? <HomeNavBar/> : <div className="bg-slate-100 opacity-85">
+              {pathname == "/home" ? <HomeNavBar/> : <div className="bg-white ">
               <div className=" flex flex-wrap items-center justify-between mx-auto p-2">
                 {/*  */}
                 {pathname.startsWith("/event/dashboard") ? (
@@ -278,7 +278,7 @@ export default function NavBar() {
                       <li>
                         <Link href={"/"}>
                           <button
-                            className=" block button py-2 px-3   rounded md:bg-transparent md:text-eventBrown-700 md:p-0  text-eventBrown hover:opacity-85"
+                            className=" block button py-2 px-3   rounded  md:text-eventBrown-700 md:p-0  text-eventBrown hover:opacity-85"
                             aria-current="page"
                           >
                             Home
@@ -416,7 +416,7 @@ export default function NavBar() {
                     !showProfile
                       ? "hidden"
                       : "xl:w-3/12 lg:w-3/12 md:w-1/3 2xl:w-1/5 sm:block hidden"
-                  } rounded-b-2xl top-13 right-0 z-20 opacity-100  bg-slate-100 text-white`}
+                  } rounded-b-2xl top-13 right-0 bg-white text-white`}
                 >
                   <NavBarProfile
                     setShowProfile={setShowProfile}
