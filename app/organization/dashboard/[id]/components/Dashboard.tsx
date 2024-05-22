@@ -38,7 +38,7 @@ export default function Dashboard() {
   return (
     <div className="flex rounded-lg h-[30rem]     md:pl-10 md:ml-2 pl-5 bg-slate-100 pt-8 lg:pl-12 flex-col justify-start items-start gap-12">
       <div className="w-full  flex flex-col justify-end">
-        <div className="text-3xl font-semibold text-custom-orange	font-IBM">
+        <div className="text-3xl font-semibold text-stone-600 font-IBM">
           Dashboard
         </div>
 
@@ -52,7 +52,7 @@ export default function Dashboard() {
               <Select onValueChange={handleEventChange}>
                 <SelectTrigger
                   value={selectedEvent}
-                  className="w-[250px] ring-2 ring-custom-orange"
+                  className="w-[250px] ring-2 ring-dashBtnBlue"
                 >
                   <SelectValue placeholder="Choose an event" />
                 </SelectTrigger>
@@ -76,7 +76,7 @@ export default function Dashboard() {
       </div>
 
       <div
-        className={`flex shadow-normalComponent border-t-[1px] border-custom-orange gap-8 md:gap-10 rounded-xl bg-white ${
+        className={`flex shadow-normalComponent border-t-[1px] border-dashBtnBlue gap-8 md:gap-10 rounded-xl bg-white ${
           isSlideBar ? "md:w-11/12 md:pl-5" : " md:w-4/5 md:pl-10"
         }  w-11/12	  lg:w-4/5  xl:w-4/5  2xl:w-3/5 pt-2 pb-2  lg:pl-24`}
       >
@@ -103,7 +103,7 @@ export default function Dashboard() {
       </div>
 
       {/* <div
-        className={`flex border-t-[1px] border-custom-orange shadow-normalComponent gap-8 md:gap-10 rounded-xl bg-white ${
+        className={`flex border-t-[1px] border-dashBtnBlue shadow-normalComponent gap-8 md:gap-10 rounded-xl bg-white ${
           isSlideBar ? "md:w-11/12 md:pl-5" : "md:w-4/5 md:pl-10"
         }  w-11/12	   lg:w-4/5 xl:w-4/5 mb-2  2xl:w-3/5 pt-2 pb-2 md:pl-10 lg:pl-24`}
       >

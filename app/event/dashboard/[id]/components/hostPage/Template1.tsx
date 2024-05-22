@@ -31,6 +31,7 @@ export default function Template1({ setIsTemplate1 }: Props) {
       body: JSON.stringify({
         id: params.id,
         template: "template1",
+        hostPageType: "template",
       }),
     });
     const data = await res.json();

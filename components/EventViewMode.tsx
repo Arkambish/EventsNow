@@ -1,10 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { HiOutlineViewGrid, HiOutlineViewList } from "react-icons/hi";
 import EventCard from "@/components/EventCard";
 import Pagination from "@mui/material/Pagination";
 import { formatDate } from "@/util/helper";
 import EventListView from "./EventListView";
+import { useIntersection } from "react-use";
+import gsap from "gsap";
 import { EventType } from "@/app/Type";
 import {
   HiOutlineLocationMarker,
@@ -27,7 +29,35 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("");
   const [eventsPerPage, setEventsPerPage] = useState(2);
+  const eventRef = useRef(null);
+  const intersection = useIntersection(eventRef, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  });
+  useEffect(() => {
+    const fadeInFromRight = (element: gsap.TweenTarget, delay: number) => {
+      gsap.from(element, {
+        opacity: 0,
+        x: 100,
+        duration: 1,
+        delay: delay,
+        ease: "power4.out",
+      });
+    };
 
+    if (intersection && intersection.intersectionRatio >= 0.5) {
+      const eventCards = (eventRef.current as HTMLElement | null)?.children;
+      let delay = 0;
+      if (eventCards) {
+        let delay = 0;
+        for (let i = 0; i < eventCards.length; i++) {
+          fadeInFromRight(eventCards[i], delay);
+          delay += 0.3;
+        }
+      }
+    }
+  }, [intersection]);
   useEffect(() => {
     const handleResize = () => {
       if (document.documentElement.clientWidth >= 1448) {
@@ -75,7 +105,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
 
   return (
     <div>
-      <div className="mb-10 flex flex-col md:flex-row lg:flex-row  sm:items-center items-start justify-between">
+      <div className="mt-8 mb-10 flex flex-col md:flex-row lg:flex-row  sm:items-center items-start justify-between">
         <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg  ms-8">
           Upcoming Events
         </div>
@@ -143,12 +173,14 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
           </div>
         </div>
       </div>
+
       <div
         className={`flex ${
           viewMode === "grid"
             ? "flex-wrap ml-1 justify-center items-center"
             : " flex-col gap-3 justify-center items-center"
         }  `}
+        ref={eventRef}
       >
         {/* <EventListView /> */}
         {currentEvents.map((event, index) =>

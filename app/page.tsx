@@ -5,19 +5,22 @@ import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
 import { EventType } from "./Type";
-import Notification from "@/components/Navbar/Notification";
-
+import { getUser } from "@/components/Navbar/NavBar";
+import { getSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSideProps } from "next";
+import useUser from "@/hooks/useUser";
 async function getOutDateEvent() {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/outdatedEvents`,
       { cache: "no-cache" }
     );
-    const data = await response.json();
-
-    return data;
+    return await response.json();
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching outdated events:", error);
     return [];
   }
 }
@@ -28,31 +31,34 @@ async function getEvent() {
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getPublishedEvents`,
       { next: { revalidate: 10 } }
     );
-    const event = await response.json();
-
-    return event;
+    return await response.json();
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching published events:", error);
     return [];
   }
 }
+type props = {
+  username: string;
+};
 
 export default async function Home() {
+  const [username] = useUser();
+  if (!username) {
+    redirect("/home");
+  }
+
   const data = await getOutDateEvent();
   const event = await getEvent();
 
   return (
-    <div className=" scroll-smooth">
+    <div className="scroll-smooth">
       <HeroSection />
-
       <EventViewMode event={event} />
-
-      <div className=" font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
+      <div className="font-bold text-[30px] md:text-[40px] lg:text-5xl text-[#906953] drop-shadow-lg ms-8">
         Outdated Events
       </div>
-
       {data.length !== 0 && (
-        <div className="flex-wrap justify-center items-center flex ">
+        <div className="flex-wrap justify-center items-center flex">
           {data.slice(0, 6).map((e: EventType) => (
             <EventCardDisabled
               key={e._id}
@@ -64,8 +70,16 @@ export default async function Home() {
           ))}
         </div>
       )}
-
       <Footer />
     </div>
   );
 }
+
+// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+//   const username = req.cookies["next-auth.session-token"];
+//   return {
+//     props: {
+//       username: username || "",
+//     },
+//   };
+// };

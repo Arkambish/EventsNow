@@ -79,7 +79,7 @@ export default memo(function PaymentModal({
         aria-hidden="true"
         className=" overflow-y-auto overflow-x-hidden p-4 fixed  z-50 justify-center items-center w-full md:inset-0  max-h-full"
       >
-        <div className="border-[1px] border-custom-orange rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
+        <div className="border-[1px] border-dashBtnBlue rounded-md bg-white  w-3/5 relative top-[20%] left-[20%]">
           <div className="mr-4">
             <button
               onClick={() => setShowPaymentModal(false)}

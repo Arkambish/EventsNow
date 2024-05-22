@@ -1,3 +1,4 @@
+
 import Event from "./eventModel";
 import TicketType from "./ticketType";
 
@@ -7,7 +8,7 @@ const BuyticketSchema = new mongoose.Schema({
   ticketId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: TicketType,
-  },
+  },  
 
   eventId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -17,6 +18,15 @@ const BuyticketSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: [true, "Please enter userId"],
+  },
+
+  ticketCode: {
+    type: String,
+    required: [true, "Please enter ticketCode"],
+  },
+  isAttendentMarked: {
+    type: Boolean,
+    default: false,
   },
  
 });

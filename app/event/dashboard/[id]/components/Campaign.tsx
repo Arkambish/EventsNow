@@ -26,14 +26,15 @@ export default function Campaign() {
     <Container>
       <div className="pl-10 mb-5 grid gap-2 mt-8 mr-10 pb-20">
         <div className="flex justify-between">
-        <div className="  text-custom-orange font-medium text-3xl pb-4 ">
-          CAMPAIGN
-        </div>
-        <button 
-        onClick={() => setStatus("registeredusers")}
-         className=" border-2  rounded-md hover:bg-slate-100   text-custom-orange font-mono text-base font-normal  drop-shadow-md my-auto px-2 py-0.5 ">
-          Registered Users
-        </button>
+          <div className=" text-stone-600 font-IBM font-medium text-3xl pb-4 ">
+            CAMPAIGN
+          </div>
+          <button
+            onClick={() => setStatus("registeredusers")}
+            className=" border-2  rounded-md hover:bg-slate-100   text-dashBtnBlue font-mono text-base font-normal  drop-shadow-md my-auto px-2 py-0.5 "
+          >
+            Registered Users
+          </button>
         </div>
 
         <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
@@ -45,7 +46,7 @@ export default function Campaign() {
           </div>
           <button
             onClick={() => setCreatePost(true)}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-dashBtnBlue rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -64,7 +65,7 @@ export default function Campaign() {
           </div>
           <button
             onClick={() => setStatus("editpost")}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-dashBtnBlue rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"
@@ -86,7 +87,7 @@ export default function Campaign() {
           </div>
           <button
             onClick={() => setStatus("sendemail")}
-            className="bg-custom-orange rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
+            className="bg-dashBtnBlue rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
               className="my-auto mx-2"

@@ -1,9 +1,16 @@
+export const dynamic = "force-dynamic";
+
 import connectMongoDB from "@/lib/mongo/mongodb";
 import Event from "@/models/eventModel";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
-  const id = await req.json();
+type Params = {
+  id: string;
+};
+
+export async function GET(req: Request, { params }: { params: Params }) {
+  const id = params.id;
+  // const id = await req.json();
   connectMongoDB();
   const event = await Event.findOne({ _id: id });
 

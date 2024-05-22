@@ -37,6 +37,7 @@ export default function SideBar() {
     globalPermission,
     eventPermission,
     isLoading,
+    status,
   } = UseEventContext() as EventContextType;
 
   return (
@@ -77,6 +78,7 @@ export default function SideBar() {
                     isSlideBar={isSideBar}
                     text="Overview"
                     onClick={() => handleOverview()}
+                    isActive={status === "overview"}
                   >
                     <AiOutlineHome size={23} />
                   </EventDashButton>
@@ -88,6 +90,7 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Host Page"
                       onClick={handleHostPage}
+                      isActive={status === "hostpage"}
                     >
                       <RiPagesLine size={23} />
                     </EventDashButton>
@@ -96,6 +99,7 @@ export default function SideBar() {
                     isSlideBar={isSideBar}
                     text="My Team"
                     onClick={() => handleMyteam()}
+                    isActive={status === "myteam"}
                   >
                     <HiOutlineUsers size={23} />
                   </EventDashButton>
@@ -107,6 +111,7 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Reports"
                       onClick={() => handleReports()}
+                      isActive={status === "reports"}
                     >
                       <HiOutlineDocumentText size={23} />
                     </EventDashButton>
@@ -119,6 +124,7 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Campaign"
                       onClick={() => handleCampaign()}
+                      isActive={status === "campaign"}
                     >
                       <MdOutlinePublishedWithChanges size={23} />
                     </EventDashButton>
@@ -131,6 +137,7 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Settings"
                       onClick={() => handleSetting()}
+                      isActive={status === "settings"}
                     >
                       <IoSettingsOutline size={23} />
                     </EventDashButton>
@@ -146,6 +153,7 @@ export default function SideBar() {
                       isSlideBar={isSideBar}
                       text="Tickets"
                       onClick={() => handleTicket()}
+                      isActive={status === "tickets"}
                     >
                       <TiTicket size={23} />
                     </EventDashButton>
@@ -156,8 +164,9 @@ export default function SideBar() {
                   >
                     <EventDashButton
                       isSlideBar={isSideBar}
-                      text="QR Reader"
+                      text="Mark Attendance"
                       onClick={() => handleQRreader()}
+                      isActive={status === "qrreader"}
                     >
                       <TbFileBarcode size={23} />
                     </EventDashButton>

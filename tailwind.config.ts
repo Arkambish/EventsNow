@@ -12,6 +12,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+          'gradient-home': 'linear-gradient(119deg, #FF8158 -2.11%, #4B65A6 63.58%)',
       },
       spacing: {
         "571": "571px",
@@ -35,12 +36,19 @@ const config: Config = {
         "custom-gray": "#F8F8F8",
         dashboard: "#E9E9E9",
         new: "#906953",
-        dashBtnBlue:"#394855"
+        dashBtnBlue: "#394855",
+        "home-blue":"#003585",
       },
       fontFamily: {
-        Inter: ["Inter", "sans - serif"],
+        Inter: ["Inter", "sans-serif"],
         khand: ["Khand", "sans-serif"],
         IBM: ["IBM Plex Mono", "monospace"],
+        'dm-sans': ['"DM Sans"', 'sans-serif'],
+        'monoton': ['Monoton', 'cursive'],
+        manrope: ['Manrope', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        'bai-jamjuree': ['"Bai Jamjuree"', 'sans-serif'],
+        'abhaya-libre': ['Abhaya Libre', 'serif'],
       },
       height: {
         "394": "394px",
@@ -53,7 +61,7 @@ const config: Config = {
       boxShadow: {
         "3xl": " 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset",
         normalComponent:
-          "0px 4px 4px 0px rgba(212, 113, 81, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+          "0px 4px 4px 0px rgba(255, 255, 255, 222) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
       },
     },
   },

@@ -4,14 +4,16 @@ import Event from "../../../../../models/eventModel";
 import BuyTicket from "@/models/buyTicket";
 
 export async function POST(req: NextRequest) {
-  const { ticketId, eventId, userId } = await req.json();
-  console.log(ticketId, eventId, userId);
+  const { ticketId, eventId, userId,ticketCode } = await req.json();
+  console.log(ticketId, eventId, userId,ticketCode);
+  console.log("ashan")
   try {
     await connectMongoDB();
     const buyTicket = await BuyTicket.create({
       ticketId: ticketId.typeId,
       eventId,
       userId,
+      ticketCode
     });
     console.log(buyTicket);
     if (!buyTicket) {

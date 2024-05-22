@@ -7,17 +7,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { ticketType, eventId, userId } = await req.json();
+  console.log(ticketType, eventId, userId);
 
   try {
     connectMongoDB();
-
-    // const checkUser = await Attendant.findOne({
-    //   userId: userId,
-    //   eventId: eventId,
-    // });
-    // if (checkUser) {
-    //   return NextResponse.json({ message: "User Already Attending" });
-    // }
 
     const attendant = await Attendant.create({
       ticketType,

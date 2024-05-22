@@ -6,6 +6,8 @@ import QrScanner from "qr-scanner";
 import { error, success } from "@/util/Toastify";
 import { FetchPost } from "@/hooks/useFetch";
 import { UseEventContext } from "../EventDashContext";
+import QrCode from "./QrCode";
+import Code from "./Code";
 
 const QrReader = () => {
   const videoElementRef = useRef(null);
@@ -16,6 +18,18 @@ const QrReader = () => {
   const [ticketType, setTicketType] = useState();
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
+  const [activeButton, setActiveButton] = useState(1);
+  const [activeComponent, setActiveComponent] = useState("Code");
+  //set active component
+ 
+
+  const handleClick = (buttonNumber) => {
+    setActiveButton(buttonNumber);
+  };
+
+  const handleComponentChange = (component) => {
+    setActiveComponent(component);
+  };
 
   const { id } = UseEventContext();
 
@@ -91,57 +105,55 @@ const QrReader = () => {
   return (
     <div>
       <Container>
-        <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
-          <div className="  text-custom-orange font-medium text-3xl ">
-            QR READER
-          </div>
-          <div className=" text-[#455273]  mr-8">
-            Turn on the camera and scan the qr code
-          </div>
-        </div>
 
-        <div className="flex gap-10 items-center">
-          <div className="flex flex-col gap-5 justify-center items-center">
-            <Switch
-              className="grid  self-center"
-              onChange={handleChange}
-              checked={isVideoOn}
-              offColor="#E9E9E9"
-              onColor="#D47151"
-              offHandleColor="#D47151"
-              onHandleColor="#E9E9E9"
-              height={20}
-              width={40}
-            />
-            <div className="flex align items-center justify-center mb-3 ">
-              <video
-                className="object-cover border-2 border-solid w-64 h-64"
-                ref={videoElementRef}
-              />
-            </div>
+        <div className="grid lg:pl-10 mb-5 gap-2 mt-8 md:mr-10 pb-8">
+         <div className="flex  "> 
+          <div className="  text-custom-orange font-medium text-3xl ">
+            Mark Attendence
+
           </div>
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-3">
-              <p className="scannedText font-bold text-lg">
-                Event id:<span className="text-slate-400"> {scannedEvent}</span>
-              </p>
-              <p className="scannedText font-bold text-lg">
-                User id:<span className="text-slate-400"> {scannedUser}</span>
-              </p>
-              <p className="scannedText font-bold text-lg">
-                Ticket Type:{" "}
-                <span className="text-slate-400"> {ticketType}</span>
-              </p>
-            </div>
+
+
+        <div className="flex items-end ml-56 ">
+          <div className="flex md:w-64 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
             <button
-              onClick={handleMarkAttendance}
-              className={`button p-2 rounded-full  text-white font-bold ${
-                isActiveMark ? "bg-custom-orange" : "bg-slate-400"
-              }`}
-            >
-              Mark the attendance
-            </button>
-          </div>
+             className={`md:text-sm button font-medium ml-2 w-40 h-6 xl:h-8 rounded-3xl  ${
+            activeButton === 1
+              ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+              : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+             }`}
+            onClick={() => {
+            if (activeComponent !== "QrCode") {
+              handleComponentChange("QrCode");
+              handleClick(1);
+            }
+          }}
+        >
+          Qr Reader
+        </button>
+        <button
+          className={` md:text-sm button cursor-pointer font-medium mr-2 w-40 h-6 xl:h-8 rounded-3xl  ${
+            activeButton === 2
+              ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+              : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+          }`}
+          onClick={() => {
+            if (activeComponent !== "Code") {
+              handleComponentChange("Code");
+              handleClick(2);
+            }
+          }}
+        >
+          Code Reader
+        </button>
+      </div>    
+      </div>      
+      </div>
+
+      {activeComponent === "QrCode" && <QrCode />}
+      {activeComponent === "Code" && <Code />}
+
+
         </div>
       </Container>
     </div>

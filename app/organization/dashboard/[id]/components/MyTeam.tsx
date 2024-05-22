@@ -51,7 +51,7 @@ export default function MyTeam() {
   return (
     <div className="flex pl-5 rounded-lg    md:ml-2 bg-slate-100 pt-8 md:pl-12 flex-col justify-start items-start gap-12">
       <div className="flex flex-col gap-3 justify-start items-start">
-        <div className="text-3xl font-semibold text-custom-orange	font-IBM">
+        <div className="text-3xl font-semibold text-stone-600 font-IBM">
           MY TEAM
         </div>
         <div className="text-base text-[#848484] font-normal">

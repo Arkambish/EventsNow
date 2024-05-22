@@ -78,6 +78,12 @@ export default function MainComponent() {
     };
   }, [isDashboardOpen]);
 
+  console.log("isloading", isLoading);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div>
       <div>
