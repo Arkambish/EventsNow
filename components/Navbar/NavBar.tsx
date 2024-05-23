@@ -132,7 +132,6 @@ export default function NavBar() {
           const name = session?.user?.name ? session?.user?.name : "";
           if (name !== "") {
             const data = await getUser({ email: session?.user?.email });
-
             if (data) {
               setUserActive(true);
               setUser(data);

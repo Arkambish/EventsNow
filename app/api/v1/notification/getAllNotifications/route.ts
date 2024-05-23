@@ -13,13 +13,11 @@ export async function POST(req: Request) {
 
     const recieverId = await reciever._id;
 
-    console.log("t1");
     const createNotification = await Notification.create({
       topic,
       comment,
       recieverId,
     });
-    console.log("t2");
 
     if (!createNotification) {
       return NextResponse.json(
