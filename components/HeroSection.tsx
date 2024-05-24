@@ -12,8 +12,8 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
+// import { useSearchParams } from "next/navigation";
+// import { useRouter } from "next/router";
 // const customTheme: CustomFlowbiteTheme = {
 //   carousel: {
 //     scrollContainer: {
@@ -32,7 +32,7 @@ import { useRouter } from "next/router";
 
 export default function HeroSection() {
   const [search, setSearch] = useState("");
-  const router = useRouter();
+  // const router = useRouter();
 
   // useEffect(() => {
   //   if (search) {
@@ -43,11 +43,11 @@ export default function HeroSection() {
   //   }
   // }, [search, router]);
 
-  const handleChange = (value: string) => {
-    setSearch(value);
-    const url = `/home/?search=${encodeURIComponent(search)}`;
-    router.push(url, undefined, { shallow: true });
-  };
+  // const handleChange = (value: string) => {
+  //   setSearch(value);
+  //   const url = `/home/?search=${encodeURIComponent(search)}`;
+  //   router.push(url, undefined, { shallow: true });
+  // };
 
   useEffect(() => {
     animateHero();
