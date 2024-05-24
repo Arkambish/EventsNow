@@ -12,6 +12,8 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 // const customTheme: CustomFlowbiteTheme = {
 //   carousel: {
 //     scrollContainer: {
@@ -29,6 +31,24 @@ import Image from "next/image";
 // };
 
 export default function HeroSection() {
+  const [search, setSearch] = useState("");
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   if (search) {
+  //     const url = `/home/?search=${encodeURIComponent(search)}`;
+  //     router.push(url, undefined, { shallow: true });
+  //   } else {
+  //     router.push("/home", undefined, { shallow: true });
+  //   }
+  // }, [search, router]);
+
+  const handleChange = (value: string) => {
+    setSearch(value);
+    const url = `/home/?search=${encodeURIComponent(search)}`;
+    router.push(url, undefined, { shallow: true });
+  };
+
   useEffect(() => {
     animateHero();
   }, []);
@@ -89,6 +109,8 @@ export default function HeroSection() {
                 placeholder="Title, Venue, Organizer..."
                 type="text"
                 name="search"
+                value={search}
+                onChange={(e) => handleChange(e.target.value)}
               />
             </label>
           </div>

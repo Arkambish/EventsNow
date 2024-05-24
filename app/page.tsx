@@ -35,10 +35,10 @@ async function getEvent() {
 }
 
 export default async function Home() {
-  const [username] = useUser();
-  if (!username) {
-    redirect("/home");
-  }
+  // const [username] = useUser();
+  // if (!username) {
+  //   redirect("/home");
+  // }
 
   const data = await getOutDateEvent();
   const event = await getEvent();
