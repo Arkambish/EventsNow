@@ -5,13 +5,9 @@ import { formatDate } from "@/util/helper";
 import EventViewMode from "@/components/EventViewMode";
 import HeroSection from "@/components/HeroSection";
 import { EventType } from "./Type";
-import { getUser } from "@/components/Navbar/NavBar";
-import { getSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { GetServerSideProps } from "next";
 import useUser from "@/hooks/useUser";
+import { redirect } from "next/navigation";
+
 async function getOutDateEvent() {
   try {
     const response = await fetch(
@@ -37,9 +33,6 @@ async function getEvent() {
     return [];
   }
 }
-type props = {
-  username: string;
-};
 
 export default async function Home() {
   const [username] = useUser();
