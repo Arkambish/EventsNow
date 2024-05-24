@@ -43,11 +43,11 @@ export default function HeroSection() {
   //   }
   // }, [search, router]);
 
-  // const handleChange = (value: string) => {
-  //   setSearch(value);
-  //   const url = `/home/?search=${encodeURIComponent(search)}`;
-  //   router.push(url, undefined, { shallow: true });
-  // };
+  const handleChange = (value: string) => {
+    setSearch(value);
+    // const url = `/home/?search=${encodeURIComponent(search)}`;
+    // router.push(url, undefined, { shallow: true });
+  };
 
   useEffect(() => {
     animateHero();
