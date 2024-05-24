@@ -212,18 +212,16 @@ export default function NavBar() {
         <div>
           {/* check data has loaded */}
           {isLoading ? (
-
             <nav
               className={`${
                 pathname == "/home" ? "" : "bg-slate-100 opacity-85"
               } `}
             >
-
               <Spinner />
             </nav>
           ) : (
             <nav className="  ">
-
+              {/* <div> */}
               {pathname == "/home" ? (
                 <HomeNavBar />
               ) : (
@@ -237,7 +235,6 @@ export default function NavBar() {
                         >
                           <div className="flex text-white  flex-row ml-2 mr-2  gap-2 p-0 items-center justify-center">
                             <IoMdArrowRoundBack />
-
 
                             <div className=" text-white text-sm S font-bold ">
                               Organization
@@ -301,7 +298,6 @@ export default function NavBar() {
                               </button>
                             </Link>
                           </li>
-
 
                           <Link href={"/about"}>
                             <NavBarButton text={"About"} />
@@ -451,32 +447,6 @@ export default function NavBar() {
                       />
                     </div>
                   </div>
-
-                )}
-                <ResponsiveMenuBar
-                  user={user}
-                  userActive={userActive}
-                  isMenuOpen={isMenuOpen}
-                  setIsMenuOpen={setIsMenuOpen}
-                  clickLogoutBtn={clickLogoutBtn}
-                />
-              </div>
-              {/* */}
-              <div className="relative">
-                <div
-                  className={`absolute ${
-                    !showProfile
-                      ? "hidden"
-                      : "xl:w-3/12 lg:w-3/12 md:w-1/3 2xl:w-1/5 sm:block hidden"
-                  } rounded-b-2xl top-13 right-0 bg-white text-white`}
-                >
-                  <NavBarProfile
-                    setShowProfile={setShowProfile}
-                    showProfile={showProfile}
-                    user={user}
-                    clickLogoutBtn={clickLogoutBtn}
-                  />
-
                 </div>
               )}
             </nav>
