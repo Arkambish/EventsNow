@@ -27,6 +27,7 @@ export default function SelectTemplate({
   event: EventType;
   preview?: boolean;
 }) {
+  console.log(event.template);
   return (
     <div>
       {event.template === "template1" && (

@@ -28,6 +28,7 @@ function Template2({ setIsTemplate2 }: Props) {
       body: JSON.stringify({
         id: params.id,
         template: "template2",
+        hostPageType: "template",
       }),
     });
     const data = await res.json();

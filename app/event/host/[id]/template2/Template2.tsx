@@ -9,6 +9,8 @@ import { RiTimeFill } from "react-icons/ri";
 import PostTab from "../components/PostTab";
 import { EventType } from "@/app/Type";
 import Footer from "@/components/Footer";
+import Buttons from "./Buttons";
+import { formatDate } from "@/util/helper";
 function Template2({
   event,
   preview,
@@ -17,6 +19,9 @@ function Template2({
   preview?: boolean;
 }) {
   const [postBar, setPostBar] = useState(false);
+  const date = `${formatDate(event.eventStartDate)} to ${formatDate(
+    event.eventEndDate
+  )}`;
   return (
     <div
       //   style={{
@@ -30,9 +35,12 @@ function Template2({
       }}
       className=" overflow-y-auto overflow-x-hidden h-full z-0   justify-center items-center w-full   "
     >
-      <div className="backdrop-blur-xl text-white mt-12 z-10  font-sans pb-16">
-        <div className=" text-white   w-full  mx-auto px-8 pt-1 ">
-          <div className="absolute  left-0 p-4 mx-auto xl:mx-28">
+      <div
+        className="h-full w-full bg-purple-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 
+                    relative  text-white  mt-12 z-10 p-6  font-sans pb-16 mb-12"
+      >
+        <div className=" text-white   w-full  mx-auto px-10  ">
+          <div className="absolute  left-0 p-6 mx-auto xl:mx-28">
             <div className="flex space-x-2  mb-2">
               <div className="">
                 <FaLocationDot size={23} />
@@ -55,7 +63,7 @@ function Template2({
             </div>
           </div>
 
-          <div className="absolute text-white  right-0 p-4 mx-auto xl:mx-28 ">
+          <div className="absolute text-white  right-0 p-6 mx-auto xl:mx-28 ">
             <div className="flex space-x-2  mb-2">
               <div className="">
                 <RiTimeFill size={23} />
@@ -73,7 +81,7 @@ function Template2({
               {event.eventEndDate.substring(0, 10)}
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center h-full max-sm:mt-60 ">
+          <div className="flex flex-col items-center justify-center h-full  ">
             <div
               style={{
                 backgroundImage: `url(${event.dashboardImage})`,
@@ -85,53 +93,22 @@ function Template2({
                 borderRadius: "50%",
                 padding: "50px",
               }}
-              className="max-sm:hidden backdrop-blur-xl mx-4 p-8 mt-4 text-gray-700 shadow-2xl bg-clip-border rounded-full h-full"
+              className="max-sm:hidden   mx-4 p-8 mt-4 text-gray-700 hover:shadow-3xl hover:bg-white border-black border-2 bg-clip-border rounded-full h-full"
             ></div>
 
-            <h1 className="text-5xl font-bold my-6">{event.eventName}</h1>
-            <p className="mb-6  mx-auto xl:mx-28  text-lg text-center">
+            <h1 className="text-5xl font-bold max-sm:mt-60 text-center my-6">
+              {event.eventName}
+            </h1>
+            <p className="mb-6  mx-auto max-sm:mx-6   text-lg text-center">
               {event.description}
             </p>
             <div className="flex flex-col sm:flex-row sm:justify-center mb-6 space-x-9">
-              <a
-                href="#"
-                className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full mb-2"
-              >
-                <div className="flex space-x-2">
-                  <div className="text-white">
-                    <FaRegistered size={23} />{" "}
-                  </div>
-                  <div className="font-medium text-md text-white text-left leading-tight ">
-                    Register
-                  </div>
-                </div>
-              </a>
-              <a
-                href="#"
-                className="bg-gray-800 hover:bg-gray-700 text-white py-2 px-6 rounded-full mb-2"
-              >
-                <div className="flex space-x-2">
-                  <div className="text-white">
-                    <FaHeart size={21} />
-                  </div>
-                  <div className="font-medium text-md text-white text-left leading-tight ">
-                    Wish List
-                  </div>
-                </div>
-              </a>
-              <a
-                href="#"
-                className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full mb-2  "
-              >
-                <div className="flex space-x-2">
-                  <div className="text-white">
-                    <FaTicketAlt size={23} />
-                  </div>
-                  <div className="font-medium text-md text-white text-left leading-tight ">
-                    Buy Tickets
-                  </div>
-                </div>
-              </a>
+              <Buttons
+                EventName={event.eventName}
+                Location={event.selectedTab}
+                Time={`${event.startTime} to ${event.endTime}`}
+                Date={date}
+              />
             </div>
             <div
               onClick={() => setPostBar(true)}
