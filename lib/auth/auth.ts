@@ -67,8 +67,8 @@ export const authOptions: NextAuthOptions = {
     }),
 
     FacebookProvider({
-      clientId: "797878142270676",
-      clientSecret: "d27da573f4163c53213bf3f6d392e048",
+      clientId: "1177960263652284",
+      clientSecret: "228f8878875c9a1f3c9b3d5b4f8f9e86",
     }),
     // AppleProvider({
     //   clientId: process.env.APPLE_ID,
