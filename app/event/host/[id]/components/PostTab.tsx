@@ -45,7 +45,7 @@ export default function PostTab() {
       console.log(data);
 
       setData(data);
-      
+
       setLoading(false);
     };
     postFunction();
@@ -60,7 +60,6 @@ export default function PostTab() {
   }, []);
 
   function checkLike({ post }: any) {
-  
     {
       const like = post.likeBy.find((like: any) => like.email === email);
       if (like) {
@@ -72,7 +71,7 @@ export default function PostTab() {
   }
 
   return (
-    <div className="overflow-y-auto h-[40rem] xl:h-[45rem] md:h-[33rem] sm:mt-12 mt-4 xl:ml-44 md:ml-20 ">
+    <div className="overflow-y-auto h-[400px]  sm:mt-12 mt-4 xl:ml-44 md:ml-20 ">
       <div className="xl:pr-72 md:pr-64 pr-8">
         {loading ? (
           <div className="w-full flex justify-center items-center">

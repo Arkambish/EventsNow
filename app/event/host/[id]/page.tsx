@@ -31,7 +31,7 @@ export default async function Home({ params }: any) {
   if (data.hostPageType === "pageBuilder") {
     return (
       <div>
-        <PageBuilder page={data.pageBuilder} />
+        <PageBuilder page={data.pageBuilder} EventName={data.eventName} />
       </div>
     );
   }
@@ -39,7 +39,7 @@ export default async function Home({ params }: any) {
   if (data.hostPageType === "uploadPage") {
     return (
       <div>
-        <PageBuilder page={data.uploadPage} />
+        <PageBuilder page={data.uploadPage} EventName={data.eventName} />
       </div>
     );
   }

@@ -1,0 +1,34 @@
+@media (min-width: 1536px) {
+  /* 2xl */
+  .heightxxl {
+    height: 800px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  /* xl */
+  .heightxl {
+    height: 600px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* lg */
+  .heightlg {
+    height: 500px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* md */
+  .heightmd {
+    height: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* sm */
+  .heightsm {
+    height: 400px;
+  }
+}
