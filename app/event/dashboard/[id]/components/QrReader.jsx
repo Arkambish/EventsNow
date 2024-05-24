@@ -21,7 +21,6 @@ const QrReader = () => {
   const [activeButton, setActiveButton] = useState(1);
   const [activeComponent, setActiveComponent] = useState("Code");
   //set active component
- 
 
   const handleClick = (buttonNumber) => {
     setActiveButton(buttonNumber);
@@ -105,55 +104,50 @@ const QrReader = () => {
   return (
     <div>
       <Container>
-
         <div className="grid lg:pl-10 mb-5 gap-2 mt-8 md:mr-10 pb-8">
-         <div className="flex  "> 
-          <div className="  text-custom-orange font-medium text-3xl ">
-            Mark Attendence
+          <div className="flex  ">
+            <div className="  text-stone-600 font-medium text-3xl ">
+              Mark Attendence
+            </div>
 
+            <div className="flex items-end ml-56 ">
+              <div className="flex md:w-64 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
+                <button
+                  className={`md:text-sm button font-medium ml-2 w-40 h-6 xl:h-8 rounded-3xl  ${
+                    activeButton === 1
+                      ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+                      : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+                  }`}
+                  onClick={() => {
+                    if (activeComponent !== "QrCode") {
+                      handleComponentChange("QrCode");
+                      handleClick(1);
+                    }
+                  }}
+                >
+                  Qr Reader
+                </button>
+                <button
+                  className={` md:text-sm button cursor-pointer font-medium mr-2 w-40 h-6 xl:h-8 rounded-3xl  ${
+                    activeButton === 2
+                      ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+                      : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+                  }`}
+                  onClick={() => {
+                    if (activeComponent !== "Code") {
+                      handleComponentChange("Code");
+                      handleClick(2);
+                    }
+                  }}
+                >
+                  Code Reader
+                </button>
+              </div>
+            </div>
           </div>
 
-
-        <div className="flex items-end ml-56 ">
-          <div className="flex md:w-64 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
-            <button
-             className={`md:text-sm button font-medium ml-2 w-40 h-6 xl:h-8 rounded-3xl  ${
-            activeButton === 1
-              ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
-              : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
-             }`}
-            onClick={() => {
-            if (activeComponent !== "QrCode") {
-              handleComponentChange("QrCode");
-              handleClick(1);
-            }
-          }}
-        >
-          Qr Reader
-        </button>
-        <button
-          className={` md:text-sm button cursor-pointer font-medium mr-2 w-40 h-6 xl:h-8 rounded-3xl  ${
-            activeButton === 2
-              ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
-              : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
-          }`}
-          onClick={() => {
-            if (activeComponent !== "Code") {
-              handleComponentChange("Code");
-              handleClick(2);
-            }
-          }}
-        >
-          Code Reader
-        </button>
-      </div>    
-      </div>      
-      </div>
-
-      {activeComponent === "QrCode" && <QrCode />}
-      {activeComponent === "Code" && <Code />}
-
-
+          {activeComponent === "QrCode" && <QrCode />}
+          {activeComponent === "Code" && <Code />}
         </div>
       </Container>
     </div>

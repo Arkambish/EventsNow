@@ -68,12 +68,9 @@ export default function HostSideBar({
   const [isRemoveWishListModal, setIsRemoveWishListModal] =
     useState<boolean>(false);
   const [isAddWishListModal, setIsAddWishListModal] = useState<boolean>(false);
-  const [isRegModalShow, setIsRegModalShow] = useState<boolean>(false);
-
   const [isRemoveRegistation, setIsRemoveRegistation] =
     useState<boolean>(false);
-
-
+  const [isRegModalShow, setIsRegModalShow] = useState<boolean>(false);
 
   const [eventUpdates, setEventUpdates] = useState(false);
   const [marketingUpdates, setMarketingUpdates] = useState(false);
@@ -145,8 +142,8 @@ export default function HostSideBar({
       endpoint: `notification/getAllNotifications`,
       body: data,
     });
-    
-    if (sendNotification.message!="Notification created successfully") {
+
+    if (sendNotification.message != "Notification created successfully") {
       error("Error registration for event");
       return;
     }
@@ -360,15 +357,14 @@ export default function HostSideBar({
               disabled={preview ? true : false}
               onClick={() => setIsRemoveRegistation(true)}
               className="flex button py-2.5 xl:py-3.5 bg-custom-orange rounded-l-2xl items-center xl:px-4"
-
             >
               <div className="flex py-1 px-2">
-              <div className=" text-white">           
-                  <FaRegRegistered size={20}/>              
-               </div>
-              <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
-                Unregister
-              </div>
+                <div className=" text-white">
+                  <FaRegRegistered size={20} />
+                </div>
+                <div className="font-medium xl:text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
+                  Unregister
+                </div>
               </div>
             </button>
           ) : (
@@ -378,18 +374,17 @@ export default function HostSideBar({
                 setIsRegModalShow(true);
               }}
               className={`flex button py-2.5 xl:py-3.5 bg-custom-orange rounded-l-2xl items-center xl:px-4 ${
-
                 preview ? "cursor-not-allowed" : ""
               } `}
             >
               <div className="flex py-1 px-2 ">
-              <div className=" text-white">            
-                <FaRegRegistered size={20}/>               
-              </div>
+                <div className=" text-white">
+                  <FaRegRegistered size={20} />
+                </div>
 
-              <div className="font-medium xl:text-md text-white text-left leading-tight xl:ml-4 md:ml-2 mx-auto ">
-                Register
-              </div>
+                <div className="font-medium xl:text-md text-white text-left leading-tight xl:ml-4 md:ml-2 mx-auto ">
+                  Register
+                </div>
               </div>
             </button>
           )}

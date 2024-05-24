@@ -241,7 +241,7 @@ export default function MainComponent() {
               {isLoading ? (
                 <Spinner />
               ) : (
-                <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2">
+                <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2 h-full overflow-hidden">
                   <div
                     className={` md:block hidden ${
                       isSideBar
