@@ -11,7 +11,7 @@ export default function BookticketSection() {
     >
       <div className="  hidden items-end  justify-center lg:flex ">
         <Image
-          src="/images/home/image-area.png"
+          src="https://res.cloudinary.com/dpk9utvby/image/upload/v1716571573/uyhe5akzqz0bh1syhs5w.png"
           alt="Picture of the author"
           style={{ height: "80vh", width: "auto" }}
           width={2000}
