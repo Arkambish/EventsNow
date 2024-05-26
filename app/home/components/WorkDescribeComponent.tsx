@@ -1,5 +1,7 @@
+"use client";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
-import React from "react";
+import styles from "./WorkDescribeComponent.module.css";
 
 interface WorkDescribeProps {
   fillColor: string;
@@ -7,6 +9,7 @@ interface WorkDescribeProps {
   headerText: string;
   text: string;
 }
+
 export default function WorkDescribeComponent({
   fillColor,
   image,
@@ -14,9 +17,9 @@ export default function WorkDescribeComponent({
   text,
 }: WorkDescribeProps) {
   return (
-    <div className="grid   lg:w-60 gap-4">
+    <div className={`grid lg:w-60 gap-4 ${styles.workDescribe}`}>
       <div
-        className={` grid justify-self-center place-content-center size-12 sm:size-16 md:size-24 rounded-3xl border-2 border-[#2F2F2F]  sm:mb-8`}
+        className={`grid justify-self-center place-content-center size-12 sm:size-16 md:size-24 rounded-3xl border-2 border-[#2F2F2F] sm:mb-8 ${styles.workImage}`}
         style={{ backgroundColor: fillColor }}
       >
         <Image
