@@ -25,7 +25,7 @@ export default function OverviewComponent() {
               }
               return newCount;
             });
-          }, 100); // Faster animation
+          }, 100);
           return () => clearInterval(interval);
         }
       }, 2000);
@@ -48,7 +48,7 @@ export default function OverviewComponent() {
       <div className="text-center text-white 2xl:mx-56">
         <div className="grid">
           <div className="text-2xl lg:text-[80px] md:text-5xl font-bai-jamjuree font-bold mb-5">
-            {customerCount}+ Customers
+            1000+ Customers
           </div>
           <div
             ref={descriptionRef}
