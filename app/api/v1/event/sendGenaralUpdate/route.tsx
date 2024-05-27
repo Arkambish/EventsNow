@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
 import Handlebars from "handlebars";
-import { promises as fs } from "fs";
+// import { promises as fs } from "fs";
+
+type RegisterUser = {
+  _id: string;
+  userId: string;
+  eventId: string;
+  eventUpdates: boolean;
+  marketingUpdates: boolean;
+  email: string;
+};
 
 import { transporter, mailOptions } from "@/config/nodemailer";
 import User from "@/models/userModel";
@@ -10,13 +19,31 @@ import Event from "@/models/eventModel";
 export async function POST(req: Request) {
   const { subject, message, eventId } = await req.json();
 
+  const registerUser = await Event.findOne({ _id: eventId });
+  if (!registerUser) {
+    return NextResponse.json({ message: "No  event" });
+  }
+  if (registerUser.registerUser.length == 0) {
+    return NextResponse.json({ message: "No users registered for the event" });
+  }
   const user = await Event.findOne({ _id: eventId }).populate("registerUser");
-  const usersEmail = user.registerUser.map((u: any) => u.email);
-  if (usersEmail.length === 0) {
+  console.log(user);
+
+  if (!user) {
+    console.log("No users registered for the event");
     return NextResponse.json({ message: "No users registered for the event" });
   }
 
-  // return NextResponse.json(usersEmail);
+  const usersArray = user.registerUser;
+  const usersEmail = user.registerUser.map((u: RegisterUser) => u.email);
+
+  console.log("usersEmail" + usersEmail);
+
+  if (!usersEmail) {
+    console.log("No users registered for the event");
+
+    return NextResponse.json({ message: "No users registered for the event" });
+  }
 
   // const template = Handlebars.compile(emailTemplate);
   // const htmlBody = template({
@@ -34,9 +61,12 @@ export async function POST(req: Request) {
     });
 
     if (res.accepted.length > 0) {
+      console.log("Email sent successfully");
       return NextResponse.json({ message: "Email sent successfully" });
     }
   } catch (error) {
+    console.log(error);
+
     return NextResponse.json(error);
   }
 

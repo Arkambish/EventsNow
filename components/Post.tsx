@@ -25,10 +25,8 @@ import {
 import { set } from "mongoose";
 import { FaRegComment } from "react-icons/fa6";
 import { IoShareSocialOutline } from "react-icons/io5";
-import { IoHeartOutline,IoHeartSharp } from "react-icons/io5";
+import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { FiSend } from "react-icons/fi";
-
-
 
 interface Post {
   profilePic: string;
@@ -87,7 +85,6 @@ Post) {
 
   const commentRef = useRef<HTMLDivElement>(null);
 
-
   // handle comment button
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -114,7 +111,6 @@ Post) {
     };
   }, [isComment, setIsComment]);
 
-  
   // useEffect(() => {
   //   const getUser = async () => {
   //     const userData = await fetch("/api/v1/user/getUserId", {
@@ -129,10 +125,9 @@ Post) {
   //     const userID  = await userData.json();
   //  setUserId(userID.id);
   //   }
-    
-    
+
   //  getUser();
-   
+
   // }, [user]);
 
   useEffect(() => {
@@ -146,31 +141,21 @@ Post) {
           email: user?.user?.email,
         }),
       });
-      const data  = await userData.json();
+      const data = await userData.json();
       if (data && data.data) {
         if (data.data.firstName) {
           setUserName(data.data.firstName);
-          
         }
         if (data.data._id) {
           setUserId(data.data._id);
         }
       }
+    };
 
-    }
-    
-    
-    
-   getUser();
-   
-  }
-  , [user]);
-
-
-
+    getUser();
+  }, [user]);
 
   useEffect(() => {
-   
     const getUser = async () => {
       const user = await getSession();
 
@@ -186,6 +171,8 @@ Post) {
         body: JSON.stringify({ id }),
       });
       const data = await res.json();
+
+      console.log(data.data);
 
       setAllComment(data.data);
     };
@@ -248,20 +235,16 @@ Post) {
     isShare ? setIsShare(false) : setIsShare(true);
   }
 
-  //send comment 
+  //send comment
   async function sentComment() {
-   
-    
-
     if (comment.length > 0) {
-     
       const res = await fetch("/api/v1/post/createComment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId:userId,
+          userId: userId,
           userName: userName,
           userImage: user?.user?.image,
           postId: id,
@@ -269,6 +252,7 @@ Post) {
         }),
       });
       const data = await res.json();
+      console.log(data);
 
       if (data.message === "comment created successfully") {
         setComment("");
@@ -284,180 +268,179 @@ Post) {
             userId: data.comment.userId,
           },
         ]);
+
+        setAllComment((prev) => [
+          ...prev,
+          {
+            _id: data.comment._id,
+            userImage: data.comment.userImage,
+            userName: data.comment.userName,
+            postId: data.comment.postId,
+            description: data.comment.description,
+            userId: data.comment.userId,
+          },
+        ]);
       }
     }
   }
 
-
-
   return (
-  
-      <div className="xl:w-[500px] sm:w-[24rem] w-[20rem] border border-zinc-900 text-white m-8 rounded-2xl pb-4">
-        <div className="px-5 pt-5">
-          
-          <div className="flex gap-7 items-center mb-4">
-            <Image
-              src={`${profilePic}`}
-              alt="profile picture"
-              width={50}
-              height={10}
-              className="rounded-full  border-rose-700 border-2"
-            />
-            
-              <div className="">
-              <div className="text-black sm:text-24 text-base  font-semibold font-Inter">
-                {name}
-            
+    <div className="xl:w-[500px] sm:w-[24rem] w-[20rem] border border-zinc-900 text-white m-8 rounded-2xl pb-4">
+      <div className="px-5 pt-5">
+        <div className="flex gap-7 items-center mb-4">
+          <Image
+            src={`${profilePic}`}
+            alt="profile picture"
+            width={50}
+            height={10}
+            className="rounded-full  border-rose-700 border-2"
+          />
+
+          <div className="">
+            <div className="text-black sm:text-24 text-base  font-semibold font-Inter">
+              {name}
             </div>
             <div className="text-black mt-2 font-Inter">"{caption}"</div>
-              </div>
           </div>
-          
         </div>
-        
-          <Image
-            src={`${post}`}
-            alt="post"
-            width={661}
-            height={363}
-            className="fit rounded-sm border-y-2"
-          />
-       
-        <div className=" content-start px-5">
-          <div className="flex gap-5 py-2">
-            {isLike ? (
-              <button className={styles.zoom} onClick={handleClickOffLikeButton}>
-                <IoHeartSharp 
-                color="#ed3e4f"
-                size={30}
-                />
-              </button>
-            ) : (
-              <button className={styles.zoom} onClick={handleClickLikeButton}>
-                <IoHeartOutline
-                color="#535454"
-                size={30}
-                />
-              </button>
-            )}
+      </div>
 
-            <button className={`${styles.zoom} my-auto `} onClick={() => handleClickCommentButton()}>
-            <FaRegComment 
-            color="#535454"
-            size={26} />
+      <Image
+        src={`${post}`}
+        alt="post"
+        width={661}
+        height={363}
+        className="fit rounded-sm border-y-2"
+      />
+
+      <div className=" content-start px-5">
+        <div className="flex gap-5 py-2">
+          {isLike ? (
+            <button className={styles.zoom} onClick={handleClickOffLikeButton}>
+              <IoHeartSharp color="#ed3e4f" size={30} />
             </button>
-            <button className={styles.zoom} onClick={() => handleClickShareButton()}>
-            <IoShareSocialOutline
-            color="#535454"
-            size={28} />
+          ) : (
+            <button className={styles.zoom} onClick={handleClickLikeButton}>
+              <IoHeartOutline color="#535454" size={30} />
             </button>
-          </div>
-          {isComment && (
-            <div
-              ref={commentRef}
-              className="mt-2 mb-2 items-center flex gap-4 "
-            >
-              <Image
-                src={user?.user?.image ?? ""}
-                alt="user-photo"
-                width={35}
-                height={35}
-                className="rounded-full mt-1"
+          )}
+
+          <button
+            className={`${styles.zoom} my-auto `}
+            onClick={() => handleClickCommentButton()}
+          >
+            <FaRegComment color="#535454" size={26} />
+          </button>
+          <button
+            className={styles.zoom}
+            onClick={() => handleClickShareButton()}
+          >
+            <IoShareSocialOutline color="#535454" size={28} />
+          </button>
+        </div>
+        {isComment && (
+          <div ref={commentRef} className="mt-2 mb-2 items-center flex gap-4 ">
+            <Image
+              src={user?.user?.image ?? ""}
+              alt="user-photo"
+              width={35}
+              height={35}
+              className="rounded-full mt-1"
+            />
+            <div className="flex p-1 content-center border rounded-3xl px-4">
+              <input
+                type="text"
+                className="outline-none  text-black "
+                placeholder="Write a comment"
+                onChange={(e) => setComment(e.target.value)}
+                value={comment}
               />
-              <div className="flex p-1 content-center border rounded-3xl px-4">
-                <input
-                  type="text"
-                  className="outline-none  text-black "
-                  placeholder="Write a comment"
-                  onChange={(e) => setComment(e.target.value)}
-                  value={comment}
-                />
-                <button
-                  onClick={sentComment}
-                  disabled={comment.length > 0 ? false : true}
-             
-                >
-                  <FiSend 
+              <button
+                onClick={sentComment}
+                disabled={comment.length > 0 ? false : true}
+              >
+                <FiSend
                   size={22}
                   className={`${
-                      comment.length > 0
-                        ? "text-slate-600"
-                        : "text-slate-400 cursor-not-allowed"}`
-                    }
-                  />
-                </button>
-              </div>
+                    comment.length > 0
+                      ? "text-slate-600"
+                      : "text-slate-400 cursor-not-allowed"
+                  }`}
+                />
+              </button>
             </div>
-          )}
-          {isShare && (
-            <div className="flex gap-3 mb-3 mt-3 mx-6">
-              <FacebookShareButton url={`${post}`}>
-                <Image
-                  src={"/images/reusableComponents/FacebookIconPost.svg"}
-                  alt="facebook"
-                  width={40}
-                  height={34}
-                  className={styles.zoom}
-                />
-              </FacebookShareButton>
-              <TwitterShareButton url={`${post}`}>
-                <Image
-                  src={"/images/reusableComponents/TwitterIconPost.svg"}
-                  alt="twtter"
-                  width={40}
-                  height={34}
-                  className={styles.zoom}
-                />
-              </TwitterShareButton>
+          </div>
+        )}
+        {isShare && (
+          <div className="flex gap-3 mb-3 mt-3 mx-6">
+            <FacebookShareButton url={`${post}`}>
               <Image
-                src={"/images/reusableComponents/InstagramIconPost.svg"}
-                alt="instagram"
+                src={"/images/reusableComponents/FacebookIconPost.svg"}
+                alt="facebook"
                 width={40}
                 height={34}
                 className={styles.zoom}
               />
+            </FacebookShareButton>
+            <TwitterShareButton url={`${post}`}>
               <Image
-                src={"/images/reusableComponents/threads-app-icon.svg"}
-                alt="threads"
-                width={31}
-                height={28}
+                src={"/images/reusableComponents/TwitterIconPost.svg"}
+                alt="twtter"
+                width={40}
+                height={34}
                 className={styles.zoom}
               />
-            </div>
-          )}
+            </TwitterShareButton>
+            <Image
+              src={"/images/reusableComponents/InstagramIconPost.svg"}
+              alt="instagram"
+              width={40}
+              height={34}
+              className={styles.zoom}
+            />
+            <Image
+              src={"/images/reusableComponents/threads-app-icon.svg"}
+              alt="threads"
+              width={31}
+              height={28}
+              className={styles.zoom}
+            />
+          </div>
+        )}
 
-          {like>0 &&<div className="text-black font-Inter font-semibold ">
+        {like > 0 && (
+          <div className="text-black font-Inter font-semibold ">
             {` ${like} likes`}
-          </div>}
-          {allComment.length>0 &&<button onClick={handleCommentBtn}>
+          </div>
+        )}
+        {allComment.length > 0 && (
+          <button onClick={handleCommentBtn}>
             <div className="text-neutral-500 font-Inter ">
               {`View all ${allComment.length} comments`}
             </div>
-          </button>}
+          </button>
+        )}
 
-          {hasComment ? (
-            <div className="grid gap-2 mt-4 max-h-36 overflow-y-scroll ">
-                {allComment.map((comment ) => (
-                  <CommentBtn
-                    allComments={allComment}
-                    setAllComment={setAllComment}
-                    canDelete={userId===comment.userId ? true : false}
-                    id={comment._id}
-                    key={comment._id}
-                    userImage={comment.userImage}
-                    userName={comment.userName}
-                    description={comment.description}
-                  />
-                ))}
-              
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
+        {hasComment ? (
+          <div className="grid gap-2 mt-4 max-h-36 overflow-y-scroll ">
+            {allComment.map((comment) => (
+              <CommentBtn
+                allComments={allComment}
+                setAllComment={setAllComment}
+                canDelete={userId === comment.userId ? true : false}
+                id={comment._id}
+                key={comment._id}
+                userImage={comment.userImage}
+                userName={comment.userName}
+                description={comment.description}
+              />
+            ))}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
-      
-    
+    </div>
   );
 }
 

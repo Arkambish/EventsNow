@@ -71,7 +71,7 @@ const eventSchema = new mongoose.Schema({
 
   registerUser: {
     type: [mongoose.Schema.Types.ObjectId],
-    // ref: "RegisteredUser",
+    ref: "RegisteredUser",
   },
   income: {
     type: Number,
