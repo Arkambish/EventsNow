@@ -105,14 +105,16 @@ function OrgContextProvider({ children }: ChildrenType) {
           );
 
           if (!res.ok) {
-            router.push("/404");
+            notFound();
+            // router.push("/404");
             return;
           }
 
           const organizationDetails: GettingOrganizationData = await res.json();
 
           if (organizationDetails.message === "No organization") {
-            router.push("/404");
+            notFound();
+            // router.push("/404");
           }
 
           setEditedName(

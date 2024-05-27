@@ -43,22 +43,22 @@ export default memo(function GenaralUpdate({
           message: message,
         },
       });
+      console.log(res);
+      // if (!res.ok) {
+      //   error("Error sending email");
+      //   setIsSubmitting(false);
+      //   return;
+      // }
 
-      if (!res.ok) {
-        error("Error sending email");
-        setIsSubmitting(false);
-        return;
-      }
+      // const returnMessage = await res.json();
 
-      const returnMessage = await res.json();
-
-      if (returnMessage.message === "No users registered for the event") {
+      if (res.message === "No users registered for the event") {
         error("No users registered for the event");
         setIsSubmitting(false);
         return;
       }
 
-      if (returnMessage.message === "Email sent successfully") {
+      if (res.message === "Email sent successfully") {
         success("Email sent successfully");
         setIsSubmitting(false);
         setMessage("");
