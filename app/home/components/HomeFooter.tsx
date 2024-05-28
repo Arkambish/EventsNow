@@ -39,6 +39,7 @@
 //     </div>
 //   );
 // }
+
 "use client";
 import React, { useRef, useEffect } from "react";
 import HomeButton from "./HomeButton";
@@ -64,35 +65,30 @@ export default function HomeFooter() {
   useEffect(() => {
     const title = titleRef.current;
     const description = descriptionRef.current;
-    const section = sectionRef.current;
 
-    if (!title || !description || !section) return;
+    if (!title || !description) return;
 
-    const titleChars = titleText
-      .split("")
-      .map(
-        (char, index) =>
-          `<span key=${index} style="opacity: 0; display: inline-block;">${char}</span>`
-      );
-    title.innerHTML = titleChars.join(" ");
+    const titleChars = titleText.split("").map((char, index) => {
+      const span = document.createElement("span");
+      span.style.opacity = "0";
+      span.style.display = "inline-block";
+      span.textContent = char === " " ? "\u00A0" : char;
+      return span;
+    });
 
-    const descriptionWords = descriptionText
-      .split(" ")
-      .map(
-        (word, index) =>
-          `<span key=${index} style="opacity: 0; display: inline-block;">${word}&nbsp;</span>`
-      );
-    description.innerHTML = descriptionWords.join("");
+    title.innerHTML = "";
+    titleChars.forEach((char) => title.appendChild(char));
 
     if (inView) {
-      gsap.timeline().to(Array.from(title.children), {
+      gsap.timeline().to(titleChars, {
         opacity: 1,
         stagger: 0.1,
+        duration: 0.5,
         ease: "power2.inOut",
         onComplete: () => {
-          gsap.to(Array.from(description.children), {
+          gsap.to(description, {
             opacity: 1,
-            stagger: 0.3,
+            duration: 1,
             ease: "power2.inOut",
           });
         },
@@ -113,22 +109,17 @@ export default function HomeFooter() {
           <div
             ref={titleRef}
             className="text-center text-white font-bold text-4xl sm:text-[50px] font-abhaya-libre"
-          >
-            {/* Title text  */}
-          </div>
+          ></div>
           <div
             ref={descriptionRef}
-            className="place-self-center text-white text-center font-dm-sans sm:font-bold text-xs sm:text-lg opacity-80 w-3/5"
+            className="place-self-center text-white text-center font-dm-sans font-light  text-xs sm:text-lg opacity-80 w-3/5"
+            style={{ opacity: 0 }}
           >
-            {/* Description text */}
+            {descriptionText}
           </div>
           <div className="place-self-center sm:my-6 my-1">
             <Link href="/about">
-              <HomeButton
-                initialTextcolor="#142A62"
-                initialColor="#ffffff"
-                text={"Contact Us"}
-              />
+              <HomeButton filled={true} text={"Contact Us"} />
             </Link>
           </div>
           <div className="text-white text-center font-dm-sans text-xs sm:text-sm font-bold opacity-80">

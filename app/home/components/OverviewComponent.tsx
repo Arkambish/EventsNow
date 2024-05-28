@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { gsap } from "gsap";
@@ -41,7 +40,7 @@ export default function OverviewComponent() {
 
       return () => clearTimeout(delay);
     }
-  }, [inView, customerCount]);
+  }, [inView]);
 
   return (
     <div ref={ref} className="h-screen grid content-center p-10">

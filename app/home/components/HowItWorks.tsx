@@ -29,7 +29,7 @@ export default function HowItWorks() {
         tl.to(wordSpans, {
           opacity: 1,
           y: 0,
-          duration: 1,
+          duration: 0.5,
           ease: "power2.out",
           stagger: 0.18,
         });
@@ -39,7 +39,7 @@ export default function HowItWorks() {
         tl.from(content, {
           opacity: 0,
           y: 50,
-          duration: 1,
+          duration: 0.5,
           ease: "power2.out",
           stagger: 0.3,
         });
