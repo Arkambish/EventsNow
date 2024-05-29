@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Template from "./template1/Template1";
 import { EventType } from "@/app/Type";
 import NoPreviewPage from "../../dashboard/[id]/components/NoPreviewPage";
+import TemplateBlack from "./template2/Template2";
 
 export type Post = {
   _id: string;
@@ -26,12 +27,14 @@ export default function SelectTemplate({
   event: EventType;
   preview?: boolean;
 }) {
+  console.log(event.template);
   return (
     <div>
-      {event.template === "template1" ? (
+      {event.template === "template1" && (
         <Template event={event} preview={false} />
-      ) : (
-        <NoPreviewPage />
+      )}
+      {event.template === "template2" && (
+        <TemplateBlack event={event} preview={false} />
       )}
     </div>
   );

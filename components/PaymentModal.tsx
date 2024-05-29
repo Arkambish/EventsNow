@@ -8,7 +8,7 @@ import { error, success } from "@/util/Toastify";
 
 import { useParams } from "next/navigation";
 import { getSession } from "next-auth/react";
-import { FetchPost, FetchPut,FetchGet } from "@/hooks/useFetch";
+import { FetchPost, FetchPut, FetchGet } from "@/hooks/useFetch";
 import { TicketArray } from "@/app/event/host/[id]/components/HostSideBar";
 
 declare global {
@@ -43,9 +43,11 @@ const PaymentModal = (props: PaymentModalProps) => {
   const orderId = props.orderId;
   const name = props.item;
   const amount = props.amount;
-  const merchantId = "1226307";
-  const merchantSecret =
-    "MjY0MDQ5OTc3NTIyNDg2NDk2OTUyMzU2MDY1OTcxMzYyMTEyODYxMA==";
+  const merchantId = "1226229";
+  const merchantSecret = "OTA4MzgwNDQ5MzAzODA0NTg5MjYzODIxNjAwODIxOTUwNDczMjk=";
+
+  // localhost merchantSecret=    "MjY0MDQ5OTc3NTIyNDg2NDk2OTUyMzU2MDY1OTcxMzYyMTEyODYxMA==";
+
   const currency = props.currency || "LKR";
 
   const hashedSecret = crypto
@@ -66,9 +68,12 @@ const PaymentModal = (props: PaymentModalProps) => {
   var payment = {
     sandbox: true, // if the account is sandbox or real
     merchant_id: merchantId, // Replace your Merchant ID
-    return_url: "http://localhost:3000/",
-    cancel_url: "http://localhost:3000/",
-    notify_url: "http://localhost:3000/",
+    // return_url: "http://localhost:3000/",
+    // cancel_url: "http://localhost:3000/",
+    // notify_url: "http://localhost:3000/",
+    return_url: "https://events-now.vercel.app/",
+    cancel_url: "https://events-now.vercel.app/",
+    notify_url: "https://events-now.vercel.app/",
     order_id: orderId,
     items: name,
     amount: amount,
@@ -129,31 +134,33 @@ const PaymentModal = (props: PaymentModalProps) => {
       ) {
         {
           const exTicketCodes = await FetchGet({
-            endpoint: "buyTicket/getAllTicketCodes"
-            
+            endpoint: "buyTicket/getAllTicketCodes",
           });
           console.log(exTicketCodes);
 
           props.ticketArrTemp.map(async (ticket: TicketArray) => {
-            // get all excist ticket Codes 
-            
+            // get all excist ticket Codes
+
             console.log(exTicketCodes);
-            //generate code 
+            //generate code
             let ticketCode = "";
             while (true) {
-            const randomCode = Math.floor(10000000 + Math.random() * 90000000).toString();
-            console.log(randomCode);
-            if (!exTicketCodes.data.includes(randomCode)) {
-              // setTicketCode(randomCode);
-              ticketCode = randomCode;
-              console.log("ashan")
-              console.log(randomCode)
-              console.log(ticketCode)
-              
-              break;
-            }}
+              const randomCode = Math.floor(
+                10000000 + Math.random() * 90000000
+              ).toString();
+              console.log(randomCode);
+              if (!exTicketCodes.data.includes(randomCode)) {
+                // setTicketCode(randomCode);
+                ticketCode = randomCode;
+                console.log("ashan");
+                console.log(randomCode);
+                console.log(ticketCode);
+
+                break;
+              }
+            }
             console.log(ticketCode);
-            
+
             //store ticket buy data
             try {
               const value = {
@@ -161,7 +168,6 @@ const PaymentModal = (props: PaymentModalProps) => {
                 eventId: params.id,
                 class: ticket.typeId,
                 classType: ticket.type,
-                
               };
 
               const qrImg = await generateQRCodeImage(JSON.stringify(value));
@@ -171,7 +177,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                 body: {
                   qr: qrImg,
                   userid: userId,
-                  ticketCode:ticketCode
+                  ticketCode: ticketCode,
                 },
               });
               console.log(qrdata);
@@ -187,7 +193,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                   ticketId: ticket,
                   eventId: params.id,
                   userId: userId,
-                  ticketCode:ticketCode
+                  ticketCode: ticketCode,
                 },
               });
               console.log(buyTicketData);

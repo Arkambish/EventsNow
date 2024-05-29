@@ -21,7 +21,7 @@ export default function CommentBtn({
   description,
   id,
   setAllComment,
-  allComments
+  allComments,
 }: {
   canDelete: boolean;
   userName: string;
@@ -31,22 +31,19 @@ export default function CommentBtn({
   setAllComment: any;
   allComments: Comment[];
 }) {
-
   const deleteCommentHandler = async () => {
-    const res = await fetch(`/api/v1/post/deleteComment/${id}`,{
+    const res = await fetch(`/api/v1/post/deleteComment/${id}`, {
       method: "DELETE",
-
     });
     if (!res.ok) {
       error("Failed to delete comment");
-      return
-    
-  };
-  success("Comment deleted successfully");
-  setAllComment(allComments.filter((comment:Comment) => comment._id !== id));
+      return;
+    }
+    success("Comment deleted successfully");
+    setAllComment(allComments.filter((comment: Comment) => comment._id !== id));
 
-  return;
-}
+    return;
+  };
 
   return (
     <div className="flex items-center  justify-between border-t">
@@ -58,20 +55,20 @@ export default function CommentBtn({
           height={35}
           className="rounded-full mt-1"
         />
-        <div className=" text-black font-semibold">ashan </div>
+        <div className=" text-black font-semibold">{userName} </div>
         <div className=" text-black p-1 pl-2 pr-2 flex items-center">
           {description}
         </div>
       </div>
       {canDelete && (
         <div className="mr-6">
-        <button onClick={deleteCommentHandler}>
-        <MdOutlineDelete 
-        className=" hover:text-slate-700 text-slate-500"
-        size={20}
-       />
-        </button>
-      </div>
+          <button onClick={deleteCommentHandler}>
+            <MdOutlineDelete
+              className=" hover:text-slate-700 text-slate-500"
+              size={20}
+            />
+          </button>
+        </div>
       )}
     </div>
   );

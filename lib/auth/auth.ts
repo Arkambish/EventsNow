@@ -57,18 +57,11 @@ export const authOptions: NextAuthOptions = {
       clientId:
         "585040141563-5qq76qfjfl60d267mblh6voih0gj7uhh.apps.googleusercontent.com",
       clientSecret: "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",
-      // authorization: {
-      //   params: {
-      //     prompt: "consent",
-      //     access_type: "offline",
-      //     response_type: "code",
-      //   },
-      // },
     }),
 
     FacebookProvider({
-      clientId: "683671997269456",
-      clientSecret: "9220a35f2ce17bc3a56a99d34c7e1d00",
+      clientId: "1177960263652284",
+      clientSecret: "228f8878875c9a1f3c9b3d5b4f8f9e86",
     }),
     // AppleProvider({
     //   clientId: process.env.APPLE_ID,

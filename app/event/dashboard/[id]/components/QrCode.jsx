@@ -60,20 +60,21 @@ const QrReader = () => {
   }, [isVideoOn]);
 
   async function handleMarkAttendance() {
-    if (!scannedEvent.length > 0 || !scannedUser.length > 0 || !quantity > 0) {
+    console.log(scannedEvent, scannedUser);
+    if (!scannedEvent.length > 0 || !scannedUser.length > 0) {
       console.log("non");
       return;
     }
 
     if (id !== scannedEvent) error("wrong qr code");
-    console.log(scannedEvent, quantity, scannedUser);
+    console.log(scannedEvent, ticketType, scannedUser);
 
     const data = await FetchPost({
       endpoint: "attendant/markAttendant",
       body: {
         eventId: scannedEvent,
         userId: scannedUser,
-        ticketType: quantity,
+        ticketType: ticketType,
       },
     });
 
@@ -85,17 +86,15 @@ const QrReader = () => {
     success("Attendance marked successfully");
     setScannedEvent("");
     setScannedUser("");
-    setQuantity();
+    setTicketType();
   }
 
   return (
     <div>
-      <Container>         
-
-      <div className=" text-[#455273]  mr-8">
-        Turn on the camera and scan the qr code
-      </div>
-        
+      <Container>
+        <div className=" text-[#455273]  mr-8">
+          Turn on the camera and scan the qr code
+        </div>
 
         <div className="flex gap-10 items-center">
           <div className="flex flex-col gap-5 justify-center items-center">

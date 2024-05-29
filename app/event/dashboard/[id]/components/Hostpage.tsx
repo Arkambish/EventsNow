@@ -8,6 +8,7 @@ import { UseEventContext } from "../EventDashContext";
 import { EventContextType } from "@/app/Type";
 import Modal from "@/components/Modal";
 import { Dialog } from "@headlessui/react";
+import Template2 from "./hostPage/Template2";
 // import S3UploadForm from "@/components/S3UploadForm";
 import { useParams } from "next/navigation";
 import S3UploadForm from "@/components/S3UploadForm";
@@ -83,8 +84,13 @@ export default function Hostpage() {
   const [openPageBuilder, setOpenPageBuilder] = useState<boolean>(false);
   const [uploadingPage, setUploadingPage] = useState<boolean>(false);
   const [isTemplate1, setIsTemplate1] = useState<boolean>(false);
+  const [isTemplate2, setIsTemplate2] = useState<boolean>(false);
   function handleTemplate1() {
     setIsTemplate1(true);
+    setShowTemplate(false);
+  }
+  function handleTemplate2() {
+    setIsTemplate2(true);
     setShowTemplate(false);
   }
 
@@ -178,7 +184,7 @@ export default function Hostpage() {
                       template 1
                     </div>
                   </button>
-                  <button>
+                  <button onClick={handleTemplate2}>
                     <div className="flex flex-col justify-center items-center gap-3">
                       <Image
                         src={"/images/createEvent/eventRegFormImg.png"}
@@ -296,6 +302,7 @@ export default function Hostpage() {
             )}
 
             {isTemplate1 && <Template1 setIsTemplate1={setIsTemplate1} />}
+            {isTemplate2 && <Template2 setIsTemplate2={setIsTemplate2} />}
           </div>
         </div>
       </Container>

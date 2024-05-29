@@ -1,3 +1,4 @@
+
 "use client";
 import Image from "next/image";
 import HomeButton from "./HomeButton";
@@ -124,6 +125,7 @@ export default function BookticketSection() {
           <div className="flex gap-3" ref={buttonsRef}>
             <Link href="/">
               <HomeButton text={"Book Tickets"} filled={true} />
+
             </Link>
             <Link href="/about">
               <HomeButton filled={false} text={"Learn More"} />

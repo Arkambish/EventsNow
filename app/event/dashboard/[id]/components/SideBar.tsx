@@ -46,10 +46,10 @@ export default function SideBar() {
         <Spinner />
       ) : (
         <div>
-          <div className=" flex flex-col  items-center  bg-slate-100 rounded-lg py- text-center  ">
-            <div className=" grid-rows-8  gap-3 flex flex-col items-center">
+          <div className=" flex flex-col  items-center  bg-slate-100 rounded-lg py- text-center h-full overflow-hidden  ">
+            <div className=" grid-rows-8   flex flex-col items-center">
               <div
-                className={`mt-8 ${
+                className={`mt-4 ${
                   isSideBar
                     ? "md:col-span-3 md:ml-2  col-span-4"
                     : "md:col-span-1  col-span-2"
