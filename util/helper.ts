@@ -2,6 +2,7 @@ import { getUser } from "@/components/Navbar/NavBar";
 import { DateExpression } from "mongoose";
 import { getSession } from "next-auth/react";
 import qrCode from "qrcode";
+import React from "react";
 
 export function formatDate(dateString: any) {
   const date = new Date(dateString);
