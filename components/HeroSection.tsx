@@ -1,6 +1,6 @@
 "use client";
 import animateHero from "./AnimateHero";
-import React, { useEffect, useState } from "react";
+import React, { use, useCallback, useEffect, useState } from "react";
 // import { Carousel, Flowbite, theme, CustomFlowbiteTheme } from "flowbite-react";
 import {
   Carousel,
@@ -12,6 +12,9 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 import Image from "next/image";
+// import { Router,  } from "next/router";
+import { useSearchParams, useRouter } from "next/navigation";
+
 // import { useSearchParams } from "next/navigation";
 // import { useRouter } from "next/router";
 // const customTheme: CustomFlowbiteTheme = {
@@ -31,6 +34,10 @@ import Image from "next/image";
 // };
 
 export default function HeroSection() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("search") || "";
+
   const [search, setSearch] = useState("");
   // const router = useRouter();
 
@@ -43,10 +50,19 @@ export default function HeroSection() {
   //   }
   // }, [search, router]);
 
+  useEffect(() => {
+    setSearch(searchQuery);
+  }, [searchQuery]);
+
   const handleChange = (value: string) => {
     setSearch(value);
-    // const url = `/home/?search=${encodeURIComponent(search)}`;
-    // router.push(url, undefined, { shallow: true });
+    const params = new URLSearchParams(window.location.search);
+    if (value) {
+      params.set("search", value);
+    } else {
+      params.delete("search");
+    }
+    router.push(`${window.location.pathname}?${params.toString()}`, undefined);
   };
 
   useEffect(() => {

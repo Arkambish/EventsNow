@@ -1,0 +1,15 @@
+.workDescribe {
+  transition: transform 0.2s ease;
+}
+
+.workDescribe:hover {
+  transform: translateY(-8px);
+}
+
+.workImage {
+  transition: transform 0.2s ease;
+}
+
+.workImage:hover {
+  transform: translateY(-5px);
+}

@@ -9,11 +9,10 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
     console.log(data);
-    
 
     await connectMongoDB();
 
-    const user : UserType | null = await User.findOne({ email: data.email });
+    const user: UserType | null = await User.findOne({ email: data.email });
     if (!user) {
       return NextResponse.json({ message: "User not found" });
     }
@@ -29,11 +28,12 @@ export async function POST(request: NextRequest) {
 
     const registerUser = await RegistrationUser.create({
       userId: user._id,
+      email: user.email,
       eventId: data.eventId,
       eventUpdates: data.sendEventUpdates,
       marketingUpdates: data.sendMarketingUpdates,
     });
-    
+
     if (!registerUser) {
       console.log("Registration Failed");
       return NextResponse.json(
@@ -46,7 +46,6 @@ export async function POST(request: NextRequest) {
     if (!eventForUpdate) {
       return NextResponse.json({ message: "Event not found" });
     }
-   
 
     const newRegisterUserArray = [
       ...eventForUpdate.registerUser,
@@ -79,7 +78,7 @@ export async function POST(request: NextRequest) {
         message: "failed to register user to  event ",
       });
     }
-  
+
     return NextResponse.json(registerUser, { status: 201 });
   } catch (e) {
     return NextResponse.json(
