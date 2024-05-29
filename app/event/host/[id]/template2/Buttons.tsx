@@ -247,43 +247,83 @@ const Buttons = ({
   }
 
   return (
-    <div className=" space-x-6">
-      {isRegistered ? (
-        <button
-          disabled={preview ? true : false}
-          onClick={() => setIsRemoveRegistation(true)}
-          className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full mb-2"
-        >
-          <div className="flex py-1 px-2">
-            <div className=" text-white">
-              <FaRegistered size={23} />{" "}
+    <div className=" space-x-6 container mx-auto px-4">
+      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 my-4">
+        {isRegistered ? (
+          <button
+            disabled={preview}
+            onClick={() => setIsRemoveRegistation(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full"
+          >
+            <div className="flex items-center space-x-2">
+              <FaRegistered size={23} />
+              <span className="font-medium xl:text-md text-left leading-tight">
+                Unregister
+              </span>
             </div>
-            <div className="font-medium xl:text-md text-white text-left leading-tight xl:ml-4 md:ml-2 mx-auto ">
-              Unregister
+          </button>
+        ) : (
+          <button
+            disabled={preview}
+            onClick={() => setIsRegModalShow(true)}
+            className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
+              preview ? "cursor-not-allowed" : ""
+            }`}
+          >
+            <div className="flex items-center space-x-2">
+              <FaRegistered size={23} />
+              <span className="font-medium xl:text-md text-left leading-tight">
+                Register
+              </span>
             </div>
-          </div>
-        </button>
-      ) : (
-        <button
-          disabled={preview ? true : false}
-          onClick={() => {
-            setIsRegModalShow(true);
-          }}
-          className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full mb-2 ${
-            preview ? "cursor-not-allowed" : ""
-          } `}
-        >
-          <div className="flex py-1 px-2 ">
-            <div className=" text-white">
-              <FaRegistered size={23} />{" "}
-            </div>
+          </button>
+        )}
 
-            <div className="font-medium xl:text-md text-white text-left leading-tight xl:ml-4 md:ml-2 mx-auto ">
-              Register
+        {isAddWishList ? (
+          <button
+            disabled={preview}
+            onClick={() => setIsRemoveWishListModal(true)}
+            className="bg-gray-800 hover:bg-gray-700 text-white py-2 px-6 rounded-full"
+          >
+            <div className="flex items-center space-x-2">
+              <FaHeart size={21} />
+              <span className="font-medium text-sm text-left leading-tight">
+                Remove
+              </span>
             </div>
+          </button>
+        ) : (
+          <button
+            disabled={preview}
+            onClick={() => setIsAddWishListModal(true)}
+            className={`bg-gray-800 hover:bg-gray-700 text-white py-2 px-6 rounded-full ${
+              preview ? "cursor-not-allowed" : ""
+            }`}
+          >
+            <div className="flex items-center space-x-2">
+              <FaRegHeart size={21} />
+              <span className="font-medium text-sm text-left leading-tight">
+                Wish List
+              </span>
+            </div>
+          </button>
+        )}
+
+        <button
+          onClick={() => setIsActiveTicketModal(true)}
+          disabled={preview}
+          className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
+            preview ? "cursor-not-allowed" : ""
+          }`}
+        >
+          <div className="flex items-center space-x-2">
+            <FaTicketAlt size={23} />
+            <span className="font-medium xl:text-md text-left leading-tight">
+              Buy tickets
+            </span>
           </div>
         </button>
-      )}
+      </div>
 
       {/* Registration Modal */}
       {isRegModalShow && (
@@ -334,59 +374,6 @@ const Buttons = ({
           </div>
         </Modal>
       )}
-
-      {isAddWishList ? (
-        <button
-          disabled={preview ? true : false}
-          onClick={() => setIsRemoveWishListModal(true)}
-          // onClick={removeFromWishlistHandler}
-          className="bg-gray-800 hover:bg-gray-700 text-white py-2 px-6 rounded-full mb-2"
-        >
-          <div className="p-1 flex">
-            <div className="text-white">
-              <FaHeart size={21} />
-            </div>
-            <div className="font-medium text-sm text-white text-left leading-tight xl:ml-4 md:ml-2">
-              Remove
-            </div>
-          </div>
-        </button>
-      ) : (
-        <button
-          disabled={preview ? true : false}
-          // onClick={addTowishlistHandler}
-          onClick={() => setIsAddWishListModal(true)}
-          className={`${
-            preview ? "cursor-not-allowed" : ""
-          }  bg-gray-800 hover:bg-gray-700 text-white py-2 px-6 rounded-full mb-2`}
-        >
-          <div className="flex p-1">
-            <div className=" text-white">
-              <FaRegHeart size={21} />
-            </div>
-            <div className="font-medium md:text-md text-sm  text-white text-left leading-tight xl:ml-4 md:ml-2">
-              Wish List
-            </div>
-          </div>
-        </button>
-      )}
-
-      <button
-        onClick={() => setIsActiveTicketModal(true)}
-        disabled={preview ? true : false}
-        className={` bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full mb-2 ${
-          preview ? "cursor-not-allowed" : ""
-        } `}
-      >
-        <div className="flex p-1">
-          <div className="text-white">
-            <FaTicketAlt size={23} />
-          </div>
-          <div className="font-medium xl:text-md text-sm text-white text-left leading-tight ml-4">
-            Buy tickets
-          </div>
-        </div>
-      </button>
 
       {isAddWishListModal && (
         <Modal setIsOpen={setIsAddWishListModal} isOpen={isAddWishListModal}>

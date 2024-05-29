@@ -5,6 +5,8 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
   theme: {
     extend: {
@@ -12,7 +14,8 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-          'gradient-home': 'linear-gradient(119deg, #FF8158 -2.11%, #4B65A6 63.58%)',
+        "gradient-home":
+          "linear-gradient(119deg, #FF8158 -2.11%, #4B65A6 63.58%)",
       },
       spacing: {
         "571": "571px",
@@ -37,18 +40,18 @@ const config: Config = {
         dashboard: "#E9E9E9",
         new: "#906953",
         dashBtnBlue: "#394855",
-        "home-blue":"#003585",
+        "home-blue": "#003585",
       },
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
         khand: ["Khand", "sans-serif"],
         IBM: ["IBM Plex Mono", "monospace"],
-        'dm-sans': ['"DM Sans"', 'sans-serif'],
-        'monoton': ['Monoton', 'cursive'],
-        manrope: ['Manrope', 'sans-serif'],
-        roboto: ['Roboto', 'sans-serif'],
-        'bai-jamjuree': ['"Bai Jamjuree"', 'sans-serif'],
-        'abhaya-libre': ['Abhaya Libre', 'serif'],
+        "dm-sans": ['"DM Sans"', "sans-serif"],
+        monoton: ["Monoton", "cursive"],
+        manrope: ["Manrope", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+        "bai-jamjuree": ['"Bai Jamjuree"', "sans-serif"],
+        "abhaya-libre": ["Abhaya Libre", "serif"],
       },
       height: {
         "394": "394px",

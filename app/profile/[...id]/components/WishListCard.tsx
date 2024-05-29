@@ -21,7 +21,6 @@ interface Upcoming_Events {
   Date: string;
   Ratings: string;
   image: string;
-  buttonDesc: string;
   eId: string;
 }
 
@@ -32,7 +31,6 @@ export default function WishListCArd({
   Date,
   Ratings,
   image,
-  buttonDesc,
   eId,
 }: Upcoming_Events) {
   const { eventDetails, userId } = useProf() as any as EventDetails;
@@ -277,27 +275,28 @@ export default function WishListCArd({
     //     </Modal>
     //   )}
     // </div>
-    <div className=" w-full   bg-[#D9D9D9]   max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 mb-6 ">
+    //! this
+    <div className=" w-full   bg-[#D9D9D9]   max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 mb-6 p-2 ">
       <div
-        className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
+        className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden w-fit bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
         style={{ backgroundImage: `url(${image as string})` }}
       ></div>
-      <div className="lg:col-span-4 rounded-r-xl pt-1 justify-start items-start">
-        <div className="  flex justify-between px-6 my-2">
-          <div className="  text-[#353535] font-semibold sm:font-bold text-lg sm:text-24">
+      <div className="lg:col-span-4 rounded-r-xl pt-1 justify-start ">
+        <div className="  flex justify-between px-6 my-2 gap-6">
+          <div className="  text-[#353535] font-semibold sm:font-bold text-lg sm:text-24 items-start whitespace-nowrap">
             {EventName}
           </div>
-          <div className="flex flex-col gap-3">
-            <div className=" w-56 text-right">
-              <button className="flex relative items-center bg-red-500 hover:bg-red-800 text-white rounded-3xl py-2 px-3">
+          <div className="flex flex-col gap-3 items-end justify-end">
+            <div className=" w-56 items-end ">
+              <button className="flex relative  bg-red-500 hover:bg-red-800 text-white rounded-3xl py-2 px-3 ">
                 <div className="mr-2">
                   <IoRemoveCircleOutline />
                 </div>
                 <div
-                  className="text-xs font-medium"
+                  className="text-xs font-medium whitespace-nowrap"
                   onClick={() => setIsOpen(true)}
                 >
-                  {buttonDesc}
+                  Remove
                 </div>
               </button>
             </div>
@@ -450,5 +449,189 @@ export default function WishListCArd({
         </Modal>
       )}
     </div>
+    // <div className="w-full bg-[#D9D9D9] rounded-xl shadow-lg grid lg:grid-cols-6 mb-6">
+    //   <div
+    //     className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden w-full bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
+    //     style={{ backgroundImage: `url(${image as string})` }}
+    //   ></div>
+    //   <div className="lg:col-span-4 rounded-r-xl pt-1 flex flex-col justify-start ">
+    //     <div className="flex flex-col  justify-between px-6 my-2 gap-6">
+    //       <div className="text-[#353535] font-semibold sm:font-bold text-lg sm:text-24 whitespace-nowrap items-start">
+    //         {EventName}
+    //       </div>
+    //       <div className=" items-end">
+    //         <button className="flex relative items-center bg-red-500 hover:bg-red-800 text-white rounded-3xl py-2 px-3 float-right">
+    //           <div className="mr-2">
+    //             <IoRemoveCircleOutline />
+    //           </div>
+    //           <div
+    //             className="text-xs font-medium whitespace-nowrap"
+    //             onClick={() => setIsOpen(true)}
+    //           >
+    //             Remove
+    //           </div>
+    //         </button>
+    //       </div>
+    //       {/* <div className=" items-end">
+    //         <button
+    //           className="flex  relative items-center bg-red-500 hover:bg-red-800 whitespace-nowrap text-white rounded-3xl py-2 px-3 float-right"
+    //           onClick={() => setIsOpen(true)}
+    //         >
+    //           <div className="mr-2">
+    //             <IoRemoveCircleOutline />
+    //           </div>
+    //           <div className="text-xs font-medium whitespace-nowrap">
+    //             Remove
+    //           </div>
+    //         </button>
+    //       </div> */}
+    //     </div>
+
+    //     <div className="grid gap-2 pl-4 pb-4">
+    //       <div className="flex items-center">
+    //         <BiMapPin size={22} />
+    //         <div className="ml-2 my-auto text-[#353C4E] text-sm font-medium">
+    //           {Location}
+    //         </div>
+    //       </div>
+    //       <div className="flex items-center">
+    //         <BiAlarm size={22} />
+    //         <div className="ml-2 my-auto text-[#353C4E] text-sm font-medium">
+    //           {Time}
+    //         </div>
+    //       </div>
+    //       <div className="flex items-center">
+    //         <BiCalendar size={22} />
+    //         <div className="ml-2 my-auto text-[#353C4E] text-sm font-medium">
+    //           {Date.substring(0, 10)}
+    //         </div>
+    //       </div>
+    //       <div className="flex items-center">
+    //         <HiOutlineLightningBolt size={22} />
+    //         <div className="ml-2 my-auto text-[#353C4E] text-sm font-medium">
+    //           {Ratings}
+    //         </div>
+    //       </div>
+    //     </div>
+    //     <div className="flex sm:hidden justify-center mb-4">
+    //       <button className="flex gap-2 bg-[#D47151] text-white rounded-2xl px-2 py-1 font-IBM">
+    //         <svg
+    //           width="21"
+    //           height="20"
+    //           viewBox="0 0 21 20"
+    //           fill="none"
+    //           xmlns="http://www.w3.org/2000/svg"
+    //         >
+    //           <g id="Filter">
+    //             <path
+    //               id="Vector 7"
+    //               d="M4.375 10L4.375 3.33333"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //             <path
+    //               id="Vector 9"
+    //               d="M16.1919 16.667L16.1919 15.0003"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //             <path
+    //               id="Vector 8"
+    //               d="M4.375 16.667L4.375 13.3337"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //             <path
+    //               id="Vector 10"
+    //               d="M16.1919 10L16.1919 3.33333"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //             <path
+    //               id="Vector 11"
+    //               d="M10.2837 5.83301L10.2837 3.33301"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //             <path
+    //               id="Vector 12"
+    //               d="M10.2837 16.667L10.2837 10.0003"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //             <ellipse
+    //               id="Ellipse 36"
+    //               cx="4.37514"
+    //               cy="11.6667"
+    //               rx="1.68813"
+    //               ry="1.66667"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //             <ellipse
+    //               id="Ellipse 37"
+    //               cx="10.2833"
+    //               cy="7.49967"
+    //               rx="1.68813"
+    //               ry="1.66667"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //             <ellipse
+    //               id="Ellipse 38"
+    //               cx="16.192"
+    //               cy="12.4997"
+    //               rx="1.68813"
+    //               ry="1.66667"
+    //               stroke="white"
+    //               strokeWidth="2"
+    //               strokeLinecap="round"
+    //             />
+    //           </g>
+    //         </svg>
+    //       </button>
+    //     </div>
+    //   </div>
+    //   {isOpen && (
+    //     <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+    //       <Dialog.Title
+    //         as="h3"
+    //         className="text-lg font-medium rounded-xl leading-6 text-gray-900"
+    //       >
+    //         Remove from Wishlist
+    //       </Dialog.Title>
+    //       <div className="mt-2">
+    //         <p className="text-sm text-gray-500">
+    //           Are you sure? Do you want to remove from wishlist?
+    //         </p>
+    //       </div>
+
+    //       <div className="mt-4 flex gap-2">
+    //         <button
+    //           onClick={removeFromWishList}
+    //           type="submit"
+    //           className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+    //         >
+    //           Remove
+    //         </button>
+    //         <button
+    //           type="button"
+    //           className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+    //           onClick={() => setIsOpen(false)}
+    //         >
+    //           Cancel
+    //         </button>
+    //       </div>
+    //     </Modal>
+    //   )}
+    // </div>
   );
 }

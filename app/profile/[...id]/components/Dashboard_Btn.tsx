@@ -36,7 +36,7 @@ export default function Dashboard_Btn({
 
         {isSlideBar ? (
           <div
-            className={` font-sans text-center text-base flex content-center font-semibold   leading-normal ${
+            className={` font-sans text-center text-base whitespace-nowrap  flex content-center font-semibold   leading-normal ${
               isActive && "text-custom-orange"
             }`}
           >

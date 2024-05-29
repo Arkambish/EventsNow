@@ -1,17 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import ProfileSettings from "../components/ProfileSettings";
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import Profsettings from "./Profsettings";
 import ChangePassword from "./ChangePassword";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { useProf } from "../ProfContext";
 import { UserDetails } from "@/app/Type";
 import { useParams } from "next/navigation";
 import { error, success } from "@/util/Toastify";
-
 import {
   CldUploadWidget,
   CloudinaryUploadWidgetInfo,
@@ -20,6 +15,7 @@ import {
 import { FaCloudUploadAlt } from "react-icons/fa";
 import Image from "next/image";
 import { ZodNull, z } from "zod";
+import Datepicker from "react-tailwindcss-datepicker";
 
 type Detailss = {
   userDeatails: UserDetails;
@@ -36,13 +32,17 @@ export default function Settings() {
   const [showOtherInfo, setShowOtherInfo] = useState(false);
 
   const [mobile, setMobile] = useState<number>();
-  const [birth, setBirth] = useState<Date | null>();
+  const [birth, setBirth] = useState<any>();
   const [pemail, setPemail] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [tshirt, setTshirt] = useState<string>("");
   const [meal, setMeal] = useState<string>("");
   const [profileImage, setProfileImage] = useState("");
+
+  const handleValueChange = (newValue: any) => {
+    setBirth(newValue);
+  };
 
   const toggleOtherInfo = () => {
     setShowOtherInfo(!showOtherInfo);
@@ -98,15 +98,6 @@ export default function Settings() {
       .regex(/^[a-zA-Z ]*$/, {
         message: "Cannot enter number or symbol for last name",
       }),
-    // birthday: z.date().refine(
-    //   (date) => {
-    //     // Custom validation logic for date of birth
-    //     const currentDate = new Date();
-    //     const minimumDate = new Date("1900-01-01");
-    //     return date <= currentDate && date >= minimumDate;
-    //   },
-    //   { message: "Invalid date of birth" }
-    // ),
     mobileNumber: z
       .string()
       .min(1, { message: "Enter your mobile number" })
@@ -171,8 +162,6 @@ export default function Settings() {
           error(String(formattedError.firstName?._errors));
         } else if (formattedError.lastName?._errors) {
           error(String(formattedError.lastName?._errors));
-          // } else if (formattedError.birthday?._errors) {
-          //   error(String(formattedError.birthday?._errors));
         } else if (formattedError.mobileNumber?._errors) {
           error(String(formattedError.mobileNumber?._errors));
         } else if (formattedError.primaryEmail?._errors) {
@@ -332,7 +321,7 @@ export default function Settings() {
                 <div className="sm:col-span-4 mx-4">
                   <button
                     onClick={toggleOtherInfo}
-                    className="text-dashBtnBlue hover:underline mt-1"
+                    className="text-dashBtnBlue hover:underline mt-1 whitespace-nowrap"
                   >
                     {showOtherInfo ? "Hide" : "Show"} Other Informations ...
                   </button>
@@ -360,7 +349,7 @@ export default function Settings() {
                         value={address}
                         setFname={setAddress}
                       />
-                      <div className="sm:col-span-4">
+                      <div className="sm:col-span-4 text-black">
                         <label
                           htmlFor="birthday"
                           className="block text-sm font-medium text-gray-700"
@@ -383,6 +372,15 @@ export default function Settings() {
                           yearDropdownItemNumber={50}
                           className="mt-1 p-2 border-2 border-custom-orange rounded-md focus:outline-none focus:ring-dashBtnBlue focus:border-custom-orange block w-full shadow-sm sm:text-sm"
                         /> */}
+                        <Datepicker
+                          placeholder="Enter your Birthday"
+                          inputClassName="bg-white text-black w-full rounded-md px-3 py-[4px]  "
+                          primaryColor={"blue"}
+                          useRange={false}
+                          asSingle={true}
+                          value={birth}
+                          onChange={handleValueChange}
+                        />
                       </div>
                       <div className="sm:col-span-3 capitalize">
                         <label

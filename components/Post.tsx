@@ -286,7 +286,9 @@ Post) {
 
   return (
     <div className="xl:w-[500px] sm:w-[24rem] w-[20rem] border border-zinc-900 text-white m-8 rounded-2xl pb-4">
-      <div className="px-5 pt-5">
+
+      <div className="px-5 pt-2">
+
         <div className="flex gap-7 items-center mb-4">
           <Image
             src={`${profilePic}`}
@@ -305,6 +307,9 @@ Post) {
         </div>
       </div>
 
+
+
+
       <Image
         src={`${post}`}
         alt="post"
@@ -312,6 +317,7 @@ Post) {
         height={363}
         className="fit rounded-sm border-y-2"
       />
+
 
       <div className=" content-start px-5">
         <div className="flex gap-5 py-2">

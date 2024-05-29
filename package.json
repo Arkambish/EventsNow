@@ -87,6 +87,7 @@
     "react-qr-scanner": "^1.0.0-alpha.11",
     "react-share": "^5.1.0",
     "react-switch": "^7.0.0",
+    "react-tailwindcss-datepicker": "^1.6.6",
     "react-to-print": "^2.15.1",
     "react-use": "^17.5.0",
     "validator": "^13.11.0",
