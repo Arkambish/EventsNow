@@ -59,8 +59,8 @@ export default function RegisteredEventCard({
         />
       </div>
 
-      <div className=" pl-2 pr-4 flex justify-between">
-        <div className=" font-mono text-lg text-center font-semibold">
+      <div className=" pl-2 pr-4 flex justify-between gap-4">
+        <div className=" font-mono text-lg text-center font-semibold ">
           {eventName}
         </div>
 
@@ -92,30 +92,27 @@ export default function RegisteredEventCard({
         </div>
       </div>
       {updating ? (
-          <button className="border-2 button flex text-center mx-2  py-0 px-2  justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base font-mono ">
-            <div className="flex gap-2 justify-center items-center">
-              <div> updating</div>
-              <Image
-                src="/images/createEvent/LoadingBtnIcon.svg"
-                alt="loading btn"
-                width={20}
-                height={20}
-              />
-            </div>
-          </button>
-        ) : (
-          <button
-        onClick={registrationUpdateHandler}
-        className="
+        <button className="border-2 button flex text-center mx-2  py-0 px-2  justify-center bg-custom-orange text-white font-semibold rounded-lg  text-base font-mono ">
+          <div className="flex gap-2 justify-center items-center">
+            <div> updating</div>
+            <Image
+              src="/images/createEvent/LoadingBtnIcon.svg"
+              alt="loading btn"
+              width={20}
+              height={20}
+            />
+          </div>
+        </button>
+      ) : (
+        <button
+          onClick={registrationUpdateHandler}
+          className="
       border-2 
        button rounded-lg mx-2  py-0 px-2 text-custom-orange text-base font-semibold hover:bg-custom-orange hover:text-white ease-in-500"
-      >
-        
-        update Registration
-      </button>
-        )}
-
-      
+        >
+          update Registration
+        </button>
+      )}
     </div>
   );
 }

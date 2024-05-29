@@ -110,9 +110,12 @@ function Template2({
                 Date={date}
               />
             </div>
+
             <div
+              data-modal-target="popup-modal"
+              data-modal-toggle="popup-modal"
               onClick={() => setPostBar(true)}
-              className="flex flex-col  sm:flex-row sm:justify-center my-6"
+              className="flex flex-col sm:flex-row sm:justify-center my-6"
             >
               <a
                 href="#"
@@ -122,7 +125,7 @@ function Template2({
                   <div className="text-white">
                     <BsPostcardFill size={23} />
                   </div>
-                  <div className="font-medium text-md text-white text-left leading-tight ">
+                  <div className="font-medium text-md text-white text-left leading-tight">
                     See Community Posts
                   </div>
                 </div>
@@ -134,24 +137,30 @@ function Template2({
 
       {postBar && (
         <div
-          style={{
-            backgroundColor: "#D9D9D9CC",
-          }}
-          id="static-modal"
-          data-modal-backdrop="static"
+          id="default-modal"
           aria-hidden="true"
-          className="overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full inset-0 max-h-full"
+          className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
         >
-          <div className=" flex justify-between items-center p-4 z-10">
-            <div></div>
-            <button
-              onClick={() => setPostBar(false)}
-              className="bg-slate-300 hover:bg-slate-600 w-8 h-8 rounded-full p-2 flex justify-end items-center"
-            >
-              <IoClose />
-            </button>
+          <div className="relative p-4 w-full max-w-2xl max-h-full">
+            <div className="relative bg-white rounded-lg shadow ">
+              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+                <h3 className="text-xl font-semibold text-black ">
+                  Community posts
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setPostBar(false)}
+                  className="text-white bg-red-500 hover:bg-red-800  rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center  "
+                >
+                  <IoClose />
+                  <span className="sr-only">Close modal</span>
+                </button>
+              </div>
+              <div className=" overflow-y-scroll text-center justify-center overflow-x-hidden">
+                <PostTab />
+              </div>
+            </div>
           </div>
-          <PostTab />
         </div>
       )}
       <Footer />
