@@ -7,9 +7,9 @@ import EmptyStateComponent from "@/components/EmptyStateComponent";
 export default function Myteam() {
   const { user } = UseEventContext() as EventContextType;
 
-  function handleInvite() {}
+
   return (
-    <div>
+    
       <Container>
         <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
           <div className="text-stone-600 font-IBM font-medium text-3xl ">
@@ -32,7 +32,7 @@ export default function Myteam() {
               Invite
             </button>
           </div> */}
-          <div className="mt-6 grid overflow-auto h-80 md:w-full">
+          <div className="mt-6 grid overflow-auto h-80 md:w-full content-start gap-3 ">
             {/* {user.length == 0 || user == null? (
               <EmptyStateComponent message="No user in the event" />
             ) : (
@@ -54,6 +54,8 @@ export default function Myteam() {
                   name={user.name}
                   email={user.email}
                 />
+                
+                
               ))
             ) : (
               <EmptyStateComponent message="No team members" />
@@ -61,6 +63,6 @@ export default function Myteam() {
           </div>
         </div>
       </Container>
-    </div>
+    
   );
 }

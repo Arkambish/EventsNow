@@ -96,7 +96,7 @@ export default memo(function CreatePost({
           <div className=" mt-5 font-Inter ">
             <input
               type="text "
-              className=" outline-none text-2xl	w-full text-gray-600"
+              className=" outline-none text-xl	w-full text-gray-600"
               placeholder="What's on your mind?"
               value={title}
               onChange={(e) => handleEdit(e.target.value)}

@@ -113,7 +113,7 @@ const EventContext = createContext<EventContextType | string>("");
 
 function EventContextProvider({ children }: { children: React.ReactNode }) {
   const { setEventPublish } = useAuth() as AuthContext;
-  const [status, setStatus] = useState<string>("qrreader");
+  const [status, setStatus] = useState<string>("overview");
   const params = useParams<{ id: string }>();
   const [isSideBar, setIsSideBar] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);

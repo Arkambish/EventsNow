@@ -19,7 +19,7 @@ const QrReader = () => {
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
   const [activeButton, setActiveButton] = useState(1);
-  const [activeComponent, setActiveComponent] = useState("Code");
+  const [activeComponent, setActiveComponent] = useState("QrCode");
   //set active component
 
   const handleClick = (buttonNumber) => {
@@ -102,16 +102,16 @@ const QrReader = () => {
   }
 
   return (
-    <div>
+
       <Container>
         <div className="grid lg:pl-10 mb-5 gap-2 mt-8 md:mr-10 pb-8">
-          <div className="flex  ">
-            <div className="  text-stone-600 font-medium text-3xl ">
+          <div className="x  ">
+            <div className="  text-stone-600 font-medium text-3xl m-4 ">
               Mark Attendence
             </div>
 
-            <div className="flex items-end ml-56 ">
-              <div className="flex md:w-64 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
+            <div className="flex items-end  ">
+              <div className="flex w-100 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
                 <button
                   className={`md:text-sm button font-medium ml-2 w-40 h-6 xl:h-8 rounded-3xl  ${
                     activeButton === 1
@@ -150,7 +150,7 @@ const QrReader = () => {
           {activeComponent === "Code" && <Code />}
         </div>
       </Container>
-    </div>
+
   );
 };
 

@@ -269,8 +269,8 @@ export default function GetReportComponent({
           </div>
         </div>
         <div className="bg-slate-500  w-full rounded-md flex justify-between p-2">
-          <div className="text-lg font-bold	 text-white">
-            Toral Revenue- LKR: {income}
+          <div className="text-lg font-semibold	 text-white">
+            Total Revenue- LKR: {income}
           </div>
           <button
             className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"

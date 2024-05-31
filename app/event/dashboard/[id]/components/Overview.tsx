@@ -30,11 +30,11 @@ export default function Overview() {
 
         if (res && res.data) {
           setTotalTicketSale(res.data);
-          console.log("asjan")
+          
         }
       } catch (error) {
         console.error("Error fetching total ticket sale:", error);
-        console.log(error)
+        
       }
     };
 
@@ -49,7 +49,7 @@ export default function Overview() {
         
       } catch (error) {
         console.error("Error fetching total attendance:", error);
-        console.log("ashan")
+        
       }
     };
 
@@ -59,7 +59,7 @@ export default function Overview() {
 
   return (
     <Container>
-      <div className="h-full mt-5 mb-8 sm:mb-56">
+      <div className="h-full mt-5 ">
         <div className="pl-10 mb-5 grid gap-2 mt-3">
           <div className="  text-stone-600 font-IBM font-medium text-3xl ">
             Overview

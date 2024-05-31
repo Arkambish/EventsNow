@@ -40,7 +40,7 @@ export default function TicketMockup({
   }
 
   return (
-    <div className=" rounded-[10px] border-2  border-[#E2E2E2] pb-4 mx-2  mb-6 ">
+    <div className=" rounded-[10px] border-2  border-[#E2E2E2] pb-4 mx-2  ">
       <div className=" w-64 h-60 p-4  object-cover">
         <Image
           src={image}

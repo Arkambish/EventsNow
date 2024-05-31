@@ -27,7 +27,7 @@ export default function OverviewSubComponent({
 
   return (
     <ContainerWithStroke>
-      <div className="py-4 grid gap-3  justify-center">
+      <div className="py-4 sm:px-4 lg:px-0 grid gap-3  justify-center text-sm lg:text-base">
         <Image
           className="justify-self-center"
           src={`/images/eventDash/${image}`}

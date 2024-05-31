@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import S3UploadForm from "@/components/S3UploadForm";
 import { error, success } from "@/util/Toastify";
 import WidthChangeModal from "@/components/WidthChangeModal";
+import { MdCancel } from "react-icons/md";
 
 export default function Hostpage() {
   const [file, setFile] = React.useState<File | null>(null);
@@ -104,7 +105,7 @@ export default function Hostpage() {
     document.body.removeChild(link);
   };
   return (
-    <div>
+   
       <Container>
         <div className="mt-5">
           <div className="sm:pl-10 mb-5 grid gap-2 mt-3 ">
@@ -213,9 +214,18 @@ export default function Hostpage() {
               <Modal setIsOpen={setOpenPageBuilder} isOpen={openPageBuilder}>
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-lg font-medium leading-6 text-gray-900 flex justify-between items-center"
                 >
                   Page builder
+                  
+                  <button
+                    type="button"
+                   className=" hover:opacity-70 ease-in-out"
+                    onClick={() => setOpenPageBuilder(false)}
+                  >
+                   <MdCancel size={23} />
+                  </button>
+                
                 </Dialog.Title>
                 <div className="mt-2 text-slate-600">
                   Use our Page Builder to create and customize your host page
@@ -223,42 +233,37 @@ export default function Hostpage() {
                   adjust settings, and preview your design in real-time
                 </div>
                 <div className="flex gap-5 mb-10 p-5">
-                  <button onClick={handleDownload}>
-                    <div className="flex flex-col justify-center items-center gap-3">
-                      <Image
-                        src={"/images/createEvent/eventRegFormImg.png"}
-                        alt="template1"
-                        width={40}
-                        height={40}
-                      />
-                      Doc
-                    </div>
-                  </button>
-                  <button>
-                    <button
+                <button
                       onClick={() => setIsPageBuilder(true)}
-                      className="flex flex-col justify-center items-center gap-3"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2"
                     >
-                      <Image
+                      {/* <Image
                         src={"/images/createEvent/eventRegFormImg.png"}
                         alt="template1"
                         width={40}
                         height={40}
-                      />
-                      Builder
+                      /> */}
+                      Start Page Builder
                     </button>
+
+                  <button onClick={handleDownload}
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                    {/* <div className="flex flex-col justify-center items-center gap-3"> */}
+                      {/* <Image
+                        src={"/images/createEvent/eventRegFormImg.png"}
+                        alt="template1"
+                        width={40}
+                        height={40}
+                      /> */}
+                     Learn More
+                    {/* </div> */}
                   </button>
+                 
+                    
+                
                 </div>
 
-                <div className="mt-4 flex gap-2">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={() => setOpenPageBuilder(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
+                
               </Modal>
             )}
 
@@ -275,11 +280,18 @@ export default function Hostpage() {
                   Once your design is complete, you can upload it as an HTML
                   file. Please note that only one HTML file can be uploaded
                 </div>
-                <div className="  mb-10 p-5">
-                  <form onSubmit={handleSubmit}>
-                    <input type="file" onChange={handleFileChange} />
-                  </form>
-                </div>
+                <div className="mb-10 p-5 bg-gray-100 shadow rounded-lg">
+  <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+    <input type="file" onChange={handleFileChange} className="block w-full text-sm text-gray-700
+      file:mr-4 file:py-2 file:px-4
+      file:rounded file:border-0
+      file:text-sm file:font-semibold
+      file:bg-blue-50 file:text-blue-700
+      hover:file:bg-blue-100
+    "/>
+  </form>
+</div>
+
 
                 <div className="mt-4 flex gap-2">
                   <button
@@ -292,7 +304,7 @@ export default function Hostpage() {
 
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={handleSubmit}
                   >
                     upload
@@ -306,6 +318,6 @@ export default function Hostpage() {
           </div>
         </div>
       </Container>
-    </div>
+   
   );
 }

@@ -31,13 +31,13 @@ export default function Campaign() {
           </div>
           <button
             onClick={() => setStatus("registeredusers")}
-            className=" border-2  rounded-md hover:bg-slate-100   text-dashBtnBlue font-mono text-base font-normal  drop-shadow-md my-auto px-2 py-0.5 "
+            className=" border-2  rounded-md hover:bg-slate-100 ease-in-out delay-100   text-dashBtnBlue font-mono text-base font-normal  drop-shadow-md my-auto px-2 py-0.5 "
           >
             Registered Users
           </button>
         </div>
 
-        <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center ">
+        <div className="xl:pr-64 2xl:pr-32 grid place-content-center text-center  ">
           <div className="text-lg py-2 font-semibold">
             Use Event’s Community page .
           </div>
