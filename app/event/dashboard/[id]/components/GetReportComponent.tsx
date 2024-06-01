@@ -84,8 +84,8 @@ export default function GetReportComponent({
           height={size}
         />
         <div className="content-center justify-start lg:pl-10 xl:pl-20 grid gap-2 w-full">
-          <div className=" text-left text-[#666]">EVENT’S</div>
-          <div className="mx-auto lg:text-lg text-[#353535] font-bold">
+          <div className=" text-left text-base text-[#666]">event's</div>
+          <div className="text-start  lg:text-lg text-sm text-[#353535] font-semibold">
             {reportName}
           </div>
         </div>
