@@ -10,9 +10,9 @@ export default function Tickets() {
 
   return (
     <Container>
-      <div className="mb-5 grid gap-2 lg:px-6 mt-8 lg:mr-16 pb-20">
-        <div className="">
-          <div className="   content-start   pb-4 ">
+      <div className=" grid gap-2 lg:px-6 mt-8 lg:mr-16 ">
+       
+          <div className="   content-start    ">
             <div className=" text-stone-600 font-IBM font-medium text-3xl">
               TICKETS
             </div>
@@ -25,12 +25,12 @@ export default function Tickets() {
               <GetTicketDatils />
             </div>
 
-            <div className="mt-2 flex flex-wrap">
+            <div className="mt-2 flex flex-wrap gap-3 h-96 overflow-auto">
               {!allTickets || allTickets.length == 0 ? (
                 <EmptyStateComponent message="You have not created any tickets yet" />
               ) : (
                 allTickets.map((ticket) => (
-                  <div className="m-2" key={ticket._id}>
+                  <div key={ticket._id}>
                     <TicketMockup
                       id={ticket._id}
                       image={ticket.image}
@@ -38,12 +38,13 @@ export default function Tickets() {
                       type={ticket.classType}
                       key={ticket._id}
                     />
+                    
                   </div>
                 ))
               )}
             </div>
           </div>
-        </div>
+      
       </div>
     </Container>
   );

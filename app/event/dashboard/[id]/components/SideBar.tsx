@@ -41,11 +41,11 @@ export default function SideBar() {
   } = UseEventContext() as EventContextType;
 
   return (
-    <div>
+    <div className="h-full">
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+        <div className=" h-full">
           <div className=" flex flex-col  items-center  bg-slate-100 rounded-lg py- text-center h-full overflow-hidden  ">
             <div className=" grid-rows-8   flex flex-col items-center">
               <div
@@ -70,7 +70,7 @@ export default function SideBar() {
                   </button>
                 </div>
                 <div
-                  className={`flex flex-col  ${
+                  className={`flex flex-col gap-4  ${
                     isSideBar ? "items-start" : "items-center"
                   } `}
                 >

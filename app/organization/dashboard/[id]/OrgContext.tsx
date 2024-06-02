@@ -39,7 +39,7 @@ type GettingOrganizationData = {
 };
 const orgContext = createContext<OrgContext | string>("");
 function OrgContextProvider({ children }: ChildrenType) {
-  const [status, setStatus] = useState<OrgDashboardType>("myEvents");
+  const [status, setStatus] = useState<OrgDashboardType>("dashboard");
   const [revenue, setRevenue] = useState<number>(0);
   const [ticketSold, setTicketSold] = useState<number>(0);
   const [events, setEvents] = useState<EventType[]>([]);

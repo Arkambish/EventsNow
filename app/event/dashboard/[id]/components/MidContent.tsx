@@ -18,7 +18,7 @@ import RegisteredUsersList from "./RegisteredUsersList";
 export default function MidContent() {
   const { status } = UseEventContext() as EventContextType;
   return (
-    <div>
+    <div className=" h-full ">
       {status === "overview" && <Overview />}
       {status === "hostpage" && <Hostpage />}
       {status === "myteam" && <Myteam />}

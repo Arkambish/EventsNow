@@ -259,10 +259,11 @@ export default function MainComponent() {
                     <MidContent />
                   </div>
                   <div
-                    className={`lg:col-span-3 md:block hidden
-             ${isSideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
+                    className={`   lg:col-span-3 md:block hidden
+             ${isSideBar ? "md:col-span-4 md:mr-2 " : "md:col-span-3  "}`}
                   >
-                    <Event
+                    {eventname && eventLocation && eventStartTime && eventDate && eventEndDate && eventDashboardImage && endTime && eventPublish && (
+                      <Event
                       EventName={eventname}
                       Location={eventLocation}
                       Time={eventStartTime}
@@ -273,6 +274,8 @@ export default function MainComponent() {
                       setIsPreview={setIsPreview}
                       isPublished={eventPublish}
                     />
+                    )}
+                    
                   </div>
                 </div>
               )}

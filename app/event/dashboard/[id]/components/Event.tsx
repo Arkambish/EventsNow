@@ -1,9 +1,8 @@
+
 import React from "react";
 import Image from "next/image";
 
-function Share() {}
 
-function preview() {}
 
 interface Event {
   EventName: String;
@@ -34,30 +33,32 @@ export default function Event({
     }
   };
   return (
-    <div className=" w-64 xl:w-72   rounded-xl bg-slate-100 shadow-inner xl:pt-8 xl:px-8 pt-6 px-6  ">
+    <div className="grid justify-center bg-slate-100 shadow-inner rounded-xl h-full ">
+    <div className="     xl:pt-8 xl:px-8 pt-6 px-6 h-full grid  ">
       <Image
-        className=" rounded-md  "
+        className=" rounded-md lg:w-52 xl:w-auto 
+          "
         src={eventCover as string}
         alt="event cover"
-        width={410}
-        height={200}
+        width={250}
+        height={150}
       />
 
       <div className="text-[#353535]  text-2xl py-4  font-medium  ">
         {EventName}
       </div>
 
-      <div className="grid grid-rows-5 gap-6 ">
+      <div className="grid grid-rows-4 gap-3 mb-5 ">
         <div className="flex gap-3">
           <Image
             className="grid content-center "
             src="/images/reusableComponents/Pin_fill.svg"
             alt="print"
-            width={32}
-            height={32}
+            width={28}
+            height={28}
           />
 
-          <div className="text-[#353C4E] text-base text-start align-top  grid content-center">
+          <div className="text-[#353C4E]  text-sm text-start align-top  grid content-center">
             {Location}
           </div>
         </div>
@@ -67,11 +68,11 @@ export default function Event({
             className="grid content-center"
             src="/images/reusableComponents/Date_org.svg"
             alt="print"
-            width={32}
-            height={32}
+            width={28}
+            height={28}
           />
 
-          <div className="text-[#353C4E] text-base text-start  align-top grid content-center">
+          <div className="text-[#353C4E] text-sm text-start  align-top grid content-center">
             {Date} to <span>{endDate}</span>
           </div>
         </div>
@@ -81,17 +82,17 @@ export default function Event({
             className="grid content-center"
             src="/images/reusableComponents/Clock_fill.svg"
             alt="print"
-            width={32}
-            height={32}
+            width={28}
+            height={28}
           />
 
-          <div className="text-[#353C4E] text-base text-start   align-top grid content-center">
+          <div className="text-[#353C4E] text-sm text-start   align-top grid content-center">
             {Time}-{endTime}
           </div>
         </div>
 
-        <div className="flex xl:gap-4 gap-1">
-          <button
+        {/* <div className="flex xl:gap-4 gap-1"> */}
+          {/* <button
             onClick={() => Share()}
             className="w-24 h-8 rounded-3xl bg-white shrink-0 flex"
           >
@@ -106,11 +107,11 @@ export default function Event({
             <div className="w-40 h-4 text-[#535353] text-sm font-medium font-['IBM Plex Mono'] py-1.5 pl-0 mr-2 ">
               Share
             </div>
-          </button>
+          </button> */}
 
           <button
             onClick={() => handlePreviewClick()}
-            className={`w-28 h-8 rounded-3xl bg-white shrink-0 flex ${
+            className={`w-28 h-8 rounded-3xl bg-white shrink-0 flex  ${
               !isPublished && "opacity-50 pointer-events-none"
             }`}
           >
@@ -127,8 +128,9 @@ export default function Event({
               Preview
             </div>
           </button>
-        </div>
+        {/* </div> */}
       </div>
+    </div>
     </div>
   );
 }

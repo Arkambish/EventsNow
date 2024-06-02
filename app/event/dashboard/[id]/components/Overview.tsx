@@ -6,57 +6,58 @@ import CheckPermission from "./CheckPermission";
 import { useParams } from "next/navigation";
 import { EventContextType, UseEventContext } from "../EventDashContext";
 import { FetchGet } from "@/hooks/useFetch";
+import { is } from "date-fns/locale";
 
 export default function Overview() {
-  const { event, id } = UseEventContext() as EventContextType;
+  const { event, totalTicketSale,totalAttendance,isLoading } = UseEventContext() as EventContextType;
   // const { id } = useParams();
-  const [totalTicketSale, setTotalTicketSale] = useState<number | null>(null);
-  const [totalAttendance, setTotalAttendance] = useState<number | null>(null);
 
-  useEffect(() => {
-    const fetchTotalTicketSale = async () => {
-      try {
-        // const data = await FetchGet({
-        //   endpoint: `ticket/countTickets/${id}`,
-        // });
+  // useEffect(() => {
+  //   const fetchTotalTicketSale = async () => {
+  //     try {
+  //       // const data = await FetchGet({
+  //       //   endpoint: `ticket/countTickets/${id}`,
+  //       // });
 
-        const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
+  //       const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
           
-        );
-        console.log(data);
-        const res = await data.json();
-        console.log(res);
-        console.log(res.data)
+  //       );
+  //       console.log(data);
+  //       const res = await data.json();
+  //       console.log(res);
+  //       console.log(res.data)
 
-        if (res && res.data) {
-          setTotalTicketSale(res.data);
-          console.log("asjan")
-        }
-      } catch (error) {
-        console.error("Error fetching total ticket sale:", error);
-        console.log(error)
-      }
-    };
+  //       if (res && res.data) {
+  //         setTotalTicketSale(res.data);
+  //         console.log("asjan")
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching total ticket sale:", error);
+  //       console.log(error)
+  //     }
+  //   };
 
-    const fetchTotalAttendance = async () => {
-      try {
-        const data = await FetchGet({
-          endpoint: `attendant/countAttendant/${id}`,
-        });
-        if (data && data.data){
-          setTotalAttendance(data.data);
-        }
+  //   const fetchTotalAttendance = async () => {
+  //     try {
+  //       const data = await FetchGet({
+  //         endpoint: `attendant/countAttendant/${id}`,
+  //       });
+  //       if (data && data.data){
+  //         setTotalAttendance(data.data);
+  //       }
         
-      } catch (error) {
-        console.error("Error fetching total attendance:", error);
-        console.log("ashan")
-      }
-    };
+  //     } catch (error) {
+  //       console.error("Error fetching total attendance:", error);
+        
+  //     }
+  //   };
 
-    fetchTotalTicketSale();
-    fetchTotalAttendance();
-  }, [id]);
-
+  //   fetchTotalTicketSale();
+  //   fetchTotalAttendance();
+  // }, [id]);
+if(isLoading) return (
+  <div>loading</div>
+)
   return (
     <Container>
       <div className="h-full mt-5 mb-8 sm:mb-56">
@@ -73,19 +74,19 @@ export default function Overview() {
             image="tickets.svg"
             text="Total ticket Sale"
             linkToDetails="totalTicket"
-            details={totalTicketSale !== null ? totalTicketSale : "Loading..."}
+            details={totalTicketSale }
           />
           <OverviewSubComponent
             image="attendence.svg"
             text="Total attendence"
             linkToDetails="totalAttendence"
-            details={totalAttendance !== null ? totalAttendance : "Loading..."}
+            details={totalAttendance}
           />
           <OverviewSubComponent
             image="revenue.svg"
             text="Total revenue"
             linkToDetails="totalRevenue"
-            details={event.income !== null ? event.income : "Loading..."}
+            details={event.income}
           />
         </div>
       </div>

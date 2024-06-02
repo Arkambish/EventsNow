@@ -33,12 +33,12 @@ export default function EditPost() {
   return (
     <Container>
       <button className="button mt-5" onClick={() => setStatus("campaign")}>
-        <div className="text-white rounded-full bg-custom-orange p-1 w-8 flex justify-center">
+        <div className="text-white rounded-full bg-stone-600 p-1 w-8 flex justify-center">
           <MdArrowBack size={20} />
         </div>
       </button>
       <div className="lg:pl-10 mb-5 grid gap-2  md:mr-10 pb-4">
-        <div className="  gap-3 flex text-custom-orange font-medium text-3xl ">
+        <div className="  gap-3 flex text-stone-600 font-medium text-3xl ">
           Edit Post
         </div>
         <div className=" text-[#455273]  mr-8">

@@ -17,6 +17,7 @@ import { UserDetails } from "@/app/Type";
 import { set } from "mongoose";
 import { ca, ro } from "date-fns/locale";
 import { error, success } from "@/util/Toastify";
+import { FetchGet } from "@/hooks/useFetch";
 
 import {
   AttendanceType,
@@ -89,6 +90,8 @@ export interface EventContextType {
   allTickets: Ticket[];
 
   allRegisteredUsers: UserType[];
+  totalTicketSale: number | null;
+  totalAttendance: number | null;
 }
 
 type EventUserDeatils = {
@@ -113,7 +116,7 @@ const EventContext = createContext<EventContextType | string>("");
 
 function EventContextProvider({ children }: { children: React.ReactNode }) {
   const { setEventPublish } = useAuth() as AuthContext;
-  const [status, setStatus] = useState<string>("qrreader");
+  const [status, setStatus] = useState<string>("overview");
   const params = useParams<{ id: string }>();
   const [isSideBar, setIsSideBar] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -123,6 +126,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   const [allRegisteredUsers, setAllRegisteredUsers] = useState<UserType[]>([]);
 
   const [isPageBuilder, setIsPageBuilder] = useState<boolean>(false);
+  const [totalTicketSale, setTotalTicketSale] = useState<number | null>(null);
+  const [totalAttendance, setTotalAttendance] = useState<number | null>(null);
 
   const handleOverview: voidFunc = () => {
     setStatus("overview");
@@ -219,7 +224,48 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setIsLoading(true);
+
+    
+    const fetchTotalTicketSale = async () => {
+      try {
+        // const data = await FetchGet({
+        //   endpoint: `ticket/countTickets/${id}`,
+        // });
+
+        const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
+          
+        );
+    
+        const res = await data.json();
+      
+
+        if (res && res.data) {
+         return res.data;
+        }
+      } catch (error) {
+        console.error("Error fetching total ticket sale:", error);
+        console.log(error)
+      }
+    };
+
+    const fetchTotalAttendance = async () => {
+      try {
+        const data = await FetchGet({
+          endpoint: `attendant/countAttendant/${id}`,
+        });
+        if (data && data.data){
+          return data.data;
+         
+        }
+        
+      } catch (error) {
+        console.error("Error fetching total attendance:", error);
+        
+      }
+    };
+
     const getEvent = async () => {
+
       const res = await fetch(`/api/v1/event/getOneEvent`, {
         method: "POST",
         headers: {
@@ -278,6 +324,10 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     async function handleContext() {
       setIsLoading(true);
       const event = await getEvent();
+       const totalTicketSaleData = await fetchTotalTicketSale();
+       setTotalTicketSale(totalTicketSaleData);
+       const totalAttendanceData = await fetchTotalAttendance();
+        setTotalAttendance(totalAttendanceData);
 
       const userPermissionData = await getUserDetails({
         organizationId: event.organizationId,
@@ -342,7 +392,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     }
     getTickets();
     setIsLoading(false);
-  }, [params.id, router, setEventPublish, status, id]);
+  }, [params.id, router, setEventPublish, id]);
 
   return (
     <EventContext.Provider
@@ -411,6 +461,9 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
         eventPermission,
         globalPermission,
+
+        totalTicketSale,
+        totalAttendance,
       }}
     >
       {children}

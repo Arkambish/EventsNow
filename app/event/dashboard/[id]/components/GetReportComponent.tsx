@@ -84,8 +84,8 @@ export default function GetReportComponent({
           height={size}
         />
         <div className="content-center justify-start lg:pl-10 xl:pl-20 grid gap-2 w-full">
-          <div className=" text-left text-[#666]">EVENT’S</div>
-          <div className="mx-auto lg:text-lg text-[#353535] font-bold">
+          <div className=" text-left text-base text-[#666]">event's</div>
+          <div className="text-start  lg:text-lg text-sm text-[#353535] font-semibold">
             {reportName}
           </div>
         </div>
@@ -269,8 +269,8 @@ export default function GetReportComponent({
           </div>
         </div>
         <div className="bg-slate-500  w-full rounded-md flex justify-between p-2">
-          <div className="text-lg font-bold	 text-white">
-            Toral Revenue- LKR: {income}
+          <div className="text-lg font-semibold	 text-white">
+            Total Revenue- LKR: {income}
           </div>
           <button
             className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"

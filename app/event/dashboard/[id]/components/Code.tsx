@@ -9,12 +9,11 @@ export default function Code() {
   // const { id } = useParams();
 
   const params = useParams();
-  console.log(params.id);
+
 
   const handleMarkAttendence = async () => {
     // Add code to mark attendence
-    console.log(ticketCode);
-    console.log("ashan");
+   
     if (ticketCode.length == 8) {
       try {
         const res = await fetch("/api/v1/attendant/markAttendenceUsingCode", {
@@ -34,7 +33,7 @@ export default function Code() {
         //     body:{ticketCode},
         // })
         const ticketData = await res.json();
-        console.log(ticketData);
+       
         if (!ticketData) {
           error("Invalid Ticket Code");
           return;
@@ -81,18 +80,18 @@ export default function Code() {
         console.log(e);
       }
     } else {
-      error("Enter a valid Ticket Code");
+      error("Invalid Ticket Code");
     }
   };
   return (
-    <div>
+    <div >
       <Container>
-        <div className=" text-[#455273]  mr-8">Enter your Ticket code</div>
+        <div className="mt-6 text-[#455273]  mr-8">Enter your Ticket code</div>
 
         <div className="flex items-center">
           <input
             type="text"
-            className="w-full px-3 py-[6px] border rounded-md focus:outline-none"
+            className=" px-3 py-[6px] border rounded-md focus:outline-none"
             onChange={(e) => setTicketCode(e.target.value)}
           />
           <button
