@@ -33,9 +33,11 @@ export default function Event({
     }
   };
   return (
-    <div className="   rounded-xl bg-slate-100 shadow-inner xl:pt-8 xl:px-8 pt-6 px-6 h-full  ">
+    <div className="grid justify-center bg-slate-100 shadow-inner rounded-xl h-full ">
+    <div className="     xl:pt-8 xl:px-8 pt-6 px-6 h-full grid  ">
       <Image
-        className=" rounded-md  "
+        className=" rounded-md lg:w-52 xl:w-auto 
+          "
         src={eventCover as string}
         alt="event cover"
         width={250}
@@ -128,6 +130,7 @@ export default function Event({
           </button>
         {/* </div> */}
       </div>
+    </div>
     </div>
   );
 }
