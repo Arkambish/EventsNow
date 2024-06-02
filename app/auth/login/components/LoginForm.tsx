@@ -94,6 +94,11 @@ export default function LoginForm() {
 
       const { data } = await res.json();
 
+      if (data === "Please verify your email before logging in") {
+        error("Please verify your email before logging in");
+        setIsSubmitting(false);
+        return;
+      }
       if (data === "Invalid user name or password") {
         error("Invalid username or password");
         setIsSubmitting(false);

@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { error, success } from "../../../../util/Toastify";
 import Image from "next/image";
 import { z } from "zod";
+import toast from "react-hot-toast";
 
 export default function LoginFormBasic() {
   const [firstName, setFristName] = useState<string>("");
@@ -17,29 +18,33 @@ export default function LoginFormBasic() {
   const [passwordConfirm, setCPassword] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const router = useRouter();
-  const validateSignUpForm = z.object({
-    firstName: z
-      .string()
-      .min(1, "Enter your first name")
-      .regex(/^[a-zA-Z ]*$/, {
-        message: "Cannot enter number or symbol for name",
-      }),
-    lastName: z
-      .string()
-      .min(1, "Enter your last name")
-      .regex(/^[a-zA-Z ]*$/, {
-        message: "Cannot enter number or symbol for name",
-      }),
-    email: z.string().email({ message: "Invalid email" }),
-    password: z.string().min(6, "Password must be at least 6 characters long"),
-    passwordConfirm: z
-      .string()
-  }).refine((data) => data.password === data.passwordConfirm, {path: ["passwordConfirm"],
-  message: "Password Doesnot Match"
-});
+  const validateSignUpForm = z
+    .object({
+      firstName: z
+        .string()
+        .min(1, "Enter your first name")
+        .regex(/^[a-zA-Z ]*$/, {
+          message: "Cannot enter number or symbol for name",
+        }),
+      lastName: z
+        .string()
+        .min(1, "Enter your last name")
+        .regex(/^[a-zA-Z ]*$/, {
+          message: "Cannot enter number or symbol for name",
+        }),
+      email: z.string().email({ message: "Invalid email" }),
+      password: z
+        .string()
+        .min(6, "Password must be at least 6 characters long"),
+      passwordConfirm: z.string(),
+    })
+    .refine((data) => data.password === data.passwordConfirm, {
+      path: ["passwordConfirm"],
+      message: "Password Doesnot Match",
+    });
   async function sendLoginData(e: any) {
     e.preventDefault();
-    
+
     try {
       const data = {
         firstName,
@@ -92,7 +97,27 @@ export default function LoginFormBasic() {
         setpassword("");
         setCPassword("");
         setSpinner(false);
-        success("Successfully created your account");
+        toast.custom((t) => (
+          <div
+            className={`${
+              t.visible ? "animate-enter" : "animate-leave"
+            } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+          >
+            <div className="flex-1 w-0 p-4">
+              <div className="flex items-start">
+                <div className="ml-3 flex-1">
+                  <p className="text-sm font-medium text-gray-900">
+                    Successfully created your account 🔥
+                  </p>
+                  <p className="mt-1 text-sm text-orange-500">
+                    Please verify your email before logging in
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ));
+        //success("Successfully created your account");
         router.push("/auth/login");
         setIsSubmitting(false);
       } else {
