@@ -10,10 +10,12 @@ import {
   CarouselPrevious,
 } from "@/components/Carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 import Image from "next/image";
 // import { Router,  } from "next/router";
-import { useSearchParams, useRouter } from "next/navigation";
+// import { useSearchParams, useRouter } from "next/navigation";
+// import { useSearchParams } from "react-router-dom";
 
 // import { useSearchParams } from "next/navigation";
 // import { useRouter } from "next/router";
@@ -34,36 +36,36 @@ import { useSearchParams, useRouter } from "next/navigation";
 // };
 
 export default function HeroSection() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("search") || "";
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
+
+  // const searchQuery = searchParams.get("search") || "";
 
   const [search, setSearch] = useState("");
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   if (search) {
-  //     const url = `/home/?search=${encodeURIComponent(search)}`;
-  //     router.push(url, undefined, { shallow: true });
-  //   } else {
-  //     router.push("/home", undefined, { shallow: true });
-  //   }
-  // }, [search, router]);
-
-  useEffect(() => {
-    setSearch(searchQuery);
-  }, [searchQuery]);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const handleChange = (value: string) => {
-    setSearch(value);
-    const params = new URLSearchParams(window.location.search);
-    if (value) {
-      params.set("search", value);
+    const query = value;
+    setSearch(query);
+
+    // Update the URL without causing a full page reload
+    const params = new URLSearchParams(searchParams);
+    if (query) {
+      params.set("search", query);
     } else {
       params.delete("search");
     }
-    router.push(`${window.location.pathname}?${params.toString()}`, undefined);
+    router.replace(`${pathname}?${params.toString()}`);
   };
+
+  useEffect(() => {
+    // Sync the search input with the URL query parameter
+    const currentSearch = searchParams.get("search") || "";
+    setSearch(currentSearch);
+  }, [searchParams]);
 
   useEffect(() => {
     animateHero();
@@ -133,39 +135,6 @@ export default function HeroSection() {
         </div>
 
         <div className="-z-10 h-[500px] md:h-[565px] xl:h-[836px] overflow-hidden  rounded-none hidden lg:grid">
-          {/* <Flowbite theme={{ theme: customTheme }}>
-            <Carousel>
-              <Image
-                src="/images/heroSection/Frame1.png"
-                alt="..."
-                width={1000}
-                height={2000}
-                className="xl:max-2xl:w-full xl:max-2xl:h-full"
-              />
-              <Image
-                src="/images/heroSection/Frame2.png"
-                alt="..."
-                width={2000}
-                height={2000}
-                className="xl:max-2xl:w-full xl:max-2xl:h-full "
-              />
-              <Image
-                src="/images/heroSection/Frame3.png"
-                alt="..."
-                width={1000}
-                height={2000}
-                className="xl:max-2xl:w-full xl:max-2xl:h-full"
-              />
-              <Image
-                src="/images/heroSection/Frame4.png"
-                alt="..."
-                width={1000}
-                height={1000}
-                className="xl:max-2xl:w-full xl:max-2xl:h-full"
-              />
-            </Carousel>
-          </Flowbite> */}
-
           <Carousel
             plugins={[
               Autoplay({
