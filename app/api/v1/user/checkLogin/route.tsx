@@ -13,6 +13,11 @@ export async function POST(req: Request) {
     if (!data) {
       return NextResponse.json({ data: "Invalid user name or password" });
     }
+    if (!data.isVerified) {
+      return NextResponse.json({
+        data: "Please verify your email before logging in",
+      });
+    }
 
     const checkPassword = await comparePassword(password, data.password);
 

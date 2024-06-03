@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import connectMongoDB from "../../../../../lib/mongo/mongodb";
-
+import { sendMail } from "../../../../../config/nodemailer";
 import User from "../../../../../models/userModel";
 
 export async function GET() {
@@ -34,6 +34,9 @@ export async function POST(req) {
   });
 
   if (!res) return NextResponse.json({ message: "there is a error" });
+
+  //! send email verification
+  await sendMail({ email, emailType: "VERIFY", userId: res._id });
 
   return NextResponse.json({ message: "success" }, { status: 201 });
 }

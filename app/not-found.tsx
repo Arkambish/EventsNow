@@ -3,7 +3,7 @@ import React from "react";
 
 function Notfound() {
   return (
-    <div className="lg:h-3/4 h-screen  bg-[#AC736D]  text-center">
+    <div className="lg:h-3/4 h-screen  bg-[#AC736D]  text-center p-6">
       <div className="font-bold text-[#455273]  pt-40 ">
         There was a problem
       </div>

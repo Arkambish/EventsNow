@@ -88,6 +88,22 @@ const userSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: RegisteredUser,
   },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+  },
+  verificationTokenExpires: {
+    type: Date,
+  },
+  forgotPasswordToken: {
+    type: String,
+  },
+  forgotPasswordTokenExpires: {
+    type: Date,
+  },
 });
 
 userSchema.pre("save", async function (next) {
