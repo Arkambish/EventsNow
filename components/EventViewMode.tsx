@@ -23,12 +23,35 @@ import {
   SelectValue,
 } from "@/components/Select";
 
+import { useSearchParams } from "next/navigation";
+import EmptyStateComponent from "./EmptyStateComponent";
+
 const EventViewMode = ({ event }: { event: EventType[] }) => {
   const [eventarr, setEventarr] = useState<EventType[]>(event);
   const [viewMode, setViewMode] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("");
   const [eventsPerPage, setEventsPerPage] = useState(2);
+
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
+  console.log(search);
+  const scrollPosition = useRef(0);
+
+  useEffect(() => {
+    const filterEvents = (searchQuery: string | null) => {
+      if (searchQuery) {
+        const filteredEvents = event.filter((e) =>
+          e.eventName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setEventarr(filteredEvents);
+      } else {
+        setEventarr(event); // Reset to all events if there's no search query
+      }
+    };
+
+    filterEvents(search);
+  }, [search, event]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,6 +69,8 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
   }, []);
 
   const handleSortByChange = (e: string) => {
+    scrollPosition.current = window.scrollY;
+
     const selectedSortBy = e;
     setSortBy(selectedSortBy);
     if (selectedSortBy === "name") {
@@ -64,9 +89,14 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
       );
       setEventarr(sortedEvents);
     }
+
+    window.scrollTo(0, scrollPosition.current);
   };
   const handleViewChange = (mode: React.SetStateAction<string>) => {
+    scrollPosition.current = window.scrollY;
+
     setViewMode(mode);
+    window.scrollTo(0, scrollPosition.current);
   };
   const paginate = (event: any, pageNumber: React.SetStateAction<number>) =>
     setCurrentPage(pageNumber);
@@ -154,29 +184,33 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
         }  `}
       >
         {/* <EventListView /> */}
-        {currentEvents.map((event, index) =>
-          viewMode === "grid" ? (
-            <EventCard
-              id={event._id}
-              key={index}
-              name={event.eventName}
-              img={event.dashboardImage}
-              location={event.selectedTab}
-              date={formatDate(event.eventStartDate)}
-              time={event.startTime}
-            />
-          ) : (
-            <EventListView
-              id={event._id}
-              key={index}
-              name={event.eventName}
-              img={event.dashboardImage}
-              location={event.selectedTab}
-              date={formatDate(event.eventStartDate)}
-              time={event.startTime}
-            />
+        {currentEvents.length > 0 ? (
+          currentEvents.map((event, index) =>
+            viewMode === "grid" ? (
+              <EventCard
+                id={event._id}
+                key={index}
+                name={event.eventName}
+                img={event.dashboardImage}
+                location={event.selectedTab}
+                date={formatDate(event.eventStartDate)}
+                time={event.startTime}
+              />
+            ) : (
+              <EventListView
+                id={event._id}
+                key={index}
+                name={event.eventName}
+                img={event.dashboardImage}
+                location={event.selectedTab}
+                date={formatDate(event.eventStartDate)}
+                time={event.startTime}
+              />
+            )
           )
-        )}{" "}
+        ) : (
+          <EmptyStateComponent message="no event found" />
+        )}
       </div>
 
       {/* Pagination */}
