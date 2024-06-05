@@ -20,6 +20,7 @@ export const getUser = async ({ email }: any) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email }),
+      
     }
   );
 
@@ -28,6 +29,7 @@ export const getUser = async ({ email }: any) => {
 };
 function Notification() {
   const [notification, setNotification] = useState<NotificationType[]>([]);
+
 
   useEffect(() => {
     async function session() {

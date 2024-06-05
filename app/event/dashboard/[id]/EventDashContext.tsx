@@ -225,26 +225,27 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setIsLoading(true);
 
-    
     const fetchTotalTicketSale = async () => {
       try {
         // const data = await FetchGet({
         //   endpoint: `ticket/countTickets/${id}`,
         // });
 
-        const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
-          
+        const data = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
         );
-    
-        const res = await data.json();
-      
 
-        if (res && res.data) {
-         return res.data;
+        const res = await data.json();
+
+        console.log(res);
+        console.log(res.data);
+        if (!res && !res.data) {
+          return;
         }
+        return res.data;
       } catch (error) {
         console.error("Error fetching total ticket sale:", error);
-        console.log(error)
+        console.log(error);
       }
     };
 
@@ -253,19 +254,16 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
         const data = await FetchGet({
           endpoint: `attendant/countAttendant/${id}`,
         });
-        if (data && data.data){
-          return data.data;
-         
+        if (!data && !data.data) {
+          return;
         }
-        
+        return data.data;
       } catch (error) {
         console.error("Error fetching total attendance:", error);
-        
       }
     };
 
     const getEvent = async () => {
-
       const res = await fetch(`/api/v1/event/getOneEvent`, {
         method: "POST",
         headers: {
@@ -324,10 +322,12 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     async function handleContext() {
       setIsLoading(true);
       const event = await getEvent();
-       const totalTicketSaleData = await fetchTotalTicketSale();
-       setTotalTicketSale(totalTicketSaleData);
-       const totalAttendanceData = await fetchTotalAttendance();
-        setTotalAttendance(totalAttendanceData);
+      const totalTicketSaleData = await fetchTotalTicketSale();
+      console.log(totalTicketSaleData);
+      setTotalTicketSale(totalTicketSaleData);
+      const totalAttendanceData = await fetchTotalAttendance();
+      console.log(totalAttendanceData);
+      setTotalAttendance(totalAttendanceData);
 
       const userPermissionData = await getUserDetails({
         organizationId: event.organizationId,
@@ -383,7 +383,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     handleContext();
 
     async function getTickets() {
-      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
+      const res = await fetch(`/api/v1/ticket/getTicket/${id}`);
       if (!res.ok) {
         return;
       }
@@ -392,7 +392,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     }
     getTickets();
     setIsLoading(false);
-  }, [params.id, router, setEventPublish, id]);
+  }, [id]);
 
   return (
     <EventContext.Provider

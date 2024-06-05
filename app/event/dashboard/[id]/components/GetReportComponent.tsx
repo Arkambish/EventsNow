@@ -239,7 +239,7 @@ export default function GetReportComponent({
                         </tr>
                       </thead>
                       <tbody>
-                        {allTicketTypes.map((ticket) => (
+                        {allTicketTypes?.map((ticket) => (
                           <tr key={ticket._id}>
                             <td className="px-6 py-4 whitespace-nowrap">
                               {ticket.classType}
