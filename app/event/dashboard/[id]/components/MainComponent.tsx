@@ -78,9 +78,8 @@ export default function MainComponent() {
     };
   }, [isDashboardOpen]);
 
-  console.log("isloading", isLoading);
-
-  if (isLoading) {
+  if (!eventname) {
+    console.log("loading");
     return <Spinner />;
   }
 
@@ -238,32 +237,34 @@ export default function MainComponent() {
                   </ResponsiveSideBarButton>
                 </div>
               </div>
-              {isLoading ? (
-                <Spinner />
-              ) : (
-                <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2 h-full overflow-hidden">
-                  <div
-                    className={` md:block hidden ${
-                      isSideBar
-                        ? "md:col-span-3 md:ml-2  col-span-4 lg:col-span-2 "
-                        : "md:col-span-1   "
+              {/* {isLoading ?  (
+                 <Spinner /> 
+              ) : ( */}
+              <div className="grid grid-cols-12 gap-5 md:gap-2 lg:gap-2 xl:gap-5 mt-5 px-2 h-full overflow-hidden">
+                <div
+                  className={` md:block hidden ${
+                    isSideBar
+                      ? "md:col-span-3 md:ml-2  col-span-4 lg:col-span-2 "
+                      : "md:col-span-1   "
+                  }`}
+                >
+                  {eventname && <SideBar />}
+                </div>
+                <div
+                  className={`lg:col-span-7 col-span-12  ${
+                    isSideBar ? "md:col-span-5 " : "md:col-span-7 "
+                  }`}
+                >
+                  {eventname && <MidContent />}
+                </div>
+                <div
+                  className={`   lg:col-span-3 md:block hidden
+                    ${
+                      isSideBar ? "md:col-span-4 md:mr-2 " : "md:col-span-3  "
                     }`}
-                  >
-                    <SideBar />
-                  </div>
-                  <div
-                    className={`lg:col-span-7 col-span-12  ${
-                      isSideBar ? "md:col-span-5 " : "md:col-span-7 "
-                    }`}
-                  >
-                    <MidContent />
-                  </div>
-                  <div
-                    className={`   lg:col-span-3 md:block hidden
-             ${isSideBar ? "md:col-span-4 md:mr-2 " : "md:col-span-3  "}`}
-                  >
-                    {eventname && eventLocation && eventStartTime && eventDate && eventEndDate && eventDashboardImage && endTime && eventPublish && (
-                      <Event
+                >
+                  {eventname && (
+                    <Event
                       EventName={eventname}
                       Location={eventLocation}
                       Time={eventStartTime}
@@ -274,11 +275,10 @@ export default function MainComponent() {
                       setIsPreview={setIsPreview}
                       isPublished={eventPublish}
                     />
-                    )}
-                    
-                  </div>
+                  )}
                 </div>
-              )}
+              </div>
+              {/* )} */}
             </>
           </div>
         )}

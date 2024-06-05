@@ -9,9 +9,10 @@ import { FetchGet } from "@/hooks/useFetch";
 import { is } from "date-fns/locale";
 
 export default function Overview() {
-  const { event, totalTicketSale,totalAttendance,isLoading } = UseEventContext() as EventContextType;
+  const { event, totalTicketSale, totalAttendance, isLoading } =
+    UseEventContext() as EventContextType;
   // const { id } = useParams();
-
+  console.log(totalTicketSale, totalAttendance);
   // useEffect(() => {
   //   const fetchTotalTicketSale = async () => {
   //     try {
@@ -20,7 +21,7 @@ export default function Overview() {
   //       // });
 
   //       const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
-          
+
   //       );
   //       console.log(data);
   //       const res = await data.json();
@@ -45,19 +46,17 @@ export default function Overview() {
   //       if (data && data.data){
   //         setTotalAttendance(data.data);
   //       }
-        
+
   //     } catch (error) {
   //       console.error("Error fetching total attendance:", error);
-        
+
   //     }
   //   };
 
   //   fetchTotalTicketSale();
   //   fetchTotalAttendance();
   // }, [id]);
-if(isLoading) return (
-  <div>loading</div>
-)
+  if (isLoading) return <div>loading</div>;
   return (
     <Container>
       <div className="h-full mt-5 mb-8 sm:mb-56">
@@ -74,7 +73,7 @@ if(isLoading) return (
             image="tickets.svg"
             text="Total ticket Sale"
             linkToDetails="totalTicket"
-            details={totalTicketSale }
+            details={totalTicketSale}
           />
           <OverviewSubComponent
             image="attendence.svg"
