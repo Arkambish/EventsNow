@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 .styleQ {
   clip-path: polygon(0 0, 100% 0%, 100% 88%, 0% 100%);
 }
