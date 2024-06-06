@@ -70,8 +70,8 @@ export default function PostTab() {
   }
 
   return (
-    <div className="overflow-y-auto h-[400px]  sm:mt-12 mt-1 xl:ml-10 md:ml-20 ">
-      <div className="xl:pr-72 md:pr-64 pr-8">
+    <div className="overflow-y-auto h-screen         sm:mt-12 mt-1 xl:ml-10 md:ml-20  w-full  grid   justify-center  ">
+      
         {loading ? (
           <div className="w-full flex justify-center items-center">
             <Spinner />
@@ -93,7 +93,7 @@ export default function PostTab() {
         ) : (
           <EmptyStateComponent message="No post publish yet" />
         )}
-      </div>
+      
     </div>
   );
 }

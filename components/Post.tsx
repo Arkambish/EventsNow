@@ -266,17 +266,7 @@ Post) {
           },
         ]);
 
-        setAllComment((prev) => [
-          ...prev,
-          {
-            _id: data.comment._id,
-            userImage: data.comment.userImage,
-            userName: data.comment.userName,
-            postId: data.comment.postId,
-            description: data.comment.description,
-            userId: data.comment.userId,
-          },
-        ]);
+      
       }
     }
   }
