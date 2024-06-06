@@ -9,6 +9,10 @@ import { FaTicketAlt } from "react-icons/fa";
 import { FaHeart, FaRegHeart, FaRegistered } from "react-icons/fa6";
 import ShowTicketsForUserModal from "../components/ShowTicketsForUserModal";
 import TicketModal from "../components/TicketModal";
+import {
+  EventContextType,
+  UseEventContext,
+} from "@/app/event/dashboard/[id]/EventDashContext";
 interface HostSideBar {
   EventName: String;
   Location: String;
@@ -42,6 +46,7 @@ const Buttons = ({
   Date,
   preview = false,
 }: HostSideBar) => {
+  const { allTickets } = UseEventContext() as EventContextType;
   const [isRemoveWishListModal, setIsRemoveWishListModal] =
     useState<boolean>(false);
   const [isAddWishListModal, setIsAddWishListModal] = useState<boolean>(false);
@@ -305,21 +310,22 @@ const Buttons = ({
             </div>
           </button>
         )}
-
-        <button
-          onClick={() => setIsActiveTicketModal(true)}
-          disabled={preview}
-          className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
-            preview ? "cursor-not-allowed" : ""
-          }`}
-        >
-          <div className="flex items-center space-x-2">
-            <FaTicketAlt size={23} />
-            <span className="font-medium xl:text-md text-left leading-tight">
-              Buy tickets
-            </span>
-          </div>
-        </button>
+        {allTickets && allTickets.length > 0 && (
+          <button
+            onClick={() => setIsActiveTicketModal(true)}
+            disabled={preview}
+            className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
+              preview ? "cursor-not-allowed" : ""
+            }`}
+          >
+            <div className="flex items-center space-x-2">
+              <FaTicketAlt size={23} />
+              <span className="font-medium xl:text-md text-left leading-tight">
+                Buy tickets
+              </span>
+            </div>
+          </button>
+        )}
       </div>
 
       {/* Registration Modal */}

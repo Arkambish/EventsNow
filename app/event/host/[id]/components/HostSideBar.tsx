@@ -27,6 +27,11 @@ import { Dialog } from "@headlessui/react";
 import { FetchPost } from "@/hooks/useFetch";
 import { comment } from "postcss";
 
+import {
+  UseEventContext,
+  EventContextType,
+} from "../../../dashboard/[id]/EventDashContext";
+
 interface HostSideBar {
   EventName: String;
   Location: String;
@@ -65,6 +70,7 @@ export default function HostSideBar({
   preview = false,
   handleComponentChange,
 }: HostSideBar) {
+  const { allTickets } = UseEventContext() as EventContextType;
   const [isRemoveWishListModal, setIsRemoveWishListModal] =
     useState<boolean>(false);
   const [isAddWishListModal, setIsAddWishListModal] = useState<boolean>(false);
@@ -472,23 +478,24 @@ export default function HostSideBar({
             </button>
           )}
         </div>
-
-        <button
-          onClick={() => setIsActiveTicketModal(true)}
-          disabled={preview ? true : false}
-          className={`  button w-40  h-12  bg-[#D47151] rounded-xl xl:px-4 px-2 ${
-            preview ? "cursor-not-allowed" : ""
-          } `}
-        >
-          <div className="flex p-1">
-            <div className="text-white">
-              <IoIosCard size={20} />
+        {allTickets && allTickets.length > 0 && (
+          <button
+            onClick={() => setIsActiveTicketModal(true)}
+            disabled={preview ? true : false}
+            className={`  button w-40  h-12  bg-[#D47151] rounded-xl xl:px-4 px-2 ${
+              preview ? "cursor-not-allowed" : ""
+            } `}
+          >
+            <div className="flex p-1">
+              <div className="text-white">
+                <IoIosCard size={20} />
+              </div>
+              <div className="font-medium xl:text-md text-sm text-white text-left leading-tight ml-4">
+                Buy tickets
+              </div>
             </div>
-            <div className="font-medium xl:text-md text-sm text-white text-left leading-tight ml-4">
-              Buy tickets
-            </div>
-          </div>
-        </button>
+          </button>
+        )}
         {isActiveTicketModal && (
           <ShowTicketsForUserModal
             totalPrice={totalTicketPrice}

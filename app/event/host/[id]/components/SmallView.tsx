@@ -15,6 +15,10 @@ import { IoIosTime } from "react-icons/io";
 import { FaTicketSimple } from "react-icons/fa6";
 
 import RegistrationForEventModalSmall from "./RegistrationForEventModalSmall";
+import {
+  EventContextType,
+  UseEventContext,
+} from "../../../dashboard/[id]/EventDashContext";
 
 interface SmallView {
   EventName: String;
@@ -50,6 +54,7 @@ export default function SmallView({
   preview = false,
   handleComponentChange,
 }: SmallView) {
+  const { allTickets } = UseEventContext() as EventContextType;
   const [activeButton, setActiveButton] = useState<number | null>(1);
 
   const [isRegModalShow, setIsRegModalShow] = useState<boolean>(false);
@@ -370,17 +375,18 @@ export default function SmallView({
             </button>
           )}
         </div>
-
-        <button className="h-10 w-36 bg-[#D47151] rounded-xl items-center  ">
-          <div className="flex p-2 pl-6 space-x-3">
-            <div className="text-white">
-              <FaTicketSimple size={20} />
+        {allTickets && allTickets.length > 0 && (
+          <button className="h-10 w-36 bg-[#D47151] rounded-xl items-center  ">
+            <div className="flex p-2 pl-6 space-x-3">
+              <div className="text-white">
+                <FaTicketSimple size={20} />
+              </div>
+              <div className="font-medium text-sm text-white text-left leading-tight ">
+                Buy tickets
+              </div>
             </div>
-            <div className="font-medium text-sm text-white text-left leading-tight ">
-              Buy tickets
-            </div>
-          </div>
-        </button>
+          </button>
+        )}
       </div>
 
       <div className="text-center text-[#455273] text-xl font-bold mt-10 ">
