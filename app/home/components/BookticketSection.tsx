@@ -1,4 +1,3 @@
-
 "use client";
 import Image from "next/image";
 import HomeButton from "./HomeButton";
@@ -99,7 +98,7 @@ export default function BookticketSection() {
     <div className="h-screen overflow-hidden grid lg:grid-cols-2 bg-[url('/images/home/Rectangle12.png')] bg-no-repeat bg-cover bg-center">
       <div className="hidden items-end justify-center lg:flex" ref={imageRef}>
         <Image
-          src="/images/home/image-area.png"
+          src="/images/home/Image-area.png"
           alt="Picture of the author"
           style={{ height: "80vh", width: "auto" }}
           width={2000}
@@ -125,7 +124,6 @@ export default function BookticketSection() {
           <div className="flex gap-3" ref={buttonsRef}>
             <Link href="/">
               <HomeButton text={"Book Tickets"} filled={true} />
-
             </Link>
             <Link href="/about">
               <HomeButton filled={false} text={"Learn More"} />

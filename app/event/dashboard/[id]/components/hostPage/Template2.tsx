@@ -10,10 +10,12 @@ import { RiTimeFill } from "react-icons/ri";
 import { useParams } from "next/navigation";
 import { error, success } from "@/util/Toastify";
 import { AuthContext, useAuth } from "@/app/AuthContext";
+import { UseEventContext, EventContextType } from "../../EventDashContext";
 type Props = {
   setIsTemplate2: React.Dispatch<React.SetStateAction<boolean>>;
 };
 function Template2({ setIsTemplate2 }: Props) {
+  const { allTickets } = UseEventContext() as EventContextType;
   // const [postBar, setPostBar] = useState(false);
   const { setEventPublish } = useAuth() as AuthContext;
 
@@ -165,19 +167,21 @@ function Template2({ setIsTemplate2 }: Props) {
                   </div>
                 </div>
               </a>
-              <a
-                href="#"
-                className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full mb-2 sm:mb-0 sm:mr-2"
-              >
-                <div className="flex space-x-2">
-                  <div className="text-white">
-                    <FaTicketAlt size={23} />
+              {allTickets && allTickets.length > 0 && (
+                <a
+                  href="#"
+                  className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full mb-2 sm:mb-0 sm:mr-2"
+                >
+                  <div className="flex space-x-2">
+                    <div className="text-white">
+                      <FaTicketAlt size={23} />
+                    </div>
+                    <div className="font-medium text-md text-white text-left leading-tight">
+                      Buy Tickets
+                    </div>
                   </div>
-                  <div className="font-medium text-md text-white text-left leading-tight ">
-                    Buy Tickets
-                  </div>
-                </div>
-              </a>
+                </a>
+              )}
             </div>
             <div
               // onClick={() => setPostBar(true)}
