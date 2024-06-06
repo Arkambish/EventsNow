@@ -98,10 +98,7 @@ export default memo(function AllPermission({
       { method: "PUT", body: JSON.stringify(formDataKeysArray) }
     );
 
-    console.log(res.ok);
-
     const dat = await res.json();
-    console.log(dat);
 
     if (!res.ok) {
       error("error for updating permission");

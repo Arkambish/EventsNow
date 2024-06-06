@@ -61,7 +61,6 @@ export default function WishListCArd({
         }
       );
 
-      console.log(removeFromWishList);
       if (!removeWishlist.ok) {
         error("Error removing from wishlist");
         return;

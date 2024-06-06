@@ -25,7 +25,6 @@ export default function Hostpage() {
   };
 
   const handleSubmit = async (e: any) => {
-    console.log(file);
     setUpload(true);
     e.preventDefault();
     if (!file) return;
@@ -39,18 +38,14 @@ export default function Hostpage() {
     const formData = new FormData();
     formData.append("file", file);
 
-    console.log(formData);
-
     try {
       const response = await fetch("/api/v1/aws/s3-upload/uploadPage", {
         method: "POST",
         body: formData,
       });
       const data = await response.json();
-      console.log(data);
 
       const objectUrl = data.objectUrl;
-      console.log(objectUrl);
 
       const updateEvent = await fetch("/api/v1/event/publishOwnHostPage", {
         method: "PUT",
@@ -62,14 +57,11 @@ export default function Hostpage() {
 
       const updateEventRes = await updateEvent.json();
 
-      console.log(updateEventRes);
-
       if (updateEventRes.message != "pageBuilder update faild") {
         success("Host page updated successfully");
       }
 
       success("File uploaded successfully");
-      console.log(data);
     } catch (error) {
       console.error(error);
     } finally {
@@ -105,219 +97,212 @@ export default function Hostpage() {
     document.body.removeChild(link);
   };
   return (
-   
-      <Container>
-        <div className="mt-5">
-          <div className="sm:pl-10 mb-5 grid gap-2 mt-3 ">
-            <div className="  text-stone-600 font-IBM font-medium text-3xl ">
-              Host page
-            </div>
-            <div className=" text-[#848484] ">
-              You can upload host page or design your own host page
-            </div>
+    <Container>
+      <div className="mt-5">
+        <div className="sm:pl-10 mb-5 grid gap-2 mt-3 ">
+          <div className="  text-stone-600 font-IBM font-medium text-3xl ">
+            Host page
           </div>
-          <div className="w-full font-Inter lg:text-base grid gap-8 py-16 font-semibold text-dashBtnBlue rounded-lg sm:px-24 px-4 md:px-8 text-xs xl:px-24 mb-20 ">
-            <ContainerWithStroke>
-              <button onClick={() => setUploadingPage(true)} className="w-full">
-                <div className=" py-2 flex justify-between mx-4 sm:mx-10">
-                  <div className=" flex items-center ">UPLOAD EVENT PAGE</div>
-                  <Image
-                    className="mt-1"
-                    src="/images/eventDash/Arrow_left.svg"
-                    alt="arrow"
-                    width={25}
-                    height={25}
-                  />
-                </div>
-              </button>
-            </ContainerWithStroke>
-            <ContainerWithStroke>
-              <button onClick={() => setShowTemplate(true)} className="w-full">
-                <div className=" py-2 flex justify-between  mx-4 sm:mx-10">
-                  <div className=" flex items-center">USING TEMPLATE</div>
-                  <Image
-                    className="mt-1"
-                    src="/images/eventDash/Arrow_left.svg"
-                    alt="arrow"
-                    width={25}
-                    height={25}
-                  />
-                </div>
-              </button>
-            </ContainerWithStroke>
-            <ContainerWithStroke>
-              <button
-                onClick={() => setOpenPageBuilder(true)}
-                className="w-full"
+          <div className=" text-[#848484] ">
+            You can upload host page or design your own host page
+          </div>
+        </div>
+        <div className="w-full font-Inter lg:text-base grid gap-8 py-16 font-semibold text-dashBtnBlue rounded-lg sm:px-24 px-4 md:px-8 text-xs xl:px-24 mb-20 ">
+          <ContainerWithStroke>
+            <button onClick={() => setUploadingPage(true)} className="w-full">
+              <div className=" py-2 flex justify-between mx-4 sm:mx-10">
+                <div className=" flex items-center ">UPLOAD EVENT PAGE</div>
+                <Image
+                  className="mt-1"
+                  src="/images/eventDash/Arrow_left.svg"
+                  alt="arrow"
+                  width={25}
+                  height={25}
+                />
+              </div>
+            </button>
+          </ContainerWithStroke>
+          <ContainerWithStroke>
+            <button onClick={() => setShowTemplate(true)} className="w-full">
+              <div className=" py-2 flex justify-between  mx-4 sm:mx-10">
+                <div className=" flex items-center">USING TEMPLATE</div>
+                <Image
+                  className="mt-1"
+                  src="/images/eventDash/Arrow_left.svg"
+                  alt="arrow"
+                  width={25}
+                  height={25}
+                />
+              </div>
+            </button>
+          </ContainerWithStroke>
+          <ContainerWithStroke>
+            <button onClick={() => setOpenPageBuilder(true)} className="w-full">
+              <div className=" py-3 flex justify-between mx-4  sm:mx-10">
+                <div className=" flex items-center "> PAGE BUILDER</div>
+                <Image
+                  className="mt-1"
+                  src="/images/eventDash/Arrow_left.svg"
+                  alt="arrow"
+                  width={25}
+                  height={25}
+                />
+              </div>
+            </button>
+          </ContainerWithStroke>
+          {showTemplate && (
+            <WidthChangeModal setIsOpen={setShowTemplate} isOpen={showTemplate}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
               >
-                <div className=" py-3 flex justify-between mx-4  sm:mx-10">
-                  <div className=" flex items-center "> PAGE BUILDER</div>
-                  <Image
-                    className="mt-1"
-                    src="/images/eventDash/Arrow_left.svg"
-                    alt="arrow"
-                    width={25}
-                    height={25}
-                  />
-                </div>
-              </button>
-            </ContainerWithStroke>
-            {showTemplate && (
-              <WidthChangeModal
-                setIsOpen={setShowTemplate}
-                isOpen={showTemplate}
-              >
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
-                >
-                  select template
-                </Dialog.Title>
-                <div className="flex gap-5 mb-10 p-5">
-                  <button onClick={handleTemplate1}>
-                    <div className="flex flex-col justify-center items-center gap-3">
-                      <Image
-                        src={"/images/createEvent/eventRegFormImg.png"}
-                        alt="template1"
-                        width={40}
-                        height={40}
-                      />
-                      template 1
-                    </div>
-                  </button>
-                  <button onClick={handleTemplate2}>
-                    <div className="flex flex-col justify-center items-center gap-3">
-                      <Image
-                        src={"/images/createEvent/eventRegFormImg.png"}
-                        alt="template1"
-                        width={40}
-                        height={40}
-                      />
-                      template 2
-                    </div>
-                  </button>
-                </div>
+                select template
+              </Dialog.Title>
+              <div className="flex gap-5 mb-10 p-5">
+                <button onClick={handleTemplate1}>
+                  <div className="flex flex-col justify-center items-center gap-3">
+                    <Image
+                      src={"/images/createEvent/eventRegFormImg.png"}
+                      alt="template1"
+                      width={40}
+                      height={40}
+                    />
+                    template 1
+                  </div>
+                </button>
+                <button onClick={handleTemplate2}>
+                  <div className="flex flex-col justify-center items-center gap-3">
+                    <Image
+                      src={"/images/createEvent/eventRegFormImg.png"}
+                      alt="template1"
+                      width={40}
+                      height={40}
+                    />
+                    template 2
+                  </div>
+                </button>
+              </div>
 
-                <div className="mt-4 flex gap-2">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={() => setShowTemplate(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </WidthChangeModal>
-            )}
-
-            {openPageBuilder && (
-              <Modal setIsOpen={setOpenPageBuilder} isOpen={openPageBuilder}>
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 flex justify-between items-center"
-                >
-                  Page builder
-                  
-                  <button
-                    type="button"
-                   className=" hover:opacity-70 ease-in-out"
-                    onClick={() => setOpenPageBuilder(false)}
-                  >
-                   <MdCancel size={23} />
-                  </button>
-                
-                </Dialog.Title>
-                <div className="mt-2 text-slate-600">
-                  Use our Page Builder to create and customize your host page
-                  just the way you like it. Easily drag and drop elements,
-                  adjust settings, and preview your design in real-time
-                </div>
-                <div className="flex gap-5 mb-10 p-5">
+              <div className="mt-4 flex gap-2">
                 <button
-                      onClick={() => setIsPageBuilder(true)}
-                      className="inline-flex justify-center rounded-md border border-transparent bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2"
-                    >
-                      {/* <Image
-                        src={"/images/createEvent/eventRegFormImg.png"}
-                        alt="template1"
-                        width={40}
-                        height={40}
-                      /> */}
-                      Start Page Builder
-                    </button>
-
-                  <button onClick={handleDownload}
-                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                    {/* <div className="flex flex-col justify-center items-center gap-3"> */}
-                      {/* <Image
-                        src={"/images/createEvent/eventRegFormImg.png"}
-                        alt="template1"
-                        width={40}
-                        height={40}
-                      /> */}
-                     Learn More
-                    {/* </div> */}
-                  </button>
-                 
-                    
-                
-                </div>
-
-                
-              </Modal>
-            )}
-
-            {uploadingPage && (
-              <Modal setIsOpen={setUploadingPage} isOpen={uploadingPage}>
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={() => setShowTemplate(false)}
                 >
-                  Upload Event hostpage
-                </Dialog.Title>
-                <div className="my-3 text-slate-400">
-                  Design your host page manually according to your preferences.
-                  Once your design is complete, you can upload it as an HTML
-                  file. Please note that only one HTML file can be uploaded
-                </div>
-                <div className="mb-10 p-5 bg-gray-100 shadow rounded-lg">
-  <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-    <input type="file" onChange={handleFileChange} className="block w-full text-sm text-gray-700
+                  Cancel
+                </button>
+              </div>
+            </WidthChangeModal>
+          )}
+
+          {openPageBuilder && (
+            <Modal setIsOpen={setOpenPageBuilder} isOpen={openPageBuilder}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900 flex justify-between items-center"
+              >
+                Page builder
+                <button
+                  type="button"
+                  className=" hover:opacity-70 ease-in-out"
+                  onClick={() => setOpenPageBuilder(false)}
+                >
+                  <MdCancel size={23} />
+                </button>
+              </Dialog.Title>
+              <div className="mt-2 text-slate-600">
+                Use our Page Builder to create and customize your host page just
+                the way you like it. Easily drag and drop elements, adjust
+                settings, and preview your design in real-time
+              </div>
+              <div className="flex gap-5 mb-10 p-5">
+                <button
+                  onClick={() => setIsPageBuilder(true)}
+                  className="inline-flex justify-center rounded-md border border-transparent bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2"
+                >
+                  {/* <Image
+                        src={"/images/createEvent/eventRegFormImg.png"}
+                        alt="template1"
+                        width={40}
+                        height={40}
+                      /> */}
+                  Start Page Builder
+                </button>
+
+                <button
+                  onClick={handleDownload}
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                >
+                  {/* <div className="flex flex-col justify-center items-center gap-3"> */}
+                  {/* <Image
+                        src={"/images/createEvent/eventRegFormImg.png"}
+                        alt="template1"
+                        width={40}
+                        height={40}
+                      /> */}
+                  Learn More
+                  {/* </div> */}
+                </button>
+              </div>
+            </Modal>
+          )}
+
+          {uploadingPage && (
+            <Modal setIsOpen={setUploadingPage} isOpen={uploadingPage}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Upload Event hostpage
+              </Dialog.Title>
+              <div className="my-3 text-slate-400">
+                Design your host page manually according to your preferences.
+                Once your design is complete, you can upload it as an HTML file.
+                Please note that only one HTML file can be uploaded
+              </div>
+              <div className="mb-10 p-5 bg-gray-100 shadow rounded-lg">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col space-y-4"
+                >
+                  <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="block w-full text-sm text-gray-700
       file:mr-4 file:py-2 file:px-4
       file:rounded file:border-0
       file:text-sm file:font-semibold
       file:bg-blue-50 file:text-blue-700
       hover:file:bg-blue-100
-    "/>
-  </form>
-</div>
+    "
+                  />
+                </form>
+              </div>
 
+              <div className="mt-4 flex gap-2">
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={() => setUploadingPage(false)}
+                >
+                  Cancel
+                </button>
 
-                <div className="mt-4 flex gap-2">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={() => setUploadingPage(false)}
-                  >
-                    Cancel
-                  </button>
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={handleSubmit}
+                >
+                  upload
+                </button>
+              </div>
+            </Modal>
+          )}
 
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={handleSubmit}
-                  >
-                    upload
-                  </button>
-                </div>
-              </Modal>
-            )}
-
-            {isTemplate1 && <Template1 setIsTemplate1={setIsTemplate1} />}
-            {isTemplate2 && <Template2 setIsTemplate2={setIsTemplate2} />}
-          </div>
+          {isTemplate1 && <Template1 setIsTemplate1={setIsTemplate1} />}
+          {isTemplate2 && <Template2 setIsTemplate2={setIsTemplate2} />}
         </div>
-      </Container>
-   
+      </div>
+    </Container>
   );
 }

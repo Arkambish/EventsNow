@@ -21,14 +21,14 @@ export const FetchPost = async ({ endpoint, body = {} }: PostFetchProps) => {
         body: JSON.stringify(body),
       }
     );
-    console.log(response.ok);
+
     if (!response.ok) {
       error("Something went wrong while fetching data from post request");
       return;
     }
 
     const data = await response.json();
-    console.log(data);
+
     return data;
   } catch (e) {
     console.log(e);
@@ -39,7 +39,6 @@ export const FetchPost = async ({ endpoint, body = {} }: PostFetchProps) => {
 
 export const FetchPut = async ({ endpoint, body = {} }: PostFetchProps) => {
   try {
-    
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`,
       {
@@ -56,7 +55,7 @@ export const FetchPut = async ({ endpoint, body = {} }: PostFetchProps) => {
     }
 
     const data = await response.json();
-    
+
     return data;
   } catch (e) {
     console.log(e);
@@ -69,7 +68,7 @@ export const FetchGet = async ({ endpoint }: GetFetchProps) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/${endpoint}`
     );
-    console.log(endpoint)
+    console.log(endpoint);
     if (!response.ok) {
       error("Something went wrong while fetching data");
     }

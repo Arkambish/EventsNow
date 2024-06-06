@@ -56,7 +56,6 @@ export default function GetReportComponent({
       }
       const data = await res.json();
       setAllTicketTypes(data);
-      console.log("ticket data", data);
     }
     getTicketData();
   }, [params.id]);

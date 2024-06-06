@@ -40,13 +40,14 @@ export default function CheckActive() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="   w-full sm:px-5 px-3 xl:px-0  "
-        >
+        <div className="   w-full sm:px-5 px-3 xl:px-0  ">
           {isActive ? (
-            <div className="flex justify-center w-full   "
-            style={{
-              height: "88vh",
-            }}>
+            <div
+              className="flex justify-center w-full   "
+              style={{
+                height: "88vh",
+              }}
+            >
               <div className="grid grid-cols-12 md:gap-2 lg:gap-2 xl:gap-5   w-full md:w-auto ">
                 <div
                   className={`xl:col-span-2   md:block hidden w-full  ${
@@ -67,7 +68,7 @@ export default function CheckActive() {
                 </div>
                 <div
                   className={`xl:col-span-3 md:block hidden
-             ${isSlideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
+                  ${isSlideBar ? "md:col-span-3 md:mr-2 " : "md:col-span-3  "}`}
                 >
                   <Profile />
                 </div>

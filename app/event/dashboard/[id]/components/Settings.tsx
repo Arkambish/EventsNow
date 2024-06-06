@@ -68,18 +68,6 @@ export default function Settings() {
   }, [id]);
 
   const handleUpdate = async () => {
-    console.log(
-      //     eventname,
-      //       eventType,
-      //        eventDate,
-      // eventStartTime,
-      //   endTime,
-      //        eventLocation,
-      //       eventDashboardImage,
-      //     eventCoverImage,
-      //      eventEndDate,
-      id
-    );
     // const data ={
     //   eventName: eventname,
     //       selectedTab: eventType,
@@ -155,8 +143,7 @@ export default function Settings() {
             </div>
           </div>
           <ContainerWithStroke>
-          <div className="text-[#666] grid gap-6 h-96 overflow-auto ">
-            
+            <div className="text-[#666] grid gap-6 h-96 overflow-auto ">
               <div className="lg:px-8 grid gap-2 pt-3 pb-8 max-md:px-3 md:px-8 ">
                 <div className="w-full text-left text-lg ">Event Name</div>
                 <div className="w-full flex justify-start ">
@@ -465,8 +452,8 @@ export default function Settings() {
                   </div>
                 </div>
               </div>
-            
-          </div></ContainerWithStroke>
+            </div>
+          </ContainerWithStroke>
         </div>
 
         <div className="flex justify-start">

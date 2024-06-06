@@ -40,7 +40,7 @@ export default function OverviewComponent() {
 
       return () => clearTimeout(delay);
     }
-  }, [inView]);
+  }, [inView, customerCount]);
 
   return (
     <div ref={ref} className="h-screen grid content-center p-10">

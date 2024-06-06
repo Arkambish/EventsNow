@@ -27,21 +27,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "No users registered for the event" });
   }
   const user = await Event.findOne({ _id: eventId }).populate("registerUser");
-  console.log(user);
 
   if (!user) {
-    console.log("No users registered for the event");
     return NextResponse.json({ message: "No users registered for the event" });
   }
 
   const usersArray = user.registerUser;
   const usersEmail = user.registerUser.map((u: RegisterUser) => u.email);
 
-  console.log("usersEmail" + usersEmail);
-
   if (!usersEmail) {
-    console.log("No users registered for the event");
-
     return NextResponse.json({ message: "No users registered for the event" });
   }
 
@@ -53,7 +47,7 @@ export async function POST(req: Request) {
 
   try {
     const res = await transporter.sendMail({
-      from: "ruchithsamarawickrama.sg@gmail.com",
+      from: "eventsnow.project.ruchith@gmail.com",
       to: usersEmail,
       subject: subject,
       // html: htmlBody,
@@ -61,12 +55,9 @@ export async function POST(req: Request) {
     });
 
     if (res.accepted.length > 0) {
-      console.log("Email sent successfully");
       return NextResponse.json({ message: "Email sent successfully" });
     }
   } catch (error) {
-    console.log(error);
-
     return NextResponse.json(error);
   }
 

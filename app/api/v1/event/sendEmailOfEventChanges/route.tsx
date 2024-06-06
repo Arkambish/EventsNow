@@ -1,4 +1,3 @@
-
 import { NextResponse } from "next/server";
 import Handlebars from "handlebars";
 import { promises as fs } from "fs";
@@ -12,30 +11,24 @@ import { uploadToCloudinary } from "@/util/helper";
 import { v2 as cloudinary } from "cloudinary";
 
 export async function POST(req: Request) {
-    console.log("Request received");
-    
-    // user id , event data 
+  // user id , event data
   const data = await req.json();
-  console.log(data);
-  console.log(data.userEmail);
 
+  //   const user = await User.findOne({ _id: data.userId });
 
+  //   if (user === null) {
+  //     return NextResponse.json("No User  exists");
+  //     console.log("No User  exists");
+  //   }
 
-//   const user = await User.findOne({ _id: data.userId });
-
-//   if (user === null) {
-//     return NextResponse.json("No User  exists");
-//     console.log("No User  exists"); 
-//   }
-
-//   const template = Handlebars.compile(QrEmailTemplate);
-//   const htmlBody = template({
-//     qr: data.qr,
-//   });
+  //   const template = Handlebars.compile(QrEmailTemplate);
+  //   const htmlBody = template({
+  //     qr: data.qr,
+  //   });
 
   try {
     const res = await transporter.sendMail({
-      from: "ruchithsamarawickrama.sg@gmail.com",
+      from: "eventsnow.project.ruchith@gmail.com",
       to: data.userEmail,
       subject: "event details updated",
       text: `here are the new event details `,

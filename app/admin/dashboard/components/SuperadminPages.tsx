@@ -34,7 +34,7 @@ export default function SuperadminPages({
   description,
   customComponent,
 }: superadminpages) {
-  const showSearchBar = title !== "All organization requests";
+  const showSearchBar = title != "All Organization requests";
 
   // const { organization } = useAdmin() as AdminContext;
   // console.log(serachData.data);

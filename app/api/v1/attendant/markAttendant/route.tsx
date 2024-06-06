@@ -7,7 +7,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { ticketType, eventId, userId } = await req.json();
-  console.log(ticketType, eventId, userId);
 
   try {
     connectMongoDB();

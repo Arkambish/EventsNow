@@ -37,7 +37,7 @@ function Notification() {
 
       if (session) {
         const name = session?.user?.name ? session?.user?.name : "";
-        console.log(name);
+
         if (name !== "") {
           const data = await getUser({ email: session?.user?.email });
 

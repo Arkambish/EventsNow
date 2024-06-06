@@ -136,30 +136,23 @@ const PaymentModal = (props: PaymentModalProps) => {
           const exTicketCodes = await FetchGet({
             endpoint: "buyTicket/getAllTicketCodes",
           });
-          console.log(exTicketCodes);
 
           props.ticketArrTemp.map(async (ticket: TicketArray) => {
             // get all excist ticket Codes
 
-            console.log(exTicketCodes);
             //generate code
             let ticketCode = "";
             while (true) {
               const randomCode = Math.floor(
                 10000000 + Math.random() * 90000000
               ).toString();
-              console.log(randomCode);
               if (!exTicketCodes.data.includes(randomCode)) {
                 // setTicketCode(randomCode);
                 ticketCode = randomCode;
-                console.log("ashan");
-                console.log(randomCode);
-                console.log(ticketCode);
 
                 break;
               }
             }
-            console.log(ticketCode);
 
             //store ticket buy data
             try {
@@ -180,7 +173,6 @@ const PaymentModal = (props: PaymentModalProps) => {
                   ticketCode: ticketCode,
                 },
               });
-              console.log(qrdata);
 
               if (qrdata !== "Email sent successfully") {
                 error("server error");
@@ -196,7 +188,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                   ticketCode: ticketCode,
                 },
               });
-              console.log(buyTicketData);
+
               if (buyTicketData == "user buy ticket Failed,try again") {
                 error("user buy ticket Failed,try again");
                 return;
@@ -229,7 +221,6 @@ const PaymentModal = (props: PaymentModalProps) => {
             amount: props.totalPrice,
           },
         });
-        console.log(updateData);
 
         success("Payment completed");
         props.setIsActiveProceedTicketModal(false);

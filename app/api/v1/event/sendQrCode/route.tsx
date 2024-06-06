@@ -12,13 +12,10 @@ import { v2 as cloudinary } from "cloudinary";
 
 export async function POST(req: Request) {
   const data = await req.json();
-console.log(data);
+
   const image = await uploadToCloudinary(data.qr);
-  console.log(image);
 
   const user = await User.findOne({ _id: data.userid });
-  console.log(user);
-
 
   if (user === null) {
     return NextResponse.json("No User  exists");
@@ -31,7 +28,7 @@ console.log(data);
 
   try {
     const res = await transporter.sendMail({
-      from: "ruchithsamarawickrama.sg@gmail.com",
+      from: "eventsnow.project.ruchith@gmail.com",
       to: user.email,
       subject: "Payment Successfull",
       text: `Payment Successfull. Here is your qr code`,

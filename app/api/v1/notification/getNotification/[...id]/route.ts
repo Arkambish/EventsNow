@@ -31,7 +31,7 @@ export async function PUT(req: Request, { params }: any) {
   try {
     await connectMongoDB();
     const recieverId = params.id[0];
-    console.log(params.id[0]);
+
     const updateRead = await Notification.findByIdAndUpdate(recieverId, {
       isClicked: false,
     });

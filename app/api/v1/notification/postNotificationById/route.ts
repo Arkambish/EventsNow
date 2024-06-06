@@ -14,10 +14,8 @@ export async function POST(req: Request) {
       // Find the user in the database based on the user ID
       const receiverr = await User.findById(userId);
       if (!receiverr) {
-        console.log(`User with ID ${userId} not found`);
         continue; // Move on to the next user ID
       }
-      console.log(userId);
 
       // Create a new notification for the user
       const createNotification = await Notification.create({
@@ -32,8 +30,6 @@ export async function POST(req: Request) {
           { status: 500 }
         );
       }
-
-      console.log(createNotification);
     }
 
     return NextResponse.json(

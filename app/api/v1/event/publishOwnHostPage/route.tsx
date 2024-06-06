@@ -6,8 +6,6 @@ import Event from "@/models/eventModel";
 export async function PUT(request: NextRequest) {
   try {
     const { id, uploadPage } = await request.json();
-    console.log("uploadPage is" + uploadPage);
-    console.log("id is" + id);
 
     await connectMongoDB();
 
@@ -18,8 +16,6 @@ export async function PUT(request: NextRequest) {
       },
       { new: true }
     );
-
-    console.log(data);
 
     if (!data) {
       return NextResponse.json({ message: "pageBuilder update faild" });

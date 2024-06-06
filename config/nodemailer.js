@@ -6,14 +6,14 @@ import User from "@/models/userModel";
 export const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "ruchithsamarawickrama.sg@gmail.com",
-    pass: "umvm idkp zzam hxsy",
+    user: "eventsnow.project.ruchith@gmail.com",
+    pass: "zrba iwuu xfel fyky",
   },
 });
 
 export const mailOptions = {
-  from: "ruchithsamarawickrama.sg@gmail.com",
-  to: "ruchithsamarawickrama.sg@gmail.com",
+  from: "eventsnow.project.ruchith@gmail.com",
+  to: "eventsnow.project.ruchith@gmail.com",
 };
 
 export const sendMail = async ({ email, emailType, userId }) => {

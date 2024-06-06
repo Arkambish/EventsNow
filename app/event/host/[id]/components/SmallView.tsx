@@ -231,7 +231,6 @@ export default function SmallView({
       }
     );
 
-    console.log(res);
     if (!res.ok) {
       error("Error removing from wishlist");
       return;

@@ -43,7 +43,7 @@ export default memo(function GenaralUpdate({
           message: message,
         },
       });
-      console.log(res);
+
       // if (!res.ok) {
       //   error("Error sending email");
       //   setIsSubmitting(false);

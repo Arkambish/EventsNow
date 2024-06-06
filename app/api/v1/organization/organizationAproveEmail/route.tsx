@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
   try {
     const res = await transporter.sendMail({
-      from: "ruchithsamarawickrama.sg@gmail.com",
+      from: "eventsnow.project.ruchith@gmail.com",
       to: email,
       subject: "Invitation to join the organization",
       text: `You have been invited to join the organization`,
