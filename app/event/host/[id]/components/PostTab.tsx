@@ -42,7 +42,6 @@ export default function PostTab() {
     const postFunction = async () => {
       const res = await fetch(`/api/v1/post/getAllPostEvent/${id}`);
       const data = await res.json();
-      console.log(data);
 
       setData(data);
 

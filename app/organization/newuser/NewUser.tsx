@@ -45,8 +45,6 @@ export default function NewUser() {
           userIds: userId,
         };
 
-        console.log([userId]);
-
         const notifyUser = await FetchPost({
           endpoint: `notification/postNotificationById`,
           body: data,

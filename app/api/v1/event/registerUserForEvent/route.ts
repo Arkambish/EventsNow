@@ -8,7 +8,6 @@ import { UserType } from "@/app/Type";
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
-    console.log(data);
 
     await connectMongoDB();
 
@@ -22,7 +21,6 @@ export async function POST(request: NextRequest) {
       eventId: data.eventId,
     });
     if (checkRegisterUser) {
-      console.log("User Already Registered");
       return NextResponse.json({ message: "User Already Registered" });
     }
 
@@ -35,7 +33,6 @@ export async function POST(request: NextRequest) {
     });
 
     if (!registerUser) {
-      console.log("Registration Failed");
       return NextResponse.json(
         { message: "Registration Failed" },
         { status: 400 }

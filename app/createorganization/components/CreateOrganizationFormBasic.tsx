@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-phone-number-input/style.css";
 import { SafeParseReturnType, ZodObject, number, z } from "zod";
 import Image from "next/image";
@@ -66,13 +66,25 @@ export default function CreateOrganizationFormBasic() {
 
   const [profileImage, setProfileImage] = useState<string>("");
 
+  useEffect(() => {
+    async function fetchData() {
+      const session: null | Session = await getSession();
+      if (!session) {
+        return null;
+      }
+      const email: string | null | undefined = session.user?.email;
+      setEmail(email as string);
+    }
+    fetchData();
+  }, []);
+
   const getUserId = async () => {
     const session: null | Session = await getSession();
     if (!session) {
       return null;
     }
     const email: string | null | undefined = session.user?.email;
-
+    setEmail(email as string);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getUserId`,
@@ -304,7 +316,7 @@ export default function CreateOrganizationFormBasic() {
           id="companyName"
           value={companyName}
           onChange={(e) => setCompanyName(e.target.value)}
-          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-custom-orange sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
+          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-slate-400 sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
           placeholder="Company Name (Optional) "
         ></input>
         <input
@@ -314,7 +326,7 @@ export default function CreateOrganizationFormBasic() {
           id="organizationName"
           value={organizationName}
           onChange={(e) => setOrganizationName(e.target.value)}
-          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-custom-orange sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
+          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-slate-400 sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
           placeholder="Organization Name "
         ></input>
         <input
@@ -324,7 +336,7 @@ export default function CreateOrganizationFormBasic() {
           id="address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-custom-orange sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
+          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-slate-400 sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
           placeholder="Address  "
         ></input>
         <input
@@ -334,7 +346,7 @@ export default function CreateOrganizationFormBasic() {
           id="phoneNumber"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
-          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-custom-orange sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
+          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-slate-400 sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
           placeholder="Phone number "
         ></input>
 
@@ -345,7 +357,7 @@ export default function CreateOrganizationFormBasic() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-custom-orange sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
+          className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-slate-400 sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
           placeholder="Enter email address "
         ></input>
       </form>

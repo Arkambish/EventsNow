@@ -129,7 +129,7 @@ export default function Org_RequestHandle({
         error("Failed to save");
         return;
       }
-      success("Messsage sent successfully");
+      // success("Messsage sent successfully");
     } catch (error) {
       console.error("Error saving settings:", error);
     }

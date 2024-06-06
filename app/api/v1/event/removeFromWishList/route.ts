@@ -21,7 +21,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
         wishListId: newWishListArray,
       },
     });
-    console.log(updatedUser);
 
     if (!updatedUser) {
       return NextResponse.json({ message: "failed to add event to wishList " });

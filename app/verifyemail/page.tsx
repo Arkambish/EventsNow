@@ -2,13 +2,13 @@
 import { error, success } from "@/util/Toastify";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function VerifyEmailPage() {
   const [token, setToken] = useState("");
   const [verified, setVerified] = useState(false);
 
-  const verifyEmail = async () => {
+  const verifyEmail = useCallback(async () => {
     try {
       const response = await fetch("/api/v1/user/verifyemail", {
         method: "POST",
@@ -27,7 +27,7 @@ export default function VerifyEmailPage() {
     } catch (err: any) {
       error(err.message);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     const urlToken = new URLSearchParams(window.location.search).get("token");
@@ -38,7 +38,7 @@ export default function VerifyEmailPage() {
     if (token.length > 0) {
       verifyEmail();
     }
-  }, [token]);
+  }, [token, verifyEmail]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 lg:h-3/4 h-screen  bg-[#AC736D]">

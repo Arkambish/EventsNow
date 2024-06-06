@@ -35,7 +35,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
 
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
-  console.log(search);
+
   const scrollPosition = useRef(0);
 
   useEffect(() => {

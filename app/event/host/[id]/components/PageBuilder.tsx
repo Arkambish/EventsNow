@@ -32,7 +32,6 @@ const PageBuilder = ({
 
   const handleComponentChange = (component: string) => {
     setActiveComponent(component);
-    console.log(component);
   };
 
   const [activeButton, setActiveButton] = useState<number | null>(1);
@@ -102,7 +101,6 @@ const PageBuilder = ({
   }
 
   async function userRegistrationForEventHandler() {
-    console.log("userRegistrationForEventHandler");
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/registerUserForEvent`,
       {
@@ -134,8 +132,6 @@ const PageBuilder = ({
       return;
     }
     if (!res.ok) {
-      console.log("res");
-
       error("Error registration for event");
       return;
     }

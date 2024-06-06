@@ -18,8 +18,6 @@ async function getData({ id }: any) {
 export default async function Home({ params }: any) {
   const data = await getData(params);
 
-  console.log(data.hostPageType);
-
   if (data.hostPageType === "template") {
     return (
       <div>

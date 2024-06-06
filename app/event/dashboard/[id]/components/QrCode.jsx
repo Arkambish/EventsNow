@@ -34,8 +34,6 @@ const QrReader = () => {
             .replace(/^"|"$/g, ""); // Remove backslashes and surrounding quotation marks
           const dataObject = JSON.parse(cleanedDataString);
 
-          console.log(dataObject);
-
           setScannedText(result.data);
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
@@ -60,14 +58,11 @@ const QrReader = () => {
   }, [isVideoOn]);
 
   async function handleMarkAttendance() {
-    console.log(scannedEvent, scannedUser);
     if (!scannedEvent.length > 0 || !scannedUser.length > 0) {
-      console.log("non");
       return;
     }
 
     if (id !== scannedEvent) error("wrong qr code");
-    console.log(scannedEvent, ticketType, scannedUser);
 
     const data = await FetchPost({
       endpoint: "attendant/markAttendant",

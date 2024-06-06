@@ -10,10 +10,9 @@ export default function Code() {
 
   const params = useParams();
 
-
   const handleMarkAttendence = async () => {
     // Add code to mark attendence
-   
+
     if (ticketCode.length == 8) {
       try {
         const res = await fetch("/api/v1/attendant/markAttendenceUsingCode", {
@@ -33,7 +32,7 @@ export default function Code() {
         //     body:{ticketCode},
         // })
         const ticketData = await res.json();
-       
+
         if (!ticketData) {
           error("Invalid Ticket Code");
           return;
@@ -53,8 +52,6 @@ export default function Code() {
           setTicketCode("");
           return success("Attendance marked successfully");
         }
-
-        console.log(ticketData);
 
         // console.log(ticketData.ticketId.classType);
 
@@ -84,7 +81,7 @@ export default function Code() {
     }
   };
   return (
-    <div >
+    <div>
       <Container>
         <div className="mt-6 text-[#455273]  mr-8">Enter your Ticket code</div>
 

@@ -15,7 +15,6 @@ export type People = {
 
 export default function InviteButton() {
   const { organization, isSlideBar, peopleEmail } = useOrg() as OrgContext;
-  console.log(peopleEmail, "peopleEmail");
 
   const [email, setEmail] = useState<People>({ id: 0, name: "" });
 

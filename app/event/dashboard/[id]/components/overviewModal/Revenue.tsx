@@ -27,7 +27,6 @@ export default memo(function RevenueDetails() {
       }
       const data = await res.json();
       setAllTicketTypes(data);
-      console.log("ticket data", data);
     }
     getTicketData();
   }, [params.id]);

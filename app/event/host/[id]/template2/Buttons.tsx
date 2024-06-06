@@ -82,7 +82,6 @@ const Buttons = ({
   const params = useParams<{ id: string }>();
 
   async function userRegistrationForEventHandler() {
-    console.log("userRegistrationForEventHandler");
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/registerUserForEvent`,
       {
@@ -114,8 +113,6 @@ const Buttons = ({
       return;
     }
     if (!res.ok) {
-      console.log("res");
-
       error("Error registration for event");
       return;
     }

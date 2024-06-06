@@ -6,7 +6,7 @@ import Event from "@/models/eventModel";
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
     const data = await request.json();
-    console.log(data.id)
+
     await connectMongoDB();
 
     const updatedEvent = await Event.findByIdAndUpdate(data.id, {
@@ -22,13 +22,6 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         eventEndDate: data.eventEndDate,
       },
     });
- 
-
-   
-     
-     
-      
-    
 
     return NextResponse.json(
       { message: "Event details updated successfully" },

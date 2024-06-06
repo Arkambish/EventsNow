@@ -30,25 +30,23 @@ function NotificationButton({
   const [active, setIsActive] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   async function handleClick() {
-    console.log(_id);
     const update = await FetchPut({
       endpoint: `notification/getNotification/${_id}`,
       body: {},
     });
     if (update === "User updated successfully") {
       setNotification((data: NotificationType[]) => {
-        console.log(data);
         const newArray = data.map((document: NotificationType) => {
           if (document._id == _id) {
             document.isClicked = false;
           }
           return document;
         });
-        console.log(newArray);
+
         return newArray;
       });
     }
-    console.log("Hi");
+
     setClick(false);
   }
   // const timeAgo = () => {

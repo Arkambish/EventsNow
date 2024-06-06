@@ -202,6 +202,8 @@ export default function NavBar() {
     [emailAuth, pathname, organizationId, setOrganization]
   );
 
+  // console.log();
+
   return (
     <div
       className={
@@ -229,7 +231,13 @@ export default function NavBar() {
                   <div className=" flex flex-wrap items-center justify-between mx-auto p-2 bg-slate-100 opacity-85">
                     {/*  */}
                     {pathname.startsWith("/event/dashboard") ? (
-                      <Link href={`/organization/dashboard/${organizationId}`}>
+                      <Link
+                        href={`/organization/dashboard/${
+                          organizationId
+                            ? organizationId
+                            : localStorage.getItem("organizationId")
+                        }`}
+                      >
                         <button
                           className={`bg-custom-orange button  h-8 rounded-2xl`}
                         >

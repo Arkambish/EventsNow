@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+// import grapesjs from "grapesjs";
 import grapesjs from "grapesjs";
+
 import plugin from "grapesjs-blocks-basic";
 import form from "grapesjs-plugin-forms";
 import gradient from "grapesjs-style-gradient";
@@ -19,14 +21,16 @@ import { success } from "@/util/Toastify";
 import { saveAs } from "file-saver";
 import { useParams } from "next/navigation";
 import { FetchPut } from "@/hooks/useFetch";
+import Image from "next/image";
 
 export default function Build() {
   const { id } = useParams();
-  console.log(id);
+
   const [editor, setEditor] = useState(null);
   const [html, setHtml] = useState(null);
 
-  // console.log("mko balnneh");
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     const editor = grapesjs.init({
       container: "#editor",
@@ -92,6 +96,7 @@ export default function Build() {
   }, []);
 
   const handleSave = async () => {
+    setIsLoaded(true);
     editor.runCommand("export-html");
     if (html) {
       const completeHtml = `
@@ -108,16 +113,12 @@ export default function Build() {
       const blob = new Blob([completeHtml], {
         type: "text/html;charset=utf-8",
       });
-      console.log(blob);
 
       const file = new File([blob], `${id}.html`, { type: "text/html" });
-      console.log(file);
 
       if (!file) return;
       const formData = new FormData();
       formData.append("file", file);
-
-      console.log(formData);
 
       try {
         const response = await fetch("/api/v1/aws/s3-upload/pagebuilder", {
@@ -126,13 +127,9 @@ export default function Build() {
         });
         const data = await response.json();
 
-        console.log(data);
         if (!data) return;
 
         const objectUrl = data.objectUrl;
-        console.log(objectUrl);
-
-        console.log(id);
 
         const updateEvent = await fetch("/api/v1/event/publishPageBuilder", {
           method: "PUT",
@@ -153,14 +150,14 @@ export default function Build() {
         //   body: { id, pageBuilder: objectUrl },
         // });
 
-        console.log(updateEvent);
         // if (updateEvent.message != "pageBuilder update faild") {
 
         // }
-        console.log(data);
       } catch (error) {
+        console.error(error.message);
         console.error(error);
       } finally {
+        setIsLoaded(false);
       }
     }
   };
@@ -194,7 +191,19 @@ export default function Build() {
           onClick={handleSave}
           className="bg-slate-500 mx-10 hover:bg-slate-700 text-white font-bold p-1 rounded"
         >
-          Export HTML
+          {isLoaded ? (
+            <div className="flex gap-2 justify-center items-center">
+              <div> Loading</div>
+              <Image
+                src="/images/createEvent/LoadingBtnIcon.svg"
+                alt="loading btn"
+                width={40}
+                height={40}
+              />
+            </div>
+          ) : (
+            <div> Export HTML </div>
+          )}
         </button>
       </div>
       <div id="editor">hii</div>

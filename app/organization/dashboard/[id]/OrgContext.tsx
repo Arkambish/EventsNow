@@ -140,6 +140,7 @@ function OrgContextProvider({ children }: ChildrenType) {
 
           setTeam(team);
           setOrganizationId(params.id);
+          localStorage.setItem("organizationId", id);
           // get events in organization
 
           const organizationEvent: EventType[] = await FetchGet({
@@ -169,7 +170,7 @@ function OrgContextProvider({ children }: ChildrenType) {
 
       getData();
     },
-    [params.id, router, setOrganizationId]
+    [params.id, router, setOrganizationId, id]
   );
 
   const handleDashboard: voidFunc = () => {

@@ -116,7 +116,6 @@ export default function HostSideBar({
   }, [params.id]);
 
   async function userRegistrationForEventHandler() {
-    console.log("userRegistrationForEventHandler");
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/registerUserForEvent`,
       {
@@ -148,8 +147,6 @@ export default function HostSideBar({
       return;
     }
     if (!res.ok) {
-      console.log("res");
-
       error("Error registration for event");
       return;
     }

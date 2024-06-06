@@ -47,8 +47,6 @@ const QrReader = () => {
             .replace(/^"|"$/g, ""); // Remove backslashes and surrounding quotation marks
           const dataObject = JSON.parse(cleanedDataString);
 
-          console.log(dataObject);
-
           setScannedText(result.data);
           setScannedEvent(dataObject.eventId);
           setScannedUser(dataObject.useId);
@@ -74,12 +72,10 @@ const QrReader = () => {
 
   async function handleMarkAttendance() {
     if (!scannedEvent.length > 0 || !scannedUser.length > 0 || !quantity > 0) {
-      console.log("non");
       return;
     }
 
     if (id !== scannedEvent) error("wrong qr code");
-    console.log(scannedEvent, quantity, scannedUser);
 
     const data = await FetchPost({
       endpoint: "attendant/markAttendant",
@@ -102,55 +98,53 @@ const QrReader = () => {
   }
 
   return (
-
-      <Container>
-        <div className="grid lg:pl-10 mb-5 gap-2 mt-8 md:mr-10 pb-8">
-          <div className="x  ">
-            <div className="  text-stone-600 font-medium text-3xl m-4 ">
-              Mark Attendence
-            </div>
-
-            <div className="flex items-end  ">
-              <div className="flex w-100 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
-                <button
-                  className={`md:text-sm button font-medium ml-2 w-40 h-6 xl:h-8 rounded-3xl  ${
-                    activeButton === 1
-                      ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
-                      : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
-                  }`}
-                  onClick={() => {
-                    if (activeComponent !== "QrCode") {
-                      handleComponentChange("QrCode");
-                      handleClick(1);
-                    }
-                  }}
-                >
-                  Qr Reader
-                </button>
-                <button
-                  className={` md:text-sm button cursor-pointer font-medium mr-2 w-40 h-6 xl:h-8 rounded-3xl  ${
-                    activeButton === 2
-                      ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
-                      : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
-                  }`}
-                  onClick={() => {
-                    if (activeComponent !== "Code") {
-                      handleComponentChange("Code");
-                      handleClick(2);
-                    }
-                  }}
-                >
-                  Code Reader
-                </button>
-              </div>
-            </div>
+    <Container>
+      <div className="grid lg:pl-10 mb-5 gap-2 mt-8 md:mr-10 pb-8">
+        <div className="x  ">
+          <div className="  text-stone-600 font-medium text-3xl m-4 ">
+            Mark Attendence
           </div>
 
-          {activeComponent === "QrCode" && <QrCode />}
-          {activeComponent === "Code" && <Code />}
+          <div className="flex items-end  ">
+            <div className="flex w-100 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
+              <button
+                className={`md:text-sm button font-medium ml-2 w-40 h-6 xl:h-8 rounded-3xl  ${
+                  activeButton === 1
+                    ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+                    : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+                }`}
+                onClick={() => {
+                  if (activeComponent !== "QrCode") {
+                    handleComponentChange("QrCode");
+                    handleClick(1);
+                  }
+                }}
+              >
+                Qr Reader
+              </button>
+              <button
+                className={` md:text-sm button cursor-pointer font-medium mr-2 w-40 h-6 xl:h-8 rounded-3xl  ${
+                  activeButton === 2
+                    ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+                    : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+                }`}
+                onClick={() => {
+                  if (activeComponent !== "Code") {
+                    handleComponentChange("Code");
+                    handleClick(2);
+                  }
+                }}
+              >
+                Code Reader
+              </button>
+            </div>
+          </div>
         </div>
-      </Container>
 
+        {activeComponent === "QrCode" && <QrCode />}
+        {activeComponent === "Code" && <Code />}
+      </div>
+    </Container>
   );
 };
 

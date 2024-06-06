@@ -121,15 +121,6 @@ export function getTimeAgo(date: Date): string {
   const monthsAgo: number = Math.floor(daysAgo / 30);
   const yearsAgo: number = Math.floor(daysAgo / 365);
 
-  console.log(`Milliseconds ago: ${millisecondsAgo}`);
-  console.log(`Seconds ago: ${secondsAgo}`);
-  console.log(`Minutes ago: ${minutesAgo}`);
-  console.log(`Hours ago: ${hoursAgo}`);
-  console.log(`Days ago: ${daysAgo}`);
-  console.log(`Weeks ago: ${weeksAgo}`);
-  console.log(`Months ago: ${monthsAgo}`);
-  console.log(`Years ago: ${yearsAgo}`);
-
   if (secondsAgo < 60) {
     return `${secondsAgo} second${secondsAgo > 1 ? "s" : ""} ago`;
   } else if (minutesAgo < 60) {

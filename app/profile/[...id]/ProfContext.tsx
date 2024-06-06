@@ -106,7 +106,7 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
           return;
         }
         const finalrespone = await res.json();
-        console.log(finalrespone.eventName);
+
         setEventDetails(finalrespone);
       }
       async function getRegisterdUser() {

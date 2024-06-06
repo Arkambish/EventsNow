@@ -237,8 +237,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
         const res = await data.json();
 
-        console.log(res);
-        console.log(res.data);
         if (!res && !res.data) {
           return;
         }
@@ -270,7 +268,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: params.id,
+          id: id,
         }),
       });
       if (!res.ok) {
@@ -282,7 +280,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     };
 
     const eventPost = async () => {
-      const res = await fetch(`/api/v1/post/getAllPostEvent/${params.id}`);
+      const res = await fetch(`/api/v1/post/getAllPostEvent/${id}`);
       if (!res.ok) {
         return;
       }
@@ -298,7 +296,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: params.id,
+          id,
         }),
       });
       if (!res.ok) {
@@ -323,10 +321,10 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(true);
       const event = await getEvent();
       const totalTicketSaleData = await fetchTotalTicketSale();
-      console.log(totalTicketSaleData);
+
       setTotalTicketSale(totalTicketSaleData);
       const totalAttendanceData = await fetchTotalAttendance();
-      console.log(totalAttendanceData);
+
       setTotalAttendance(totalAttendanceData);
 
       const userPermissionData = await getUserDetails({
@@ -335,7 +333,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
       setGlobalPermission(userPermissionData.globalPermission);
       const getEventPermission = userPermissionData.eventPermission.filter(
-        (item: EventPermissionType) => item.eventId === params.id
+        (item: EventPermissionType) => item.eventId === id
       );
 
       setEventPermission(
@@ -392,7 +390,7 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     }
     getTickets();
     setIsLoading(false);
-  }, [id]);
+  }, [id, router, setEventPublish]);
 
   return (
     <EventContext.Provider

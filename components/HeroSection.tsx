@@ -71,9 +71,7 @@ export default function HeroSection() {
     animateHero();
   }, []);
 
-  const info = () => {
-    console.log("clicked info");
-  };
+  const info = () => {};
   return (
     <div>
       <div className="grid lg:grid-cols-2 ">

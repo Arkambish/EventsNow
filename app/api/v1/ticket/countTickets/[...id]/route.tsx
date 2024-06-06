@@ -6,7 +6,6 @@ export const GET = async (
   req: Request,
   { params }: { params: { id: string } }
 ) => {
-  console.log("ashan")
   connectMongoDB();
   console.log("connected");
   try {
@@ -14,8 +13,6 @@ export const GET = async (
     const buyTicket = await BuyTicket.find({ eventId: id });
     return NextResponse.json({ success: true, data: buyTicket.length });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ success: false, error: error });
-    
   }
 };
