@@ -44,7 +44,7 @@ const PaymentModal = (props: PaymentModalProps) => {
   const name = props.item;
   const amount = props.amount;
   const merchantId = "1226229";
-  const merchantSecret = "OTA4MzgwNDQ5MzAzODA0NTg5MjYzODIxNjAwODIxOTUwNDczMjk=";
+  const merchantSecret = "MzU5NjU2Nzc1NDE4NTEwMDg0MjM1NTU2Mzk5NTYzNzI3ODQ0MTM3";
 
   // localhost merchantSecret=    "MjY0MDQ5OTc3NTIyNDg2NDk2OTUyMzU2MDY1OTcxMzYyMTEyODYxMA==";
 
@@ -161,6 +161,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                 eventId: params.id,
                 class: ticket.typeId,
                 classType: ticket.type,
+                ticketCode: ticketCode,
               };
 
               const qrImg = await generateQRCodeImage(JSON.stringify(value));

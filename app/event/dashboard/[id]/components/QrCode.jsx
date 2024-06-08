@@ -16,6 +16,7 @@ const QrReader = () => {
   const [ticketType, setTicketType] = useState();
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
+  const [ticketCode, setTicketCode] = useState();
 
   const { id } = UseEventContext();
 
@@ -39,6 +40,7 @@ const QrReader = () => {
           setScannedUser(dataObject.useId);
 
           setTicketType(dataObject.classType);
+          setTicketCode(dataObject.ticketCode);
 
           setIsActiveMark(true);
         },
@@ -70,10 +72,12 @@ const QrReader = () => {
         eventId: scannedEvent,
         userId: scannedUser,
         ticketType: ticketType,
+        ticketCode: ticketCode,
+        
       },
     });
 
-    if (data.message === "User Already Attending") {
+    if (data?.message === "User Already Attending") {
       error("User Already Attending");
       return;
     }
