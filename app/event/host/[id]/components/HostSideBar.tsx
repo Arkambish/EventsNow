@@ -71,6 +71,7 @@ export default function HostSideBar({
   handleComponentChange,
 }: HostSideBar) {
   const { allTickets } = UseEventContext() as EventContextType;
+
   const [isRemoveWishListModal, setIsRemoveWishListModal] =
     useState<boolean>(false);
   const [isAddWishListModal, setIsAddWishListModal] = useState<boolean>(false);
@@ -116,6 +117,7 @@ export default function HostSideBar({
         return;
       }
       const data = await res.json();
+      console.log(data);
       setAllTicketTypes(data);
     }
     getTicketTypes();
@@ -478,24 +480,24 @@ export default function HostSideBar({
             </button>
           )}
         </div>
-        {allTickets && allTickets.length > 0 && (
-          <button
-            onClick={() => setIsActiveTicketModal(true)}
-            disabled={preview ? true : false}
-            className={`  button w-40  h-12  bg-[#D47151] rounded-xl xl:px-4 px-2 ${
-              preview ? "cursor-not-allowed" : ""
-            } `}
-          >
-            <div className="flex p-1">
-              <div className="text-white">
-                <IoIosCard size={20} />
-              </div>
-              <div className="font-medium xl:text-md text-sm text-white text-left leading-tight ml-4">
-                Buy tickets
-              </div>
+        {/* {allTickets && allTickets.length > 0 && ( */}
+        <button
+          onClick={() => setIsActiveTicketModal(true)}
+          disabled={preview ? true : false}
+          className={`  button w-40  h-12  bg-[#D47151] rounded-xl xl:px-4 px-2 ${
+            preview ? "cursor-not-allowed" : ""
+          } `}
+        >
+          <div className="flex p-1">
+            <div className="text-white">
+              <IoIosCard size={20} />
             </div>
-          </button>
-        )}
+            <div className="font-medium xl:text-md text-sm text-white text-left leading-tight ml-4">
+              Buy tickets
+            </div>
+          </div>
+        </button>
+        {/* )} */}
         {isActiveTicketModal && (
           <ShowTicketsForUserModal
             totalPrice={totalTicketPrice}
