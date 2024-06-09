@@ -102,8 +102,8 @@ const QrReader = () => {
               onChange={handleChange}
               checked={isVideoOn}
               offColor="#E9E9E9"
-              onColor="#D47151"
-              offHandleColor="#D47151"
+              onColor="#394855"
+              offHandleColor="#394855"
               onHandleColor="#E9E9E9"
               height={20}
               width={40}

@@ -27,6 +27,11 @@ import { Dialog } from "@headlessui/react";
 import { FetchPost } from "@/hooks/useFetch";
 import { comment } from "postcss";
 
+import {
+  UseEventContext,
+  EventContextType,
+} from "../../../dashboard/[id]/EventDashContext";
+
 interface HostSideBar {
   EventName: String;
   Location: String;
@@ -65,6 +70,8 @@ export default function HostSideBar({
   preview = false,
   handleComponentChange,
 }: HostSideBar) {
+  const { allTickets } = UseEventContext() as EventContextType;
+
   const [isRemoveWishListModal, setIsRemoveWishListModal] =
     useState<boolean>(false);
   const [isAddWishListModal, setIsAddWishListModal] = useState<boolean>(false);
@@ -110,6 +117,7 @@ export default function HostSideBar({
         return;
       }
       const data = await res.json();
+      console.log(data);
       setAllTicketTypes(data);
     }
     getTicketTypes();
@@ -472,7 +480,7 @@ export default function HostSideBar({
             </button>
           )}
         </div>
-
+        {/* {allTickets && allTickets.length > 0 && ( */}
         <button
           onClick={() => setIsActiveTicketModal(true)}
           disabled={preview ? true : false}
@@ -489,6 +497,7 @@ export default function HostSideBar({
             </div>
           </div>
         </button>
+        {/* )} */}
         {isActiveTicketModal && (
           <ShowTicketsForUserModal
             totalPrice={totalTicketPrice}

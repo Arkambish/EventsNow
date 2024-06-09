@@ -109,12 +109,12 @@ const QrReader = () => {
           </div>
 
           <div className="flex items-end  ">
-            <div className="flex w-100 xl:h-10 md:h-10 rounded-3xl bg-[#F9EBE9] items-center ">
+            <div className="flex w-100 xl:h-10 md:h-10 rounded-3xl bg-[#CCCCCC] items-center ">
               <button
                 className={`md:text-sm button font-medium ml-2 w-40 h-6 xl:h-8 rounded-3xl  ${
                   activeButton === 1
-                    ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
-                    : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+                    ? "bg-dashBtnBlue text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+                    : "hover:bg-gray-200 text-dashBtnBlue bg-[#CCCCCC]"
                 }`}
                 onClick={() => {
                   if (activeComponent !== "QrCode") {
@@ -128,8 +128,8 @@ const QrReader = () => {
               <button
                 className={` md:text-sm button cursor-pointer font-medium mr-2 w-40 h-6 xl:h-8 rounded-3xl  ${
                   activeButton === 2
-                    ? "bg-[#D47151] text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
-                    : "hover:bg-gray-200 text-[#D47151] bg-[#F9EBE9]"
+                    ? "bg-dashBtnBlue text-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+                    : "hover:bg-gray-200 text-dashBtnBlue bg-[#CCCCCC]"
                 }`}
                 onClick={() => {
                   if (activeComponent !== "Code") {

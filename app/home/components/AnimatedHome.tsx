@@ -53,6 +53,16 @@ const AnimatedHome: React.FC = () => {
 
   const CurrentComponent = components[currentIndex];
 
+  useEffect(() => {
+    document.documentElement.classList.add("docBody");
+    document.body.classList.add("docBody");
+
+    return () => {
+      document.documentElement.classList.remove("docBody");
+      document.body.classList.remove("docBody");
+    };
+  }, []);
+
   return (
     <div className="bg-gradient-home" ref={containerRef}>
       <CurrentComponent />

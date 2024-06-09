@@ -28,7 +28,7 @@ export default function Dashboard_Btn({
         {children}
         {isSlideBar ? (
           <div
-            className={` font-sans hover:text-custom-orange text-center text-base font-semibold text-black  leading-normal ${
+            className={` font-sans hover:text-custom-orange text-center text-base font-semibold leading-normal ${
               isActive && "text-custom-orange"
             }`}
           >
