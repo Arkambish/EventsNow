@@ -8,16 +8,23 @@ import Ticket from "@/models/ticketType";
 export async function POST(req: NextRequest) {
   const { ticketType, eventId, userId, ticketCode} = await req.json();
 
-  console.log("ashan", ticketType, eventId, userId, ticketCode)
+
 
   try {
     connectMongoDB();
 
-    const attendanceMarked = await Attendant.findOne({ ticketCode });
-    if (attendanceMarked.isMarkAttendance) {
+    const boughtTicket = await BuyTicket.findOne({ ticketCode: ticketCode});
+    console.log("ashan", boughtTicket)
+    if (!boughtTicket) {
       return NextResponse.json(
-        { message: "Ticket Type Already Marked" },
-        { status: 400 }
+        { message: "invalid ticket code" },
+        { status: 200 }
+      );
+    }
+    if (boughtTicket.isAttendentMarked) {
+      return NextResponse.json(
+        { message: "This ticket is  Already Marked" },
+        { status: 200 }
       );
     }
 
@@ -30,24 +37,23 @@ export async function POST(req: NextRequest) {
     if (!attendant) {
       return NextResponse.json(
         { message: "attendant Creation Failed" },
-        { status: 400 }
+        { status: 200 }
       );
     }
     const updatedAttendant = await BuyTicket.findOneAndUpdate(
-      { ticketCode },
-      { isMarkAttendance: true }
+      { ticketCode: ticketCode},
+      { isAttendentMarked: true }
     );
     if(!updatedAttendant) {
       return NextResponse.json(
-        { message: "attendant create failed" },
-        { status: 400 }
+        { message: "attendant Creation Failed" },
+        { status: 200 }
       );
     }
 
     return NextResponse.json(attendant, { status: 201 });
   } catch (e) {
     return NextResponse.json(
-      { message: "ticket Creation Failed" },
       { status: 400 }
     );
   }

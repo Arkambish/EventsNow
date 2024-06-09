@@ -6,6 +6,7 @@ import QrScanner from "qr-scanner";
 import { error, success } from "@/util/Toastify";
 import { FetchPost } from "@/hooks/useFetch";
 import { UseEventContext } from "../EventDashContext";
+import Image from "next/image";
 
 const QrReader = () => {
   const videoElementRef = useRef(null);
@@ -17,6 +18,7 @@ const QrReader = () => {
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
   const [ticketCode, setTicketCode] = useState();
+  const [markAttendenceLoading, setMarkAttendenceLoading] = useState(false);
 
   const { id } = UseEventContext();
 
@@ -41,8 +43,8 @@ const QrReader = () => {
 
           setTicketType(dataObject.classType);
           setTicketCode(dataObject.ticketCode);
-
-          setIsActiveMark(true);
+        
+          
         },
         {
           returnDetailedScanResult: true,
@@ -60,6 +62,13 @@ const QrReader = () => {
   }, [isVideoOn]);
 
   async function handleMarkAttendance() {
+
+    if (!scannedEvent || !scannedUser || !ticketType || !ticketCode) {
+      error("Enter the QR code");
+      return;
+    }
+
+    setMarkAttendenceLoading(true);
     if (!scannedEvent.length > 0 || !scannedUser.length > 0) {
       return;
     }
@@ -77,8 +86,10 @@ const QrReader = () => {
       },
     });
 
-    if (data?.message === "User Already Attending") {
-      error("User Already Attending");
+    setMarkAttendenceLoading(false);
+    
+    if (data?.message === "User Already Attending" || data?.message === "invalid ticket code" || data?.message === "This ticket is  Already Marked" || data?.message === "attendant Creation Failed") {
+      error(data.message);
       return;
     }
 
@@ -86,6 +97,7 @@ const QrReader = () => {
     setScannedEvent("");
     setScannedUser("");
     setTicketType();
+    setTicketCode();
   }
 
   return (
@@ -124,18 +136,35 @@ const QrReader = () => {
                 User id:<span className="text-slate-400"> {scannedUser}</span>
               </p>
               <p className="scannedText font-bold text-lg">
-                Ticket Type:{" "}
+                Ticket Type:
                 <span className="text-slate-400"> {ticketType}</span>
               </p>
+              <p className="scannedText font-bold text-lg">
+                Ticket Code:
+                <span className="text-slate-400"> {ticketCode}</span>
+              </p>
             </div>
-            <button
+
+            {markAttendenceLoading ? (
+              <button 
+                className={`button px-4 py-1.5 rounded-lg  text-white bg-slate-400`}>
+                <div className="flex gap-2 justify-center items-center">
+                  <div>Loading</div>
+                  <Image 
+                    src="/images/createEvent/LoadingBtnIcon.svg"
+                    alt="loading"
+                    width={20} 
+                    height={20} 
+                  />
+                </div>
+              </button>
+            ) : (
+              <button
               onClick={handleMarkAttendance}
-              className={`button p-2 rounded-full  text-white font-bold ${
-                isActiveMark ? "bg-custom-orange" : "bg-slate-400"
-              }`}
-            >
-              Mark the attendance
+              className={`button px-4 py-1.5 rounded-lg  text-white bg-slate-400`}>
+              Check In
             </button>
+            )}    
           </div>
         </div>
       </Container>
