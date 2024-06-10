@@ -10,6 +10,7 @@ const QRScanner = () => {
   const [scannedUser, setScannedUser] = useState("");
   const [quantity, setQuantity] = useState();
   const [isVideoOn, setIsVideoOn] = useState(false);
+  
 
   const handleToggleVideo = () => {
     setIsVideoOn(!isVideoOn);

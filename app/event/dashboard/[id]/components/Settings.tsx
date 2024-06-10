@@ -92,6 +92,7 @@ export default function Settings() {
           eventLocation: eventLocation,
           eventDashboardImage: eventDashboardImage,
           eventCoverImage: eventCoverImage,
+          eventDate: eventDate,
           eventEndDate: eventEndDate,
         },
       });
@@ -116,8 +117,11 @@ export default function Settings() {
               eventName: eventname,
               selectedTab: eventType,
               startTime: eventStartTime,
+              endTime: endTime,
               eventLocation: eventLocation,
               eventCoverImage: eventCoverImage,
+              eventDate: eventDate,
+              eventEndDate: eventEndDate,
             }),
           }
         );

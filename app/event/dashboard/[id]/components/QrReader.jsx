@@ -15,6 +15,7 @@ const QrReader = () => {
   const [scannedEvent, setScannedEvent] = useState("");
   const [scannedUser, setScannedUser] = useState("");
   const [quantity, setQuantity] = useState();
+  const [ticketCode, setTicketCode] = useState();
   const [ticketType, setTicketType] = useState();
   const [isVideoOn, setIsVideoOn] = useState(false);
   const [isActiveMark, setIsActiveMark] = useState(false);
@@ -52,6 +53,7 @@ const QrReader = () => {
           setScannedUser(dataObject.useId);
 
           setTicketType(dataObject.classType);
+          setTicketCode(dataObject.ticketCode);
 
           setIsActiveMark(true);
         },
@@ -83,6 +85,7 @@ const QrReader = () => {
         eventId: scannedEvent,
         userId: scannedUser,
         ticketType: quantity,
+        ticketCode: ticketCode,
       },
     });
 

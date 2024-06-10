@@ -776,7 +776,16 @@ export async function POST(req: Request) {
                                             Event venue/platform : ${data.eventLocation}
                                           </p>
                                           <p style="margin: 0">
-                                            Event time : ${data.startTime}
+                                            Event start time : ${data.startTime}
+                                          </p>
+                                          <p style="margin: 0">
+                                            Event End time : ${data.endTime}
+                                          </p>
+                                          <p style="margin: 0">
+                                            Event Date : ${data.eventDate}
+                                          </p>
+                                          <p style="margin: 0">
+                                            Event End Date : ${data.eventEndDate}
                                           </p>
                                         </div>
                                       </td>
