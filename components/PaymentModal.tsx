@@ -166,6 +166,7 @@ const PaymentModal = (props: PaymentModalProps) => {
                 eventId: params.id,
                 class: ticket.typeId,
                 classType: ticket.type,
+                ticketCode: ticketCode,
               };
 
               const qrImg = await generateQRCodeImage(JSON.stringify(value));

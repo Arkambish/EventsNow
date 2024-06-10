@@ -3,15 +3,24 @@ import Container from "./Container";
 import { error, success } from "@/util/Toastify";
 import { FetchPost } from "@/hooks/useFetch";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
 export default function Code() {
   const [ticketCode, setTicketCode] = React.useState("");
+  const [isMarking, setIsMarking] = React.useState(false);
   // const { id } = useParams();
 
   const params = useParams();
 
   const handleMarkAttendence = async () => {
     // Add code to mark attendence
+
+    if (!ticketCode) {
+      error("Enter the code");
+      return;
+    }
+
+    setIsMarking(true);
 
     if (ticketCode.length == 8) {
       try {
@@ -24,6 +33,7 @@ export default function Code() {
         });
         if (!res.ok) {
           error("Invalid Ticket Code");
+          setIsMarking(false);
           return;
         }
 
@@ -35,8 +45,11 @@ export default function Code() {
 
         if (!ticketData) {
           error("Invalid Ticket Code");
+          setIsMarking(false);
           return;
         }
+
+        setIsMarking(false);
 
         if (ticketData.message == "Invalid Ticket Code") {
           return error("Invalid Ticket Code");
@@ -52,27 +65,6 @@ export default function Code() {
           setTicketCode("");
           return success("Attendance marked successfully");
         }
-
-        // console.log(ticketData.ticketId.classType);
-
-        // const res1 = await fetch("/api/v1/attendant/markAttendant", {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     ticketType: ticketData.ticketId.classType,
-        //     eventId: ticketData.eventId,
-        //     userId: ticketData.userId,
-        //   }),
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-
-        // if (!res1.ok) {
-        //   error("Attendance marking Failed");
-        //   return;
-        // } else {
-        //   success("Attendance marked successfully");
-        // }
       } catch (e) {
         console.log(e);
       }
@@ -91,12 +83,30 @@ export default function Code() {
             className=" px-3 py-[6px] border rounded-md focus:outline-none"
             onChange={(e) => setTicketCode(e.target.value)}
           />
-          <button
-            className="bg-slate-400 text-white px-4 py-1.5  rounded-lg ml-2"
+          {isMarking ? (
+            <button
+              className={`bg-slate-400 button text-white px-4 py-1.5  rounded-lg ml-2`}>
+                  <div className="flex gap-2 justify-center items-center">
+                    <div>Loading</div>
+                    <Image
+                      src="/images/createEvent/LoadingBtnIcon.svg"
+                      alt="loading"
+                      width={20}
+                      height={20}
+                    />  
+                  </div>
+              </button>
+          ) : (
+            <button
+            className="bg-slate-400 button text-white px-4 py-1.5  rounded-lg ml-2"
             onClick={handleMarkAttendence}
           >
             Mark
           </button>
+          )
+              
+          }
+          
         </div>
       </Container>
     </div>
