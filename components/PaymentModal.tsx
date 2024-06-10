@@ -43,12 +43,19 @@ const PaymentModal = (props: PaymentModalProps) => {
   const orderId = props.orderId;
   const name = props.item;
   const amount = props.amount;
-  const merchantId = "1227067";
+
+  // localhost
+  // const merchantId = "1227067";
+
+  // production
+
+  const merchantId = "1226229";
+
   // const merchantSecret = "OTA4MzgwNDQ5MzAzODA0NTg5MjYzODIxNjAwODIxOTUwNDczMjk=";
   // MzU5NjU2Nzc1NDE4NTEwMDg0MjM1NTU2Mzk5NTYzNzI3ODQ0MTM3
 
   // for production
-  const merchantSecret = "NDI1MjQyMDcxMTE1MTY0MjYzNzcyNzUwMDUxNjUzNDU1NTYzMjgw";
+  const merchantSecret = "OTA4MzgwNDQ5MzAzODA0NTg5MjYzODIxNjAwODIxOTUwNDczMjk=";
 
   // for localhost
   // const merchantSecret = "NDI1MjQyMDcxMTE1MTY0MjYzNzcyNzUwMDUxNjUzNDU1NTYzMjgw";
