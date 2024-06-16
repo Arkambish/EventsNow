@@ -31,7 +31,7 @@ type OrganizationValidationTypes = ZodObject<{
   fullName: z.ZodString;
   numberType: z.ZodString;
   number: z.ZodString;
-  companyName: z.ZodString;
+  // companyName: z.ZodString;
   organizationName: z.ZodString;
   address: z.ZodString;
   phoneNumber: z.ZodString;
@@ -42,7 +42,6 @@ type OrganizationDataType = {
   fullName: string;
   numberType: string;
   number: string;
-  companyName: string;
   organizationName: string;
   address: string;
   phoneNumber: string;
@@ -54,7 +53,6 @@ export default function CreateOrganizationFormBasic() {
   const [fullName, setFullName] = useState<string>("");
   const [number, setNumber] = useState<string>("");
   const [numberType, setNumberType] = useState<string>("");
-  const [companyName, setCompanyName] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -118,7 +116,6 @@ export default function CreateOrganizationFormBasic() {
     number: z
       .string()
       .min(1, { message: "Enter your indentification card number  " }),
-    companyName: z.string(),
     organizationName: z
       .string()
       .min(1, { message: "Enter your organization name" }),
@@ -140,7 +137,6 @@ export default function CreateOrganizationFormBasic() {
         fullName,
         numberType,
         number,
-        companyName,
         organizationName,
         address,
         phoneNumber,
@@ -203,7 +199,6 @@ export default function CreateOrganizationFormBasic() {
         setFullName("");
         setNumberType("");
         setNumber("");
-        setCompanyName("");
         setAddress("");
         setPhoneNumber("");
         setEmail("");
@@ -223,8 +218,6 @@ export default function CreateOrganizationFormBasic() {
           error(String(formattedError.numberType?._errors));
         } else if (formattedError.number) {
           error(String(formattedError.number?._errors));
-        } else if (formattedError.companyName) {
-          error(String(formattedError.companyName?._errors));
         } else if (formattedError.organizationName) {
           error(String(formattedError.organizationName?._errors));
         } else if (formattedError.address) {
@@ -310,7 +303,7 @@ export default function CreateOrganizationFormBasic() {
             }
           ></input>
         </div>
-        <input
+        {/* <input
           type="text"
           name="companyName"
           id="companyName"
@@ -318,7 +311,7 @@ export default function CreateOrganizationFormBasic() {
           onChange={(e) => setCompanyName(e.target.value)}
           className=" my-5 w-full h-8 block flex-1  bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-slate-400 sm:text-sm sm:leading-6 border-2 rounded-[12px] pl-4"
           placeholder="Company Name (Optional) "
-        ></input>
+        ></input> */}
         <input
           required
           type="text"

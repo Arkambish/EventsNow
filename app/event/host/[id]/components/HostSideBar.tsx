@@ -231,6 +231,7 @@ export default function HostSideBar({
           }
         );
         const data = await res.json();
+        
 
         const wishlistStatus = data?.includes(id || "");
         setIsAddWishList(wishlistStatus);
@@ -242,6 +243,8 @@ export default function HostSideBar({
   // add to wishlist
 
   async function addTowishlistHandler() {
+    console.log(userId);
+    console.log(id);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/addToWishList`,
       {
@@ -256,6 +259,7 @@ export default function HostSideBar({
       error("Error adding to wishlist");
       return;
     }
+   
 
     success("Event added to the wishlist ");
     setIsAddWishList(true);

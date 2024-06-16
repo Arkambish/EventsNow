@@ -15,10 +15,6 @@ const organizationSchema = new mongoose.Schema({
     type: String,
     required: [true, "please enter id number"],
   },
-  companyName: {
-    type: String,
-    required: [true, "please enter company name"],
-  },
   organizationName: {
     type: String,
     required: [true, "please enter organization name"],

@@ -39,21 +39,26 @@ export default memo(function CreatePost({
     }
   }
   const handlePostButton = async () => {
+    if(!profileImage){
+      return error("Please add an image to your post");
+    }
     setIsSubmitting(true);
 
     const data = {
-      userName: user.user.name,
+      userName: user.user.firstName,
       userImage: user.user.image,
       eventId: params.id,
       description: title,
       image: profileImage,
     };
+    
 
     try {
       const dataNew = await FetchPost({
         endpoint: "post/createPost",
         body: data,
       });
+      if(!dataNew) return error("There was an error creating the post");
 
       success("Post created successfully");
       setIsSubmitting(false);

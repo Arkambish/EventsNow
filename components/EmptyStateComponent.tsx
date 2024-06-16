@@ -3,7 +3,7 @@ import React from "react";
 export default function EmptyStateComponent({ message }: { message: string }) {
   return (
     <div className="grid h-full w-full p-10 ">
-      <div className="  grid justify-items-center     bg-[#ffffff] rounded-xl place-self-center p-4">
+      <div className="  grid justify-items-center   bg-[#ffffff] rounded-xl place-self-center p-4">
         <svg
           className=""
           xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ export default function EmptyStateComponent({ message }: { message: string }) {
             fill="#2B2A7F"
           />
         </svg>
-        <div className="text-[#252526] text-center   sm:w-60 ">{message}</div>
+        <div className="text-[#252526] text-center font-mono  sm:w-60 ">{message}</div>
       </div>
     </div>
   );
