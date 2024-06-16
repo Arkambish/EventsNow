@@ -10,7 +10,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const getUserById = await User.findOne({ _id: data });
     if (!getUserById) {
-      return NextResponse.json({ message: "User not found" });
+      return NextResponse.json({ message: "User not found" }, { status: 400 });
     }
     return NextResponse.json(getUserById.wishListId, { status: 200 });
   } catch (e) {

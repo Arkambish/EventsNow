@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+  
 
     connectMongoDB();
     await Post.create({
