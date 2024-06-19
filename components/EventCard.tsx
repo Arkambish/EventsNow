@@ -12,7 +12,7 @@ interface EventCard {
 
 function EventCard({ name, img, location, date, time, id }: EventCard) {
   return (
-    <div className="text-neutral-50  bg-myBrown rounded-[9px] w-64 shrink-0 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]  m-10">
+    <div className="text-neutral-50  bg-myBrown rounded-[9px] w-64 shrink-0 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]  m-10 hover:scale-[1.01] transition ease-in-out duration-300 delay-50">
       <div className="styleQ h-[301px] overflow-hidden">
         <Image
           className="rounded-t-[9px]"

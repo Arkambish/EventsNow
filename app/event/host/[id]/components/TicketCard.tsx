@@ -51,7 +51,8 @@ export default function TicketCard({
     //if the ticket is in the array then remove it from the array
     if (index !== -1) {
       setTotalPrice(totalPrice - price);
-      setTicketArray(ticketArray.filter((item) => item.typeId !== typeId));
+      // setTicketArray(ticketArray.filter((item) => item.typeId !== typeId));
+      ticketArray.splice(index, 1);
     }
    
   };    
@@ -78,19 +79,18 @@ export default function TicketCard({
             Rs {price} /=
           </div>
 
-          {/* {visible && (
+          
             <div className="text-sm font-normal">
               Quantity :{" "}
-              {ticketArray.indexOf(type) !== -1
-                ? ticketArray.filter((item) => item === type).length
-                : 0}
+              {ticketArray.filter((item) => item.type === type).length}
+                
             </div>
-          )} */}
+    
         </div>
 
         <div className="space-y-2 pt-2">
           <button
-            className=" w-24 rounded border-[1px] border-[#37A234] px-2 my-auto text-sm font-semibold text-[#37A234] flex  gap-2 "
+            className=" w-24 rounded border-[1px] border-[#37A234] px-2 my-auto text-sm font-semibold text-[#37A234] flex  gap-2 button "
             onClick={updateQuantity}
           >
             <div className="py-1">
@@ -99,15 +99,16 @@ export default function TicketCard({
             Add
           </button>
 
-          <button
-            className="w-24 rounded border-[1px] border-[#A23434] px-2 my-auto text-sm font-semibold text-[#A23434] flex  gap-2 "
+            {(ticketArray.findIndex((item) => item.typeId === typeId) !== -1)&&<button
+            className="button w-24 rounded border-[1px] border-[#A23434] px-2 my-auto text-sm font-semibold text-[#A23434] flex  gap-2 "
             onClick={removeQuantity}
           >
             <div className="py-1">
               <MdDeleteOutline />
             </div>
             Remove
-          </button>
+          </button>}
+          
         </div>
       </div>
     </div>
