@@ -8,11 +8,14 @@ export async function POST(req: Request) {
     await connectMongoDB();
 
     const { topic, comment, userIds } = await req.json(); // Assuming userIds is an array of user IDs
-
+    console.log(topic);
+    console.log(comment);
+    console.log(userIds);
     // Iterate over the array of user IDs
     for (const userId of userIds) {
       // Find the user in the database based on the user ID
       const receiverr = await User.findById(userId);
+      console.log(receiverr);
       if (!receiverr) {
         continue; // Move on to the next user ID
       }
@@ -23,11 +26,11 @@ export async function POST(req: Request) {
         comment,
         recieverId: userId, // Use userId directly since we already have it
       });
-
+      console.log(createNotification);
       if (!createNotification) {
         return NextResponse.json(
           { message: "Error creating notification" },
-          { status: 500 }
+          { status: 201 }
         );
       }
     }

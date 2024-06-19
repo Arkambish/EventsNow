@@ -7,7 +7,7 @@ import { emailTemplate } from "@/lib/email/email";
 
 export async function POST(req: Request) {
   try {
-    const { email, organizationId } = await req.json();
+    const { email, organizationId,organizationName } = await req.json();
 
     const user = await User.findOne({ email });
 
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     const template = Handlebars.compile(emailTemplate);
     const htmlBody = template({
-      name: "99x",
+      name: organizationName,
       URL: `${process.env.NEXT_PUBLIC_URL}/organization/newuser?organizationId=${organizationId}&userId=${user._id}`,
     });
 

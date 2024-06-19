@@ -129,7 +129,7 @@ export default function PersonDetailsBar({
               <p className="text-sm text-gray-500">
                 <div className="flex sm:w-full w-fit sm:gap-0 gap-2 sm:flex-row flex-col justify-between ">
                   {/* <button onClick={deletePermission}> */}
-                  <button>
+                  <button onClick={()=>console.log("ashan")}>
                     <div className="flex  rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
                       <AiFillCloseCircle />
                       <div>Remove</div>
@@ -144,7 +144,7 @@ export default function PersonDetailsBar({
                   <button onClick={handleSelectEventButton}>
                     <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
                       <RiAddCircleFill />
-                      <div>Chose Events</div>
+                      <div>Choose Events</div>
                     </div>
                   </button>
                 </div>

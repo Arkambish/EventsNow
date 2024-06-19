@@ -19,10 +19,11 @@ export default function InviteButton() {
   const [email, setEmail] = useState<People>({ id: 0, name: "" });
 
   async function handleclick() {
+    
     try {
       const data = await FetchPost({
         endpoint: "organization/inviteTeamMember",
-        body: { email: email.name, organizationId: organization?._id },
+        body: { email: email.name, organizationId: organization?._id,organizationName:organization?.organizationName },
       });
 
       if (data === "No User  exists") {
