@@ -90,13 +90,13 @@ export default function PersonDetailsBar({
         <button
           onClick={handleEditButton}
           // onClick={() => setIsEditButton(true)}
-          className={`bg-custom-orange h-[34px] justify-self-end rounded-[5px] w-[114px]`}
+          className={`bg-dashBtnBlue h-[34px] justify-self-end rounded-[5px] w-[94px]`}
         >
-          <div className="flex justify-around pl-1">
+          <div className="flex justify-around px-2">
             <svg
-              width="21"
-              height="21"
-              viewBox="0 0 21 21"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -111,7 +111,7 @@ export default function PersonDetailsBar({
               </svg>
             </svg>
 
-            <div className="text-white  self-center text-center text-base font-medium mr-2">
+            <div className="text-white  self-center text-center text-base font-medium ">
               Edit
             </div>
           </div>
@@ -130,19 +130,19 @@ export default function PersonDetailsBar({
                 <div className="flex sm:w-full w-fit sm:gap-0 gap-2 sm:flex-row flex-col justify-between ">
                   {/* <button onClick={deletePermission}> */}
                   <button>
-                    <div className="flex  rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                    <div className="flex  rounded-md gap-2 px-3 py-1 items-center bg-dashBtnBlue text-white">
                       <AiFillCloseCircle />
                       <div>Remove</div>
                     </div>
                   </button>
                   <button onClick={handleAllEventButton}>
-                    <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                    <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-dashBtnBlue text-white">
                       <RiAddCircleFill />
                       <div>All Events</div>
                     </div>
                   </button>
                   <button onClick={handleSelectEventButton}>
-                    <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                    <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-dashBtnBlue text-white">
                       <RiAddCircleFill />
                       <div>Chose Events</div>
                     </div>
