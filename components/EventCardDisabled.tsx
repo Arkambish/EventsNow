@@ -17,7 +17,7 @@ export default function EventCardDisabled({
   return (
     <div>
       <div className=" saturate-0  text-neutral-50  bg-[#959595] rounded-[9px] w-64 shrink-0 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]  m-10">
-        <div className=" styleQ h-[301px] overflow-hidden">
+        <div className=" styleQ h-[301px] overflow-hidden ">
           <Image
             className="rounded-t-[9px] 	"
             src={`${img}`}
@@ -27,7 +27,7 @@ export default function EventCardDisabled({
           />
         </div>
 
-        <div className="grid grid-cols-3 ">
+        <div className="grid  ">
           <div className="text ml-5 col-span-2  text-xl   font-extrabold ">
             {name}
           </div>
@@ -36,13 +36,13 @@ export default function EventCardDisabled({
           <hr className="w-52 ml-5 mt-1"></hr>
         </div>
 
-        <div className=" grid grid-cols-12 ">
+        <div className=" grid grid-cols-12 ml-2 px-1 py-2 ">
           <div className="flex col-span-5">
             <Image
               className="mt-1"
               src={"/images/organization/location1.svg"}
               alt={"pin-fill"}
-              width={47}
+              width={38}
               height={47}
             />
             <div className="text-xs font-khand font-semibold my-auto ">

@@ -5,13 +5,11 @@ const mongoose = require("mongoose");
 const ticketTypeSchema = new mongoose.Schema({
   classType: {
     type: String,
-    unique: true,
     required: [true, "Please enter classType"],
   },
 
   price: {
     type: Number,
-    unique: true,
     required: [true, "Please enter price"],
   },
 

@@ -117,7 +117,7 @@ export default function HostSideBar({
         return;
       }
       const data = await res.json();
-      console.log(data);
+    
       setAllTicketTypes(data);
     }
     getTicketTypes();

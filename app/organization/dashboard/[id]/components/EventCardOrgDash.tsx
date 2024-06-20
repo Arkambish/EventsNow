@@ -36,7 +36,7 @@ type ContextData = {
   events: EventType[];
 };
 
-function eventDashboardHandler() {}
+
 
 function EventCardOrgDash({
   img,
