@@ -23,7 +23,7 @@ export default function EventListView({
   img,
 }: EventListViewProps) {
   return (
-    <div className=" flex gap-3 rounded-lg 2xl:w-2/5 xl:w-2/5 lg:w-2/5  bg-[#D9D9D9]">
+    <div className=" flex gap-3 rounded-lg 2xl:w-2/5 xl:w-2/5 lg:w-2/5  bg-[#f0f0f0]">
       <div className="rounded-lg">
         <Image
           src={img}
@@ -36,10 +36,11 @@ export default function EventListView({
       <div className="p-3 w-full  flex flex-col justify-start gap-3">
         <div className="flex justify-between sm:flex-row flex-col sm:gap-10 gap-2  mb-4">
           <div className="capitalize font-bold text-2xl	">{name}</div>
-          <button className="button">
-            <div className="flex gap-2 hover:scale-105	 hover:opacity-80 w-20 px-1 justify-center items-center text-white bg-custom-orange rounded-xl ">
+          <button className=" hover:bg-[#526595] button col-span-1 w-63  mr-4 rounded-full   text-center text-sm text-white  bg-custom-blue">
+            <div className="flex  justify-center  gap-1  ">
+              
+              <Link  href={`/event/host/${id}`}>Info</Link>
               <HiOutlineArrowSmRight size={20} />
-              <Link href={`/event/host/${id}`}>Info</Link>
             </div>
           </button>
         </div>

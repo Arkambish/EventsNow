@@ -12,7 +12,7 @@ interface EventCard {
 
 function EventCard({ name, img, location, date, time, id }: EventCard) {
   return (
-    <div className="text-neutral-50  bg-myBrown rounded-[9px] w-64 shrink-0 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]  m-10">
+    <div className="text-neutral-50  bg-myBrown rounded-[9px] w-64 shrink-0 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]  m-10 hover:scale-[1.01] transition ease-in-out duration-300 delay-50">
       <div className="styleQ h-[301px] overflow-hidden">
         <Image
           className="rounded-t-[9px]"
@@ -27,7 +27,7 @@ function EventCard({ name, img, location, date, time, id }: EventCard) {
         <div className="text ml-5 col-span-2  text-xl   font-extrabold ">
           {name}
         </div>
-        <button className="hover:bg-[#526595] button col-span-1 w-63 h-22 mr-4 rounded-[10px]   text-center text-sm  bg-custom-blue">
+        <button className="hover:bg-[#526595] button col-span-1 w-63  mr-4 rounded-full   text-center text-xs  bg-custom-blue">
           <Link href={`/event/host/${id}`}> INFO</Link>
         </button>
       </div>
@@ -35,14 +35,14 @@ function EventCard({ name, img, location, date, time, id }: EventCard) {
         <hr className="w-52 ml-5 mt-1"></hr>
       </div>
 
-      <div className=" grid grid-cols-12 ">
+      <div className=" grid grid-cols-12 ml-2 px-1 py-2 ">
         <div className="flex col-span-5">
           <Image
-            className="mt-1"
+            className=""
             src={"/images/organization/location1.svg"}
             alt={"pin-fill"}
-            width={47}
-            height={47}
+            width={38}
+            height={24}
           />
           <div className="text-xs font-khand font-semibold my-auto ">
             {location}

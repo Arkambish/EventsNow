@@ -36,7 +36,7 @@ export default function Report() {
             <View_Report
               eventName={selectedEvent}
               isSlideBar={isSlideBar}
-              img="couldWithThreeDots.svg"
+              img="attendanceReport.svg"
               discription1="ATTENDANCE REPORT"
             />
           </button>

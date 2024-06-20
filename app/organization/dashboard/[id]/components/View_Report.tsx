@@ -20,7 +20,7 @@ export default function View_Report({
     <div
       className={`md:grid ${
         isSlideBar ? " md:w-11/12" : " md:w-11/12"
-      } flex items-center justify-between shadow-normalComponent 2xl:w-3/4 gap-3 w-11/12  md:grid-cols-12 md:h-32 rounded-[10px] bg-[#F8F8F8] border-t-[1px]  border-dashBtnBlue divide-[#848484]`}
+      } flex items-center justify-between  2xl:w-3/4 gap-3 w-11/12  md:grid-cols-12 md:h-32 rounded-[10px] bg-white border-2 `}
     >
       <div className="md:col-span-4 my-3 md:ml-5 lg:ml-14 overflow-hidden">
         <Image
@@ -31,11 +31,11 @@ export default function View_Report({
         />
       </div>
 
-      <div className="md:col-span-5 mt-4">
+      <div className="md:col-span-5 text-start">
         <div className="text-[#666] font-sans md:text-xl text-lg font-normal">
           {eventName}
         </div>
-        <div className="text-[#353535] font-sans text-sm	 xl:text-2xl lg:text-base   font-bold mt-6">
+        <div className="text-[#353535] font-sans text-sm	lg:text-base   font-bold ">
           {discription1}
         </div>
       </div>
@@ -43,7 +43,7 @@ export default function View_Report({
       <div className="md:col-span-3 lg:my-10 md:my-5  ">
         <button
           onClick={() => print()}
-          className="lg:w-[116px] lg:p-1 md:p-1 md:mr-2 rounded-md bg-custom-orange"
+          className="lg:w-[116px] lg:p-1 md:p-1 md:mr-2 rounded-md bg-dashBtnBlue"
         >
           <div className="flex gap-2 justify-center items-center">
             <div className="lg:block  ">
