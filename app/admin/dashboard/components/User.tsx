@@ -84,6 +84,7 @@ export default function Notification() {
                   email={use.email}
                   userId={use._id}
                   role={use.role}
+                  isBlocked={use.isBlocked}
                   setUser={setUser}
                 />
               ))

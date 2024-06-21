@@ -29,9 +29,10 @@ type ContextData = {
 
 interface Available_Orgs {
   organization: OrganizationType;
+  setFilterOrganizationData: React.Dispatch<React.SetStateAction<OrganizationType[]>>;
 }
 
-export default function Available_Orgs({ organization }: Available_Orgs) {
+export default function Available_Orgs({ organization,setFilterOrganizationData }: Available_Orgs) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
   const [showDenyModal, setShowDenyModal] = useState<boolean>(false);
@@ -41,12 +42,18 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
     useAdmin() as ContextData;
   const handleDeny = async () => {
     try {
-      await axios.put(
+      const res = await axios.put(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/denyOrganization/${organization._id}`,
         {
           isActive: false,
         }
       );
+
+      
+    if(res.data.message !== "success"){
+      error("Failed to deny organization");
+      return;
+    }
 
       const updatedNotifications = [...notification, organization];
       success("Organization Denied successfully");
@@ -54,6 +61,11 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
       setOrganization((prev: OrganizationType[]) =>
         prev.filter((org) => org._id !== organization._id)
       ); // Remove denied organization from the organization list
+      setFilterOrganizationData((prev: OrganizationType[]) =>
+        prev.filter((org) => org._id !== organization._id)
+      );
+
+      setShowDenyModal(false);
     } catch (error) {
       console.error("Error updating organization:", error);
     }
@@ -321,7 +333,8 @@ export default function Available_Orgs({ organization }: Available_Orgs) {
               </Dialog.Title>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  Are you sure you want to Deny this organization ? Clicking
+                  Are you sure you want to Deny this organization ? 
+                  Clicking
                   "Deny" will remove this organization from EventsNow.
                 </p>
               </div>

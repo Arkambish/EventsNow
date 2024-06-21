@@ -32,12 +32,16 @@ export default function Notification() {
       (org: OrganizationType) => !org.isActive
     );
 
-    if (resActive.length !== 0) {
-      setOrganization(resActive);
-    }
-    if (notActive.length !== 0) {
-      setNotification(notActive);
-    }
+    // if (resActive.length !== 0) {
+    //   setOrganization(resActive);
+    // }
+    // if (notActive.length !== 0) {
+    //   setNotification(notActive);
+    // }
+
+    setOrganization(resActive);
+    setNotification(notActive);
+    
     setIsLoading(false);
   }
 
