@@ -10,6 +10,7 @@ export type UserType = {
   wishListId: string[];
   registeredEvents: string[];
   mobileNumber: Number;
+  isBlocked : boolean;
 };
 
 export type PermissionType = {

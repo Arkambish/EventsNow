@@ -5,6 +5,7 @@ import Handlebars from "handlebars";
 
 export async function POST(req: Request) {
   const { email, name } = await req.json();
+  console.log(email, name )
 
   const template = Handlebars.compile(OraganizationApprovalEmail);
   const htmlBody = template({

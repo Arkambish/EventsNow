@@ -20,6 +20,7 @@ export async function GET(request: Request) {
     const allEvent = await Event.find({ income: { $gt: 0 } }).populate(
       "organizationId"
     );
+    console.log(allEvent[0]);
     const getOrganizationId = allEvent.map(
       (event: EventType) => event.organizationId
     );
@@ -28,7 +29,7 @@ export async function GET(request: Request) {
     const lookupTable: any = {};
 
     for (const value of getOrganizationId) {
-      if (!lookupTable[value]) {
+      if (!lookupTable[value] && value !== null) {
         uniqueValues.push(value);
         lookupTable[value] = true;
       }

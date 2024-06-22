@@ -98,7 +98,7 @@ export default memo(function GenaralUpdate({
           as="h3"
           className="text-lg font-medium leading-6 text-gray-900"
         >
-          Send Email{" "}
+          Send Email
         </Dialog.Title>
         <div className="p-5">
           <div className="font-semibold	text-lg">Subject</div>
@@ -135,7 +135,7 @@ export default memo(function GenaralUpdate({
             <button
               onClick={handlePostButton}
               disabled={isDissableBtn ? true : false}
-              className={`w-full m-2  button rounded-2xl flex justify-center items-center p-1  text-bold text-lg bg-custom-orange text-white `}
+              className={`w-full m-2  button rounded-2xl flex justify-center items-center p-1  text-bold text-lg bg-dashBtnBlue text-white `}
             >
               <div className="flex gap-2 justify-center items-center">
                 <div> Sending</div>

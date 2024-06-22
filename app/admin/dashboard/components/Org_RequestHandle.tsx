@@ -20,6 +20,7 @@ import WidthChangeModal from "@/components/WidthChangeModal";
 import { IoPencilOutline } from "react-icons/io5";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import { set } from "mongoose";
 
 interface Data {
   organization: OrganizationType;
@@ -51,6 +52,11 @@ export default function Org_RequestHandle({
   const [showDenyModal, setShowDenyModal] = useState<boolean>(false);
 
   const addComment = async () => {
+    if(comment === "" || comment === null){ 
+      error("Please write a comment before submitting");
+      console.log(organization._id);
+      return;
+    }
     try {
       const data = {
         topic: `Organization: ${organization.organizationName}`,
@@ -63,19 +69,56 @@ export default function Org_RequestHandle({
         endpoint: `notification/getAllNotifications`,
         body: data,
       });
+      console.log(res)
+      if (res=="Notification created successfully") {
+        error("Failed to save");
+        return;
+      }
       // if (!res) {
       //   error("Failed to save");
       //   return;
       // }
       setCommentModal(false);
       success("Messsage sent successfully");
+      setComment("");
     } catch (error) {
       console.error("Error saving settings:", error);
     }
   };
+
+  const handleDeny = async () => {
+    
+  
+    const data = {
+      id: organization._id,
+    };
+
+    const res =await  FetchPost({
+      endpoint: `organization/deleteOrganization`,
+      body: data,
+    });
+
+    console.log(res.message);
+    if (res.message !== "success") {
+      error("Failed to delete organization");
+      return;
+    }
+    
+    
+    success("Organization request deleted successfully");
+    const newNotification = notification.filter(
+      (org) => org._id !== organization._id
+    );
+    setNotification(newNotification);
+    denyNotification();
+    
+    setShowDenyModal(false);
+
+
+  }
   const handleAllow = async () => {
     try {
-      allowNotification();
+     
 
       const allowOrgRes = await axios.put(
         `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/updateOrganization/${organization._id}`,
@@ -83,16 +126,17 @@ export default function Org_RequestHandle({
           isActive: true,
         }
       );
+      console.log(allowOrgRes.data  )
 
-      if (allowOrgRes.status !== 200) {
-        // error("Failed to Allow the organization");
+      if(allowOrgRes.data.message !="success"){
+        error("Failed to update organization");
         return;
       }
 
       const newNotification = notification.filter(
         (org) => org._id !== organization._id
       );
-
+      allowNotification();
       success("Organization Allowed successfully");
       setNotification(newNotification); // Remove approved organization from the notification list
       setOrganization((prev: OrganizationType[]) => [...prev, organization]); // Add approved organization to the organization list
@@ -120,16 +164,18 @@ export default function Org_RequestHandle({
         comment: `${organization.organizationName} is accepted`,
         email: organization.email,
       };
+      console.log(data)
 
       const res = await FetchPost({
         endpoint: `notification/getAllNotifications`,
         body: data,
       });
-      if (!res) {
+      
+      if (res.message !== "Notification created successfully") {
         error("Failed to save");
         return;
       }
-      // success("Messsage sent successfully");
+      success("notification sent successfully");
     } catch (error) {
       console.error("Error saving settings:", error);
     }
@@ -146,8 +192,10 @@ export default function Org_RequestHandle({
         endpoint: `notification/getAllNotifications`,
         body: data,
       });
-      if (!res) {
-        error("Failed to save");
+    
+    
+      if (res.message !== "Notification created successfully") {
+        error("error sending notification");
         return;
       }
       success("Messsage sent successfully");
@@ -159,15 +207,15 @@ export default function Org_RequestHandle({
   return (
     <div className="flex flex-col w-fit p-4 mx-4 bg-white shadow-md hover:shadow-lg border-2 rounded-2xl mb-3">
       <div className="flex items-center">
-        <div className="flex items-center">
+        <div className="flex items-center gap-5">
           <Image
             src={organization.postImageLink}
             alt="image2"
-            width={249.64}
+            width={300}
             height={124.5}
-            className="w-16 h-16 rounded-2xl p-3 border border-slate-200  bg-slate-100"
+            className="w-24 h-24 rounded-2xl  border border-slate-200  bg-slate-100"
           />
-          <div className="flex flex-col ml-3">
+          <div className=" font-semibold text-lg">
             {organization.organizationName}
           </div>
         </div>
@@ -278,6 +326,7 @@ export default function Org_RequestHandle({
               rows={6}
               className="border-none border-b border-black w-full text-sm rounded-md rounded-t-none p-1 my-2"
               placeholder="Write a comment..."
+              value={comment}
               required
             ></textarea>
           </div>
@@ -431,12 +480,15 @@ export default function Org_RequestHandle({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                Confirm Denying
+                Confirm Deleting
               </Dialog.Title>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  Are you sure you want to Deny this organization ? Clicking
-                  "Deny" will remove this organization from EventsNow.
+                  Are you sure you want to delete this organization request ? 
+                  <div>
+                  Clicking
+                  "Delete" will delete this organization  from EventsNow.
+                  </div>
                 </p>
               </div>
 
@@ -445,11 +497,12 @@ export default function Org_RequestHandle({
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   onClick={() => {
-                    handleAllow();
-                    denyNotification();
+                    // handleAllow();
+                    handleDeny();
+                    // denyNotification();
                   }}
                 >
-                  Deny
+                  Delete
                 </button>
                 <button
                   type="button"

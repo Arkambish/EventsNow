@@ -13,6 +13,8 @@ export async function POST(req: Request) {
 
     const recieverId = await reciever._id;
 
+    
+
     const createNotification = await Notification.create({
       topic,
       comment,
