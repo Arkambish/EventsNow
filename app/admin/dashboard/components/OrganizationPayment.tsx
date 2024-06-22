@@ -20,7 +20,7 @@ export default function OrganizationPayment({
   return (
     <div>
       <div
-        className={`grid grid-cols-1 lg:grid-cols-11 md:grid-cols-1  sm:m-6  ${value} h-auto md:h-auto lg:h-32 rounded-lg bg-[#D9D9D9] mt-6 ms-4 lg:ms-4 md:ms-20 shadow-3xl`}
+        className={`grid grid-cols-1 lg:grid-cols-11 md:grid-cols-1  sm:m-6  ${value} h-auto md:h-auto lg:h-48 rounded-lg bg-[#D9D9D9] mt-6 ms-4 lg:ms-4 md:ms-20 shadow-3xl`}
       >
         <div className="col-span-full lg:col-span-3 md:col-span-full overflow-hidden  rounded-lg ">
           <Image
@@ -28,11 +28,11 @@ export default function OrganizationPayment({
             alt="compo4"
             width={249.65}
             height={126}
-            className="sm:h-32 h-auto"
+            className="sm:h-48 h-auto  "
           />
         </div>
 
-        <div className="col-span-full md:col-span-2 lg:col-span-3 flex justify-center sm:justify-start pl-8 sm:mt-0 md:mt-4 lg:mt-0">
+        <div className="col-span-full md:col-span-2 lg:col-span-3 flex justify-center sm:justify-start pl-4 sm:mt-0 md:mt-4 lg:mt-0">
           <div className=" justify-auto flex flex-col  md:justify-center lg:justify-around">
             <div className="flex w-full md:w-1/2  lg:w-full text-slate-500 font-sans capitalize text-2xl font-bold mt-2 leading-7  ">
               {organization.organizationName}
@@ -74,13 +74,13 @@ export default function OrganizationPayment({
               </div>
             </div>
           </div> */}
-          <div className="flex flex-wrap gap-y-[0.5px] gap-x-40">
+          <div className="flex flex-wrap gap-y-[0.5px] gap-x-40 py-8 ml-4">
             <div className="flex gap-2 mt-1">
               <div className="text-base	font-bold ">AccountName =</div>
               <div>{organization.accountName}</div>
             </div>
             <div className="flex gap-2">
-              <div className="text-base	font-bold ">AccountNumber =</div>
+              <div className="text-base	font-bold ">AccountNo =</div>
               <div>{organization.accountNumber}</div>
             </div>
             <div className="flex gap-2">

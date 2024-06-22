@@ -39,10 +39,7 @@ export default function OverviewSubComponent({
           {text}
           {/* Total Ticket Sale */}
         </div>
-        <div
-          // onClick={handleOverview}
-          className="pl-0.5 justify-self-start  text-[#455273] font-normal hover:text-sky-600 "
-        >
+        <div className="pl-0.5 flex justify-center  text-[#455273] font-normal hover:text-sky-600 ">
           {details}
         </div>
       </div>

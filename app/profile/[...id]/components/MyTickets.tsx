@@ -16,7 +16,7 @@ export default function MyTickets() {
         <div className="text-3xl font-semibold text-stone-600 font-IBM ml-[55px]">
           My Tickets
         </div>
-        <div className="w-full  overflow-y-scroll sm:max-h-80 xl:max-h-96 scroll-smooth">
+        <div className="w-1/2   overflow-y-scroll sm:max-h-80 xl:max-h-96 scroll-smooth">
           {ticket.length > 0 ? (
             ticket.map((ticket: any) => (
               <TicketMockup

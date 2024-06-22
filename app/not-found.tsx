@@ -8,7 +8,7 @@ function Notfound() {
         There was a problem
       </div>
       <div className="font-bold text-white md:text-4xl text-2xl pt-2">
-        This age is not found
+        This Page is not found
       </div>
       {/* <div className="font-bold text-white pt-4">
         Please try again later or contact support if the problem persists

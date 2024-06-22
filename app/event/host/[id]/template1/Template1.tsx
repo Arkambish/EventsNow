@@ -7,8 +7,6 @@ import PostTab from "../components/PostTab";
 import SmallView from "../components/SmallView";
 import HostSideBar from "../components/HostSideBar";
 import Description from "../components/Description";
-// import { Event, Post } from "../SelectTemplate";
-
 import { formatDate } from "@/util/helper";
 import { EventType } from "@/app/Type";
 
@@ -33,10 +31,7 @@ export default function Template({
     <div>
       <div className="md:flex md:justify-between ">
         {activeComponent === "CoverPhoto" && (
-          <CoverPhoto
-            image={event.coverImage}
-            // image={"/images/ReusableComponents/PictureOfPost.jpg"}
-          />
+          <CoverPhoto image={event.coverImage} />
         )}
 
         {activeComponent === "PostTab" && <PostTab />}
