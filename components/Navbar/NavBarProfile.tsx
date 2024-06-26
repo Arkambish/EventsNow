@@ -42,6 +42,7 @@ const NavBarProfile = memo(function NavBarProfile({
   const profileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log(organization)
     const handleClickOutside = (event: MouseEvent) => {
       if (
         profileRef.current &&
@@ -131,6 +132,7 @@ const NavBarProfile = memo(function NavBarProfile({
             ) : (
               <div className="max-h-36 divide-y-2 overflow-auto navBar-profile">
                 {organization.map((org: OrganizationProps) => (
+                  org.id && 
                   <Link
                     onClick={() => setShowProfile(false)}
                     key={org.id}
