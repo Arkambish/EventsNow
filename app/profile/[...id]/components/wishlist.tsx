@@ -25,8 +25,7 @@ export default function MyProfile() {
                 Location={e.selectedTab}
                 Time={e.startTime}
                 Date={e.eventStartDate}
-                Ratings={"4.5"}
-                image={e.dashboardImage}
+                image={e.coverImage}
               />
             ))
           ) : (

@@ -15,23 +15,16 @@ interface TicketDetailProps {
 }
 
 const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
-  // const {
-  //   newTicketPrice,
-  //   newTicketClass,
-  //   newTicketImage,
-  //   setNewTicketPrice,
-  //   setNewTicketClass,
-  //   setNewTicketImage,
-  //   setAllTickets,
-  //   id,
-  // } = UseEventContext() as EventContextType;
   const [newTicketPrice, setNewTicketPrice] = React.useState<number>(0);
   const [newTicketClass, setNewTicketClass] = React.useState<string>("");
   const [newTicketImage, setNewTicketImage] = React.useState<string>("");
   const { setAllTickets, id } = UseEventContext() as EventContextType;
 
   const createTicketHandlerLocal = async () => {
-    if(newTicketPrice === 0 || newTicketClass === "" || newTicketImage === "") return error("Please fill all fields");
+    if (newTicketPrice === 0 || newTicketClass === "" || newTicketImage === "") {
+      return error("Please fill all fields");
+    }
+    
     try {
       const newData = await FetchPost({
         endpoint: "ticket/addTicket",
@@ -42,6 +35,13 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
           classType: newTicketClass,
         },
       });
+
+      
+
+      if (!newData || !newData.ticket) {
+        
+        return error("Failed to create ticket due to invalid data");
+      }
 
       setAllTickets((prev) => {
         if (!prev) return [newData.ticket];
@@ -54,7 +54,8 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
       setNewTicketClass("");
       setNewTicketImage("");
     } catch (err) {
-      error("Failed to create ticket 2");
+      console.error("Failed to create ticket:", err);
+      error("Failed to create ticket");
     }
   };
 
@@ -90,8 +91,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
                 console.log("isPhotographer");
               }}
               onSuccess={(results: CloudinaryUploadWidgetResults) => {
-                const uploadedResult =
-                  results.info as CloudinaryUploadWidgetInfo;
+                const uploadedResult = results.info as CloudinaryUploadWidgetInfo;
                 const profileImageURL = {
                   image: uploadedResult.secure_url,
                 };
@@ -99,7 +99,6 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
               }}
               options={{
                 tags: ["ticket image"],
-
                 sources: ["local"],
                 googleApiKey: "<image_search_google_api_key>",
                 showAdvancedOptions: false,
@@ -110,12 +109,9 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
                 croppingDefaultSelectionRatio: 0.75,
                 croppingShowDimensions: true,
                 croppingCoordinatesMode: "custom",
-                // maxImageHeight: 100,
-                // croppingValidateDimensions: true,
                 defaultSource: "local",
                 resourceType: "image",
                 folder: "events",
-
                 styles: {
                   palette: {
                     window: "#ffffff",
@@ -155,9 +151,9 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
 
             <div className="flex">
               {newTicketImage.length > 0 && (
-                <div className=" mt-5 border-2 w-auto border-solId rounded-xl   ">
+                <div className="mt-5 border-2 w-auto border-solid rounded-xl">
                   <Image
-                    className=" p-4"
+                    className="p-4"
                     src={newTicketImage}
                     width={500}
                     height={500}
@@ -166,11 +162,11 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
                 </div>
               )}
 
-              <div className="flex justify-end w-full ">
+              <div className="flex justify-end w-full">
                 <button
                   onClick={createTicketHandlerLocal}
                   type="button"
-                  className=" rounded-md border border-transparent shadow-sm py-1 px-2 my-auto  bg-custom-orange  text-base font-medium text-white hover:opacity-70  button  sm:ml-3 sm:w-auto sm:text-sm"
+                  className="rounded-md border border-transparent shadow-sm py-1 px-2 my-auto bg-custom-orange text-base font-medium text-white hover:opacity-70 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Create
                 </button>

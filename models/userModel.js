@@ -104,6 +104,10 @@ const userSchema = new mongoose.Schema({
   forgotPasswordTokenExpires: {
     type: Date,
   },
+  isBlocked: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {

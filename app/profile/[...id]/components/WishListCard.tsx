@@ -19,7 +19,6 @@ interface Upcoming_Events {
   Location: string;
   Time: string;
   Date: string;
-  Ratings: string;
   image: string;
   eId: string;
 }
@@ -29,7 +28,6 @@ export default function WishListCArd({
   Location,
   Time,
   Date,
-  Ratings,
   image,
   eId,
 }: Upcoming_Events) {
@@ -277,7 +275,8 @@ export default function WishListCArd({
     //! this
     <div className=" w-full   bg-[#D9D9D9]   max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 mb-6 p-2 ">
       <div
-        className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden w-fit bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
+        className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden  bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
+        
         style={{ backgroundImage: `url(${image as string})` }}
       ></div>
       <div className="lg:col-span-4 rounded-r-xl pt-1 justify-start ">
@@ -321,12 +320,12 @@ export default function WishListCArd({
               {Date.substring(0, 10)}
             </div>
           </div>
-          <div className=" flex  items-center">
+          {/* <div className=" flex  items-center">
             <HiOutlineLightningBolt size={22} />
             <div className=" ml-2 my-auto  text-[#353C4E] text-sm font-medium">
               {Ratings}
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="flex sm:hidden content-center ">
           <button className="button text-center mb-8 flex gap-2 bg-[#D47151] text-white rounded-2xl px-2 my-auto py-1 ml-4 font-IBM ">

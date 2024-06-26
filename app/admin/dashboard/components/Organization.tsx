@@ -95,7 +95,7 @@ export default function Organization() {
               <EmptyStateComponent message="No Events" />
             ) : (
               filterOrganizationData.map((me) => (
-                <Available_Orgs key={me._id} organization={me} />
+                <Available_Orgs key={me._id} organization={me} setFilterOrganizationData={setFilterOrganizationData} />
               ))
             )}
           </>

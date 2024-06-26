@@ -28,7 +28,7 @@ export default function MyTickets() {
               />
             ))
           ) : (
-            <EmptyStateComponent message="No ticket created yet" />
+            <EmptyStateComponent message="No ticket available" />
           )}
         </div>
       </div>

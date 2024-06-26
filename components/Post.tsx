@@ -378,7 +378,7 @@ Post) {
                 className={styles.zoom}
               />
             </TwitterShareButton>
-            <Image
+            {/* <Image
               src={"/images/reusableComponents/InstagramIconPost.svg"}
               alt="instagram"
               width={40}
@@ -391,7 +391,7 @@ Post) {
               width={31}
               height={28}
               className={styles.zoom}
-            />
+            /> */}
           </div>
         )}
 

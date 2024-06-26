@@ -36,7 +36,7 @@ type ContextData = {
   events: EventType[];
 };
 
-function eventDashboardHandler() {}
+
 
 function EventCardOrgDash({
   img,
@@ -76,7 +76,7 @@ function EventCardOrgDash({
   };
 
   return (
-    <div className="  w-full border-2 my-4  max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 ">
+    <div className="  w-full border-2 my-4  max-sm:mr-24 rounded-xl  shadow-lg grid lg:grid-cols-6 bg-white ">
       <div
         className="lg:rounded-l-xl max-lg:rounded-t-xl overflow-hidden bg-no-repeat bg-cover lg:col-span-2 bg-center h-40 lg:h-full"
         style={{ backgroundImage: `url(${img as string})` }}

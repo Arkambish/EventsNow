@@ -14,17 +14,19 @@ export default function OrganizationPayment({
 }: OrganizationPayment) {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const value =
-    organization.fullName.length > 10
+    organization?.fullName.length > 10
       ? "w-[250px] md:w-[250px] lg:w-[720px]"
       : "lg:w-[720px] w-72 md:w-[250px]";
   return (
     <div>
       <div
+
         className={`grid grid-cols-1 lg:grid-cols-11 md:grid-cols-1  sm:m-6  ${value} h-auto md:h-auto lg:h-48 rounded-lg bg-[#D9D9D9] mt-6 ms-4 lg:ms-4 md:ms-20 shadow-3xl`}
+
       >
         <div className="col-span-full lg:col-span-3 md:col-span-full overflow-hidden  rounded-lg ">
           <Image
-            src={organization.postImageLink}
+            src={organization?.postImageLink}
             alt="compo4"
             width={249.65}
             height={126}
@@ -32,15 +34,17 @@ export default function OrganizationPayment({
           />
         </div>
 
+
         <div className="col-span-full md:col-span-2 lg:col-span-3 flex justify-center sm:justify-start pl-4 sm:mt-0 md:mt-4 lg:mt-0">
+
           <div className=" justify-auto flex flex-col  md:justify-center lg:justify-around">
             <div className="flex w-full md:w-1/2  lg:w-full text-slate-500 font-sans capitalize text-2xl font-bold mt-2 leading-7  ">
-              {organization.organizationName}
+              {organization?.organizationName}
             </div>
             <div className="flex flex-col md:flex-col lg:flex-row gap-4 ml-0">
               <button
                 onClick={() => setShowPaymentModal(true)}
-                className=" w-20 h-[30px] rounded-3xl bg-[#B63535] mt-2 ml-0 md:ml-12 lg:ml-0 "
+                className=" w-20 h-[30px] rounded-3xl bg-[#B63535] hover:bg-red-600 mt-2 ml-0 md:ml-12 lg:ml-0 transition duration-200  "
               >
                 <div className="flex justify-center text-white text-sans font-medium ">
                   Pay
@@ -51,7 +55,7 @@ export default function OrganizationPayment({
         </div>
 
         <div
-          className={`col-span-full md:col-span-full lg:col-span-5 mr-3 mb-3 sm:mb-0 ms-3 lg:ms-0 md:ms-0 `}
+          className={`col-span-full md:col-span-full lg:col-span-4 mr-1 mb-3 sm:mb-0 ms-3 lg:ms-0 md:ms-0 `}
         >
           {/* <div className="lg:w-64 w-48 md:w-48 lg:h-24 h-28 md:h-28 rounded bg-[#F4F4F4] mt-2 md:mt-4 lg:mt-5 ml-0 md:ml-6 lg:ml-10 mb-0 md:mb-4 lg:mb-0 ">
             <div className="grid grid-cols-12">
@@ -77,24 +81,26 @@ export default function OrganizationPayment({
           <div className="flex flex-wrap gap-y-[0.5px] gap-x-40 py-8 ml-4">
             <div className="flex gap-2 mt-1">
               <div className="text-base	font-bold ">AccountName =</div>
-              <div>{organization.accountName}</div>
+              <div>{organization?.accountName}</div>
             </div>
             <div className="flex gap-2">
+
               <div className="text-base	font-bold ">AccountNo =</div>
               <div>{organization.accountNumber}</div>
+
             </div>
             <div className="flex gap-2">
               <div className="text-base	font-bold ">Bank =</div>
-              <div>{organization.bank}</div>
+              <div>{organization?.bank}</div>
             </div>
 
             <div className="flex gap-2">
               <div className="text-base	font-bold ">Branch =</div>
-              <div>{organization.branch}</div>
+              <div>{organization?.branch}</div>
             </div>
             <div className="flex gap-2">
               <div className="text-base	font-bold ">Payout =</div>
-              <div>{organization.payout}</div>
+              <div>{organization?.payout}</div>
             </div>
           </div>
         </div>
@@ -102,7 +108,7 @@ export default function OrganizationPayment({
       {showPaymentModal && (
         <PaymentModal
           setShowPaymentModal={setShowPaymentModal}
-          organizationId={organization._id}
+          organizationId={organization?._id}
         />
       )}
     </div>

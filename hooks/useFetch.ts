@@ -21,7 +21,7 @@ export const FetchPost = async ({ endpoint, body = {} }: PostFetchProps) => {
         body: JSON.stringify(body),
       }
     );
-
+    console.log(response);
     if (!response.ok) {
       error("Something went wrong while fetching data from post request");
       return;

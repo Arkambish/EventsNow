@@ -14,6 +14,7 @@ interface PresonDetailsBar {
   email: string;
   userId: String;
   role: String;
+  isBlocked: boolean;
   setUser: React.Dispatch<React.SetStateAction<UserType[]>>;
 }
 
@@ -22,11 +23,13 @@ export default function AdminPersonDetailsBar({
   email,
   userId,
   role,
+  isBlocked,
   setUser,
 }: PresonDetailsBar) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showBlacklistModal, setShowBlacklistModal] = useState(false);
   const [showMakeAdminModal, setMakeAdminModal] = useState(false);
+  const [showUnblockingUserModal, setShowUnblockingUserModal] = useState(false);
   const adminUser = async () => {
     try {
       const makeAdminRes = await fetch(
@@ -60,28 +63,73 @@ export default function AdminPersonDetailsBar({
   const blacklistUser = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/app/api/v1/blacklist/${userId}`,
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/user/blockUser`,
         {
-          method: "POST",
+          method: "PUT",
+          body: JSON.stringify({ id: userId }),
         }
       );
+      console.log(response);
 
       if (!response.ok) {
-        throw new Error("Failed to blacklist user");
+        error("Failed to add user to the blacklist");
+        return;
       }
+      success("User added to the blacklist");
+      setShowBlacklistModal(false);
 
-      const data = await response.json();
+      setUser((user: UserType[]) => {
+        const userChangers = user.map((user: UserType) => {
+          if (user._id === userId) {
+            user.isBlocked = true;
+          }
+          return user;
+        });
+        return userChangers;
+      });
     } catch (error) {
       console.error("Error blacklisting user:", error);
     }
   };
+  const unblockUser = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/user/unblockUser`,
+        {
+          method: "PUT",
+          body: JSON.stringify({ id: userId }),
+        }
+      );
+      console.log(response);
+
+      if (!response.ok) {
+        error("Failed to unblock user");
+        return;
+      }
+      success("User unblocked");
+      setShowUnblockingUserModal(false);
+
+      setUser((user: UserType[]) => {
+        const userChangers = user.map((user: UserType) => {
+          if (user._id === userId) {
+            user.isBlocked = false;
+          }
+          return user;
+        });
+        return userChangers;
+      });
+    } catch (error) {
+      console.error("Error unblocking user:", error);
+    }
+  }
 
   return (
     <div>
       <div
         className={`${
-          role === "admin" ? " bg-slate-500 text-white" : "bg-white"
-        } my-2 sm:my-4 border-2  justify-between ms-4 sm:ms-4 mt-6  w-full      col-span-2 grid grid-cols-12  rounded-[5px] mb-2  h-8`}
+          role === "admin" ? " bg-slate-500 text-white" :(
+            isBlocked?"bg-red-400": "bg-white")
+        } my-2 sm:my-4 border-2  justify-between ms-4 sm:ms-4 mt-6      col-span-2 grid grid-cols-12  rounded-[5px] mb-2  h-8`}
       >
         <div className="text-base font-light lg:col-span-3  hidden lg:flex ms-2">
           {name}
@@ -112,103 +160,55 @@ export default function AdminPersonDetailsBar({
                   leaveTo="transform opacity-0 scale-95"
                 >
                   <Menu.Items className=" mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none font-Inter font-semibold">
-                    <div className="px-1 py-1 ">
+                  {isBlocked ? <div className="px-1 py-1 ">
                       <Menu.Item>
                         <button
                           onClick={() => {
-                            setMakeAdminModal(true);
+                            setShowUnblockingUserModal(true);
                             setIsOpen(true);
                           }}
                           className={`group flex w-full text-stone-600 gap-3 hover:bg-slate-100 items-center rounded-md px-2 py-2 text-sm `}
                         >
-                          Make admin
+                          remove from blocklist
                         </button>
                       </Menu.Item>
 
-                      <Menu.Item>
-                        <button
-                          onClick={() => {
-                            setShowBlacklistModal(true);
-                            setIsOpen(true);
-                          }}
-                          className={` group flex w-full text-stone-600 gap-3 hover:bg-slate-100 items-center rounded-md px-2 py-2 text-sm `}
-                        >
-                          Block user
-                        </button>
-                      </Menu.Item>
-                    </div>
+                      
+                    </div>:
+                  <div className="px-1 py-1 ">
+                  <Menu.Item>
+                    <button
+                      onClick={() => {
+                        setMakeAdminModal(true);
+                        setIsOpen(true);
+                      }}
+                      className={`group flex w-full text-stone-600 gap-3 hover:bg-slate-100 items-center rounded-md px-2 py-2 text-sm `}
+                    >
+                      Make admin
+                    </button>
+                  </Menu.Item>
+
+                  <Menu.Item>
+                    <button
+                      onClick={() => {
+                        setShowBlacklistModal(true);
+                        setIsOpen(true);
+                      }}
+                      className={` group flex w-full text-stone-600 gap-3 hover:bg-slate-100 items-center rounded-md px-2 py-2 text-sm `}
+                    >
+                      Block user
+                    </button>
+                  </Menu.Item>
+                </div>}
+                    
                   </Menu.Items>
                 </Transition>
               </div>
             </Menu>
 
-            // <>
-            //   <button
-            //     onClick={() => {
-            //       setMakeAdminModal(true);
-            //       setIsOpen(true);
-            //     }}
-            //     className={`bg-custom-blue h-[34px]  rounded-[5px] w-20 md:w-32 xl:w-44  shadow-3xl`}
-            //   >
-            //     <div className="flex justify-around pl-1">
-            //       <div className="lg:hidden xl:grid grid">
-            //         <Image
-            //           src={"/images/admin/Info_fill.png"}
-            //           width={25}
-            //           height={25}
-            //           alt="cancel"
-            //         />
-            //       </div>
-            //       <div className="text-white  self-center text-center text-base font-medium mr-2 hidden lg:flex ">
-            //         Make admin
-            //       </div>
-            //     </div>
-            //   </button>
-            //   <button
-            //     onClick={() => {
-            //       setShowBlacklistModal(true);
-            //       setIsOpen(true);
-            //     }}
-            //     className={`bg-custom-green h-[34px]  rounded-[5px] w-20 md:w-32 xl:w-44  shadow-3xl `}
-            //   >
-            //     <div className="flex justify-around pl-1">
-            //       <div className="lg:hidden xl:grid grid">
-            //         <Image
-            //           src={"/images/admin/Cancel_fill.png"}
-            //           width={25}
-            //           height={25}
-            //           alt="cancel"
-            //         />
-            //       </div>
-            //       <div className="text-white  self-center text-center text-base font-medium xl:mr-2 hidden lg:flex ">
-            //         Block user
-            //       </div>
-            //     </div>
-            //   </button>
-            // </>
           )}
 
-          {/* {role === "admin" && (
-            <>
-              <div className="">
-                <button className="bg-custom-blue  h-[34px] rounded-[5px]  w-[3.9rem] sm:w-[5.4rem] md:w-[7.3rem] xl:w-36 shadow-3xl ">
-                  <div className="flex justify-around pl-1">
-                    <div className="lg:hidden xl:grid grid">
-                      <Image
-                        src={"/images/admin/Info_fill.png"}
-                        width={25}
-                        height={25}
-                        alt="cancel"
-                      />
-                    </div>
-                    <div className="text-white  self-center text-center text-base font-medium xl:mr-6 hidden lg:flex ">
-                      Admin
-                    </div>
-                  </div>
-                </button>
-              </div>
-            </>
-          )} */}
+          
         </div>
       </div>
 
@@ -276,6 +276,45 @@ export default function AdminPersonDetailsBar({
                   onClick={adminUser}
                 >
                   Make admin
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Modal>
+          )}
+        </div>
+      )}
+
+
+{showUnblockingUserModal && (
+        <div>
+          {" "}
+          {isOpen && (
+            <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Confirm Unblock user
+              </Dialog.Title>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">
+                  Are you sure you want to unblock this user?
+                </p>
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={unblockUser}
+                >
+                  Unblock
                 </button>
                 <button
                   type="button"

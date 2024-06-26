@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import SuperadminPages from "@/app/admin/dashboard/components/SuperadminPages";
 import Superadminevents from "./Superadminevent";
 import Spinner from "@/components/Spinner";
@@ -6,6 +6,7 @@ import OrganizationPayment from "./OrganizationPayment";
 import EmptyStateComponent from "@/components/EmptyStateComponent";
 import { AdminContext, OrganizationType } from "@/app/Type";
 import { People } from "@/app/organization/dashboard/[id]/components/InviteButton";
+import { set } from "mongoose";
 
 // const paymentsOrganization = async () => {
 // const response = await fetch(
@@ -16,11 +17,24 @@ import { People } from "@/app/organization/dashboard/[id]/components/InviteButto
 // };
 
 export default function Payments() {
+  // useEffect(() => {
+  //   const paymentsOrganization = async () => {
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_URL}/api/v1/organization/getOrganizationHasPayment`
+  //     );
+  //     const data = await response.json();
+  //     setOrganizationData(data);
+  //     console.log(data);
+  //   };
+  //   paymentsOrganization();
+  //   console.log(organizationData);
+  // }, []);
+
   // const organizationData = await paymentsOrganization();
-  const [organizationData, setOrganizationData] = React.useState<
-    OrganizationType[]
-  >([]);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [organizationData, setOrganizationData] = useState<OrganizationType[]>(
+    []
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [filterOrganizationData, setFilterOrganizationData] = useState<
     OrganizationType[]
@@ -30,10 +44,10 @@ export default function Payments() {
     id: "",
     name: "",
   });
-
+console.log(organizationData[0]?._id);
   const searchEventData = organizationData.map((org: OrganizationType) => ({
-    id: org._id,
-    name: org.organizationName,
+    id: org?._id,
+    name: org?.organizationName,
   }));
 
   function handleSearchBtn() {
@@ -107,7 +121,7 @@ export default function Payments() {
               <EmptyStateComponent message="No Events" />
             ) : (
               filterOrganizationData.map((me: OrganizationType) => (
-                <OrganizationPayment key={me._id} organization={me} />
+                <OrganizationPayment key={me?._id} organization={me} />
               ))
             )}
           </>

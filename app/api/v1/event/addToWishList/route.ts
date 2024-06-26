@@ -6,12 +6,14 @@ import { ca } from "date-fns/locale";
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
     const data = await request.json();
+   
 
     await connectMongoDB();
 
     const getUserById = await User.findOne({ _id: data.userId });
+
     if (!getUserById) {
-      return NextResponse.json({ message: "User not found" });
+      return NextResponse.json({ message: "User not found" }, { status: 400 });
     }
 
     const newWishListArray = [...getUserById.wishListId, data.eventId];
@@ -23,7 +25,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
     });
 
     if (!updatedUser) {
-      return NextResponse.json({ message: "failed to add event to wishList " });
+      return NextResponse.json({ message: "failed to add event to wishList " }, { status: 400 });
     }
     return NextResponse.json("Event added to wishList successfully");
   } catch (e) {
