@@ -5,6 +5,7 @@ import TicketType from "@/models/ticketType";
 
 export async function POST(req: NextRequest) {
   const { price, image, eventId, classType } = await req.json();
+  
 
 
   try {

@@ -40,7 +40,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
 
       if (!newData || !newData.ticket) {
         
-        return error("Failed to create ticket due to invalid data");
+        return error("Failed to create ticket");
       }
 
       setAllTickets((prev) => {
@@ -71,6 +71,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
               value={newTicketPrice}
               className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
               onChange={(e) => {
+                if (isNaN(Number(e.target.value))) return;
                 setNewTicketPrice(Number(e.target.value));
               }}
             />
