@@ -20,7 +20,6 @@ export const getUser = async ({ email }: any) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email }),
-      
     }
   );
 
@@ -29,7 +28,6 @@ export const getUser = async ({ email }: any) => {
 };
 function Notification() {
   const [notification, setNotification] = useState<NotificationType[]>([]);
-
 
   useEffect(() => {
     async function session() {
@@ -45,7 +43,7 @@ function Notification() {
             const notificationData = await FetchGet({
               endpoint: `notification/getNotification/${data._id}`,
             });
-
+            console.log("Fetched Notifications:", notificationData);
             notificationData
               ? setNotification(notificationData.filternotification.reverse())
               : setNotification([]);
