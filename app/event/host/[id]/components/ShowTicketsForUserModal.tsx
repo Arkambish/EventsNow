@@ -25,6 +25,9 @@ export default function ShowTicketsForUserModal({
   setTotalPrice: any;
   isActiveTicketModal: boolean;
 }) {
+  console.log("ticketArrayTemp", ticketTypes);
+  console.log("ticketArrayTemp", ticketArrayTemp);
+
   const handleVisible = () => {
     setIsActiveTicketModal(false);
     setIsActiveProceedTicketModal(true);

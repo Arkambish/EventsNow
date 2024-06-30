@@ -86,6 +86,19 @@ const Buttons = ({
   const [totalTicketPrice, setTotalTicketPrice] = useState<number>(0);
   const params = useParams<{ id: string }>();
 
+  useEffect(() => {
+    async function getTicketTypes() {
+      const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+
+      setAllTicketTypes(data);
+    }
+    getTicketTypes();
+  }, [params.id]);
+
   async function userRegistrationForEventHandler() {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/registerUserForEvent`,
@@ -310,22 +323,22 @@ const Buttons = ({
             </div>
           </button>
         )}
-        {allTickets && allTickets.length > 0 && (
-          <button
-            onClick={() => setIsActiveTicketModal(true)}
-            disabled={preview}
-            className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
-              preview ? "cursor-not-allowed" : ""
-            }`}
-          >
-            <div className="flex items-center space-x-2">
-              <FaTicketAlt size={23} />
-              <span className="font-medium xl:text-md text-left leading-tight">
-                Buy tickets
-              </span>
-            </div>
-          </button>
-        )}
+        {/* {allTickets && allTickets.length > 0 && ( */}
+        <button
+          onClick={() => setIsActiveTicketModal(true)}
+          disabled={preview}
+          className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
+            preview ? "cursor-not-allowed" : ""
+          }`}
+        >
+          <div className="flex items-center space-x-2">
+            <FaTicketAlt size={23} />
+            <span className="font-medium xl:text-md text-left leading-tight">
+              Buy tickets
+            </span>
+          </div>
+        </button>
+        {/* )} */}
       </div>
 
       {/* Registration Modal */}
