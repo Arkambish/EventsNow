@@ -26,6 +26,7 @@ import Modal from "@/components/Modal";
 import { Dialog } from "@headlessui/react";
 import { FetchPost } from "@/hooks/useFetch";
 import { comment } from "postcss";
+import { useRouter } from "next/navigation";
 
 import {
   UseEventContext,
@@ -109,6 +110,14 @@ export default function HostSideBar({
   const [allTicketTypes, setAllTicketTypes] = useState<Ticket[]>([]);
   const [totalTicketPrice, setTotalTicketPrice] = useState<number>(0);
   const params = useParams<{ id: string }>();
+  const router = useRouter();
+  const showTicketModal = () => {
+    if(!userId){
+      router.push("/auth/login");
+      return;
+    }
+    setIsActiveTicketModal(true);
+  }
 
   useEffect(() => {
     async function getTicketTypes() {
@@ -189,8 +198,8 @@ export default function HostSideBar({
     const getUser = async () => {
       const session = await getSession();
       const user = session?.user as customUser;
-      setUserId(user._id);
-      setEmail(user.email);
+      setUserId(user?._id);
+      setEmail(user?.email);
     };
     getUser();
   }, [id]);
@@ -289,6 +298,7 @@ export default function HostSideBar({
     setIsRemoveWishListModal(false);
   }
 
+
   return (
     <div className="xl:w-96  bg-white items-end md:w-80">
       <div className=' text-center text-[#454545cc] md:text-4xl xl:text-5xl sm:text-xl font-normal xl:pt-16 md:pt-10 font-["Roboto"]'>
@@ -380,6 +390,10 @@ export default function HostSideBar({
             <button
               disabled={preview ? true : false}
               onClick={() => {
+                if(!userId){
+                  router.push("/auth/login");
+                  return;
+                }
                 setIsRegModalShow(true);
               }}
               className={`flex button py-2.5 xl:py-3.5 bg-custom-orange rounded-l-2xl items-center xl:px-4 ${
@@ -468,7 +482,12 @@ export default function HostSideBar({
             <button
               disabled={preview ? true : false}
               // onClick={addTowishlistHandler}
-              onClick={() => setIsAddWishListModal(true)}
+              onClick={() => {
+                if(!userId){
+                  router.push("/auth/login");
+                  return;
+                }
+                setIsAddWishListModal(true)}}
               className={`${
                 preview ? "cursor-not-allowed" : ""
               }  button  xl:h-14 h-12 bg-[#455273] rounded-r-xl items-center xl:px-4 px-2`}
@@ -486,7 +505,7 @@ export default function HostSideBar({
         </div>
         {/* {allTickets && allTickets.length > 0 && ( */}
         <button
-          onClick={() => setIsActiveTicketModal(true)}
+          onClick={showTicketModal}
           disabled={preview ? true : false}
           className={`  button w-40  h-12  bg-[#D47151] rounded-xl xl:px-4 px-2 ${
             preview ? "cursor-not-allowed" : ""
