@@ -210,7 +210,7 @@ export default function AnimatedAbout() {
         </div>
       </div>
 
-      <div className="mt-44">
+      <div className="mt-24">
         <div ref={historyRef}>
           <div className="bg-[#F9EBE9] py-8">
             <div className='text-center w-full  text-[#906953] font-["Khand"] md:text-4xl xl:text-6xl sm:text-3xl  font-semibold sm:mt-12'>
@@ -254,7 +254,7 @@ export default function AnimatedAbout() {
         </div>
       </div>
 
-      <div className="sm:mt-52 mt-20">
+      <div className="sm:mt-32 mt-20">
         <div className='mt-6 text-center w-full  h-[5rem]  text-[#906953] font-["Khand"] md:text-4xl xl:text-5xl sm:text-3xl md:mt-12 font-semibold sm:my-10 '>
           Why choose EventNow?
         </div>
@@ -311,7 +311,7 @@ export default function AnimatedAbout() {
         </div>
       </div>
 
-      <div className='mt-32 text-center w-full  text-[#906953] font-["Khand"] md:text-4xl xl:text-5xl sm:text-3xl md:mt-44 font-semibold  '>
+      <div className='mt-16 text-center w-full  text-[#906953] font-["Khand"] md:text-4xl xl:text-5xl sm:text-3xl md:mt-24 font-semibold  '>
         Ready to get started?
       </div>
 
@@ -370,7 +370,7 @@ export default function AnimatedAbout() {
         </div>
       </div>
 
-      <div ref={besteventRef}>
+      {/* <div ref={besteventRef}>
         <div className='mt-6 text-center w-full  h-[5rem]  text-[#906953] font-["Khand"] md:text-4xl xl:text-5xl sm:text-3xl md:mt-12 font-semibold sm:my-10 '>
           BEST EVENTS
         </div>
@@ -402,7 +402,7 @@ export default function AnimatedAbout() {
             }
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -44,7 +44,7 @@ export default function BestEvent({
         <div className="text-[#AC736D]  text-lg font-bold">{eventname}</div>
 
         <button
-          onClick={() => print()}
+          // onClick={() => print()}
           className="w-[3.9rem] h-[1.5rem] rounded-full bg-[#AC736D] text-white "
         >
           {year}

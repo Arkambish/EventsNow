@@ -40,14 +40,14 @@ export default function Report() {
               discription1="ATTENDANCE REPORT"
             />
           </button>
-          <button onClick={() => setIsRevenueReport(true)}>
+          {/* <button onClick={() => setIsRevenueReport(true)}>
             <View_Report
               eventName={selectedEvent}
               isSlideBar={isSlideBar}
               img="revenueReport.svg"
               discription1="REVENUE REPORT"
             />
-          </button>
+          </button> */}
         </>
       );
     }
