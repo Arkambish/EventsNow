@@ -11,7 +11,7 @@ import Modal from "@/components/Modal";
 import { Dialog } from "@headlessui/react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { RiAddCircleFill } from "react-icons/ri";
-import { success } from "@/util/Toastify";
+import { error, success } from "@/util/Toastify";
 import AllPermission from "./modal/AllPermission";
 import SelectOneEvent from "./modal/SelectOneEvent";
 import PermissionOneEvent from "./modal/PermissionOneEvent";
@@ -36,6 +36,8 @@ export default function PersonDetailsBar({
     setPermissionID,
     setGlobalPermission,
     setEventPermission,
+    team,
+    setTeam,
   } = useOrg() as OrgContext;
 
   const [isEditButton, setIsEditButton] = useState<boolean>(false);
@@ -76,6 +78,32 @@ export default function PersonDetailsBar({
     setIsEditButton(false);
     setIsSelectEvent(true);
   };
+
+  async function deletePermission() {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/v1/permission/deleteUserPermission/${permissionDocumentId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!res.ok) {
+      error("Failed to remove permission");
+      return;
+    }
+
+    const newTeam = team.filter(
+      (team) => team.permissionDocumentId !== permissionDocumentId
+    );
+
+    success("Permission removed successfully");
+    setIsEditButton(false);
+    setTeam(newTeam);
+    setModal("");
+  }
 
   return (
     //parent div eken 3n 2k kiyala gaththe meka.wenas krla gann onnm.mn dila tynne meke mulu loku div ekatam col-span-2 kiyala-ashan
@@ -128,11 +156,9 @@ export default function PersonDetailsBar({
             <div className="mt-4">
               <p className="text-sm text-gray-500">
                 <div className="flex sm:w-full w-fit sm:gap-0 gap-2 sm:flex-row flex-col justify-between ">
-                  {/* <button onClick={deletePermission}> */}
-
-                  <button>
+                  <button onClick={deletePermission}>
+                    {/* <button> */}
                     <div className="flex  rounded-md gap-2 px-3 py-1 items-center bg-dashBtnBlue text-white">
-
                       <AiFillCloseCircle />
                       <div>Remove</div>
                     </div>

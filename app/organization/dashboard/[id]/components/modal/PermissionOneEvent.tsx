@@ -114,6 +114,7 @@ export default function PermissionOneEvent({
 
     success("permission updated");
     setModal("");
+    setIsOpen(false);
   }
 
   function backButton() {

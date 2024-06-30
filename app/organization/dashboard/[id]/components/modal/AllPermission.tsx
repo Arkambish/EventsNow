@@ -107,6 +107,7 @@ export default memo(function AllPermission({
 
     success("permission updated");
     setGlobalPermission(formDataKeysArray);
+    setIsOpen(false);
     setModal("");
   }
 
