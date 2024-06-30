@@ -167,13 +167,15 @@ export default function NavBar() {
 
             const data = await getUser({ email });
 
-            const notificationData = await FetchGet({
-              endpoint: `notification/getNotification/${data._id}`,
-            });
-            console.log(notificationData);
-            notificationData
-              ? setNotification(notificationData.filternotification)
-              : setNotification([]);
+            if (data) {
+              const notificationData = await FetchGet({
+                endpoint: `notification/getNotification/${data._id}`,
+              });
+              console.log(notificationData);
+              notificationData
+                ? setNotification(notificationData.filternotification)
+                : setNotification([]);
+            }
 
             if (data) {
               setUserActive(true);

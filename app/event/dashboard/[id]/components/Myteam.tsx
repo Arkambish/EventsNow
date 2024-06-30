@@ -7,19 +7,17 @@ import EmptyStateComponent from "@/components/EmptyStateComponent";
 export default function Myteam() {
   const { user } = UseEventContext() as EventContextType;
 
-
   return (
-    
-      <Container>
-        <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
-          <div className="text-stone-600 font-IBM font-medium text-3xl ">
-            MY TEAM
-          </div>
-          <div className=" text-[#455273]  mr-8">
-            Experience the power of collaborating by easily inviting your team
-            members and assigning roles
-          </div>
-          {/* <div className="lg:flex py-4">
+    <Container>
+      <div className="lg:pl-10 mb-5 grid gap-2 mt-8 md:mr-10 pb-8">
+        <div className="text-stone-600 font-IBM font-medium text-3xl ">
+          MY TEAM
+        </div>
+        <div className=" text-[#455273]  mr-8">
+          Experience the power of collaborating by easily inviting your team
+          members and assigning roles
+        </div>
+        {/* <div className="lg:flex py-4">
             <input
               type="text"
               placeholder="Search by email ... "
@@ -32,8 +30,8 @@ export default function Myteam() {
               Invite
             </button>
           </div> */}
-          <div className="mt-6 grid overflow-auto h-80 md:w-full content-start gap-3 ">
-            {/* {user.length == 0 || user == null? (
+        <div className="mt-6 grid overflow-auto h-80 md:w-full content-start gap-3 ">
+          {/* {user.length == 0 || user == null? (
               <EmptyStateComponent message="No user in the event" />
             ) : (
              (
@@ -47,22 +45,20 @@ export default function Myteam() {
               
             )} */}
 
-            {user && Array.isArray(user) ? (
-              user.map((user) => (
-                <TeamMemberCard
-                  key={user.email}
-                  name={user.name}
-                  email={user.email}
-                />
-                
-                
-              ))
-            ) : (
-              <EmptyStateComponent message="No team members" />
-            )}
-          </div>
+          {user && Array.isArray(user) ? (
+            user.map((user) => (
+              <TeamMemberCard
+                key={user.email}
+                name={user.name}
+                email={user.email}
+                user={user}
+              />
+            ))
+          ) : (
+            <EmptyStateComponent message="No team members" />
+          )}
         </div>
-      </Container>
-    
+      </div>
+    </Container>
   );
 }

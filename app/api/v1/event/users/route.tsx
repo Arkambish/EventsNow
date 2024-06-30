@@ -11,6 +11,8 @@ type Permission = {
     _id: string;
     email: string;
     firstName: string;
+    lastName: string;
+    image: string;
   };
   globalPermission: string[];
   eventPermission: {
@@ -38,6 +40,7 @@ export async function POST(req: Request) {
         }
       });
     });
+    console.log(user);
 
     if (!user || user.length === 0) {
       return NextResponse.json({ message: "user not found" });
@@ -47,6 +50,9 @@ export async function POST(req: Request) {
       return {
         email: u.userId.email,
         name: u.userId.firstName,
+        firstName: u.userId.firstName,
+        lastName: u.userId.lastName,
+        image: u.userId.image,
       };
     });
 
