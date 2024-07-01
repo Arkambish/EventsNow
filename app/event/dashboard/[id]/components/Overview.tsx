@@ -10,10 +10,8 @@ import { is } from "date-fns/locale";
 import TicketSalesByClass from "./TicketByClass";
 
 export default function Overview() {
-  const { event, totalTicketSale, totalAttendance, isLoading } =
+  const { event, totalAttendance, isLoading } =
     UseEventContext() as EventContextType;
-
-  console.log(totalTicketSale, totalAttendance);
 
   if (isLoading) return <div>loading</div>;
   return (
