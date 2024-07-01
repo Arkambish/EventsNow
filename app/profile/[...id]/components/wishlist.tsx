@@ -22,7 +22,7 @@ export default function MyProfile() {
                 key={e._id}
                 eId={e._id}
                 EventName={e.eventName}
-                Location={e.selectedTab}
+                Location={e.eventLocation}
                 Time={e.startTime}
                 Date={e.eventStartDate}
                 image={e.coverImage}
