@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import EmptyStateComponent from "@/components/EmptyStateComponent";
-import TicketMockup from "@/app/event/dashboard/[id]/components/TicketMockup";
+import TicketMockup from "./TicketMockup";
 import { useProf } from "../ProfContext";
 import { Ticket } from "@/app/Type";
 import { RiH1 } from "react-icons/ri";
