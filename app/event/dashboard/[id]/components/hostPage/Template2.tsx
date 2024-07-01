@@ -123,8 +123,10 @@ function Template2({ setIsTemplate2 }: Props) {
                 End Date
               </div>
             </div>
+
             <div className="text-2xl font-bold">11th May 2020</div>
           </div>
+
           <div className="flex flex-col items-center justify-center h-full mt-60">
             <h1 className="text-5xl font-bold my-6">Nadagama</h1>
             <p className="mb-6  mx-auto text-lg text-center">

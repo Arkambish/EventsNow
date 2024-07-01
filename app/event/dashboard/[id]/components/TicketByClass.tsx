@@ -3,6 +3,7 @@ import Image from "next/image";
 import ContainerWithStroke from "./ContainerWithStroke";
 import DetailsModal from "./modals/TicketByClass";
 import { EventContextType, UseEventContext } from "../EventDashContext";
+import TicketByClassModal from "./modals/TicketByClass";
 
 interface OverviewSubComponentProps {
   image: string;
@@ -61,7 +62,7 @@ export default function TicketSalesByClass({
         >
           {totalTicketSale}
         </div>
-        <DetailsModal
+        <TicketByClassModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           ticketSales={ticketSales}
