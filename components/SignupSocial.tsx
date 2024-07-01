@@ -9,15 +9,15 @@ export default function SignupSocial() {
     signIn("google");
   }
   return (
-    <div className="  justify-center ">
-      <div className="grid grid-cols-12 my-8">
+    <div className="  justify-center grid ">
+      <div className="grid grid-cols-12">
         <div className="h-[1px] bg-black self-center col-span-5"></div>
         <div className="  text-center font-serif sm:text-[16px] font-normal col-span-2 ">
           OR
         </div>
         <div className="h-[1px] bg-black self-center col-span-5"></div>
       </div>
-      <div className="grid grid-cols-2 justify-items-center">
+      <div className="grid  justify-items-center">
         {/* <button
           onClick={() => signIn("facebook")}
           className="mx-3 mb-3 mt-4 justify-self-end hover:bg-custom-lightorange rounded-[10px] border-solid border-[#D7CFC7] border-[1px]"
@@ -62,7 +62,7 @@ export default function SignupSocial() {
 
         <button
           onClick={() => handleGoogleBtn()}
-          className="mx-3 mb-3 mt-4 justify-self-start hover:bg-custom-lightorange rounded-[10px] border-solid border-[#D7CFC7] border-[1px]"
+          className="mx-3  mt-4 justify-self-start hover:bg-custom-lightorange rounded-[10px] border-solid border-[#D7CFC7] hover:bg-slate-100 border-[1px]"
         >
           <div className="flex">
             <svg
@@ -104,7 +104,7 @@ export default function SignupSocial() {
         </button>
       </div>
       {/* handlegoogle */}
-      <div className="grid mt-2 mb-5">
+      {/* <div className="grid mt-2 mb-5">
         <button
           onClick={() => signIn()}
           className="justify-self-center   hover:bg-custom-lightorange rounded-[10px] border-solid border-[#D7CFC7] border-[1px]"
@@ -142,7 +142,7 @@ export default function SignupSocial() {
             </div>
           </div>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

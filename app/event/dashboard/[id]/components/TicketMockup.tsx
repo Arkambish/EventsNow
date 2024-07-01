@@ -79,7 +79,7 @@ export default function TicketMockup({
             as="h3"
             className="text-lg font-medium leading-6 text-gray-900"
           >
-            Confirm Denying
+            Confirm removing
           </Dialog.Title>
           <div className="mt-2">
             <p className="text-sm text-gray-500">
@@ -93,7 +93,7 @@ export default function TicketMockup({
               className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
               onClick={deleteTicket}
             >
-              Deny
+              Delete
             </button>
             <button
               type="button"

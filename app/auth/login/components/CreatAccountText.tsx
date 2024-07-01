@@ -3,7 +3,7 @@ import React from "react";
 
 export default function CreatAccountText() {
   return (
-    <div className=" my-15 justify-center self-end font-sans">
+    <div className="  mt-10 mb-20 justify-center self-end font-sans">
       <div className=" mt-[100px] justify-center self-end font-sans">
         <div className="text-center ">If you do not have an account</div>
         <div className="text-center">

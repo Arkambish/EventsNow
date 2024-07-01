@@ -44,7 +44,7 @@ AllPermissionProps) {
           <p className="text-sm text-gray-500">
             <div className="flex w-full  justify-center ">
               <button>
-                <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-dashBtnBlue text-white">
                   <RiAddCircleFill />
                   <div>Chose Events</div>
                 </div>
@@ -112,7 +112,7 @@ const EvntsDetails = memo(function EvntsDetails({
         <div className="">
           <button
             onClick={() => editButton(event)}
-            className={`bg-custom-orange h-[30px] justify-self-end rounded-[5px] `}
+            className={`bg-dashBtnBlue  h-[30px] justify-self-end rounded-[5px] `}
           >
             <div className="flex ml-2 gap-2 items-center justify-center">
               <svg

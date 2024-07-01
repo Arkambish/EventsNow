@@ -124,7 +124,7 @@ export default memo(function AllPermission({
           <p className="text-sm text-gray-500">
             <div className="flex w-full  justify-center ">
               <button>
-                <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-dashBtnBlue text-white">
                   <RiAddCircleFill />
                   <div>Chose Permission</div>
                 </div>
@@ -191,7 +191,7 @@ export default memo(function AllPermission({
               />
               <div className="flex w-11/12  justify-end  ">
                 <button type="submit" className="button">
-                  <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-custom-orange text-white">
+                  <div className="flex rounded-md gap-2 px-3 py-1 items-center bg-dashBtnBlue text-white">
                     <RiAddCircleFill />
                     <div>Done</div>
                   </div>

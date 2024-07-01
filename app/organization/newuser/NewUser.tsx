@@ -43,18 +43,18 @@ export default function NewUser() {
             userIds: [userId],
           };
 
-          const notifyUser = await FetchPost({
-            endpoint: `notification/postNotificationById`,
-            body: data,
-          });
-          console.log(notifyUser);
-          if (!notifyUser) {
-            // error("error in sending notification");
-            console.log("error in sending notification");
-            return;
-          }
+          // const notifyUser = await FetchPost({
+          //   endpoint: `notification/postNotificationById`,
+          //   body: data,
+          // });
+          // console.log(notifyUser);
+          // if (!notifyUser) {
+          //   // error("error in sending notification");
+          //   console.log("error in sending notification");
+          //   return;
+          // }
 
-          success("Notification sent successfully");
+          // success("Notification sent successfully");
           console.log("Notification sent successfully");
         } catch (error) {
           console.error("Error", error);
