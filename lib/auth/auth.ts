@@ -124,6 +124,8 @@ export const authOptions: NextAuthOptions = {
       // }
       return true;
     },
+
+    
     async session(params: { session: any; token: JWT; user: any }) {
       // if (params.session.user) {
       //   params.session.user.email = params.token.email;
@@ -137,6 +139,8 @@ export const authOptions: NextAuthOptions = {
       params.session.user._id = params.token.id;
       return params.session;
     },
+
+
     async jwt(params: {
       token: any;
       user: any;

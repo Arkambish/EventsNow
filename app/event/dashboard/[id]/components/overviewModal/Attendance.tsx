@@ -55,10 +55,14 @@ export default memo(function AttendanceDetails() {
               <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div className="overflow-hidden">
                   <div className="text-lg text-bold flex justify-center align-center ">
-                    Attendance of the event
+                    Attendance of the Event
                   </div>
                   <div className=" h-60 overflow-auto">
-                    <div ref={componentpdf} className="w-full ">
+                    <div ref={componentpdf} className="m-4">
+                      <div className="text-bold text-center text-lg m-4">
+                        Attendence Report
+                      </div>
+
                       <table className="w-full text-left text-sm font-light">
                         <thead className="border-b w-full font-medium ">
                           <tr>

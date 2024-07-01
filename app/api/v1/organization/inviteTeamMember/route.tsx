@@ -16,6 +16,7 @@ export async function POST(req: Request) {
     }
 
     const template = Handlebars.compile(emailTemplate);
+    
     const htmlBody = template({
       name: organizationName,
       URL: `${process.env.NEXT_PUBLIC_URL}/organization/newuser?organizationId=${organizationId}&userId=${user._id}`,

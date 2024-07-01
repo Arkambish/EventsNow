@@ -22,6 +22,7 @@ export const FetchPost = async ({ endpoint, body = {} }: PostFetchProps) => {
       }
     );
     console.log(response);
+
     if (!response.ok) {
       error("Something went wrong while fetching data from post request");
       return;

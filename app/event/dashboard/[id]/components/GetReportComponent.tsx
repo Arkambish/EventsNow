@@ -121,60 +121,63 @@ export default function GetReportComponent({
           <div className="overflow-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
               <div className="overflow-hidden">
-                <div className=" h-60 overflow-auto">
-                  <div ref={componentpdf} className="w-full ">
-                    <table className="w-full text-left text-sm font-light">
-                      <thead className="border-b w-full font-medium ">
+                <div className="h-60 overflow-auto">
+                  <div ref={componentpdf} className="w-full p-4 bg-white">
+                    <div className="text-lg text-center m-10 font-bold">
+                      Attendance Report
+                    </div>
+                    <table className="w-full m-2 text-sm font-light border text-center">
+                      <thead className="border-b font-medium bg-gray-100">
                         <tr>
-                          <th scope="col" className="px-6 py-4">
+                          <th scope="col" className="px-2 py-4">
                             Count
                           </th>
-                          <th scope="col" className="px-6 py-4">
+                          <th scope="col" className="px-2 py-4">
                             Time
                           </th>
-                          <th scope="col" className="px-6 py-4">
+                          <th scope="col" className="px-2 py-4">
                             UserId
                           </th>
-                          <th scope="col" className="px-6 py-4">
+                          <th scope="col" className="px-2 py-4">
                             User Name
                           </th>
-                          <th scope="col" className="px-6 py-4">
+                          <th scope="col" className="px-2 py-4">
                             Phone Number
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         {attendances.length === 0 ? (
-                          <tr className="border-b dark:border-neutral-500">
+                          <tr className="border-b">
                             <td className="whitespace-nowrap px-6 py-4 font-medium">
                               _
                             </td>
-                            <td className="whitespace-nowrap px-6 py-4">_</td>
-                            <td className="whitespace-nowrap px-6 py-4">_</td>
-                            <td className="whitespace-nowrap px-6 py-4">_</td>
-                            <td className="whitespace-nowrap px-6 py-4">_</td>
+                            <td className="whitespace-nowrap px-2 py-4">_</td>
+                            <td className="whitespace-nowrap px-2 py-4">_</td>
+                            <td className="whitespace-nowrap px-2 py-4">_</td>
+                            <td className="whitespace-nowrap px-2 py-4">_</td>
                           </tr>
                         ) : (
                           attendances.map((attendance, index) => (
                             <tr
                               key={index}
-                              className="border-b dark:border-neutral-500"
+                              className="border-b"
                             >
-                              <td className="whitespace-nowrap px-6 py-4 font-medium">
+                              <td className="whitespace-nowrap px-2 py-4 font-medium">
                                 {index + 1}
                               </td>
-                              <td className="whitespace-nowrap px-6 py-4">
-                              {attendance.createdAt.substring(0, 10)}
-                                                                 {" | "} 
+                              <td className="whitespace-nowrap px-2 py-4">
+                                {attendance.createdAt.substring(0, 10)}
+                                {" | "}
                                 {attendance.createdAt.substring(11, 19)}
                               </td>
-                              <td className="whitespace-nowrap px-6 py-4">
+                              <td className="whitespace-nowrap px-2 py-4">
                                 {attendance.userId._id}
                               </td>
-                              <td className="whitespace-nowrap px-6 py-4">
+                              <td className="whitespace-nowrap px-2 py-4">
                                 {attendance.userId?.firstName}
                               </td>
-                              <td className="whitespace-nowrap px-6 py-4">
+                              <td className="whitespace-nowrap px-2 py-4">
                                 _
                                 {/* {attendance.userId?.mobileNumber
                                 ? attendance.userId?.mobileNumber
@@ -183,7 +186,6 @@ export default function GetReportComponent({
                             </tr>
                           ))
                         )}
-                        {}
                       </tbody>
                     </table>
                   </div>
@@ -193,11 +195,11 @@ export default function GetReportComponent({
           </div>
         </div>
         <div className="bg-slate-500 rounded-md flex justify-between p-2">
-          <div className="text-lg font-bold	 text-white">
-            Total Attendence: {attendances.length}
+          <div className="text-lg font-bold text-white">
+            Total Attendance: {attendances.length}
           </div>
           <button
-            className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+            className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium text-white rounded-lg w-20"
             onClick={generateAttendencePDF}
           >
             <FaPrint />
@@ -227,10 +229,13 @@ export default function GetReportComponent({
           <div className="overflow-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
               <div className="overflow-hidden">
-                <div className=" h-60 overflow-auto">
-                  <div ref={componentRdf} className="w-full">
-                    <table className="w-full text-left text-sm font-light">
-                      <thead className="border-b w-full font-medium ">
+                <div className="h-60 overflow-auto">
+                  <div ref={componentRdf} className="w-full p-4 bg-white">
+                  <div className="text-lg text-center m-10 font-bold">
+                      Revenue Report
+                    </div>
+                    <table className="w-full text-left text-sm font-light border">
+                      <thead className="border-b font-medium bg-gray-100">
                         <tr>
                           <th scope="col" className="px-6 py-4">
                             Ticket Type
@@ -245,7 +250,7 @@ export default function GetReportComponent({
                       </thead>
                       <tbody>
                         {allTicketTypes?.map((ticket) => (
-                          <tr key={ticket._id}>
+                          <tr key={ticket._id} className="border-b">
                             <td className="px-6 py-4 whitespace-nowrap">
                               {ticket.classType}
                             </td>
@@ -273,12 +278,12 @@ export default function GetReportComponent({
             </div>
           </div>
         </div>
-        <div className="bg-slate-500  w-full rounded-md flex justify-between p-2">
-          <div className="text-lg font-semibold	 text-white">
+        <div className="bg-slate-500 w-full rounded-md flex justify-between p-2">
+          <div className="text-lg font-semibold text-white">
             Total Revenue- LKR: {income}
           </div>
           <button
-            className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
+            className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium text-white rounded-lg w-20"
             onClick={generatePDF}
           >
             <FaPrint />
