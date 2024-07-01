@@ -30,41 +30,41 @@ export default function NewUser() {
         }
       );
       const data = await res.json();
-      console.log(data.message)
+      console.log(data.message);
       if (data.message === "success to create organizer") {
         success("success to create organizer");
-        console.log("success to create organizer")
+        console.log("success to create organizer");
 
-        // send notification 
+        // send notification
         try {
           const data = {
             topic: "Congratulations",
             comment: "You have been added to the organization team",
-            userIds: [userId]
+            userIds: [userId],
           };
-  
+
           const notifyUser = await FetchPost({
             endpoint: `notification/postNotificationById`,
             body: data,
           });
-          console.log(notifyUser)
+          console.log(notifyUser);
           if (!notifyUser) {
-            error("error in sending notification");
-            console.log("error in sending notification")
+            // error("error in sending notification");
+            console.log("error in sending notification");
             return;
           }
-  
+
           success("Notification sent successfully");
-          console.log("Notification sent successfully")
+          console.log("Notification sent successfully");
         } catch (error) {
           console.error("Error", error);
         }
-        return 
+        return;
       }
       if (data.message === "User already exists in the organization") {
         error("User already exists in the organization");
-        console.log("User already exists in the organization")
-        return 
+        console.log("User already exists in the organization");
+        return;
       }
     }
     // const sendNotification = async () => {

@@ -335,6 +335,7 @@ const Buttons = ({
           </button>
         )}
 
+
         {/* {allTickets && allTickets.length > 0 && ( */}
         <button
           onClick={() => {
@@ -343,6 +344,7 @@ const Buttons = ({
                 return;
               }
               setIsActiveTicketModal(true)}}
+
           disabled={preview}
           className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
             preview ? "cursor-not-allowed" : ""
