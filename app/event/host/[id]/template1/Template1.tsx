@@ -50,7 +50,7 @@ export default function Template({
           <HostSideBar
             preview={preview}
             EventName={event.eventName}
-            Location={event.selectedTab}
+            Location={event.eventLocation}
             Time={`${event.startTime} to ${event.endTime}`}
             Date={date}
             activeComponent={activeComponent}

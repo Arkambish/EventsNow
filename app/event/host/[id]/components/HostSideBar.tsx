@@ -345,27 +345,27 @@ export default function HostSideBar({
       <div className="grid grid-rows-3 gap-6 xl:ml-12 md:ml-8 text-left mt-8">
         <div>
           <div className="text-[#AC736D] ">
-            <IoLocation size={30} />
+            <IoLocation size={25} />
           </div>
-          <div className="text-[#353C4E] xl:text-2xl md:text-xl  align-top -mt-8 font-['Roboto'] ml-12">
+          <div className="text-[#353C4E]  md:text-lg  align-top -mt-6 font-['Roboto'] ml-12">
             {Location}
           </div>
         </div>
 
         <div>
           <div className="text-[#AC736D]">
-            <SlCalender size={25} />
+            <SlCalender size={20} />
           </div>
-          <div className="text-[#353C4E] xl:text-2xl  md:text-xl font-['Roboto'] align-top -mt-8 ml-12">
+          <div className="text-[#353C4E]   md:text-lg font-['Roboto'] align-top -mt-6 ml-12">
             {Date}
           </div>
         </div>
 
         <div>
           <div className="text-[#AC736D]">
-            <IoIosTime size={25} />
+            <IoIosTime size={20} />
           </div>
-          <div className="text-[#353C4E] xl:text-2xl  md:text-xl  font-['Roboto'] align-top -mt-8 ml-12">
+          <div className="text-[#353C4E]   md:text-lg  font-['Roboto'] align-top -mt-6 ml-12">
             {Time}
           </div>
         </div>
