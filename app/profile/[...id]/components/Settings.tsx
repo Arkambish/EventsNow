@@ -372,7 +372,7 @@ export default function Settings() {
                           yearDropdownItemNumber={50}
                           className="mt-1 p-2 border-2 border-custom-orange rounded-md focus:outline-none focus:ring-dashBtnBlue focus:border-custom-orange block w-full shadow-sm sm:text-sm"
                         /> */}
-                        <Datepicker
+                        {/* <Datepicker
                           placeholder="Enter your Birthday"
                           inputClassName="bg-white text-black w-full rounded-md px-3 py-[4px]  "
                           primaryColor={"blue"}
@@ -380,6 +380,16 @@ export default function Settings() {
                           asSingle={true}
                           value={birth}
                           onChange={handleValueChange}
+                        /> */}
+                        <input
+                          onChange={(e) => {
+                            setBirth(e.target.value);
+                          }}
+                          value={birth}
+                          type="date"
+                          placeholder="Enter your birthday"
+                          autoComplete="email"
+                          className={`w-full px-3 py-[4px] border rounded-md focus:outline-none focus:border-slate-700  my-2 text-sm `}
                         />
                       </div>
                       <div className="sm:col-span-3 capitalize">

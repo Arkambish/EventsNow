@@ -12,7 +12,7 @@ export default function page() {
   return (
     <div>
       <AnimatedAbout />
-      <div className="mt-52"></div>
+      {/* <div className="mt-52"></div> */}
 
       <Footer />
     </div>

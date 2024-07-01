@@ -93,7 +93,7 @@ function Template2({
                 borderRadius: "50%",
                 padding: "50px",
               }}
-              className="max-sm:hidden   mx-4 p-8 mt-4 text-gray-700 hover:shadow-3xl hover:bg-white border-black border-2 bg-clip-border rounded-full h-full"
+              className="max-sm:hidden   mx-4 p-8 mt-4 text-gray-700 hover:shadow-3xl  border-black border-2 bg-clip-border rounded-full h-full"
             ></div>
 
             <h1 className="text-5xl font-bold max-sm:mt-60 text-center my-6">
@@ -163,7 +163,7 @@ function Template2({
           </div>
         </div>
       )}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
