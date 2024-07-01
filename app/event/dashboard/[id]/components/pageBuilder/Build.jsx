@@ -28,6 +28,7 @@ export default function Build() {
 
   const [editor, setEditor] = useState(null);
   const [html, setHtml] = useState(null);
+  const [css, setCss] = useState(null);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -92,6 +93,7 @@ export default function Build() {
 
     editor.on("update", () => {
       setHtml(editor.getHtml());
+      setCss(editor.getCss());
     });
   }, []);
 
@@ -105,20 +107,29 @@ export default function Build() {
           <head>
             <meta charset="UTF-8">
             <title>Generated Page</title>
+             <style>
+                ${css}
+             </style>
           </head>
-          <body>
+        
             ${html}
-          </body>
+  
         </html>`;
+      console.log(completeHtml);
+      console.log(css);
       const blob = new Blob([completeHtml], {
         type: "text/html;charset=utf-8",
       });
 
+      console.log(blob);
+
       const file = new File([blob], `${id}.html`, { type: "text/html" });
+      console.log(file);
 
       if (!file) return;
       const formData = new FormData();
       formData.append("file", file);
+      console.log(formData);
 
       try {
         const response = await fetch("/api/v1/aws/s3-upload/pagebuilder", {

@@ -1,16 +1,24 @@
-import React, { memo } from "react";
+import React, { useRef } from "react";
 // import { UseEventContext } from "../../EventDashContext";
 import { AttendanceType, EventContextType } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
+import { useReactToPrint } from "react-to-print";
 
-export default memo(function EventReport({
+export default function EventReport({
   setStatus,
   attendances,
 }: {
   setStatus: any;
   attendances: AttendanceType[];
+  
 }) {
   // const { setStatus, attendances } = UseEventContext() as EventContextType;
+  const printRef = useRef(null);
+  
+  const generatePDF = useReactToPrint({
+    content: () => printRef.current,
+    documentTitle: "Revenue Report of the organization",
+  });
 
   return (
     <>
@@ -55,7 +63,7 @@ export default memo(function EventReport({
                   <div className="text-lg text-bold flex justify-center align-center ">
                     Attendance of the event
                   </div>
-                  <div className=" h-60 overflow-auto">
+                  <div className=" h-60 overflow-auto" ref={printRef}>
                     <table className="w-full text-left text-sm font-light">
                       <thead className="border-b w-full font-medium ">
                         <tr>
@@ -97,7 +105,9 @@ export default memo(function EventReport({
                                 {index + 1}
                               </td>
                               <td className="whitespace-nowrap px-6 py-4">
-                                {attendance.createdAt}
+                                {attendance.createdAt.substring(0, 10)}
+                                                                 {" | "} 
+                                {attendance.createdAt.substring(11, 19)}
                               </td>
                               <td className="whitespace-nowrap px-6 py-4">
                                 {attendance.userId._id}
@@ -124,9 +134,9 @@ export default memo(function EventReport({
           </div>
           <div className="bg-slate-500 rounded-md flex justify-between p-2">
             <div className="text-lg font-bold	 text-white">
-              Toral Attendence: {attendances.length}
+              Total Attendence: {attendances.length}
             </div>
-            <button className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
+            <button onClick={generatePDF} className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
               <FaPrint />
               Print
             </button>
@@ -135,4 +145,4 @@ export default memo(function EventReport({
       </div>
     </>
   );
-});
+};

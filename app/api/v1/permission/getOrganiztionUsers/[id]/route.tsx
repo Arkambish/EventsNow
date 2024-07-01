@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 
 import Organization from "@/models/organizationModel";
@@ -16,9 +17,7 @@ type Params = {
   id: string;
 };
 
-
 export const GET = async (req: Request, { params }: { params: Params }) => {
-
   try {
     const id = params.id;
 

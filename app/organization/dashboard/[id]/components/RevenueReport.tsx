@@ -1,13 +1,19 @@
-import React, { memo } from "react";
+import React, { memo, use, useRef } from "react";
 // import { UseEventContext } from "../../EventDashContext";
-import { EventContextType } from "@/app/Type";
 import { FaPrint } from "react-icons/fa6";
+import { useReactToPrint } from "react-to-print";
 
-export default memo(function RevenueDetails({
+export default function RevenueDetails({
   setStatus,
 }: {
   setStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const printRef = useRef(null);
+  
+  const generatePDF = useReactToPrint({
+    content: () => printRef.current,
+    documentTitle: "Revenue Report of the organization",
+  });
   return (
     <>
       <div
@@ -51,7 +57,7 @@ export default memo(function RevenueDetails({
                   <div className="text-lg text-bold flex justify-center align-center ">
                     Revenue of the event
                   </div>
-                  <div className=" h-60 overflow-auto">
+                  <div className=" h-60 overflow-auto" ref={printRef}>
                     <table className="w-full text-left text-sm font-light">
                       <thead className="border-b w-full font-medium ">
                         <tr>
@@ -105,7 +111,7 @@ export default memo(function RevenueDetails({
             <div className="text-lg font-bold	 text-white">
               Toral Revenue- LKR: 100
             </div>
-            <button className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
+            <button onClick={generatePDF} className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20">
               <FaPrint />
               Print
             </button>
@@ -114,4 +120,4 @@ export default memo(function RevenueDetails({
       </div>
     </>
   );
-});
+};

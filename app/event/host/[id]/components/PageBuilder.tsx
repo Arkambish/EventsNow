@@ -78,6 +78,19 @@ const PageBuilder = ({
     getUser();
   }, [id]);
 
+  useEffect(() => {
+    async function getTicketTypes() {
+      const res = await fetch(`/api/v1/ticket/getTicket/${id}`);
+      if (!res.ok) {
+        return;
+      }
+      const data = await res.json();
+
+      setAllTicketTypes(data);
+    }
+    getTicketTypes();
+  }, [id]);
+
   // registration
   async function removeUserFromRegisteredEvent() {
     const res = await fetch(

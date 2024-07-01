@@ -43,7 +43,12 @@ export default function BestEvent({
       <div className="px-4 py-2 flex justify-between items-center">
         <div className="text-[#AC736D]  text-lg font-bold">{eventname}</div>
 
-        <button className="w-[3.9rem] h-[1.5rem] rounded-full bg-[#AC736D] text-white ">
+
+        <button
+          // onClick={() => print()}
+          className="w-[3.9rem] h-[1.5rem] rounded-full bg-[#AC736D] text-white "
+        >
+
           {year}
         </button>
       </div>

@@ -70,7 +70,7 @@ export default function PostTab() {
   }
 
   return (
-    <div className="overflow-y-auto h-screen         sm:mt-12 mt-1 xl:ml-10 md:ml-20  w-full  grid   justify-center  ">
+    <div className="overflow-y-auto h-screen         sm:mt-12 mt-1 xl:ml-10 md:ml-20  w-full  xl:px-[15%]  justify-center  ">
       
         {loading ? (
           <div className="w-full flex justify-center items-center">

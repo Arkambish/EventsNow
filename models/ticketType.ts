@@ -27,3 +27,11 @@ const ticketTypeSchema = new mongoose.Schema({
 const TicketType =
   mongoose.models.TicketType || mongoose.model("TicketType", ticketTypeSchema);
 export default TicketType;
+
+TicketType.collection.dropIndex("classType_1", function (err:any, result:any) {
+  if (err) {
+    console.log("Error in dropping index:", err);
+  } else {
+    console.log("Index dropped:", result);
+  }
+});

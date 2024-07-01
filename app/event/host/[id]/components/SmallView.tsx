@@ -151,8 +151,8 @@ export default function SmallView({
     const getUser = async () => {
       const session = await getSession();
       const user = session?.user as customUser;
-      setUserId(user._id);
-      setEmail(user.email);
+      setUserId(user?._id);
+      setEmail(user?.email);
     };
     getUser();
   }, [id]);

@@ -25,7 +25,7 @@ async function getEvent() {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/v1/event/getPublishedEvents`,
-      { next: { revalidate: 10 } }
+      { next: { revalidate: 0 } }
     );
     return await response.json();
   } catch (error) {
