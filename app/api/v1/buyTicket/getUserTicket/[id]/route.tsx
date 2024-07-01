@@ -22,10 +22,11 @@ export async function GET(request: Request, { params }: { params: Params }) {
     }
 
     const ticketIds = tickets.map((ticket: any) => ticket.ticketId);
+    console.log(ticketIds);
 
     // Fetch TicketType entries for the ticketIds
     const ticketTypes = await TicketType.find({ _id: { $in: ticketIds } });
-    //console.log(ticketTypes);
+    console.log(ticketTypes);
     // Check if any ticket types were found
     if (!ticketTypes || ticketTypes.length === 0) {
       return new NextResponse("No ticket types found", { status: 404 });

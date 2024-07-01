@@ -40,7 +40,7 @@ export default function TicketMockup({
     }
     success("Ticket deleted successfully");
     setDeleteModal(false);
-    allTickets.filter((ticket) => ticket._id !== id);
+    //allTickets.filter((ticket) => ticket._id !== id);
   }
 
   return (
@@ -62,7 +62,7 @@ export default function TicketMockup({
           </div>
         </div>
 
-        <div className="space-y-2 pt-2">
+        {/* <div className="space-y-2 pt-2">
           <button
             className="w-24 rounded border-[1px] border-[#A23434] px-2 my-auto text-sm font-semibold text-[#A23434] flex  gap-2 "
             onClick={() => {
@@ -75,9 +75,9 @@ export default function TicketMockup({
             </div>
             Remove
           </button>
-        </div>
+        </div> */}
       </div>
-      {deleteModal && (
+      {/* {deleteModal && (
         <Modal setIsOpen={setDeleteModal} isOpen={deleteModal}>
           <Dialog.Title
             as="h3"
@@ -108,7 +108,7 @@ export default function TicketMockup({
             </button>
           </div>
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }
