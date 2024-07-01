@@ -37,6 +37,7 @@ export default function TicketMockup({
     }
     success("Ticket deleted successfully");
     setAllTickets(allTickets.filter((ticket) => ticket._id !== id));
+    setDeleteModal(false)
   }
 
   return (
