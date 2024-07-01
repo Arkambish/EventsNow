@@ -29,7 +29,10 @@ export default function MidContent() {
       {status === "tickets" && <Tickets />}
       {status === "editpost" && <EditPost />}
       {status === "sendemail" && <SendEmail />}
-      {status === "attendance" && <Attendance />}
+      {/* attendance report  */}
+      {status === "attendance" && <Attendance />} 
+
+      
       {status === "revenue" && <Revenue />}
 
       {status === "qrreader" && <QrReader />}

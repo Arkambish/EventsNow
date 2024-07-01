@@ -67,6 +67,7 @@ const PaymentModal = (props: PaymentModalProps) => {
     .update(merchantSecret)
     .digest("hex")
     .toUpperCase();
+
   let amountFormatted = amount
     .toLocaleString("en-us", { minimumFractionDigits: 2 })
     .replaceAll(",", "");
@@ -135,10 +136,12 @@ const PaymentModal = (props: PaymentModalProps) => {
   }, []);
 
   useEffect(() => {
+    // SCRIPT THE jdk
     const script = document.createElement("script");
     script.src = "https://www.payhere.lk/lib/payhere.js";
     script.async = true;
 
+    // if payment success
     script.onload = () => {
       // PayHere script is loaded, initialize event listeners
       window.payhere.onCompleted = async function onCompleted(
@@ -213,19 +216,7 @@ const PaymentModal = (props: PaymentModalProps) => {
             }
           });
         }
-        // const response = await fetch(
-        //   `${process.env.NEXT_PUBLIC_URL}/api/v1/event/payment`,
-        //   {
-        //     method: "PUT",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //       id: params.id,
-        //       amount: props.totalPrice,
-        //     }),
-        //   }
-        // );
+      
 
         const updateData = await FetchPut({
           endpoint: `event/payment`,
