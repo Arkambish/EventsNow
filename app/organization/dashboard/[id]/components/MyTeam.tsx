@@ -25,10 +25,11 @@ export default function MyTeam() {
       endpoint: `permission/getOrganiztionUsers/${id}`,
     });
 
-    const team = organizationTeam.filter(
-      (user: OrganizationTeamType) => user.userData.email !== organization.email
-    );
-
+    const team = organizationTeam.filter((user: OrganizationTeamType) => {
+      console.log(user.userData.email, organization.email);
+      return user.userData.email != organization.email;
+    });
+    console.log(team);
     setTeam(team);
 
     setLoading(false);
