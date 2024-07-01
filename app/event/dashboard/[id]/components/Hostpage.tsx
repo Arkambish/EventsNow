@@ -162,10 +162,10 @@ export default function Hostpage() {
                 <button onClick={handleTemplate1}>
                   <div className="flex flex-col justify-center items-center gap-3">
                     <Image
-                      src={"/images/createEvent/eventRegFormImg.png"}
+                      src={"/images/createEvent/Template 1.png"}
                       alt="template1"
-                      width={40}
-                      height={40}
+                      width={100}
+                      height={150}
                     />
                     template 1
                   </div>
@@ -173,10 +173,10 @@ export default function Hostpage() {
                 <button onClick={handleTemplate2}>
                   <div className="flex flex-col justify-center items-center gap-3">
                     <Image
-                      src={"/images/createEvent/eventRegFormImg.png"}
+                      src={"/images/createEvent/Template 2.png"}
                       alt="template1"
-                      width={40}
-                      height={40}
+                      width={100}
+                      height={150}
                     />
                     template 2
                   </div>

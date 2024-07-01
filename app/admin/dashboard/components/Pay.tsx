@@ -22,9 +22,8 @@ const Pay = (props: any) => {
   const orderId = props.orderId;
   const name = props.item;
   const amount = props.amount;
-  const merchantId = "1226307";
-  const merchantSecret =
-    "MjY0MDQ5OTc3NTIyNDg2NDk2OTUyMzU2MDY1OTcxMzYyMTEyODYxMA==";
+  const merchantId = "1226229";
+  const merchantSecret = "OTA4MzgwNDQ5MzAzODA0NTg5MjYzODIxNjAwODIxOTUwNDczMjk=";
   const currency = props.currency || "LKR";
 
   const hashedSecret = crypto
@@ -56,9 +55,9 @@ const Pay = (props: any) => {
   var payment = {
     sandbox: true, // if the account is sandbox or real
     merchant_id: merchantId, // Replace your Merchant ID
-    return_url: "http://localhost:3000/",
-    cancel_url: "http://localhost:3000/",
-    notify_url: "http://localhost:3000/",
+    return_url: "https://events-now.vercel.app/",
+    cancel_url: "https://events-now.vercel.app/",
+    notify_url: "https://events-now.vercel.app/",
     order_id: orderId,
     items: name,
     amount: amount,
@@ -71,12 +70,6 @@ const Pay = (props: any) => {
     city: props.city,
     country: props.country,
     hash: hash,
-  };
-
-  const value = {
-    useId: "1234",
-    eventId: "123445",
-    quantity: 4,
   };
 
   useEffect(() => {

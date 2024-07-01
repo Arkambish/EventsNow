@@ -18,7 +18,7 @@ export default function SignupSocial() {
         <div className="h-[1px] bg-black self-center col-span-5"></div>
       </div>
       <div className="grid grid-cols-2 justify-items-center">
-        <button
+        {/* <button
           onClick={() => signIn("facebook")}
           className="mx-3 mb-3 mt-4 justify-self-end hover:bg-custom-lightorange rounded-[10px] border-solid border-[#D7CFC7] border-[1px]"
         >
@@ -58,7 +58,7 @@ export default function SignupSocial() {
               Facebook
             </div>
           </div>
-        </button>
+        </button> */}
 
         <button
           onClick={() => handleGoogleBtn()}
