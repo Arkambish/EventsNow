@@ -31,39 +31,44 @@ export default function EventCardNewOrg({ event }: eventorg) {
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState<boolean>(false);
 
-  // const sendNotification = async () => {
-  //   try {
-  //     const data = {
-  //       topic: "Event reminder",
-  //       comment: `${
-  //         event.eventName
-  //       } will be started on ${event.eventStartDate.substring(
-  //         0,
-  //         10
-  //       )}. be ready for the excitement`,
-  //       userIds: event.registerUser,
-  //     };
+  const sendNotification = async () => {
+    try {
+      const data = {
+        topic: "Event reminder",
+        comment: `${
+          event.eventName
+        } will be started on ${event.eventStartDate.substring(
+          0,
+          10
+        )}. be ready for the excitement`,
+        userIds: event.registerUser,
+      };
+      
 
-  //     const notifyUser = await FetchPost({
-  //       endpoint: `notification/postNotificationById`,
-  //       body: data,
-  //     });
-  //     if (!notifyUser) {
-  //       error("error in sending notification");
-  //     }
+      const notifyUser = await FetchPost({
+        endpoint: `notification/postNotificationById`,
+        body: data,
+      });
+      console.log(notifyUser.message);
+      if (notifyUser.message !=="Notifications created successfully") {
 
-  //     success("Notification sent successfully");
-  //   } catch (error) {
-  //     console.error("Error", error);
-  //   }
-  // };
+        error("Error in sending notification");
+        return
+      }
+
+      success("Notification sent successfully");
+      setNotificationModal(false);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
 
   return (
     <div>
       <div className=" bg-[#ffffff] my-4 ml-4 mr-12 rounded-xl border-2 border-spacing-1 shadow-lg grid lg:grid-cols-3 overflow-hidden">
         <div
           className="lg:rounded-l-xl overflow-hidden bg-no-repeat bg-cover bg-center"
-          style={{ backgroundImage: `url(${event.dashboardImage as string})` }}
+          style={{ backgroundImage: `url(${event.coverImage as string})` }}
         ></div>
         <div className="lg:col-span-2 rounded-r-xl pt-1">
           <div className="  flex justify-between px-6">
@@ -229,32 +234,32 @@ export default function EventCardNewOrg({ event }: eventorg) {
                     {" "}
                     <h2>Start Date</h2>
                     <div className="font-underlined border-b border-gray-400 text-gray-500">
-                      {" "}
-                      {event.eventStartDate}
+                    
+                      {event.eventStartDate.substring(0, 10)}
                     </div>
                   </div>
                   <div className="flex flex-col space-y-1">
                     {" "}
                     <h2>Location</h2>
                     <div className="font-underlined border-b border-gray-400 text-gray-500 max-w-48 overflow-ellipsis overflow-hidden">
-                      {" "}
-                      {event.location}
+                      
+                      {event.eventLocation}
                     </div>
                   </div>
                   <div className="flex flex-col space-y-1">
-                    {" "}
+                   
                     <h2>Income</h2>
                     <div className="font-underlined border-b border-gray-400 text-gray-500">
-                      {" "}
+                      
                       {event.income}
                     </div>
                   </div>
                   <div className="flex flex-col space-y-1">
-                    {" "}
+                 
                     <h2>Status</h2>
                     <div className="font-underlined border-b border-gray-400 text-gray-500">
-                      {" "}
-                      {event.isPublished}
+                    
+                      {event.isPublished?"Published":"Not Published"}
                     </div>
                   </div>
                 </div>
@@ -274,11 +279,12 @@ export default function EventCardNewOrg({ event }: eventorg) {
             Send Notification
           </Dialog.Title>
           <div className="flex flex-col h-fit">
-            Do you want to send notifications to registerd users?
+            Do you want to send event reminder notifications to registered users?
           </div>
 
           <div className="mt-4 flex gap-2">
             <button
+              onClick={sendNotification}
               type="button"
               className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >

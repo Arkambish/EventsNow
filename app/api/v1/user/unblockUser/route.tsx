@@ -1,0 +1,30 @@
+import connectMongoDB from "@/lib/mongo/mongodb";
+import User from "@/models/userModel";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function PUT(request: NextRequest, response: NextResponse) {
+  try {
+    const id = await request.json();
+    console.log(id.id)
+
+    await connectMongoDB();
+
+    const updatedUser = await User.findByIdAndUpdate(id.id, {
+      $set: { isBlocked: false },
+    });
+
+    if (!updatedUser) {
+      return NextResponse.json(
+        { message: "failed" },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: "success" },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json({ message: "Error of server" });
+  }
+}

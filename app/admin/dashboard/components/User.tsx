@@ -69,7 +69,7 @@ export default function Notification() {
       <SuperadminPages
         serachData={serachData}
         title="All Users"
-        description="You can see all the users that currently available from here"
+        description="You can see all users here"
         text="Search Users"
         reloadPage={reloadPage}
         customComponent={
@@ -84,6 +84,7 @@ export default function Notification() {
                   email={use.email}
                   userId={use._id}
                   role={use.role}
+                  isBlocked={use.isBlocked}
                   setUser={setUser}
                 />
               ))

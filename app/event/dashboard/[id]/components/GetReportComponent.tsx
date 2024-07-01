@@ -48,6 +48,10 @@ export default function GetReportComponent({
     documentTitle: "Revenue Report",
   });
 
+  const generateAttendencePDF = useReactToPrint({
+    content: () => componentpdf.current,
+    documentTitle: "Attendance Report",
+  });
   useEffect(() => {
     async function getTicketData() {
       const res = await fetch(`/api/v1/ticket/getTicket/${params.id}`);
@@ -160,7 +164,9 @@ export default function GetReportComponent({
                                 {index + 1}
                               </td>
                               <td className="whitespace-nowrap px-6 py-4">
-                                {attendance.createdAt}
+                              {attendance.createdAt.substring(0, 10)}
+                                                                 {" | "} 
+                                {attendance.createdAt.substring(11, 19)}
                               </td>
                               <td className="whitespace-nowrap px-6 py-4">
                                 {attendance.userId._id}
@@ -188,11 +194,11 @@ export default function GetReportComponent({
         </div>
         <div className="bg-slate-500 rounded-md flex justify-between p-2">
           <div className="text-lg font-bold	 text-white">
-            Toral Attendence: {attendances.length}
+            Total Attendence: {attendances.length}
           </div>
           <button
             className="bg-dashBtnBlue flex justify-center items-center gap-2 text-lg font-medium		 text-white rounded-lg w-20"
-            onClick={generatePDF}
+            onClick={generateAttendencePDF}
           >
             <FaPrint />
             Print

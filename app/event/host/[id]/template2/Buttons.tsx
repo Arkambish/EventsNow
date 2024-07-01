@@ -3,7 +3,7 @@ import { FetchPost } from "@/hooks/useFetch";
 import { success, error } from "@/util/Toastify";
 import { Dialog } from "@headlessui/react";
 import { getSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FaTicketAlt } from "react-icons/fa";
 import { FaHeart, FaRegHeart, FaRegistered } from "react-icons/fa6";
@@ -63,6 +63,7 @@ const Buttons = ({
   const [registeredUserList, setRegisteredUserList] = useState<string[] | null>(
     null
   );
+  const router = useRouter(); 
 
   const [isActiveTicketModal, setIsActiveTicketModal] =
     useState<boolean>(false);
@@ -165,8 +166,8 @@ const Buttons = ({
     const getUser = async () => {
       const session = await getSession();
       const user = session?.user as customUser;
-      setUserId(user._id);
-      setEmail(user.email);
+      setUserId(user?._id);
+      setEmail(user?.email);
     };
     getUser();
   }, [id]);
@@ -280,7 +281,12 @@ const Buttons = ({
         ) : (
           <button
             disabled={preview}
-            onClick={() => setIsRegModalShow(true)}
+            onClick={() => {
+              if(!userId){
+                router.push("/auth/login");
+                return;
+              }
+              setIsRegModalShow(true)}}
             className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
               preview ? "cursor-not-allowed" : ""
             }`}
@@ -310,7 +316,12 @@ const Buttons = ({
         ) : (
           <button
             disabled={preview}
-            onClick={() => setIsAddWishListModal(true)}
+            onClick={() => {
+              if(!userId){
+                router.push("/auth/login");
+                return;
+              }
+              setIsAddWishListModal(true)}}
             className={`bg-gray-800 hover:bg-gray-700 text-white py-2 px-6 rounded-full ${
               preview ? "cursor-not-allowed" : ""
             }`}
@@ -323,9 +334,17 @@ const Buttons = ({
             </div>
           </button>
         )}
+
+
         {/* {allTickets && allTickets.length > 0 && ( */}
         <button
-          onClick={() => setIsActiveTicketModal(true)}
+          onClick={() => {
+              if(!userId){
+                router.push("/auth/login");
+                return;
+              }
+              setIsActiveTicketModal(true)}}
+
           disabled={preview}
           className={`bg-orange-600 hover:bg-orange-700 text-white py-2 px-6 rounded-full ${
             preview ? "cursor-not-allowed" : ""
@@ -339,6 +358,7 @@ const Buttons = ({
           </div>
         </button>
         {/* )} */}
+
       </div>
 
       {/* Registration Modal */}

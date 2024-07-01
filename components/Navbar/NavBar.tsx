@@ -27,6 +27,7 @@ import { FetchGet } from "@/hooks/useFetch";
 import Style from "./../../app/navbar.module.css";
 import path from "path";
 import HomeNavBar from "@/app/home/components/HomeNavBar";
+import BlockedPage from "../BlockedPage";
 
 export type OrganizationProps = {
   map: any;
@@ -95,6 +96,7 @@ export default function NavBar() {
     wishListId: [],
     registeredEvents: [],
     mobileNumber: 0,
+    isBlocked: false,
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -212,6 +214,8 @@ export default function NavBar() {
         pathname == "/" || pathname == "/home" ? `fixed w-full z-10 ` : ""
       }
     >
+      {user.isBlocked && <BlockedPage />}
+      
       {newUserPath ? null : (
         <div>
           {/* check data has loaded */}

@@ -6,9 +6,11 @@ import { getSession } from "next-auth/react";
 import { EventContextType, UseEventContext } from "../EventDashContext";
 import { MdArrowBack } from "react-icons/md";
 import GeneralUpdate from "./GeneralUpdate";
+import EventChangeUpdate from "./EventChangeUpdate";
 
 export default function SendEmail() {
   const [generalUpdate, setGenaralUpdate] = useState(false);
+  const [eventChangeUpdate, setEventChangeUpdate] = useState(false);
   const { setStatus } = UseEventContext() as EventContextType;
 
   return (
@@ -55,7 +57,7 @@ export default function SendEmail() {
             event changing and updates
           </div>
           <button
-            onClick={() => setGenaralUpdate(true)}
+            onClick={() => setEventChangeUpdate(true)}
             className="bg-dashBtnBlue rounded-md py-1 m-auto text-white  text-base font-normal pr-7 drop-shadow-md flex "
           >
             <Image
@@ -68,6 +70,9 @@ export default function SendEmail() {
             Event changes
           </button>
         </div>
+        {eventChangeUpdate && (
+          <EventChangeUpdate  generalUpdate={eventChangeUpdate} setGenaralUpdate={setEventChangeUpdate} />
+        )}
         {generalUpdate && (
           <GeneralUpdate
             generalUpdate={generalUpdate}

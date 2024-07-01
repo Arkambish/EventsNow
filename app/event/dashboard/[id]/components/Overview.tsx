@@ -7,55 +7,14 @@ import { useParams } from "next/navigation";
 import { EventContextType, UseEventContext } from "../EventDashContext";
 import { FetchGet } from "@/hooks/useFetch";
 import { is } from "date-fns/locale";
+import TicketSalesByClass from "./TicketByClass";
 
 export default function Overview() {
   const { event, totalTicketSale, totalAttendance, isLoading } =
     UseEventContext() as EventContextType;
-  // const { id } = useParams();
+
   console.log(totalTicketSale, totalAttendance);
-  // useEffect(() => {
-  //   const fetchTotalTicketSale = async () => {
-  //     try {
-  //       // const data = await FetchGet({
-  //       //   endpoint: `ticket/countTickets/${id}`,
-  //       // });
 
-  //       const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/ticket/countTickets/${id}`
-
-  //       );
-  //       console.log(data);
-  //       const res = await data.json();
-  //       console.log(res);
-  //       console.log(res.data)
-
-  //       if (res && res.data) {
-  //         setTotalTicketSale(res.data);
-  //         console.log("asjan")
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching total ticket sale:", error);
-  //       console.log(error)
-  //     }
-  //   };
-
-  //   const fetchTotalAttendance = async () => {
-  //     try {
-  //       const data = await FetchGet({
-  //         endpoint: `attendant/countAttendant/${id}`,
-  //       });
-  //       if (data && data.data){
-  //         setTotalAttendance(data.data);
-  //       }
-
-  //     } catch (error) {
-  //       console.error("Error fetching total attendance:", error);
-
-  //     }
-  //   };
-
-  //   fetchTotalTicketSale();
-  //   fetchTotalAttendance();
-  // }, [id]);
   if (isLoading) return <div>loading</div>;
   return (
     <Container>
@@ -69,12 +28,12 @@ export default function Overview() {
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 justify-between gap-8 ">
-          <OverviewSubComponent
+          <TicketSalesByClass
             image="tickets.svg"
-            text="Total ticket Sale"
-            linkToDetails="totalTicket"
-            details={totalTicketSale}
+            text="Ticket Sales Overview"
+            eventId={event._id}
           />
+
           <OverviewSubComponent
             image="attendence.svg"
             text="Total attendence"

@@ -201,7 +201,7 @@ export default function Post({
               onChange={(e) => setCaptionText(e.target.value)}
               value={captionText}
               type="text"
-              className="bg-white w-11/12 text-black  font-Inter outline-none"
+              className={` ${checkEditCaption?"bg-white":" bg-transparent"} w-11/12 text-black  font-Inter outline-none`}
             />
 
             {checkEditCaption ? (

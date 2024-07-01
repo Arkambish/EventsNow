@@ -237,7 +237,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
 
         const res = await data.json();
 
-
         if (!res && !res.data) {
           return;
         }
@@ -323,10 +322,8 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
       const event = await getEvent();
       const totalTicketSaleData = await fetchTotalTicketSale();
 
-
       setTotalTicketSale(totalTicketSaleData);
       const totalAttendanceData = await fetchTotalAttendance();
-
 
       setTotalAttendance(totalAttendanceData);
 
@@ -394,7 +391,6 @@ function EventContextProvider({ children }: { children: React.ReactNode }) {
     getTickets();
     setIsLoading(false);
   }, [id, router, setEventPublish]);
-
 
   return (
     <EventContext.Provider

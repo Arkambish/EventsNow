@@ -1,35 +1,50 @@
 import { NextResponse } from "next/server";
 import Handlebars from "handlebars";
-import { promises as fs } from "fs";
+// import { promises as fs } from "fs";
+
+type RegisterUser = {
+  _id: string;
+  userId: string;
+  eventId: string;
+  eventUpdates: boolean;
+  marketingUpdates: boolean;
+  email: string;
+};
 
 import { transporter, mailOptions } from "@/config/nodemailer";
 import User from "@/models/userModel";
 import { emailTemplate } from "@/lib/email/email";
-import { QrEmailTemplate } from "@/lib/email/QrcodeEmailTemplate";
-import { uploadToCloudinary } from "@/util/helper";
-
-import { v2 as cloudinary } from "cloudinary";
+import Event from "@/models/eventModel";
 
 export async function POST(req: Request) {
-  // user id , event data
-  const data = await req.json();
+  const {  eventId } = await req.json();
 
-  //   const user = await User.findOne({ _id: data.userId });
+  console.log("eventId", eventId);
 
-  //   if (user === null) {
-  //     return NextResponse.json("No User  exists");
-  //     console.log("No User  exists");
-  //   }
+  const event = await Event.findOne({ _id: eventId }).populate("registerUser");
+  if (!event) {
+    return NextResponse.json({ message: "No  event" });
+  }
+  if (event.registerUser.length == 0) {
+    return NextResponse.json({ message: "No users registered for the event" });
+  }
+  // const user = await Event.findOne({ _id: eventId }).populate("registerUser");
 
-  //   const template = Handlebars.compile(QrEmailTemplate);
-  //   const htmlBody = template({
-  //     qr: data.qr,
-  //   });
+  // if (!user) {
+  //   return NextResponse.json({ message: "No users registered for the event" });
+  // }
+
+  const usersArray = event.registerUser;
+  const usersEmail = event.registerUser.map((u: RegisterUser) => u.email);
+
+  if (!usersEmail) {
+    return NextResponse.json({ message: "No users registered for the event" });
+  }
 
   try {
     const res = await transporter.sendMail({
       from: "eventsnow.project.ruchith@gmail.com",
-      to: data.userEmail,
+      to: usersEmail,
       subject: "event details updated",
       text: `here are the new event details `,
       // html: htmlBody,
@@ -726,7 +741,7 @@ export async function POST(req: Request) {
                                             style="margin: 0; word-break: break-word"
                                           >
                                             <span style="color: #2a272b"
-                                              ><strong>${data.eventName}</strong></span
+                                              ><strong>${event.eventName}</strong></span
                                             >
                                           </p>
                                         </div>
@@ -767,25 +782,25 @@ export async function POST(req: Request) {
                                           "
                                         >
                                           <p style="margin: 0">
-                                            Event name : ${data.eventName}
+                                            Event name : ${event.eventName}
                                           </p>
                                           <p style="margin: 0">
-                                            Event type: ${data.selectedTab}
+                                            Event type: ${event.selectedTab}
                                           </p>
                                           <p style="margin: 0">
-                                            Event venue/platform : ${data.eventLocation}
+                                            Event venue/platform : ${event.eventLocation}
                                           </p>
                                           <p style="margin: 0">
-                                            Event start time : ${data.startTime}
+                                            Event start time : ${event.startTime}
                                           </p>
                                           <p style="margin: 0">
-                                            Event End time : ${data.endTime}
+                                            Event End time : ${event.endTime}
                                           </p>
                                           <p style="margin: 0">
-                                            Event Date : ${data.eventDate}
+                                            Event Starting Date : ${event.eventStartDate.substring(0, 10)}
                                           </p>
                                           <p style="margin: 0">
-                                            Event End Date : ${data.eventEndDate}
+                                            Event End Date : ${event.eventEndDate.substring(0, 10)}
                                           </p>
                                         </div>
                                       </td>
@@ -823,7 +838,7 @@ export async function POST(req: Request) {
                                           <div style="max-width: 640px">
                                             <img
                                               height="auto"
-                                              src=${data.eventCoverImage}
+                                              src=${event.eventCoverImage}
                                               style="
                                                 display: block;
                                                 height: auto;
@@ -1479,11 +1494,10 @@ export async function POST(req: Request) {
     });
 
     if (res.accepted.length > 0) {
-      return NextResponse.json("Email sent successfully to Registered users");
+      return NextResponse.json({ message: "Email sent successfully" });
     }
   } catch (error) {
     return NextResponse.json(error);
   }
-
-  return NextResponse.json("email not sent");
+  // return NextResponse.json("email not sent");
 }
