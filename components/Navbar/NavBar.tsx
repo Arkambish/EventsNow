@@ -118,7 +118,6 @@ export default function NavBar() {
     await signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_URL}` });
     setEmail("");
     localStorage.removeItem("email");
-    router.push("/home");
   }
 
   // get data from api
@@ -215,7 +214,7 @@ export default function NavBar() {
       }
     >
       {user.isBlocked && <BlockedPage />}
-      
+
       {newUserPath ? null : (
         <div>
           {/* check data has loaded */}
