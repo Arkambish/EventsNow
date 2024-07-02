@@ -43,6 +43,8 @@ function ProfContextProvider({ children }: ProfContextProviderProps) {
     price: 0,
     classType: "",
     image: "",
+    amount: 0,
+    count: 0,
   });
   const params = useParams();
   const router = useRouter();
