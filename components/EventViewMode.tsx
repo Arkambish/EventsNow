@@ -192,7 +192,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
                 key={index}
                 name={event.eventName}
                 img={event.dashboardImage}
-                location={event.selectedTab}
+                location={event.eventLocation}
                 date={formatDate(event.eventStartDate)}
                 time={event.startTime}
               />
@@ -202,7 +202,7 @@ const EventViewMode = ({ event }: { event: EventType[] }) => {
                 key={index}
                 name={event.eventName}
                 img={event.dashboardImage}
-                location={event.selectedTab}
+                location={event.eventLocation}
                 date={formatDate(event.eventStartDate)}
                 time={event.startTime}
               />

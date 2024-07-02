@@ -57,7 +57,7 @@ export default async function Home() {
               key={e._id}
               name={e.eventName}
               img={e.dashboardImage}
-              location={e.selectedTab}
+              location={e.eventLocation}
               date={formatDate(e.eventStartDate)}
             />
           ))}
