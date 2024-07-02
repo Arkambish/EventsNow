@@ -365,4 +365,6 @@ export type Ticket = {
   price: number;
   classType: string;
   image: string;
+  amount: number;
+  count: number;
 };

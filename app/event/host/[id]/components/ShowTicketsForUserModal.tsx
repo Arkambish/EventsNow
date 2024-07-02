@@ -61,7 +61,9 @@ export default function ShowTicketsForUserModal({
         <div className="flex flex-wrap gap-3 m-6 ">
           {ticketTypes ? (
             ticketTypes.map((ticket) => (
+
               <>
+              {ticket.count<ticket.amount && (
                 <TicketCard
                   image={ticket.image}
                   typeId={ticket._id}
@@ -72,7 +74,9 @@ export default function ShowTicketsForUserModal({
                   setTotalPrice={setTotalPrice}
                   setTicketArray={setTicketArrayTemp}
                   ticketArray={ticketArrayTemp}
-                />
+                  count={ticket.count}
+                  amount={ticket.amount}
+                />)}
               </>
             ))
           ) : (

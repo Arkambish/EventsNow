@@ -5,10 +5,12 @@ import User from "@/models/userModel";
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
     const data = await request.json();
+ 
 
     await connectMongoDB();
 
     const getUserById = await User.findOne({ _id: data });
+    console.log(getUserById)
     if (!getUserById) {
       return NextResponse.json({ message: "User not found" }, { status: 400 });
     }

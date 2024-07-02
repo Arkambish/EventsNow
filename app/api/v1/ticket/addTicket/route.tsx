@@ -4,7 +4,7 @@ import TicketType from "@/models/ticketType";
 // import Ticket from "@/models/ticketType";
 
 export async function POST(req: NextRequest) {
-  const { price, image, eventId, classType } = await req.json();
+  const { price, image, eventId, classType,amount } = await req.json();
   
 
 
@@ -16,6 +16,8 @@ export async function POST(req: NextRequest) {
       image,
       eventId,
       classType,
+      amount,
+      count:0
     });
 
   

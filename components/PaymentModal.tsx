@@ -45,20 +45,19 @@ const PaymentModal = (props: PaymentModalProps) => {
   const amount = props.amount;
 
   // localhost
-  // const merchantId = "1227067";
+  const merchantId = "1227067";
 
   // production
-
-  const merchantId = "1226229";
+  // const merchantId = "1226229";
 
   // const merchantSecret = "OTA4MzgwNDQ5MzAzODA0NTg5MjYzODIxNjAwODIxOTUwNDczMjk=";
   // MzU5NjU2Nzc1NDE4NTEwMDg0MjM1NTU2Mzk5NTYzNzI3ODQ0MTM3
 
   // for production
-  const merchantSecret = "OTA4MzgwNDQ5MzAzODA0NTg5MjYzODIxNjAwODIxOTUwNDczMjk=";
+  // const merchantSecret = "OTA4MzgwNDQ5MzAzODA0NTg5MjYzODIxNjAwODIxOTUwNDczMjk=";
 
   // for localhost
-  // const merchantSecret = "NDI1MjQyMDcxMTE1MTY0MjYzNzcyNzUwMDUxNjUzNDU1NTYzMjgw";
+  const merchantSecret = "NDI1MjQyMDcxMTE1MTY0MjYzNzcyNzUwMDUxNjUzNDU1NTYzMjgw";
 
   const currency = props.currency || "LKR";
 
@@ -216,7 +215,6 @@ const PaymentModal = (props: PaymentModalProps) => {
             }
           });
         }
-      
 
         const updateData = await FetchPut({
           endpoint: `event/payment`,
