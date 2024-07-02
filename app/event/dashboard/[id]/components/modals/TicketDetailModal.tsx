@@ -18,10 +18,11 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
   const [newTicketPrice, setNewTicketPrice] = React.useState<number>(0);
   const [newTicketClass, setNewTicketClass] = React.useState<string>("");
   const [newTicketImage, setNewTicketImage] = React.useState<string>("");
+  const [newTicketAmount, setNewTicketAmount] = React.useState<number>(0);
   const { setAllTickets, id } = UseEventContext() as EventContextType;
 
   const createTicketHandlerLocal = async () => {
-    if (newTicketPrice === 0 || newTicketClass === "" || newTicketImage === "") {
+    if (newTicketPrice === 0 || newTicketClass === "" || newTicketImage === "" || newTicketAmount === 0) {
       return error("Please fill all fields");
     }
     
@@ -33,6 +34,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
           image: newTicketImage,
           eventId: id,
           classType: newTicketClass,
+          amount: newTicketAmount
         },
       });
 
@@ -53,6 +55,7 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
       setNewTicketPrice(0);
       setNewTicketClass("");
       setNewTicketImage("");
+      setNewTicketAmount(0);
     } catch (err) {
       console.error("Failed to create ticket:", err);
       error("Failed to create ticket");
@@ -84,6 +87,17 @@ const TicketDetailmodalContent = ({ setTicketDetail }: TicketDetailProps) => {
               className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
               onChange={(e) => {
                 setNewTicketClass(e.target.value);
+              }}
+            />
+            <label htmlFor="amount">Ticket Amount:</label>
+            <input
+              type="text"
+              id="amount"
+              value={newTicketAmount}
+              className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+              onChange={(e) => {
+                if (isNaN(Number(e.target.value))) return;
+                setNewTicketAmount(Number(e.target.value));
               }}
             />
             <CldUploadWidget

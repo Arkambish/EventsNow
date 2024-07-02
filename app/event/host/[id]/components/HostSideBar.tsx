@@ -48,6 +48,8 @@ type Ticket = {
   price: number;
   classType: string;
   image: string;
+  amount: number;
+  count: number;
 };
 
 interface customUser {
@@ -230,6 +232,7 @@ export default function HostSideBar({
   //get user data
   useEffect(() => {
     const getUser = async () => {
+      // console.log(userId);
       if (userId) {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/v1/user/getWishlistByIdForHost`,
@@ -240,8 +243,12 @@ export default function HostSideBar({
           }
         );
         const data = await res.json();
+        console.log(data);
         
-
+        // if (data.message === "User not found") {
+        //   setIsAddWishList(false);
+        //   return;
+        // }
         const wishlistStatus = data?.includes(id || "");
         setIsAddWishList(wishlistStatus);
       }

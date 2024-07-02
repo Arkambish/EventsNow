@@ -16,6 +16,8 @@ interface TicketMockupProps {
   setTicketArray: React.Dispatch<React.SetStateAction<TicketArray[]>>;
   ticketArray: TicketArray[];
   type: string;
+  amount: number;
+  count: number;
 }
 export default function TicketCard({
   image,
@@ -27,6 +29,8 @@ export default function TicketCard({
   setTicketArray,
   ticketArray,
   type,
+  amount,
+  count
 }: TicketMockupProps) {
   const [visible, setVisible] = useState(false);
 
@@ -85,10 +89,17 @@ export default function TicketCard({
               {ticketArray.filter((item) => item.type === type).length}
                 
             </div>
+            <div className="text-sm font-normal">
+              Remaining  :{" "}
+              {amount-count-ticketArray.filter((item) => item.type === type).length}
+                
+            </div>
     
         </div>
 
         <div className="space-y-2 pt-2">
+
+          {count+ticketArray.filter((item) => item.type === type).length<amount &&
           <button
             className=" w-24 rounded border-[1px] border-[#37A234] px-2 my-auto text-sm font-semibold text-[#37A234] flex  gap-2 button "
             onClick={updateQuantity}
@@ -98,6 +109,7 @@ export default function TicketCard({
             </div>
             Add
           </button>
+}
 
             {(ticketArray.findIndex((item) => item.typeId === typeId) !== -1)&&<button
             className="button w-24 rounded border-[1px] border-[#A23434] px-2 my-auto text-sm font-semibold text-[#A23434] flex  gap-2 "

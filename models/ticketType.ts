@@ -22,6 +22,13 @@ const ticketTypeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: Event,
   },
+  count: {
+    type: Number,
+    default: 0,
+  },
+  amount: {
+    type: Number,
+  },
 });
 
 const TicketType =
